@@ -1,2 +1,0 @@
-# tidyverse-training
-Tidyverse training
