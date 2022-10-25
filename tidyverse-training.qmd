@@ -1,11 +1,137 @@
 ---
-title: "tidyverse-training"
+title: "Formation R - Collection de packages tidyverse"
+author: 
+  - Monique Simier, monique.simier@ird.fr 
+  - Laure Velez, laure.velez@umontpellier.fr
+  - Gael Mariani, gael.mariani@umontpellier.fr
+  - Mathieu Depetris, mathieu.depetris@ird.fr
+date: last-modified	
+date-format: DD/MM/YYYY
+format: 
+  revealjs:
+    target: "_blank"
+    scrollable: true
+    slide-number: c/t
+    chalkboard: true
+    title-slide-attributes:
+      data-background-image: images/background_title.png
+      data-background-size: cover  
+    theme: template/theme_perso.scss
+    logo: template/logo_marbec.png
+    footer: "[https://github.com/umr-marbec/tidyverse-training](https://github.com/umr-marbec/tidyverse-training)"
+editor: visual
 ---
 
-## Quarto
+## Plan de la formation {.smaller}
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+-   Préambule et introduction
 
-```{r}
-1 + 1
+    -   Prérequis et environnement de travail nécessaire à la formation
+    -   Objectifs de la formation
+    -   Présentation de tidyverse
+
+-   Partie I : Manipulation de données avec dplyr
+
+-   Partie II : Extension à la manipulation de données, cas spécifiques
+
+    -   Manipuler du texte avec stringr
+    -   Manipuler des dates avec lubridate
+
+-   Partie III : Visualisation graphique avec ggplot2
+
+-   Partie IV : Cas pratiques sur vos données
+
+Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.github.io/analyse-R/){target="_blank"}
+
+# Préambule et introduction
+
+-   Prérequis et environnement de travail nécessaire à la formation
+-   Objectifs de la formation
+-   Présentation de tidyverse
+
+## Prérequis et environnement de travail nécessaire à la formation
+
+- Avoir des notions de base dans l’utilisation de R
+- Avoir une instance valide de [R](https://cran.r-project.org/){target="_blank"} sur son poste (durant la formation utilisation de la version 4.2.1)
+- Avoir installé correctement les versions des packages dplyr (utilisation de la version 1.0.10), lubridate (utilisation de la version 1.8.0), ggp- lot2 (utilisation de la version 3.3.6) et stringr (utilisation de la version 1.4.1)
+
+## Bonus non obligatoire
+
+- Utilisation de l’environnement de développement [Rstudio](https://www.rstudio.com/products/rstudio/download/){target="_blank"} (utilisation de la version 2022.07.1 Build 554 sous Windows)
+- Pour les utilisateurs de Windows installation de [Rtools](https://cran.r-project.org/bin/windows/Rtools/){target="_blank"} (utilisation de la version 4.2)
+- Installation de [Visual Studio Code](https://code.visualstudio.com/#alt-downloads){target="_blank"} (éditeur de code source autonome)
+- Une instance de [Java](https://jdk.java.net/19/){target="_blank"} (idéalement une version JDK = kit de développement + moteur d'exécution des programmes compilés + outils de compilation)
+
+## Objectifs de la formation
+
+::: columns
+
+::: {.column width="60%"}
+- Vous présenter un panel de ce que l’on peut faire avec ces nouvelles méthodes et surtout vous donner les clés pour aller plus loin
+- Un expert n’est pas forcément quelqu’un qui connaît toutes les fonctions de R par cœur, mais qui sait écoute, comprendre et aller chercher les informations dont il a besoin
+  - Pensez à jeter un coup d’œil aux [cheatsheets](https://github.com/rstudio/cheatsheets){target="_blank"}
+- Prendre le temps de discuter et de regarder vos données et/ou problèmes
+:::
+
+::: {.column width="40%"}
+![](images/loi_pareto.jpg)
+:::
+:::
+
+## Présentation de Tidyverse {.smaller}
+
+::: columns
+
+::: {.column width="65%"}
+- Tidyverse c’est quoi ?
+  - tidy + universe ou l’univers du «bien rangé» ou du rangement
+  - Collection d’extensions conçues pour travailler ensemble et basées sur une philosophie commune
+  - Le cœur du package inclut 8 packages
+    - [ggplot2](https://ggplot2.tidyverse.org/){target="_blank"} : création de graphiques
+    - [dplyr](https://dplyr.tidyverse.org/){target="_blank"} : manipulation de données au sens large
+    - [tidyr](https://tidyr.tidyverse.org/){target="_blank"} : manipulation de données plus orientées variables
+    - [readr](https://readr.tidyverse.org/){target="_blank"} : import
+    - [purrr](https://purrr.tidyverse.org/){target="_blank"} : fonction de vectorisation (remplacement des boucles classiques)
+    - [tibble](https://tibble.tidyverse.org/){target="_blank"} : «évolution» du data.frame
+    - [stringr](https://stringr.tidyverse.org/){target="_blank"} : manipulation de caractère
+    - [forcats](https://forcats.tidyverse.org/){target="_blank"} : série d’outils pour aider dans la manipulation des facteurs
+:::
+
+::: {.column width="35%"}
+![](images/hadley_wickham.png){width="55%"}
+![](images/tidyverse_packages.png){width="55%"}
+:::
+:::
+
+## Présentation de Tidyverse
+
+- Lancement de la librairie 
+
+```{r, echo=TRUE, eval=FALSE}
+install.packages("tidyverse")
+library(tidyverse)
 ```
+
+- Cependant je vous déconseille de faire comme ça
+  - En lançant cette commande, on charge dans R tous les packages associés à tidyverse (les 8 packages cités précédemment, mais aussi les dépendances associées)
+  - Avez-vous vraiment besoin de tout cela ?
+  - Potentiel impact sur vos futurs développements (surtout si vous commencez à développer des packages)
+  - L’idée est d’appliquer dès maintenant les bonnes pratiques et surtout de comprendre ce que cela implique de ne pas les suivre (ce qui est aussi votre droit !) 
+
+## Avant d'aller plus loin
+
+- L’utilisation de ces packages permet de faire beaucoup de choses, mais ne rend pas tout le reste obsolète 
+- Il y a plusieurs stratégies pour réaliser une action, il faut juste trouver le bon compromis (connaissances, temps de calcul, contexte global de votre projet, …)
+- Attention aux règles et conventions de nommages
+  - Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d’espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (_), ne pas utiliser de mots réservés (comme par exemple TRUE)
+  - Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des _ et les noms choisis doivent pouvoir donner l’information du contenu associé
+  
+# Partie I : Manipulation de données avec dplyr
+
+
+  
+
+
+
+
+

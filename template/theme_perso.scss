@@ -1,0 +1,48 @@
+/*-- scss:defaults --*/
+
+// Background of the presentation
+$backgroundColor: #fcfbf9;
+
+// Primary/body text
+$mainFontSize: 30px;
+
+// Vertical spacing between blocks of text
+$blockMargin: 20px;
+
+// Headings
+$headingMargin: 0 0 $blockMargin 0;
+$headingColor: #025695;
+$headingLineHeight: 1.2;
+$headingLetterSpacing: normal;
+$headingTextTransform: none;
+$headingTextShadow: none;
+$headingFontWeight: normal;
+$heading1TextShadow: $headingTextShadow;
+
+$heading1Size: 3.00em;
+$heading2Size: 2.11em;
+$heading3Size: 1.55em;
+$heading4Size: 1.00em;
+
+$codeFont: monospace;
+
+// Links and actions
+$linkColor: #437597;
+$linkColorHover: darken( $linkColor, 20% );
+
+// Text selection
+$selectionBackgroundColor: #bce2f3;
+$selectionColor: #fff;
+
+// start using css here
+#title-slide > h1 {
+    color: white;
+}
+  
+#title-slide .author {
+    color: white;
+}
+  
+#title-slide > .author:first-of-type {
+    margin-top: 320px;
+}
