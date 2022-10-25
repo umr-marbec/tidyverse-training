@@ -7,7 +7,7 @@
 <link href="tidyverse-training_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="tidyverse-training_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="tidyverse-training_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.237">
+  <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Monique Simier, monique.simier@ird.fr">
   <meta name="author" content="Laure Velez, laure.velez@umontpellier.fr">
@@ -31,6 +31,70 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="tidyverse-training_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="tidyverse-training_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -329,33 +393,15 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="images/background_title.png" data-background-size="cover" class="quarto-title-block center">
+<section id="title-slide" data-background-image="images/background_title.png" data-background-size="cover" class="center">
   <h1 class="title">Formation R - Collection de packages tidyverse</h1>
-
-<div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Monique Simier, monique.simier@ird.fr 
-</div>
-</div>
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Laure Velez, laure.velez@umontpellier.fr 
-</div>
-</div>
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Gael Mariani, gael.mariani@umontpellier.fr 
-</div>
-</div>
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Mathieu Depetris, mathieu.depetris@ird.fr 
-</div>
-</div>
-</div>
-
+  <p class="author">Monique Simier, monique.simier@ird.fr</p>
+  <p class="author">Laure Velez, laure.velez@umontpellier.fr</p>
+  <p class="author">Gael Mariani, gael.mariani@umontpellier.fr</p>
+  <p class="author">Mathieu Depetris, mathieu.depetris@ird.fr</p>
+  <p class="date">25/10/2022</p>
 </section>
+
 <section id="plan-de-la-formation" class="slide level2 smaller">
 <h2>Plan de la formation</h2>
 <ul>
@@ -374,7 +420,111 @@ Mathieu Depetris, mathieu.depetris@ird.fr
 <li><p>Partie III : Visualisation graphique avec ggplot2</p></li>
 <li><p>Partie IV : Cas pratiques sur vos données</p></li>
 </ul>
-<p>Formation fortement inspirée du site de Joseph Larmarange (https://larmarange.github.io/analyse-R/)</p>
+<p>Formation fortement inspirée du site de <a href="https://larmarange.github.io/analyse-R/" target="_blank">Joseph Larmarange</a></p>
+</section>
+<section>
+<section id="préambule-et-introduction" class="title-slide slide level1 center">
+<h1>Préambule et introduction</h1>
+<ul>
+<li>Prérequis et environnement de travail nécessaire à la formation</li>
+<li>Objectifs de la formation</li>
+<li>Présentation de tidyverse</li>
+</ul>
+</section>
+<section id="prérequis-et-environnement-de-travail-nécessaire-à-la-formation" class="slide level2">
+<h2>Prérequis et environnement de travail nécessaire à la formation</h2>
+<ul>
+<li>Avoir des notions de base dans l’utilisation de R</li>
+<li>Avoir une instance valide de <a href="https://cran.r-project.org/" target="_blank">R</a> sur son poste (durant la formation utilisation de la version 4.2.1)</li>
+<li>Avoir installé correctement les versions des packages dplyr (utilisation de la version 1.0.10), lubridate (utilisation de la version 1.8.0), ggp- lot2 (utilisation de la version 3.3.6) et stringr (utilisation de la version 1.4.1)</li>
+</ul>
+</section>
+<section id="bonus-non-obligatoire" class="slide level2">
+<h2>Bonus non obligatoire</h2>
+<ul>
+<li>Utilisation de l’environnement de développement <a href="https://www.rstudio.com/products/rstudio/download/" target="_blank">Rstudio</a> (utilisation de la version 2022.07.1 Build 554 sous Windows)</li>
+<li>Pour les utilisateurs de Windows installation de <a href="https://cran.r-project.org/bin/windows/Rtools/" target="_blank">Rtools</a> (utilisation de la version 4.2)</li>
+<li>Installation de <a href="https://code.visualstudio.com/#alt-downloads" target="_blank">Visual Studio Code</a> (éditeur de code source autonome)</li>
+<li>Une instance de <a href="https://jdk.java.net/19/" target="_blank">Java</a> (idéalement une version JDK = kit de développement + moteur d’exécution des programmes compilés + outils de compilation)</li>
+</ul>
+</section>
+<section id="objectifs-de-la-formation" class="slide level2">
+<h2>Objectifs de la formation</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Vous présenter un panel de ce que l’on peut faire avec ces nouvelles méthodes et surtout vous donner les clés pour aller plus loin</li>
+<li>Un expert n’est pas forcément quelqu’un qui connaît toutes les fonctions de R par cœur, mais qui sait écoute, comprendre et aller chercher les informations dont il a besoin
+<ul>
+<li>Pensez à jeter un coup d’œil aux <a href="https://github.com/rstudio/cheatsheets" target="_blank">cheatsheets</a></li>
+</ul></li>
+<li>Prendre le temps de discuter et de regarder vos données et/ou problèmes</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="images/loi_pareto.jpg"></p>
+</div>
+</div>
+</section>
+<section id="présentation-de-tidyverse" class="slide level2 smaller">
+<h2>Présentation de Tidyverse</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<ul>
+<li>Tidyverse c’est quoi ?
+<ul>
+<li>tidy + universe ou l’univers du «bien rangé» ou du rangement</li>
+<li>Collection d’extensions conçues pour travailler ensemble et basées sur une philosophie commune</li>
+<li>Le cœur du package inclut 8 packages
+<ul>
+<li><a href="https://ggplot2.tidyverse.org/" target="_blank">ggplot2</a> : création de graphiques</li>
+<li><a href="https://dplyr.tidyverse.org/" target="_blank">dplyr</a> : manipulation de données au sens large</li>
+<li><a href="https://tidyr.tidyverse.org/" target="_blank">tidyr</a> : manipulation de données plus orientées variables</li>
+<li><a href="https://readr.tidyverse.org/" target="_blank">readr</a> : import</li>
+<li><a href="https://purrr.tidyverse.org/" target="_blank">purrr</a> : fonction de vectorisation (remplacement des boucles classiques)</li>
+<li><a href="https://tibble.tidyverse.org/" target="_blank">tibble</a> : «évolution» du data.frame</li>
+<li><a href="https://stringr.tidyverse.org/" target="_blank">stringr</a> : manipulation de caractère</li>
+<li><a href="https://forcats.tidyverse.org/" target="_blank">forcats</a> : série d’outils pour aider dans la manipulation des facteurs</li>
+</ul></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:35%;">
+<p><img data-src="images/hadley_wickham.png" style="width:55.0%"> <img data-src="images/tidyverse_packages.png" style="width:55.0%"></p>
+</div>
+</div>
+</section>
+<section id="présentation-de-tidyverse-1" class="slide level2">
+<h2>Présentation de Tidyverse</h2>
+<ul>
+<li>Lancement de la librairie</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Cependant je vous déconseille de faire comme ça
+<ul>
+<li>En lançant cette commande, on charge dans R tous les packages associés à tidyverse (les 8 packages cités précédemment, mais aussi les dépendances associées)</li>
+<li>Avez-vous vraiment besoin de tout cela ?</li>
+<li>Potentiel impact sur vos futurs développements (surtout si vous commencez à développer des packages)</li>
+<li>L’idée est d’appliquer dès maintenant les bonnes pratiques et surtout de comprendre ce que cela implique de ne pas les suivre (ce qui est aussi votre droit !)</li>
+</ul></li>
+</ul>
+</section>
+<section id="avant-daller-plus-loin" class="slide level2">
+<h2>Avant d’aller plus loin</h2>
+<ul>
+<li>L’utilisation de ces packages permet de faire beaucoup de choses, mais ne rend pas tout le reste obsolète</li>
+<li>Il y a plusieurs stratégies pour réaliser une action, il faut juste trouver le bon compromis (connaissances, temps de calcul, contexte global de votre projet, …)</li>
+<li>Attention aux règles et conventions de nommages
+<ul>
+<li>Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d’espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (_), ne pas utiliser de mots réservés (comme par exemple TRUE)</li>
+<li>Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des _ et les noms choisis doivent pouvoir donner l’information du contenu associé</li>
+</ul></li>
+</ul>
+</section></section>
+<section id="partie-i-manipulation-de-données-avec-dplyr" class="title-slide slide level1 center">
+<h1>Partie I : Manipulation de données avec dplyr</h1>
 
 <img src="template/logo_marbec.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://github.com/umr-marbec/tidyverse-training">https://github.com/umr-marbec/tidyverse-training</a></p>
@@ -407,14 +557,14 @@ Mathieu Depetris, mathieu.depetris@ird.fr
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': true,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'smaller': true,
+'smaller': false,
  
         // Display controls in the bottom right corner
         controls: false,
@@ -593,6 +743,48 @@ Mathieu Depetris, mathieu.depetris@ird.fr
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -631,24 +823,7 @@ Mathieu Depetris, mathieu.depetris@ird.fr
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
         setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -686,42 +861,24 @@ Mathieu Depetris, mathieu.depetris@ird.fr
           return note.innerHTML;
         });
       }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
           });
-        }
+          return popup.innerHTML;
+        });
       }
     });
     </script>
