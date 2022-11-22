@@ -7,7 +7,7 @@
 <link href="tidyverse-training_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="tidyverse-training_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="tidyverse-training_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.251">
+  <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Monique Simier, monique.simier@ird.fr">
   <meta name="author" content="Laure Velez, laure.velez@umontpellier.fr">
@@ -393,15 +393,34 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="images/background_title.png" data-background-size="cover" class="center">
+<section id="title-slide" data-background-image="images/background_title.png" data-background-size="cover" class="quarto-title-block center">
   <h1 class="title">Formation R - Collection de packages tidyverse</h1>
-  <p class="author">Monique Simier, monique.simier@ird.fr</p>
-  <p class="author">Laure Velez, laure.velez@umontpellier.fr</p>
-  <p class="author">Gael Mariani, gael.mariani@umontpellier.fr</p>
-  <p class="author">Mathieu Depetris, mathieu.depetris@ird.fr</p>
-  <p class="date">25/10/2022</p>
-</section>
 
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Monique Simier, monique.simier@ird.fr 
+</div>
+</div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Laure Velez, laure.velez@umontpellier.fr 
+</div>
+</div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Gael Mariani, gael.mariani@umontpellier.fr 
+</div>
+</div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Mathieu Depetris, mathieu.depetris@ird.fr 
+</div>
+</div>
+</div>
+
+  <p class="date">22/11/2022</p>
+</section>
 <section id="plan-de-la-formation" class="slide level2 smaller">
 <h2>Plan de la formation</h2>
 <ul>
@@ -525,6 +544,16 @@
 </section></section>
 <section id="partie-i-manipulation-de-données-avec-dplyr" class="title-slide slide level1 center">
 <h1>Partie I : Manipulation de données avec dplyr</h1>
+
+</section>
+
+<section id="importation-de-données-sous-r-avec-readr" class="title-slide slide level1 center">
+<h1>Importation de données sous R avec readr</h1>
+<ul>
+<li>Des fonctions de base de R sont dédiées à l’import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)</li>
+<li>La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects</li>
+<li>Elles sont compatibles avec l’esprit Tidyverse car elles permettent de générer des tibbles</li>
+</ul>
 
 <img src="template/logo_marbec.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://github.com/umr-marbec/tidyverse-training">https://github.com/umr-marbec/tidyverse-training</a></p>
@@ -749,12 +778,15 @@
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
       // slide changes (different for each slide format).
       (function () {
-        function fireSlideChanged(previousSlide, currentSlide) {
-
-          // dispatch for htmlwidgets
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
           const event = window.document.createEvent("Event");
           event.initEvent("slideenter", true, true);
           window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
 
           // dispatch for shiny
           if (window.jQuery) {
@@ -765,13 +797,6 @@
               window.jQuery(currentSlide).trigger("shown");
             }
           }
-        }
-
-        // hookup for reveal
-        if (window.Reveal) {
-          window.Reveal.addEventListener("slidechanged", function(event) {
-            fireSlideChanged(event.previousSlide, event.currentSlide);
-          });
         }
 
         // hookup for slidy
@@ -823,7 +848,24 @@
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
         button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
         setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
           button.setAttribute("title", currentTitle);
           button.classList.remove('code-copy-button-checked');
         }, 1000);
@@ -861,24 +903,42 @@
           return note.innerHTML;
         });
       }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
       var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
       for (var i=0; i<bibliorefs.length; i++) {
         const ref = bibliorefs[i];
-        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-        tippyHover(ref, function() {
-          var popup = window.document.createElement('div');
-          cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
-          return popup.innerHTML;
-        });
+        }
       }
     });
     </script>
