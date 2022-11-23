@@ -134,13 +134,11 @@ library(tidyverse)
 
 # Partie I : Manipulation de données avec dplyr
 
-
 # Importation de données sous R avec readr
 
- - Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)
- - La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects
- - Elles sont compatibles avec l'esprit Tidyverse car elles permettent de générer des tibbles
-# Partie III : Visualisation des données avec ggplot
+-   Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)
+-   La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects
+-   Elles sont compatibles avec l'esprit Tidyverse car elles permettent de générer des tibbles \# Partie III : Visualisation des données avec ggplot
 
 ## Petit apperçu des possibilités :
 
@@ -349,9 +347,21 @@ p5 <- p3 +
 p5
 ```
 
+## Ggplot pas à pas
+
+6.  Le lifting final
+
+```{r echo=TRUE, warnings=FALSE}
+p6 <- p5 +
+  ggplot2::theme_bw()
+p6
+```
+
 ## Une petite subtilité concernant les couleurs
 
 ::: incremental
+***Exercice :***
+
 1.  Construire un diagramme en barres représentant la biomasse de chacun des ordres.
 2.  Donner une couleur à chacune des barres. Vous devez choisir la couleur.
 :::
@@ -387,34 +397,119 @@ fish_data %>%
 Selon le type de variable, les fonctions pour choisir les couleurs ne seront pas les mêmes. Pourquoi ?
 
 ::: incremental
+***Exercice :***
+
 1.  Construisez un nuage de points biomass\~total
 2.  Coloriez les points en fonction de la variable abondance en BLEU.
 :::
 
 ::: incremental
 ```{r echo = TRUE}
-ggplot2::ggplot() +
+plot <- ggplot2::ggplot() +
   ggplot2::geom_point(data    = fish_data,
                       mapping = ggplot2::aes(x = total, y = biomass, 
-                                             color = total)) +
-  ggplot2::scale_color_manual(values = "blue")
+                                             color = total))
+plot + ggplot2::scale_color_manual(values = "blue")
 ```
 :::
 
-On ne peut pas donner une seule couleur à une variable continue.\
-De la même façon,
+<center>On ne peut pas donner une seule couleur à une variable continue !</center>
+
+## Couleurs & variables continues
+
+Il existe 4 fonctions principales qui permettent de construire des pallettes de couleurs continues :
+
+::: incremental
+-   `scale_fill_contiuous` : avec une palette par defaut (nuances de bleus)
+
+-   `scale_fill_viridis_c` : Colorblind friendly.
+
+-   `scale_fill_distiller` : utilise les [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) (voir [ici](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html) pour plus d'infos).\
+    Pour voir les palettes =\> `RColorBrewer::display.brewer.all()`
+
+-   `scale_fill_gradient` : permet de créer ses propres gradients de couleurs. Des variantes existent selon le nombre de couleurs à définir. Il s'agit de `scale_fill_gradient2()` et `scale_fill_gradientn()`.
+:::
+
+::: incremental
+<center>Testons les une par une à partir de la figure suivante</center>
+
+```{r}
+plot <- ggplot2::ggplot(faithfuld) +
+  ggplot2::geom_tile(ggplot2::aes(waiting, eruptions, fill = density)) +
+  ggplot2::labs(x = "Waiting", y = "Eruptions", fill = "Density") +
+  ggplot2::theme_bw()
+```
+:::
+
+## `scale_color_continuous`
+
+La plus simple, mais pas beaucoup d'options.
+
+```{r echo = FALSE}
+plot + ggplot2::scale_fill_continuous()
+```
+
+## `scale_color_viridis_c`
+
+De belles palettes dont les nuances sont captées par les personnes albinos.
+
+::: incremental
+```{r echo=TRUE}
+plot + ggplot2::scale_fill_viridis_c(option = "viridis")
+plot + ggplot2::scale_fill_viridis_c(option = "inferno")
+plot + ggplot2::scale_fill_viridis_c(option = "turbo")
+```
+:::
+
+## `scale_color_distiller()`
+
+Permet d'utiliser les palettes de couleurs issues de [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
+
+```{r echo = FALSE}
+plot + ggplot2::scale_fill_distiller(palette = "Reds")
+plot + ggplot2::scale_fill_distiller(palette = "YlGn")
+plot + ggplot2::scale_fill_distiller(palette = "Spectral")
+```
+
+::: incremental
+Petite info utile, toutes les palettes peuvent passer le test **ColorBlind Friendly** :
+
+```{r}
+install.packages("colorBlindness")
+install.packages("RColorBrewer")
+
+color_pal <- RColorBrewer::brewer.pal(10, name="Spectral")
+colorBlindness::displayAllColors(color_pal)
+```
+:::
+
+## `scale_fill_gradient()`
+
+Permet de créer ces propres palettes de couleurs, à partir de 2, 3 ou n couleurs :
+
+::: incremental
+-   `scale_fill_gradient()` avec les arguments `low` et `high`.
+
+-   `scale_fill_gradient2()` avec les arguments `low`, `mid` et `high`.
+
+-   `scale_fill_gradientn()` avec l'argument `colours`.
+:::
+
+::: incremental
+```{r echo = TRUE}
+plot + scale_fill_gradient(low = "darkblue", high = "darkred")
+plot + scale_fill_gradient2(low = "darkblue", mid = "white", high = "darkred", midpoint = 0.02)
+plot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))
+```
+:::
+
+##  De la même façon,
 
 voir https://ggplot2-book.org/scale-colour.html#colour-discrete
 
-## Ggplot pas à pas
+## Couleurs & variables discrètes
 
-5.  Le lifting final
-
-```{r echo=TRUE, warnings=FALSE}
-p6 <- p5 +
-  ggplot2::theme_bw()
-p6
-```
+## Couleurs & variables en classes
 
 ## Utiliser ggplot pour détecter des erreurs dans les données
 
