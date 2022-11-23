@@ -134,6 +134,12 @@ library(tidyverse)
 
 # Partie I : Manipulation de données avec dplyr
 
+
+# Importation de données sous R avec readr
+
+ - Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)
+ - La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects
+ - Elles sont compatibles avec l'esprit Tidyverse car elles permettent de générer des tibbles
 # Partie III : Visualisation des données avec ggplot
 
 ## Petit apperçu des possibilités :
