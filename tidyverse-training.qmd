@@ -20,7 +20,16 @@ format:
     logo: template/logo_marbec.png
     footer: "[https://github.com/umr-marbec/tidyverse-training](https://github.com/umr-marbec/tidyverse-training)"
 editor: visual
+fig-caption: center
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(patchwork)
+library(knitr)
+library(cowplot)
+```
 
 ## Plan de la formation {.smaller}
 
@@ -51,26 +60,25 @@ Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.
 
 ## Prérequis et environnement de travail nécessaire à la formation
 
-- Avoir des notions de base dans l’utilisation de R
-- Avoir une instance valide de [R](https://cran.r-project.org/){target="_blank"} sur son poste (durant la formation utilisation de la version 4.2.1)
-- Avoir installé correctement les versions des packages dplyr (utilisation de la version 1.0.10), lubridate (utilisation de la version 1.8.0), ggp- lot2 (utilisation de la version 3.3.6) et stringr (utilisation de la version 1.4.1)
+-   Avoir des notions de base dans l'utilisation de R
+-   Avoir une instance valide de [R](https://cran.r-project.org/){target="_blank"} sur son poste (durant la formation utilisation de la version 4.2.1)
+-   Avoir installé correctement les versions des packages dplyr (utilisation de la version 1.0.10), lubridate (utilisation de la version 1.8.0), ggp- lot2 (utilisation de la version 3.3.6) et stringr (utilisation de la version 1.4.1)
 
 ## Bonus non obligatoire
 
-- Utilisation de l’environnement de développement [Rstudio](https://www.rstudio.com/products/rstudio/download/){target="_blank"} (utilisation de la version 2022.07.1 Build 554 sous Windows)
-- Pour les utilisateurs de Windows installation de [Rtools](https://cran.r-project.org/bin/windows/Rtools/){target="_blank"} (utilisation de la version 4.2)
-- Installation de [Visual Studio Code](https://code.visualstudio.com/#alt-downloads){target="_blank"} (éditeur de code source autonome)
-- Une instance de [Java](https://jdk.java.net/19/){target="_blank"} (idéalement une version JDK = kit de développement + moteur d'exécution des programmes compilés + outils de compilation)
+-   Utilisation de l'environnement de développement [Rstudio](https://www.rstudio.com/products/rstudio/download/){target="_blank"} (utilisation de la version 2022.07.1 Build 554 sous Windows)
+-   Pour les utilisateurs de Windows installation de [Rtools](https://cran.r-project.org/bin/windows/Rtools/){target="_blank"} (utilisation de la version 4.2)
+-   Installation de [Visual Studio Code](https://code.visualstudio.com/#alt-downloads){target="_blank"} (éditeur de code source autonome)
+-   Une instance de [Java](https://jdk.java.net/19/){target="_blank"} (idéalement une version JDK = kit de développement + moteur d'exécution des programmes compilés + outils de compilation)
 
 ## Objectifs de la formation
 
 ::: columns
-
 ::: {.column width="60%"}
-- Vous présenter un panel de ce que l’on peut faire avec ces nouvelles méthodes et surtout vous donner les clés pour aller plus loin
-- Un expert n’est pas forcément quelqu’un qui connaît toutes les fonctions de R par cœur, mais qui sait écoute, comprendre et aller chercher les informations dont il a besoin
-  - Pensez à jeter un coup d’œil aux [cheatsheets](https://github.com/rstudio/cheatsheets){target="_blank"}
-- Prendre le temps de discuter et de regarder vos données et/ou problèmes
+-   Vous présenter un panel de ce que l'on peut faire avec ces nouvelles méthodes et surtout vous donner les clés pour aller plus loin
+-   Un expert n'est pas forcément quelqu'un qui connaît toutes les fonctions de R par cœur, mais qui sait écoute, comprendre et aller chercher les informations dont il a besoin
+    -   Pensez à jeter un coup d'œil aux [cheatsheets](https://github.com/rstudio/cheatsheets){target="_blank"}
+-   Prendre le temps de discuter et de regarder vos données et/ou problèmes
 :::
 
 ::: {.column width="40%"}
@@ -81,57 +89,385 @@ Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.
 ## Présentation de Tidyverse {.smaller}
 
 ::: columns
-
 ::: {.column width="65%"}
-- Tidyverse c’est quoi ?
-  - tidy + universe ou l’univers du «bien rangé» ou du rangement
-  - Collection d’extensions conçues pour travailler ensemble et basées sur une philosophie commune
-  - Le cœur du package inclut 8 packages
-    - [ggplot2](https://ggplot2.tidyverse.org/){target="_blank"} : création de graphiques
-    - [dplyr](https://dplyr.tidyverse.org/){target="_blank"} : manipulation de données au sens large
-    - [tidyr](https://tidyr.tidyverse.org/){target="_blank"} : manipulation de données plus orientées variables
-    - [readr](https://readr.tidyverse.org/){target="_blank"} : import
-    - [purrr](https://purrr.tidyverse.org/){target="_blank"} : fonction de vectorisation (remplacement des boucles classiques)
-    - [tibble](https://tibble.tidyverse.org/){target="_blank"} : «évolution» du data.frame
-    - [stringr](https://stringr.tidyverse.org/){target="_blank"} : manipulation de caractère
-    - [forcats](https://forcats.tidyverse.org/){target="_blank"} : série d’outils pour aider dans la manipulation des facteurs
+-   Tidyverse c'est quoi ?
+    -   tidy + universe ou l'univers du «bien rangé» ou du rangement
+    -   Collection d'extensions conçues pour travailler ensemble et basées sur une philosophie commune
+    -   Le cœur du package inclut 8 packages
+        -   [ggplot2](https://ggplot2.tidyverse.org/){target="_blank"} : création de graphiques
+        -   [dplyr](https://dplyr.tidyverse.org/){target="_blank"} : manipulation de données au sens large
+        -   [tidyr](https://tidyr.tidyverse.org/){target="_blank"} : manipulation de données plus orientées variables
+        -   [readr](https://readr.tidyverse.org/){target="_blank"} : import
+        -   [purrr](https://purrr.tidyverse.org/){target="_blank"} : fonction de vectorisation (remplacement des boucles classiques)
+        -   [tibble](https://tibble.tidyverse.org/){target="_blank"} : «évolution» du data.frame
+        -   [stringr](https://stringr.tidyverse.org/){target="_blank"} : manipulation de caractère
+        -   [forcats](https://forcats.tidyverse.org/){target="_blank"} : série d'outils pour aider dans la manipulation des facteurs
 :::
 
 ::: {.column width="35%"}
-![](images/hadley_wickham.png){width="55%"}
-![](images/tidyverse_packages.png){width="55%"}
+![](images/hadley_wickham.png){width="55%"} ![](images/tidyverse_packages.png){width="55%"}
 :::
 :::
 
 ## Présentation de Tidyverse
 
-- Lancement de la librairie 
+-   Lancement de la librairie
 
 ```{r, echo=TRUE, eval=FALSE}
 install.packages("tidyverse")
 library(tidyverse)
 ```
 
-- Cependant je vous déconseille de faire comme ça
-  - En lançant cette commande, on charge dans R tous les packages associés à tidyverse (les 8 packages cités précédemment, mais aussi les dépendances associées)
-  - Avez-vous vraiment besoin de tout cela ?
-  - Potentiel impact sur vos futurs développements (surtout si vous commencez à développer des packages)
-  - L’idée est d’appliquer dès maintenant les bonnes pratiques et surtout de comprendre ce que cela implique de ne pas les suivre (ce qui est aussi votre droit !) 
+-   Cependant je vous déconseille de faire comme ça
+    -   En lançant cette commande, on charge dans R tous les packages associés à tidyverse (les 8 packages cités précédemment, mais aussi les dépendances associées)
+    -   Avez-vous vraiment besoin de tout cela ?
+    -   Potentiel impact sur vos futurs développements (surtout si vous commencez à développer des packages)
+    -   L'idée est d'appliquer dès maintenant les bonnes pratiques et surtout de comprendre ce que cela implique de ne pas les suivre (ce qui est aussi votre droit !)
 
 ## Avant d'aller plus loin
 
-- L’utilisation de ces packages permet de faire beaucoup de choses, mais ne rend pas tout le reste obsolète 
-- Il y a plusieurs stratégies pour réaliser une action, il faut juste trouver le bon compromis (connaissances, temps de calcul, contexte global de votre projet, …)
-- Attention aux règles et conventions de nommages
-  - Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d’espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (_), ne pas utiliser de mots réservés (comme par exemple TRUE)
-  - Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des _ et les noms choisis doivent pouvoir donner l’information du contenu associé
-  
+-   L'utilisation de ces packages permet de faire beaucoup de choses, mais ne rend pas tout le reste obsolète
+-   Il y a plusieurs stratégies pour réaliser une action, il faut juste trouver le bon compromis (connaissances, temps de calcul, contexte global de votre projet, ...)
+-   Attention aux règles et conventions de nommages
+    -   Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d'espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (\_), ne pas utiliser de mots réservés (comme par exemple TRUE)
+    -   Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des \_ et les noms choisis doivent pouvoir donner l'information du contenu associé
+
 # Partie I : Manipulation de données avec dplyr
 
+# Partie III : Visualisation des données avec ggplot
 
+## Petit apperçu des possibilités :
+
+::: {layout-ncol="3"}
+![Nuage de points](images/.png){width="\"30%"}
+
+![Boxplots](images/.png){width="30%"}
+
+![Violin Plot](images/.png){width="30%"}
+:::
+
+<center>Un grand notre d'exemples est disponible sur le site [***from Data to Viz***](https://www.data-to-viz.com/)</center>
+
+## Petit apperçu des possibilités :
+
+::: {layout-ncol="3"}
+![Barplot](images/.png){width="30%"}
+
+![Barplot Circulaire](images/Figure3.png){width="30%"}
+
+![Diagramme empilé](images/.png){width="30%"}
+:::
+
+<center>Un grand notre d'exemples est disponible sur le site [***from Data to Viz***](https://www.data-to-viz.com/)</center>
+
+## Ggplot c'est comme la chirurgie *`aes`*thétique :
+
+::: incremental
+::: columns
+1)  Les jeunes s'y mettent très tôt !
+
+2)  Les moins jeunes sont réticents puis CERTAINS finissent par s'y mettre
+
+    <center>![](images/nancy_pelosi.jpg){width="20%"}</center>
+
+3)  C'est un enchainement plus ou moins long d'opérations.
+
+    <center>![](images/bogdanoff1.jpg){width="21%"}![](images/bogdanoff1.5.jpg){width="25%"}![](images/bogdanoff2.jpg){width="25%"}</center>
+:::
+:::
+
+## Ggplot, une succession de couches
+
+::: incremental
+::: columns
+<div>
+
+::: {.column width="45%"}
+1.  La Structure
+
+    ```{r echo=FALSE, out.width="85%"}
+    data <- iris
+    p1 <- ggplot2::ggplot(data, mapping = ggplot2::aes(x = Sepal.Length, y = Sepal.Width)) +
+      ggplot2::theme(axis.text = ggplot2::element_text(size = 25),
+                     axis.title = ggplot2::element_text(size = 25))
+    p1
+    ```
+:::
+
+::: {.column width="45%"}
+2.  Le type de représentation
+
+    ```{r echo=FALSE, out.width="85%"}
+    p2 <- p1 + ggplot2::geom_point(size = 5)
+    p2
+    ```
+:::
+
+</div>
+
+::: columns
+::: {.column width="45%"}
+3.  Les Couleurs
+
+    ```{r echo=FALSE, out.width="85%"}
+    p3 <- p1 + ggplot2::geom_point(mapping = ggplot2::aes(color = Petal.Width), size = 5) + scale_color_viridis_c()
+    p3
+    ```
+:::
+
+::: {.column width="45%"}
+4.  Le Lifting final
+
+    ```{r echo=FALSE, out.width="85%"}
+    p4 <- p3 + ggplot2::theme_bw() +
+      ggplot2::theme(axis.text = ggplot2::element_text(size = 25),
+                     axis.title = ggplot2::element_text(size = 25))
+    p4
+    ```
+:::
+:::
+:::
+:::
+
+## La structure des données
+
+A FAIRE
+
+## Ggplot pas à pas
+
+### 1. Construction de la structure
+
+Pour la structure du la figure, la fonction à toujours utiliser est `ggplot2::ggplot()` . Les arguments principaux sont :
+
+::: incremental
+1.  `data = nom.du.dataframe`
+
+2.  `mapping = aes(x = varaible.x, y = variable.y)`
+
+    ::: incremental
+    -   Ici le `aes` signifie **aesthetic**
+
+    -   On verra que d'autres options sont disponibles dans `aes` comme la taille (`size`), la couleur (`color`), la forme (`shape`) ...
+    :::
+
+3.  Mise en application
+
+    ```{r echo=FALSE, warnings=FALSE}
+    fish_data <- readr::read_csv("data/Global_reef_fish_abundance_and_biomass.csv") %>% dplyr::filter(survey_id == 2000951)
+    ```
+
+    ```{r echo=TRUE, warnings=FALSE}
+    p1 <- ggplot2::ggplot(data    = fish_data,
+                          mapping = ggplot2::aes(x = total, y = biomass))
+    p1
+    ```
+:::
+
+## Ggplot pas à pas
+
+### 2. Choix du type de représentation
+
+::: incremental
+Plusieurs représentations existent, les plus connues et utilisées sont :
+
+-   `ggplot2::geom_point()` pour un nuage de points
+-   `ggplot2::geom_line()` pour une ligne
+-   `ggplot2::geom_boxplot()` pour une boîte à moustache
+-   `ggplot2::geom_col()` pour un diagramme en barres
+-   `ggplot2::geom_histogram()` pour un histogramme
+
+Construisons un nuage de points entre nos deux variables:
+
+::: incremental
+::: columns
+::: {.column width="45%"}
+1.  `aes()` dans `ggplot()`
+
+    ```{r echo=TRUE, eval = FASLE, warnings=FALSE}
+    p2 <- p1 + 
+      ggplot2::geom_point()
+    ```
+
+2.  `aes()` dans `geom_point()`
+
+    ```{r echo=TRUE, warnings=FALSE}
+    p2 <- ggplot2::ggplot() +
+      ggplot2::geom_point(data    = fish_data,
+                          mapping = ggplot2::aes(x = total, y = biomass))
+    p2
+    ```
+:::
+:::
+:::
+:::
+
+## Ggplot pas à pas
+
+3.  Mettons un peu de couleurs
+
+    =\> Une couleur par ordre. Comme c'est lié à l'esthétisme de la figure, on utilise l'argument `color` dans la fonction `aes`.
+
+```{r echo=TRUE, warnings=FALSE}
+p3 <- ggplot2::ggplot() +
+  ggplot2::geom_point(data    = fish_data,
+                      mapping = ggplot2::aes(x = total, y = biomass, 
+                                             color = class))
+p3
+```
+
+## Ggplot pas à pas
+
+4.  Modifions les couleurs des points + Le titre de la légende
+
+    Pour cela, on peut utiliser la fonction `scale_color_manual()` et les arguments `name` et `values`.
+
+```{r echo=TRUE, warnings=FALSE}
+p4 <- p3 +
+  ggplot2::scale_color_manual(name = "Order :",
+                              values = c("darkblue", "darkgreen"))
+p4
+```
+
+<center>Il y a de multiples façons de modifier le titre de la légende. Ici on profite de l'utilisation de la fonction `scale_color_manual()` pour utiliser l'arguement `name`.\
+Une autre façon de faire est d'utiliser la fonction `labs` qui permet de changer les diverses légendes (axes x et y + légende de couleur). A vous de jouer !!!</center>
+
+## Ggplot pas à pas
+
+5.  Nommons proprement les axes + la légende
+
+```{r echo=TRUE, warnings=FALSE}
+p5 <- p3 +
+  ggplot2::labs(x = "Number of observations", 
+                y = "Biomass (g)", 
+                color = "Order :")
+p5
+```
+
+## Une petite subtilité concernant les couleurs
+
+::: incremental
+1.  Construire un diagramme en barres représentant la biomasse de chacun des ordres.
+2.  Donner une couleur à chacune des barres. Vous devez choisir la couleur.
+:::
+
+::: incremental
+Ggplot fait la différence entre :
+
+-   la couleur des contours -\> `color = …`
+
+-   la couleur de remplissage -\> `fill = …`
+
+De la même façon, pour choisir ses couleurs de contour *vs.* de remplissage, on utilise les fonctions\
+`scale_color_manual()` *vs.* `scale_fill_manual()`.
+:::
+
+::: incremental
+```{r echo=TRUE}
+fish_data %>%
+  dplyr::group_by(order) %>%
+  dplyr::summarise(biomass = sum(biomass)) %>%
+  ggplot2::ggplot() +
+  ggplot2::geom_col(data    = fish_data,
+                    mapping = ggplot2::aes(x = order, 
+                                           y = biomass, 
+                                           fill = order)) +
+  ggplot2::scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))
+
+```
+:::
+
+## Une autre subtilité concernant les couleurs
+
+Selon le type de variable, les fonctions pour choisir les couleurs ne seront pas les mêmes. Pourquoi ?
+
+::: incremental
+1.  Construisez un nuage de points biomass\~total
+2.  Coloriez les points en fonction de la variable abondance en BLEU.
+:::
+
+::: incremental
+```{r echo = TRUE}
+ggplot2::ggplot() +
+  ggplot2::geom_point(data    = fish_data,
+                      mapping = ggplot2::aes(x = total, y = biomass, 
+                                             color = total)) +
+  ggplot2::scale_color_manual(values = "blue")
+```
+:::
+
+On ne peut pas donner une seule couleur à une variable continue.\
+De la même façon,
+
+voir https://ggplot2-book.org/scale-colour.html#colour-discrete
+
+## Ggplot pas à pas
+
+5.  Le lifting final
+
+```{r echo=TRUE, warnings=FALSE}
+p6 <- p5 +
+  ggplot2::theme_bw()
+p6
+```
+
+## Utiliser ggplot pour détecter des erreurs dans les données
+
+<center>
+
+```{r echo = TRUE, warning = FALSE}
+fish_data <- readr::read_csv("data/Global_reef_fish_abundance_and_biomass.csv")
+
+# Selection des données pour le site n°2000951
+site1 <- fish_data %>%
+  dplyr::filter(survey_id == 2000951) %>%
+  dplyr::select(survey_id, class, order, family, species_name, total, biomass)
+
+site1 %>%
+  head(5) %>% 
+  kableExtra::kbl(digits = 4, caption = "Data to check") %>% 
+  kableExtra::kable_classic(html_font = "Computer Modern", full_width = F)  
+
+```
+
+</center>
+
+Comment détécter les outliers ?
+
+```{r echo = TRUE, warning = FALSE}
+ggplot2::ggplot(data = site1, mapping = ggplot2::aes(x = order, y = biomass)) +
+  ggplot2::geom_boxplot() +
+  ggplot2::theme_bw()
+```
+
+### Séparer les Elasmobranches des Actinoptérygiens
+
+<center>
+
+```{r echo=TRUE, warning=FALSE}
+ggplot2::ggplot(data = site1, mapping = ggplot2::aes(x = order, y = biomass)) +
+  ggplot2::geom_boxplot() +
+  ggplot2::facet_grid(.~class, scales = "free", space = "free") +
+  ggplot2::theme_bw() +
+  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
+```
+
+Interrogation au niveau des perciformes ...
+
+</center>
+
+### Qu'est-ce qu'il se passe avec les Perciformes ?
+
+<center>
+
+```{r echo=TRUE, warning=FALSE}
+site1 %>%
+  dplyr::filter(order == "Perciformes") %>%
+  ggplot2::ggplot(., mapping = ggplot2::aes(x = family, y = biomass)) +
+  ggplot2::geom_boxplot() +
+  ggplot2::theme_bw() +
+  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
   
 
+```
 
-
-
-
+</center>
