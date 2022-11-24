@@ -213,7 +213,7 @@ library(tidyverse)
 3.  Les Couleurs
 
     ```{r echo=FALSE, out.width="85%"}
-    p3 <- p1 + ggplot2::geom_point(mapping = ggplot2::aes(color = Petal.Width), size = 5) + scale_color_viridis_c()
+    p3 <- p1 + ggplot2::geom_point(mapping = ggplot2::aes(color = Petal.Width), size = 5) + ggplot2::scale_color_viridis_c()
     p3
     ```
 :::
@@ -518,9 +518,9 @@ Permet de créer ces propres palettes de couleurs, à partir de 2, 3 ou n couleu
 
 ::: incremental
 ```{r echo = TRUE}
-plot + scale_fill_gradient(low = "darkblue", high = "darkred")
-plot + scale_fill_gradient2(low = "darkblue", mid = "white", high = "darkred", midpoint = 0.02)
-plot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))
+plot + ggplot2::scale_fill_gradient(low = "darkblue", high = "darkred")
+plot + ggplot2::scale_fill_gradient2(low = "darkblue", mid = "white", high = "darkred", midpoint = 0.02)
+plot + ggplot2::scale_fill_gradientn(colours = colorspace::diverge_hcl(7))
 ```
 :::
 
