@@ -271,9 +271,9 @@ Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` 
     ```
 
     ```{r echo=TRUE, warnings=FALSE}
-    p1 <- ggplot(data    = fish_data,
-                          mapping = aes(x = total, y = biomass))
-    p1
+    # p1 <- ggplot(data    = fish_data,
+    #                       mapping = aes(x = total, y = biomass))
+    # p1
     ```
 :::
 
