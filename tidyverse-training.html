@@ -419,7 +419,7 @@ Mathieu Depetris, mathieu.depetris@ird.fr
 </div>
 </div>
 
-  <p class="date">22/11/2022</p>
+  <p class="date">24/11/2022</p>
 </section>
 <section id="plan-de-la-formation" class="slide level2 smaller">
 <h2>Plan de la formation</h2>
@@ -547,18 +547,534 @@ Mathieu Depetris, mathieu.depetris@ird.fr
 
 </section>
 
+<section>
 <section id="importation-de-données-sous-r-avec-readr" class="title-slide slide level1 center">
 <h1>Importation de données sous R avec readr</h1>
 <ul>
 <li>Des fonctions de base de R sont dédiées à l’import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)</li>
 <li>La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects</li>
-<li>Elles sont compatibles avec l’esprit Tidyverse car elles permettent de générer des tibbles</li>
+<li>Elles sont compatibles avec l’esprit Tidyverse car elles permettent de générer des tibbles # Partie III : Visualisation des données avec ggplot</li>
 </ul>
+</section>
+<section id="petit-apperçu-des-possibilités" class="slide level2">
+<h2>Petit apperçu des possibilités :</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/.png"></p>
+<p></p><figcaption>Nuage de points</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/.png"></p>
+<p></p><figcaption>Boxplots</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/.png"></p>
+<p></p><figcaption>Violin Plot</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<center>
+Un grand notre d’exemples est disponible sur le site <a href="https://www.data-to-viz.com/"><strong><em>from Data to Viz</em></strong></a>
+</center>
+</section>
+<section id="petit-apperçu-des-possibilités-1" class="slide level2">
+<h2>Petit apperçu des possibilités :</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/.png"></p>
+<p></p><figcaption>Barplot</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/Figure3.png"></p>
+<p></p><figcaption>Barplot Circulaire</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/.png"></p>
+<p></p><figcaption>Diagramme empilé</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<center>
+Un grand notre d’exemples est disponible sur le site <a href="https://www.data-to-viz.com/"><strong><em>from Data to Viz</em></strong></a>
+</center>
+</section>
+<section id="ggplot-cest-comme-la-chirurgie-aesthétique" class="slide level2">
+<h2>Ggplot c’est comme la chirurgie <em><code>aes</code></em>thétique :</h2>
+<div>
+<div class="columns">
+<ol type="1">
+<li class="fragment"><p>Les jeunes s’y mettent très tôt !</p></li>
+<li class="fragment"><p>Les moins jeunes sont réticents puis CERTAINS finissent par s’y mettre</p>
+<center>
+<p><img data-src="images/nancy_pelosi.jpg" style="width:20.0%"></p>
+</center></li>
+<li class="fragment"><p>C’est un enchainement plus ou moins long d’opérations.</p>
+<center>
+<p><img data-src="images/bogdanoff1.jpg" style="width:21.0%"><img data-src="images/bogdanoff1.5.jpg" style="width:25.0%"><img data-src="images/bogdanoff2.jpg" style="width:25.0%"></p>
+</center></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="ggplot-une-succession-de-couches" class="slide level2">
+<h2>Ggplot, une succession de couches</h2>
+<div>
+<div class="columns">
+<div>
+<div class="column" style="width:45%;">
+<ol type="1">
+<li class="fragment"><p>La Structure</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:85.0%"></p>
+</div>
+</div></li>
+</ol>
+</div>
+<div class="column" style="width:45%;">
+<ol start="2" type="1">
+<li class="fragment"><p>Le type de représentation</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-3-1.png" style="width:85.0%"></p>
+</div>
+</div></li>
+</ol>
+</div>
+</div><div class="columns">
+<div class="column" style="width:45%;">
+<ol start="3" type="1">
+<li class="fragment"><p>Les Couleurs</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:85.0%"></p>
+</div>
+</div></li>
+</ol>
+</div><div class="column" style="width:45%;">
+<ol start="4" type="1">
+<li class="fragment"><p>Le Lifting final</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:85.0%"></p>
+</div>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="la-structure-des-données" class="slide level2">
+<h2>La structure des données</h2>
+<p>A FAIRE</p>
+</section>
+<section id="ggplot-pas-à-pas" class="slide level2">
+<h2>Ggplot pas à pas</h2>
+<h3 id="construction-de-la-structure">1. Construction de la structure</h3>
+<p>Pour la structure du la figure, la fonction à toujours utiliser est <code>ggplot()</code> . Les arguments principaux sont :</p>
+<div>
+<ol type="1">
+<li class="fragment"><p><code>data = nom.du.dataframe</code></p></li>
+<li class="fragment"><p><code>mapping = aes(x = varaible.x, y = variable.y)</code></p>
+<div>
+<ul>
+<li class="fragment"><p>Ici le <code>aes</code> signifie <strong>aesthetic</strong></p></li>
+<li class="fragment"><p>On verra que d’autres options sont disponibles dans <code>aes</code> comme la taille (<code>size</code>), la couleur (<code>color</code>), la forme (<code>shape</code>) …</p></li>
+</ul>
+</div></li>
+<li class="fragment"><p>Mise en application</p>
+<div class="cell" data-warnings="false">
+
+</div>
+<div class="cell" data-warnings="false">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># p1 &lt;- ggplot(data    = fish_data,</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#                       mapping = aes(x = total, y = biomass))</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co"># p1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ol>
+</div>
+</section>
+<section id="ggplot-pas-à-pas-1" class="slide level2">
+<h2>Ggplot pas à pas</h2>
+<h3 id="choix-du-type-de-représentation">2. Choix du type de représentation</h3>
+<div>
+<p>Plusieurs représentations existent, les plus connues et utilisées sont :</p>
+<ul>
+<li class="fragment"><code>geom_point()</code> pour un nuage de points</li>
+<li class="fragment"><code>geom_line()</code> pour une ligne</li>
+<li class="fragment"><code>geom_boxplot()</code> pour une boîte à moustache</li>
+<li class="fragment"><code>geom_col()</code> pour un diagramme en barres</li>
+<li class="fragment"><code>geom_histogram()</code> pour un histogramme</li>
+</ul>
+<p>Construisons un nuage de points entre nos deux variables:</p>
+<div>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li class="fragment"><p><code>aes()</code> dans <code>ggplot()</code></p>
+<div class="cell" data-warnings="false">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># p2 &lt;- p1 + </span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#   geom_point()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</div><div class="column" style="width:45%;">
+<ul>
+<li class="fragment"><p><code>aes()</code> dans <code>geom_point()</code></p>
+<div class="cell" data-warnings="false">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># p2 &lt;- ggplot() +</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#   geom_point(data    = fish_data,</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#                       mapping = aes(x = total, </span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#                                              y = biomass))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</div><div class="cell">
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ggplot-pas-à-pas-2" class="slide level2">
+<h2>Ggplot pas à pas</h2>
+<ol start="3" type="1">
+<li><p>Mettons un peu de couleurs</p>
+<p>=&gt; Une couleur par ordre. Comme c’est lié à l’esthétisme de la figure, on utilise l’argument <code>color</code> dans la fonction <code>aes</code>.</p></li>
+</ol>
+<div class="cell" data-warnings="false">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># p3 &lt;- ggplot() +</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#   geom_point(data    = fish_data,</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#                       mapping = aes(x = total, y = biomass, </span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#                                              color = class))</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># p3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ggplot-pas-à-pas-3" class="slide level2">
+<h2>Ggplot pas à pas</h2>
+<ol start="4" type="1">
+<li><p>Modifions les couleurs des points + Le titre de la légende</p>
+<p>Pour cela, on peut utiliser la fonction <code>scale_color_manual()</code> et les arguments <code>name</code> et <code>values</code>.</p></li>
+</ol>
+<div class="cell" data-warnings="false">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># p4 &lt;- p3 +</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#   scale_color_manual(name = "Order :",</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#                               values = c("darkblue", "darkgreen"))</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># p4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<center>
+Il y a de multiples façons de modifier le titre de la légende. Ici on profite de l’utilisation de la fonction <code>scale_color_manual()</code> pour utiliser l’arguement <code>name</code>.<br>
+Une autre façon de faire est d’utiliser la fonction <code>labs</code> qui permet de changer les diverses légendes (axes x et y + légende de couleur). A vous de jouer !!!
+</center>
+</section>
+<section id="ggplot-pas-à-pas-4" class="slide level2">
+<h2>Ggplot pas à pas</h2>
+<ol start="5" type="1">
+<li>Nommons proprement les axes + la légende</li>
+</ol>
+<div class="cell" data-warnings="false">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># p5 &lt;- p3 +</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#   labs(x = "Number of observations", </span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#                 y = "Biomass (g)", </span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#                 color = "Order :")</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co"># p5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ggplot-pas-à-pas-5" class="slide level2">
+<h2>Ggplot pas à pas</h2>
+<ol start="6" type="1">
+<li>Petit lifting de la couleur de font</li>
+</ol>
+<div class="cell" data-warnings="false">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># p5 + theme_bw()</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># p5 + theme_classic()</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># p5 + theme_dark()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<center>
+Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’arrière plan (voir <a href="http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements">ici</a>). A vous de choisir votre préféré.
+</center>
+</section>
+<section id="ggplot-pas-à-pas-6" class="slide level2">
+<h2>Ggplot pas à pas</h2>
+<ol start="7" type="1">
+<li>Le lifting final sur les légendes</li>
+</ol>
+<div class="cell" data-warnings="false">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># p6 &lt;- p5 +</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#   theme(axis.text       = element_text(size = 11),</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#                  axis.title      = element_text(size = 13),</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#                  legend.position = c(0.2, 0.8),</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#                  legend.text     = element_text(size = 13),</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#                  legend.title    = element_text(size = 15))</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co"># p6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="une-petite-subtilité-concernant-les-couleurs" class="slide level2">
+<h2>Une petite subtilité concernant les couleurs</h2>
+<div>
+<p><strong><em>Exercice :</em></strong></p>
+<ol type="1">
+<li class="fragment">Construire un diagramme en barres représentant la biomasse de chacun des ordres.</li>
+<li class="fragment">Donner une couleur à chacune des barres. Vous devez choisir la couleur.</li>
+</ol>
+</div>
+<div>
+<p>Ggplot fait la différence entre :</p>
+<ul>
+<li class="fragment"><p>la couleur des contours -&gt; <code>color = …</code></p></li>
+<li class="fragment"><p>la couleur de remplissage -&gt; <code>fill = …</code></p></li>
+</ul>
+<p>De la même façon, pour choisir ses couleurs de contour <em>vs.</em> de remplissage, on utilise les fonctions<br>
+<code>scale_color_manual()</code> <em>vs.</em> <code>scale_fill_manual()</code>.</p>
+</div>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># fish_data %&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#   group_by(order) %&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#   summarise(biomass = sum(biomass)) %&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#   ggplot() +</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#   geom_col(data    = fish_data,</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#                     mapping = aes(x = order, </span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#                                            y = biomass, </span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#                                            fill = order)) +</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#   scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="une-autre-subtilité-concernant-les-couleurs" class="slide level2">
+<h2>Une autre subtilité concernant les couleurs</h2>
+<p>Selon le type de variable, les fonctions pour choisir les couleurs ne seront pas les mêmes. Pourquoi ?</p>
+<div>
+<p><strong><em>Exercice :</em></strong></p>
+<ol type="1">
+<li class="fragment">Construisez un nuage de points biomass~total</li>
+<li class="fragment">Coloriez les points en fonction de la variable abondance en BLEU.</li>
+</ol>
+</div>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># plot &lt;- ggplot() +</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#   geom_point(data    = fish_data,</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#                       mapping = aes(x = total, y = biomass, </span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#                                              color = total))</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co"># plot + scale_color_manual(values = "blue")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<center>
+On ne peut pas donner une seule couleur à une variable continue !
+</center>
+</section>
+<section id="couleurs-variables-continues" class="slide level2">
+<h2>Couleurs &amp; variables continues</h2>
+<p>Il existe 4 fonctions principales qui permettent de construire des pallettes de couleurs continues :</p>
+<div>
+<ul>
+<li class="fragment"><p><code>scale_fill_contiuous</code> : avec une palette par defaut (nuances de bleus)</p></li>
+<li class="fragment"><p><code>scale_fill_viridis_c</code> : Colorblind friendly.</p></li>
+<li class="fragment"><p><code>scale_fill_distiller</code> : utilise les <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">BrewerPalettes</a> (voir <a href="https://r-graph-gallery.com/38-rcolorbrewers-palettes.html">ici</a> pour plus d’infos).<br>
+Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p></li>
+<li class="fragment"><p><code>scale_fill_gradient</code> : permet de créer ses propres gradients de couleurs. Des variantes existent selon le nombre de couleurs à définir. Il s’agit de <code>scale_fill_gradient2()</code> et <code>scale_fill_gradientn()</code>.</p></li>
+</ul>
+</div>
+<div>
+<center>
+Testons les une par une à partir de la figure suivante
+</center>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(faithfuld) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(waiting, eruptions, <span class="at">fill =</span> density)) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Waiting"</span>, <span class="at">y =</span> <span class="st">"Eruptions"</span>, <span class="at">fill =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="scale_color_continuous" class="slide level2">
+<h2><code>scale_color_continuous</code></h2>
+<p>La plus simple, mais pas beaucoup d’options.</p>
+
+<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section>
+<section id="scale_color_viridis_c" class="slide level2">
+<h2><code>scale_color_viridis_c</code></h2>
+<p>De belles palettes dont les nuances sont captées par les personnes albinos.</p>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-20-2.png" width="960"></p>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-20-3.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="scale_color_distiller" class="slide level2">
+<h2><code>scale_color_distiller()</code></h2>
+<p>Permet d’utiliser les palettes de couleurs issues de <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">BrewerPalettes</a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
+</div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-21-2.png" width="960"></p>
+</div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-21-3.png" width="960"></p>
+</div>
+</div>
+<div>
+<p>Petite info utile, toutes les palettes peuvent passer le test <strong>ColorBlind Friendly</strong> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># install.packages("colorBlindness")</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co"># install.packages("RColorBrewer")</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a>color_pal <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">10</span>, <span class="at">name=</span><span class="st">"Spectral"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5"></a>colorBlindness<span class="sc">::</span><span class="fu">displayAllColors</span>(color_pal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="scale_fill_gradient" class="slide level2">
+<h2><code>scale_fill_gradient()</code></h2>
+<p>Permet de créer ces propres palettes de couleurs, à partir de 2, 3 ou n couleurs :</p>
+<div>
+<ul>
+<li class="fragment"><p><code>scale_fill_gradient()</code> avec les arguments <code>low</code> et <code>high</code>.</p></li>
+<li class="fragment"><p><code>scale_fill_gradient2()</code> avec les arguments <code>low</code>, <code>mid</code> et <code>high</code>.</p></li>
+<li class="fragment"><p><code>scale_fill_gradientn()</code> avec l’argument <code>colours</code>.</p></li>
+</ul>
+</div>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">midpoint =</span> <span class="fl">0.02</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-23-2.png" width="960"></p>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> colorspace<span class="sc">::</span><span class="fu">diverge_hcl</span>(<span class="dv">7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-23-3.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="couleurs-variables-discrètes" class="slide level2">
+<h2>Couleurs &amp; variables discrètes</h2>
+<p>Les principales fonctions utilisées permettant de construire des pallettes de couleurs continues :</p>
+<div>
+<ul>
+<li class="fragment"><p><code>scale_fill_discrete</code> : Couleurs par défaut</p></li>
+<li class="fragment"><p><code>scale_fill_manual</code> : choix de la couleur parmis toutes les couleurs existantes.</p></li>
+<li class="fragment"><p><code>scale_fill_brewer</code> : utilise les <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">BrewerPalettes</a> (voir <a href="https://r-graph-gallery.com/38-rcolorbrewers-palettes.html">ici</a> pour plus d’infos). Equivalent de <code>scale_fill_distiller</code> pour les variables discrètes.</p></li>
+</ul>
+</div>
+<div>
+<div class="cell">
+
+</div>
+</div>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># plot + scale_fill_discrete()</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="co"># plot + scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co"># plot + scale_fill_brewer(palette = "Set2") </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="couleurs-variables-en-classes" class="slide level2">
+<h2>Couleurs &amp; variables en classes</h2>
+</section>
+<section id="ressources-utilisées" class="slide level2">
+<h2>Ressources utilisées</h2>
+<p>https://ggplot2-book.org/scale-colour.html#colour-discrete</p>
+<p>https://stackoverflow.com/questions/70942728/understanding-color-scales-in-ggplot2</p>
+<p>https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3</p>
+</section>
+<section id="utiliser-ggplot-pour-détecter-des-erreurs-dans-les-données" class="slide level2">
+<h2>Utiliser ggplot pour détecter des erreurs dans les données</h2>
+<center>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># fish_data &lt;- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="co"># Selection des données pour le site n°2000951</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="co"># site1 &lt;- fish_data %&gt;%</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#   filter(survey_id == 2000951) %&gt;%</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#   select(survey_id, class, order, family, species_name, total, biomass)</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="co"># </span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="co"># site1 %&gt;%</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="co">#   head(5) %&gt;% </span></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="co">#   kbl(digits = 4, caption = "Data to check") %&gt;% </span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="co">#   kable_classic(html_font = "Computer Modern", full_width = F)  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</center>
+<p>Comment détécter les outliers ?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># ggplot(data = site1, mapping = aes(x = order, y = biomass)) +</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="co">#   geom_boxplot() +</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="co">#   theme_bw()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<h3 id="séparer-les-elasmobranches-des-actinoptérygiens">Séparer les Elasmobranches des Actinoptérygiens</h3>
+<center>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># ggplot(data = site1, mapping = aes(x = order, y = biomass)) +</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="co">#   geom_boxplot() +</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="co">#   facet_grid(.~class, scales = "free", space = "free") +</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="co">#   theme_bw() +</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Interrogation au niveau des perciformes …</p>
+</center>
+<h3 id="quest-ce-quil-se-passe-avec-les-perciformes">Qu’est-ce qu’il se passe avec les Perciformes ?</h3>
+<center>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># site1 %&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="co">#   filter(order == "Perciformes") %&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="co">#   ggplot(., mapping = aes(x = family, y = biomass)) +</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="co">#   geom_boxplot() +</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="co">#   theme_bw() +</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</center>
 
 <img src="template/logo_marbec.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://github.com/umr-marbec/tidyverse-training">https://github.com/umr-marbec/tidyverse-training</a></p>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
