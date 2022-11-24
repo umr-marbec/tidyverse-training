@@ -34,6 +34,14 @@ jobs:
             colorBlindness
             RColorBrewer
             kableExtra
+            dplyr
+            tidyr
+            readr
+            ggplot2
+            purrr
+            tibble
+            stringr
+            forcats
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
