@@ -25,9 +25,20 @@ fig-caption: center
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyr)
 library(patchwork)
 library(knitr)
 library(cowplot)
+library(colorBlindness)
+library(RColorBrewer)
+library(kableExtra)
+library(readr)
+library(ggplot2)
+library(purrr)
+library(tibble)
+library(stringr)
+library(forcats)
 ```
 
 ## Plan de la formation {.smaller}
@@ -190,9 +201,9 @@ library(tidyverse)
 
     ```{r echo=FALSE, out.width="85%"}
     data <- iris
-    p1 <- ggplot2::ggplot(data, mapping = ggplot2::aes(x = Sepal.Length, y = Sepal.Width)) +
-      ggplot2::theme(axis.text = ggplot2::element_text(size = 25),
-                     axis.title = ggplot2::element_text(size = 25))
+    p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
+      theme(axis.text = element_text(size = 25),
+                     axis.title = element_text(size = 25))
     p1
     ```
 :::
@@ -201,7 +212,7 @@ library(tidyverse)
 2.  Le type de représentation
 
     ```{r echo=FALSE, out.width="85%"}
-    p2 <- p1 + ggplot2::geom_point(size = 5)
+    p2 <- p1 + geom_point(size = 5)
     p2
     ```
 :::
@@ -213,7 +224,7 @@ library(tidyverse)
 3.  Les Couleurs
 
     ```{r echo=FALSE, out.width="85%"}
-    p3 <- p1 + ggplot2::geom_point(mapping = ggplot2::aes(color = Petal.Width), size = 5) + ggplot2::scale_color_viridis_c()
+    p3 <- p1 + geom_point(mapping = aes(color = Petal.Width), size = 5) + scale_color_viridis_c()
     p3
     ```
 :::
@@ -222,9 +233,9 @@ library(tidyverse)
 4.  Le Lifting final
 
     ```{r echo=FALSE, out.width="85%"}
-    p4 <- p3 + ggplot2::theme_bw() +
-      ggplot2::theme(axis.text = ggplot2::element_text(size = 25),
-                     axis.title = ggplot2::element_text(size = 25))
+    p4 <- p3 + theme_bw() +
+      theme(axis.text = element_text(size = 25),
+                     axis.title = element_text(size = 25))
     p4
     ```
 :::
@@ -240,7 +251,7 @@ A FAIRE
 
 ### 1. Construction de la structure
 
-Pour la structure du la figure, la fonction à toujours utiliser est `ggplot2::ggplot()` . Les arguments principaux sont :
+Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
 
 ::: incremental
 1.  `data = nom.du.dataframe`
@@ -256,12 +267,12 @@ Pour la structure du la figure, la fonction à toujours utiliser est `ggplot2::g
 3.  Mise en application
 
     ```{r echo=FALSE, warnings=FALSE}
-    fish_data <- readr::read_csv("data/Global_reef_fish_abundance_and_biomass.csv") %>% dplyr::filter(survey_id == 2000951)
+    fish_data <- read_csv("data/Global_reef_fish_abundance_and_biomass.csv") %>% filter(survey_id == 2000951)
     ```
 
     ```{r echo=TRUE, warnings=FALSE}
-    p1 <- ggplot2::ggplot(data    = fish_data,
-                          mapping = ggplot2::aes(x = total, y = biomass))
+    p1 <- ggplot(data    = fish_data,
+                          mapping = aes(x = total, y = biomass))
     p1
     ```
 :::
@@ -273,11 +284,11 @@ Pour la structure du la figure, la fonction à toujours utiliser est `ggplot2::g
 ::: incremental
 Plusieurs représentations existent, les plus connues et utilisées sont :
 
--   `ggplot2::geom_point()` pour un nuage de points
--   `ggplot2::geom_line()` pour une ligne
--   `ggplot2::geom_boxplot()` pour une boîte à moustache
--   `ggplot2::geom_col()` pour un diagramme en barres
--   `ggplot2::geom_histogram()` pour un histogramme
+-   `geom_point()` pour un nuage de points
+-   `geom_line()` pour une ligne
+-   `geom_boxplot()` pour une boîte à moustache
+-   `geom_col()` pour un diagramme en barres
+-   `geom_histogram()` pour un histogramme
 
 Construisons un nuage de points entre nos deux variables:
 
@@ -288,7 +299,7 @@ Construisons un nuage de points entre nos deux variables:
 
     ```{r echo=TRUE, eval = FALSE, warnings=FALSE}
     p2 <- p1 + 
-      ggplot2::geom_point()
+      geom_point()
     ```
 :::
 
@@ -296,9 +307,9 @@ Construisons un nuage de points entre nos deux variables:
 -   `aes()` dans `geom_point()`
 
     ```{r echo=TRUE, warnings=FALSE}
-    p2 <- ggplot2::ggplot() +
-      ggplot2::geom_point(data    = fish_data,
-                          mapping = ggplot2::aes(x = total, 
+    p2 <- ggplot() +
+      geom_point(data    = fish_data,
+                          mapping = aes(x = total, 
                                                  y = biomass))
     ```
 :::
@@ -317,9 +328,9 @@ p2
     =\> Une couleur par ordre. Comme c'est lié à l'esthétisme de la figure, on utilise l'argument `color` dans la fonction `aes`.
 
 ```{r echo=TRUE, warnings=FALSE}
-p3 <- ggplot2::ggplot() +
-  ggplot2::geom_point(data    = fish_data,
-                      mapping = ggplot2::aes(x = total, y = biomass, 
+p3 <- ggplot() +
+  geom_point(data    = fish_data,
+                      mapping = aes(x = total, y = biomass, 
                                              color = class))
 p3
 ```
@@ -332,7 +343,7 @@ p3
 
 ```{r echo=TRUE, warnings=FALSE}
 p4 <- p3 +
-  ggplot2::scale_color_manual(name = "Order :",
+  scale_color_manual(name = "Order :",
                               values = c("darkblue", "darkgreen"))
 p4
 ```
@@ -346,7 +357,7 @@ Une autre façon de faire est d'utiliser la fonction `labs` qui permet de change
 
 ```{r echo=TRUE, warnings=FALSE}
 p5 <- p3 +
-  ggplot2::labs(x = "Number of observations", 
+  labs(x = "Number of observations", 
                 y = "Biomass (g)", 
                 color = "Order :")
 p5
@@ -357,9 +368,9 @@ p5
 6.  Petit lifting de la couleur de font
 
 ```{r echo=TRUE, warnings=FALSE}
-p5 + ggplot2::theme_bw()
-p5 + ggplot2::theme_classic()
-p5 + ggplot2::theme_dark()
+p5 + theme_bw()
+p5 + theme_classic()
+p5 + theme_dark()
 ```
 
 <center>Un tas de `theme_*` existent pour obtenir différentes formats d'arrière plan (voir [ici](http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements)). A vous de choisir votre préféré.</center>
@@ -370,11 +381,11 @@ p5 + ggplot2::theme_dark()
 
 ```{r echo=TRUE, warnings=FALSE}
 p6 <- p5 +
-  ggplot2::theme(axis.text       = ggplot2::element_text(size = 11),
-                 axis.title      = ggplot2::element_text(size = 13),
+  theme(axis.text       = element_text(size = 11),
+                 axis.title      = element_text(size = 13),
                  legend.position = c(0.2, 0.8),
-                 legend.text     = ggplot2::element_text(size = 13),
-                 legend.title    = ggplot2::element_text(size = 15))
+                 legend.text     = element_text(size = 13),
+                 legend.title    = element_text(size = 15))
 p6
 ```
 
@@ -401,14 +412,14 @@ De la même façon, pour choisir ses couleurs de contour *vs.* de remplissage, o
 ::: incremental
 ```{r echo=TRUE}
 fish_data %>%
-  dplyr::group_by(order) %>%
-  dplyr::summarise(biomass = sum(biomass)) %>%
-  ggplot2::ggplot() +
-  ggplot2::geom_col(data    = fish_data,
-                    mapping = ggplot2::aes(x = order, 
+  group_by(order) %>%
+  summarise(biomass = sum(biomass)) %>%
+  ggplot() +
+  geom_col(data    = fish_data,
+                    mapping = aes(x = order, 
                                            y = biomass, 
                                            fill = order)) +
-  ggplot2::scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))
+  scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))
 
 ```
 :::
@@ -426,11 +437,11 @@ Selon le type de variable, les fonctions pour choisir les couleurs ne seront pas
 
 ::: incremental
 ```{r echo = TRUE, error = TRUE}
-plot <- ggplot2::ggplot() +
-  ggplot2::geom_point(data    = fish_data,
-                      mapping = ggplot2::aes(x = total, y = biomass, 
+plot <- ggplot() +
+  geom_point(data    = fish_data,
+                      mapping = aes(x = total, y = biomass, 
                                              color = total))
-plot + ggplot2::scale_color_manual(values = "blue")
+plot + scale_color_manual(values = "blue")
 ```
 :::
 
@@ -455,10 +466,10 @@ Il existe 4 fonctions principales qui permettent de construire des pallettes de 
 <center>Testons les une par une à partir de la figure suivante</center>
 
 ```{r}
-plot <- ggplot2::ggplot(faithfuld) +
-  ggplot2::geom_tile(ggplot2::aes(waiting, eruptions, fill = density)) +
-  ggplot2::labs(x = "Waiting", y = "Eruptions", fill = "Density") +
-  ggplot2::theme_bw()
+plot <- ggplot(faithfuld) +
+  geom_tile(aes(waiting, eruptions, fill = density)) +
+  labs(x = "Waiting", y = "Eruptions", fill = "Density") +
+  theme_bw()
 ```
 :::
 
@@ -467,7 +478,7 @@ plot <- ggplot2::ggplot(faithfuld) +
 La plus simple, mais pas beaucoup d'options.
 
 ```{r echo = FALSE}
-plot + ggplot2::scale_fill_continuous()
+plot + scale_fill_continuous()
 ```
 
 ## `scale_color_viridis_c`
@@ -476,9 +487,9 @@ De belles palettes dont les nuances sont captées par les personnes albinos.
 
 ::: incremental
 ```{r echo=TRUE}
-plot + ggplot2::scale_fill_viridis_c(option = "viridis")
-plot + ggplot2::scale_fill_viridis_c(option = "inferno")
-plot + ggplot2::scale_fill_viridis_c(option = "turbo")
+plot + scale_fill_viridis_c(option = "viridis")
+plot + scale_fill_viridis_c(option = "inferno")
+plot + scale_fill_viridis_c(option = "turbo")
 ```
 :::
 
@@ -487,9 +498,9 @@ plot + ggplot2::scale_fill_viridis_c(option = "turbo")
 Permet d'utiliser les palettes de couleurs issues de [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
 
 ```{r echo = FALSE}
-plot + ggplot2::scale_fill_distiller(palette = "Reds")
-plot + ggplot2::scale_fill_distiller(palette = "YlGn")
-plot + ggplot2::scale_fill_distiller(palette = "Spectral")
+plot + scale_fill_distiller(palette = "Reds")
+plot + scale_fill_distiller(palette = "YlGn")
+plot + scale_fill_distiller(palette = "Spectral")
 ```
 
 ::: incremental
@@ -518,9 +529,9 @@ Permet de créer ces propres palettes de couleurs, à partir de 2, 3 ou n couleu
 
 ::: incremental
 ```{r echo = TRUE}
-plot + ggplot2::scale_fill_gradient(low = "darkblue", high = "darkred")
-plot + ggplot2::scale_fill_gradient2(low = "darkblue", mid = "white", high = "darkred", midpoint = 0.02)
-plot + ggplot2::scale_fill_gradientn(colours = colorspace::diverge_hcl(7))
+plot + scale_fill_gradient(low = "darkblue", high = "darkred")
+plot + scale_fill_gradient2(low = "darkblue", mid = "white", high = "darkred", midpoint = 0.02)
+plot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))
 ```
 :::
 
@@ -539,23 +550,23 @@ Les principales fonctions utilisées permettant de construire des pallettes de c
 ::: incremental
 ```{r echo = FALSE}
 plot <- fish_data %>%
-  dplyr::group_by(order) %>%
-  dplyr::summarise(biomass = sum(biomass)) %>%
-  ggplot2::ggplot() +
-  ggplot2::geom_col(data    = fish_data,
-                    mapping = ggplot2::aes(x = order, 
+  group_by(order) %>%
+  summarise(biomass = sum(biomass)) %>%
+  ggplot() +
+  geom_col(data    = fish_data,
+                    mapping = aes(x = order, 
                                            y = biomass, 
                                            fill = order)) + 
-  ggplot2::theme_bw()
+  theme_bw()
 
 ```
 :::
 
 ::: incremental
 ```{r echo = TRUE}
-plot + ggplot2::scale_fill_discrete()
-plot + ggplot2::scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))
-plot + ggplot2::scale_fill_brewer(palette = "Set2") 
+plot + scale_fill_discrete()
+plot + scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))
+plot + scale_fill_brewer(palette = "Set2") 
 
 ```
 :::
@@ -575,17 +586,17 @@ https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 <center>
 
 ```{r echo = TRUE, warning = FALSE}
-fish_data <- readr::read_csv("data/Global_reef_fish_abundance_and_biomass.csv")
+fish_data <- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")
 
 # Selection des données pour le site n°2000951
 site1 <- fish_data %>%
-  dplyr::filter(survey_id == 2000951) %>%
-  dplyr::select(survey_id, class, order, family, species_name, total, biomass)
+  filter(survey_id == 2000951) %>%
+  select(survey_id, class, order, family, species_name, total, biomass)
 
 site1 %>%
   head(5) %>% 
-  kableExtra::kbl(digits = 4, caption = "Data to check") %>% 
-  kableExtra::kable_classic(html_font = "Computer Modern", full_width = F)  
+  kbl(digits = 4, caption = "Data to check") %>% 
+  kable_classic(html_font = "Computer Modern", full_width = F)  
 
 ```
 
@@ -594,9 +605,9 @@ site1 %>%
 Comment détécter les outliers ?
 
 ```{r echo = TRUE, warning = FALSE}
-ggplot2::ggplot(data = site1, mapping = ggplot2::aes(x = order, y = biomass)) +
-  ggplot2::geom_boxplot() +
-  ggplot2::theme_bw()
+ggplot(data = site1, mapping = aes(x = order, y = biomass)) +
+  geom_boxplot() +
+  theme_bw()
 ```
 
 ### Séparer les Elasmobranches des Actinoptérygiens
@@ -604,11 +615,11 @@ ggplot2::ggplot(data = site1, mapping = ggplot2::aes(x = order, y = biomass)) +
 <center>
 
 ```{r echo=TRUE, warning=FALSE}
-ggplot2::ggplot(data = site1, mapping = ggplot2::aes(x = order, y = biomass)) +
-  ggplot2::geom_boxplot() +
-  ggplot2::facet_grid(.~class, scales = "free", space = "free") +
-  ggplot2::theme_bw() +
-  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
+ggplot(data = site1, mapping = aes(x = order, y = biomass)) +
+  geom_boxplot() +
+  facet_grid(.~class, scales = "free", space = "free") +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 Interrogation au niveau des perciformes ...
@@ -621,11 +632,11 @@ Interrogation au niveau des perciformes ...
 
 ```{r echo=TRUE, warning=FALSE}
 site1 %>%
-  dplyr::filter(order == "Perciformes") %>%
-  ggplot2::ggplot(., mapping = ggplot2::aes(x = family, y = biomass)) +
-  ggplot2::geom_boxplot() +
-  ggplot2::theme_bw() +
-  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
+  filter(order == "Perciformes") %>%
+  ggplot(., mapping = aes(x = family, y = biomass)) +
+  geom_boxplot() +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
   
 
 ```
