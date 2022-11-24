@@ -388,9 +388,6 @@
       margin-right: 0; 
     }
   </style>
-  
-  <script src="tidyverse-training_files/libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="tidyverse-training_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -698,8 +695,8 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 
 </div>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data    =</span> fish_data,</span>
-<span id="cb2-2"><a href="#cb2-2"></a>                      <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> total, <span class="at">y =</span> biomass))</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data    =</span> data_crabs,</span>
+<span id="cb2-2"><a href="#cb2-2"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CL, <span class="at">y =</span> CW))</span>
 <span id="cb2-3"><a href="#cb2-3"></a>p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
@@ -727,7 +724,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <ul>
 <li class="fragment"><p><code>aes()</code> dans <code>ggplot()</code></p>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>p2 <span class="ot">&lt;-</span> p1 <span class="sc">+</span> </span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>p2 <span class="ot">&lt;-</span> p1 <span class="sc">+</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
@@ -735,10 +732,10 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <ul>
 <li class="fragment"><p><code>aes()</code> dans <code>geom_point()</code></p>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> fish_data,</span>
-<span id="cb4-3"><a href="#cb4-3"></a>                      <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> total, </span>
-<span id="cb4-4"><a href="#cb4-4"></a>                                             <span class="at">y =</span> biomass))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># p2 &lt;- ggplot() +</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#   geom_point(data    = fish_data,</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#                       mapping = aes(x = total, </span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#                                              y = biomass))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
 </div><div class="cell">
@@ -758,9 +755,9 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 </ol>
 <div class="cell" data-warnings="false">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> fish_data,</span>
-<span id="cb5-3"><a href="#cb5-3"></a>                      <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> total, <span class="at">y =</span> biomass, </span>
-<span id="cb5-4"><a href="#cb5-4"></a>                                             <span class="at">color =</span> class))</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data_crabs,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CL, <span class="at">y =</span> CW,</span>
+<span id="cb5-4"><a href="#cb5-4"></a>                           <span class="at">color =</span> sex))</span>
 <span id="cb5-5"><a href="#cb5-5"></a>p3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
@@ -773,8 +770,8 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 </ol>
 <div class="cell" data-warnings="false">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>p4 <span class="ot">&lt;-</span> p3 <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Order :"</span>,</span>
-<span id="cb6-3"><a href="#cb6-3"></a>                              <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkgreen"</span>))</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name   =</span> <span class="st">"Sex :"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span>
 <span id="cb6-4"><a href="#cb6-4"></a>p4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
@@ -789,10 +786,10 @@ Une autre façon de faire est d’utiliser la fonction <code>labs</code> qui per
 <li>Nommons proprement les axes + la légende</li>
 </ol>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>p5 <span class="ot">&lt;-</span> p3 <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of observations"</span>, </span>
-<span id="cb7-3"><a href="#cb7-3"></a>                <span class="at">y =</span> <span class="st">"Biomass (g)"</span>, </span>
-<span id="cb7-4"><a href="#cb7-4"></a>                <span class="at">color =</span> <span class="st">"Order :"</span>)</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>p5 <span class="ot">&lt;-</span> p4 <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Carapace Length (mm)"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>       <span class="at">y =</span> <span class="st">"Carapace Width (mm)"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>       <span class="at">color =</span> <span class="st">"Sex :"</span>)</span>
 <span id="cb7-5"><a href="#cb7-5"></a>p5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
@@ -800,42 +797,54 @@ Une autre façon de faire est d’utiliser la fonction <code>labs</code> qui per
 <section id="ggplot-pas-à-pas-5" class="slide level2">
 <h2>Ggplot pas à pas</h2>
 <ol start="6" type="1">
+<li>Faisons deux plot en un en séparant les données pour les deux espèces.</li>
+</ol>
+<div class="cell" data-warnings="false">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>p6 <span class="ot">&lt;-</span> p5 <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>sp)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>p6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"></section>
+<section id="ggplot-pas-à-pas-6" class="slide level2">
+<h2>Ggplot pas à pas</h2>
+<ol start="7" type="1">
 <li>Petit lifting de la couleur de font</li>
 </ol>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>p5 <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>p6 <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>p5 <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>p6 <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-28-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-30-2.png" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>p5 <span class="sc">+</span> <span class="fu">theme_dark</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>p6 <span class="sc">+</span> <span class="fu">theme_dark</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-28-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-30-3.png" width="960"></p>
 </div>
 </div>
 <center>
 Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’arrière plan (voir <a href="http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements">ici</a>). A vous de choisir votre préféré.
 </center>
 </section>
-<section id="ggplot-pas-à-pas-6" class="slide level2">
+<section id="ggplot-pas-à-pas-7" class="slide level2">
 <h2>Ggplot pas à pas</h2>
 <ol start="7" type="1">
 <li>Le lifting final sur les légendes</li>
 </ol>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>p6 <span class="ot">&lt;-</span> p5 <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">theme</span>(<span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
-<span id="cb11-3"><a href="#cb11-3"></a>                 <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
-<span id="cb11-4"><a href="#cb11-4"></a>                 <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>),</span>
-<span id="cb11-5"><a href="#cb11-5"></a>                 <span class="at">legend.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
-<span id="cb11-6"><a href="#cb11-6"></a>                 <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>))</span>
-<span id="cb11-7"><a href="#cb11-7"></a>p6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>p7 <span class="ot">&lt;-</span> p6 <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">theme</span>(<span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb12-4"><a href="#cb12-4"></a>        <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb12-5"><a href="#cb12-5"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>        <span class="at">legend.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb12-7"><a href="#cb12-7"></a>        <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>))</span>
+<span id="cb12-8"><a href="#cb12-8"></a>p7</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"></section>
+<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch"></section>
 <section id="une-petite-subtilité-concernant-les-couleurs" class="slide level2">
 <h2>Une petite subtilité concernant les couleurs</h2>
 <div>
@@ -856,18 +865,15 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 </div>
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>fish_data <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">group_by</span>(order) <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">summarise</span>(<span class="at">biomass =</span> <span class="fu">sum</span>(biomass)) <span class="sc">%&gt;%</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">geom_col</span>(<span class="at">data    =</span> fish_data,</span>
-<span id="cb12-6"><a href="#cb12-6"></a>                    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> order, </span>
-<span id="cb12-7"><a href="#cb12-7"></a>                                           <span class="at">y =</span> biomass, </span>
-<span id="cb12-8"><a href="#cb12-8"></a>                                           <span class="at">fill =</span> order)) <span class="sc">+</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"pink"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"yellow"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
-</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># fish_data %&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#   group_by(order) %&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#   summarise(biomass = sum(biomass)) %&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#   ggplot() +</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#   geom_col(data    = fish_data,</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#                     mapping = aes(x = order, </span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#                                            y = biomass, </span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#                                            fill = order)) +</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#   scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -883,17 +889,11 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 </div>
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> fish_data,</span>
-<span id="cb13-3"><a href="#cb13-3"></a>                      <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> total, <span class="at">y =</span> biomass, </span>
-<span id="cb13-4"><a href="#cb13-4"></a>                                             <span class="at">color =</span> total))</span>
-<span id="cb13-5"><a href="#cb13-5"></a>plot <span class="sc">+</span> <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error: Continuous value supplied to discrete scale</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
-</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># plot &lt;- ggplot() +</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#   geom_point(data    = fish_data,</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#                       mapping = aes(x = total, y = biomass, </span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#                                              color = total))</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co"># plot + scale_color_manual(values = "blue")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <center>
@@ -928,7 +928,7 @@ Testons les une par une à partir de la figure suivante
 <h2><code>scale_color_continuous</code></h2>
 <p>La plus simple, mais pas beaucoup d’options.</p>
 
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"></section>
+<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-40-1.png" width="960" class="r-stretch"></section>
 <section id="scale_color_viridis_c" class="slide level2">
 <h2><code>scale_color_viridis_c</code></h2>
 <p>De belles palettes dont les nuances sont captées par les personnes albinos.</p>
@@ -936,15 +936,15 @@ Testons les une par une à partir de la figure suivante
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-40-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-42-1.png" width="960"></p>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-40-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-42-2.png" width="960"></p>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-40-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-42-3.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -954,13 +954,13 @@ Testons les une par une à partir de la figure suivante
 <p>Permet d’utiliser les palettes de couleurs issues de <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">BrewerPalettes</a>.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-42-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
 </div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-42-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-44-2.png" width="960"></p>
 </div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-42-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-44-3.png" width="960"></p>
 </div>
 </div>
 <div>
@@ -972,7 +972,7 @@ Testons les une par une à partir de la figure suivante
 <span id="cb19-4"><a href="#cb19-4"></a>color_pal <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">10</span>, <span class="at">name=</span><span class="st">"Spectral"</span>)</span>
 <span id="cb19-5"><a href="#cb19-5"></a>colorBlindness<span class="sc">::</span><span class="fu">displayAllColors</span>(color_pal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -991,15 +991,15 @@ Testons les une par une à partir de la figure suivante
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-48-1.png" width="960"></p>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">midpoint =</span> <span class="fl">0.02</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-48-2.png" width="960"></p>
 </div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> colorspace<span class="sc">::</span><span class="fu">diverge_hcl</span>(<span class="dv">7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-48-3.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1016,22 +1016,24 @@ Testons les une par une à partir de la figure suivante
 </div>
 <div>
 <div class="cell">
-
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-50-1.png" width="960"></p>
+</div>
 </div>
 </div>
 <div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_discrete</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-50-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-52-1.png" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"pink"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"yellow"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-50-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-52-2.png" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-50-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-52-3.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1049,123 +1051,49 @@ Testons les une par une à partir de la figure suivante
 <h2>Utiliser ggplot pour détecter des erreurs dans les données</h2>
 <center>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>fish_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Global_reef_fish_abundance_and_biomass.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># fish_data &lt;- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")</span></span>
 <span id="cb26-2"><a href="#cb26-2"></a></span>
 <span id="cb26-3"><a href="#cb26-3"></a><span class="co"># Selection des données pour le site n°2000951</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a>site1 <span class="ot">&lt;-</span> fish_data <span class="sc">%&gt;%</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">filter</span>(survey_id <span class="sc">==</span> <span class="dv">2000951</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">select</span>(survey_id, class, order, family, species_name, total, biomass)</span>
-<span id="cb26-7"><a href="#cb26-7"></a></span>
-<span id="cb26-8"><a href="#cb26-8"></a>site1 <span class="sc">%&gt;%</span></span>
-<span id="cb26-9"><a href="#cb26-9"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-10"><a href="#cb26-10"></a>  <span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">4</span>, <span class="at">caption =</span> <span class="st">"Data to check"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-11"><a href="#cb26-11"></a>  <span class="fu">kable_classic</span>(<span class="at">html_font =</span> <span class="st">"Computer Modern"</span>, <span class="at">full_width =</span> F)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: Computer Modern; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>Data to check</caption>
- <thead>
-  <tr>
-   <th style="text-align:right;"> survey_id </th>
-   <th style="text-align:left;"> class </th>
-   <th style="text-align:left;"> order </th>
-   <th style="text-align:left;"> family </th>
-   <th style="text-align:left;"> species_name </th>
-   <th style="text-align:right;"> total </th>
-   <th style="text-align:right;"> biomass </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 2000951 </td>
-   <td style="text-align:left;"> Actinopterygii </td>
-   <td style="text-align:left;"> Perciformes </td>
-   <td style="text-align:left;"> Chironemidae </td>
-   <td style="text-align:left;"> Chironemus marmoratus </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 201.7886 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2000951 </td>
-   <td style="text-align:left;"> Actinopterygii </td>
-   <td style="text-align:left;"> Perciformes </td>
-   <td style="text-align:left;"> Chironemidae </td>
-   <td style="text-align:left;"> Chironemus marmoratus </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 301.2770 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2000951 </td>
-   <td style="text-align:left;"> Actinopterygii </td>
-   <td style="text-align:left;"> Perciformes </td>
-   <td style="text-align:left;"> Dinolestidae </td>
-   <td style="text-align:left;"> Dinolestes lewini </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 190.6464 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2000951 </td>
-   <td style="text-align:left;"> Actinopterygii </td>
-   <td style="text-align:left;"> Perciformes </td>
-   <td style="text-align:left;"> Kyphosidae </td>
-   <td style="text-align:left;"> Atypichthys strigatus </td>
-   <td style="text-align:right;"> 30 </td>
-   <td style="text-align:right;"> 27.6482 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2000951 </td>
-   <td style="text-align:left;"> Actinopterygii </td>
-   <td style="text-align:left;"> Perciformes </td>
-   <td style="text-align:left;"> Kyphosidae </td>
-   <td style="text-align:left;"> Atypichthys strigatus </td>
-   <td style="text-align:right;"> 20 </td>
-   <td style="text-align:right;"> 129.9803 </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="co"># site1 &lt;- fish_data %&gt;%</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="co">#   filter(survey_id == 2000951) %&gt;%</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="co">#   select(survey_id, class, order, family, species_name, total, biomass)</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="co"># </span></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="co"># site1 %&gt;%</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="co">#   head(5) %&gt;% </span></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="co">#   kbl(digits = 4, caption = "Data to check") %&gt;% </span></span>
+<span id="cb26-11"><a href="#cb26-11"></a><span class="co">#   kable_classic(html_font = "Computer Modern", full_width = F)  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </center>
 <p>Comment détécter les outliers ?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> site1, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> order, <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-54-1.png" width="960"></p>
-</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># ggplot(data = site1, mapping = aes(x = order, y = biomass)) +</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="co">#   geom_boxplot() +</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="co">#   theme_bw()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <h3 id="séparer-les-elasmobranches-des-actinoptérygiens">Séparer les Elasmobranches des Actinoptérygiens</h3>
 <center>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> site1, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> order, <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span>class, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">space =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
-<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-56-1.png" width="960"></p>
-</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># ggplot(data = site1, mapping = aes(x = order, y = biomass)) +</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="co">#   geom_boxplot() +</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="co">#   facet_grid(.~class, scales = "free", space = "free") +</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="co">#   theme_bw() +</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Interrogation au niveau des perciformes …</p>
 </center>
 <h3 id="quest-ce-quil-se-passe-avec-les-perciformes">Qu’est-ce qu’il se passe avec les Perciformes ?</h3>
 <center>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>site1 <span class="sc">%&gt;%</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">filter</span>(order <span class="sc">==</span> <span class="st">"Perciformes"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">ggplot</span>(., <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> family, <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
-<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb29-5"><a href="#cb29-5"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb29-6"><a href="#cb29-6"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-58-1.png" width="960"></p>
-</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># site1 %&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="co">#   filter(order == "Perciformes") %&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="co">#   ggplot(., mapping = aes(x = family, y = biomass)) +</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="co">#   geom_boxplot() +</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="co">#   theme_bw() +</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </center>
-<p><img src="template/logo_marbec.png" class="slide-logo"></p>
-<div class="footer footer-default">
+
+<img src="template/logo_marbec.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://github.com/umr-marbec/tidyverse-training">https://github.com/umr-marbec/tidyverse-training</a></p>
 </div>
 </section></section>
