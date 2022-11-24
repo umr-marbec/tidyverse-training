@@ -285,22 +285,28 @@ Construisons un nuage de points entre nos deux variables:
 ::: incremental
 ::: columns
 ::: {.column width="45%"}
-1.  `aes()` dans `ggplot()`
+-   `aes()` dans `ggplot()`
 
-    ```{r echo=TRUE, eval = FASLE, warnings=FALSE}
+    ```{r echo=TRUE, eval = FALSE, warnings=FALSE}
     p2 <- p1 + 
       ggplot2::geom_point()
     ```
+:::
 
-2.  `aes()` dans `geom_point()`
+::: {.column width="45%"}
+-   `aes()` dans `geom_point()`
 
     ```{r echo=TRUE, warnings=FALSE}
     p2 <- ggplot2::ggplot() +
       ggplot2::geom_point(data    = fish_data,
-                          mapping = ggplot2::aes(x = total, y = biomass))
-    p2
+                          mapping = ggplot2::aes(x = total, 
+                                                 y = biomass))
     ```
 :::
+
+```{r echo=FALSE}
+p2
+```
 :::
 :::
 :::
@@ -404,7 +410,7 @@ Selon le type de variable, les fonctions pour choisir les couleurs ne seront pas
 :::
 
 ::: incremental
-```{r echo = TRUE}
+```{r echo = TRUE, error = TRUE}
 plot <- ggplot2::ggplot() +
   ggplot2::geom_point(data    = fish_data,
                       mapping = ggplot2::aes(x = total, y = biomass, 
@@ -475,11 +481,11 @@ plot + ggplot2::scale_fill_distiller(palette = "Spectral")
 Petite info utile, toutes les palettes peuvent passer le test **ColorBlind Friendly** :
 
 ```{r}
-install.packages("colorBlindness")
-install.packages("RColorBrewer")
-
-color_pal <- RColorBrewer::brewer.pal(10, name="Spectral")
-colorBlindness::displayAllColors(color_pal)
+# install.packages("colorBlindness")
+# install.packages("RColorBrewer")
+# 
+# color_pal <- RColorBrewer::brewer.pal(10, name="Spectral")
+# colorBlindness::displayAllColors(color_pal)
 ```
 :::
 
@@ -503,7 +509,7 @@ plot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))
 ```
 :::
 
-##  De la même façon,
+## De la même façon,
 
 voir https://ggplot2-book.org/scale-colour.html#colour-discrete
 
