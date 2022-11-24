@@ -355,11 +355,27 @@ p5
 
 ## Ggplot pas à pas
 
-6.  Le lifting final
+6.  Petit lifting de la couleur de font
+
+```{r echo=TRUE, warnings=FALSE}
+p5 + ggplot2::theme_bw()
+p5 + ggplot2::theme_classic()
+p5 + ggplot2::theme_dark()
+```
+
+<center>Un tas de `theme_*` existent pour obtenir différentes formats d'arrière plan (voir [ici](http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements)). A vous de choisir votre préféré.</center>
+
+## Ggplot pas à pas
+
+7.  Le lifting final sur les légendes
 
 ```{r echo=TRUE, warnings=FALSE}
 p6 <- p5 +
-  ggplot2::theme_bw()
+  ggplot2::theme(axis.text       = ggplot2::element_text(size = 11),
+                 axis.title      = ggplot2::element_text(size = 13),
+                 legend.position = c(0.2, 0.8),
+                 legend.text     = ggplot2::element_text(size = 13),
+                 legend.title    = ggplot2::element_text(size = 15))
 p6
 ```
 
@@ -483,9 +499,9 @@ Petite info utile, toutes les palettes peuvent passer le test **ColorBlind Frien
 ```{r}
 # install.packages("colorBlindness")
 # install.packages("RColorBrewer")
-# 
-# color_pal <- RColorBrewer::brewer.pal(10, name="Spectral")
-# colorBlindness::displayAllColors(color_pal)
+
+color_pal <- RColorBrewer::brewer.pal(10, name="Spectral")
+colorBlindness::displayAllColors(color_pal)
 ```
 :::
 
@@ -509,13 +525,51 @@ plot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))
 ```
 :::
 
-## De la même façon,
-
-voir https://ggplot2-book.org/scale-colour.html#colour-discrete
-
 ## Couleurs & variables discrètes
 
+Les principales fonctions utilisées permettant de construire des pallettes de couleurs continues :
+
+::: incremental
+-   `scale_fill_discrete` : Couleurs par défaut
+
+-   `scale_fill_manual` : choix de la couleur parmis toutes les couleurs existantes.
+
+-   `scale_fill_brewer` : utilise les [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) (voir [ici](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html) pour plus d'infos). Equivalent de `scale_fill_distiller` pour les variables discrètes.
+:::
+
+::: incremental
+```{r echo = FALSE}
+plot <- fish_data %>%
+  dplyr::group_by(order) %>%
+  dplyr::summarise(biomass = sum(biomass)) %>%
+  ggplot2::ggplot() +
+  ggplot2::geom_col(data    = fish_data,
+                    mapping = ggplot2::aes(x = order, 
+                                           y = biomass, 
+                                           fill = order)) + 
+  ggplot2::theme_bw()
+
+```
+:::
+
+::: incremental
+```{r echo = TRUE}
+plot + ggplot2::scale_fill_discrete()
+plot + ggplot2::scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))
+plot + ggplot2::scale_fill_brewer(palette = "Set2") 
+
+```
+:::
+
 ## Couleurs & variables en classes
+
+## Ressources utilisées
+
+https://ggplot2-book.org/scale-colour.html#colour-discrete
+
+https://stackoverflow.com/questions/70942728/understanding-color-scales-in-ggplot2
+
+https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 
 ## Utiliser ggplot pour détecter des erreurs dans les données
 
