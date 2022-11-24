@@ -267,7 +267,7 @@ Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` 
 3.  Mise en application
 
     ```{r echo=FALSE, warnings=FALSE}
-    fish_data <- read_csv("data/Global_reef_fish_abundance_and_biomass.csv") %>% filter(survey_id == 2000951)
+    # fish_data <- read_csv("data/Global_reef_fish_abundance_and_biomass.csv") %>% filter(survey_id == 2000951)
     ```
 
     ```{r echo=TRUE, warnings=FALSE}
@@ -298,8 +298,8 @@ Construisons un nuage de points entre nos deux variables:
 -   `aes()` dans `ggplot()`
 
     ```{r echo=TRUE, eval = FALSE, warnings=FALSE}
-    p2 <- p1 + 
-      geom_point()
+    # p2 <- p1 + 
+    #   geom_point()
     ```
 :::
 
@@ -307,15 +307,15 @@ Construisons un nuage de points entre nos deux variables:
 -   `aes()` dans `geom_point()`
 
     ```{r echo=TRUE, warnings=FALSE}
-    p2 <- ggplot() +
-      geom_point(data    = fish_data,
-                          mapping = aes(x = total, 
-                                                 y = biomass))
+    # p2 <- ggplot() +
+    #   geom_point(data    = fish_data,
+    #                       mapping = aes(x = total, 
+    #                                              y = biomass))
     ```
 :::
 
 ```{r echo=FALSE}
-p2
+# p2
 ```
 :::
 :::
@@ -328,11 +328,11 @@ p2
     =\> Une couleur par ordre. Comme c'est lié à l'esthétisme de la figure, on utilise l'argument `color` dans la fonction `aes`.
 
 ```{r echo=TRUE, warnings=FALSE}
-p3 <- ggplot() +
-  geom_point(data    = fish_data,
-                      mapping = aes(x = total, y = biomass, 
-                                             color = class))
-p3
+# p3 <- ggplot() +
+#   geom_point(data    = fish_data,
+#                       mapping = aes(x = total, y = biomass, 
+#                                              color = class))
+# p3
 ```
 
 ## Ggplot pas à pas
@@ -342,10 +342,10 @@ p3
     Pour cela, on peut utiliser la fonction `scale_color_manual()` et les arguments `name` et `values`.
 
 ```{r echo=TRUE, warnings=FALSE}
-p4 <- p3 +
-  scale_color_manual(name = "Order :",
-                              values = c("darkblue", "darkgreen"))
-p4
+# p4 <- p3 +
+#   scale_color_manual(name = "Order :",
+#                               values = c("darkblue", "darkgreen"))
+# p4
 ```
 
 <center>Il y a de multiples façons de modifier le titre de la légende. Ici on profite de l'utilisation de la fonction `scale_color_manual()` pour utiliser l'arguement `name`.\
@@ -356,11 +356,11 @@ Une autre façon de faire est d'utiliser la fonction `labs` qui permet de change
 5.  Nommons proprement les axes + la légende
 
 ```{r echo=TRUE, warnings=FALSE}
-p5 <- p3 +
-  labs(x = "Number of observations", 
-                y = "Biomass (g)", 
-                color = "Order :")
-p5
+# p5 <- p3 +
+#   labs(x = "Number of observations", 
+#                 y = "Biomass (g)", 
+#                 color = "Order :")
+# p5
 ```
 
 ## Ggplot pas à pas
@@ -368,9 +368,9 @@ p5
 6.  Petit lifting de la couleur de font
 
 ```{r echo=TRUE, warnings=FALSE}
-p5 + theme_bw()
-p5 + theme_classic()
-p5 + theme_dark()
+# p5 + theme_bw()
+# p5 + theme_classic()
+# p5 + theme_dark()
 ```
 
 <center>Un tas de `theme_*` existent pour obtenir différentes formats d'arrière plan (voir [ici](http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements)). A vous de choisir votre préféré.</center>
@@ -380,13 +380,13 @@ p5 + theme_dark()
 7.  Le lifting final sur les légendes
 
 ```{r echo=TRUE, warnings=FALSE}
-p6 <- p5 +
-  theme(axis.text       = element_text(size = 11),
-                 axis.title      = element_text(size = 13),
-                 legend.position = c(0.2, 0.8),
-                 legend.text     = element_text(size = 13),
-                 legend.title    = element_text(size = 15))
-p6
+# p6 <- p5 +
+#   theme(axis.text       = element_text(size = 11),
+#                  axis.title      = element_text(size = 13),
+#                  legend.position = c(0.2, 0.8),
+#                  legend.text     = element_text(size = 13),
+#                  legend.title    = element_text(size = 15))
+# p6
 ```
 
 ## Une petite subtilité concernant les couleurs
@@ -411,15 +411,15 @@ De la même façon, pour choisir ses couleurs de contour *vs.* de remplissage, o
 
 ::: incremental
 ```{r echo=TRUE}
-fish_data %>%
-  group_by(order) %>%
-  summarise(biomass = sum(biomass)) %>%
-  ggplot() +
-  geom_col(data    = fish_data,
-                    mapping = aes(x = order, 
-                                           y = biomass, 
-                                           fill = order)) +
-  scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))
+# fish_data %>%
+#   group_by(order) %>%
+#   summarise(biomass = sum(biomass)) %>%
+#   ggplot() +
+#   geom_col(data    = fish_data,
+#                     mapping = aes(x = order, 
+#                                            y = biomass, 
+#                                            fill = order)) +
+#   scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))
 
 ```
 :::
@@ -437,11 +437,11 @@ Selon le type de variable, les fonctions pour choisir les couleurs ne seront pas
 
 ::: incremental
 ```{r echo = TRUE, error = TRUE}
-plot <- ggplot() +
-  geom_point(data    = fish_data,
-                      mapping = aes(x = total, y = biomass, 
-                                             color = total))
-plot + scale_color_manual(values = "blue")
+# plot <- ggplot() +
+#   geom_point(data    = fish_data,
+#                       mapping = aes(x = total, y = biomass, 
+#                                              color = total))
+# plot + scale_color_manual(values = "blue")
 ```
 :::
 
@@ -549,24 +549,24 @@ Les principales fonctions utilisées permettant de construire des pallettes de c
 
 ::: incremental
 ```{r echo = FALSE}
-plot <- fish_data %>%
-  group_by(order) %>%
-  summarise(biomass = sum(biomass)) %>%
-  ggplot() +
-  geom_col(data    = fish_data,
-                    mapping = aes(x = order, 
-                                           y = biomass, 
-                                           fill = order)) + 
-  theme_bw()
+# plot <- fish_data %>%
+#   group_by(order) %>%
+#   summarise(biomass = sum(biomass)) %>%
+#   ggplot() +
+#   geom_col(data    = fish_data,
+#                     mapping = aes(x = order, 
+#                                            y = biomass, 
+#                                            fill = order)) + 
+#   theme_bw()
 
 ```
 :::
 
 ::: incremental
 ```{r echo = TRUE}
-plot + scale_fill_discrete()
-plot + scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))
-plot + scale_fill_brewer(palette = "Set2") 
+# plot + scale_fill_discrete()
+# plot + scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))
+# plot + scale_fill_brewer(palette = "Set2") 
 
 ```
 :::
@@ -586,17 +586,17 @@ https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 <center>
 
 ```{r echo = TRUE, warning = FALSE}
-fish_data <- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")
+# fish_data <- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")
 
 # Selection des données pour le site n°2000951
-site1 <- fish_data %>%
-  filter(survey_id == 2000951) %>%
-  select(survey_id, class, order, family, species_name, total, biomass)
-
-site1 %>%
-  head(5) %>% 
-  kbl(digits = 4, caption = "Data to check") %>% 
-  kable_classic(html_font = "Computer Modern", full_width = F)  
+# site1 <- fish_data %>%
+#   filter(survey_id == 2000951) %>%
+#   select(survey_id, class, order, family, species_name, total, biomass)
+# 
+# site1 %>%
+#   head(5) %>% 
+#   kbl(digits = 4, caption = "Data to check") %>% 
+#   kable_classic(html_font = "Computer Modern", full_width = F)  
 
 ```
 
@@ -605,9 +605,9 @@ site1 %>%
 Comment détécter les outliers ?
 
 ```{r echo = TRUE, warning = FALSE}
-ggplot(data = site1, mapping = aes(x = order, y = biomass)) +
-  geom_boxplot() +
-  theme_bw()
+# ggplot(data = site1, mapping = aes(x = order, y = biomass)) +
+#   geom_boxplot() +
+#   theme_bw()
 ```
 
 ### Séparer les Elasmobranches des Actinoptérygiens
@@ -615,11 +615,11 @@ ggplot(data = site1, mapping = aes(x = order, y = biomass)) +
 <center>
 
 ```{r echo=TRUE, warning=FALSE}
-ggplot(data = site1, mapping = aes(x = order, y = biomass)) +
-  geom_boxplot() +
-  facet_grid(.~class, scales = "free", space = "free") +
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+# ggplot(data = site1, mapping = aes(x = order, y = biomass)) +
+#   geom_boxplot() +
+#   facet_grid(.~class, scales = "free", space = "free") +
+#   theme_bw() +
+#   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 Interrogation au niveau des perciformes ...
@@ -631,12 +631,12 @@ Interrogation au niveau des perciformes ...
 <center>
 
 ```{r echo=TRUE, warning=FALSE}
-site1 %>%
-  filter(order == "Perciformes") %>%
-  ggplot(., mapping = aes(x = family, y = biomass)) +
-  geom_boxplot() +
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+# site1 %>%
+#   filter(order == "Perciformes") %>%
+#   ggplot(., mapping = aes(x = family, y = biomass)) +
+#   geom_boxplot() +
+#   theme_bw() +
+#   theme(axis.text.x = element_text(angle = 45, hjust = 1))
   
 
 ```
