@@ -682,7 +682,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <section id="ggplot-pas-à-pas" class="slide level2">
 <h2>Ggplot pas à pas</h2>
 <h3 id="construction-de-la-structure">1. Construction de la structure</h3>
-<p>Pour la structure du la figure, la fonction à toujours utiliser est <code>ggplot2::ggplot()</code> . Les arguments principaux sont :</p>
+<p>Pour la structure du la figure, la fonction à toujours utiliser est <code>ggplot()</code> . Les arguments principaux sont :</p>
 <div>
 <ol type="1">
 <li class="fragment"><p><code>data = nom.du.dataframe</code></p></li>
@@ -698,8 +698,8 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 
 </div>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>p1 <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data    =</span> fish_data,</span>
-<span id="cb2-2"><a href="#cb2-2"></a>                      <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> total, <span class="at">y =</span> biomass))</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data    =</span> fish_data,</span>
+<span id="cb2-2"><a href="#cb2-2"></a>                      <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> total, <span class="at">y =</span> biomass))</span>
 <span id="cb2-3"><a href="#cb2-3"></a>p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
@@ -714,11 +714,11 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <div>
 <p>Plusieurs représentations existent, les plus connues et utilisées sont :</p>
 <ul>
-<li class="fragment"><code>ggplot2::geom_point()</code> pour un nuage de points</li>
-<li class="fragment"><code>ggplot2::geom_line()</code> pour une ligne</li>
-<li class="fragment"><code>ggplot2::geom_boxplot()</code> pour une boîte à moustache</li>
-<li class="fragment"><code>ggplot2::geom_col()</code> pour un diagramme en barres</li>
-<li class="fragment"><code>ggplot2::geom_histogram()</code> pour un histogramme</li>
+<li class="fragment"><code>geom_point()</code> pour un nuage de points</li>
+<li class="fragment"><code>geom_line()</code> pour une ligne</li>
+<li class="fragment"><code>geom_boxplot()</code> pour une boîte à moustache</li>
+<li class="fragment"><code>geom_col()</code> pour un diagramme en barres</li>
+<li class="fragment"><code>geom_histogram()</code> pour un histogramme</li>
 </ul>
 <p>Construisons un nuage de points entre nos deux variables:</p>
 <div>
@@ -728,16 +728,16 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <li class="fragment"><p><code>aes()</code> dans <code>ggplot()</code></p>
 <div class="cell" data-warnings="false">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>p2 <span class="ot">&lt;-</span> p1 <span class="sc">+</span> </span>
-<span id="cb3-2"><a href="#cb3-2"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
 </div><div class="column" style="width:45%;">
 <ul>
 <li class="fragment"><p><code>aes()</code> dans <code>geom_point()</code></p>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>p2 <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">data    =</span> fish_data,</span>
-<span id="cb4-3"><a href="#cb4-3"></a>                      <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> total, </span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> fish_data,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>                      <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> total, </span>
 <span id="cb4-4"><a href="#cb4-4"></a>                                             <span class="at">y =</span> biomass))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
@@ -757,9 +757,9 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <p>=&gt; Une couleur par ordre. Comme c’est lié à l’esthétisme de la figure, on utilise l’argument <code>color</code> dans la fonction <code>aes</code>.</p></li>
 </ol>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>p3 <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">data    =</span> fish_data,</span>
-<span id="cb5-3"><a href="#cb5-3"></a>                      <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> total, <span class="at">y =</span> biomass, </span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> fish_data,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>                      <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> total, <span class="at">y =</span> biomass, </span>
 <span id="cb5-4"><a href="#cb5-4"></a>                                             <span class="at">color =</span> class))</span>
 <span id="cb5-5"><a href="#cb5-5"></a>p3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
@@ -773,7 +773,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 </ol>
 <div class="cell" data-warnings="false">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>p4 <span class="ot">&lt;-</span> p3 <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Order :"</span>,</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">"Order :"</span>,</span>
 <span id="cb6-3"><a href="#cb6-3"></a>                              <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkgreen"</span>))</span>
 <span id="cb6-4"><a href="#cb6-4"></a>p4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
@@ -790,7 +790,7 @@ Une autre façon de faire est d’utiliser la fonction <code>labs</code> qui per
 </ol>
 <div class="cell" data-warnings="false">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>p5 <span class="ot">&lt;-</span> p3 <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of observations"</span>, </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of observations"</span>, </span>
 <span id="cb7-3"><a href="#cb7-3"></a>                <span class="at">y =</span> <span class="st">"Biomass (g)"</span>, </span>
 <span id="cb7-4"><a href="#cb7-4"></a>                <span class="at">color =</span> <span class="st">"Order :"</span>)</span>
 <span id="cb7-5"><a href="#cb7-5"></a>p5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -803,15 +803,15 @@ Une autre façon de faire est d’utiliser la fonction <code>labs</code> qui per
 <li>Petit lifting de la couleur de font</li>
 </ol>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>p5 <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>p5 <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>p5 <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>p5 <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-28-2.png" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>p5 <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">theme_dark</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>p5 <span class="sc">+</span> <span class="fu">theme_dark</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-28-3.png" width="960"></p>
 </div>
@@ -827,11 +827,11 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 </ol>
 <div class="cell" data-warnings="false">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>p6 <span class="ot">&lt;-</span> p5 <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">axis.text       =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
-<span id="cb11-3"><a href="#cb11-3"></a>                 <span class="at">axis.title      =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">theme</span>(<span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb11-3"><a href="#cb11-3"></a>                 <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
 <span id="cb11-4"><a href="#cb11-4"></a>                 <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>),</span>
-<span id="cb11-5"><a href="#cb11-5"></a>                 <span class="at">legend.text     =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
-<span id="cb11-6"><a href="#cb11-6"></a>                 <span class="at">legend.title    =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>))</span>
+<span id="cb11-5"><a href="#cb11-5"></a>                 <span class="at">legend.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb11-6"><a href="#cb11-6"></a>                 <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>))</span>
 <span id="cb11-7"><a href="#cb11-7"></a>p6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
@@ -857,14 +857,14 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 <div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>fish_data <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(order) <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">biomass =</span> <span class="fu">sum</span>(biomass)) <span class="sc">%&gt;%</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_col</span>(<span class="at">data    =</span> fish_data,</span>
-<span id="cb12-6"><a href="#cb12-6"></a>                    <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> order, </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">group_by</span>(order) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">summarise</span>(<span class="at">biomass =</span> <span class="fu">sum</span>(biomass)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">geom_col</span>(<span class="at">data    =</span> fish_data,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>                    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> order, </span>
 <span id="cb12-7"><a href="#cb12-7"></a>                                           <span class="at">y =</span> biomass, </span>
 <span id="cb12-8"><a href="#cb12-8"></a>                                           <span class="at">fill =</span> order)) <span class="sc">+</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"pink"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"yellow"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"pink"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"yellow"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
 </div>
@@ -883,11 +883,11 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 </div>
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">data    =</span> fish_data,</span>
-<span id="cb13-3"><a href="#cb13-3"></a>                      <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> total, <span class="at">y =</span> biomass, </span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> fish_data,</span>
+<span id="cb13-3"><a href="#cb13-3"></a>                      <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> total, <span class="at">y =</span> biomass, </span>
 <span id="cb13-4"><a href="#cb13-4"></a>                                             <span class="at">color =</span> total))</span>
-<span id="cb13-5"><a href="#cb13-5"></a>plot <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5"><a href="#cb13-5"></a>plot <span class="sc">+</span> <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error: Continuous value supplied to discrete scale</code></pre>
 </div>
@@ -917,10 +917,10 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 Testons les une par une à partir de la figure suivante
 </center>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(faithfuld) <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_tile</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(waiting, eruptions, <span class="at">fill =</span> density)) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Waiting"</span>, <span class="at">y =</span> <span class="st">"Eruptions"</span>, <span class="at">fill =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(faithfuld) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(waiting, eruptions, <span class="at">fill =</span> density)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Waiting"</span>, <span class="at">y =</span> <span class="st">"Eruptions"</span>, <span class="at">fill =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -934,15 +934,15 @@ Testons les une par une à partir de la figure suivante
 <p>De belles palettes dont les nuances sont captées par les personnes albinos.</p>
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>plot <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-40-1.png" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>plot <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-40-2.png" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>plot <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-40-3.png" width="960"></p>
 </div>
@@ -1021,15 +1021,15 @@ Testons les une par une à partir de la figure suivante
 </div>
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>plot <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">scale_fill_discrete</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_discrete</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-50-1.png" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>plot <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"pink"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"yellow"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"pink"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"yellow"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-50-2.png" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>plot <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-50-3.png" width="960"></p>
 </div>
@@ -1049,17 +1049,17 @@ Testons les une par une à partir de la figure suivante
 <h2>Utiliser ggplot pour détecter des erreurs dans les données</h2>
 <center>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>fish_data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/Global_reef_fish_abundance_and_biomass.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>fish_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Global_reef_fish_abundance_and_biomass.csv"</span>)</span>
 <span id="cb26-2"><a href="#cb26-2"></a></span>
 <span id="cb26-3"><a href="#cb26-3"></a><span class="co"># Selection des données pour le site n°2000951</span></span>
 <span id="cb26-4"><a href="#cb26-4"></a>site1 <span class="ot">&lt;-</span> fish_data <span class="sc">%&gt;%</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(survey_id <span class="sc">==</span> <span class="dv">2000951</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb26-6"><a href="#cb26-6"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(survey_id, class, order, family, species_name, total, biomass)</span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">filter</span>(survey_id <span class="sc">==</span> <span class="dv">2000951</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">select</span>(survey_id, class, order, family, species_name, total, biomass)</span>
 <span id="cb26-7"><a href="#cb26-7"></a></span>
 <span id="cb26-8"><a href="#cb26-8"></a>site1 <span class="sc">%&gt;%</span></span>
 <span id="cb26-9"><a href="#cb26-9"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-10"><a href="#cb26-10"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">4</span>, <span class="at">caption =</span> <span class="st">"Data to check"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-11"><a href="#cb26-11"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_classic</span>(<span class="at">html_font =</span> <span class="st">"Computer Modern"</span>, <span class="at">full_width =</span> F)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-10"><a href="#cb26-10"></a>  <span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">4</span>, <span class="at">caption =</span> <span class="st">"Data to check"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-11"><a href="#cb26-11"></a>  <span class="fu">kable_classic</span>(<span class="at">html_font =</span> <span class="st">"Computer Modern"</span>, <span class="at">full_width =</span> F)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <table class=" lightable-classic" style="font-family: Computer Modern; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -1129,9 +1129,9 @@ Testons les une par une à partir de la figure suivante
 </center>
 <p>Comment détécter les outliers ?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> site1, <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> order, <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> site1, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> order, <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-54-1.png" width="960"></p>
 </div>
@@ -1139,11 +1139,11 @@ Testons les une par une à partir de la figure suivante
 <h3 id="séparer-les-elasmobranches-des-actinoptérygiens">Séparer les Elasmobranches des Actinoptérygiens</h3>
 <center>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> site1, <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> order, <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>  ggplot2<span class="sc">::</span><span class="fu">facet_grid</span>(.<span class="sc">~</span>class, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">space =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
-<span id="cb28-4"><a href="#cb28-4"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> site1, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> order, <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span>class, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">space =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-56-1.png" width="960"></p>
 </div>
@@ -1154,11 +1154,11 @@ Testons les une par une à partir de la figure suivante
 <center>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>site1 <span class="sc">%&gt;%</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(order <span class="sc">==</span> <span class="st">"Perciformes"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(., <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> family, <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
-<span id="cb29-4"><a href="#cb29-4"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb29-5"><a href="#cb29-5"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb29-6"><a href="#cb29-6"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">filter</span>(order <span class="sc">==</span> <span class="st">"Perciformes"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">ggplot</span>(., <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> family, <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-58-1.png" width="960"></p>
 </div>
