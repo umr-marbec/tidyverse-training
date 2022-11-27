@@ -40,6 +40,7 @@ library(tibble)
 library(stringr)
 library(forcats)
 library(MASS)
+library(viridis)
 ```
 
 ## Plan de la formation {.smaller}
@@ -547,6 +548,65 @@ plot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))
 ```
 :::
 
+## Couleurs & variable groupée en classes
+
+Il existe 3 fonctions principales qui permettent de construire ce type de pallettes de couleurs :
+
+::: incremental
+-   `scale_fill_binned` : avec une palette par defaut (nuances de bleus)
+
+-   `scale_fill_fermenter` : utilise les [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) (voir [ici](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html) pour plus d'infos).\
+    Pour voir les palettes =\> `RColorBrewer::display.brewer.all()`
+
+-   `scale_fill_steps` : permet de créer sa propre palette avec un nombre de classes précis. Des variantes existent selon le nombre de couleurs à définir. Il s'agit de `scale_fill_steps2()` et `scale_fill_stepsn()`.
+:::
+
+## `scale_fill_binned()`
+
+Les couleurs sont par défaut des nuances de bleu. Certaines précisions peuvent cependant être apportées.
+
+```{r echo = TRUE}
+plot + scale_fill_binned(n.breaks = 4)
+plot + scale_fill_binned(n.breaks = 7,
+                         guide = guide_colorsteps(show.limits = T))
+plot + scale_fill_binned(breaks = quantile(faithfuld$density, 
+                                           probs = (seq(0,1,0.3))))
+
+
+
+
+```
+
+## `scale_fill_fermenter()`
+
+La fonction analogue à `scale_fill_distiller()` et `scale_fill_brewer()` .
+
+```{r echo = TRUE}
+plot + scale_fill_fermenter(n.breaks = 8, palette = "BuGn")
+plot + scale_fill_fermenter(n.breaks = 8, palette = "BuGn", direction = 1)
+plot + scale_fill_fermenter(n.breaks = 8, palette = "RdBu")
+```
+
+## `scale_fill_steps()`
+
+Fonction analogue à `scale_fill_gradient()`. Permet de créer ces propres palettes de couleurs, à partir de 2, 3 ou n couleurs :
+
+::: incremental
+-   `scale_fill_steps()` avec les arguments `low` et `high`.
+
+-   `scale_fill_steps2()` avec les arguments `low`, `mid` et `high`.
+
+-   `scale_fill_stepsn()` avec l'argument `colours`.
+:::
+
+::: incremental
+```{r echo = TRUE}
+plot + scale_fill_steps(low = "darkblue", high = "darkred", n.breaks = 8)
+plot + scale_fill_steps2(low = "darkblue", mid = "white", high = "darkred", midpoint = 0.02, n.breaks = 8)
+plot + scale_fill_stepsn(colors = magma(9), n.breaks = 9)
+```
+:::
+
 ## Couleurs & variables discrètes
 
 Les principales fonctions utilisées permettant de construire des pallettes de couleurs continues :
@@ -579,8 +639,6 @@ plot + scale_fill_brewer(palette = "Set2")
 
 ```
 :::
-
-## Couleurs & variables en classes
 
 ## Ressources utilisées
 
