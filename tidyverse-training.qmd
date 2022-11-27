@@ -41,6 +41,7 @@ library(stringr)
 library(forcats)
 library(MASS)
 library(viridis)
+library(ggpubr)
 ```
 
 ## Plan de la formation {.smaller}
@@ -204,8 +205,8 @@ library(tidyverse)
     ```{r echo=FALSE, out.width="85%"}
     data <- iris
     p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
-      theme(axis.text = element_text(size = 25),
-                     axis.title = element_text(size = 25))
+      theme(axis.text  = element_text(size = 25),
+            axis.title = element_text(size = 25))
     p1
     ```
 :::
@@ -275,7 +276,7 @@ Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` 
 
     ```{r echo=TRUE, warnings=FALSE}
     couche.1 <- ggplot(data    = data_crabs,
-                 mapping = aes(x = CL, y = CW))
+                       mapping = aes(x = CL, y = CW))
     couche.1
     ```
 :::
@@ -287,7 +288,9 @@ Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` 
 ::: incremental
 Plusieurs représentations existent selon le type de variables que l'on a (i.e. variables discrètes, contunues ou les deux).
 
-L'exemple ici va mener à la réalisation d'un nuage de points. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou encore une **droite** : <center> En superposant différentes couches </center>
+L'exemple ici va mener à la réalisation d'un nuage de points. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou encore une **droite** :
+
+<center>En superposant différentes couches</center>
 
 Construisons un nuage de points entre nos deux variables :
 
@@ -296,7 +299,7 @@ Construisons un nuage de points entre nos deux variables :
 ::: {.column width="45%"}
 -   `aes()` dans `ggplot()`
 
-    ```{r echo=TRUE, eval = FALSE, warnings=FALSE}
+    ```{r echo=TRUE, warnings=FALSE}
     couche.2 <- couche.1 +
       geom_point()
     ```
@@ -308,8 +311,8 @@ Construisons un nuage de points entre nos deux variables :
     ```{r echo=TRUE, warnings=FALSE}
     # couche.2 <- ggplot() +
     #   geom_point(data    = fish_data,
-    #                       mapping = aes(x = total, 
-    #                                              y = biomass))
+    #              mapping = aes(x = total, 
+    #                            y = biomass))
     ```
 :::
 
@@ -433,7 +436,7 @@ couche.8
 ::: incremental
 ::: columns
 ::: column
-3.  Une \*\*discrète\*\* & une \*\*continue\*\* \
+3.  Une \*\*discrète\*\* & une \*\*continue\*\*\
     `geom_boxplot()geom_violin()geom_col()`
 :::
 
