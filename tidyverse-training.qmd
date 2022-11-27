@@ -274,9 +274,9 @@ Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` 
     ```
 
     ```{r echo=TRUE, warnings=FALSE}
-    p1 <- ggplot(data    = data_crabs,
+    couche.1 <- ggplot(data    = data_crabs,
                  mapping = aes(x = CL, y = CW))
-    p1
+    couche.1
     ```
 :::
 
@@ -285,15 +285,11 @@ Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` 
 ### 2. Choix du type de représentation
 
 ::: incremental
-Plusieurs représentations existent, les plus connues et utilisées sont :
+Plusieurs représentations existent selon le type de variables que l'on a (i.e. variables discrètes, contunues ou les deux).
 
--   `geom_point()` pour un nuage de points
--   `geom_line()` pour une ligne
--   `geom_boxplot()` pour une boîte à moustache
--   `geom_col()` pour un diagramme en barres
--   `geom_histogram()` pour un histogramme
+L'exemple ici va mener à la réalisation d'un nuage de points. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou encore une **droite** : <center> En superposant différentes couches </center>
 
-Construisons un nuage de points entre nos deux variables:
+Construisons un nuage de points entre nos deux variables :
 
 ::: incremental
 ::: columns
@@ -301,7 +297,7 @@ Construisons un nuage de points entre nos deux variables:
 -   `aes()` dans `ggplot()`
 
     ```{r echo=TRUE, eval = FALSE, warnings=FALSE}
-    p2 <- p1 +
+    couche.2 <- couche.1 +
       geom_point()
     ```
 :::
@@ -310,7 +306,7 @@ Construisons un nuage de points entre nos deux variables:
 -   `aes()` dans `geom_point()`
 
     ```{r echo=TRUE, warnings=FALSE}
-    # p2 <- ggplot() +
+    # couche.2 <- ggplot() +
     #   geom_point(data    = fish_data,
     #                       mapping = aes(x = total, 
     #                                              y = biomass))
@@ -318,7 +314,7 @@ Construisons un nuage de points entre nos deux variables:
 :::
 
 ```{r echo=FALSE}
-p2
+couche.2
 ```
 :::
 :::
@@ -326,29 +322,43 @@ p2
 
 ## Ggplot pas à pas
 
-3.  Mettons un peu de couleurs
+3.  Traçons un modèle linéaire et ajoutons la formule qui correspond
+
+```{r echo = TRUE}
+couche.3 <- couche.2 +
+  geom_smooth(color = "red", method = "lm") +
+  stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) + # la formule
+  stat_regline_equation(label.y = 48, aes(label = ..adj.rr.label..)) # R²
+
+couche.3
+
+```
+
+## Ggplot pas à pas
+
+4.  Différencions les mâles et les femelles avec de la couleur
 
     =\> Une couleur par ordre. Comme c'est lié à l'esthétisme de la figure, on utilise l'argument `color` dans la fonction `aes`.
 
 ```{r echo=TRUE, warnings=FALSE}
-p3 <- ggplot() +
+couche.4 <- ggplot() +
   geom_point(data    = data_crabs,
              mapping = aes(x = CL, y = CW,
                            color = sex))
-p3
+couche.4
 ```
 
 ## Ggplot pas à pas
 
-4.  Modifions les couleurs des points + Le titre de la légende
+5.  Modifions les couleurs des points + Le titre de la légende
 
     Pour cela, on peut utiliser la fonction `scale_color_manual()` et les arguments `name` et `values`.
 
 ```{r echo=TRUE, warnings=FALSE}
-p4 <- p3 +
+couche.5 <- couche.4 +
   scale_color_manual(name   = "Sex :",
                      values = c("M" = "darkblue", "F" = "darkgreen"))
-p4
+couche.5
 ```
 
 <center>Il y a de multiples façons de modifier le titre de la légende. Ici on profite de l'utilisation de la fonction `scale_color_manual()` pour utiliser l'arguement `name`.\
@@ -356,51 +366,83 @@ Une autre façon de faire est d'utiliser la fonction `labs` qui permet de change
 
 ## Ggplot pas à pas
 
-5.  Nommons proprement les axes + la légende
+6.  Nommons proprement les axes + la légende
 
 ```{r echo=TRUE, warnings=FALSE}
-p5 <- p4 +
+couche.6 <- couche.5 +
   labs(x = "Carapace Length (mm)",
        y = "Carapace Width (mm)",
        color = "Sex :")
-p5
+couche.6
 ```
 
 ## Ggplot pas à pas
 
-6.  Faisons deux plot en un en séparant les données pour les deux espèces.
+7.  Faisons deux plot en un en séparant les données pour les deux espèces.
 
 ```{r echo=TRUE, warnings=FALSE}
-p6 <- p5 + facet_grid(~sp)
-p6
+couche.7 <- couche.6 + facet_grid(~sp)
+couche.7
 ```
 
 ## Ggplot pas à pas
 
-7.  Petit lifting de la couleur de font
+8.  Petit lifting de la couleur de l'arrière plan
 
 ```{r echo=TRUE, warnings=FALSE}
-p6 + theme_bw()
-p6 + theme_classic()
-p6 + theme_dark()
+couche.7 + theme_bw()
+couche.7 + theme_classic()
+couche.7 + theme_dark()
 ```
 
 <center>Un tas de `theme_*` existent pour obtenir différentes formats d'arrière plan (voir [ici](http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements)). A vous de choisir votre préféré.</center>
 
 ## Ggplot pas à pas
 
-7.  Le lifting final sur les légendes
+9.  Le lifting final sur les légendes
 
 ```{r echo=TRUE, warnings=FALSE}
-p7 <- p6 +
+couche.8 <- couche.7 +
   theme_bw() +
   theme(axis.text       = element_text(size = 11),
         axis.title      = element_text(size = 13),
         legend.position = "right",
         legend.text     = element_text(size = 13),
         legend.title    = element_text(size = 15))
-p7
+couche.8
 ```
+
+## Les principales fonctions selon le type de données
+
+::: incremental
+::: columns
+::: column
+1.  Une variable \*\*continue\*\*
+
+    `geom_histogram()geom_density()`
+:::
+
+::: column
+2.  Deux variables \*\*continues\*\*\
+    `geom_point()`\
+    `geom_line()geom_area()`
+:::
+:::
+:::
+
+::: incremental
+::: columns
+::: column
+3.  Une \*\*discrète\*\* & une \*\*continue\*\* \
+    `geom_boxplot()geom_violin()geom_col()`
+:::
+
+::: column
+4.  Données spatiales\
+    `geom_polygon()` ==\> Avec Laure Velez
+:::
+:::
+:::
 
 ## Une petite subtilité concernant les couleurs
 
