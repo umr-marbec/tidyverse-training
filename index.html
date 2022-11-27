@@ -419,7 +419,7 @@ Mathieu Depetris, mathieu.depetris@ird.fr
 </div>
 </div>
 
-  <p class="date">24/11/2022</p>
+  <p class="date">27/11/2022</p>
 </section>
 <section id="plan-de-la-formation" class="slide level2 smaller">
 <h2>Plan de la formation</h2>
@@ -1023,6 +1023,83 @@ Testons les une par une à partir de la figure suivante
 </div>
 </div>
 </section>
+<section id="couleurs-variable-groupée-en-classes" class="slide level2">
+<h2>Couleurs &amp; variable groupée en classes</h2>
+<p>Il existe 3 fonctions principales qui permettent de construire ce type de pallettes de couleurs :</p>
+<div>
+<ul>
+<li class="fragment"><p><code>scale_fill_binned</code> : avec une palette par defaut (nuances de bleus)</p></li>
+<li class="fragment"><p><code>scale_fill_fermenter</code> : utilise les <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">BrewerPalettes</a> (voir <a href="https://r-graph-gallery.com/38-rcolorbrewers-palettes.html">ici</a> pour plus d’infos).<br>
+Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p></li>
+<li class="fragment"><p><code>scale_fill_steps</code> : permet de créer sa propre palette avec un nombre de classes précis. Des variantes existent selon le nombre de couleurs à définir. Il s’agit de <code>scale_fill_steps2()</code> et <code>scale_fill_stepsn()</code>.</p></li>
+</ul>
+</div>
+</section>
+<section id="scale_fill_binned" class="slide level2">
+<h2><code>scale_fill_binned()</code></h2>
+<p>Les couleurs sont par défaut des nuances de bleu. Certaines précisions peuvent cependant être apportées.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">n.breaks =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">n.breaks =</span> <span class="dv">7</span>,</span>
+<span id="cb24-2"><a href="#cb24-2"></a>                         <span class="at">guide =</span> <span class="fu">guide_colorsteps</span>(<span class="at">show.limits =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-25-2.png" width="960"></p>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">breaks =</span> <span class="fu">quantile</span>(faithfuld<span class="sc">$</span>density, </span>
+<span id="cb25-2"><a href="#cb25-2"></a>                                           <span class="at">probs =</span> (<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.3</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-25-3.png" width="960"></p>
+</div>
+</div>
+</section>
+<section id="scale_fill_fermenter" class="slide level2">
+<h2><code>scale_fill_fermenter()</code></h2>
+<p>La fonction analogue à <code>scale_fill_distiller()</code> et <code>scale_fill_brewer()</code> .</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_fermenter</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">palette =</span> <span class="st">"BuGn"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-26-1.png" width="960"></p>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_fermenter</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">palette =</span> <span class="st">"BuGn"</span>, <span class="at">direction =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-26-2.png" width="960"></p>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_fermenter</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">palette =</span> <span class="st">"RdBu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-26-3.png" width="960"></p>
+</div>
+</div>
+</section>
+<section id="scale_fill_steps" class="slide level2">
+<h2><code>scale_fill_steps()</code></h2>
+<p>Fonction analogue à <code>scale_fill_gradient()</code>. Permet de créer ces propres palettes de couleurs, à partir de 2, 3 ou n couleurs :</p>
+<div>
+<ul>
+<li class="fragment"><p><code>scale_fill_steps()</code> avec les arguments <code>low</code> et <code>high</code>.</p></li>
+<li class="fragment"><p><code>scale_fill_steps2()</code> avec les arguments <code>low</code>, <code>mid</code> et <code>high</code>.</p></li>
+<li class="fragment"><p><code>scale_fill_stepsn()</code> avec l’argument <code>colours</code>.</p></li>
+</ul>
+</div>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_steps</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">n.breaks =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-27-1.png" width="960"></p>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_steps2</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">midpoint =</span> <span class="fl">0.02</span>, <span class="at">n.breaks =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-27-2.png" width="960"></p>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_stepsn</span>(<span class="at">colors =</span> <span class="fu">magma</span>(<span class="dv">9</span>), <span class="at">n.breaks =</span> <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-27-3.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
 <section id="couleurs-variables-discrètes" class="slide level2">
 <h2>Couleurs &amp; variables discrètes</h2>
 <p>Les principales fonctions utilisées permettant de construire des pallettes de couleurs continues :</p>
@@ -1036,29 +1113,26 @@ Testons les une par une à partir de la figure suivante
 <div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
 </div>
 </div>
 </div>
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_discrete</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_discrete</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-26-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-26-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-29-2.png" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-26-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-29-3.png" width="960"></p>
 </div>
 </div>
 </div>
-</section>
-<section id="couleurs-variables-en-classes" class="slide level2">
-<h2>Couleurs &amp; variables en classes</h2>
 </section>
 <section id="ressources-utilisées" class="slide level2">
 <h2>Ressources utilisées</h2>
@@ -1070,45 +1144,45 @@ Testons les une par une à partir de la figure suivante
 <h2>Utiliser ggplot pour détecter des erreurs dans les données</h2>
 <center>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># fish_data &lt;- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a></span>
-<span id="cb26-3"><a href="#cb26-3"></a><span class="co"># Selection des données pour le site n°2000951</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="co"># site1 &lt;- fish_data %&gt;%</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a><span class="co">#   filter(survey_id == 2000951) %&gt;%</span></span>
-<span id="cb26-6"><a href="#cb26-6"></a><span class="co">#   select(survey_id, class, order, family, species_name, total, biomass)</span></span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="co"># </span></span>
-<span id="cb26-8"><a href="#cb26-8"></a><span class="co"># site1 %&gt;%</span></span>
-<span id="cb26-9"><a href="#cb26-9"></a><span class="co">#   head(5) %&gt;% </span></span>
-<span id="cb26-10"><a href="#cb26-10"></a><span class="co">#   kbl(digits = 4, caption = "Data to check") %&gt;% </span></span>
-<span id="cb26-11"><a href="#cb26-11"></a><span class="co">#   kable_classic(html_font = "Computer Modern", full_width = F)  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># fish_data &lt;- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="co"># Selection des données pour le site n°2000951</span></span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="co"># site1 &lt;- fish_data %&gt;%</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="co">#   filter(survey_id == 2000951) %&gt;%</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a><span class="co">#   select(survey_id, class, order, family, species_name, total, biomass)</span></span>
+<span id="cb35-7"><a href="#cb35-7"></a><span class="co"># </span></span>
+<span id="cb35-8"><a href="#cb35-8"></a><span class="co"># site1 %&gt;%</span></span>
+<span id="cb35-9"><a href="#cb35-9"></a><span class="co">#   head(5) %&gt;% </span></span>
+<span id="cb35-10"><a href="#cb35-10"></a><span class="co">#   kbl(digits = 4, caption = "Data to check") %&gt;% </span></span>
+<span id="cb35-11"><a href="#cb35-11"></a><span class="co">#   kable_classic(html_font = "Computer Modern", full_width = F)  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </center>
 <p>Comment détécter les outliers ?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># ggplot(data = site1, mapping = aes(x = order, y = biomass)) +</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="co">#   geom_boxplot() +</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a><span class="co">#   theme_bw()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># ggplot(data = site1, mapping = aes(x = order, y = biomass)) +</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="co">#   geom_boxplot() +</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="co">#   theme_bw()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <h3 id="séparer-les-elasmobranches-des-actinoptérygiens">Séparer les Elasmobranches des Actinoptérygiens</h3>
 <center>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># ggplot(data = site1, mapping = aes(x = order, y = biomass)) +</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="co">#   geom_boxplot() +</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a><span class="co">#   facet_grid(.~class, scales = "free", space = "free") +</span></span>
-<span id="cb28-4"><a href="#cb28-4"></a><span class="co">#   theme_bw() +</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># ggplot(data = site1, mapping = aes(x = order, y = biomass)) +</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="co">#   geom_boxplot() +</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="co">#   facet_grid(.~class, scales = "free", space = "free") +</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a><span class="co">#   theme_bw() +</span></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Interrogation au niveau des perciformes …</p>
 </center>
 <h3 id="quest-ce-quil-se-passe-avec-les-perciformes">Qu’est-ce qu’il se passe avec les Perciformes ?</h3>
 <center>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># site1 %&gt;%</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="co">#   filter(order == "Perciformes") %&gt;%</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a><span class="co">#   ggplot(., mapping = aes(x = family, y = biomass)) +</span></span>
-<span id="cb29-4"><a href="#cb29-4"></a><span class="co">#   geom_boxplot() +</span></span>
-<span id="cb29-5"><a href="#cb29-5"></a><span class="co">#   theme_bw() +</span></span>
-<span id="cb29-6"><a href="#cb29-6"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># site1 %&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="co">#   filter(order == "Perciformes") %&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a><span class="co">#   ggplot(., mapping = aes(x = family, y = biomass)) +</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a><span class="co">#   geom_boxplot() +</span></span>
+<span id="cb38-5"><a href="#cb38-5"></a><span class="co">#   theme_bw() +</span></span>
+<span id="cb38-6"><a href="#cb38-6"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </center>
 
