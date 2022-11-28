@@ -163,16 +163,26 @@ library(tidyverse)
 ![Violin Plot](images/.png){width="30%"}
 :::
 
-<center>Un grand notre d'exemples est disponible sur le site [***from Data to Viz***](https://www.data-to-viz.com/)</center>
+<center>Un grand nombre d'exemples est disponible sur le site [***from Data to Viz***](https://www.data-to-viz.com/)</center>
 
 ## Petit apperçu des possibilités :
 
 ::: {layout-ncol="3"}
-![Barplot](images/.png){width="30%"}
+![Barplot](images/barplot.png){width="30%"}
+
+![Barplot](images/barplot2.png){width="30%"}
 
 ![Barplot Circulaire](images/Figure3.png){width="30%"}
+:::
 
-![Diagramme empilé](images/.png){width="30%"}
+## Petit apperçu des possibilités :
+
+::: {layout-ncol="3"}
+![Données temporelles](images/Series_temporelles.png){width="\"30%"}
+
+![Données temporelles empillées](images/Diagramme_empile.png){width="30%"}
+
+![Cartes](images/map2.png){width="30%"}
 :::
 
 <center>Un grand notre d'exemples est disponible sur le site [***from Data to Viz***](https://www.data-to-viz.com/)</center>
@@ -197,9 +207,7 @@ library(tidyverse)
 
 ::: incremental
 ::: columns
-<div>
-
-::: {.column width="45%"}
+::: column
 1.  La Structure
 
     ```{r echo=FALSE, out.width="85%"}
@@ -211,7 +219,7 @@ library(tidyverse)
     ```
 :::
 
-::: {.column width="45%"}
+::: column
 2.  Le type de représentation
 
     ```{r echo=FALSE, out.width="85%"}
@@ -219,11 +227,10 @@ library(tidyverse)
     p2
     ```
 :::
-
-</div>
+:::
 
 ::: columns
-::: {.column width="45%"}
+::: column
 3.  Les Couleurs
 
     ```{r echo=FALSE, out.width="85%"}
@@ -232,7 +239,7 @@ library(tidyverse)
     ```
 :::
 
-::: {.column width="45%"}
+::: column
 4.  Le Lifting final
 
     ```{r echo=FALSE, out.width="85%"}
@@ -244,41 +251,53 @@ library(tidyverse)
 :::
 :::
 :::
+
 :::
 
 ## La structure des données
 
-A FAIRE
+Pour la démonstration nous allons utiliser le jeu de données `crabs` de la librairie `MASS`.
+
+```{r echo = TRUE}
+library(MASS)
+data_crabs <- crabs %>% dplyr::select(sp, sex, CL, CW)
+
+data_crabs %>%
+  head(3) %>%
+  kbl(digits = 4, caption = "Crabs data") %>%
+  kable_classic(html_font = "Computer Modern", full_width = F)
+```
 
 ## Ggplot pas à pas
 
 ### 1. Construction de la structure
 
+::: incremental
+<div>
+
 Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
 
 ::: incremental
-1.  `data = nom.du.dataframe`
+-   `data = nom.du.dataframe`
 
-2.  `mapping = aes(x = varaible.x, y = variable.y)`
+-   `mapping = aes(x = varaible.x, y = variable.y)`
 
     ::: incremental
     -   Ici le `aes` signifie **aesthetic**
 
     -   On verra que d'autres options sont disponibles dans `aes` comme la taille (`size`), la couleur (`color`), la forme (`shape`) ...
     :::
+:::
 
-3.  Mise en application
+</div>
+:::
 
-    ```{r echo=FALSE, warnings=FALSE}
-    library(MASS)
-    data_crabs <- crabs
-    ```
-
-    ```{r echo=TRUE, warnings=FALSE}
-    couche.1 <- ggplot(data    = data_crabs,
-                       mapping = aes(x = CL, y = CW))
-    couche.1
-    ```
+::: incremental
+```{r echo=TRUE, warnings=FALSE, fig.align='center'}
+couche.1 <- ggplot(data    = data_crabs,
+                   mapping = aes(x = CL, y = CW))
+couche.1
+```
 :::
 
 ## Ggplot pas à pas
@@ -286,17 +305,15 @@ Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` 
 ### 2. Choix du type de représentation
 
 ::: incremental
-Plusieurs représentations existent selon le type de variables que l'on a (i.e. variables discrètes, contunues ou les deux).
+Plusieurs représentations existent selon le type de variables que l'on a (i.e. variables discrètes, continues ou les deux).
 
-L'exemple ici va mener à la réalisation d'un nuage de points. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou encore une **droite** :
-
-<center>En superposant différentes couches</center>
+L'exemple ici va mener à la réalisation d'un nuage de points. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou autres : **En superposant différentes couches.**
 
 Construisons un nuage de points entre nos deux variables :
 
 ::: incremental
 ::: columns
-::: {.column width="45%"}
+::: {.column width="50%"}
 -   `aes()` dans `ggplot()`
 
     ```{r echo=TRUE, warnings=FALSE}
@@ -305,18 +322,17 @@ Construisons un nuage de points entre nos deux variables :
     ```
 :::
 
-::: {.column width="45%"}
+::: {.column width="50%"}
 -   `aes()` dans `geom_point()`
 
     ```{r echo=TRUE, warnings=FALSE}
-    # couche.2 <- ggplot() +
-    #   geom_point(data    = fish_data,
-    #              mapping = aes(x = total, 
-    #                            y = biomass))
+    couche.2 <- ggplot() +
+      geom_point(data    = data_crabs,
+                 mapping = aes(x = CL, y = CW))
     ```
 :::
 
-```{r echo=FALSE}
+```{r echo = FALSE, fig.align='center'}
 couche.2
 ```
 :::
@@ -327,7 +343,7 @@ couche.2
 
 3.  Traçons un modèle linéaire et ajoutons la formule qui correspond
 
-```{r echo = TRUE}
+```{r echo = TRUE, fig.align='center'}
 couche.3 <- couche.2 +
   geom_smooth(color = "red", method = "lm") +
   stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) + # la formule
@@ -343,7 +359,7 @@ couche.3
 
     =\> Une couleur par ordre. Comme c'est lié à l'esthétisme de la figure, on utilise l'argument `color` dans la fonction `aes`.
 
-```{r echo=TRUE, warnings=FALSE}
+```{r echo=TRUE, warnings=FALSE, fig.align='center'}
 couche.4 <- ggplot() +
   geom_point(data    = data_crabs,
              mapping = aes(x = CL, y = CW,
@@ -357,21 +373,21 @@ couche.4
 
     Pour cela, on peut utiliser la fonction `scale_color_manual()` et les arguments `name` et `values`.
 
-```{r echo=TRUE, warnings=FALSE}
+```{r echo=TRUE, warnings=FALSE, fig.align='center'}
 couche.5 <- couche.4 +
   scale_color_manual(name   = "Sex :",
                      values = c("M" = "darkblue", "F" = "darkgreen"))
 couche.5
 ```
 
-<center>Il y a de multiples façons de modifier le titre de la légende. Ici on profite de l'utilisation de la fonction `scale_color_manual()` pour utiliser l'arguement `name`.\
-Une autre façon de faire est d'utiliser la fonction `labs` qui permet de changer les diverses légendes (axes x et y + légende de couleur). A vous de jouer !!!</center>
+Il y a de multiples façons de modifier le titre de la légende. Ici on profite de l'utilisation de la fonction `scale_color_manual()` pour utiliser l'arguement `name`.\
+Une autre façon de faire est d'utiliser la fonction `labs` qui permet de changer les diverses légendes (axes x et y + légende de couleur). A vous de jouer !!!
 
 ## Ggplot pas à pas
 
 6.  Nommons proprement les axes + la légende
 
-```{r echo=TRUE, warnings=FALSE}
+```{r echo=TRUE, warnings=FALSE, fig.align='center'}
 couche.6 <- couche.5 +
   labs(x = "Carapace Length (mm)",
        y = "Carapace Width (mm)",
@@ -383,7 +399,7 @@ couche.6
 
 7.  Faisons deux plot en un en séparant les données pour les deux espèces.
 
-```{r echo=TRUE, warnings=FALSE}
+```{r echo=TRUE, warnings=FALSE, fig.align='center'}
 couche.7 <- couche.6 + facet_grid(~sp)
 couche.7
 ```
@@ -392,10 +408,11 @@ couche.7
 
 8.  Petit lifting de la couleur de l'arrière plan
 
-```{r echo=TRUE, warnings=FALSE}
-couche.7 + theme_bw()
-couche.7 + theme_classic()
-couche.7 + theme_dark()
+```{r echo=TRUE, warnings=FALSE, fig.align='center', out.width="85%"}
+p1 <- couche.7 + theme_bw()
+p2 <- couche.7 + theme_classic()
+p3 <- couche.7 + theme_dark()
+p1 + p2 + p3
 ```
 
 <center>Un tas de `theme_*` existent pour obtenir différentes formats d'arrière plan (voir [ici](http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements)). A vous de choisir votre préféré.</center>
@@ -404,7 +421,7 @@ couche.7 + theme_dark()
 
 9.  Le lifting final sur les légendes
 
-```{r echo=TRUE, warnings=FALSE}
+```{r echo=TRUE, warnings=FALSE, fig.align='center'}
 couche.8 <- couche.7 +
   theme_bw() +
   theme(axis.text       = element_text(size = 11),
@@ -420,15 +437,23 @@ couche.8
 ::: incremental
 ::: columns
 ::: column
-1.  Une variable \*\*continue\*\*
+1.  Une variable continue
 
-    `geom_histogram()geom_density()`
+    ::: incremental
+    -   `geom_histogram()`
+
+    -   `geom_density()`
+    :::
 :::
 
 ::: column
-2.  Deux variables \*\*continues\*\*\
-    `geom_point()`\
-    `geom_line()geom_area()`
+2.  Deux variables continues
+
+    ::: incremental
+    -   `geom_point()`
+    -   `geom_line()`
+    -   `geom_area()`
+    :::
 :::
 :::
 :::
@@ -436,13 +461,23 @@ couche.8
 ::: incremental
 ::: columns
 ::: column
-3.  Une \*\*discrète\*\* & une \*\*continue\*\*\
-    `geom_boxplot()geom_violin()geom_col()`
+3.  Une discrète & une continue
+
+    ::: incremental
+    -   `geom_boxplot()`
+    -   `geom_violin()`
+    -   `geom_col()`
+    :::
 :::
 
 ::: column
-4.  Données spatiales\
-    `geom_polygon()` ==\> Avec Laure Velez
+4.  Données spatiales
+
+    ::: incremental
+    -   `geom_polygon()`
+
+    -   `geom_sf()`
+    :::
 :::
 :::
 :::
@@ -544,17 +579,17 @@ plot + scale_fill_continuous()
 De belles palettes dont les nuances sont captées par les personnes albinos.
 
 ::: incremental
-```{r echo=TRUE}
+
+```{r echo=TRUE, out.width = "30%"}
 plot + scale_fill_viridis_c(option = "viridis")
 plot + scale_fill_viridis_c(option = "inferno")
 plot + scale_fill_viridis_c(option = "turbo")
 ```
 :::
 
-## `scale_color_distiller()`
+## `scale_fill_distiller()`
 
 Permet d'utiliser les palettes de couleurs issues de [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
-
 ```{r echo = FALSE}
 plot + scale_fill_distiller(palette = "Reds")
 plot + scale_fill_distiller(palette = "YlGn")
