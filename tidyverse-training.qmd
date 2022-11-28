@@ -252,8 +252,6 @@ library(tidyverse)
 :::
 :::
 
-:::
-
 ## La structure des données
 
 Pour la démonstration nous allons utiliser le jeu de données `crabs` de la librairie `MASS`.
@@ -292,12 +290,30 @@ Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` 
 </div>
 :::
 
+## Ggplot pas à pas
+
+### 1. Construction de la structure
+
 ::: incremental
-```{r echo=TRUE, warnings=FALSE, fig.align='center'}
-couche.1 <- ggplot(data    = data_crabs,
-                   mapping = aes(x = CL, y = CW))
-couche.1
-```
+<div>
+
+Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
+
+<div>
+
+-   `data = nom.du.dataframe`
+
+-   `mapping = aes(x = varaible.x, y = variable.y)`
+
+    ```{r echo=TRUE, warnings=FALSE, fig.align='center'}
+    couche.1 <- ggplot(data    = data_crabs,
+                       mapping = aes(x = CL, y = CW))
+    couche.1
+    ```
+
+</div>
+
+</div>
 :::
 
 ## Ggplot pas à pas
@@ -305,11 +321,61 @@ couche.1
 ### 2. Choix du type de représentation
 
 ::: incremental
-Plusieurs représentations existent selon le type de variables que l'on a (i.e. variables discrètes, continues ou les deux).
+::: incremental
+Plusieurs représentations existent selon le type de variables que l'on a :
+:::
 
-L'exemple ici va mener à la réalisation d'un nuage de points. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou autres : **En superposant différentes couches.**
+::: columns
+::: column
+1.  **Une variable continue**
 
-Construisons un nuage de points entre nos deux variables :
+    ::: incremental
+    -   `geom_histogram()`
+
+    -   `geom_density()`
+    :::
+:::
+
+::: column
+2.  **Deux variables continues**
+
+    ::: incremental
+    -   `geom_point()`
+    -   `geom_line()`
+    -   `geom_area()`
+    :::
+:::
+:::
+:::
+
+::: incremental
+::: columns
+::: column
+3.  **Une discrète & une continue**
+
+    ::: incremental
+    -   `geom_boxplot()`
+    -   `geom_violin()`
+    -   `geom_col()`
+    :::
+:::
+
+::: column
+4.  **Données spatiales**
+
+    ::: incremental
+    -   `geom_polygon()`
+
+    -   `geom_sf()`
+    :::
+:::
+:::
+:::
+
+## 2. Choix du type de représentation
+
+::: incremental
+L'exemple ici va mener à la réalisation d'un nuage de points. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou autres.
 
 ::: incremental
 ::: columns
@@ -345,19 +411,18 @@ couche.2
 
 ```{r echo = TRUE, fig.align='center'}
 couche.3 <- couche.2 +
-  geom_smooth(color = "red", method = "lm") +
+  geom_smooth(color = "red", method = "lm") + # le modèle linéaire 
   stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) + # la formule
   stat_regline_equation(label.y = 48, aes(label = ..adj.rr.label..)) # R²
 
 couche.3
-
 ```
 
 ## Ggplot pas à pas
 
 4.  Différencions les mâles et les femelles avec de la couleur
 
-    =\> Une couleur par ordre. Comme c'est lié à l'esthétisme de la figure, on utilise l'argument `color` dans la fonction `aes`.
+    =\> Une couleur par ordre. Comme c'est lié à l'esthétisme de la figure, il faut retourner à l'argument `color` dans la fonction `aes`.
 
 ```{r echo=TRUE, warnings=FALSE, fig.align='center'}
 couche.4 <- ggplot() +
@@ -380,8 +445,7 @@ couche.5 <- couche.4 +
 couche.5
 ```
 
-Il y a de multiples façons de modifier le titre de la légende. Ici on profite de l'utilisation de la fonction `scale_color_manual()` pour utiliser l'arguement `name`.\
-Une autre façon de faire est d'utiliser la fonction `labs` qui permet de changer les diverses légendes (axes x et y + légende de couleur). A vous de jouer !!!
+*Une autre façon de faire est d'utiliser la fonction `labs` qui permet de changer les diverses légendes (axes x et y + légende de couleur). A vous de jouer !!!*
 
 ## Ggplot pas à pas
 
@@ -399,7 +463,7 @@ couche.6
 
 7.  Faisons deux plot en un en séparant les données pour les deux espèces.
 
-```{r echo=TRUE, warnings=FALSE, fig.align='center'}
+```{r warnings=FALSE, fig.align='center'}
 couche.7 <- couche.6 + facet_grid(~sp)
 couche.7
 ```
@@ -408,11 +472,12 @@ couche.7
 
 8.  Petit lifting de la couleur de l'arrière plan
 
-```{r echo=TRUE, warnings=FALSE, fig.align='center', out.width="85%"}
-p1 <- couche.7 + theme_bw()
-p2 <- couche.7 + theme_classic()
-p3 <- couche.7 + theme_dark()
-p1 + p2 + p3
+```{r warnings=FALSE}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
+couche.7 + theme_bw()
+couche.7 + theme_classic()
+couche.7 + theme_dark()
 ```
 
 <center>Un tas de `theme_*` existent pour obtenir différentes formats d'arrière plan (voir [ici](http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements)). A vous de choisir votre préféré.</center>
@@ -421,7 +486,7 @@ p1 + p2 + p3
 
 9.  Le lifting final sur les légendes
 
-```{r echo=TRUE, warnings=FALSE, fig.align='center'}
+```{r warnings=FALSE, fig.align='center'}
 couche.8 <- couche.7 +
   theme_bw() +
   theme(axis.text       = element_text(size = 11),
@@ -432,63 +497,13 @@ couche.8 <- couche.7 +
 couche.8
 ```
 
-## Les principales fonctions selon le type de données
-
-::: incremental
-::: columns
-::: column
-1.  Une variable continue
-
-    ::: incremental
-    -   `geom_histogram()`
-
-    -   `geom_density()`
-    :::
-:::
-
-::: column
-2.  Deux variables continues
-
-    ::: incremental
-    -   `geom_point()`
-    -   `geom_line()`
-    -   `geom_area()`
-    :::
-:::
-:::
-:::
-
-::: incremental
-::: columns
-::: column
-3.  Une discrète & une continue
-
-    ::: incremental
-    -   `geom_boxplot()`
-    -   `geom_violin()`
-    -   `geom_col()`
-    :::
-:::
-
-::: column
-4.  Données spatiales
-
-    ::: incremental
-    -   `geom_polygon()`
-
-    -   `geom_sf()`
-    :::
-:::
-:::
-:::
-
 ## Une petite subtilité concernant les couleurs
 
 ::: incremental
 ***Exercice :***
 
-1.  Construire un diagramme en barres représentant la biomasse de chacun des ordres.
-2.  Donner une couleur à chacune des barres. Vous devez choisir la couleur.
+1.  *Construire un diagramme en barres représentant la biomasse de chacun des ordres.*
+2.  *Donner une couleur à chacune des barres. Vous devez choisir la couleur.*
 :::
 
 ::: incremental
@@ -500,9 +515,7 @@ Ggplot fait la différence entre :
 
 De la même façon, pour choisir ses couleurs de contour *vs.* de remplissage, on utilise les fonctions\
 `scale_color_manual()` *vs.* `scale_fill_manual()`.
-:::
 
-::: incremental
 ```{r echo=TRUE}
 # fish_data %>%
 #   group_by(order) %>%
@@ -559,10 +572,16 @@ Il existe 4 fonctions principales qui permettent de construire des pallettes de 
 <center>Testons les une par une à partir de la figure suivante</center>
 
 ```{r}
-plot <- ggplot(faithfuld) +
-  geom_tile(aes(waiting, eruptions, fill = density)) +
-  labs(x = "Waiting", y = "Eruptions", fill = "Density") +
-  theme_bw()
+# plot <- ggplot(faithfuld) +
+#   geom_tile(aes(waiting, eruptions, fill = density)) +
+#   labs(x = "Waiting", y = "Eruptions", fill = "Density") +
+#   theme_bw()
+
+plot <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_raster() +
+  scale_x_continuous(NULL, expand = c(0, 0)) + 
+  scale_y_continuous(NULL, expand = c(0, 0)) + 
+  theme(legend.position = "none")
 ```
 :::
 
@@ -570,7 +589,7 @@ plot <- ggplot(faithfuld) +
 
 La plus simple, mais pas beaucoup d'options.
 
-```{r echo = FALSE}
+```{r}
 plot + scale_fill_continuous()
 ```
 
@@ -579,8 +598,9 @@ plot + scale_fill_continuous()
 De belles palettes dont les nuances sont captées par les personnes albinos.
 
 ::: incremental
-
-```{r echo=TRUE, out.width = "30%"}
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
 plot + scale_fill_viridis_c(option = "viridis")
 plot + scale_fill_viridis_c(option = "inferno")
 plot + scale_fill_viridis_c(option = "turbo")
@@ -590,7 +610,10 @@ plot + scale_fill_viridis_c(option = "turbo")
 ## `scale_fill_distiller()`
 
 Permet d'utiliser les palettes de couleurs issues de [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
-```{r echo = FALSE}
+
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
 plot + scale_fill_distiller(palette = "Reds")
 plot + scale_fill_distiller(palette = "YlGn")
 plot + scale_fill_distiller(palette = "Spectral")
@@ -621,7 +644,9 @@ Permet de créer ces propres palettes de couleurs, à partir de 2, 3 ou n couleu
 :::
 
 ::: incremental
-```{r echo = TRUE}
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
 plot + scale_fill_gradient(low = "darkblue", high = "darkred")
 plot + scale_fill_gradient2(low = "darkblue", mid = "white", high = "darkred", midpoint = 0.02)
 plot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))
@@ -645,7 +670,9 @@ Il existe 3 fonctions principales qui permettent de construire ce type de pallet
 
 Les couleurs sont par défaut des nuances de bleu. Certaines précisions peuvent cependant être apportées.
 
-```{r echo = TRUE}
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
 plot + scale_fill_binned(n.breaks = 4)
 plot + scale_fill_binned(n.breaks = 7,
                          guide = guide_colorsteps(show.limits = T))
@@ -661,7 +688,9 @@ plot + scale_fill_binned(breaks = quantile(faithfuld$density,
 
 La fonction analogue à `scale_fill_distiller()` et `scale_fill_brewer()` .
 
-```{r echo = TRUE}
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
 plot + scale_fill_fermenter(n.breaks = 8, palette = "BuGn")
 plot + scale_fill_fermenter(n.breaks = 8, palette = "BuGn", direction = 1)
 plot + scale_fill_fermenter(n.breaks = 8, palette = "RdBu")
@@ -680,7 +709,9 @@ Fonction analogue à `scale_fill_gradient()`. Permet de créer ces propres palet
 :::
 
 ::: incremental
-```{r echo = TRUE}
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
 plot + scale_fill_steps(low = "darkblue", high = "darkred", n.breaks = 8)
 plot + scale_fill_steps2(low = "darkblue", mid = "white", high = "darkred", midpoint = 0.02, n.breaks = 8)
 plot + scale_fill_stepsn(colors = magma(9), n.breaks = 9)
@@ -700,8 +731,7 @@ Les principales fonctions utilisées permettant de construire des pallettes de c
 :::
 
 ::: incremental
-```{r echo = FALSE}
-
+```{r }
 plot <- ggplot() +
   geom_violin(data    = data_crabs,
               mapping = aes(x = sex, y = CL, fill = sex), alpha = 0.7) +
@@ -712,7 +742,9 @@ plot
 :::
 
 ::: incremental
-```{r echo = TRUE}
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
 plot + scale_fill_discrete()
 plot + scale_fill_manual(values = c("M" = "darkblue", "F" = "darkgreen"))
 plot + scale_fill_brewer(palette = "Set2")
