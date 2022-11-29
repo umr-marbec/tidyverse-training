@@ -52,16 +52,18 @@ library(ggpubr)
     -   Objectifs de la formation
     -   Présentation de tidyverse
 
--   Partie I : Manipulation de données avec dplyr
+-   Partie I : Manipulation de données avec `dplyr`
 
--   Partie II : Extension à la manipulation de données, cas spécifiques
+-   Partie II : Nettoyage des données avec `tidyr`
 
-    -   Manipuler du texte avec stringr
-    -   Manipuler des dates avec lubridate
+-   Partie III : Extension à la manipulation de données, cas spécifiques
 
--   Partie III : Visualisation graphique avec ggplot2
+    -   Manipuler du texte avec `stringr`
+    -   Manipuler des dates avec `lubridate`
 
--   Partie IV : Cas pratiques sur vos données
+-   Partie IV : Visualisation graphique avec `ggplot2`
+
+-   Partie V : Cas pratiques sur vos données
 
 Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.github.io/analyse-R/){target="_blank"}
 
@@ -145,21 +147,65 @@ library(tidyverse)
     -   Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d'espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (\_), ne pas utiliser de mots réservés (comme par exemple TRUE)
     -   Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des \_ et les noms choisis doivent pouvoir donner l'information du contenu associé
 
-# Partie I : Importation des données avec `readr`
+# Partie I : Manipulation de données avec `dplyr` 
+
+1.1. Importation de données sous R avec readr
 
 -   Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)
 -   La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects
 -   Elles sont compatibles avec l'esprit Tidyverse car elles permettent de générer des tibbles \# Partie III : Visualisation des données avec ggplot
 
-# Partie II : Manipulation de données avec `dplyr` 
+# Partie II : Nettoyage des données avec `tidyr`
 
-# Partie III : Nettoyage des données avec `tidyr`
+# Partie III : Extension à la manipulation de données, cas spécifiques
 
-# Partie IV : Manipulation des chaines de caractère avec `stringr`
+## Manipuler du texte avec `stringr`
 
-# Partie V : Manipulation des dates avec `lubridate`
+Un package conçu pour manipuler les chaines de caractères "facilement". En plus d'être plus faciles à utiliser, le nom des fonctions dans `stringr` représentent bien ce qu'elles permettent de faire.
 
-# Partie VI : Visualisation des données avec `ggplot2`
+![](images/stringr_logo.png){.absolute top="100" right="20" width="15%"}
+
+. . .
+
+Le nom de toutes les fonctions dans `stringr` commence par `str_`.
+
+. . .
+
+Voici quelques exemples :
+
+::: columns
+::: {.column width="50%"}
+::: incremental
+-   `str_detect` : Détection de caractères
+
+-   `str_extract` : Exctraction de caractères
+
+-   `str_replace` : Remplacement de caractères
+:::
+:::
+
+::: {.column width="50%"}
+::: incremental
+-   `str_trim` : Enlève les espaces
+
+-   `str_split` : Sépare une chaine de caractères
+
+-   `str_length` : Nombre de caractère
+:::
+:::
+:::
+
+. . .
+
+<center>Le cheat-sheet du package `stringr` est disponible [ici](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf).</center>
+
+### Les expressions régulères
+
+Pour toi Mathieu ;)
+
+## Manipuler des dates avec `lubridate`
+
+# Partie IV : Visualisation des données avec `ggplot2`
 
 ## Ggplot c'est comme la chirurgie *`aes`*thétique :
 

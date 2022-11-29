@@ -414,14 +414,15 @@
 <li>Objectifs de la formation</li>
 <li>Présentation de tidyverse</li>
 </ul></li>
-<li><p>Partie I : Manipulation de données avec dplyr</p></li>
-<li><p>Partie II : Extension à la manipulation de données, cas spécifiques</p>
+<li><p>Partie I : Manipulation de données avec <code>dplyr</code></p></li>
+<li><p>Partie II : Nettoyage des données avec <code>tidyr</code></p></li>
+<li><p>Partie III : Extension à la manipulation de données, cas spécifiques</p>
 <ul>
-<li>Manipuler du texte avec stringr</li>
-<li>Manipuler des dates avec lubridate</li>
+<li>Manipuler du texte avec <code>stringr</code></li>
+<li>Manipuler des dates avec <code>lubridate</code></li>
 </ul></li>
-<li><p>Partie III : Visualisation graphique avec ggplot2</p></li>
-<li><p>Partie IV : Cas pratiques sur vos données</p></li>
+<li><p>Partie IV : Visualisation graphique avec <code>ggplot2</code></p></li>
+<li><p>Partie V : Cas pratiques sur vos données</p></li>
 </ul>
 <p>Formation fortement inspirée du site de <a href="https://larmarange.github.io/analyse-R/" target="_blank">Joseph Larmarange</a></p>
 </section>
@@ -527,18 +528,86 @@
 </ul>
 </section></section>
 <section id="partie-i-manipulation-de-données-avec-dplyr" class="title-slide slide level1 center">
-<h1>Partie I : Manipulation de données avec dplyr</h1>
-
-</section>
-
-<section>
-<section id="importation-de-données-sous-r-avec-readr" class="title-slide slide level1 center">
-<h1>Importation de données sous R avec readr</h1>
+<h1>Partie I : Manipulation de données avec <code>dplyr</code></h1>
+<p>1.1. Importation de données sous R avec readr</p>
 <ul>
 <li>Des fonctions de base de R sont dédiées à l’import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)</li>
 <li>La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects</li>
 <li>Elles sont compatibles avec l’esprit Tidyverse car elles permettent de générer des tibbles # Partie III : Visualisation des données avec ggplot</li>
 </ul>
+</section>
+
+<section id="partie-ii-nettoyage-des-données-avec-tidyr" class="title-slide slide level1 center">
+<h1>Partie II : Nettoyage des données avec <code>tidyr</code></h1>
+
+</section>
+
+<section>
+<section id="partie-iii-extension-à-la-manipulation-de-données-cas-spécifiques" class="title-slide slide level1 center">
+<h1>Partie III : Extension à la manipulation de données, cas spécifiques</h1>
+
+</section>
+<section id="manipuler-du-texte-avec-stringr" class="slide level2">
+<h2>Manipuler du texte avec <code>stringr</code></h2>
+<p>Un package conçu pour manipuler les chaines de caractères “facilement”. En plus d’être plus faciles à utiliser, le nom des fonctions dans <code>stringr</code> représentent bien ce qu’elles permettent de faire.</p>
+<p><img data-src="images/stringr_logo.png" class="absolute" style="top: 100px; right: 20px; width: 15%; "></p>
+<div class="fragment">
+<p>Le nom de toutes les fonctions dans <code>stringr</code> commence par <code>str_</code>.<br>
+. . .</p>
+<p>Voici quelques exemples :</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div>
+<ul>
+<li class="fragment"><p><code>str_detect</code> : Détection de caractères</p></li>
+<li class="fragment"><p><code>str_extract</code> : Exctraction de caractères</p></li>
+<li class="fragment"><p><code>str_replace</code> : Remplacement de caractères</p></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div>
+<ul>
+<li class="fragment"><p><code>str_trim</code> : Enlève les espaces</p></li>
+<li class="fragment"><p><code>str_split</code> : Sépare une chaine de caractères</p></li>
+<li class="fragment"><p><code>str_length</code> : Nombre de caractère</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<center>
+Le cheat-sheet du package <code>stringr</code> est disponible <a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf">ici</a>.
+</center>
+<h3 id="les-expressions-régulères">Les expressions régulères</h3>
+<p>Pour toi Mathieu ;)</p>
+</div>
+</section>
+<section id="manipuler-des-dates-avec-lubridate" class="slide level2">
+<h2>Manipuler des dates avec <code>lubridate</code></h2>
+</section></section>
+<section>
+<section id="partie-iv-visualisation-des-données-avec-ggplot2" class="title-slide slide level1 center">
+<h1>Partie IV : Visualisation des données avec <code>ggplot2</code></h1>
+
+</section>
+<section id="ggplot-cest-comme-la-chirurgie-aesthétique" class="slide level2">
+<h2>Ggplot c’est comme la chirurgie <em><code>aes</code></em>thétique :</h2>
+<div>
+<div class="columns">
+<ol type="1">
+<li class="fragment"><p>Les jeunes s’y mettent très tôt !</p></li>
+<li class="fragment"><p>Les moins jeunes sont réticents puis CERTAINS finissent par s’y mettre</p>
+<center>
+<p><img data-src="images/nancy_pelosi.jpg" style="width:20.0%"></p>
+</center></li>
+<li class="fragment"><p>C’est un enchainement plus ou moins long d’opérations.</p>
+<center>
+<p><img data-src="images/bogdanoff1.jpg" style="width:21.0%"><img data-src="images/bogdanoff1.5.jpg" style="width:25.0%"><img data-src="images/bogdanoff2.jpg" style="width:25.0%"></p>
+</center></li>
+</ol>
+</div>
+</div>
 </section>
 <section id="petit-apperçu-des-possibilités" class="slide level2">
 <h2>Petit apperçu des possibilités :</h2>
@@ -639,23 +708,8 @@ Un grand nombre d’exemples est disponible sur le site <a href="https://www.dat
 Un grand notre d’exemples est disponible sur le site <a href="https://www.data-to-viz.com/"><strong><em>from Data to Viz</em></strong></a>
 </center>
 </section>
-<section id="ggplot-cest-comme-la-chirurgie-aesthétique" class="slide level2">
-<h2>Ggplot c’est comme la chirurgie <em><code>aes</code></em>thétique :</h2>
-<div>
-<div class="columns">
-<ol type="1">
-<li class="fragment"><p>Les jeunes s’y mettent très tôt !</p></li>
-<li class="fragment"><p>Les moins jeunes sont réticents puis CERTAINS finissent par s’y mettre</p>
-<center>
-<p><img data-src="images/nancy_pelosi.jpg" style="width:20.0%"></p>
-</center></li>
-<li class="fragment"><p>C’est un enchainement plus ou moins long d’opérations.</p>
-<center>
-<p><img data-src="images/bogdanoff1.jpg" style="width:21.0%"><img data-src="images/bogdanoff1.5.jpg" style="width:25.0%"><img data-src="images/bogdanoff2.jpg" style="width:25.0%"></p>
-</center></li>
-</ol>
-</div>
-</div>
+<section id="section" class="slide level2">
+<h2></h2>
 </section>
 <section id="ggplot-une-succession-de-couches" class="slide level2">
 <h2>Ggplot, une succession de couches</h2>
@@ -1511,16 +1565,21 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <center>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># fish_data &lt;- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a></span>
-<span id="cb29-3"><a href="#cb29-3"></a><span class="co"># Selection des données pour le site n°2000951</span></span>
-<span id="cb29-4"><a href="#cb29-4"></a><span class="co"># site1 &lt;- fish_data %&gt;%</span></span>
-<span id="cb29-5"><a href="#cb29-5"></a><span class="co">#   filter(survey_id == 2000951) %&gt;%</span></span>
-<span id="cb29-6"><a href="#cb29-6"></a><span class="co">#   select(survey_id, class, order, family, species_name, total, biomass)</span></span>
-<span id="cb29-7"><a href="#cb29-7"></a><span class="co"># </span></span>
-<span id="cb29-8"><a href="#cb29-8"></a><span class="co"># site1 %&gt;%</span></span>
-<span id="cb29-9"><a href="#cb29-9"></a><span class="co">#   head(5) %&gt;% </span></span>
-<span id="cb29-10"><a href="#cb29-10"></a><span class="co">#   kbl(digits = 4, caption = "Data to check") %&gt;% </span></span>
-<span id="cb29-11"><a href="#cb29-11"></a><span class="co">#   kable_classic(html_font = "Computer Modern", full_width = F)  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="co"># fish_data &lt;- read_csv("data/Global_reef_fish_biomass.csv")</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="co"># survey &lt;- read_delim("data/Survey_metadata.csv", </span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="co">#      delim = ";", escape_double = FALSE, trim_ws = TRUE, </span></span>
+<span id="cb29-6"><a href="#cb29-6"></a><span class="co">#      skip = 70)</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a></span>
+<span id="cb29-8"><a href="#cb29-8"></a><span class="co"># Selection des données pour le site n°2000951</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a><span class="co"># site1 &lt;- fish_data %&gt;%</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a><span class="co">#   filter(survey_id == 2000951) %&gt;%</span></span>
+<span id="cb29-11"><a href="#cb29-11"></a><span class="co">#   select(survey_id, class, order, family, species_name, total, biomass)</span></span>
+<span id="cb29-12"><a href="#cb29-12"></a><span class="co"># </span></span>
+<span id="cb29-13"><a href="#cb29-13"></a><span class="co"># site1 %&gt;%</span></span>
+<span id="cb29-14"><a href="#cb29-14"></a><span class="co">#   head(5) %&gt;% </span></span>
+<span id="cb29-15"><a href="#cb29-15"></a><span class="co">#   kbl(digits = 4, caption = "Data to check") %&gt;% </span></span>
+<span id="cb29-16"><a href="#cb29-16"></a><span class="co">#   kable_classic(html_font = "Computer Modern", full_width = F)  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </center>
 <p>Comment détécter les outliers ?</p>
