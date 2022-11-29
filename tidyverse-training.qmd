@@ -1,12 +1,4 @@
 ---
-title: "Formation R - Collection de packages tidyverse"
-author: 
-  - Monique Simier, monique.simier@ird.fr 
-  - Laure Velez, laure.velez@umontpellier.fr
-  - Gael Mariani, gael.mariani@umontpellier.fr
-  - Mathieu Depetris, mathieu.depetris@ird.fr
-date: last-modified	
-date-format: DD/MM/YYYY
 format: 
   revealjs:
     target: "_blank"
@@ -44,6 +36,25 @@ library(viridis)
 library(ggpubr)
 ```
 
+#  {background-image="images/background_title.png"}
+
+[Formation R]{style="color:#ffffff; font-size: 2em"}
+
+[Collection de packages tidyverse]{style="color:#ffffff; font-size: 1.5em"}
+
+[Monique Simier (monique.simier@ird.fr)]{style="color:#ffffff; font-size: 1em"} <br/>
+[Laure Velez (laure.velez@umontpellier.fr)]{style="color:#ffffff; font-size: 1em"} <br/>
+[Gael Mariani (gael.mariani@umontpellier.fr)]{style="color:#ffffff; font-size: 1em"} <br/>
+[Mathieu Depetris (mathieu.depetris@ird.fr)]{style="color:#ffffff; font-size: 1em"} <br/>
+<br/>
+[05-06 decembre 2022]{style="color:#ffffff; font-size: 1em"}
+<br/>
+<br/>
+<br/>
+[© RStudio]{style="color:#ffffff; font-size: 0.4em"}
+
+![](images/tidyverse_packages.png){.absolute top="60" right="20" width="35%"}
+
 ## Plan de la formation {.smaller}
 
 -   Préambule et introduction
@@ -52,16 +63,19 @@ library(ggpubr)
     -   Objectifs de la formation
     -   Présentation de tidyverse
 
--   Partie I : Manipulation de données avec dplyr
+-   Partie 1 : Manipulation de données avec dplyr
 
--   Partie II : Extension à la manipulation de données, cas spécifiques
+    - 1.1 : Importation de données sous R
+    - 1.2 : Transformation des données avec dplyr
+
+-   Partie 2 : Extension à la manipulation de données, cas spécifiques
 
     -   Manipuler du texte avec stringr
     -   Manipuler des dates avec lubridate
 
--   Partie III : Visualisation graphique avec ggplot2
+-   Partie 3 : Visualisation graphique avec ggplot2
 
--   Partie IV : Cas pratiques sur vos données
+-   Partie 4 : Cas pratiques sur vos données
 
 Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.github.io/analyse-R/){target="_blank"}
 
@@ -145,13 +159,250 @@ library(tidyverse)
     -   Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d'espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (\_), ne pas utiliser de mots réservés (comme par exemple TRUE)
     -   Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des \_ et les noms choisis doivent pouvoir donner l'information du contenu associé
 
-# Partie I : Manipulation de données avec dplyr
+# Partie 1 : Manipulation de données avec dplyr
 
-# Importation de données sous R avec readr
+## 1.1. Importation de données sous R avec readr
 
 -   Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)
 -   La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects
--   Elles sont compatibles avec l'esprit Tidyverse car elles permettent de générer des tibbles \# Partie III : Visualisation des données avec ggplot
+-   Elles sont compatibles avec l'esprit Tidyverse car elles permettent de générer des tibbles
+
+## A voir avec Monique
+
+```{r, echo=TRUE, eval=FALSE}
+global_reef_fish_abundance_biomass <- read_delim(file = "./data/global_reef_fish_abundance_and_biomass.csv",
+                                                 delim = ",",
+                                                 quote = "\"")
+# probleme ligne 26 data ori
+survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
+                              delim = ";",
+                              skip = 68)
+```
+
+## 1.2. Tranformation des données avec [dplyr](https://dplyr.tidyverse.org/){target="_blank"}
+
+### Pourquoi utiliser dplyr et ca syntaxe ?
+
+- Syntaxe claire et cohérente
+    - "lien" avec le SQL
+    - deux "familles" de fonctions : résumer et vectorisation
+<br/>
+<br/>
+<br/>
+![](images/summary_function.png){.absolute top="395" left="15"}
+![](images/vectorized_function.png){.absolute top="395" right="15"}
+- Utilisation de verbes
+- Généralement plus rapides que leur équivalent sous R de base
+- Permets d'enchainer les opérations avec des "pipes"
+![](images/pipe.png){.absolute top="525" right="20" width="15%"}
+
+## Manipulation des lignes
+
+### Manipulation de type extraction
+
+Type de fonctions qui retournent un sous-ensemble de lignes
+
+- Extraction d'une ou plusieurs lignes : fonctions de la famille slice & co
+
+```{r echo=TRUE, eval=FALSE}
+# sélection d'une ou plusieurs lignes par position absolue
+slice()
+# sélection au hasard d'un nombre de lignes ou d'une proportion du jeu de données
+slice_sample()
+# sélection des n dernières lignes
+slice_tail()
+# sélection des n premières lignes
+slice_head()
+# sélection des valeurs distinctes
+distinct()
+# sélection en fonction d'opérateurs logiques et/ou booléens
+filter()
+```
+
+## Petit focus sur les opérateurs booléens et logiques {.smaller}
+
+Renvoi une valeur TRUE ou FALSE
+
+- les communs :
+
+![](images/booleens.png)
+
+- certains plus particuliers :
+
+![](images/booleens_particulier.png){width="25%"}
+  
+- Attention aux priorités dans les interprétations
+  - & et plus fort que |, il sera exécuté en premier
+  - une solution est d'utiliser des () pour séparer vos opérateurs
+  
+## Exercice {auto-animate="true"}
+
+- supprimer les données dupliquées dans le jeu de données "global_reef_fish_abundance_and_biomass"
+- En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Kyphosidae" et pour finir ou la classe de taille associé est <= 10.
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice corrigé {auto-animate="true"}
+
+- supprimer les données dupliquées dans le jeu de données "global_reef_fish_abundance_and_biomass"
+- En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Kyphosidae" et pour finir ou la classe de taille associé est <= 10.
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+tmp1 <- distinct(.data = global_reef_fish_abundance_biomass)
+tmp2 <- filter(.data = tmp1,
+               total != 0
+               & ! family %in% c("Mullidae",
+                                 "Kyphosidae")
+               & size_class <= 10)
+```
+
+## Amélioration de la lisibilité du code
+
+Ici on a effectué 2 opérations, mais on peut imaginer en faire beaucoup plus dans la réalité.
+
+Grâce à syntaxe de dplyr, on peut répondre à ce besoin de deux manières différentes.
+
+La première est d’effectuer toutes les opérations en une fois en les emboîtant :
+  
+```{r echo=TRUE, eval=FALSE}
+tmp1 <- filter(.data = distinct(.data = global_reef_fish_abundance_biomass),
+               total != 0
+               & ! family %in% c("Mullidae",
+                                 "Kyphosidae")
+               & size_class <= 10)
+```
+
+Cependant cela à plusieurs inconvénients. La structure est peu lisible, les opérations apparaissent dans l’ordre inverse de leur réalisation et il est difficile de voir quel paramètre se rapporte à quelle fonction.
+
+## Aller encore plus loin
+
+### Utilisation d'un nouvelle opérateur baptisé [pipe](https://magrittr.tidyverse.org/ ){target="_blank"} 
+
+- Il se note %>%
+
+- Son fonctionnement est le suivant : si j'exécute expr %>% f, le résultat de l’expression expr, à gauche du pipe, sera passé comme premier argument à la fonction f, à droite du pipe, ce qui revient à exécuter f(expr)
+
+- L'intérêt est que l'on peut enchainer plusieurs pipes
+
+- Avec notre exemple précédent cela donne :
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+tmp1 <- distinct(.data = global_reef_fish_abundance_biomass) %>%
+  filter(total != 0
+         & ! family %in% c("Mullidae",
+                           "Kyphosidae")
+         & size_class <= 10)
+```
+
+## Encore quelques fonctions de manipulation de lignes
+
+### Manipulation de type "trie"
+
+- Ordonner les lignes d'une ou plusieurs colonnes 
+
+```{r echo=TRUE, eval=FALSE}
+# par défaut ordre croissant, utiliser l'argument desc pour ordre décroissant
+arrange()
+```
+<br/>
+
+### Manipulation de type "ajout"
+
+- Ajouter une ligne dans un jeu de données
+
+```{r echo=TRUE, eval=FALSE}
+# interet des arguments .before and .after
+add_row()
+```
+
+## Manipulation des variables
+
+### Extraction d'une ou plusieurs colonnes
+
+Type de fonctions qui retournent un sous-ensemble de colonnes sous la forme d'un vecteur ou d'une table
+
+```{r echo=TRUE, eval=FALSE}
+# extraction des valeurs d'une colonne sous la forme d'un vecteur
+# on peut utiliser des noms ou les ids
+pull()
+# extraction d'une colonne sous la forme d'une table
+# bien regarder les arguments de la fonction car on peut faire beaucoup
+select()
+# Changer l'ordre ou la place d'une ou plusieurs colonnes
+# ne pas oublier les arguments .after et .before
+relocate()
+```
+
+## Fonctions de vectorisation
+
+### Une des deux grandes familles de fonction avec dplyr
+
+- On a commencé à l'aborder de manière instinctive avec relocate()
+
+- Globalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie
+
+```{r echo=TRUE, eval=FALSE}
+# créer une nouvelle variable
+mutate()
+# créer une nouvelle variable mais ne conserve pas les anciennes
+transmute()
+```
+
+- Petit bonus pour renomer les variables 
+
+```{r echo=TRUE, eval=FALSE}
+rename()
+```
+
+## Exercice {auto-animate="true" .smaller}
+
+- À partir du jeu de données de sortie de l'exercice précédent
+- Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, block et method
+- Placer cette nouvelle colonne au début du jeu de données
+- Supprimer les colonnes survey_id, block et method
+- Renommer la variable size_class en size_class_cm
+- Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm et supprimer la variable size_class_cm
+- Trier par ordre décroissant les données en fonction de la variable size_class_mm
+- Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice corrigé {auto-animate="true" .smaller}
+
+- À partir du jeu de données de sortie de l'exercice précédent
+- Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, block et method
+- Placer cette nouvelle colonne au début du jeu de données
+- Supprimer les colonnes survey_id, block et method
+- Renommer la variable size_class en size_class_cm
+- Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm et supprimer la variable size_class_cm
+- Trier par ordre décroissant les données en fonction de la variable size_class_mm
+- Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+tmp3 <- mutate(.data = tmp1,
+               survey_id_full = paste(survey_id,
+                                      method,
+                                      block,
+                                      sep = "_")) %>%
+  relocate(survey_id_full,
+           .before = survey_id) %>%
+  dplyr::select(-survey_id,
+                -method,
+                -block) %>%
+  rename(size_class_cm = size_class) %>%
+  mutate(size_class_mm = size_class_cm * 10) %>%
+  arrange(desc(size_class_mm)) %>%
+  dplyr::select(-size_class_cm)
+```
+
+# Partie III : Visualisation graphique avec ggplot2
 
 ## Petit apperçu des possibilités :
 
@@ -186,6 +437,8 @@ library(tidyverse)
 :::
 
 <center>Un grand notre d'exemples est disponible sur le site [***from Data to Viz***](https://www.data-to-viz.com/)</center>
+
+# Partie II : Extension à la manipulation de données, cas spécifiques
 
 ## Ggplot c'est comme la chirurgie *`aes`*thétique :
 
