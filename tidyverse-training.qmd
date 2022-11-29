@@ -147,7 +147,7 @@ library(tidyverse)
     -   Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d'espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (\_), ne pas utiliser de mots réservés (comme par exemple TRUE)
     -   Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des \_ et les noms choisis doivent pouvoir donner l'information du contenu associé
 
-# Partie I : Manipulation de données avec `dplyr` 
+# Partie I : Manipulation de données avec `dplyr`
 
 1.1. Importation de données sous R avec readr
 
