@@ -402,7 +402,7 @@
   <p class="author">Laure Velez, laure.velez@umontpellier.fr</p>
   <p class="author">Gael Mariani, gael.mariani@umontpellier.fr</p>
   <p class="author">Mathieu Depetris, mathieu.depetris@ird.fr</p>
-  <p class="date">28/11/2022</p>
+  <p class="date">29/11/2022</p>
 </section>
 
 <section id="plan-de-la-formation" class="slide level2 smaller">
@@ -715,6 +715,9 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <span id="cb2-5"><a href="#cb2-5"></a>  <span class="fu">head</span>(<span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-6"><a href="#cb2-6"></a>  <span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">4</span>, <span class="at">caption =</span> <span class="st">"Crabs data"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-7"><a href="#cb2-7"></a>  <span class="fu">kable_classic</span>(<span class="at">html_font =</span> <span class="st">"Computer Modern"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="cell">
 <div class="cell-output-display">
 
 <table class=" lightable-classic" style="font-family: Computer Modern; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -751,6 +754,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 
 </div>
 </div>
+</div>
 </section>
 <section id="ggplot-pas-à-pas" class="slide level2">
 <h2>Ggplot pas à pas</h2>
@@ -781,21 +785,24 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <p>Pour la structure du la figure, la fonction à toujours utiliser est <code>ggplot()</code> . Les arguments principaux sont :</p>
 <div>
 <ul>
-<li class="fragment"><p><code>data = nom.du.dataframe</code></p></li>
-<li class="fragment"><p><code>mapping = aes(x = varaible.x, y = variable.y)</code></p>
-<div class="cell" data-layout-align="center" data-warnings="false">
+<li><p><code>data = nom.du.dataframe</code></p></li>
+<li><p><code>mapping = aes(x = varaible.x, y = variable.y)</code></p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell" data-warnings="false">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>couche<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data    =</span> data_crabs,</span>
-<span id="cb3-2"><a href="#cb3-2"></a>                   <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CL, <span class="at">y =</span> CW))</span>
-<span id="cb3-3"><a href="#cb3-3"></a>couche<span class="fl">.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2"></a>                   <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CL, <span class="at">y =</span> CW))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
 </figure>
 </div>
-</div>
-</div></li>
-</ul>
 </div>
 </div>
 </div>
@@ -858,6 +865,9 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 </div>
 </div>
 </div>
+</section>
+<section id="ggplot-pas-à-pas-3" class="slide level2">
+<h2>Ggplot pas à pas</h2>
 <h3 id="choix-du-type-de-représentation-1">2. Choix du type de représentation</h3>
 <div>
 <p>L’exemple ici va mener à la réalisation d’un nuage de points. Mais <code>ggplot2</code> fonctionne de la même façon pour construire un <strong>diagramme en barres</strong>, <strong>une boite à moustache</strong> ou autres.</p>
@@ -880,20 +890,19 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <span id="cb5-3"><a href="#cb5-3"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CL, <span class="at">y =</span> CW))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
-</div><div class="cell" data-layout-align="center">
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
 </div>
 </div>
 </div>
 </section>
-<section id="ggplot-pas-à-pas-3" class="slide level2">
+<section id="ggplot-pas-à-pas-4" class="slide level2">
 <h2>Ggplot pas à pas</h2>
 <ol start="3" type="1">
 <li>Traçons un modèle linéaire et ajoutons la formule qui correspond</li>
@@ -902,72 +911,131 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>couche<span class="fl">.3</span> <span class="ot">&lt;-</span> couche<span class="fl">.2</span> <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> <span class="co"># le modèle linéaire </span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">stat_regline_equation</span>(<span class="at">label.y =</span> <span class="dv">52</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..eq.label..)) <span class="sc">+</span> <span class="co"># la formule</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">stat_regline_equation</span>(<span class="at">label.y =</span> <span class="dv">48</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..adj.rr.label..)) <span class="co"># R²</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a></span>
-<span id="cb6-6"><a href="#cb6-6"></a>couche<span class="fl">.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">stat_regline_equation</span>(<span class="at">label.y =</span> <span class="dv">48</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..adj.rr.label..)) <span class="co"># R²</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="ggplot-pas-à-pas-4" class="slide level2">
-<h2>Ggplot pas à pas</h2>
-<ol start="4" type="1">
-<li><p>Différencions les mâles et les femelles avec de la couleur</p>
-<p>=&gt; Une couleur par ordre. Comme c’est lié à l’esthétisme de la figure, il faut retourner à l’argument <code>color</code> dans la fonction <code>aes</code>.</p></li>
-</ol>
-<div class="cell" data-layout-align="center" data-warnings="false">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>couche<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data_crabs,</span>
-<span id="cb7-3"><a href="#cb7-3"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CL, <span class="at">y =</span> CW,</span>
-<span id="cb7-4"><a href="#cb7-4"></a>                           <span class="at">color =</span> sex))</span>
-<span id="cb7-5"><a href="#cb7-5"></a>couche<span class="fl">.4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
+</figure>
 </div>
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+</div>
+</div>
+</div>
+</section>
 <section id="ggplot-pas-à-pas-5" class="slide level2">
 <h2>Ggplot pas à pas</h2>
-<ol start="5" type="1">
-<li><p>Modifions les couleurs des points + Le titre de la légende</p>
-<p>Pour cela, on peut utiliser la fonction <code>scale_color_manual()</code> et les arguments <code>name</code> et <code>values</code>.</p></li>
+<ol start="4" type="1">
+<li>Différencions les mâles et les femelles avec de la couleur</li>
 </ol>
-<div class="cell" data-layout-align="center" data-warnings="false">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>couche<span class="fl">.5</span> <span class="ot">&lt;-</span> couche<span class="fl">.4</span> <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name   =</span> <span class="st">"Sex :"</span>,</span>
-<span id="cb8-3"><a href="#cb8-3"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span>
-<span id="cb8-4"><a href="#cb8-4"></a>couche<span class="fl">.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="fragment">
+<p>=&gt; Une couleur par ordre. Comme c’est lié à l’esthétisme de la figure, il faut retourner à l’argument <code>color</code> dans la fonction <code>aes</code>.</p>
 </div>
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch quarto-figure-center"><p><em>Une autre façon de faire est d’utiliser la fonction <code>labs</code> qui permet de changer les diverses légendes (axes x et y + légende de couleur). A vous de jouer !!!</em></p>
+<div class="fragment">
+<div class="cell" data-warnings="false">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>couche<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data_crabs,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x     =</span> CL, </span>
+<span id="cb7-4"><a href="#cb7-4"></a>                           <span class="at">y     =</span> CW, </span>
+<span id="cb7-5"><a href="#cb7-5"></a>                           <span class="at">color =</span> sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="ggplot-pas-à-pas-6" class="slide level2">
+<h2>Ggplot pas à pas</h2>
+<ol start="5" type="1">
+<li>Modifions les couleurs des points + Le titre de la légende</li>
+</ol>
+<div class="fragment">
+<p>Pour cela, on peut utiliser la fonction <code>scale_color_manual()</code> et les arguments <code>name</code> et <code>values</code>.</p>
+</div>
+<div class="fragment">
+<div class="cell" data-warnings="false">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>couche<span class="fl">.5</span> <span class="ot">&lt;-</span> couche<span class="fl">.4</span> <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name   =</span> <span class="st">"Sex :"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, </span>
+<span id="cb8-4"><a href="#cb8-4"></a>                                <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-36-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<center>
+<em>Une autre façon de faire est d’utiliser la fonction <code>labs</code> qui permet de changer les diverses légendes (axes x et y + légende de couleur). A vous de jouer !!!</em>
+</center>
+</div>
+</section>
+<section id="ggplot-pas-à-pas-7" class="slide level2">
 <h2>Ggplot pas à pas</h2>
 <ol start="6" type="1">
 <li>Nommons proprement les axes + la légende</li>
 </ol>
 <div class="cell" data-layout-align="center" data-warnings="false">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>couche<span class="fl">.6</span> <span class="ot">&lt;-</span> couche<span class="fl">.5</span> <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Carapace Length (mm)"</span>,</span>
-<span id="cb9-3"><a href="#cb9-3"></a>       <span class="at">y =</span> <span class="st">"Carapace Width (mm)"</span>,</span>
-<span id="cb9-4"><a href="#cb9-4"></a>       <span class="at">color =</span> <span class="st">"Sex :"</span>)</span>
-<span id="cb9-5"><a href="#cb9-5"></a>couche<span class="fl">.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">labs</span>(<span class="at">x     =</span> <span class="st">"Carapace Length (mm)"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>       <span class="at">y     =</span> <span class="st">"Carapace Width (mm)"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4"></a>       <span class="at">color =</span> <span class="st">"Sex :"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="ggplot-pas-à-pas-7" class="slide level2">
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-40-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ggplot-pas-à-pas-8" class="slide level2">
 <h2>Ggplot pas à pas</h2>
 <ol start="7" type="1">
 <li>Faisons deux plot en un en séparant les données pour les deux espèces.</li>
 </ol>
-<div class="cell" data-layout-align="center" data-warnings="false">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>couche<span class="fl">.7</span> <span class="ot">&lt;-</span> couche<span class="fl">.6</span> <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>sp)</span>
-<span id="cb10-2"><a href="#cb10-2"></a>couche<span class="fl">.7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>couche<span class="fl">.7</span> <span class="ot">&lt;-</span> couche<span class="fl">.6</span> <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>sp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="ggplot-pas-à-pas-8" class="slide level2">
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ggplot-pas-à-pas-9" class="slide level2">
 <h2>Ggplot pas à pas</h2>
 <ol start="8" type="1">
 <li>Petit lifting de la couleur de l’arrière plan</li>
 </ol>
+<div class="fragment">
 <div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
 <span id="cb11-2"><a href="#cb11-2"></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
@@ -975,57 +1043,73 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <div class="cell quarto-layout-panel" data-warnings="false">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-32-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-32-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-3.png" width="960"></p>
 </div>
 </div>
 </div>
 </div>
+</div>
+<div class="fragment">
 <center>
 Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’arrière plan (voir <a href="http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements">ici</a>). A vous de choisir votre préféré.
 </center>
+</div>
 </section>
-<section id="ggplot-pas-à-pas-9" class="slide level2">
+<section id="ggplot-pas-à-pas-10" class="slide level2">
 <h2>Ggplot pas à pas</h2>
 <ol start="9" type="1">
 <li>Le lifting final sur les légendes</li>
 </ol>
-<div class="cell" data-layout-align="center" data-warnings="false">
+<div class="fragment">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>couche<span class="fl">.8</span> <span class="ot">&lt;-</span> couche<span class="fl">.7</span> <span class="sc">+</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">theme</span>(<span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
 <span id="cb12-4"><a href="#cb12-4"></a>        <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
 <span id="cb12-5"><a href="#cb12-5"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
 <span id="cb12-6"><a href="#cb12-6"></a>        <span class="at">legend.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
-<span id="cb12-7"><a href="#cb12-7"></a>        <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>))</span>
-<span id="cb12-8"><a href="#cb12-8"></a>couche<span class="fl">.8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<span id="cb12-7"><a href="#cb12-7"></a>        <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-50-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="une-petite-subtilité-concernant-les-couleurs" class="slide level2">
 <h2>Une petite subtilité concernant les couleurs</h2>
-<div>
+<div class="fragment">
 <p><strong><em>Exercice :</em></strong></p>
 <ol type="1">
-<li class="fragment"><em>Construire un diagramme en barres représentant la biomasse de chacun des ordres.</em></li>
-<li class="fragment"><em>Donner une couleur à chacune des barres. Vous devez choisir la couleur.</em></li>
+<li><em>Construire un diagramme en barres représentant la biomasse de chacun des ordres.</em></li>
+<li><em>Donner une couleur à chacune des barres. Vous devez choisir la couleur.</em></li>
 </ol>
 </div>
+<div class="fragment">
 <div>
 <p>Ggplot fait la différence entre :</p>
 <ul>
 <li class="fragment"><p>la couleur des contours -&gt; <code>color = …</code></p></li>
 <li class="fragment"><p>la couleur de remplissage -&gt; <code>fill = …</code></p></li>
 </ul>
-<p>De la même façon, pour choisir ses couleurs de contour <em>vs.</em> de remplissage, on utilise les fonctions<br>
-<code>scale_color_manual()</code> <em>vs.</em> <code>scale_fill_manual()</code>.</p>
 </div>
-<div>
+</div>
+<div class="fragment">
+<p>Pour choisir ses couleurs de contour <em>vs.</em> de remplissage, on utilise les fonctions<br>
+<code>scale_color_manual()</code> <em>vs.</em> <code>scale_fill_manual()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># fish_data %&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="co">#   group_by(order) %&gt;%</span></span>
@@ -1042,13 +1126,14 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 <section id="une-autre-subtilité-concernant-les-couleurs" class="slide level2">
 <h2>Une autre subtilité concernant les couleurs</h2>
 <p>Selon le type de variable, les fonctions pour choisir les couleurs ne seront pas les mêmes. Pourquoi ?</p>
-<div>
+<div class="fragment">
 <p><strong><em>Exercice :</em></strong></p>
 <ol type="1">
-<li class="fragment">Construisez un nuage de points biomass~total</li>
-<li class="fragment">Coloriez les points en fonction de la variable abondance en BLEU.</li>
+<li><em>Construisez un nuage de points biomass~total</em></li>
+<li><em>Coloriez les points en fonction de la variable abondance en BLEU.</em></li>
 </ol>
 </div>
+<div class="fragment">
 <div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># plot &lt;- ggplot() +</span></span>
@@ -1058,9 +1143,12 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 <span id="cb14-5"><a href="#cb14-5"></a><span class="co"># plot + scale_color_manual(values = "blue")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+</div>
+<div class="fragment">
 <center>
 On ne peut pas donner une seule couleur à une variable continue !
 </center>
+</div>
 </section>
 <section id="couleurs-variables-continues" class="slide level2">
 <h2>Couleurs &amp; variables continues</h2>
@@ -1074,7 +1162,9 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <li class="fragment"><p><code>scale_fill_gradient</code> : permet de créer ses propres gradients de couleurs. Des variantes existent selon le nombre de couleurs à définir. Il s’agit de <code>scale_fill_gradient2()</code> et <code>scale_fill_gradientn()</code>.</p></li>
 </ul>
 </div>
-<div>
+</section>
+<section id="couleurs-variables-continues-1" class="slide level2">
+<h2>Couleurs &amp; variables continues</h2>
 <center>
 Testons les une par une à partir de la figure suivante
 </center>
@@ -1090,19 +1180,39 @@ Testons les une par une à partir de la figure suivante
 <span id="cb15-9"><a href="#cb15-9"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
 <span id="cb15-10"><a href="#cb15-10"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="couleurs-variables-continues-2" class="slide level2">
+<h2>Couleurs &amp; variables continues</h2>
+<h3 id="scale_color_continuous"><code>scale_color_continuous</code></h3>
+<p>La plus simple, mais pas beaucoup d’options. C’est aussi la palette de couleur par défaut.</p>
+<div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>plot</span>
+<span id="cb16-2"><a href="#cb16-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_continuous</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-58-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-58-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section>
-<section id="scale_color_continuous" class="slide level2">
-<h2><code>scale_color_continuous</code></h2>
-<p>La plus simple, mais pas beaucoup d’options.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_continuous</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-42-1.png" width="960" class="r-stretch"></section>
-<section id="scale_color_viridis_c" class="slide level2">
-<h2><code>scale_color_viridis_c</code></h2>
+<section id="couleurs-variables-continues-3" class="slide level2">
+<h2>Couleurs &amp; variables continues</h2>
+<h3 id="scale_color_viridis_c"><code>scale_color_viridis_c</code></h3>
 <p>De belles palettes dont les nuances sont captées par les personnes albinos.</p>
+<div class="fragment">
 <div>
 <div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>)</span>
@@ -1111,21 +1221,23 @@ Testons les une par une à partir de la figure suivante
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-60-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-44-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-60-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-44-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-60-3.png" width="960"></p>
+</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="scale_fill_distiller" class="slide level2">
-<h2><code>scale_fill_distiller()</code></h2>
+<section id="couleurs-variables-continues-4" class="slide level2">
+<h2>Couleurs &amp; variables continues</h2>
+<h3 id="scale_fill_distiller"><code>scale_fill_distiller()</code></h3>
 <p>Permet d’utiliser les palettes de couleurs issues de <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">BrewerPalettes</a>.</p>
 <div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"Reds"</span>)</span>
@@ -1134,19 +1246,23 @@ Testons les une par une à partir de la figure suivante
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-62-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-62-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-62-3.png" width="960"></p>
 </div>
 </div>
 </div>
 </div>
-<div>
-<p>Petite info utile, toutes les palettes peuvent passer le test <strong>ColorBlind Friendly</strong> :</p>
+</section>
+<section id="couleurs-variables-continues-5" class="slide level2">
+<h2>Couleurs &amp; variables continues</h2>
+<h3 id="scale_fill_distiller-1"><code>scale_fill_distiller()</code></h3>
+<p>Petite info utile, toutes les palettes peuvent passer le test <strong><em>ColorBlind Friendly</em></strong> :</p>
+<div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># install.packages("colorBlindness")</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="co"># install.packages("RColorBrewer")</span></span>
@@ -1154,13 +1270,14 @@ Testons les une par une à partir de la figure suivante
 <span id="cb19-4"><a href="#cb19-4"></a>color_pal <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">10</span>, <span class="at">name=</span><span class="st">"Spectral"</span>)</span>
 <span id="cb19-5"><a href="#cb19-5"></a>colorBlindness<span class="sc">::</span><span class="fu">displayAllColors</span>(color_pal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-48-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-64-1.png" width="960"></p>
 </div>
 </div>
 </div>
 </section>
-<section id="scale_fill_gradient" class="slide level2">
-<h2><code>scale_fill_gradient()</code></h2>
+<section id="couleurs-variables-continues-6" class="slide level2">
+<h2>Couleurs &amp; variables continues</h2>
+<h3 id="scale_fill_gradient"><code>scale_fill_gradient()</code></h3>
 <p>Permet de créer ces propres palettes de couleurs, à partir de 2, 3 ou n couleurs :</p>
 <div>
 <ul>
@@ -1169,7 +1286,7 @@ Testons les une par une à partir de la figure suivante
 <li class="fragment"><p><code>scale_fill_gradientn()</code> avec l’argument <code>colours</code>.</p></li>
 </ul>
 </div>
-<div>
+<div class="fragment">
 <div>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>)</span>
 <span id="cb20-2"><a href="#cb20-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">midpoint =</span> <span class="fl">0.02</span>)</span>
@@ -1177,13 +1294,13 @@ Testons les une par une à partir de la figure suivante
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-50-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-66-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-50-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-66-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-50-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-66-3.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1202,9 +1319,11 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 </ul>
 </div>
 </section>
-<section id="scale_fill_binned" class="slide level2">
-<h2><code>scale_fill_binned()</code></h2>
+<section id="couleurs-variable-groupée-en-classes-1" class="slide level2">
+<h2>Couleurs &amp; variable groupée en classes</h2>
+<h3 id="scale_fill_binned"><code>scale_fill_binned()</code></h3>
 <p>Les couleurs sont par défaut des nuances de bleu. Certaines précisions peuvent cependant être apportées.</p>
+<div class="fragment">
 <div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">n.breaks =</span> <span class="dv">4</span>)</span>
 <span id="cb21-2"><a href="#cb21-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">n.breaks =</span> <span class="dv">7</span>,</span>
@@ -1214,21 +1333,24 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-52-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-68-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-52-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-68-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-52-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-68-3.png" width="960"></p>
+</div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="scale_fill_fermenter" class="slide level2">
-<h2><code>scale_fill_fermenter()</code></h2>
-<p>La fonction analogue à <code>scale_fill_distiller()</code> et <code>scale_fill_brewer()</code> .</p>
+<section id="couleurs-variable-groupée-en-classes-2" class="slide level2">
+<h2>Couleurs &amp; variable groupée en classes</h2>
+<h3 id="scale_fill_fermenter"><code>scale_fill_fermenter()</code></h3>
+<p>La fonction analogue à <code>scale_fill_distiller()</code> et <code>scale_fill_brewer()</code>.</p>
+<div class="fragment">
 <div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_fermenter</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">palette =</span> <span class="st">"BuGn"</span>)</span>
 <span id="cb22-2"><a href="#cb22-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_fermenter</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">palette =</span> <span class="st">"BuGn"</span>, <span class="at">direction =</span> <span class="dv">1</span>)</span>
@@ -1236,20 +1358,22 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-54-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-70-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-54-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-70-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-54-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-70-3.png" width="960"></p>
+</div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="scale_fill_steps" class="slide level2">
-<h2><code>scale_fill_steps()</code></h2>
+<section id="couleurs-variable-groupée-en-classes-3" class="slide level2">
+<h2>Couleurs &amp; variable groupée en classes</h2>
+<h3 id="scale_fill_steps"><code>scale_fill_steps()</code></h3>
 <p>Fonction analogue à <code>scale_fill_gradient()</code>. Permet de créer ces propres palettes de couleurs, à partir de 2, 3 ou n couleurs :</p>
 <div>
 <ul>
@@ -1258,7 +1382,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <li class="fragment"><p><code>scale_fill_stepsn()</code> avec l’argument <code>colours</code>.</p></li>
 </ul>
 </div>
-<div>
+<div class="fragment">
 <div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_steps</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">n.breaks =</span> <span class="dv">8</span>)</span>
 <span id="cb23-2"><a href="#cb23-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_steps2</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">midpoint =</span> <span class="fl">0.02</span>, <span class="at">n.breaks =</span> <span class="dv">8</span>)</span>
@@ -1266,13 +1390,13 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-56-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-72-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-56-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-72-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-56-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-72-3.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1289,19 +1413,20 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <li class="fragment"><p><code>scale_fill_brewer</code> : utilise les <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">BrewerPalettes</a> (voir <a href="https://r-graph-gallery.com/38-rcolorbrewers-palettes.html">ici</a> pour plus d’infos). Equivalent de <code>scale_fill_distiller</code> pour les variables discrètes.</p></li>
 </ul>
 </div>
+</section>
+<section id="couleurs-variables-discrètes-1" class="slide level2">
+<h2>Couleurs &amp; variables discrètes</h2>
 <div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">geom_violin</span>(<span class="at">data    =</span> data_crabs,</span>
-<span id="cb24-3"><a href="#cb24-3"></a>              <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> CL, <span class="at">fill =</span> sex), <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sp) <span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb24-6"><a href="#cb24-6"></a>plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-58-1.png" width="960"></p>
+<span id="cb24-3"><a href="#cb24-3"></a>              <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> CL, <span class="at">fill =</span> sex), </span>
+<span id="cb24-4"><a href="#cb24-4"></a>              <span class="at">alpha   =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sp) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
+<div class="fragment">
 <div>
 <div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_discrete</span>()</span>
@@ -1310,13 +1435,14 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-60-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-76-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-60-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-76-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-60-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-76-3.png" width="960"></p>
+</div>
 </div>
 </div>
 </div>
