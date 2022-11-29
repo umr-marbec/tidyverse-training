@@ -20,7 +20,29 @@ format:
     logo: template/logo_marbec.png
     footer: "[https://github.com/umr-marbec/tidyverse-training](https://github.com/umr-marbec/tidyverse-training)"
 editor: visual
+fig-caption: center
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyr)
+library(patchwork)
+library(knitr)
+library(cowplot)
+library(colorBlindness)
+library(RColorBrewer)
+library(kableExtra)
+library(readr)
+library(ggplot2)
+library(purrr)
+library(tibble)
+library(stringr)
+library(forcats)
+library(MASS)
+library(viridis)
+library(ggpubr)
+```
 
 ## Plan de la formation {.smaller}
 
@@ -51,26 +73,25 @@ Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.
 
 ## Prérequis et environnement de travail nécessaire à la formation
 
-- Avoir des notions de base dans l’utilisation de R
-- Avoir une instance valide de [R](https://cran.r-project.org/){target="_blank"} sur son poste (durant la formation utilisation de la version 4.2.1)
-- Avoir installé correctement les versions des packages dplyr (utilisation de la version 1.0.10), lubridate (utilisation de la version 1.8.0), ggp- lot2 (utilisation de la version 3.3.6) et stringr (utilisation de la version 1.4.1)
+-   Avoir des notions de base dans l'utilisation de R
+-   Avoir une instance valide de [R](https://cran.r-project.org/){target="_blank"} sur son poste (durant la formation utilisation de la version 4.2.1)
+-   Avoir installé correctement les versions des packages dplyr (utilisation de la version 1.0.10), lubridate (utilisation de la version 1.8.0), ggp- lot2 (utilisation de la version 3.3.6) et stringr (utilisation de la version 1.4.1)
 
 ## Bonus non obligatoire
 
-- Utilisation de l’environnement de développement [Rstudio](https://www.rstudio.com/products/rstudio/download/){target="_blank"} (utilisation de la version 2022.07.1 Build 554 sous Windows)
-- Pour les utilisateurs de Windows installation de [Rtools](https://cran.r-project.org/bin/windows/Rtools/){target="_blank"} (utilisation de la version 4.2)
-- Installation de [Visual Studio Code](https://code.visualstudio.com/#alt-downloads){target="_blank"} (éditeur de code source autonome)
-- Une instance de [Java](https://jdk.java.net/19/){target="_blank"} (idéalement une version JDK = kit de développement + moteur d'exécution des programmes compilés + outils de compilation)
+-   Utilisation de l'environnement de développement [Rstudio](https://www.rstudio.com/products/rstudio/download/){target="_blank"} (utilisation de la version 2022.07.1 Build 554 sous Windows)
+-   Pour les utilisateurs de Windows installation de [Rtools](https://cran.r-project.org/bin/windows/Rtools/){target="_blank"} (utilisation de la version 4.2)
+-   Installation de [Visual Studio Code](https://code.visualstudio.com/#alt-downloads){target="_blank"} (éditeur de code source autonome)
+-   Une instance de [Java](https://jdk.java.net/19/){target="_blank"} (idéalement une version JDK = kit de développement + moteur d'exécution des programmes compilés + outils de compilation)
 
 ## Objectifs de la formation
 
 ::: columns
-
 ::: {.column width="60%"}
-- Vous présenter un panel de ce que l’on peut faire avec ces nouvelles méthodes et surtout vous donner les clés pour aller plus loin
-- Un expert n’est pas forcément quelqu’un qui connaît toutes les fonctions de R par cœur, mais qui sait écoute, comprendre et aller chercher les informations dont il a besoin
-  - Pensez à jeter un coup d’œil aux [cheatsheets](https://github.com/rstudio/cheatsheets){target="_blank"}
-- Prendre le temps de discuter et de regarder vos données et/ou problèmes
+-   Vous présenter un panel de ce que l'on peut faire avec ces nouvelles méthodes et surtout vous donner les clés pour aller plus loin
+-   Un expert n'est pas forcément quelqu'un qui connaît toutes les fonctions de R par cœur, mais qui sait écoute, comprendre et aller chercher les informations dont il a besoin
+    -   Pensez à jeter un coup d'œil aux [cheatsheets](https://github.com/rstudio/cheatsheets){target="_blank"}
+-   Prendre le temps de discuter et de regarder vos données et/ou problèmes
 :::
 
 ::: {.column width="40%"}
@@ -81,57 +102,722 @@ Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.
 ## Présentation de Tidyverse {.smaller}
 
 ::: columns
-
 ::: {.column width="65%"}
-- Tidyverse c’est quoi ?
-  - tidy + universe ou l’univers du «bien rangé» ou du rangement
-  - Collection d’extensions conçues pour travailler ensemble et basées sur une philosophie commune
-  - Le cœur du package inclut 8 packages
-    - [ggplot2](https://ggplot2.tidyverse.org/){target="_blank"} : création de graphiques
-    - [dplyr](https://dplyr.tidyverse.org/){target="_blank"} : manipulation de données au sens large
-    - [tidyr](https://tidyr.tidyverse.org/){target="_blank"} : manipulation de données plus orientées variables
-    - [readr](https://readr.tidyverse.org/){target="_blank"} : import
-    - [purrr](https://purrr.tidyverse.org/){target="_blank"} : fonction de vectorisation (remplacement des boucles classiques)
-    - [tibble](https://tibble.tidyverse.org/){target="_blank"} : «évolution» du data.frame
-    - [stringr](https://stringr.tidyverse.org/){target="_blank"} : manipulation de caractère
-    - [forcats](https://forcats.tidyverse.org/){target="_blank"} : série d’outils pour aider dans la manipulation des facteurs
+-   Tidyverse c'est quoi ?
+    -   tidy + universe ou l'univers du «bien rangé» ou du rangement
+    -   Collection d'extensions conçues pour travailler ensemble et basées sur une philosophie commune
+    -   Le cœur du package inclut 8 packages
+        -   [ggplot2](https://ggplot2.tidyverse.org/){target="_blank"} : création de graphiques
+        -   [dplyr](https://dplyr.tidyverse.org/){target="_blank"} : manipulation de données au sens large
+        -   [tidyr](https://tidyr.tidyverse.org/){target="_blank"} : manipulation de données plus orientées variables
+        -   [readr](https://readr.tidyverse.org/){target="_blank"} : import
+        -   [purrr](https://purrr.tidyverse.org/){target="_blank"} : fonction de vectorisation (remplacement des boucles classiques)
+        -   [tibble](https://tibble.tidyverse.org/){target="_blank"} : «évolution» du data.frame
+        -   [stringr](https://stringr.tidyverse.org/){target="_blank"} : manipulation de caractère
+        -   [forcats](https://forcats.tidyverse.org/){target="_blank"} : série d'outils pour aider dans la manipulation des facteurs
 :::
 
 ::: {.column width="35%"}
-![](images/hadley_wickham.png){width="55%"}
-![](images/tidyverse_packages.png){width="55%"}
+![](images/hadley_wickham.png){width="55%"} ![](images/tidyverse_packages.png){width="55%"}
 :::
 :::
 
 ## Présentation de Tidyverse
 
-- Lancement de la librairie 
+-   Lancement de la librairie
 
 ```{r, echo=TRUE, eval=FALSE}
 install.packages("tidyverse")
 library(tidyverse)
 ```
 
-- Cependant je vous déconseille de faire comme ça
-  - En lançant cette commande, on charge dans R tous les packages associés à tidyverse (les 8 packages cités précédemment, mais aussi les dépendances associées)
-  - Avez-vous vraiment besoin de tout cela ?
-  - Potentiel impact sur vos futurs développements (surtout si vous commencez à développer des packages)
-  - L’idée est d’appliquer dès maintenant les bonnes pratiques et surtout de comprendre ce que cela implique de ne pas les suivre (ce qui est aussi votre droit !) 
+-   Cependant je vous déconseille de faire comme ça
+    -   En lançant cette commande, on charge dans R tous les packages associés à tidyverse (les 8 packages cités précédemment, mais aussi les dépendances associées)
+    -   Avez-vous vraiment besoin de tout cela ?
+    -   Potentiel impact sur vos futurs développements (surtout si vous commencez à développer des packages)
+    -   L'idée est d'appliquer dès maintenant les bonnes pratiques et surtout de comprendre ce que cela implique de ne pas les suivre (ce qui est aussi votre droit !)
 
 ## Avant d'aller plus loin
 
-- L’utilisation de ces packages permet de faire beaucoup de choses, mais ne rend pas tout le reste obsolète 
-- Il y a plusieurs stratégies pour réaliser une action, il faut juste trouver le bon compromis (connaissances, temps de calcul, contexte global de votre projet, …)
-- Attention aux règles et conventions de nommages
-  - Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d’espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (_), ne pas utiliser de mots réservés (comme par exemple TRUE)
-  - Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des _ et les noms choisis doivent pouvoir donner l’information du contenu associé
-  
+-   L'utilisation de ces packages permet de faire beaucoup de choses, mais ne rend pas tout le reste obsolète
+-   Il y a plusieurs stratégies pour réaliser une action, il faut juste trouver le bon compromis (connaissances, temps de calcul, contexte global de votre projet, ...)
+-   Attention aux règles et conventions de nommages
+    -   Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d'espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (\_), ne pas utiliser de mots réservés (comme par exemple TRUE)
+    -   Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des \_ et les noms choisis doivent pouvoir donner l'information du contenu associé
+
 # Partie I : Manipulation de données avec dplyr
 
+# Importation de données sous R avec readr
 
+-   Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)
+-   La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects
+-   Elles sont compatibles avec l'esprit Tidyverse car elles permettent de générer des tibbles \# Partie III : Visualisation des données avec ggplot
+
+## Petit apperçu des possibilités :
+
+::: {layout-ncol="3"}
+![Nuage de points](images/.png){width="\"30%"}
+
+![Boxplots](images/.png){width="30%"}
+
+![Violin Plot](images/.png){width="30%"}
+:::
+
+<center>Un grand nombre d'exemples est disponible sur le site [***from Data to Viz***](https://www.data-to-viz.com/)</center>
+
+## Petit apperçu des possibilités :
+
+::: {layout-ncol="3"}
+![Barplot](images/barplot.png){width="30%"}
+
+![Barplot](images/barplot2.png){width="30%"}
+
+![Barplot Circulaire](images/Figure3.png){width="30%"}
+:::
+
+## Petit apperçu des possibilités :
+
+::: {layout-ncol="3"}
+![Données temporelles](images/Series_temporelles.png){width="\"30%"}
+
+![Données temporelles empillées](images/Diagramme_empile.png){width="30%"}
+
+![Cartes](images/map2.png){width="30%"}
+:::
+
+<center>Un grand notre d'exemples est disponible sur le site [***from Data to Viz***](https://www.data-to-viz.com/)</center>
+
+## Ggplot c'est comme la chirurgie *`aes`*thétique :
+
+::: incremental
+::: columns
+1)  Les jeunes s'y mettent très tôt !
+
+2)  Les moins jeunes sont réticents puis CERTAINS finissent par s'y mettre
+
+    <center>![](images/nancy_pelosi.jpg){width="20%"}</center>
+
+3)  C'est un enchainement plus ou moins long d'opérations.
+
+    <center>![](images/bogdanoff1.jpg){width="21%"}![](images/bogdanoff1.5.jpg){width="25%"}![](images/bogdanoff2.jpg){width="25%"}</center>
+:::
+:::
+
+## Ggplot, une succession de couches
+
+::: incremental
+::: columns
+::: column
+1.  La Structure
+
+    ```{r echo=FALSE, out.width="85%"}
+    data <- iris
+    p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
+      theme(axis.text  = element_text(size = 25),
+            axis.title = element_text(size = 25))
+    p1
+    ```
+:::
+
+::: column
+2.  Le type de représentation
+
+    ```{r echo=FALSE, out.width="85%"}
+    p2 <- p1 + geom_point(size = 5)
+    p2
+    ```
+:::
+:::
+
+::: columns
+::: column
+3.  Les Couleurs
+
+    ```{r echo=FALSE, out.width="85%"}
+    p3 <- p1 + geom_point(mapping = aes(color = Petal.Width), size = 5) + scale_color_viridis_c()
+    p3
+    ```
+:::
+
+::: column
+4.  Le Lifting final
+
+    ```{r echo=FALSE, out.width="85%"}
+    p4 <- p3 + theme_bw() +
+      theme(axis.text = element_text(size = 25),
+                     axis.title = element_text(size = 25))
+    p4
+    ```
+:::
+:::
+:::
+
+## La structure des données
+
+Pour la démonstration nous allons utiliser le jeu de données `crabs` de la librairie `MASS`.
+
+```{r echo = TRUE}
+library(MASS)
+data_crabs <- crabs %>% dplyr::select(sp, sex, CL, CW)
+
+data_crabs %>%
+  head(3) %>%
+  kbl(digits = 4, caption = "Crabs data") %>%
+  kable_classic(html_font = "Computer Modern", full_width = F)
+```
+
+## Ggplot pas à pas
+
+### 1. Construction de la structure
+
+::: incremental
+<div>
+
+Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
+
+::: incremental
+-   `data = nom.du.dataframe`
+
+-   `mapping = aes(x = varaible.x, y = variable.y)`
+
+    ::: incremental
+    -   Ici le `aes` signifie **aesthetic**
+
+    -   On verra que d'autres options sont disponibles dans `aes` comme la taille (`size`), la couleur (`color`), la forme (`shape`) ...
+    :::
+:::
+
+</div>
+:::
+
+## Ggplot pas à pas
+
+### 1. Construction de la structure
+
+::: incremental
+<div>
+
+Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
+
+<div>
+
+-   `data = nom.du.dataframe`
+
+-   `mapping = aes(x = varaible.x, y = variable.y)`
+
+    ```{r echo=TRUE, warnings=FALSE, fig.align='center'}
+    couche.1 <- ggplot(data    = data_crabs,
+                       mapping = aes(x = CL, y = CW))
+    couche.1
+    ```
+
+</div>
+
+</div>
+:::
+
+## Ggplot pas à pas
+
+### 2. Choix du type de représentation
+
+::: incremental
+::: incremental
+Plusieurs représentations existent selon le type de variables que l'on a :
+:::
+
+::: columns
+::: column
+1.  **Une variable continue**
+
+    ::: incremental
+    -   `geom_histogram()`
+
+    -   `geom_density()`
+    :::
+:::
+
+::: column
+2.  **Deux variables continues**
+
+    ::: incremental
+    -   `geom_point()`
+    -   `geom_line()`
+    -   `geom_area()`
+    :::
+:::
+:::
+:::
+
+::: incremental
+::: columns
+::: column
+3.  **Une discrète & une continue**
+
+    ::: incremental
+    -   `geom_boxplot()`
+    -   `geom_violin()`
+    -   `geom_col()`
+    :::
+:::
+
+::: column
+4.  **Données spatiales**
+
+    ::: incremental
+    -   `geom_polygon()`
+
+    -   `geom_sf()`
+    :::
+:::
+:::
+:::
+
+## 2. Choix du type de représentation
+
+::: incremental
+L'exemple ici va mener à la réalisation d'un nuage de points. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou autres.
+
+::: incremental
+::: columns
+::: {.column width="50%"}
+-   `aes()` dans `ggplot()`
+
+    ```{r echo=TRUE, warnings=FALSE}
+    couche.2 <- couche.1 +
+      geom_point()
+    ```
+:::
+
+::: {.column width="50%"}
+-   `aes()` dans `geom_point()`
+
+    ```{r echo=TRUE, warnings=FALSE}
+    couche.2 <- ggplot() +
+      geom_point(data    = data_crabs,
+                 mapping = aes(x = CL, y = CW))
+    ```
+:::
+
+```{r echo = FALSE, fig.align='center'}
+couche.2
+```
+:::
+:::
+:::
+
+## Ggplot pas à pas
+
+3.  Traçons un modèle linéaire et ajoutons la formule qui correspond
+
+```{r echo = TRUE, fig.align='center'}
+couche.3 <- couche.2 +
+  geom_smooth(color = "red", method = "lm") + # le modèle linéaire 
+  stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) + # la formule
+  stat_regline_equation(label.y = 48, aes(label = ..adj.rr.label..)) # R²
+
+couche.3
+```
+
+## Ggplot pas à pas
+
+4.  Différencions les mâles et les femelles avec de la couleur
+
+    =\> Une couleur par ordre. Comme c'est lié à l'esthétisme de la figure, il faut retourner à l'argument `color` dans la fonction `aes`.
+
+```{r echo=TRUE, warnings=FALSE, fig.align='center'}
+couche.4 <- ggplot() +
+  geom_point(data    = data_crabs,
+             mapping = aes(x = CL, y = CW,
+                           color = sex))
+couche.4
+```
+
+## Ggplot pas à pas
+
+5.  Modifions les couleurs des points + Le titre de la légende
+
+    Pour cela, on peut utiliser la fonction `scale_color_manual()` et les arguments `name` et `values`.
+
+```{r echo=TRUE, warnings=FALSE, fig.align='center'}
+couche.5 <- couche.4 +
+  scale_color_manual(name   = "Sex :",
+                     values = c("M" = "darkblue", "F" = "darkgreen"))
+couche.5
+```
+
+*Une autre façon de faire est d'utiliser la fonction `labs` qui permet de changer les diverses légendes (axes x et y + légende de couleur). A vous de jouer !!!*
+
+## Ggplot pas à pas
+
+6.  Nommons proprement les axes + la légende
+
+```{r echo=TRUE, warnings=FALSE, fig.align='center'}
+couche.6 <- couche.5 +
+  labs(x = "Carapace Length (mm)",
+       y = "Carapace Width (mm)",
+       color = "Sex :")
+couche.6
+```
+
+## Ggplot pas à pas
+
+7.  Faisons deux plot en un en séparant les données pour les deux espèces.
+
+```{r warnings=FALSE, fig.align='center'}
+couche.7 <- couche.6 + facet_grid(~sp)
+couche.7
+```
+
+## Ggplot pas à pas
+
+8.  Petit lifting de la couleur de l'arrière plan
+
+```{r warnings=FALSE}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
+couche.7 + theme_bw()
+couche.7 + theme_classic()
+couche.7 + theme_dark()
+```
+
+<center>Un tas de `theme_*` existent pour obtenir différentes formats d'arrière plan (voir [ici](http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements)). A vous de choisir votre préféré.</center>
+
+## Ggplot pas à pas
+
+9.  Le lifting final sur les légendes
+
+```{r warnings=FALSE, fig.align='center'}
+couche.8 <- couche.7 +
+  theme_bw() +
+  theme(axis.text       = element_text(size = 11),
+        axis.title      = element_text(size = 13),
+        legend.position = "right",
+        legend.text     = element_text(size = 13),
+        legend.title    = element_text(size = 15))
+couche.8
+```
+
+## Une petite subtilité concernant les couleurs
+
+::: incremental
+***Exercice :***
+
+1.  *Construire un diagramme en barres représentant la biomasse de chacun des ordres.*
+2.  *Donner une couleur à chacune des barres. Vous devez choisir la couleur.*
+:::
+
+::: incremental
+Ggplot fait la différence entre :
+
+-   la couleur des contours -\> `color = …`
+
+-   la couleur de remplissage -\> `fill = …`
+
+De la même façon, pour choisir ses couleurs de contour *vs.* de remplissage, on utilise les fonctions\
+`scale_color_manual()` *vs.* `scale_fill_manual()`.
+
+```{r echo=TRUE}
+# fish_data %>%
+#   group_by(order) %>%
+#   summarise(biomass = sum(biomass)) %>%
+#   ggplot() +
+#   geom_col(data    = fish_data,
+#                     mapping = aes(x = order, 
+#                                            y = biomass, 
+#                                            fill = order)) +
+#   scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))
+
+```
+:::
+
+## Une autre subtilité concernant les couleurs
+
+Selon le type de variable, les fonctions pour choisir les couleurs ne seront pas les mêmes. Pourquoi ?
+
+::: incremental
+***Exercice :***
+
+1.  Construisez un nuage de points biomass\~total
+2.  Coloriez les points en fonction de la variable abondance en BLEU.
+:::
+
+::: incremental
+```{r echo = TRUE, error = TRUE}
+# plot <- ggplot() +
+#   geom_point(data    = fish_data,
+#                       mapping = aes(x = total, y = biomass, 
+#                                              color = total))
+# plot + scale_color_manual(values = "blue")
+```
+:::
+
+<center>On ne peut pas donner une seule couleur à une variable continue !</center>
+
+## Couleurs & variables continues
+
+Il existe 4 fonctions principales qui permettent de construire des pallettes de couleurs continues :
+
+::: incremental
+-   `scale_fill_contiuous` : avec une palette par defaut (nuances de bleus)
+
+-   `scale_fill_viridis_c` : Colorblind friendly.
+
+-   `scale_fill_distiller` : utilise les [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) (voir [ici](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html) pour plus d'infos).\
+    Pour voir les palettes =\> `RColorBrewer::display.brewer.all()`
+
+-   `scale_fill_gradient` : permet de créer ses propres gradients de couleurs. Des variantes existent selon le nombre de couleurs à définir. Il s'agit de `scale_fill_gradient2()` et `scale_fill_gradientn()`.
+:::
+
+::: incremental
+<center>Testons les une par une à partir de la figure suivante</center>
+
+```{r}
+# plot <- ggplot(faithfuld) +
+#   geom_tile(aes(waiting, eruptions, fill = density)) +
+#   labs(x = "Waiting", y = "Eruptions", fill = "Density") +
+#   theme_bw()
+
+plot <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_raster() +
+  scale_x_continuous(NULL, expand = c(0, 0)) + 
+  scale_y_continuous(NULL, expand = c(0, 0)) + 
+  theme(legend.position = "none")
+```
+:::
+
+## `scale_color_continuous`
+
+La plus simple, mais pas beaucoup d'options.
+
+```{r}
+plot + scale_fill_continuous()
+```
+
+## `scale_color_viridis_c`
+
+De belles palettes dont les nuances sont captées par les personnes albinos.
+
+::: incremental
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
+plot + scale_fill_viridis_c(option = "viridis")
+plot + scale_fill_viridis_c(option = "inferno")
+plot + scale_fill_viridis_c(option = "turbo")
+```
+:::
+
+## `scale_fill_distiller()`
+
+Permet d'utiliser les palettes de couleurs issues de [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
+
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
+plot + scale_fill_distiller(palette = "Reds")
+plot + scale_fill_distiller(palette = "YlGn")
+plot + scale_fill_distiller(palette = "Spectral")
+```
+
+::: incremental
+Petite info utile, toutes les palettes peuvent passer le test **ColorBlind Friendly** :
+
+```{r}
+# install.packages("colorBlindness")
+# install.packages("RColorBrewer")
+
+color_pal <- RColorBrewer::brewer.pal(10, name="Spectral")
+colorBlindness::displayAllColors(color_pal)
+```
+:::
+
+## `scale_fill_gradient()`
+
+Permet de créer ces propres palettes de couleurs, à partir de 2, 3 ou n couleurs :
+
+::: incremental
+-   `scale_fill_gradient()` avec les arguments `low` et `high`.
+
+-   `scale_fill_gradient2()` avec les arguments `low`, `mid` et `high`.
+
+-   `scale_fill_gradientn()` avec l'argument `colours`.
+:::
+
+::: incremental
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
+plot + scale_fill_gradient(low = "darkblue", high = "darkred")
+plot + scale_fill_gradient2(low = "darkblue", mid = "white", high = "darkred", midpoint = 0.02)
+plot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))
+```
+:::
+
+## Couleurs & variable groupée en classes
+
+Il existe 3 fonctions principales qui permettent de construire ce type de pallettes de couleurs :
+
+::: incremental
+-   `scale_fill_binned` : avec une palette par defaut (nuances de bleus)
+
+-   `scale_fill_fermenter` : utilise les [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) (voir [ici](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html) pour plus d'infos).\
+    Pour voir les palettes =\> `RColorBrewer::display.brewer.all()`
+
+-   `scale_fill_steps` : permet de créer sa propre palette avec un nombre de classes précis. Des variantes existent selon le nombre de couleurs à définir. Il s'agit de `scale_fill_steps2()` et `scale_fill_stepsn()`.
+:::
+
+## `scale_fill_binned()`
+
+Les couleurs sont par défaut des nuances de bleu. Certaines précisions peuvent cependant être apportées.
+
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
+plot + scale_fill_binned(n.breaks = 4)
+plot + scale_fill_binned(n.breaks = 7,
+                         guide = guide_colorsteps(show.limits = T))
+plot + scale_fill_binned(breaks = quantile(faithfuld$density, 
+                                           probs = (seq(0,1,0.3))))
+
+
+
+
+```
+
+## `scale_fill_fermenter()`
+
+La fonction analogue à `scale_fill_distiller()` et `scale_fill_brewer()` .
+
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
+plot + scale_fill_fermenter(n.breaks = 8, palette = "BuGn")
+plot + scale_fill_fermenter(n.breaks = 8, palette = "BuGn", direction = 1)
+plot + scale_fill_fermenter(n.breaks = 8, palette = "RdBu")
+```
+
+## `scale_fill_steps()`
+
+Fonction analogue à `scale_fill_gradient()`. Permet de créer ces propres palettes de couleurs, à partir de 2, 3 ou n couleurs :
+
+::: incremental
+-   `scale_fill_steps()` avec les arguments `low` et `high`.
+
+-   `scale_fill_steps2()` avec les arguments `low`, `mid` et `high`.
+
+-   `scale_fill_stepsn()` avec l'argument `colours`.
+:::
+
+::: incremental
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
+plot + scale_fill_steps(low = "darkblue", high = "darkred", n.breaks = 8)
+plot + scale_fill_steps2(low = "darkblue", mid = "white", high = "darkred", midpoint = 0.02, n.breaks = 8)
+plot + scale_fill_stepsn(colors = magma(9), n.breaks = 9)
+```
+:::
+
+## Couleurs & variables discrètes
+
+Les principales fonctions utilisées permettant de construire des pallettes de couleurs continues :
+
+::: incremental
+-   `scale_fill_discrete` : Couleurs par défaut
+
+-   `scale_fill_manual` : choix de la couleur parmis toutes les couleurs existantes.
+
+-   `scale_fill_brewer` : utilise les [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) (voir [ici](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html) pour plus d'infos). Equivalent de `scale_fill_distiller` pour les variables discrètes.
+:::
+
+::: incremental
+```{r }
+plot <- ggplot() +
+  geom_violin(data    = data_crabs,
+              mapping = aes(x = sex, y = CL, fill = sex), alpha = 0.7) +
+  facet_wrap(~sp) +
+  theme_bw()
+plot
+```
+:::
+
+::: incremental
+```{r}
+#| fig-height: 8
+#| layout: "[30, 30, 30]"
+plot + scale_fill_discrete()
+plot + scale_fill_manual(values = c("M" = "darkblue", "F" = "darkgreen"))
+plot + scale_fill_brewer(palette = "Set2")
+
+```
+:::
+
+## Ressources utilisées
+
+https://ggplot2-book.org/scale-colour.html#colour-discrete
+
+https://stackoverflow.com/questions/70942728/understanding-color-scales-in-ggplot2
+
+https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
+
+## Utiliser ggplot pour détecter des erreurs dans les données
+
+<center>
+
+```{r echo = TRUE, warning = FALSE}
+# fish_data <- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")
+
+# Selection des données pour le site n°2000951
+# site1 <- fish_data %>%
+#   filter(survey_id == 2000951) %>%
+#   select(survey_id, class, order, family, species_name, total, biomass)
+# 
+# site1 %>%
+#   head(5) %>% 
+#   kbl(digits = 4, caption = "Data to check") %>% 
+#   kable_classic(html_font = "Computer Modern", full_width = F)  
+
+```
+
+</center>
+
+Comment détécter les outliers ?
+
+```{r echo = TRUE, warning = FALSE}
+# ggplot(data = site1, mapping = aes(x = order, y = biomass)) +
+#   geom_boxplot() +
+#   theme_bw()
+```
+
+### Séparer les Elasmobranches des Actinoptérygiens
+
+<center>
+
+```{r echo=TRUE, warning=FALSE}
+# ggplot(data = site1, mapping = aes(x = order, y = biomass)) +
+#   geom_boxplot() +
+#   facet_grid(.~class, scales = "free", space = "free") +
+#   theme_bw() +
+#   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+Interrogation au niveau des perciformes ...
+
+</center>
+
+### Qu'est-ce qu'il se passe avec les Perciformes ?
+
+<center>
+
+```{r echo=TRUE, warning=FALSE}
+# site1 %>%
+#   filter(order == "Perciformes") %>%
+#   ggplot(., mapping = aes(x = family, y = biomass)) +
+#   geom_boxplot() +
+#   theme_bw() +
+#   theme(axis.text.x = element_text(angle = 45, hjust = 1))
   
 
+```
 
-
-
-
+</center>
