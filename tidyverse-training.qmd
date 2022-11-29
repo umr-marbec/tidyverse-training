@@ -391,7 +391,7 @@ Plusieurs représentations existent selon le type de variables que l'on a :
 ### 2. Choix du type de représentation
 
 ::: incremental
-L'exemple ici va mener à la réalisation d'un nuage de points. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou autres.
+L'exemple ici va mener à la réalisation d'un **nuage de points**. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou autres.
 
 ::: incremental
 ::: columns
@@ -408,7 +408,7 @@ L'exemple ici va mener à la réalisation d'un nuage de points. Mais `ggplot2` f
 -   `aes()` dans `geom_point()`
 
     ```{r warnings=FALSE}
-    couche.2 <- ggplot() +
+    couche.2.2 <- ggplot() +
       geom_point(data    = data_crabs,
                  mapping = aes(x = CL, y = CW))
     ```
@@ -423,24 +423,43 @@ L'exemple ici va mener à la réalisation d'un nuage de points. Mais `ggplot2` f
 couche.2
 ```
 
-## Ggplot pas à pas
+## Ggplot pas à pas {auto-animate=true}
 
-3.  Traçons un modèle linéaire et ajoutons la formule qui correspond
+Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
 
 . . .
+
+```{r echo = TRUE, fig.align='center'}
+couche.3 <- couche.2 +
+  geom_smooth(color = "red", method = "lm") # le modèle linéaire 
+```
+
+. . .
+
+```{r echo=FALSE, fig.align='center'}
+couche.3
+```
+
+## Ggplot pas à pas {auto-animate=true}
+
+Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
+
+```{r echo = TRUE, fig.align='center'}
+couche.3 <- couche.2 +
+  geom_smooth(color = "red", method = "lm") + # le modèle linéaire 
+  stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) # la formule
+couche.3
+```
+
+## Ggplot pas à pas {auto-animate=true}
+
+Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
 
 ```{r echo = TRUE, fig.align='center'}
 couche.3 <- couche.2 +
   geom_smooth(color = "red", method = "lm") + # le modèle linéaire 
   stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) + # la formule
   stat_regline_equation(label.y = 48, aes(label = ..adj.rr.label..)) # R²
-
-
-```
-
-. . .
-
-```{r echo=FALSE, fig.align='center'}
 couche.3
 ```
 
@@ -544,7 +563,6 @@ couche.7 + theme_bw()
 couche.7 + theme_classic()
 couche.7 + theme_dark()
 ```
-
 . . .
 
 <center>Un tas de `theme_*` existent pour obtenir différentes formats d'arrière plan (voir [ici](http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements)). A vous de choisir votre préféré.</center>
@@ -887,6 +905,11 @@ https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 
 ```{r echo = TRUE, warning = FALSE}
 # fish_data <- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")
+fish_data <- read_csv("data/Global_reef_fish_biomass.csv")
+
+survey <- read_delim("data/Survey_metadata.csv", 
+     delim = ";", escape_double = FALSE, trim_ws = TRUE, 
+     skip = 70)
 
 # Selection des données pour le site n°2000951
 # site1 <- fish_data %>%
