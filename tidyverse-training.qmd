@@ -70,8 +70,8 @@ library(ggpubr)
 
 -   Partie 2 : Extension à la manipulation de données, cas spécifiques
 
-    -   Manipuler du texte avec stringr
-    -   Manipuler des dates avec lubridate
+    - 2.1 : Manipuler du texte avec stringr
+    - 2.2 : Manipuler des dates avec lubridate
 
 -   Partie 3 : Visualisation graphique avec ggplot2
 
