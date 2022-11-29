@@ -145,13 +145,37 @@ library(tidyverse)
     -   Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d'espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (\_), ne pas utiliser de mots réservés (comme par exemple TRUE)
     -   Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des \_ et les noms choisis doivent pouvoir donner l'information du contenu associé
 
-# Partie I : Manipulation de données avec dplyr
-
-# Importation de données sous R avec readr
+# Partie I : Importation des données avec `readr`
 
 -   Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)
 -   La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects
 -   Elles sont compatibles avec l'esprit Tidyverse car elles permettent de générer des tibbles \# Partie III : Visualisation des données avec ggplot
+
+# Partie II : Manipulation de données avec `dplyr` 
+
+# Partie III : Nettoyage des données avec `tidyr`
+
+# Partie IV : Manipulation des chaines de caractère avec `stringr`
+
+# Partie V : Manipulation des dates avec `lubridate`
+
+# Partie VI : Visualisation des données avec `ggplot2`
+
+## Ggplot c'est comme la chirurgie *`aes`*thétique :
+
+::: incremental
+::: columns
+1)  Les jeunes s'y mettent très tôt !
+
+2)  Les moins jeunes sont réticents puis CERTAINS finissent par s'y mettre
+
+    <center>![](images/nancy_pelosi.jpg){width="20%"}</center>
+
+3)  C'est un enchainement plus ou moins long d'opérations.
+
+    <center>![](images/bogdanoff1.jpg){width="21%"}![](images/bogdanoff1.5.jpg){width="25%"}![](images/bogdanoff2.jpg){width="25%"}</center>
+:::
+:::
 
 ## Petit apperçu des possibilités :
 
@@ -187,21 +211,7 @@ library(tidyverse)
 
 <center>Un grand notre d'exemples est disponible sur le site [***from Data to Viz***](https://www.data-to-viz.com/)</center>
 
-## Ggplot c'est comme la chirurgie *`aes`*thétique :
-
-::: incremental
-::: columns
-1)  Les jeunes s'y mettent très tôt !
-
-2)  Les moins jeunes sont réticents puis CERTAINS finissent par s'y mettre
-
-    <center>![](images/nancy_pelosi.jpg){width="20%"}</center>
-
-3)  C'est un enchainement plus ou moins long d'opérations.
-
-    <center>![](images/bogdanoff1.jpg){width="21%"}![](images/bogdanoff1.5.jpg){width="25%"}![](images/bogdanoff2.jpg){width="25%"}</center>
-:::
-:::
+## 
 
 ## Ggplot, une succession de couches
 
@@ -423,7 +433,7 @@ L'exemple ici va mener à la réalisation d'un **nuage de points**. Mais `ggplot
 couche.2
 ```
 
-## Ggplot pas à pas {auto-animate=true}
+## Ggplot pas à pas {auto-animate="true"}
 
 Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
 
@@ -440,7 +450,7 @@ couche.3 <- couche.2 +
 couche.3
 ```
 
-## Ggplot pas à pas {auto-animate=true}
+## Ggplot pas à pas {auto-animate="true"}
 
 Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
 
@@ -451,7 +461,7 @@ couche.3 <- couche.2 +
 couche.3
 ```
 
-## Ggplot pas à pas {auto-animate=true}
+## Ggplot pas à pas {auto-animate="true"}
 
 Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
 
@@ -563,6 +573,7 @@ couche.7 + theme_bw()
 couche.7 + theme_classic()
 couche.7 + theme_dark()
 ```
+
 . . .
 
 <center>Un tas de `theme_*` existent pour obtenir différentes formats d'arrière plan (voir [ici](http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements)). A vous de choisir votre préféré.</center>
