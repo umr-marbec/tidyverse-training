@@ -916,11 +916,11 @@ https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 
 ```{r echo = TRUE, warning = FALSE}
 # fish_data <- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")
-fish_data <- read_csv("data/Global_reef_fish_biomass.csv")
+# fish_data <- read_csv("data/Global_reef_fish_biomass.csv")
 
-survey <- read_delim("data/Survey_metadata.csv", 
-     delim = ";", escape_double = FALSE, trim_ws = TRUE, 
-     skip = 70)
+# survey <- read_delim("data/Survey_metadata.csv", 
+#      delim = ";", escape_double = FALSE, trim_ws = TRUE, 
+#      skip = 70)
 
 # Selection des données pour le site n°2000951
 # site1 <- fish_data %>%
