@@ -53,20 +53,23 @@ library(ggpubr)
     -   Prérequis et environnement de travail nécessaire à la formation
     -   Objectifs de la formation
     -   Présentation de tidyverse
+    
+-   Partie 1 : Importation de données sous R avec readr
 
--   Partie 1 : Manipulation de données avec dplyr
+-   Partie 2 : Manipulation de données avec dplyr
 
-    -   1.1 : Importation de données sous R
-    -   1.2 : Transformation des données avec dplyr
+    -   2.2 : Transformation des données avec dplyr
+    
+-   Partie 3 : Nettoyage des données avec tidyr
 
--   Partie 2 : Extension à la manipulation de données, cas spécifiques
+-   Partie 4 : Extension à la manipulation de données, cas spécifiques
 
-    -   2.1 : Manipuler du texte avec stringr
-    -   2.2 : Manipuler des dates avec lubridate
+    -   4.1 : Manipuler du texte avec stringr
+    -   4.2 : Manipuler des dates avec lubridate
 
--   Partie 3 : Visualisation graphique avec ggplot2
+-   Partie 5 : Visualisation graphique avec ggplot2
 
--   Partie 4 : Cas pratiques sur vos données
+-   Partie 6 : Cas pratiques sur vos données
 
 Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.github.io/analyse-R/){target="_blank"}
 
@@ -215,12 +218,12 @@ Renvoi une valeur TRUE ou FALSE
 -   certains plus particuliers :
 
 ![](images/booleens_particulier.png){width="25%"}
-
--   Attention aux priorités dans les interprétations
-    -   & et plus fort que \|, il sera exécuté en premier
-    -   une solution est d'utiliser des () pour séparer vos opérateurs
-
-## Exercice {auto-animate="true"}
+  
+- Attention aux priorités dans les interprétations
+  - & et plus fort que |, il sera exécuté en premier
+  - une solution est d'utiliser des () pour séparer vos opérateurs
+  
+## Exercice 1 {auto-animate="true"}
 
 -   supprimer les données dupliquées dans le jeu de données "global_reef_fish_abundance_and_biomass"
 -   En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Kyphosidae" et pour finir ou la classe de taille associé est \<= 10.
@@ -229,7 +232,7 @@ Renvoi une valeur TRUE ou FALSE
 # solution
 ```
 
-## Exercice corrigé {auto-animate="true"}
+## Exercice 1 corrigé {auto-animate="true"}
 
 -   supprimer les données dupliquées dans le jeu de données "global_reef_fish_abundance_and_biomass"
 -   En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Kyphosidae" et pour finir ou la classe de taille associé est \<= 10.
@@ -238,6 +241,7 @@ Renvoi une valeur TRUE ou FALSE
 # solution
 tmp1 <- distinct(.data = global_reef_fish_abundance_biomass)
 tmp2 <- filter(.data = tmp1,
+               # changer total
                total != 0
                & ! family %in% c("Mullidae",
                                  "Kyphosidae")
@@ -329,7 +333,11 @@ relocate()
 
 -   On a commencé à l'aborder de manière instinctive avec relocate()
 
--   Globalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie
+- Globalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie
+<br/>
+<br/>
+<br/>
+![](images/vectorized_function.png){.absolute top="300" left="250" width="50%"}
 
 ```{r echo=TRUE, eval=FALSE}
 # créer une nouvelle variable
@@ -344,7 +352,7 @@ transmute()
 rename()
 ```
 
-## Exercice {.smaller auto-animate="true"}
+## Exercice 2 {auto-animate="true" .smaller}
 
 -   À partir du jeu de données de sortie de l'exercice précédent
 -   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, block et method
@@ -359,7 +367,7 @@ rename()
 # solution
 ```
 
-## Exercice corrigé {.smaller auto-animate="true"}
+## Exercice 2 corrigé {auto-animate="true" .smaller}
 
 -   À partir du jeu de données de sortie de l'exercice précédent
 -   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, block et method
@@ -372,13 +380,15 @@ rename()
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-tmp3 <- mutate(.data = tmp1,
+# A revoir
+global_reef_fish_abundance_biomass_final <- mutate(.data = tmp1,
                survey_id_full = paste(survey_id,
-                                      method,
-                                      block,
+                                      species_names,
+                                      size_cat
                                       sep = "_")) %>%
   relocate(survey_id_full,
            .before = survey_id) %>%
+  # pas enlever species_names
   dplyr::select(-survey_id,
                 -method,
                 -block) %>%
@@ -388,13 +398,129 @@ tmp3 <- mutate(.data = tmp1,
   dplyr::select(-size_class_cm)
 ```
 
-# Partie III : Visualisation graphique avec ggplot2
+## Fonctions de resumé {.smaller}
 
-# Partie II : Manipulation de données avec `dplyr`
+### La deuxième grande famille
+
+- Fonctions qui vont créer une nouvelle table avec des resumés statistique. De manière globale, les fonctions associées vont utiliser en entrée des vecteurs et en sortie une ou plusieurs valeurs (inférieur en nombre au nombre de vecteurs d'entrée)
+<br/>
+<br/>
+<br/>
+![](images/summary_function.png){.absolute top="200" left="250" width="50%"}
+
+- Fonction clé 
+
+```{r echo=TRUE, eval=FALSE}
+summarise()
+# Beaucoup, beaucoup d'options et de possibilités
+# Compter le nombre de valeurs/lignes
+n()
+# Compter le nombre de valeurs/lignes distinctes
+n_distinct()
+# Faire un moyenne
+mean()
+# Faire une somme, option na.rm disponible
+sum()
+# Utiliser des notions de position
+first()
+last()
+# Ou de rang
+quantile()
+min()
+max()
+```
+
+## Introduction à la notion de groupe
+
+- Pour le moment on à fait des opérations sur l'ensemble du jeu de données, pas très pertinent non ?
+
+- Fonction de création de groupe
+
+```{r echo=TRUE, eval=FALSE}
+# on peut définir nos groupes en fonction des modalités des variables
+group_by()
+# ou alors en isolant chaque ligne
+rowwise()
+```
+
+- Attention à ce que vous faite ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R).  Pour y remédier :
+
+```{r echo=TRUE, eval=FALSE}
+# via un summarise (argument experimental, attention à la pérénité)
+.groups
+# de manière plus générale
+ungroups()
+```
+
+- Cette notion de groupe peut être utilisé avec d'autres fonctions (comme un mutate)
+
+## Exercice 3 {auto-animate="true" .smaller}
+
+- À partir du jeu de données de sortie de l'exercice précédent
+- Calculer la biomasse moyenne d'un invididu pour chaque échantillon
+- Exprimer cette nouvelle variable dans un jeu données avec la famille et le nom de l'espèce et sa famille (variables family et species_name)
+- Calculer dans une nouvelle variable, la biomasse moyenne des individus par famille.
+- Créer une nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et verifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 3 corrigé {auto-animate="true" .smaller}
+
+- À partir du jeu de données de sortie de l'exercice précédent
+- Calculer la biomasse moyenne d'un invididu pour chaque échantillon
+- Exprimer cette nouvelle variable dans un jeu données avec la famille et le nom de l'espèce et sa famille (variables family et species_name)
+- Calculer dans une nouvelle variable, la biomasse moyenne des individus par famille.
+- Créer une nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et verifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+# group_by sur espece et class de taille, faire la somme à ce moment la
+tmp4 <- tmp3 %>%
+  mutate(mean_biomass_sample = biomass / total) %>%
+  dplyr::select(family,
+                species_name,
+                mean_biomass_sample) %>%
+  dplyr::group_by(family) %>%
+  summarise(mean_biomass_sample_family = mean(mean_biomass_sample,
+                                              na.rm = TRUE),
+            .groups = "drop")
+
+tmp5 <- dplyr::group_by(.data = tmp3,
+                        family) %>%
+  summarise(nb_sample_family = n()) %>%
+  mutate(total = sum(nb_sample_family))
+```
+
+## Fonction bonus très utile {.smaller}
+
+### case_when : généralisation vectorisé de if(s)
+
+- Vectorisation de multiple if_else sous R et CASE WHEN en SQL
+- Améliore grandement la lisibilité de vos fonctions
+- Syntaxe de base :
+
+```{r echo=TRUE, eval=FALSE}
+case_when(
+  operateur(s) booléen(s) ou logique(s) ~ output1,
+  operateur(s) booléen(s) ou logique(s) ~ output2,
+  ....
+  operateur(s) booléen(s) ou logique(s) ~ output_n,
+  TRUE ~ output si rien ne marche au dessus
+)
+```
+
+- Pensez bien à toujours mettre un TRUE (=valeur par défaut)
+- Attention à ne pas mélanger les types, il existe différent NA : 
+  - NA_integer_ 
+  - NA_real_ 
+  - NA_complex_
+  - NA_character_
 
 # Partie III : Nettoyage des données avec `tidyr`
 
-## 
+##
 
 L'objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format "tidy"
 
