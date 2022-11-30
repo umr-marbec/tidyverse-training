@@ -53,13 +53,13 @@ library(ggpubr)
     -   Prérequis et environnement de travail nécessaire à la formation
     -   Objectifs de la formation
     -   Présentation de tidyverse
-    
+
 -   Partie 1 : Importation de données sous R avec readr
 
 -   Partie 2 : Manipulation de données avec dplyr
 
     -   2.2 : Transformation des données avec dplyr
-    
+
 -   Partie 3 : Nettoyage des données avec tidyr
 
 -   Partie 4 : Extension à la manipulation de données, cas spécifiques
@@ -218,11 +218,11 @@ Renvoi une valeur TRUE ou FALSE
 -   certains plus particuliers :
 
 ![](images/booleens_particulier.png){width="25%"}
-  
-- Attention aux priorités dans les interprétations
-  - & et plus fort que |, il sera exécuté en premier
-  - une solution est d'utiliser des () pour séparer vos opérateurs
-  
+
+-   Attention aux priorités dans les interprétations
+    -   & et plus fort que \|, il sera exécuté en premier
+    -   une solution est d'utiliser des () pour séparer vos opérateurs
+
 ## Exercice 1 {auto-animate="true"}
 
 -   supprimer les données dupliquées dans le jeu de données "global_reef_fish_abundance_and_biomass"
@@ -333,11 +333,7 @@ relocate()
 
 -   On a commencé à l'aborder de manière instinctive avec relocate()
 
-- Globalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie
-<br/>
-<br/>
-<br/>
-![](images/vectorized_function.png){.absolute top="300" left="250" width="50%"}
+-   Globalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie <br/> <br/> <br/> ![](images/vectorized_function.png){.absolute top="300" left="250" width="50%"}
 
 ```{r echo=TRUE, eval=FALSE}
 # créer une nouvelle variable
@@ -352,7 +348,7 @@ transmute()
 rename()
 ```
 
-## Exercice 2 {auto-animate="true" .smaller}
+## Exercice 2 {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice précédent
 -   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, block et method
@@ -367,7 +363,7 @@ rename()
 # solution
 ```
 
-## Exercice 2 corrigé {auto-animate="true" .smaller}
+## Exercice 2 corrigé {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice précédent
 -   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, block et method
@@ -402,13 +398,9 @@ global_reef_fish_abundance_biomass_final <- mutate(.data = tmp1,
 
 ### La deuxième grande famille
 
-- Fonctions qui vont créer une nouvelle table avec des resumés statistique. De manière globale, les fonctions associées vont utiliser en entrée des vecteurs et en sortie une ou plusieurs valeurs (inférieur en nombre au nombre de vecteurs d'entrée)
-<br/>
-<br/>
-<br/>
-![](images/summary_function.png){.absolute top="200" left="250" width="50%"}
+-   Fonctions qui vont créer une nouvelle table avec des resumés statistique. De manière globale, les fonctions associées vont utiliser en entrée des vecteurs et en sortie une ou plusieurs valeurs (inférieur en nombre au nombre de vecteurs d'entrée) <br/> <br/> <br/> ![](images/summary_function.png){.absolute top="200" left="250" width="50%"}
 
-- Fonction clé 
+-   Fonction clé
 
 ```{r echo=TRUE, eval=FALSE}
 summarise()
@@ -432,9 +424,9 @@ max()
 
 ## Introduction à la notion de groupe
 
-- Pour le moment on à fait des opérations sur l'ensemble du jeu de données, pas très pertinent non ?
+-   Pour le moment on à fait des opérations sur l'ensemble du jeu de données, pas très pertinent non ?
 
-- Fonction de création de groupe
+-   Fonction de création de groupe
 
 ```{r echo=TRUE, eval=FALSE}
 # on peut définir nos groupes en fonction des modalités des variables
@@ -443,7 +435,7 @@ group_by()
 rowwise()
 ```
 
-- Attention à ce que vous faite ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R).  Pour y remédier :
+-   Attention à ce que vous faite ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R). Pour y remédier :
 
 ```{r echo=TRUE, eval=FALSE}
 # via un summarise (argument experimental, attention à la pérénité)
@@ -452,27 +444,27 @@ rowwise()
 ungroups()
 ```
 
-- Cette notion de groupe peut être utilisé avec d'autres fonctions (comme un mutate)
+-   Cette notion de groupe peut être utilisé avec d'autres fonctions (comme un mutate)
 
-## Exercice 3 {auto-animate="true" .smaller}
+## Exercice 3 {.smaller auto-animate="true"}
 
-- À partir du jeu de données de sortie de l'exercice précédent
-- Calculer la biomasse moyenne d'un invididu pour chaque échantillon
-- Exprimer cette nouvelle variable dans un jeu données avec la famille et le nom de l'espèce et sa famille (variables family et species_name)
-- Calculer dans une nouvelle variable, la biomasse moyenne des individus par famille.
-- Créer une nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et verifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+-   À partir du jeu de données de sortie de l'exercice précédent
+-   Calculer la biomasse moyenne d'un invididu pour chaque échantillon
+-   Exprimer cette nouvelle variable dans un jeu données avec la famille et le nom de l'espèce et sa famille (variables family et species_name)
+-   Calculer dans une nouvelle variable, la biomasse moyenne des individus par famille.
+-   Créer une nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et verifier la cohérence du nombre total obtenu avec le jeu de données de départ.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
 ```
 
-## Exercice 3 corrigé {auto-animate="true" .smaller}
+## Exercice 3 corrigé {.smaller auto-animate="true"}
 
-- À partir du jeu de données de sortie de l'exercice précédent
-- Calculer la biomasse moyenne d'un invididu pour chaque échantillon
-- Exprimer cette nouvelle variable dans un jeu données avec la famille et le nom de l'espèce et sa famille (variables family et species_name)
-- Calculer dans une nouvelle variable, la biomasse moyenne des individus par famille.
-- Créer une nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et verifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+-   À partir du jeu de données de sortie de l'exercice précédent
+-   Calculer la biomasse moyenne d'un invididu pour chaque échantillon
+-   Exprimer cette nouvelle variable dans un jeu données avec la famille et le nom de l'espèce et sa famille (variables family et species_name)
+-   Calculer dans une nouvelle variable, la biomasse moyenne des individus par famille.
+-   Créer une nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et verifier la cohérence du nombre total obtenu avec le jeu de données de départ.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -497,9 +489,9 @@ tmp5 <- dplyr::group_by(.data = tmp3,
 
 ### case_when : généralisation vectorisé de if(s)
 
-- Vectorisation de multiple if_else sous R et CASE WHEN en SQL
-- Améliore grandement la lisibilité de vos fonctions
-- Syntaxe de base :
+-   Vectorisation de multiple if_else sous R et CASE WHEN en SQL
+-   Améliore grandement la lisibilité de vos fonctions
+-   Syntaxe de base :
 
 ```{r echo=TRUE, eval=FALSE}
 case_when(
@@ -511,16 +503,18 @@ case_when(
 )
 ```
 
-- Pensez bien à toujours mettre un TRUE (=valeur par défaut)
-- Attention à ne pas mélanger les types, il existe différent NA : 
-  - NA_integer_ 
-  - NA_real_ 
-  - NA_complex_
-  - NA_character_
+-   Pensez bien à toujours mettre un TRUE (=valeur par défaut)
+-   Attention à ne pas mélanger les types, il existe différent NA :
+    -   NA_integer\_
+    -   NA_real\_
+    -   NA_complex\_
+    -   NA_character\_
 
 # Partie III : Nettoyage des données avec `tidyr`
 
-##
+    ![](images/logo_tidyr.jpeg)
+
+## 
 
 L'objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format "tidy"
 
@@ -532,9 +526,9 @@ Les différents verbes viennent s'ajouter à tous ceux que nous avons déjà vu 
 
     -   1 observation = 1 ligne/case
 
-    -   1 type d'observations par table \# Partie IV : Manipulation des chaines de caractère avec `stringr`
+    -   1 type d'observations par table
 
-Pour vous aider, il existe une cheatsheet `tidyr` [cliquez ici](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf)
+Pour visualiser le cheatsheet `tidyr` [cliquez ici](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf)
 
 ```{r echo=TRUE, eval=FALSE}
 # Pour illustrer cette partie nous utiliserons le jeu de données popEU
@@ -543,29 +537,34 @@ dim(popEU)
 popEU
 ```
 
-## Les principaux verbes de la librairie tidyr
+## Les principaux verbes de la librairie tidyr {.smaller}
 
 ### Modelage des tableaux
 
-`pivot_wider()`et `pivot_longer()`sont les successeurs des fonctions en base R du package `reshape` puis `reshape2`. Et se nommaient `spread()`et `gather()` dans les premières versions de `tidyr` - Transformer un tableau long en format large
+`pivot_wider()`et `pivot_longer()`sont les successeurs des fonctions en base R du package `reshape` puis `reshape2`. Et se nommaient `spread()`et `gather()` dans les premières versions de `tidyr`
 
-```{r echo=TRUE, eval=FALSE}
-# Les arguments names_from et values_from renseignent les noms de colonnes 
-#à partir desquelles nous obtenons les colonnes de sortie et les valeurs des cellules
-pivot_wider(names_from, values_from)
-# L'argument values_fill permet de spécifier une valeur que l'on choisit 
-#quand la combinaison names_from/values_from est manquante. Par défaut NA
-```
+::: incremental
+-   Transformer un tableau long en format large
+
+    ```{r echo=TRUE, eval=FALSE}
+    # Les arguments names_from et values_from renseignent les noms de colonnes 
+    #à partir desquelles nous obtenons les colonnes de sortie et les valeurs des cellules
+    pivot_wider(names_from, values_from)
+    # L'argument values_fill permet de spécifier une valeur que l'on choisit 
+    #quand la combinaison names_from/values_from est manquante. Par défaut NA
+    ```
 
 -   Transformer un tableau large en format long
 
-```{r echo=TRUE, eval=FALSE}
-# Les arguments cols,names_to et values_to renseignent les noms de colonnes à créer ainsi que les numéros (position) des colonnes à faire pivoter
-pivot_longer(cols, names_to, values_to, ...)
-# Si l'argument values_drop_na = TRUE les lignes contenant des NA dans la colonne créée avec values_to seront supprimées. Par défaut FALSE
-```
+    ```{r echo=TRUE, eval=FALSE}
+    # Les arguments cols,names_to et values_to renseignent les noms de colonnes à créer ainsi que les colonnes à faire pivoter
+    pivot_longer(cols, names_to, values_to, ...)
+    # Si l'argument values_drop_na = TRUE les lignes contenant des NA dans la colonne créée avec values_to seront supprimées. 
+    #Par défaut FALSE
+    ```
+:::
 
-## 
+##  {.smaller}
 
 -   Applications
 
@@ -582,26 +581,31 @@ popEU_wide
 
 ### Gestion des valeurs manquantes "NA"
 
+::: incremental
 -   Remplacer des "NA" par des valeurs spécifiques
 
-```{r echo=TRUE, eval=FALSE}
-# Si la donnée est un data frame alors l'argument replace prend une liste de valeurs. Si la donnée est un vecteur alors replace prend une seule valeur
-replace_na(data, replace, ...)
-```
+    ```{r echo=TRUE, eval=FALSE}
+    # Si la donnée est un data frame alors l'argument replace prend une liste de valeurs. 
+    #Si la donnée est un vecteur alors replace prend une seule valeur
+    replace_na(data, replace, …)
+    ```
 
 -   Supprimer les lignes contenant des "NA"
 
-```{r echo=TRUE, eval=FALSE}
-# Il est possible en 2ème argument de spécifier le nom d'une colonne en particulier pour laquelle nous voulons que `drop_na()` s'applique
-drop_na(data, ...)
-```
+    ```{r echo=TRUE, eval=FALSE}
+    # Il est possible en 2ème argument de spécifier le nom d'une colonne en particulier
+    drop_na(data, …)
+    ```
 
 -   Remplir les "NA" en utilisant les valeurs précédentes ou suivantes de la même colonne
 
-```{r echo=TRUE, eval=FALSE}
-# Importance de l'argument .direction ("down","up","updown","downup")
-fill(data, ..., .direction)
-```
+    ```{r echo=TRUE, eval=FALSE}
+    # Importance de l'argument .direction ("down","up","updown","downup")
+    fill(data, …, .direction)
+    ```
+:::
+
+##  {.smaller}
 
 -   Applications
 
@@ -639,63 +643,180 @@ fill(data, ..., .direction)
         ```
     :::
 
+## 
+
 ### Combinaison des variables
 
+::: incremental
 -   Séparer une colonne en plusieurs colonnes
 
-```{r echo=TRUE, eval=FALSE}
-# par défaut le séparateur est un caractère non alpha-numérique. Si l'on souhaite un autre séparateur il faut le spécifier aec l'argument sep
-separate(data, col, into)
-```
+    ```{r echo=TRUE, eval=FALSE}
+    # par défaut le séparateur est un caractère non alpha-numérique. 
+    #Si l'on souhaite un autre séparateur il faut le spécifier aec l'argument sep
+    separate(data, col, into)
+    ```
 
 -   Créer une seule colonne à partir de plusieurs colonnes
 
-```{r echo=TRUE, eval=FALSE}
-# par défaut le séparateur est un caractère non alpha-numérique. Si l'on souhaite un autre séparateur il faut le spécifier aec l'argument sep
-unite(col, ..., sep)
-```
+    ```{r echo=TRUE, eval=FALSE}
+    unite(col, ..., sep)
+    ```
 
 -   Générer toutes les combinaisons 2 à 2 possibles entre les variables définies
 
-```{r echo=TRUE, eval=FALSE}
-expand(data, ...)
-```
+    ```{r echo=TRUE, eval=FALSE}
+    expand(data, ...)
+    ```
+:::
 
-## 
+##  {.smaller}
 
 -   Applications
 
-    \# A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
+    ::: incremental
+    -   A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
+
+        ```{r echo=TRUE, eval=FALSE}
+        popEU_sep <- popEU_long %>%
+        mutate(pop = as.character(pop))%>%
+        separate(.,col=pop,into=c("millions","milliers"))
+        popEU_sep
+        ```
+
+    -   Recréer la colonne pop comme à l'origine en la nommant population
+
+        ```{r echo=TRUE, eval=FALSE}
+        popEU_unite <- popEU_sep %>%
+        unite(.,population,c(millions,milliers),sep=".")
+        popEU_unite
+        ```
+
+    -   Générer un tableau avec toutes les combinaisons possibles pays/population
+
+        ```{r echo=TRUE, eval=FALSE}
+        popEU_expand <- popEU_unite %>%
+        expand(.,pays,population)
+        popEU_expand
+        # Que remarquons nous ?
+        ```
+
+        ```{r echo=TRUE, eval=FALSE}
+        popEU_expand
+        # la valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques
+        ```
+    :::
+
+## Exercice 1 {.smaller auto-animate="true"}
+
+-   Chargez les données d'abondance. Les données sont elles Tidy ?
 
 ```{r echo=TRUE, eval=FALSE}
-popEU_sep <- popEU_long %>%
-  mutate(pop = as.character(pop))%>%
-  separate(.,col=pop,into=c("millions","milliers"))
-popEU_sep
+# solution
 ```
 
-       # Recreez la colonne pop comme à l'origine en la nommant population
-       
+## Exercice 1 corrigé {.smaller auto-animate="true"}
+
+-   Chargez les données d'abondance. Les données sont elles Tidy ?
 
 ```{r echo=TRUE, eval=FALSE}
-popEU_unite <- popEU_sep %>%
-  unite(.,population,c(millions,milliers),sep=".")
-popEU_unite
+# solution
+abundance <- read_delim(".data/Global_reef_fish_abundance.csv")
+# Non les données ne sont pas tidy, car elles sont en format wide
 ```
 
-      # Générer un tableuau avec toutes les combinaisons possibles pays/population
-      
+## Exercice 2 {.smaller auto-animate="true"}
+
+-   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
+-   Créez une nouvelle variables "pk" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
 
 ```{r echo=TRUE, eval=FALSE}
-popEU_expand <- popEU_unite %>%
-  expand(.,pays,population)
-popEU_expand
-# Que remarquons nous ?
+# solution
 ```
 
+## Exercice 2 corrigé {.smaller auto-animate="true"}
+
+-   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
+-   Créez une nouvelle variables "pk" à partir des colonnes survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
+
 ```{r echo=TRUE, eval=FALSE}
-popEU_expand
-# la valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques
+# solution
+# Attention à l'argument values_dop_na
+abundance_long <- abundance %>%
+  pivot_longer(.,cols=2:17523,names_to="sp_size",values_to="abundance",values_drop_na = TRUE) %>%
+  unite(.,col="pk",c(survey_id,sp_size),sep="_")
+```
+
+## Exercice 3 {.smaller auto-animate="true"}
+
+-   Créez un seul tableau regroupant biomasse et abondance
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 3 corrigé {.smaller auto-animate="true"}
+
+-   Créez un seul tableau regroupant biomasse et abondance
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+biomass_abundance <- biomass %>%
+  left_join(.,abundance_long,by="pk")
+```
+
+## Exercice 4 {.smaller auto-animate="true"}
+
+-   Créez 2 nouvelles colonnes "genus" et "species" à partir de species_name
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 4 corrigé {.smaller auto-animate="true"}
+
+-   Créez 2 nouvelles colonnes "genus" et "species" à partir de species_name
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+biomass_abundance <- biomass_abundance %>%
+  separate(.,species_name,into = c("genus","species"))
+```
+
+## Exercice 5 {.smaller auto-animate="true"}
+
+-   Transformez le tibble en sf object avec la commande sf::st_as_sf(survey,coords =c("latitude","longitude") ,remove=FALSE).
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 5 corrigé {.smaller auto-animate="true"}
+
+-   Transformez le tibble en sf object avec la commande sf::st_as_sf(survey,coords =c("latitude","longitude") ,remove=FALSE).
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+data_sf <- sf::st_as_sf(biomass_abundance,coords =c("latitude","longitude") ,remove=FALSE)
+```
+
+## Exercice 6 {.smaller auto-animate="true"}
+
+-   Corrigez l'erreur
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 6 corrigé {.smaller auto-animate="true"}
+
+-   Corrigez l'erreur
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+data_sf <- biomass_abundance %>%
+  drop_na(latitude) %>%
+  drop_na(longitude) %>%
+  sf::st_as_sf(.,coords =c("latitude","longitude") ,remove=FALSE)
 ```
 
 # Partie V : Manipulation des dates avec `lubridate`
