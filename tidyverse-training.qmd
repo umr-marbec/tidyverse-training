@@ -394,6 +394,8 @@ tmp3 <- mutate(.data = tmp1,
 
 # Partie III : Nettoyage des données avec `tidyr`
 
+## 
+
 L'objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format "tidy"
 
 Les différents verbes viennent s'ajouter à tous ceux que nous avons déjà vu avec readr et dplyr et ils s'intègrent parfaitement dans la série de pipe %\>% permettant d'enchainer les opérations
@@ -420,13 +422,14 @@ popEU
 ### Modelage des tableaux
 
 `pivot_wider()`et `pivot_longer()`sont les successeurs des fonctions en base R du package `reshape` puis `reshape2`. Et se nommaient `spread()`et `gather()` dans les premières versions de `tidyr`
-
 -   Transformer un tableau long en format large
 
 ```{r echo=TRUE, eval=FALSE}
-# Les arguments names_from et values_from renseignent les noms de colonnes à partir desquelles nous obtenons les colonnes de sortie et les valeurs des cellules
+# Les arguments names_from et values_from renseignent les noms de colonnes 
+#à partir desquelles nous obtenons les colonnes de sortie et les valeurs des cellules
 pivot_wider(names_from, values_from)
-# L'argument values_fill permet de spécifier une valeur que l'on choisit quand la combinaison names_from/values_from est manquante. Par défaut NA
+# L'argument values_fill permet de spécifier une valeur que l'on choisit 
+#quand la combinaison names_from/values_from est manquante. Par défaut NA
 ```
 
 -   Transformer un tableau large en format long
@@ -437,6 +440,7 @@ pivot_longer(cols, names_to, values_to, ...)
 # Si l'argument values_drop_na = TRUE les lignes contenant des NA dans la colonne créée avec values_to seront supprimées. Par défaut FALSE
 ```
 
+##
 -   Applications
 
     -   Transformer le jeu de données en format "wide" en utilisant la fonction `pivot_wider()`. Nous voulons obtenir une colonne par année
@@ -448,7 +452,7 @@ dim(popEU_wide)
 popEU_wide
 ```    
 
-
+##
 ### Gestion des valeurs manquantes "NA"
 
 -   Remplacer des "NA" par des valeurs spécifiques
@@ -474,9 +478,10 @@ drop_na(data, ...)
 fill(data, ..., .direction)
 ```
 
+##
 -   Applications
 
-    -   Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M).
+    -   Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
     
 ```{r echo=TRUE, eval=FALSE}
 # Créer un nouvel objet que l'on nomme popEU_long
@@ -508,7 +513,7 @@ popEU_long <- popEU_wide %>%
 popEU_long
 ``` 
 
-
+##
 ### Combinaison des variables
 
 -   Séparer une colonne en plusieurs colonnes
@@ -531,7 +536,7 @@ unite(col, ..., sep)
 expand(data, ...)
 ```
 
-
+##
 -   Applications
 
        # A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
