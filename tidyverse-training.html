@@ -410,18 +410,19 @@
 <li>Objectifs de la formation</li>
 <li>Présentation de tidyverse</li>
 </ul></li>
-<li><p>Partie 1 : Manipulation de données avec dplyr</p>
+<li><p>Partie 1 : Importation de données sous R avec readr</p></li>
+<li><p>Partie 2 : Manipulation de données avec dplyr</p>
 <ul>
-<li>1.1 : Importation de données sous R</li>
-<li>1.2 : Transformation des données avec dplyr</li>
+<li>2.2 : Transformation des données avec dplyr</li>
 </ul></li>
-<li><p>Partie 2 : Extension à la manipulation de données, cas spécifiques</p>
+<li><p>Partie 3 : Nettoyage des données avec tidyr</p></li>
+<li><p>Partie 4 : Extension à la manipulation de données, cas spécifiques</p>
 <ul>
-<li>2.1 : Manipuler du texte avec stringr</li>
-<li>2.2 : Manipuler des dates avec lubridate</li>
+<li>4.1 : Manipuler du texte avec stringr</li>
+<li>4.2 : Manipuler des dates avec lubridate</li>
 </ul></li>
-<li><p>Partie 3 : Visualisation graphique avec ggplot2</p></li>
-<li><p>Partie 4 : Cas pratiques sur vos données</p></li>
+<li><p>Partie 5 : Visualisation graphique avec ggplot2</p></li>
+<li><p>Partie 6 : Cas pratiques sur vos données</p></li>
 </ul>
 <p>Formation fortement inspirée du site de <a href="https://larmarange.github.io/analyse-R/" target="_blank">Joseph Larmarange</a></p>
 </section></section>
@@ -626,10 +627,11 @@
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb5-1" class="hljs-ln-code"><a href="#cb5-1"></a><span class="co"># solution</span></span>
 <span id="cb5-2" class="hljs-ln-code"><a href="#cb5-2"></a>tmp1 <span class="ot">&lt;-</span> <span class="fu">distinct</span>(<span class="at">.data =</span> global_reef_fish_abundance_biomass)</span>
 <span id="cb5-3" class="hljs-ln-code"><a href="#cb5-3"></a>tmp2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="at">.data =</span> tmp1,</span>
-<span id="cb5-4" class="hljs-ln-code"><a href="#cb5-4"></a>               total <span class="sc">!=</span> <span class="dv">0</span></span>
-<span id="cb5-5" class="hljs-ln-code"><a href="#cb5-5"></a>               <span class="sc">&amp;</span> <span class="sc">!</span> family <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mullidae"</span>,</span>
-<span id="cb5-6" class="hljs-ln-code"><a href="#cb5-6"></a>                                 <span class="st">"Kyphosidae"</span>)</span>
-<span id="cb5-7" class="hljs-ln-code"><a href="#cb5-7"></a>               <span class="sc">&amp;</span> size_class <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4" class="hljs-ln-code"><a href="#cb5-4"></a>               <span class="co"># changer total</span></span>
+<span id="cb5-5" class="hljs-ln-code"><a href="#cb5-5"></a>               total <span class="sc">!=</span> <span class="dv">0</span></span>
+<span id="cb5-6" class="hljs-ln-code"><a href="#cb5-6"></a>               <span class="sc">&amp;</span> <span class="sc">!</span> family <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mullidae"</span>,</span>
+<span id="cb5-7" class="hljs-ln-code"><a href="#cb5-7"></a>                                 <span class="st">"Kyphosidae"</span>)</span>
+<span id="cb5-8" class="hljs-ln-code"><a href="#cb5-8"></a>               <span class="sc">&amp;</span> size_class <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="amélioration-de-la-lisibilité-du-code" class="slide level2">
@@ -750,20 +752,22 @@
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb14-1" class="hljs-ln-code"><a href="#cb14-1"></a><span class="co"># solution</span></span>
-<span id="cb14-2" class="hljs-ln-code"><a href="#cb14-2"></a>tmp3 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">.data =</span> tmp1,</span>
-<span id="cb14-3" class="hljs-ln-code"><a href="#cb14-3"></a>               <span class="at">survey_id_full =</span> <span class="fu">paste</span>(survey_id,</span>
-<span id="cb14-4" class="hljs-ln-code"><a href="#cb14-4"></a>                                      method,</span>
-<span id="cb14-5" class="hljs-ln-code"><a href="#cb14-5"></a>                                      block,</span>
-<span id="cb14-6" class="hljs-ln-code"><a href="#cb14-6"></a>                                      <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb14-7" class="hljs-ln-code"><a href="#cb14-7"></a>  <span class="fu">relocate</span>(survey_id_full,</span>
-<span id="cb14-8" class="hljs-ln-code"><a href="#cb14-8"></a>           <span class="at">.before =</span> survey_id) <span class="sc">%&gt;%</span></span>
-<span id="cb14-9" class="hljs-ln-code"><a href="#cb14-9"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>survey_id,</span>
-<span id="cb14-10" class="hljs-ln-code"><a href="#cb14-10"></a>                <span class="sc">-</span>method,</span>
-<span id="cb14-11" class="hljs-ln-code"><a href="#cb14-11"></a>                <span class="sc">-</span>block) <span class="sc">%&gt;%</span></span>
-<span id="cb14-12" class="hljs-ln-code"><a href="#cb14-12"></a>  <span class="fu">rename</span>(<span class="at">size_class_cm =</span> size_class) <span class="sc">%&gt;%</span></span>
-<span id="cb14-13" class="hljs-ln-code"><a href="#cb14-13"></a>  <span class="fu">mutate</span>(<span class="at">size_class_mm =</span> size_class_cm <span class="sc">*</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb14-14" class="hljs-ln-code"><a href="#cb14-14"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(size_class_mm)) <span class="sc">%&gt;%</span></span>
-<span id="cb14-15" class="hljs-ln-code"><a href="#cb14-15"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>size_class_cm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-2" class="hljs-ln-code"><a href="#cb14-2"></a><span class="co"># A revoir</span></span>
+<span id="cb14-3" class="hljs-ln-code"><a href="#cb14-3"></a>global_reef_fish_abundance_biomass_final <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">.data =</span> tmp1,</span>
+<span id="cb14-4" class="hljs-ln-code"><a href="#cb14-4"></a>               <span class="at">survey_id_full =</span> <span class="fu">paste</span>(survey_id,</span>
+<span id="cb14-5" class="hljs-ln-code"><a href="#cb14-5"></a>                                      species_names,</span>
+<span id="cb14-6" class="hljs-ln-code"><a href="#cb14-6"></a>                                      size_cat</span>
+<span id="cb14-7" class="hljs-ln-code"><a href="#cb14-7"></a>                                      <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-8" class="hljs-ln-code"><a href="#cb14-8"></a>  <span class="fu">relocate</span>(survey_id_full,</span>
+<span id="cb14-9" class="hljs-ln-code"><a href="#cb14-9"></a>           <span class="at">.before =</span> survey_id) <span class="sc">%&gt;%</span></span>
+<span id="cb14-10" class="hljs-ln-code"><a href="#cb14-10"></a>  <span class="co"># pas enlever species_names</span></span>
+<span id="cb14-11" class="hljs-ln-code"><a href="#cb14-11"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>survey_id,</span>
+<span id="cb14-12" class="hljs-ln-code"><a href="#cb14-12"></a>                <span class="sc">-</span>method,</span>
+<span id="cb14-13" class="hljs-ln-code"><a href="#cb14-13"></a>                <span class="sc">-</span>block) <span class="sc">%&gt;%</span></span>
+<span id="cb14-14" class="hljs-ln-code"><a href="#cb14-14"></a>  <span class="fu">rename</span>(<span class="at">size_class_cm =</span> size_class) <span class="sc">%&gt;%</span></span>
+<span id="cb14-15" class="hljs-ln-code"><a href="#cb14-15"></a>  <span class="fu">mutate</span>(<span class="at">size_class_mm =</span> size_class_cm <span class="sc">*</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-16" class="hljs-ln-code"><a href="#cb14-16"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(size_class_mm)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-17" class="hljs-ln-code"><a href="#cb14-17"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>size_class_cm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="fonctions-de-resumé" class="slide level2 smaller">
@@ -842,20 +846,21 @@
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb19-1" class="hljs-ln-code"><a href="#cb19-1"></a><span class="co"># solution</span></span>
-<span id="cb19-2" class="hljs-ln-code"><a href="#cb19-2"></a>tmp4 <span class="ot">&lt;-</span> tmp3 <span class="sc">%&gt;%</span></span>
-<span id="cb19-3" class="hljs-ln-code"><a href="#cb19-3"></a>  <span class="fu">mutate</span>(<span class="at">mean_biomass_sample =</span> biomass <span class="sc">/</span> total) <span class="sc">%&gt;%</span></span>
-<span id="cb19-4" class="hljs-ln-code"><a href="#cb19-4"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(family,</span>
-<span id="cb19-5" class="hljs-ln-code"><a href="#cb19-5"></a>                species_name,</span>
-<span id="cb19-6" class="hljs-ln-code"><a href="#cb19-6"></a>                mean_biomass_sample) <span class="sc">%&gt;%</span></span>
-<span id="cb19-7" class="hljs-ln-code"><a href="#cb19-7"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(family) <span class="sc">%&gt;%</span></span>
-<span id="cb19-8" class="hljs-ln-code"><a href="#cb19-8"></a>  <span class="fu">summarise</span>(<span class="at">mean_biomass_sample_family =</span> <span class="fu">mean</span>(mean_biomass_sample,</span>
-<span id="cb19-9" class="hljs-ln-code"><a href="#cb19-9"></a>                                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb19-10" class="hljs-ln-code"><a href="#cb19-10"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb19-11" class="hljs-ln-code"><a href="#cb19-11"></a></span>
-<span id="cb19-12" class="hljs-ln-code"><a href="#cb19-12"></a>tmp5 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(<span class="at">.data =</span> tmp3,</span>
-<span id="cb19-13" class="hljs-ln-code"><a href="#cb19-13"></a>                        family) <span class="sc">%&gt;%</span></span>
-<span id="cb19-14" class="hljs-ln-code"><a href="#cb19-14"></a>  <span class="fu">summarise</span>(<span class="at">nb_sample_family =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb19-15" class="hljs-ln-code"><a href="#cb19-15"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> <span class="fu">sum</span>(nb_sample_family))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-2" class="hljs-ln-code"><a href="#cb19-2"></a><span class="co"># group_by sur espece et class de taille, faire la somme à ce moment la</span></span>
+<span id="cb19-3" class="hljs-ln-code"><a href="#cb19-3"></a>tmp4 <span class="ot">&lt;-</span> tmp3 <span class="sc">%&gt;%</span></span>
+<span id="cb19-4" class="hljs-ln-code"><a href="#cb19-4"></a>  <span class="fu">mutate</span>(<span class="at">mean_biomass_sample =</span> biomass <span class="sc">/</span> total) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5" class="hljs-ln-code"><a href="#cb19-5"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(family,</span>
+<span id="cb19-6" class="hljs-ln-code"><a href="#cb19-6"></a>                species_name,</span>
+<span id="cb19-7" class="hljs-ln-code"><a href="#cb19-7"></a>                mean_biomass_sample) <span class="sc">%&gt;%</span></span>
+<span id="cb19-8" class="hljs-ln-code"><a href="#cb19-8"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(family) <span class="sc">%&gt;%</span></span>
+<span id="cb19-9" class="hljs-ln-code"><a href="#cb19-9"></a>  <span class="fu">summarise</span>(<span class="at">mean_biomass_sample_family =</span> <span class="fu">mean</span>(mean_biomass_sample,</span>
+<span id="cb19-10" class="hljs-ln-code"><a href="#cb19-10"></a>                                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb19-11" class="hljs-ln-code"><a href="#cb19-11"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb19-12" class="hljs-ln-code"><a href="#cb19-12"></a></span>
+<span id="cb19-13" class="hljs-ln-code"><a href="#cb19-13"></a>tmp5 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(<span class="at">.data =</span> tmp3,</span>
+<span id="cb19-14" class="hljs-ln-code"><a href="#cb19-14"></a>                        family) <span class="sc">%&gt;%</span></span>
+<span id="cb19-15" class="hljs-ln-code"><a href="#cb19-15"></a>  <span class="fu">summarise</span>(<span class="at">nb_sample_family =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb19-16" class="hljs-ln-code"><a href="#cb19-16"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> <span class="fu">sum</span>(nb_sample_family))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="fonction-bonus-très-utile" class="slide level2 smaller">
@@ -885,26 +890,13 @@
 <li>NA_character_</li>
 </ul></li>
 </ul>
-</section>
-<section id="section-1" class="slide level2">
-<h2></h2>
 </section></section>
-<section id="partie-iii-visualisation-graphique-avec-ggplot2" class="title-slide slide level1 center">
-<h1>Partie III : Visualisation graphique avec ggplot2</h1>
-
-</section>
-
-<section id="partie-ii-manipulation-de-données-avec-dplyr" class="title-slide slide level1 center">
-<h1>Partie II : Manipulation de données avec <code>dplyr</code></h1>
-
-</section>
-
 <section>
 <section id="partie-iii-nettoyage-des-données-avec-tidyr" class="title-slide slide level1 center">
 <h1>Partie III : Nettoyage des données avec <code>tidyr</code></h1>
 
 </section>
-<section id="section-2" class="slide level2">
+<section id="section-1" class="slide level2">
 <h2></h2>
 <p>L’objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format “tidy”</p>
 <p>Les différents verbes viennent s’ajouter à tous ceux que nous avons déjà vu avec readr et dplyr et ils s’intègrent parfaitement dans la série de pipe %&gt;% permettant d’enchainer les opérations</p>
@@ -944,7 +936,7 @@
 <span id="cb23-3"><a href="#cb23-3"></a><span class="co"># Si l'argument values_drop_na = TRUE les lignes contenant des NA dans la colonne créée avec values_to seront supprimées. Par défaut FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="section-3" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <ul>
 <li><p>Applications</p>
@@ -959,7 +951,7 @@
 <span id="cb24-4"><a href="#cb24-4"></a>popEU_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-3" class="slide level2">
 <h2></h2>
 <h3 id="gestion-des-valeurs-manquantes-na">Gestion des valeurs manquantes “NA”</h3>
 <ul>
@@ -984,7 +976,7 @@
 <span id="cb27-2"><a href="#cb27-2"></a><span class="fu">fill</span>(data, ..., .direction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="section-5" class="slide level2">
+<section id="section-4" class="slide level2">
 <h2></h2>
 <ul>
 <li><p>Applications</p>
@@ -1018,7 +1010,7 @@
 <span id="cb32-5"><a href="#cb32-5"></a>popEU_long</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section-5" class="slide level2">
 <h2></h2>
 <h3 id="combinaison-des-variables">Combinaison des variables</h3>
 <ul>
@@ -1042,7 +1034,7 @@
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">expand</span>(data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="section-7" class="slide level2">
+<section id="section-6" class="slide level2">
 <h2></h2>
 <ul>
 <li><p>Applications</p>
