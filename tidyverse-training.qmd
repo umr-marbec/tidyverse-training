@@ -421,8 +421,7 @@ popEU
 
 ### Modelage des tableaux
 
-`pivot_wider()`et `pivot_longer()`sont les successeurs des fonctions en base R du package `reshape` puis `reshape2`. Et se nommaient `spread()`et `gather()` dans les premières versions de `tidyr`
--   Transformer un tableau long en format large
+`pivot_wider()`et `pivot_longer()`sont les successeurs des fonctions en base R du package `reshape` puis `reshape2`. Et se nommaient `spread()`et `gather()` dans les premières versions de `tidyr` - Transformer un tableau long en format large
 
 ```{r echo=TRUE, eval=FALSE}
 # Les arguments names_from et values_from renseignent les noms de colonnes 
@@ -440,19 +439,21 @@ pivot_longer(cols, names_to, values_to, ...)
 # Si l'argument values_drop_na = TRUE les lignes contenant des NA dans la colonne créée avec values_to seront supprimées. Par défaut FALSE
 ```
 
-##
+## 
+
 -   Applications
 
     -   Transformer le jeu de données en format "wide" en utilisant la fonction `pivot_wider()`. Nous voulons obtenir une colonne par année
-    
+
 ```{r echo=TRUE, eval=FALSE}
 # Créer un nouvel objet que l'on nomme popEU_wide
 popEU_wide <- pivot_wider(popEU,names_from="year",values_from="pop")
 dim(popEU_wide)
 popEU_wide
-```    
+```
 
-##
+## 
+
 ### Gestion des valeurs manquantes "NA"
 
 -   Remplacer des "NA" par des valeurs spécifiques
@@ -462,14 +463,12 @@ popEU_wide
 replace_na(data, replace, ...)
 ```
 
-
 -   Supprimer les lignes contenant des "NA"
 
 ```{r echo=TRUE, eval=FALSE}
 # Il est possible en 2ème argument de spécifier le nom d'une colonne en particulier pour laquelle nous voulons que `drop_na()` s'applique
 drop_na(data, ...)
 ```
-
 
 -   Remplir les "NA" en utilisant les valeurs précédentes ou suivantes de la même colonne
 
@@ -478,42 +477,42 @@ drop_na(data, ...)
 fill(data, ..., .direction)
 ```
 
-##
 -   Applications
 
+    ::: incremental
     -   Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
-    
-```{r echo=TRUE, eval=FALSE}
-# Créer un nouvel objet que l'on nomme popEU_long
-popEU_long <- pivot_longer(popEU_wide,cols=c(2:4),names_to="year",values_to="pop")
-dim(popEU_long)
-# Afficher popEU_long
-popEU_long
-popEU_long <- mutate(popEU_long,pop = replace_na(pop,11.27))
-popEU_long
-```    
 
-    -   Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d'enchainer les opérations à l'aide du pipe %\>%
+        ```{r echo=TRUE, eval=FALSE}
+        # Créer un nouvel objet que l'on nomme popEU_long
+        popEU_long <- pivot_longer(popEU_wide,cols=c(2:4),names_to="year",values_to="pop")
+        dim(popEU_long)
+        # Afficher popEU_long
+        popEU_long
+        popEU_long <- mutate(popEU_long,pop = replace_na(pop,11.27))
+        popEU_long
+        ```
 
-```{r echo=TRUE, eval=FALSE}
-# Créer un nouvel objet que l'on nomme popEU_long
-popEU_long <- popEU_wide %>%
-  tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
-  drop_na(.,pop)
-popEU_long
-``` 
+    -   Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d'enchainer les opérations à l'aide du pipe %\\\>%
 
-    -   Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d'enchainer les opérations à l'aide du pipe %\>%
+        ```{r echo=TRUE, eval=FALSE}
+        # Créer un nouvel objet que l'on nomme popEU_long
+        popEU_long <- popEU_wide %>%
+          tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
+          drop_na(.,pop)
+        popEU_long
+        ```
 
-```{r echo=TRUE, eval=FALSE}
-# Créer un nouvel objet que l'on nomme popEU_long
-popEU_long <- popEU_wide %>%
-  tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
-  fill(.,pop,.direction="down")
-popEU_long
-``` 
+    -   Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d'enchainer les opérations à l'aide du pipe %\\\>%
 
-##
+        ```{r echo=TRUE, eval=FALSE}
+        # Créer un nouvel objet que l'on nomme popEU_long
+        popEU_long <- popEU_wide %>%
+          tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
+          fill(.,pop,.direction="down")
+        popEU_long
+        ```
+    :::
+
 ### Combinaison des variables
 
 -   Séparer une colonne en plusieurs colonnes
@@ -536,11 +535,12 @@ unite(col, ..., sep)
 expand(data, ...)
 ```
 
-##
+## 
+
 -   Applications
 
-       # A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
-       
+    \# A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
+
 ```{r echo=TRUE, eval=FALSE}
 popEU_sep <- popEU_long %>%
   mutate(pop = as.character(pop))%>%
@@ -550,6 +550,7 @@ popEU_sep
 
        # Recreez la colonne pop comme à l'origine en la nommant population
        
+
 ```{r echo=TRUE, eval=FALSE}
 popEU_unite <- popEU_sep %>%
   unite(.,population,c(millions,milliers),sep=".")
@@ -558,17 +559,18 @@ popEU_unite
 
       # Générer un tableuau avec toutes les combinaisons possibles pays/population
       
+
 ```{r echo=TRUE, eval=FALSE}
 popEU_expand <- popEU_unite %>%
   expand(.,pays,population)
 popEU_expand
 # Que remarquons nous ?
-```     
+```
 
 ```{r echo=TRUE, eval=FALSE}
 popEU_expand
 # la valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques
-```           
+```
 
 # Partie V : Manipulation des dates avec `lubridate`
 
