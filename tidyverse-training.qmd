@@ -58,8 +58,6 @@ library(ggpubr)
 
 -   Partie 2 : Manipulation de données avec dplyr
 
-    -   2.2 : Transformation des données avec dplyr
-
 -   Partie 3 : Nettoyage des données avec tidyr
 
 -   Partie 4 : Extension à la manipulation de données, cas spécifiques
@@ -153,9 +151,9 @@ library(tidyverse)
     -   Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d'espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (\_), ne pas utiliser de mots réservés (comme par exemple TRUE)
     -   Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des \_ et les noms choisis doivent pouvoir donner l'information du contenu associé
 
-# Partie 1 : Manipulation de données avec dplyr
+# Partie 1 : Importation de données sous R avec readr
 
-## 1.1. Importation de données sous R avec readr
+## Utilisation du package readr
 
 -   Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)
 -   La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects
@@ -164,16 +162,20 @@ library(tidyverse)
 ## A voir avec Monique
 
 ```{r, echo=TRUE, eval=FALSE}
-global_reef_fish_abundance_biomass <- read_delim(file = "./data/global_reef_fish_abundance_and_biomass.csv",
+global_reef_fish_abundance <- read_delim(file = "./data/global_reef_fish_abundance.csv",
                                                  delim = ",",
                                                  quote = "\"")
-# probleme ligne 26 data ori
+global_reef_fish_biomass <- read_delim(file = "./data/global_reef_fish_biomass.csv",
+                                                 delim = ",",
+                                                 quote = "\"")
 survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
                               delim = ";",
-                              skip = 68)
+                              skip = 70)
 ```
 
-## 1.2. Tranformation des données avec [dplyr](https://dplyr.tidyverse.org/){target="_blank"}
+# Partie 2 : Manipulation de données avec dplyr
+
+## [dplyr](https://dplyr.tidyverse.org/){target="_blank"}
 
 ### Pourquoi utiliser dplyr et ca syntaxe ?
 
@@ -234,15 +236,14 @@ Renvoi une valeur TRUE ou FALSE
 
 ## Exercice 1 corrigé {auto-animate="true"}
 
--   supprimer les données dupliquées dans le jeu de données "global_reef_fish_abundance_and_biomass"
+-   A l'aide d'une fonction dplyr, verifier s'il y a des données dupliquées dans le jeu de données "global_reef_fish_biomass"
 -   En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Kyphosidae" et pour finir ou la classe de taille associé est \<= 10.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-tmp1 <- distinct(.data = global_reef_fish_abundance_biomass)
+tmp1 <- distinct(.data = global_reef_fish_biomass)
 tmp2 <- filter(.data = tmp1,
-               # changer total
-               total != 0
+               biomass != 0
                & ! family %in% c("Mullidae",
                                  "Kyphosidae")
                & size_class <= 10)
@@ -257,8 +258,8 @@ Grâce à syntaxe de dplyr, on peut répondre à ce besoin de deux manières dif
 La première est d'effectuer toutes les opérations en une fois en les emboîtant :
 
 ```{r echo=TRUE, eval=FALSE}
-tmp1 <- filter(.data = distinct(.data = global_reef_fish_abundance_biomass),
-               total != 0
+tmp1 <- filter(.data = distinct(.data = global_reef_fish_biomass),
+               biomass != 0
                & ! family %in% c("Mullidae",
                                  "Kyphosidae")
                & size_class <= 10)
@@ -280,11 +281,11 @@ Cependant cela à plusieurs inconvénients. La structure est peu lisible, les op
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-tmp1 <- distinct(.data = global_reef_fish_abundance_biomass) %>%
-  filter(total != 0
-         & ! family %in% c("Mullidae",
-                           "Kyphosidae")
-         & size_class <= 10)
+tmp1 <- distinct(.data = global_reef_fish_biomass) %>%
+  filter(biomass != 0
+               & ! family %in% c("Mullidae",
+                                 "Kyphosidae")
+               & size_class <= 10)
 ```
 
 ## Encore quelques fonctions de manipulation de lignes
@@ -350,12 +351,13 @@ rename()
 
 ## Exercice 2 {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice précédent
--   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, block et method
--   Placer cette nouvelle colonne au début du jeu de données
--   Supprimer les colonnes survey_id, block et method
+-   À partir du jeu de données de sortie de l'exercice 1
+-   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
+-   Placer cette nouvelle colonne avant la colonne survey_id 
+-   Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne survey_id
 -   Renommer la variable size_class en size_class_cm
--   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm et supprimer la variable size_class_cm
+-   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm
+-   Supprimer les variables size_class et size_class_cm
 -   Trier par ordre décroissant les données en fonction de la variable size_class_mm
 -   Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
 
@@ -365,33 +367,31 @@ rename()
 
 ## Exercice 2 corrigé {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice précédent
--   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, block et method
--   Placer cette nouvelle colonne au début du jeu de données
--   Supprimer les colonnes survey_id, block et method
+-   À partir du jeu de données de sortie de l'exercice 1
+-   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
+-   Placer cette nouvelle colonne avant la colonne survey_id 
+-   Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne survey_id
 -   Renommer la variable size_class en size_class_cm
--   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm et supprimer la variable size_class_cm
+-   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm
+-   Supprimer la variable size_class_cm
 -   Trier par ordre décroissant les données en fonction de la variable size_class_mm
 -   Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-# A revoir
-global_reef_fish_abundance_biomass_final <- mutate(.data = tmp1,
+tmp3 <- mutate(.data = tmp1,
                survey_id_full = paste(survey_id,
-                                      species_names,
-                                      size_cat
+                                      species_name,
+                                      size_class,
                                       sep = "_")) %>%
   relocate(survey_id_full,
            .before = survey_id) %>%
-  # pas enlever species_names
-  dplyr::select(-survey_id,
-                -method,
-                -block) %>%
+  dplyr::select(-1,
+                -survey_id) %>%
   rename(size_class_cm = size_class) %>%
   mutate(size_class_mm = size_class_cm * 10) %>%
-  arrange(desc(size_class_mm)) %>%
-  dplyr::select(-size_class_cm)
+  dplyr::select(-size_class_cm) %>%
+  arrange(desc(size_class_mm))
 ```
 
 ## Fonctions de resumé {.smaller}
@@ -448,11 +448,9 @@ ungroups()
 
 ## Exercice 3 {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice précédent
--   Calculer la biomasse moyenne d'un invididu pour chaque échantillon
--   Exprimer cette nouvelle variable dans un jeu données avec la famille et le nom de l'espèce et sa famille (variables family et species_name)
--   Calculer dans une nouvelle variable, la biomasse moyenne des individus par famille.
--   Créer une nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et verifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+-   À partir du jeu de données de sortie de l'exercice 2
+-   Calculer la biomasse moyenne par espèce et classe de taille
+-   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -460,23 +458,17 @@ ungroups()
 
 ## Exercice 3 corrigé {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice précédent
--   Calculer la biomasse moyenne d'un invididu pour chaque échantillon
--   Exprimer cette nouvelle variable dans un jeu données avec la famille et le nom de l'espèce et sa famille (variables family et species_name)
--   Calculer dans une nouvelle variable, la biomasse moyenne des individus par famille.
--   Créer une nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et verifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+-   À partir du jeu de données de sortie de l'exercice 2
+-   Calculer la biomasse moyenne par espèce et classe de taille
+-   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
 # group_by sur espece et class de taille, faire la somme à ce moment la
 tmp4 <- tmp3 %>%
-  mutate(mean_biomass_sample = biomass / total) %>%
-  dplyr::select(family,
-                species_name,
-                mean_biomass_sample) %>%
-  dplyr::group_by(family) %>%
-  summarise(mean_biomass_sample_family = mean(mean_biomass_sample,
-                                              na.rm = TRUE),
+  dplyr::group_by(species_name,
+                  size_class_mm) %>%
+  summarise(mean_biomass = mean(x = biomass),
             .groups = "drop")
 
 tmp5 <- dplyr::group_by(.data = tmp3,
@@ -509,10 +501,76 @@ case_when(
     -   NA_real\_
     -   NA_complex\_
     -   NA_character\_
+    
+## Combinaison de jeux de données 1
+
+### Jointures "simples"
+
+- Il doit y avoir une cohérence entre le nombre de colonnes ou de lignes
+- Attention, aucune verification de cohérence des jointures
+
+```{r echo=TRUE, eval=FALSE}
+# "Coller" deux jeux de données
+bind_cols()
+bind_rows()
+```
+
+## Combinaison de jeux de données 2 {.smaller}
+
+### Jointures de type relationnelle
+
+::: columns
+::: {.column width="70%"}
+- Très proche du SQL
+- Très puissantes et permettent de se poser les bonnes questions !
+- Attention à bien spécifier l'argument by (ne pas laisser place à l'interprétation !)
+  - On peut spécifier un seul ou plusieurs colonnes si les noms sont identiques entre les deux jeux de données
+  - Sinon on spécifier le nom du jeu de données à "gauche" et celui qui est à "droite"
+:::
+::: {.column width="30%"}
+![](images/jointure.png)
+:::
+:::
+
+```{r echo=TRUE, eval=FALSE}
+# jointure à gauche
+left_join()
+# jointure à droite
+right_join()
+# jointure commune
+inner_join()
+# jointure complete
+full_join()
+```
+
+## Exercice 4 {.smaller auto-animate="true"}
+
+-   À partir du jeu de données de sortie de l'exercice 2
+-   Calculer la biomasse moyenne par espèce et classe de taille
+-   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 4 corrigé {.smaller auto-animate="true"}
+
+-   À partir du jeu de données de sortie de l'exercice précédent
+-   Calculer la biomasse moyenne par espèce et classe de taille
+-   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+global_reef_fish_biomass_light <- slice_sample(.data = global_reef_fish_biomass,
+                                               prop = 0.5)
+tmp6 <- inner_join(x = global_reef_fish_biomass_light,
+                   y = global_reef_fish_abundance,
+                   by = "survey_id")
+```
 
 # Partie III : Nettoyage des données avec `tidyr`
 
-    ![](images/logo_tidyr.jpeg)
+![](images/logo_tidyr.png)
 
 ## 
 
