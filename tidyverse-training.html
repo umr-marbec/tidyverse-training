@@ -779,6 +779,10 @@
 <section>
 <section id="partie-iii-nettoyage-des-données-avec-tidyr" class="title-slide slide level1 center">
 <h1>Partie III : Nettoyage des données avec <code>tidyr</code></h1>
+
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
 <p>L’objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format “tidy”</p>
 <p>Les différents verbes viennent s’ajouter à tous ceux que nous avons déjà vu avec readr et dplyr et ils s’intègrent parfaitement dans la série de pipe %&gt;% permettant d’enchainer les opérations</p>
 <ul>
@@ -800,14 +804,13 @@
 <section id="les-principaux-verbes-de-la-librairie-tidyr" class="slide level2">
 <h2>Les principaux verbes de la librairie tidyr</h2>
 <h3 id="modelage-des-tableaux">Modelage des tableaux</h3>
-<p><code>pivot_wider()</code>et <code>pivot_longer()</code>sont les successeurs des fonctions en base R du package <code>reshape</code> puis <code>reshape2</code>. Et se nommaient <code>spread()</code>et <code>gather()</code> dans les premières versions de <code>tidyr</code></p>
-<ul>
-<li>Transformer un tableau long en format large</li>
-</ul>
+<p><code>pivot_wider()</code>et <code>pivot_longer()</code>sont les successeurs des fonctions en base R du package <code>reshape</code> puis <code>reshape2</code>. Et se nommaient <code>spread()</code>et <code>gather()</code> dans les premières versions de <code>tidyr</code> - Transformer un tableau long en format large</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Les arguments names_from et values_from renseignent les noms de colonnes à partir desquelles nous obtenons les colonnes de sortie et les valeurs des cellules</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">pivot_wider</span>(names_from, values_from)</span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># L'argument values_fill permet de spécifier une valeur que l'on choisit quand la combinaison names_from/values_from est manquante. Par défaut NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Les arguments names_from et values_from renseignent les noms de colonnes </span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co">#à partir desquelles nous obtenons les colonnes de sortie et les valeurs des cellules</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="fu">pivot_wider</span>(names_from, values_from)</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># L'argument values_fill permet de spécifier une valeur que l'on choisit </span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="co">#quand la combinaison names_from/values_from est manquante. Par défaut NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Transformer un tableau large en format long</li>
@@ -817,6 +820,9 @@
 <span id="cb17-2"><a href="#cb17-2"></a><span class="fu">pivot_longer</span>(cols, names_to, values_to, ...)</span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="co"># Si l'argument values_drop_na = TRUE les lignes contenant des NA dans la colonne créée avec values_to seront supprimées. Par défaut FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
 <ul>
 <li><p>Applications</p>
 <ul>
@@ -829,6 +835,9 @@
 <span id="cb18-3"><a href="#cb18-3"></a><span class="fu">dim</span>(popEU_wide)</span>
 <span id="cb18-4"><a href="#cb18-4"></a>popEU_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
 <h3 id="gestion-des-valeurs-manquantes-na">Gestion des valeurs manquantes “NA”</h3>
 <ul>
 <li>Remplacer des “NA” par des valeurs spécifiques</li>
@@ -851,10 +860,13 @@
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Importance de l'argument .direction ("down","up","updown","downup")</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a><span class="fu">fill</span>(data, ..., .direction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
 <ul>
 <li><p>Applications</p>
 <ul>
-<li>Re-transformer le jeu de données en format “long” en utilisant la fonction <code>pivot_longer()</code> et remplacer les valeurs de NA dans la colonne “pop”, par la population moyenne de la Belgique pour ces 2 années (11,27 M).</li>
+<li>Re-transformer le jeu de données en format “long” en utilisant la fonction <code>pivot_longer()</code> et remplacer les valeurs de NA dans la colonne “pop”, par la population moyenne de la Belgique pour ces 2 années (11,27 M)</li>
 </ul></li>
 </ul>
 <div class="cell">
@@ -882,6 +894,9 @@
 <span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">fill</span>(.,pop,<span class="at">.direction=</span><span class="st">"down"</span>)</span>
 <span id="cb26-5"><a href="#cb26-5"></a>popEU_long</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
 <h3 id="combinaison-des-variables">Combinaison des variables</h3>
 <ul>
 <li>Séparer une colonne en plusieurs colonnes</li>
@@ -903,6 +918,9 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">expand</span>(data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
 <ul>
 <li><p>Applications</p>
 <p># A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles “millions” et “milliers”</p></li>
