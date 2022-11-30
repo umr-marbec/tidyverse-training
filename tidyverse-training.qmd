@@ -42,16 +42,7 @@ library(ggpubr)
 
 [Collection de packages tidyverse]{style="color:#ffffff; font-size: 1.5em"}
 
-[Monique Simier (monique.simier@ird.fr)]{style="color:#ffffff; font-size: 1em"} <br/>
-[Laure Velez (laure.velez@umontpellier.fr)]{style="color:#ffffff; font-size: 1em"} <br/>
-[Gael Mariani (gael.mariani@umontpellier.fr)]{style="color:#ffffff; font-size: 1em"} <br/>
-[Mathieu Depetris (mathieu.depetris@ird.fr)]{style="color:#ffffff; font-size: 1em"} <br/>
-<br/>
-[05-06 decembre 2022]{style="color:#ffffff; font-size: 1em"}
-<br/>
-<br/>
-<br/>
-[© RStudio]{style="color:#ffffff; font-size: 0.4em"}
+[Monique Simier (monique.simier\@ird.fr)]{style="color:#ffffff; font-size: 1em"} <br/> [Laure Velez (laure.velez\@umontpellier.fr)]{style="color:#ffffff; font-size: 1em"} <br/> [Gael Mariani (gael.mariani\@umontpellier.fr)]{style="color:#ffffff; font-size: 1em"} <br/> [Mathieu Depetris (mathieu.depetris\@ird.fr)]{style="color:#ffffff; font-size: 1em"} <br/> <br/> [05-06 decembre 2022]{style="color:#ffffff; font-size: 1em"} <br/> <br/> <br/> [© RStudio]{style="color:#ffffff; font-size: 0.4em"}
 
 ![](images/tidyverse_packages.png){.absolute top="60" right="20" width="35%"}
 
@@ -65,13 +56,13 @@ library(ggpubr)
 
 -   Partie 1 : Manipulation de données avec dplyr
 
-    - 1.1 : Importation de données sous R
-    - 1.2 : Transformation des données avec dplyr
+    -   1.1 : Importation de données sous R
+    -   1.2 : Transformation des données avec dplyr
 
 -   Partie 2 : Extension à la manipulation de données, cas spécifiques
 
-    - 2.1 : Manipuler du texte avec stringr
-    - 2.2 : Manipuler des dates avec lubridate
+    -   2.1 : Manipuler du texte avec stringr
+    -   2.2 : Manipuler des dates avec lubridate
 
 -   Partie 3 : Visualisation graphique avec ggplot2
 
@@ -183,18 +174,12 @@ survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
 
 ### Pourquoi utiliser dplyr et ca syntaxe ?
 
-- Syntaxe claire et cohérente
-    - "lien" avec le SQL
-    - deux "familles" de fonctions : résumer et vectorisation
-<br/>
-<br/>
-<br/>
-![](images/summary_function.png){.absolute top="395" left="15"}
-![](images/vectorized_function.png){.absolute top="395" right="15"}
-- Utilisation de verbes
-- Généralement plus rapides que leur équivalent sous R de base
-- Permets d'enchainer les opérations avec des "pipes"
-![](images/pipe.png){.absolute top="525" right="20" width="15%"}
+-   Syntaxe claire et cohérente
+    -   "lien" avec le SQL
+    -   deux "familles" de fonctions : résumer et vectorisation <br/> <br/> <br/> ![](images/summary_function.png){.absolute top="395" left="15"} ![](images/vectorized_function.png){.absolute top="395" right="15"}
+-   Utilisation de verbes
+-   Généralement plus rapides que leur équivalent sous R de base
+-   Permets d'enchainer les opérations avec des "pipes" ![](images/pipe.png){.absolute top="525" right="20" width="15%"}
 
 ## Manipulation des lignes
 
@@ -202,7 +187,7 @@ survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
 
 Type de fonctions qui retournent un sous-ensemble de lignes
 
-- Extraction d'une ou plusieurs lignes : fonctions de la famille slice & co
+-   Extraction d'une ou plusieurs lignes : fonctions de la famille slice & co
 
 ```{r echo=TRUE, eval=FALSE}
 # sélection d'une ou plusieurs lignes par position absolue
@@ -223,11 +208,11 @@ filter()
 
 Renvoi une valeur TRUE ou FALSE
 
-- les communs :
+-   les communs :
 
 ![](images/booleens.png)
 
-- certains plus particuliers :
+-   certains plus particuliers :
 
 ![](images/booleens_particulier.png){width="25%"}
   
@@ -237,8 +222,8 @@ Renvoi une valeur TRUE ou FALSE
   
 ## Exercice 1 {auto-animate="true"}
 
-- supprimer les données dupliquées dans le jeu de données "global_reef_fish_abundance_and_biomass"
-- En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Kyphosidae" et pour finir ou la classe de taille associé est <= 10.
+-   supprimer les données dupliquées dans le jeu de données "global_reef_fish_abundance_and_biomass"
+-   En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Kyphosidae" et pour finir ou la classe de taille associé est \<= 10.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -246,8 +231,8 @@ Renvoi une valeur TRUE ou FALSE
 
 ## Exercice 1 corrigé {auto-animate="true"}
 
-- supprimer les données dupliquées dans le jeu de données "global_reef_fish_abundance_and_biomass"
-- En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Kyphosidae" et pour finir ou la classe de taille associé est <= 10.
+-   supprimer les données dupliquées dans le jeu de données "global_reef_fish_abundance_and_biomass"
+-   En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Kyphosidae" et pour finir ou la classe de taille associé est \<= 10.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -265,8 +250,8 @@ Ici on a effectué 2 opérations, mais on peut imaginer en faire beaucoup plus d
 
 Grâce à syntaxe de dplyr, on peut répondre à ce besoin de deux manières différentes.
 
-La première est d’effectuer toutes les opérations en une fois en les emboîtant :
-  
+La première est d'effectuer toutes les opérations en une fois en les emboîtant :
+
 ```{r echo=TRUE, eval=FALSE}
 tmp1 <- filter(.data = distinct(.data = global_reef_fish_abundance_biomass),
                total != 0
@@ -275,19 +260,19 @@ tmp1 <- filter(.data = distinct(.data = global_reef_fish_abundance_biomass),
                & size_class <= 10)
 ```
 
-Cependant cela à plusieurs inconvénients. La structure est peu lisible, les opérations apparaissent dans l’ordre inverse de leur réalisation et il est difficile de voir quel paramètre se rapporte à quelle fonction.
+Cependant cela à plusieurs inconvénients. La structure est peu lisible, les opérations apparaissent dans l'ordre inverse de leur réalisation et il est difficile de voir quel paramètre se rapporte à quelle fonction.
 
 ## Aller encore plus loin
 
-### Utilisation d'un nouvelle opérateur baptisé [pipe](https://magrittr.tidyverse.org/ ){target="_blank"} 
+### Utilisation d'un nouvelle opérateur baptisé [pipe](https://magrittr.tidyverse.org/){target="_blank"}
 
-- Il se note %>%
+-   Il se note %\>%
 
-- Son fonctionnement est le suivant : si j'exécute expr %>% f, le résultat de l’expression expr, à gauche du pipe, sera passé comme premier argument à la fonction f, à droite du pipe, ce qui revient à exécuter f(expr)
+-   Son fonctionnement est le suivant : si j'exécute expr %\>% f, le résultat de l'expression expr, à gauche du pipe, sera passé comme premier argument à la fonction f, à droite du pipe, ce qui revient à exécuter f(expr)
 
-- L'intérêt est que l'on peut enchainer plusieurs pipes
+-   L'intérêt est que l'on peut enchainer plusieurs pipes
 
-- Avec notre exemple précédent cela donne :
+-   Avec notre exemple précédent cela donne :
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -302,17 +287,18 @@ tmp1 <- distinct(.data = global_reef_fish_abundance_biomass) %>%
 
 ### Manipulation de type "trie"
 
-- Ordonner les lignes d'une ou plusieurs colonnes 
+-   Ordonner les lignes d'une ou plusieurs colonnes
 
 ```{r echo=TRUE, eval=FALSE}
 # par défaut ordre croissant, utiliser l'argument desc pour ordre décroissant
 arrange()
 ```
+
 <br/>
 
 ### Manipulation de type "ajout"
 
-- Ajouter une ligne dans un jeu de données
+-   Ajouter une ligne dans un jeu de données
 
 ```{r echo=TRUE, eval=FALSE}
 # interet des arguments .before and .after
@@ -341,7 +327,7 @@ relocate()
 
 ### Une des deux grandes familles de fonction avec dplyr
 
-- On a commencé à l'aborder de manière instinctive avec relocate()
+-   On a commencé à l'aborder de manière instinctive avec relocate()
 
 - Globalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie
 <br/>
@@ -356,7 +342,7 @@ mutate()
 transmute()
 ```
 
-- Petit bonus pour renomer les variables 
+-   Petit bonus pour renomer les variables
 
 ```{r echo=TRUE, eval=FALSE}
 rename()
@@ -364,14 +350,14 @@ rename()
 
 ## Exercice 2 {auto-animate="true" .smaller}
 
-- À partir du jeu de données de sortie de l'exercice précédent
-- Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, block et method
-- Placer cette nouvelle colonne au début du jeu de données
-- Supprimer les colonnes survey_id, block et method
-- Renommer la variable size_class en size_class_cm
-- Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm et supprimer la variable size_class_cm
-- Trier par ordre décroissant les données en fonction de la variable size_class_mm
-- Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
+-   À partir du jeu de données de sortie de l'exercice précédent
+-   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, block et method
+-   Placer cette nouvelle colonne au début du jeu de données
+-   Supprimer les colonnes survey_id, block et method
+-   Renommer la variable size_class en size_class_cm
+-   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm et supprimer la variable size_class_cm
+-   Trier par ordre décroissant les données en fonction de la variable size_class_mm
+-   Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -379,14 +365,14 @@ rename()
 
 ## Exercice 2 corrigé {auto-animate="true" .smaller}
 
-- À partir du jeu de données de sortie de l'exercice précédent
-- Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, block et method
-- Placer cette nouvelle colonne au début du jeu de données
-- Supprimer les colonnes survey_id, block et method
-- Renommer la variable size_class en size_class_cm
-- Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm et supprimer la variable size_class_cm
-- Trier par ordre décroissant les données en fonction de la variable size_class_mm
-- Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
+-   À partir du jeu de données de sortie de l'exercice précédent
+-   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, block et method
+-   Placer cette nouvelle colonne au début du jeu de données
+-   Supprimer les colonnes survey_id, block et method
+-   Renommer la variable size_class en size_class_cm
+-   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm et supprimer la variable size_class_cm
+-   Trier par ordre décroissant les données en fonction de la variable size_class_mm
+-   Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -529,11 +515,185 @@ case_when(
 
 # Partie III : Visualisation graphique avec ggplot2
 
-# Partie II : Manipulation de données avec `dplyr` 
+# Partie II : Manipulation de données avec `dplyr`
 
 # Partie III : Nettoyage des données avec `tidyr`
 
-# Partie IV : Manipulation des chaines de caractère avec `stringr`
+## 
+
+L'objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format "tidy"
+
+Les différents verbes viennent s'ajouter à tous ceux que nous avons déjà vu avec readr et dplyr et ils s'intègrent parfaitement dans la série de pipe %\>% permettant d'enchainer les opérations
+
+-   Les données "tidy", qu'est ce que c'est?
+
+    -   1 variable = 1 colonne
+
+    -   1 observation = 1 ligne/case
+
+    -   1 type d'observations par table \# Partie IV : Manipulation des chaines de caractère avec `stringr`
+
+Pour vous aider, il existe une cheatsheet `tidyr` [cliquez ici](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf)
+
+```{r echo=TRUE, eval=FALSE}
+# Pour illustrer cette partie nous utiliserons le jeu de données popEU
+popEU <- read_rds("popEU.rds")
+dim(popEU)
+popEU
+```
+
+## Les principaux verbes de la librairie tidyr
+
+### Modelage des tableaux
+
+`pivot_wider()`et `pivot_longer()`sont les successeurs des fonctions en base R du package `reshape` puis `reshape2`. Et se nommaient `spread()`et `gather()` dans les premières versions de `tidyr`
+-   Transformer un tableau long en format large
+
+```{r echo=TRUE, eval=FALSE}
+# Les arguments names_from et values_from renseignent les noms de colonnes 
+#à partir desquelles nous obtenons les colonnes de sortie et les valeurs des cellules
+pivot_wider(names_from, values_from)
+# L'argument values_fill permet de spécifier une valeur que l'on choisit 
+#quand la combinaison names_from/values_from est manquante. Par défaut NA
+```
+
+-   Transformer un tableau large en format long
+
+```{r echo=TRUE, eval=FALSE}
+# Les arguments cols,names_to et values_to renseignent les noms de colonnes à créer ainsi que les numéros (position) des colonnes à faire pivoter
+pivot_longer(cols, names_to, values_to, ...)
+# Si l'argument values_drop_na = TRUE les lignes contenant des NA dans la colonne créée avec values_to seront supprimées. Par défaut FALSE
+```
+
+##
+-   Applications
+
+    -   Transformer le jeu de données en format "wide" en utilisant la fonction `pivot_wider()`. Nous voulons obtenir une colonne par année
+    
+```{r echo=TRUE, eval=FALSE}
+# Créer un nouvel objet que l'on nomme popEU_wide
+popEU_wide <- pivot_wider(popEU,names_from="year",values_from="pop")
+dim(popEU_wide)
+popEU_wide
+```    
+
+##
+### Gestion des valeurs manquantes "NA"
+
+-   Remplacer des "NA" par des valeurs spécifiques
+
+```{r echo=TRUE, eval=FALSE}
+# Si la donnée est un data frame alors l'argument replace prend une liste de valeurs. Si la donnée est un vecteur alors replace prend une seule valeur
+replace_na(data, replace, ...)
+```
+
+
+-   Supprimer les lignes contenant des "NA"
+
+```{r echo=TRUE, eval=FALSE}
+# Il est possible en 2ème argument de spécifier le nom d'une colonne en particulier pour laquelle nous voulons que `drop_na()` s'applique
+drop_na(data, ...)
+```
+
+
+-   Remplir les "NA" en utilisant les valeurs précédentes ou suivantes de la même colonne
+
+```{r echo=TRUE, eval=FALSE}
+# Importance de l'argument .direction ("down","up","updown","downup")
+fill(data, ..., .direction)
+```
+
+##
+-   Applications
+
+    -   Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
+    
+```{r echo=TRUE, eval=FALSE}
+# Créer un nouvel objet que l'on nomme popEU_long
+popEU_long <- pivot_longer(popEU_wide,cols=c(2:4),names_to="year",values_to="pop")
+dim(popEU_long)
+# Afficher popEU_long
+popEU_long
+popEU_long <- mutate(popEU_long,pop = replace_na(pop,11.27))
+popEU_long
+```    
+
+    -   Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d'enchainer les opérations à l'aide du pipe %\>%
+
+```{r echo=TRUE, eval=FALSE}
+# Créer un nouvel objet que l'on nomme popEU_long
+popEU_long <- popEU_wide %>%
+  tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
+  drop_na(.,pop)
+popEU_long
+``` 
+
+    -   Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d'enchainer les opérations à l'aide du pipe %\>%
+
+```{r echo=TRUE, eval=FALSE}
+# Créer un nouvel objet que l'on nomme popEU_long
+popEU_long <- popEU_wide %>%
+  tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
+  fill(.,pop,.direction="down")
+popEU_long
+``` 
+
+##
+### Combinaison des variables
+
+-   Séparer une colonne en plusieurs colonnes
+
+```{r echo=TRUE, eval=FALSE}
+# par défaut le séparateur est un caractère non alpha-numérique. Si l'on souhaite un autre séparateur il faut le spécifier aec l'argument sep
+separate(data, col, into)
+```
+
+-   Créer une seule colonne à partir de plusieurs colonnes
+
+```{r echo=TRUE, eval=FALSE}
+# par défaut le séparateur est un caractère non alpha-numérique. Si l'on souhaite un autre séparateur il faut le spécifier aec l'argument sep
+unite(col, ..., sep)
+```
+
+-   Générer toutes les combinaisons 2 à 2 possibles entre les variables définies
+
+```{r echo=TRUE, eval=FALSE}
+expand(data, ...)
+```
+
+##
+-   Applications
+
+       # A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
+       
+```{r echo=TRUE, eval=FALSE}
+popEU_sep <- popEU_long %>%
+  mutate(pop = as.character(pop))%>%
+  separate(.,col=pop,into=c("millions","milliers"))
+popEU_sep
+```
+
+       # Recreez la colonne pop comme à l'origine en la nommant population
+       
+```{r echo=TRUE, eval=FALSE}
+popEU_unite <- popEU_sep %>%
+  unite(.,population,c(millions,milliers),sep=".")
+popEU_unite
+```
+
+      # Générer un tableuau avec toutes les combinaisons possibles pays/population
+      
+```{r echo=TRUE, eval=FALSE}
+popEU_expand <- popEU_unite %>%
+  expand(.,pays,population)
+popEU_expand
+# Que remarquons nous ?
+```     
+
+```{r echo=TRUE, eval=FALSE}
+popEU_expand
+# la valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques
+```           
 
 # Partie V : Manipulation des dates avec `lubridate`
 
