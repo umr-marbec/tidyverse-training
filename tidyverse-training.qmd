@@ -53,20 +53,23 @@ library(ggpubr)
     -   Prérequis et environnement de travail nécessaire à la formation
     -   Objectifs de la formation
     -   Présentation de tidyverse
+    
+-   Partie 1 : Importation de données sous R avec readr
 
--   Partie 1 : Manipulation de données avec dplyr
+-   Partie 2 : Manipulation de données avec dplyr
 
-    -   1.1 : Importation de données sous R
-    -   1.2 : Transformation des données avec dplyr
+    -   2.2 : Transformation des données avec dplyr
+    
+-   Partie 3 : Nettoyage des données avec tidyr
 
--   Partie 2 : Extension à la manipulation de données, cas spécifiques
+-   Partie 4 : Extension à la manipulation de données, cas spécifiques
 
-    -   2.1 : Manipuler du texte avec stringr
-    -   2.2 : Manipuler des dates avec lubridate
+    -   4.1 : Manipuler du texte avec stringr
+    -   4.2 : Manipuler des dates avec lubridate
 
--   Partie 3 : Visualisation graphique avec ggplot2
+-   Partie 5 : Visualisation graphique avec ggplot2
 
--   Partie 4 : Cas pratiques sur vos données
+-   Partie 6 : Cas pratiques sur vos données
 
 Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.github.io/analyse-R/){target="_blank"}
 
@@ -238,6 +241,7 @@ Renvoi une valeur TRUE ou FALSE
 # solution
 tmp1 <- distinct(.data = global_reef_fish_abundance_biomass)
 tmp2 <- filter(.data = tmp1,
+               # changer total
                total != 0
                & ! family %in% c("Mullidae",
                                  "Kyphosidae")
@@ -376,13 +380,15 @@ rename()
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-tmp3 <- mutate(.data = tmp1,
+# A revoir
+global_reef_fish_abundance_biomass_final <- mutate(.data = tmp1,
                survey_id_full = paste(survey_id,
-                                      method,
-                                      block,
+                                      species_names,
+                                      size_cat
                                       sep = "_")) %>%
   relocate(survey_id_full,
            .before = survey_id) %>%
+  # pas enlever species_names
   dplyr::select(-survey_id,
                 -method,
                 -block) %>%
@@ -470,6 +476,7 @@ ungroups()
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
+# group_by sur espece et class de taille, faire la somme à ce moment la
 tmp4 <- tmp3 %>%
   mutate(mean_biomass_sample = biomass / total) %>%
   dplyr::select(family,
@@ -510,16 +517,10 @@ case_when(
   - NA_real_ 
   - NA_complex_
   - NA_character_
-  
-## 
-
-# Partie III : Visualisation graphique avec ggplot2
-
-# Partie II : Manipulation de données avec `dplyr`
 
 # Partie III : Nettoyage des données avec `tidyr`
 
-## 
+##
 
 L'objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format "tidy"
 
