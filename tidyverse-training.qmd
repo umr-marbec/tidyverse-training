@@ -353,7 +353,7 @@ rename()
 
 -   À partir du jeu de données de sortie de l'exercice 1
 -   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
--   Placer cette nouvelle colonne avant la colonne survey_id 
+-   Placer cette nouvelle colonne avant la colonne survey_id
 -   Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne survey_id
 -   Renommer la variable size_class en size_class_cm
 -   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm
@@ -369,7 +369,7 @@ rename()
 
 -   À partir du jeu de données de sortie de l'exercice 1
 -   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
--   Placer cette nouvelle colonne avant la colonne survey_id 
+-   Placer cette nouvelle colonne avant la colonne survey_id
 -   Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne survey_id
 -   Renommer la variable size_class en size_class_cm
 -   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm
@@ -501,13 +501,13 @@ case_when(
     -   NA_real\_
     -   NA_complex\_
     -   NA_character\_
-    
+
 ## Combinaison de jeux de données 1
 
 ### Jointures "simples"
 
-- Il doit y avoir une cohérence entre le nombre de colonnes ou de lignes
-- Attention, aucune verification de cohérence des jointures
+-   Il doit y avoir une cohérence entre le nombre de colonnes ou de lignes
+-   Attention, aucune verification de cohérence des jointures
 
 ```{r echo=TRUE, eval=FALSE}
 # "Coller" deux jeux de données
@@ -521,12 +521,13 @@ bind_rows()
 
 ::: columns
 ::: {.column width="70%"}
-- Très proche du SQL
-- Très puissantes et permettent de se poser les bonnes questions !
-- Attention à bien spécifier l'argument by (ne pas laisser place à l'interprétation !)
-  - On peut spécifier un seul ou plusieurs colonnes si les noms sont identiques entre les deux jeux de données
-  - Sinon on spécifier le nom du jeu de données à "gauche" et celui qui est à "droite"
+-   Très proche du SQL
+-   Très puissantes et permettent de se poser les bonnes questions !
+-   Attention à bien spécifier l'argument by (ne pas laisser place à l'interprétation !)
+    -   On peut spécifier un seul ou plusieurs colonnes si les noms sont identiques entre les deux jeux de données
+    -   Sinon on spécifier le nom du jeu de données à "gauche" et celui qui est à "droite"
 :::
+
 ::: {.column width="30%"}
 ![](images/jointure.png)
 :::
