@@ -888,10 +888,12 @@ biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
 
 # Partie 4 : Extension à la manipulation de données, cas spécifiques
 
-![](images/logo_stringr.png){.absolute top="300" width="20%"}
-![](images/logo_lubridate.png){.absolute top="300" left="300" width="20%"}
+![](images/logo_stringr.png){.absolute top="300" width="20%"} ![](images/logo_lubridate.png){.absolute top="300" left="300" width="20%"}
 
 ## 4.1 : Manipuler du texte avec stringr
+
+Conçu pour manipuler les chaines de caractères "facilement". <br>En plus d'être plus faciles à utiliser, le nom des fonctions dans\
+`stringr` représentent bien ce qu'elles permettent de faire.
 
 . . .
 
@@ -1017,10 +1019,82 @@ Solution décomposée
 
 Pour toi Mathieu ;)
 
-Conçu pour manipuler les chaines de caractères "facilement". <br>En plus d'être plus faciles à utiliser, le nom des fonctions dans\
-`stringr` représentent bien ce qu'elles permettent de faire.
+# 4.2 : Manipuler des dates avec lubridate
 
-## 4.2 : Manipuler des dates avec lubridate
+## Rends la manipulation des dates et du temps presque agréable sous R
+
+- Analyse semi-automatique des dates et des heures
+
+- Les fonctions vont essayer de trouver le séparateur et le format
+
+- Possibilité de rajouter l'indicateur de fuseau horaire via l'argument tz
+
+```{r echo=TRUE, eval=FALSE}
+library(lubridate)
+# Identifie l'ordre de l'année (y), le mois (m), le jour (d), l'heure (h), la minute (m) et la second (s) d'un élement fournis à R
+ymd()
+mdy()
+dmy()
+ymd_hms()
+# Beaucoup de possibilité, jeter un coup d'oeil sur le cheatsheet
+```
+
+## Manipulation des élements date-temps
+
+### Modification et extration
+
+```{r echo=TRUE, eval=FALSE}
+test_date_time <- ymd_hms("2022-12-05 12:00:00", tz = "CET")
+# pour une extraction des informations
+second()
+hour()
+day()
+wday()
+month()
+...
+# pour modifier les informations utiliser les fonctions précédentes avec une assignation (<-)
+```
+
+## Tour d'horizon
+
+- Les fuseaux horaires, un cauchemar par le passé, maintenant ça va mieux
+
+    - Deux fonctions clées
+
+```{r echo=TRUE, eval=FALSE}
+# Pour exprimer un élément dans un autre fuseau horaire
+with_tz()
+# Pour forcer le changement d'un fuseau horaire mais on concervant la même heure
+force_tz()
+```
+<br/>
+
+- 3 classes pour calculer des intervalles de temps
+
+    - Periode, durée et intervalle
+    
+    - Le plus "dure" est de définir votre date-temps, après c'est une syntaxe mathématique
+
+## Bonus
+
+- Les fonctions sont vectorisables !
+
+- Sur certains jeux de données, les dates-temps sont stocké en seconde depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas la :
+
+```{r echo=TRUE, eval=FALSE}
+as_datetime()
+```
+
+- Possibilité de faire des arrondies
+
+```{r echo=TRUE, eval=FALSE}
+# arrondie inférieur sur "l'unité" la plus proche
+floor_date()
+# arrondie inférieur sur "l'unité" la plus proche
+round_date()
+# arrondie supérieur sur "l'unité" la plus proche
+ceiling_date()
+```
 
 # Partie 5 : Visualisation des données avec `ggplot2`
 
