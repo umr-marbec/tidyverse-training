@@ -611,30 +611,30 @@
 </ul></li>
 </ul>
 </section>
-<section id="exercice-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 1</h2>
+<section id="exercice-2.1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 2.1</h2>
 <ul>
 <li>supprimer les données dupliquées dans le jeu de données “global_reef_fish_abundance_and_biomass”</li>
-<li>En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l’espèce est différente de “Mullidae” ou “Kyphosidae” et pour finir ou la classe de taille associé est &lt;= 10.</li>
+<li>En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l’espèce est différente de “Mullidae” ou “Apogonidae” et pour finir ou la classe de taille associé est &lt;= 10.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a href="#cb4-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-1-corrigé" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 1 corrigé</h2>
+<section id="exercice-2.1-corrigé" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 2.1 corrigé</h2>
 <ul>
 <li>A l’aide d’une fonction dplyr, verifier s’il y a des données dupliquées dans le jeu de données “global_reef_fish_biomass”</li>
-<li>En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l’espèce est différente de “Mullidae” ou “Kyphosidae” et pour finir ou la classe de taille associé est &lt;= 10.</li>
+<li>En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l’espèce est différente de “Mullidae” ou “Apogonidae” et pour finir ou la classe de taille associé est &lt;= 10.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb5-1" class="hljs-ln-code"><a href="#cb5-1"></a><span class="co"># solution</span></span>
-<span id="cb5-2" class="hljs-ln-code"><a href="#cb5-2"></a>tmp1 <span class="ot">&lt;-</span> <span class="fu">distinct</span>(<span class="at">.data =</span> global_reef_fish_biomass)</span>
-<span id="cb5-3" class="hljs-ln-code"><a href="#cb5-3"></a>tmp2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="at">.data =</span> tmp1,</span>
-<span id="cb5-4" class="hljs-ln-code"><a href="#cb5-4"></a>               biomass <span class="sc">!=</span> <span class="dv">0</span></span>
-<span id="cb5-5" class="hljs-ln-code"><a href="#cb5-5"></a>               <span class="sc">&amp;</span> <span class="sc">!</span> family <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mullidae"</span>,</span>
-<span id="cb5-6" class="hljs-ln-code"><a href="#cb5-6"></a>                                 <span class="st">"Kyphosidae"</span>)</span>
-<span id="cb5-7" class="hljs-ln-code"><a href="#cb5-7"></a>               <span class="sc">&amp;</span> size_class <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2" class="hljs-ln-code"><a href="#cb5-2"></a>biomass_exercice2_1_distinct <span class="ot">&lt;-</span> <span class="fu">distinct</span>(<span class="at">.data =</span> global_reef_fish_biomass)</span>
+<span id="cb5-3" class="hljs-ln-code"><a href="#cb5-3"></a>biomass_exercice2_1_filter <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="at">.data =</span> biomass_exercice1_distinct,</span>
+<span id="cb5-4" class="hljs-ln-code"><a href="#cb5-4"></a>                                     biomass <span class="sc">!=</span> <span class="dv">0</span></span>
+<span id="cb5-5" class="hljs-ln-code"><a href="#cb5-5"></a>                                     <span class="sc">&amp;</span> <span class="sc">!</span> family <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mullidae"</span>,</span>
+<span id="cb5-6" class="hljs-ln-code"><a href="#cb5-6"></a>                                                       <span class="st">"Apogonidae"</span>)</span>
+<span id="cb5-7" class="hljs-ln-code"><a href="#cb5-7"></a>                                     <span class="sc">&amp;</span> size_class <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="amélioration-de-la-lisibilité-du-code" class="slide level2">
@@ -643,11 +643,11 @@
 <p>Grâce à syntaxe de dplyr, on peut répondre à ce besoin de deux manières différentes.</p>
 <p>La première est d’effectuer toutes les opérations en une fois en les emboîtant :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>tmp1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="at">.data =</span> <span class="fu">distinct</span>(<span class="at">.data =</span> global_reef_fish_biomass),</span>
-<span id="cb6-2"><a href="#cb6-2"></a>               biomass <span class="sc">!=</span> <span class="dv">0</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>               <span class="sc">&amp;</span> <span class="sc">!</span> family <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mullidae"</span>,</span>
-<span id="cb6-4"><a href="#cb6-4"></a>                                 <span class="st">"Kyphosidae"</span>)</span>
-<span id="cb6-5"><a href="#cb6-5"></a>               <span class="sc">&amp;</span> size_class <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>biomass_exercice2_1_distinct_filter <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="at">.data =</span> <span class="fu">distinct</span>(<span class="at">.data =</span> global_reef_fish_biomass),</span>
+<span id="cb6-2"><a href="#cb6-2"></a>                                              biomass <span class="sc">!=</span> <span class="dv">0</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>                                              <span class="sc">&amp;</span> <span class="sc">!</span> family <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mullidae"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>                                                                <span class="st">"Apogonidae"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a>                                              <span class="sc">&amp;</span> size_class <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Cependant cela à plusieurs inconvénients. La structure est peu lisible, les opérations apparaissent dans l’ordre inverse de leur réalisation et il est difficile de voir quel paramètre se rapporte à quelle fonction.</p>
 </section>
@@ -662,11 +662,11 @@
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># solution</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>tmp1 <span class="ot">&lt;-</span> <span class="fu">distinct</span>(<span class="at">.data =</span> global_reef_fish_biomass) <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>biomass_exercice2_1_distinct_filter <span class="ot">&lt;-</span> <span class="fu">distinct</span>(<span class="at">.data =</span> global_reef_fish_biomass) <span class="sc">%&gt;%</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">filter</span>(biomass <span class="sc">!=</span> <span class="dv">0</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>               <span class="sc">&amp;</span> <span class="sc">!</span> family <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mullidae"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5"></a>                                 <span class="st">"Kyphosidae"</span>)</span>
-<span id="cb7-6"><a href="#cb7-6"></a>               <span class="sc">&amp;</span> size_class <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4"></a>         <span class="sc">&amp;</span> <span class="sc">!</span> family <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mullidae"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5"></a>                           <span class="st">"Apogonidae"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6"></a>         <span class="sc">&amp;</span> size_class <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="encore-quelques-fonctions-de-manipulation-de-lignes" class="slide level2">
@@ -725,16 +725,16 @@
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">rename</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-2" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 2</h2>
+<section id="exercice-2.2" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 2.2</h2>
 <ul>
 <li>À partir du jeu de données de sortie de l’exercice 1</li>
 <li>Crée une variable “survey_id_full” qui est la concaténation des variables survey_id, species_name et size_class</li>
 <li>Placer cette nouvelle colonne avant la colonne survey_id</li>
-<li>Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne survey_id</li>
+<li>Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name</li>
 <li>Renommer la variable size_class en size_class_cm</li>
 <li>Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm</li>
-<li>Supprimer les variables size_class et size_class_cm</li>
+<li>Supprimer la variable size_class_cm</li>
 <li>Trier par ordre décroissant les données en fonction de la variable size_class_mm</li>
 <li>Utiliser des pipes à la fin pour avoir une syntaxe “propre” et souffler un bon coup :)</li>
 </ul>
@@ -742,13 +742,13 @@
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb13-1" class="hljs-ln-code"><a href="#cb13-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-2-corrigé" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 2 corrigé</h2>
+<section id="exercice-2.2-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 2.2 corrigé</h2>
 <ul>
 <li>À partir du jeu de données de sortie de l’exercice 1</li>
 <li>Crée une variable “survey_id_full” qui est la concaténation des variables survey_id, species_name et size_class</li>
 <li>Placer cette nouvelle colonne avant la colonne survey_id</li>
-<li>Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne survey_id</li>
+<li>Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name</li>
 <li>Renommer la variable size_class en size_class_cm</li>
 <li>Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm</li>
 <li>Supprimer la variable size_class_cm</li>
@@ -757,15 +757,15 @@
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb14-1" class="hljs-ln-code"><a href="#cb14-1"></a><span class="co"># solution</span></span>
-<span id="cb14-2" class="hljs-ln-code"><a href="#cb14-2"></a>tmp3 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">.data =</span> tmp1,</span>
-<span id="cb14-3" class="hljs-ln-code"><a href="#cb14-3"></a>               <span class="at">survey_id_full =</span> <span class="fu">paste</span>(survey_id,</span>
-<span id="cb14-4" class="hljs-ln-code"><a href="#cb14-4"></a>                                      species_name,</span>
-<span id="cb14-5" class="hljs-ln-code"><a href="#cb14-5"></a>                                      size_class,</span>
-<span id="cb14-6" class="hljs-ln-code"><a href="#cb14-6"></a>                                      <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-2" class="hljs-ln-code"><a href="#cb14-2"></a>biomass_exercice2_2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">.data =</span> biomass_exercice2_1_distinct_filter,</span>
+<span id="cb14-3" class="hljs-ln-code"><a href="#cb14-3"></a>                              <span class="at">survey_id_full =</span> <span class="fu">paste</span>(survey_id,</span>
+<span id="cb14-4" class="hljs-ln-code"><a href="#cb14-4"></a>                                                     species_name,</span>
+<span id="cb14-5" class="hljs-ln-code"><a href="#cb14-5"></a>                                                     size_class,</span>
+<span id="cb14-6" class="hljs-ln-code"><a href="#cb14-6"></a>                                                     <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb14-7" class="hljs-ln-code"><a href="#cb14-7"></a>  <span class="fu">relocate</span>(survey_id_full,</span>
 <span id="cb14-8" class="hljs-ln-code"><a href="#cb14-8"></a>           <span class="at">.before =</span> survey_id) <span class="sc">%&gt;%</span></span>
 <span id="cb14-9" class="hljs-ln-code"><a href="#cb14-9"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb14-10" class="hljs-ln-code"><a href="#cb14-10"></a>                <span class="sc">-</span>survey_id) <span class="sc">%&gt;%</span></span>
+<span id="cb14-10" class="hljs-ln-code"><a href="#cb14-10"></a>                <span class="sc">-</span>reporting_name) <span class="sc">%&gt;%</span></span>
 <span id="cb14-11" class="hljs-ln-code"><a href="#cb14-11"></a>  <span class="fu">rename</span>(<span class="at">size_class_cm =</span> size_class) <span class="sc">%&gt;%</span></span>
 <span id="cb14-12" class="hljs-ln-code"><a href="#cb14-12"></a>  <span class="fu">mutate</span>(<span class="at">size_class_mm =</span> size_class_cm <span class="sc">*</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb14-13" class="hljs-ln-code"><a href="#cb14-13"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>size_class_cm) <span class="sc">%&gt;%</span></span>
@@ -824,8 +824,8 @@
 <li>Cette notion de groupe peut être utilisé avec d’autres fonctions (comme un mutate)</li>
 </ul>
 </section>
-<section id="exercice-3" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 3</h2>
+<section id="exercice-2.3" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 2.3</h2>
 <ul>
 <li>À partir du jeu de données de sortie de l’exercice 2</li>
 <li>Calculer la biomasse moyenne par espèce et classe de taille</li>
@@ -835,8 +835,8 @@
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb18-1" class="hljs-ln-code"><a href="#cb18-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-3-corrigé" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 3 corrigé</h2>
+<section id="exercice-2.3-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 2.3 corrigé</h2>
 <ul>
 <li>À partir du jeu de données de sortie de l’exercice 2</li>
 <li>Calculer la biomasse moyenne par espèce et classe de taille</li>
@@ -845,16 +845,17 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb19-1" class="hljs-ln-code"><a href="#cb19-1"></a><span class="co"># solution</span></span>
 <span id="cb19-2" class="hljs-ln-code"><a href="#cb19-2"></a><span class="co"># group_by sur espece et class de taille, faire la somme à ce moment la</span></span>
-<span id="cb19-3" class="hljs-ln-code"><a href="#cb19-3"></a>tmp4 <span class="ot">&lt;-</span> tmp3 <span class="sc">%&gt;%</span></span>
-<span id="cb19-4" class="hljs-ln-code"><a href="#cb19-4"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(species_name,</span>
-<span id="cb19-5" class="hljs-ln-code"><a href="#cb19-5"></a>                  size_class_mm) <span class="sc">%&gt;%</span></span>
-<span id="cb19-6" class="hljs-ln-code"><a href="#cb19-6"></a>  <span class="fu">summarise</span>(<span class="at">mean_biomass =</span> <span class="fu">mean</span>(<span class="at">x =</span> biomass),</span>
-<span id="cb19-7" class="hljs-ln-code"><a href="#cb19-7"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb19-8" class="hljs-ln-code"><a href="#cb19-8"></a></span>
-<span id="cb19-9" class="hljs-ln-code"><a href="#cb19-9"></a>tmp5 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(<span class="at">.data =</span> tmp3,</span>
-<span id="cb19-10" class="hljs-ln-code"><a href="#cb19-10"></a>                        family) <span class="sc">%&gt;%</span></span>
-<span id="cb19-11" class="hljs-ln-code"><a href="#cb19-11"></a>  <span class="fu">summarise</span>(<span class="at">nb_sample_family =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb19-12" class="hljs-ln-code"><a href="#cb19-12"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> <span class="fu">sum</span>(nb_sample_family))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-3" class="hljs-ln-code"><a href="#cb19-3"></a>biomass_exercice2_3 <span class="ot">&lt;-</span> biomass_exercice2_2 <span class="sc">%&gt;%</span></span>
+<span id="cb19-4" class="hljs-ln-code"><a href="#cb19-4"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(survey_id_full) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5" class="hljs-ln-code"><a href="#cb19-5"></a>  <span class="fu">mutate</span>(<span class="at">sum_biomass =</span> <span class="fu">sum</span>(<span class="at">x =</span> biomass)) <span class="sc">%&gt;%</span></span>
+<span id="cb19-6" class="hljs-ln-code"><a href="#cb19-6"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb19-7" class="hljs-ln-code"><a href="#cb19-7"></a>  <span class="fu">distinct</span>(survey_id_full,</span>
+<span id="cb19-8" class="hljs-ln-code"><a href="#cb19-8"></a>           <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-9" class="hljs-ln-code"><a href="#cb19-9"></a></span>
+<span id="cb19-10" class="hljs-ln-code"><a href="#cb19-10"></a>biomass_exercice2_3_sample_verification <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(<span class="at">.data =</span> biomass_exercice2_2,</span>
+<span id="cb19-11" class="hljs-ln-code"><a href="#cb19-11"></a>                                                           family) <span class="sc">%&gt;%</span></span>
+<span id="cb19-12" class="hljs-ln-code"><a href="#cb19-12"></a>  <span class="fu">summarise</span>(<span class="at">nb_sample_family =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb19-13" class="hljs-ln-code"><a href="#cb19-13"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> <span class="fu">sum</span>(nb_sample_family))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="fonction-bonus-très-utile" class="slide level2 smaller">
@@ -927,8 +928,8 @@
 <span id="cb22-8"><a href="#cb22-8"></a><span class="fu">full_join</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-4" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 4</h2>
+<section id="exercice-2.4" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 2.4</h2>
 <ul>
 <li>À partir du jeu de données de sortie de l’exercice 2</li>
 <li>Calculer la biomasse moyenne par espèce et classe de taille</li>
@@ -938,8 +939,8 @@
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb23-1" class="hljs-ln-code"><a href="#cb23-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-4-corrigé" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 4 corrigé</h2>
+<section id="exercice-2.4-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 2.4 corrigé</h2>
 <ul>
 <li>À partir du jeu de données de sortie de l’exercice précédent</li>
 <li>Calculer la biomasse moyenne par espèce et classe de taille</li>
@@ -947,16 +948,12 @@
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb24-1" class="hljs-ln-code"><a href="#cb24-1"></a><span class="co"># solution</span></span>
-<span id="cb24-2" class="hljs-ln-code"><a href="#cb24-2"></a>global_reef_fish_biomass_light <span class="ot">&lt;-</span> <span class="fu">slice_sample</span>(<span class="at">.data =</span> global_reef_fish_biomass,</span>
-<span id="cb24-3" class="hljs-ln-code"><a href="#cb24-3"></a>                                               <span class="at">prop =</span> <span class="fl">0.5</span>)</span>
-<span id="cb24-4" class="hljs-ln-code"><a href="#cb24-4"></a>tmp6 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> global_reef_fish_biomass_light,</span>
-<span id="cb24-5" class="hljs-ln-code"><a href="#cb24-5"></a>                   <span class="at">y =</span> global_reef_fish_abundance,</span>
-<span id="cb24-6" class="hljs-ln-code"><a href="#cb24-6"></a>                   <span class="at">by =</span> <span class="st">"survey_id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-2" class="hljs-ln-code"><a href="#cb24-2"></a>biomass_survey_exercice2_4 <span class="ot">&lt;-</span> biomass_exercice2_3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
-<section id="partie-iii-nettoyage-des-données-avec-tidyr" class="title-slide slide level1 center">
-<h1>Partie III : Nettoyage des données avec <code>tidyr</code></h1>
+<section id="partie-3-nettoyage-des-données-avec-tidyr" class="title-slide slide level1 center">
+<h1>Partie 3 : Nettoyage des données avec <code>tidyr</code></h1>
 
 <img data-src="images/logo_tidyr.png" class="r-stretch"></section>
 <section id="section-1" class="slide level2">
@@ -1134,8 +1131,8 @@
 </div></li>
 </ul>
 </section>
-<section id="exercice-1-1" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 1</h2>
+<section id="exercice-3.1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3.1</h2>
 <ul>
 <li>Chargez les données d’abondance. Les données sont elles Tidy ?</li>
 </ul>
@@ -1143,8 +1140,8 @@
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb42-1" class="hljs-ln-code"><a href="#cb42-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-1-corrigé-1" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 1 corrigé</h2>
+<section id="exercice-3.1-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3.1 corrigé</h2>
 <ul>
 <li>Chargez les données d’abondance. Les données sont elles Tidy ?</li>
 </ul>
@@ -1154,8 +1151,8 @@
 <span id="cb43-3" class="hljs-ln-code"><a href="#cb43-3"></a><span class="co"># Non les données ne sont pas tidy, car elles sont en format wide</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-2-1" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 2</h2>
+<section id="exercice-3.2" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3.2</h2>
 <ul>
 <li>Transformez les en format tidy. Les nouvelles colonnes seront “sp_size” et “abundance”</li>
 <li>Créez une nouvelle variables “pk” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”. Pensez à enchainer les opérations</li>
@@ -1164,8 +1161,8 @@
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb44-1" class="hljs-ln-code"><a href="#cb44-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-2-corrigé-1" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 2 corrigé</h2>
+<section id="exercice-3.2-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3.2 corrigé</h2>
 <ul>
 <li>Transformez les en format tidy. Les nouvelles colonnes seront “sp_size” et “abundance”</li>
 <li>Créez une nouvelle variables “pk” à partir des colonnes survey_id et sp_size avec comme séparateur un “_”. Pensez à enchainer les opérations</li>
@@ -1178,8 +1175,8 @@
 <span id="cb45-5" class="hljs-ln-code"><a href="#cb45-5"></a>  <span class="fu">unite</span>(.,<span class="at">col=</span><span class="st">"pk"</span>,<span class="fu">c</span>(survey_id,sp_size),<span class="at">sep=</span><span class="st">"_"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-3-1" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 3</h2>
+<section id="exercice-3.3" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3.3</h2>
 <ul>
 <li>Créez un seul tableau regroupant biomasse et abondance</li>
 </ul>
@@ -1187,8 +1184,8 @@
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb46-1" class="hljs-ln-code"><a href="#cb46-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-3-corrigé-1" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 3 corrigé</h2>
+<section id="exercice-3.3-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3.3 corrigé</h2>
 <ul>
 <li>Créez un seul tableau regroupant biomasse et abondance</li>
 </ul>
@@ -1198,8 +1195,8 @@
 <span id="cb47-3" class="hljs-ln-code"><a href="#cb47-3"></a>  <span class="fu">left_join</span>(.,abundance_long,<span class="at">by=</span><span class="st">"pk"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-4-1" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 4</h2>
+<section id="exercice-3.4" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3.4</h2>
 <ul>
 <li>Créez 2 nouvelles colonnes “genus” et “species” à partir de species_name</li>
 </ul>
@@ -1207,8 +1204,8 @@
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb48-1" class="hljs-ln-code"><a href="#cb48-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-4-corrigé-1" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 4 corrigé</h2>
+<section id="exercice-3.4-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3.4 corrigé</h2>
 <ul>
 <li>Créez 2 nouvelles colonnes “genus” et “species” à partir de species_name</li>
 </ul>
@@ -1218,8 +1215,8 @@
 <span id="cb49-3" class="hljs-ln-code"><a href="#cb49-3"></a>  <span class="fu">separate</span>(.,species_name,<span class="at">into =</span> <span class="fu">c</span>(<span class="st">"genus"</span>,<span class="st">"species"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-5" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 5</h2>
+<section id="exercice-3.5" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3.5</h2>
 <ul>
 <li>Transformez le tibble en sf object avec la commande sf::st_as_sf(survey,coords =c(“latitude”,“longitude”) ,remove=FALSE).</li>
 </ul>
@@ -1227,8 +1224,8 @@
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb50-1" class="hljs-ln-code"><a href="#cb50-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-5-corrigé" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 5 corrigé</h2>
+<section id="exercice-3.5-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3.5 corrigé</h2>
 <ul>
 <li>Transformez le tibble en sf object avec la commande sf::st_as_sf(survey,coords =c(“latitude”,“longitude”) ,remove=FALSE).</li>
 </ul>
@@ -1237,8 +1234,8 @@
 <span id="cb51-2" class="hljs-ln-code"><a href="#cb51-2"></a>data_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(biomass_abundance,<span class="at">coords =</span><span class="fu">c</span>(<span class="st">"latitude"</span>,<span class="st">"longitude"</span>) ,<span class="at">remove=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-6" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 6</h2>
+<section id="exercice-3.6" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3.6</h2>
 <ul>
 <li>Corrigez l’erreur</li>
 </ul>
@@ -1246,27 +1243,33 @@
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb52-1" class="hljs-ln-code"><a href="#cb52-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-6-corrigé" class="slide level2 smaller" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 6 corrigé</h2>
+<section id="exercice-3.6-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3.6 corrigé</h2>
 <ul>
 <li>Corrigez l’erreur</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb53-1" class="hljs-ln-code"><a href="#cb53-1"></a><span class="co"># solution</span></span>
-<span id="cb53-2" class="hljs-ln-code"><a href="#cb53-2"></a>data_sf <span class="ot">&lt;-</span> biomass_abundance <span class="sc">%&gt;%</span></span>
+<span id="cb53-2" class="hljs-ln-code"><a href="#cb53-2"></a>biomass_survey_abundance_exercice3_6 <span class="ot">&lt;-</span> biomass_abundance <span class="sc">%&gt;%</span></span>
 <span id="cb53-3" class="hljs-ln-code"><a href="#cb53-3"></a>  <span class="fu">drop_na</span>(latitude) <span class="sc">%&gt;%</span></span>
 <span id="cb53-4" class="hljs-ln-code"><a href="#cb53-4"></a>  <span class="fu">drop_na</span>(longitude) <span class="sc">%&gt;%</span></span>
 <span id="cb53-5" class="hljs-ln-code"><a href="#cb53-5"></a>  sf<span class="sc">::</span><span class="fu">st_as_sf</span>(.,<span class="at">coords =</span><span class="fu">c</span>(<span class="st">"latitude"</span>,<span class="st">"longitude"</span>) ,<span class="at">remove=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
-<section id="partie-v-manipulation-des-dates-avec-lubridate" class="title-slide slide level1 center">
-<h1>Partie V : Manipulation des dates avec <code>lubridate</code></h1>
+<section>
+<section id="partie-4-extension-à-la-manipulation-de-données-cas-spécifiques" class="title-slide slide level1 center">
+<h1>Partie 4 : Extension à la manipulation de données, cas spécifiques</h1>
 
 </section>
-
+<section id="manipuler-du-texte-avec-stringr" class="slide level2">
+<h2>4.1 : Manipuler du texte avec stringr</h2>
+</section>
+<section id="manipuler-des-dates-avec-lubridate" class="slide level2">
+<h2>4.2 : Manipuler des dates avec lubridate</h2>
+</section></section>
 <section>
-<section id="partie-vi-visualisation-des-données-avec-ggplot2" class="title-slide slide level1 center">
-<h1>Partie VI : Visualisation des données avec <code>ggplot2</code></h1>
+<section id="partie-5-visualisation-des-données-avec-ggplot2" class="title-slide slide level1 center">
+<h1>Partie 5 : Visualisation des données avec <code>ggplot2</code></h1>
 
 </section>
 <section id="ggplot-cest-comme-la-chirurgie-aesthétique" class="slide level2">
