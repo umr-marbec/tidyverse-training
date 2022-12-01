@@ -45,6 +45,9 @@ jobs:
             MASS
             viridis
             ggpubr
+            raster
+            sf
+            rnaturalearth
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2

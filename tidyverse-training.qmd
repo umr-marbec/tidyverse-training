@@ -34,6 +34,9 @@ library(forcats)
 library(MASS)
 library(viridis)
 library(ggpubr)
+library(raster)
+library(sf)
+library(rnaturalearth)
 ```
 
 #  {background-image="images/background_title.png"}
@@ -579,7 +582,7 @@ biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
 
 # Partie 3 : Nettoyage des données avec `tidyr`
 
-![](images/logo_tidyr.png)
+<center>![](images/logo_tidyr.png){width="20%"}<center>
 
 ## 
 
@@ -1023,11 +1026,11 @@ Pour toi Mathieu ;)
 
 ## Rends la manipulation des dates et du temps presque agréable sous R
 
-- Analyse semi-automatique des dates et des heures
+-   Analyse semi-automatique des dates et des heures
 
-- Les fonctions vont essayer de trouver le séparateur et le format
+-   Les fonctions vont essayer de trouver le séparateur et le format
 
-- Possibilité de rajouter l'indicateur de fuseau horaire via l'argument tz
+-   Possibilité de rajouter l'indicateur de fuseau horaire via l'argument tz
 
 ```{r echo=TRUE, eval=FALSE}
 library(lubridate)
@@ -1057,9 +1060,9 @@ month()
 
 ## Tour d'horizon
 
-- Les fuseaux horaires, un cauchemar par le passé, maintenant ça va mieux
+-   Les fuseaux horaires, un cauchemar par le passé, maintenant ça va mieux
 
-    - Deux fonctions clées
+    -   Deux fonctions clées
 
 ```{r echo=TRUE, eval=FALSE}
 # Pour exprimer un élément dans un autre fuseau horaire
@@ -1067,25 +1070,26 @@ with_tz()
 # Pour forcer le changement d'un fuseau horaire mais on concervant la même heure
 force_tz()
 ```
+
 <br/>
 
-- 3 classes pour calculer des intervalles de temps
+-   3 classes pour calculer des intervalles de temps
 
-    - Periode, durée et intervalle
-    
-    - Le plus "dure" est de définir votre date-temps, après c'est une syntaxe mathématique
+    -   Periode, durée et intervalle
+
+    -   Le plus "dure" est de définir votre date-temps, après c'est une syntaxe mathématique
 
 ## Bonus
 
-- Les fonctions sont vectorisables !
+-   Les fonctions sont vectorisables !
 
-- Sur certains jeux de données, les dates-temps sont stocké en seconde depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas la :
+-   Sur certains jeux de données, les dates-temps sont stocké en seconde depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas la :
 
 ```{r echo=TRUE, eval=FALSE}
 as_datetime()
 ```
 
-- Possibilité de faire des arrondies
+-   Possibilité de faire des arrondies
 
 ```{r echo=TRUE, eval=FALSE}
 # arrondie inférieur sur "l'unité" la plus proche
@@ -1931,3 +1935,354 @@ Interrogation au niveau des perciformes ...
 ```
 
 </center>
+
+
+  
+ ## La cartographie avec ggplot2
+
+Toutes les fonctions et la syntaxe montraient précédemment fonctionnent ici
+
+```{r echo=TRUE, eval=FALSE}
+# Pour cette partie nous utiliserons un shape file des pays de la librarie rnaturalearth
+library(rnaturalearth)
+world_boundaries <- ne_countries(returnclass = "sf", scale ="medium") 
+dim(world_boundaries)
+head(world_boundaries)
+```
+
+-   Plotter des données spatialisées
+
+```{r echo=TRUE, eval=FALSE}
+# Pour les objets spatialisés de type vectoriels au format sf
+geom_sf()
+# Permet d'extraire les coordonnées d'un objet sf
+stat_sf_coordinates()
+# Pour les objets spatialisés au format raster
+geom_raster()
+# Attention geom_raster ne reçoit pas un objet directement au format raster 
+#mais un data frame
+```
+
+##
+
+-   Applications
+
+	- Visualiser la carte
+ 
+```{r}
+map1 <- ggplot(data = world_boundaries) + 
+  geom_sf(fill="transparent") +
+  theme_bw()
+map1
+```
+
+##
+
+-   Applications
+
+	- Afficher sur chaque pays correspond un rond dont la taille est proportionnelle à la population
+
+```{r, eval=FALSE}
+map2 <- map_1 + 
+  stat_sf_coordinates(aes(size=pop_est, fill=gdp_md_est),color = "black",shape=21, data = world_boundaries) +
+  labs(fill="GDP") +
+scale_size_binned(breaks = quantile(world_boundaries$pop_est, probs = seq(0,1,0.1),na.rm=TRUE)) +
+  theme_bw()
+map2 
+``` 
+
+##
+
+-   Applications
+
+	- Créer un raster et le visualiser
+
+::: incremental
+
+```{r, eval=FALSE}
+r <- raster(ncols=5, nrows=5)
+r1 <- setValues(r, runif(ncell(r)))
+
+rastdf <- as.data.frame(r1,xy=TRUE)
+head(rastdf)
+```
+```{r, eval=FALSE}
+map3.1 <- ggplot() +
+    geom_raster(data=rastdf, aes(x=x,y=y))
+Map3.1
+```
+
+```{r, eval=FALSE}
+# Ajouter l'argument fill 
+map3.2 <- ggplot() +
+    geom_raster(data=rastdf, aes(x=x,y=y,fill=layer))
+map3.2
+```
+:::
+
+##
+
+-   Ajouter des étiquettes et du texte
+
+```{r echo=TRUE, eval=FALSE}
+# Afficher du texte
+#Interet de l'argument check_overlap
+geom_sf_text()
+# Afficher des étiquettes
+geom_sf_label()
+```
+
+## {.smaller}
+
+-   Applications
+
+	- Afficher sous format texte le code ISO3 des pays
+```{r, eval=FALSE}
+map_4.1 <- map1 +
+  geom_sf_text(aes(label = adm0_a3),vjust=-0.5,fontface="italic",colour="blue") +
+  theme_bw()
+map4.1
+```
+	- Ajout de l'argument check_overlap. Que se passe t'il?
+
+```{r, eval=FALSE}
+map_4.2 <- map1 +
+  geom_sf_text(aes(label = adm0_a3),vjust=-0.5,check_overlap=TRUE,fontface="italic",colour="blue") +
+  theme_bw()
+map4.2
+```
+
+	- Afficher sous format étiquette le code ISO3 des pays
+
+```{r, eval=FALSE}
+map_5 <- map1 +
+  geom_sf_label(aes(label = adm0_a3),vjust=-0.5,colour="blue",fill="cyan") +
+  theme_bw()
+Map5
+```
+
+##
+
+-   Peaufiner les cartes avec `ggspatial`
+
+```{r echo=TRUE, eval=FALSE}
+# Ajout de la barre d'échelle
+annotation_scale()
+# Ajout de la flèche du nord
+annotation_north_arrow()
+```
+
+##
+
+- Application
+
+	- Ajouter la barre d'échelle
+
+```{r, eval=FALSE}
+# Le filter peut aussi etre fait directement dans le graphe
+map6 <- ggplot(data = world_boundaries %>% filter(continent=="South America")) +
+  geom_sf() +
+ annotation_scale(location = "br", line_width = .5) +
+  theme_bw()
+map6
+```
+
+##
+
+- Application 
+
+	- Ajouter la flèche du nord
+
+```{r, eval=FALSE}
+map_6 <- map_5 +
+  annotation_north_arrow(location = "tl", height = unit(0.7, "cm"), width = unit(0.7, "cm"))
+```
+  
+
+## Exercice 5.X {.smaller auto-animate="true"}
+  
+- Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleur cohérente avec les données et masquez la légende
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 5.X corrigé {.smaller auto-animate="true"}
+  
+- Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleur cohérente avec les données et masquez la légende
+
+```{r, eval=FALSE}
+# solution
+med_map1 <- ggplot(data = survey_med) +
+  geom_sf(aes(color=site_name, shape=method), show.legend = FALSE) +
+  scale_colour_viridis_d() +
+  #scale_shape_manual(values = rep(15:17, len = 8)) +
+  theme_bw()
+med_map1
+```
+
+
+## Exercice 5.X+1 {.smaller auto-animate="true"}
+
+- Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 5.X+1 corrigé {.smaller auto-animate="true"}
+
+- Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+med_countries <- world_boundaries %>%
+  filter(continent %in%c("Europe","Africa","Asia"))
+med_map2 <- med_map1  +
+  geom_sf(data=med_country, fill="gray92")
+med_map2
+```
+
+## Exercice 5.X+2 {.smaller auto-animate="true"}
+
+- Recentrez la carte autour des pays d'intérêts	
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 5.X+2 corrigé {.smaller auto-animate="true"}
+
+- Recentrez la carte autour des pays d'intérêts	
+
+```{r, eval=FALSE}
+# solution
+med_map2 <- med_map1  +
+  geom_sf(data=med_country, fill="gray92") +
+xlim(-20,60) +
+ylim(4,-10)
+med_map2
+```
+
+## Exercice 5.X+3 {.smaller auto-animate="true"}
+
+- Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice .X+3 corrigé {.smaller auto-animate="true"}
+
+- Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+survey_med_nsample <- survey_med %>%
+  group_by(country) %>%
+  mutate(n_sample = n()) %>%
+  slice(1) %>%
+  data.frame() %>%
+  select(c(country,n_sample))
+country_med_nsample <- left_join(med_country,survey_med_sample,by=c("name"="country"))
+```
+
+```{r, eval=FALSE}
+med_map3 <- med_map2 +
+  stat_sf_coordinates(aes(size=n_sample),color = "white",fill="red",shape=21, data = country_med_nsample)
+med_map3
+```
+
+## Exercice X+4 {.smaller auto-animate="true"}
+
+- Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif)
+Que remarquez vous ?
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice X+4 corrigé {.smaller auto-animate="true"}
+
+- Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif)
+Que remarquez vous ?
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+bathy_med <- raster::raster("bathy_med.tif)
+rasdf <- as.data.frame(bathy_med,xy=TRUE)
+```
+```{r, eval=FALSE}
+# solution
+med_map4 <- med_map3 + geom_raster(data=rasdf, aes(x=x,y=y,fill=Gebco2019_500m))
+med_map4
+```
+
+## Exercice X+4 corrigé {.smaller auto-animate="true"}
+
+- Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif)
+Que remarquez vous ?
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+bathy_med <- raster::raster("bathy_med.tif)
+rasdf <- as.data.frame(bathy_med,xy=TRUE)
+```
+```{r, eval=FALSE}
+# solution
+med_map4 <- ggplot(data = survey_med) +
+  geom_raster(data=rasdf, aes(x=x,y=y,fill=Gebco2019_500m)) +
+  geom_sf(data=med_country, fill="gray92") +
+  geom_sf(aes(color=site_name, shape=methods), show.legend = FALSE) +
+  scale_colour_viridis_d() +
+  scale_shape_manual(values = rep(15:17, len = 8)) +
+  theme_bw()
+med_map4
+``` 
+
+## Exercice 5.X+5 {.smaller auto-animate="true"}
+
+- Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajouter une palette de couleur distinguant terre et mer pour la bathymétrie
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 5.X+5 corrigé {.smaller auto-animate="true"}
+
+- Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajouter une palette de couleur distinguant terre et mer pour la bathymétrie
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+med_map5 <- ggplot(data = survey_med) +
+  geom_raster(data=rasdf, aes(x=x,y=y,fill=Gebco2019_500m)) +
+  geom_sf(data=med_country, fill="gray92") +
+  geom_sf(aes(color=site_name, shape=methods), show.legend = FALSE) +
+  scale_colour_viridis_d() +
+  scale_shape_manual(values = rep(15:17, len = 8)) +
+  theme_bw() +
+  annotation_north_arrow(location = "tl", height = unit(0.7, "cm"), width = unit(0.7, "cm")) + 
+  labs(x="longitude",
+       y="latitude",
+       title="RLS mediterranean survey",
+       fill ="bathymétrie") +
+  scale_fill_gradient2(low = "blue", mid = "white", high = "brown")
+med_map5
+```
+
+## Exercice 5.X+6 {.smaller auto-animate="true"}
+
+- Sauvegardez votre belle carte :)
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 5.X+6 corrigé {.smaller auto-animate="true"}
+
+- Sauvegardez votre belle carte :)
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+ggsave("RLS_med.pdf",plot=med_map5, width = 15, height = 10, units = "cm")
+```
