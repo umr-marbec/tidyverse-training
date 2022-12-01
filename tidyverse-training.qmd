@@ -225,28 +225,28 @@ Renvoi une valeur TRUE ou FALSE
     -   & et plus fort que \|, il sera exécuté en premier
     -   une solution est d'utiliser des () pour séparer vos opérateurs
 
-## Exercice 1 {auto-animate="true"}
+## Exercice 2.1 {auto-animate="true"}
 
 -   supprimer les données dupliquées dans le jeu de données "global_reef_fish_abundance_and_biomass"
--   En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Kyphosidae" et pour finir ou la classe de taille associé est \<= 10.
+-   En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Apogonidae" et pour finir ou la classe de taille associé est \<= 10.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
 ```
 
-## Exercice 1 corrigé {auto-animate="true"}
+## Exercice 2.1 corrigé {auto-animate="true"}
 
 -   A l'aide d'une fonction dplyr, verifier s'il y a des données dupliquées dans le jeu de données "global_reef_fish_biomass"
--   En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Kyphosidae" et pour finir ou la classe de taille associé est \<= 10.
+-   En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Apogonidae" et pour finir ou la classe de taille associé est \<= 10.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-tmp1 <- distinct(.data = global_reef_fish_biomass)
-tmp2 <- filter(.data = tmp1,
-               biomass != 0
-               & ! family %in% c("Mullidae",
-                                 "Kyphosidae")
-               & size_class <= 10)
+biomass_exercice2_1_distinct <- distinct(.data = global_reef_fish_biomass)
+biomass_exercice2_1_filter <- filter(.data = biomass_exercice1_distinct,
+                                     biomass != 0
+                                     & ! family %in% c("Mullidae",
+                                                       "Apogonidae")
+                                     & size_class <= 10)
 ```
 
 ## Amélioration de la lisibilité du code
@@ -258,11 +258,11 @@ Grâce à syntaxe de dplyr, on peut répondre à ce besoin de deux manières dif
 La première est d'effectuer toutes les opérations en une fois en les emboîtant :
 
 ```{r echo=TRUE, eval=FALSE}
-tmp1 <- filter(.data = distinct(.data = global_reef_fish_biomass),
-               biomass != 0
-               & ! family %in% c("Mullidae",
-                                 "Kyphosidae")
-               & size_class <= 10)
+biomass_exercice2_1_distinct_filter <- filter(.data = distinct(.data = global_reef_fish_biomass),
+                                              biomass != 0
+                                              & ! family %in% c("Mullidae",
+                                                                "Apogonidae")
+                                              & size_class <= 10)
 ```
 
 Cependant cela à plusieurs inconvénients. La structure est peu lisible, les opérations apparaissent dans l'ordre inverse de leur réalisation et il est difficile de voir quel paramètre se rapporte à quelle fonction.
@@ -281,11 +281,11 @@ Cependant cela à plusieurs inconvénients. La structure est peu lisible, les op
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-tmp1 <- distinct(.data = global_reef_fish_biomass) %>%
+biomass_exercice2_1_distinct_filter <- distinct(.data = global_reef_fish_biomass) %>%
   filter(biomass != 0
-               & ! family %in% c("Mullidae",
-                                 "Kyphosidae")
-               & size_class <= 10)
+         & ! family %in% c("Mullidae",
+                           "Apogonidae")
+         & size_class <= 10)
 ```
 
 ## Encore quelques fonctions de manipulation de lignes
@@ -349,28 +349,12 @@ transmute()
 rename()
 ```
 
-## Exercice 2 {.smaller auto-animate="true"}
+## Exercice 2.2 {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice 1
 -   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
 -   Placer cette nouvelle colonne avant la colonne survey_id
--   Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne survey_id
--   Renommer la variable size_class en size_class_cm
--   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm
--   Supprimer les variables size_class et size_class_cm
--   Trier par ordre décroissant les données en fonction de la variable size_class_mm
--   Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
-
-```{r echo=TRUE, eval=FALSE}
-# solution
-```
-
-## Exercice 2 corrigé {.smaller auto-animate="true"}
-
--   À partir du jeu de données de sortie de l'exercice 1
--   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
--   Placer cette nouvelle colonne avant la colonne survey_id
--   Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne survey_id
+-   Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name
 -   Renommer la variable size_class en size_class_cm
 -   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm
 -   Supprimer la variable size_class_cm
@@ -379,15 +363,31 @@ rename()
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-tmp3 <- mutate(.data = tmp1,
-               survey_id_full = paste(survey_id,
-                                      species_name,
-                                      size_class,
-                                      sep = "_")) %>%
+```
+
+## Exercice 2.2 corrigé {.smaller auto-animate="true"}
+
+-   À partir du jeu de données de sortie de l'exercice 1
+-   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
+-   Placer cette nouvelle colonne avant la colonne survey_id
+-   Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name
+-   Renommer la variable size_class en size_class_cm
+-   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm
+-   Supprimer la variable size_class_cm
+-   Trier par ordre décroissant les données en fonction de la variable size_class_mm
+-   Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+biomass_exercice2_2 <- mutate(.data = biomass_exercice2_1_distinct_filter,
+                              survey_id_full = paste(survey_id,
+                                                     species_name,
+                                                     size_class,
+                                                     sep = "_")) %>%
   relocate(survey_id_full,
            .before = survey_id) %>%
   dplyr::select(-1,
-                -survey_id) %>%
+                -reporting_name) %>%
   rename(size_class_cm = size_class) %>%
   mutate(size_class_mm = size_class_cm * 10) %>%
   dplyr::select(-size_class_cm) %>%
@@ -446,7 +446,7 @@ ungroups()
 
 -   Cette notion de groupe peut être utilisé avec d'autres fonctions (comme un mutate)
 
-## Exercice 3 {.smaller auto-animate="true"}
+## Exercice 2.3 {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice 2
 -   Calculer la biomasse moyenne par espèce et classe de taille
@@ -456,7 +456,7 @@ ungroups()
 # solution
 ```
 
-## Exercice 3 corrigé {.smaller auto-animate="true"}
+## Exercice 2.3 corrigé {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice 2
 -   Calculer la biomasse moyenne par espèce et classe de taille
@@ -465,14 +465,15 @@ ungroups()
 ```{r echo=TRUE, eval=FALSE}
 # solution
 # group_by sur espece et class de taille, faire la somme à ce moment la
-tmp4 <- tmp3 %>%
-  dplyr::group_by(species_name,
-                  size_class_mm) %>%
-  summarise(mean_biomass = mean(x = biomass),
-            .groups = "drop")
+biomass_exercice2_3 <- biomass_exercice2_2 %>%
+  dplyr::group_by(survey_id_full) %>%
+  mutate(sum_biomass = sum(x = biomass)) %>%
+  ungroup() %>%
+  distinct(survey_id_full,
+           .keep_all = TRUE)
 
-tmp5 <- dplyr::group_by(.data = tmp3,
-                        family) %>%
+biomass_exercice2_3_sample_verification <- dplyr::group_by(.data = biomass_exercice2_2,
+                                                           family) %>%
   summarise(nb_sample_family = n()) %>%
   mutate(total = sum(nb_sample_family))
 ```
@@ -544,7 +545,7 @@ inner_join()
 full_join()
 ```
 
-## Exercice 4 {.smaller auto-animate="true"}
+## Exercice 2.4 {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice 2
 -   Calculer la biomasse moyenne par espèce et classe de taille
@@ -554,7 +555,7 @@ full_join()
 # solution
 ```
 
-## Exercice 4 corrigé {.smaller auto-animate="true"}
+## Exercice 2.4 corrigé {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice précédent
 -   Calculer la biomasse moyenne par espèce et classe de taille
@@ -562,14 +563,11 @@ full_join()
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-global_reef_fish_biomass_light <- slice_sample(.data = global_reef_fish_biomass,
-                                               prop = 0.5)
-tmp6 <- inner_join(x = global_reef_fish_biomass_light,
-                   y = global_reef_fish_abundance,
-                   by = "survey_id")
+biomass_survey_exercice2_4 <- biomass_exercice2_3
+
 ```
 
-# Partie III : Nettoyage des données avec `tidyr`
+# Partie 3 : Nettoyage des données avec `tidyr`
 
 ![](images/logo_tidyr.png)
 
@@ -765,7 +763,7 @@ popEU_wide
         ```
     :::
 
-## Exercice 1 {.smaller auto-animate="true"}
+## Exercice 3.1 {.smaller auto-animate="true"}
 
 -   Chargez les données d'abondance. Les données sont elles Tidy ?
 
@@ -773,7 +771,7 @@ popEU_wide
 # solution
 ```
 
-## Exercice 1 corrigé {.smaller auto-animate="true"}
+## Exercice 3.1 corrigé {.smaller auto-animate="true"}
 
 -   Chargez les données d'abondance. Les données sont elles Tidy ?
 
@@ -783,7 +781,7 @@ abundance <- read_delim(".data/Global_reef_fish_abundance.csv")
 # Non les données ne sont pas tidy, car elles sont en format wide
 ```
 
-## Exercice 2 {.smaller auto-animate="true"}
+## Exercice 3.2 {.smaller auto-animate="true"}
 
 -   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
 -   Créez une nouvelle variables "pk" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
@@ -792,7 +790,7 @@ abundance <- read_delim(".data/Global_reef_fish_abundance.csv")
 # solution
 ```
 
-## Exercice 2 corrigé {.smaller auto-animate="true"}
+## Exercice 3.2 corrigé {.smaller auto-animate="true"}
 
 -   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
 -   Créez une nouvelle variables "pk" à partir des colonnes survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
@@ -805,7 +803,7 @@ abundance_long <- abundance %>%
   unite(.,col="pk",c(survey_id,sp_size),sep="_")
 ```
 
-## Exercice 3 {.smaller auto-animate="true"}
+## Exercice 3.3 {.smaller auto-animate="true"}
 
 -   Créez un seul tableau regroupant biomasse et abondance
 
@@ -813,7 +811,7 @@ abundance_long <- abundance %>%
 # solution
 ```
 
-## Exercice 3 corrigé {.smaller auto-animate="true"}
+## Exercice 3.3 corrigé {.smaller auto-animate="true"}
 
 -   Créez un seul tableau regroupant biomasse et abondance
 
@@ -823,7 +821,7 @@ biomass_abundance <- biomass %>%
   left_join(.,abundance_long,by="pk")
 ```
 
-## Exercice 4 {.smaller auto-animate="true"}
+## Exercice 3.4 {.smaller auto-animate="true"}
 
 -   Créez 2 nouvelles colonnes "genus" et "species" à partir de species_name
 
@@ -831,7 +829,7 @@ biomass_abundance <- biomass %>%
 # solution
 ```
 
-## Exercice 4 corrigé {.smaller auto-animate="true"}
+## Exercice 3.4 corrigé {.smaller auto-animate="true"}
 
 -   Créez 2 nouvelles colonnes "genus" et "species" à partir de species_name
 
@@ -841,7 +839,7 @@ biomass_abundance <- biomass_abundance %>%
   separate(.,species_name,into = c("genus","species"))
 ```
 
-## Exercice 5 {.smaller auto-animate="true"}
+## Exercice 3.5 {.smaller auto-animate="true"}
 
 -   Transformez le tibble en sf object avec la commande sf::st_as_sf(survey,coords =c("latitude","longitude") ,remove=FALSE).
 
@@ -849,7 +847,7 @@ biomass_abundance <- biomass_abundance %>%
 # solution
 ```
 
-## Exercice 5 corrigé {.smaller auto-animate="true"}
+## Exercice 3.5 corrigé {.smaller auto-animate="true"}
 
 -   Transformez le tibble en sf object avec la commande sf::st_as_sf(survey,coords =c("latitude","longitude") ,remove=FALSE).
 
@@ -858,7 +856,7 @@ biomass_abundance <- biomass_abundance %>%
 data_sf <- sf::st_as_sf(biomass_abundance,coords =c("latitude","longitude") ,remove=FALSE)
 ```
 
-## Exercice 6 {.smaller auto-animate="true"}
+## Exercice 3.6 {.smaller auto-animate="true"}
 
 -   Corrigez l'erreur
 
@@ -866,21 +864,25 @@ data_sf <- sf::st_as_sf(biomass_abundance,coords =c("latitude","longitude") ,rem
 # solution
 ```
 
-## Exercice 6 corrigé {.smaller auto-animate="true"}
+## Exercice 3.6 corrigé {.smaller auto-animate="true"}
 
 -   Corrigez l'erreur
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-data_sf <- biomass_abundance %>%
+biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
   drop_na(latitude) %>%
   drop_na(longitude) %>%
   sf::st_as_sf(.,coords =c("latitude","longitude") ,remove=FALSE)
 ```
 
-# Partie V : Manipulation des dates avec `lubridate`
+# Partie 4 : Extension à la manipulation de données, cas spécifiques
 
-# Partie VI : Visualisation des données avec `ggplot2`
+## 4.1 : Manipuler du texte avec stringr
+
+## 4.2 : Manipuler des dates avec lubridate
+    
+# Partie 5 : Visualisation des données avec `ggplot2`
 
 ## Ggplot c'est comme la chirurgie *`aes`*thétique :
 
