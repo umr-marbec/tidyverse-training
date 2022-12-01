@@ -153,6 +153,8 @@ library(tidyverse)
 
 # Partie 1 : Importation de données sous R avec readr
 
+![](images/logo_readr.png)
+
 ## Utilisation du package readr
 
 -   Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)
@@ -163,11 +165,11 @@ library(tidyverse)
 
 ```{r, echo=TRUE, eval=FALSE}
 global_reef_fish_abundance <- read_delim(file = "./data/global_reef_fish_abundance.csv",
-                                                 delim = ",",
-                                                 quote = "\"")
+                                         delim = ",",
+                                         quote = "\"")
 global_reef_fish_biomass <- read_delim(file = "./data/global_reef_fish_biomass.csv",
-                                                 delim = ",",
-                                                 quote = "\"")
+                                       delim = ",",
+                                       quote = "\"")
 survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
                               delim = ";",
                               skip = 70)
@@ -175,16 +177,18 @@ survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
 
 # Partie 2 : Manipulation de données avec dplyr
 
+![](images/dplyr_logo.png)
+
 ## [dplyr](https://dplyr.tidyverse.org/){target="_blank"}
 
 ### Pourquoi utiliser dplyr et ca syntaxe ?
 
 -   Syntaxe claire et cohérente
     -   "lien" avec le SQL
-    -   deux "familles" de fonctions : résumer et vectorisation <br/> <br/> <br/> ![](images/summary_function.png){.absolute top="395" left="15"} ![](images/vectorized_function.png){.absolute top="395" right="15"}
+    -   deux "familles" de fonctions : résumer et vectorisation <br/> <br/> <br/> ![](images/summary_function.png){.absolute top="320" left="15"} ![](images/vectorized_function.png){.absolute top="320" right="15"}
 -   Utilisation de verbes
 -   Généralement plus rapides que leur équivalent sous R de base
--   Permets d'enchainer les opérations avec des "pipes" ![](images/pipe.png){.absolute top="525" right="20" width="15%"}
+-   Permets d'enchainer les opérations avec des "pipes" ![](images/pipe.png){.absolute top="450" right="20" width="15%"}
 
 ## Manipulation des lignes
 
@@ -227,7 +231,7 @@ Renvoi une valeur TRUE ou FALSE
 
 ## Exercice 2.1 {auto-animate="true"}
 
--   supprimer les données dupliquées dans le jeu de données "global_reef_fish_abundance_and_biomass"
+-   A l'aide d'une fonction dplyr, verifier s'il y a des données dupliquées dans le jeu de données "global_reef_fish_biomass"
 -   En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Apogonidae" et pour finir ou la classe de taille associé est \<= 10.
 
 ```{r echo=TRUE, eval=FALSE}
@@ -242,7 +246,7 @@ Renvoi une valeur TRUE ou FALSE
 ```{r echo=TRUE, eval=FALSE}
 # solution
 biomass_exercice2_1_distinct <- distinct(.data = global_reef_fish_biomass)
-biomass_exercice2_1_filter <- filter(.data = biomass_exercice1_distinct,
+biomass_exercice2_1_filter <- filter(.data = biomass_exercice2_1_distinct,
                                      biomass != 0
                                      & ! family %in% c("Mullidae",
                                                        "Apogonidae")
@@ -280,7 +284,6 @@ Cependant cela à plusieurs inconvénients. La structure est peu lisible, les op
 -   Avec notre exemple précédent cela donne :
 
 ```{r echo=TRUE, eval=FALSE}
-# solution
 biomass_exercice2_1_distinct_filter <- distinct(.data = global_reef_fish_biomass) %>%
   filter(biomass != 0
          & ! family %in% c("Mullidae",
@@ -449,7 +452,8 @@ ungroups()
 ## Exercice 2.3 {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice 2
--   Calculer la biomasse moyenne par espèce et classe de taille
+-   Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full crée précédemment
+-   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvé" regarder du côté des arguments en option)
 -   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
 
 ```{r echo=TRUE, eval=FALSE}
@@ -459,12 +463,12 @@ ungroups()
 ## Exercice 2.3 corrigé {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice 2
--   Calculer la biomasse moyenne par espèce et classe de taille
+-   Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full crée précédemment
+-   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvé" regarder du côté des arguments en option)
 -   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-# group_by sur espece et class de taille, faire la somme à ce moment la
 biomass_exercice2_3 <- biomass_exercice2_2 %>%
   dplyr::group_by(survey_id_full) %>%
   mutate(sum_biomass = sum(x = biomass)) %>%
@@ -547,9 +551,11 @@ full_join()
 
 ## Exercice 2.4 {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice 2
--   Calculer la biomasse moyenne par espèce et classe de taille
--   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+-   À partir du jeu de données de sortie de l'exercice 2.3 (biomass_exercice2_3)
+-   Faire la "meilleure" jointure avec le jeu de données survey_metadata et m'expliquer votre choix
+-   Pour vous aider :
+    -   Y-a-t-il un problème avec le jeu de données survey_metadata ?
+    -   Réfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -557,14 +563,18 @@ full_join()
 
 ## Exercice 2.4 corrigé {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice précédent
--   Calculer la biomasse moyenne par espèce et classe de taille
--   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+-   À partir du jeu de données de sortie de l'exercice 2.3 (biomass_exercice2_3)
+-   Faire la "meilleure" jointure avec le jeu de données survey_metadata et m'expliquer votre choix
+-   Pour vous aider :
+    -   Y-a-t-il un problème avec le jeu de données survey_metadata ?
+    -   Réfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-biomass_survey_exercice2_4 <- biomass_exercice2_3
-
+survey_metadata_distinct <- distinct(.data = survey_metadata)
+biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
+  right_join(survey_metadata_distinct,
+             by = "survey_id")
 ```
 
 # Partie 3 : Nettoyage des données avec `tidyr`
@@ -878,11 +888,143 @@ biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
 
 # Partie 4 : Extension à la manipulation de données, cas spécifiques
 
+![](images/logo_stringr.png){.absolute top="300" width="20%"}
+![](images/logo_lubridate.png){.absolute top="300" left="300" width="20%"}
+
 ## 4.1 : Manipuler du texte avec stringr
+
+. . .
+
+Le nom de toutes les fonctions dans `stringr` commence par `str_`.
+
+. . .
+
+Voici quelques exemples :
+
+::: columns
+::: {.column width="50%"}
+::: incremental
+-   `str_detect` : Détection de caractères
+
+-   `str_extract` : Exctraction de caractères
+
+-   `str_replace` : Remplacement de caractères
+:::
+:::
+
+::: {.column width="50%"}
+::: incremental
+-   `str_trim` : Enlève les espaces
+
+-   `str_split` : Sépare une chaine de caractères
+
+-   `str_length` : Nombre de caractère
+:::
+:::
+:::
+
+. . .
+
+<center>Le cheat-sheet du package `stringr` est disponible [ici](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf).</center>
+
+## Exercice
+
+***Question 1 : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location***
+
+. . .
+
+***Question 2 : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses.***
+
+. . .
+
+***Question 3 : En enchainant les pipes, obtenez un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.***
+
+. . .
+
+***Question 4 : Résolvez le problème de façon à obtenir un data.frame de dimension 2x2.***
+
+## Réponses {auto-animate="true"}
+
+***Question 1 : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location***
+
+. . .
+
+```{r echo=TRUE, eval=FALSE}
+# metadata.med <- survey %>%
+#   filter(str_detect(survey$location, "Mediterranean") == TRUE)
+```
+
+## Réponses {auto-animate="true"}
+
+***Question 1 : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location***
+
+***Question 2 : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses.***
+
+. . .
+
+```{r echo=TRUE, eval=FALSE}
+# metadata.med <- survey %>%
+#   filter(str_detect(survey$location, "Mediterranean") == TRUE) %>%
+#   mutate(orientation = str_replace_all(word(tmp$location, 2, -1), 
+#                                        c(" " = "", "\\(" = "", "\\)" = "")))
+```
+
+. . .
+
+Solution décomposée
+
+```{r echo=TRUE, eval=FALSE}
+# metadata.med <- survey %>%
+#   filter(str_detect(survey$location, "Mediterranean") == TRUE) %>%
+#   mutate(orientation = word(tmp$location, 2, -1)) %>%
+#   mutate(orientation = str_replace(orientation, " ", "")) %>%
+#   mutate(orientation = str_replace(orientation, "\\(", "")) %>%
+#   mutate(orientation = str_replace(orientation, "\\)", ""))
+```
+
+## Réponses {auto-animate="true"}
+
+***Question 3 : En enchainant les pipes, obtenez un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.***
+
+. . .
+
+```{r echo=TRUE, eval=FALSE}
+# fish_data %>%
+#   filter(survey_id == "2000951") %>%
+#   group_by(class) %>%
+#   summarise(n_class = n())
+```
+
+## Réponses {auto-animate="true"}
+
+***Question 3 : En enchainant les pipes, obtenez un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.***
+
+***Question 4 : Résolvez le problème de façon à obtenir un data.frame de dimension 2x2.***
+
+. . .
+
+```{r echo=TRUE, eval=FALSE}
+# fish_data %>%
+#   filter(survey_id == "2000951") %>%
+#   mutate(class = str_trim(class)) %>%
+#   group_by(class) %>%
+#   summarise(n_class = n())
+```
+
+## Les expressions régulières
+
+### Les expressions régulères
+
+Pour toi Mathieu ;)
+
+Conçu pour manipuler les chaines de caractères "facilement". <br>En plus d'être plus faciles à utiliser, le nom des fonctions dans\
+`stringr` représentent bien ce qu'elles permettent de faire.
 
 ## 4.2 : Manipuler des dates avec lubridate
 
 # Partie 5 : Visualisation des données avec `ggplot2`
+
+![](images/ggplot2_logo.png)
 
 ## Ggplot c'est comme la chirurgie *`aes`*thétique :
 
@@ -903,11 +1045,11 @@ biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
 ## Petit apperçu des possibilités :
 
 ::: {layout-ncol="3"}
-![Nuage de points](images/.png){width="\"30%"}
+![Nuage de points](images/Diagramme_empile.png){width="\"30%"}
 
-![Boxplots](images/.png){width="30%"}
+![Boxplots](images/Diagramme_empile.png){width="30%"}
 
-![Violin Plot](images/.png){width="30%"}
+![Violin Plot](images/Diagramme_empile.png){width="30%"}
 :::
 
 <center>Un grand nombre d'exemples est disponible sur le site [***from Data to Viz***](https://www.data-to-viz.com/)</center>
