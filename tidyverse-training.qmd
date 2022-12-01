@@ -161,9 +161,10 @@ library(tidyverse)
 
 ## Manipuler du texte avec `stringr`
 
-Un package conçu pour manipuler les chaines de caractères "facilement". En plus d'être plus faciles à utiliser, le nom des fonctions dans `stringr` représentent bien ce qu'elles permettent de faire.
+Conçu pour manipuler les chaines de caractères "facilement". <br>En plus d'être plus faciles à utiliser, le nom des fonctions dans\
+`stringr` représentent bien ce qu'elles permettent de faire.
 
-![](images/stringr_logo.png){.absolute top="100" right="20" width="15%"}
+![](images/stringr_logo.png){.absolute top="40" right="20" width="15%"}
 
 . . .
 
@@ -198,6 +199,92 @@ Voici quelques exemples :
 . . .
 
 <center>Le cheat-sheet du package `stringr` est disponible [ici](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf).</center>
+
+## Exercice
+
+***Question 1 : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location***
+
+. . .
+
+***Question 2 : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses.***
+
+. . .
+
+***Question 3 : En enchainant les pipes, obtenez un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.***
+
+. . .
+
+***Question 4 : Résolvez le problème de façon à obtenir un data.frame de dimension 2x2.***
+
+##  Réponses {auto-animate="true"}
+
+***Question 1 : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location***
+
+. . .
+
+```{r}
+# metadata.med <- survey %>%
+#   filter(str_detect(survey$location, "Mediterranean") == TRUE)
+```
+
+## Réponses {auto-animate="true"}
+
+***Question 1 : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location***
+
+***Question 2 : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses.***
+
+. . .
+
+```{r}
+# metadata.med <- survey %>%
+#   filter(str_detect(survey$location, "Mediterranean") == TRUE) %>%
+#   mutate(orientation = str_replace_all(word(tmp$location, 2, -1), 
+#                                        c(" " = "", "\\(" = "", "\\)" = "")))
+```
+
+. . .
+
+Solution décomposée
+
+```{r}
+# metadata.med <- survey %>%
+#   filter(str_detect(survey$location, "Mediterranean") == TRUE) %>%
+#   mutate(orientation = word(tmp$location, 2, -1)) %>%
+#   mutate(orientation = str_replace(orientation, " ", "")) %>%
+#   mutate(orientation = str_replace(orientation, "\\(", "")) %>%
+#   mutate(orientation = str_replace(orientation, "\\)", ""))
+```
+
+## Réponses {auto-animate="true"} 
+
+***Question 3 : En enchainant les pipes, obtenez un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.***
+
+. . .
+
+```{r}
+# fish_data %>%
+#   filter(survey_id == "2000951") %>%
+#   group_by(class) %>%
+#   summarise(n_class = n())
+```
+
+## Réponses {auto-animate="true"} 
+
+***Question 3 : En enchainant les pipes, obtenez un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.***
+
+***Question 4 : Résolvez le problème de façon à obtenir un data.frame de dimension 2x2.***
+
+. . .
+
+```{r}
+# fish_data %>%
+#   filter(survey_id == "2000951") %>%
+#   mutate(class = str_trim(class)) %>%
+#   group_by(class) %>%
+#   summarise(n_class = n())
+```
+
+##
 
 ### Les expressions régulères
 
