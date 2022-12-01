@@ -290,6 +290,7 @@ Solution décomposée
 
 Pour toi Mathieu ;)
 
+
 ## Manipuler des dates avec `lubridate`
 
 # Partie IV : Visualisation des données avec `ggplot2`

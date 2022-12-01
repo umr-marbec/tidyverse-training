@@ -3,5 +3,3 @@ project:
 
 editor: visual
 
-execute:
-  freeze: true
