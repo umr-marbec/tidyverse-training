@@ -9,12 +9,7 @@
 <link href="tidyverse-training_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.2.269">
 
-  <meta name="author" content="Monique Simier, monique.simier@ird.fr">
-  <meta name="author" content="Laure Velez, laure.velez@umontpellier.fr">
-  <meta name="author" content="Gael Mariani, gael.mariani@umontpellier.fr">
-  <meta name="author" content="Mathieu Depetris, mathieu.depetris@ird.fr">
-  <meta name="dcterms.date" content="2022-01-12">
-  <title>Formation R - Collection de packages tidyverse</title>
+  <title>tidyverse-training</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -397,33 +392,14 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="images/background_title.png" data-background-size="cover" class="quarto-title-block center">
-  <h1 class="title">Formation R - Collection de packages tidyverse</h1>
 
-<div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Monique Simier, monique.simier@ird.fr 
-</div>
-</div>
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Laure Velez, laure.velez@umontpellier.fr 
-</div>
-</div>
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Gael Mariani, gael.mariani@umontpellier.fr 
-</div>
-</div>
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Mathieu Depetris, mathieu.depetris@ird.fr 
-</div>
-</div>
-</div>
-
-  <p class="date">01/12/2022</p>
+<section>
+<section id="section" class="title-slide slide level1 center" data-background-image="images/background_title.png">
+<h1></h1>
+<p><span style="color:#ffffff; font-size: 2em">Formation R</span></p>
+<p><span style="color:#ffffff; font-size: 1.5em">Collection de packages tidyverse</span></p>
+<p><span style="color:#ffffff; font-size: 1em">Monique Simier (monique.simier@ird.fr)</span> <br> <span style="color:#ffffff; font-size: 1em">Laure Velez (laure.velez@umontpellier.fr)</span> <br> <span style="color:#ffffff; font-size: 1em">Gael Mariani (gael.mariani@umontpellier.fr)</span> <br> <span style="color:#ffffff; font-size: 1em">Mathieu Depetris (mathieu.depetris@ird.fr)</span> <br> <br> <span style="color:#ffffff; font-size: 1em">05-06 decembre 2022</span> <br> <br> <br> <span style="color:#ffffff; font-size: 0.4em">© RStudio</span></p>
+<p><img data-src="images/tidyverse_packages.png" class="absolute" style="top: 60px; right: 20px; width: 35%; "></p>
 </section>
 <section id="plan-de-la-formation" class="slide level2 smaller">
 <h2>Plan de la formation</h2>
@@ -434,18 +410,19 @@ Mathieu Depetris, mathieu.depetris@ird.fr
 <li>Objectifs de la formation</li>
 <li>Présentation de tidyverse</li>
 </ul></li>
-<li><p>Partie I : Manipulation de données avec <code>dplyr</code></p></li>
-<li><p>Partie II : Nettoyage des données avec <code>tidyr</code></p></li>
-<li><p>Partie III : Extension à la manipulation de données, cas spécifiques</p>
+<li><p>Partie 1 : Importation de données sous R avec readr</p></li>
+<li><p>Partie 2 : Manipulation de données avec dplyr</p></li>
+<li><p>Partie 3 : Nettoyage des données avec tidyr</p></li>
+<li><p>Partie 4 : Extension à la manipulation de données, cas spécifiques</p>
 <ul>
-<li>Manipuler du texte avec <code>stringr</code></li>
-<li>Manipuler des dates avec <code>lubridate</code></li>
+<li>4.1 : Manipuler du texte avec stringr</li>
+<li>4.2 : Manipuler des dates avec lubridate</li>
 </ul></li>
-<li><p>Partie IV : Visualisation graphique avec <code>ggplot2</code></p></li>
-<li><p>Partie V : Cas pratiques sur vos données</p></li>
+<li><p>Partie 5 : Visualisation graphique avec ggplot2</p></li>
+<li><p>Partie 6 : Cas pratiques sur vos données</p></li>
 </ul>
 <p>Formation fortement inspirée du site de <a href="https://larmarange.github.io/analyse-R/" target="_blank">Joseph Larmarange</a></p>
-</section>
+</section></section>
 <section>
 <section id="préambule-et-introduction" class="title-slide slide level1 center">
 <h1>Préambule et introduction</h1>
@@ -547,146 +524,749 @@ Mathieu Depetris, mathieu.depetris@ird.fr
 </ul></li>
 </ul>
 </section></section>
-<section id="partie-i-manipulation-de-données-avec-dplyr" class="title-slide slide level1 center">
-<h1>Partie I : Manipulation de données avec <code>dplyr</code></h1>
-<p>1.1. Importation de données sous R avec readr</p>
+<section>
+<section id="partie-1-importation-de-données-sous-r-avec-readr" class="title-slide slide level1 center">
+<h1>Partie 1 : Importation de données sous R avec readr</h1>
+
+</section>
+<section id="utilisation-du-package-readr" class="slide level2">
+<h2>Utilisation du package readr</h2>
 <ul>
 <li>Des fonctions de base de R sont dédiées à l’import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)</li>
 <li>La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects</li>
-<li>Elles sont compatibles avec l’esprit Tidyverse car elles permettent de générer des tibbles # Partie III : Visualisation des données avec ggplot</li>
+<li>Elles sont compatibles avec l’esprit Tidyverse car elles permettent de générer des tibbles</li>
 </ul>
 </section>
-
-<section id="partie-ii-nettoyage-des-données-avec-tidyr" class="title-slide slide level1 center">
-<h1>Partie II : Nettoyage des données avec <code>tidyr</code></h1>
-
-</section>
-
-<section>
-<section id="partie-iii-extension-à-la-manipulation-de-données-cas-spécifiques" class="title-slide slide level1 center">
-<h1>Partie III : Extension à la manipulation de données, cas spécifiques</h1>
-
-</section>
-<section id="manipuler-du-texte-avec-stringr" class="slide level2">
-<h2>Manipuler du texte avec <code>stringr</code></h2>
-<p>Conçu pour manipuler les chaines de caractères “facilement”. <br>En plus d’être plus faciles à utiliser, le nom des fonctions dans<br>
-<code>stringr</code> représentent bien ce qu’elles permettent de faire.</p>
-<p><img data-src="images/stringr_logo.png" class="absolute" style="top: 40px; right: 20px; width: 15%; "></p>
-<div class="fragment">
-<p>Le nom de toutes les fonctions dans <code>stringr</code> commence par <code>str_</code>.</p>
-</div>
-<div class="fragment">
-<p>Voici quelques exemples :</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div>
-<ul>
-<li class="fragment"><p><code>str_detect</code> : Détection de caractères</p></li>
-<li class="fragment"><p><code>str_extract</code> : Exctraction de caractères</p></li>
-<li class="fragment"><p><code>str_replace</code> : Remplacement de caractères</p></li>
-</ul>
-</div>
-</div><div class="column" style="width:50%;">
-<div>
-<ul>
-<li class="fragment"><p><code>str_trim</code> : Enlève les espaces</p></li>
-<li class="fragment"><p><code>str_split</code> : Sépare une chaine de caractères</p></li>
-<li class="fragment"><p><code>str_length</code> : Nombre de caractère</p></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<center>
-Le cheat-sheet du package <code>stringr</code> est disponible <a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf">ici</a>.
-</center>
-</div>
-</section>
-<section id="exercice" class="slide level2">
-<h2>Exercice</h2>
-<p><strong><em>Question 1 : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location</em></strong></p>
-<div class="fragment">
-<p><strong><em>Question 2 : A partir de la colonne location, créer une colonne qui extrait l’orientation. La colonne orientation doit être homogène, donc pas d’espace, ni de parenthèses.</em></strong></p>
-</div>
-<div class="fragment">
-<p><strong><em>Question 3 : En enchainant les pipes, obtenez un data.frame résumant le nombre d’observation dans chacune des classes, pour le site n°2000951 seulement.</em></strong></p>
-</div>
-<div class="fragment">
-<p><strong><em>Question 4 : Résolvez le problème de façon à obtenir un data.frame de dimension 2x2.</em></strong></p>
-</div>
-</section>
-<section id="réponses" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Réponses</h2>
-<p><strong><em>Question 1 : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location</em></strong></p>
-<div class="fragment">
+<section id="a-voir-avec-monique" class="slide level2">
+<h2>A voir avec Monique</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a href="#cb2-1"></a><span class="co"># metadata.med &lt;- survey %&gt;%</span></span>
-<span id="cb2-2" class="hljs-ln-code"><a href="#cb2-2"></a><span class="co">#   filter(str_detect(survey$location, "Mediterranean") == TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>global_reef_fish_abundance <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="at">file =</span> <span class="st">"./data/global_reef_fish_abundance.csv"</span>,</span>
+<span id="cb2-2"><a href="#cb2-2"></a>                                                 <span class="at">delim =</span> <span class="st">","</span>,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>                                                 <span class="at">quote =</span> <span class="st">"</span><span class="sc">\"</span><span class="st">"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>global_reef_fish_biomass <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="at">file =</span> <span class="st">"./data/global_reef_fish_biomass.csv"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>                                                 <span class="at">delim =</span> <span class="st">","</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>                                                 <span class="at">quote =</span> <span class="st">"</span><span class="sc">\"</span><span class="st">"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>survey_metadata <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="at">file =</span> <span class="st">"./data/survey_metadata.csv"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>                              <span class="at">delim =</span> <span class="st">";"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9"></a>                              <span class="at">skip =</span> <span class="dv">70</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</section>
-<section id="réponses-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Réponses</h2>
-<p><strong><em>Question 1 : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location</em></strong></p>
-<p><strong><em>Question 2 : A partir de la colonne location, créer une colonne qui extrait l’orientation. La colonne orientation doit être homogène, donc pas d’espace, ni de parenthèses.</em></strong></p>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># metadata.med &lt;- survey %&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#   filter(str_detect(survey$location, "Mediterranean") == TRUE) %&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#   mutate(orientation = str_replace_all(word(tmp$location, 2, -1), </span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#                                        c(" " = "", "\\(" = "", "\\)" = "")))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div class="fragment">
-<p>Solution décomposée</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># metadata.med &lt;- survey %&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#   filter(str_detect(survey$location, "Mediterranean") == TRUE) %&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#   mutate(orientation = word(tmp$location, 2, -1)) %&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#   mutate(orientation = str_replace(orientation, " ", "")) %&gt;%</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#   mutate(orientation = str_replace(orientation, "\\(", "")) %&gt;%</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#   mutate(orientation = str_replace(orientation, "\\)", ""))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</section>
-<section id="réponses-2" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Réponses</h2>
-<p><strong><em>Question 3 : En enchainant les pipes, obtenez un data.frame résumant le nombre d’observation dans chacune des classes, pour le site n°2000951 seulement.</em></strong></p>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb5-1" class="hljs-ln-code"><a href="#cb5-1"></a><span class="co"># fish_data %&gt;%</span></span>
-<span id="cb5-2" class="hljs-ln-code"><a href="#cb5-2"></a><span class="co">#   filter(survey_id == "2000951") %&gt;%</span></span>
-<span id="cb5-3" class="hljs-ln-code"><a href="#cb5-3"></a><span class="co">#   group_by(class) %&gt;%</span></span>
-<span id="cb5-4" class="hljs-ln-code"><a href="#cb5-4"></a><span class="co">#   summarise(n_class = n())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</section>
-<section id="réponses-3" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Réponses</h2>
-<p><strong><em>Question 3 : En enchainant les pipes, obtenez un data.frame résumant le nombre d’observation dans chacune des classes, pour le site n°2000951 seulement.</em></strong></p>
-<p><strong><em>Question 4 : Résolvez le problème de façon à obtenir un data.frame de dimension 2x2.</em></strong></p>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb6-1" class="hljs-ln-code"><a href="#cb6-1"></a><span class="co"># fish_data %&gt;%</span></span>
-<span id="cb6-2" class="hljs-ln-code"><a href="#cb6-2"></a><span class="co">#   filter(survey_id == "2000951") %&gt;%</span></span>
-<span id="cb6-3" class="hljs-ln-code"><a href="#cb6-3"></a><span class="co">#   mutate(class = str_trim(class)) %&gt;%</span></span>
-<span id="cb6-4" class="hljs-ln-code"><a href="#cb6-4"></a><span class="co">#   group_by(class) %&gt;%</span></span>
-<span id="cb6-5" class="hljs-ln-code"><a href="#cb6-5"></a><span class="co">#   summarise(n_class = n())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</section>
-<section id="section" class="slide level2">
-<h2></h2>
-<h3 id="les-expressions-régulères">Les expressions régulères</h3>
-<p>Pour toi Mathieu ;)</p>
-</section>
-<section id="manipuler-des-dates-avec-lubridate" class="slide level2">
-<h2>Manipuler des dates avec <code>lubridate</code></h2>
 </section></section>
 <section>
-<section id="partie-iv-visualisation-des-données-avec-ggplot2" class="title-slide slide level1 center">
-<h1>Partie IV : Visualisation des données avec <code>ggplot2</code></h1>
+<section id="partie-2-manipulation-de-données-avec-dplyr" class="title-slide slide level1 center">
+<h1>Partie 2 : Manipulation de données avec dplyr</h1>
+
+</section>
+<section id="dplyr" class="slide level2">
+<h2><a href="https://dplyr.tidyverse.org/" target="_blank">dplyr</a></h2>
+<h3 id="pourquoi-utiliser-dplyr-et-ca-syntaxe">Pourquoi utiliser dplyr et ca syntaxe ?</h3>
+<ul>
+<li>Syntaxe claire et cohérente
+<ul>
+<li>“lien” avec le SQL</li>
+<li>deux “familles” de fonctions : résumer et vectorisation <br> <br> <br> <img data-src="images/summary_function.png" class="absolute" style="top: 395px; left: 15px; "> <img data-src="images/vectorized_function.png" class="absolute" style="top: 395px; right: 15px; "></li>
+</ul></li>
+<li>Utilisation de verbes</li>
+<li>Généralement plus rapides que leur équivalent sous R de base</li>
+<li>Permets d’enchainer les opérations avec des “pipes” <img data-src="images/pipe.png" class="absolute" style="top: 525px; right: 20px; width: 15%; "></li>
+</ul>
+</section>
+<section id="manipulation-des-lignes" class="slide level2">
+<h2>Manipulation des lignes</h2>
+<h3 id="manipulation-de-type-extraction">Manipulation de type extraction</h3>
+<p>Type de fonctions qui retournent un sous-ensemble de lignes</p>
+<ul>
+<li>Extraction d’une ou plusieurs lignes : fonctions de la famille slice &amp; co</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># sélection d'une ou plusieurs lignes par position absolue</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">slice</span>()</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># sélection au hasard d'un nombre de lignes ou d'une proportion du jeu de données</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">slice_sample</span>()</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># sélection des n dernières lignes</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">slice_tail</span>()</span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># sélection des n premières lignes</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="fu">slice_head</span>()</span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co"># sélection des valeurs distinctes</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="fu">distinct</span>()</span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co"># sélection en fonction d'opérateurs logiques et/ou booléens</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="fu">filter</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="petit-focus-sur-les-opérateurs-booléens-et-logiques" class="slide level2 smaller">
+<h2>Petit focus sur les opérateurs booléens et logiques</h2>
+<p>Renvoi une valeur TRUE ou FALSE</p>
+<ul>
+<li>les communs :</li>
+</ul>
+<p><img data-src="images/booleens.png"></p>
+<ul>
+<li>certains plus particuliers :</li>
+</ul>
+<p><img data-src="images/booleens_particulier.png" style="width:25.0%"></p>
+<ul>
+<li>Attention aux priorités dans les interprétations
+<ul>
+<li>&amp; et plus fort que |, il sera exécuté en premier</li>
+<li>une solution est d’utiliser des () pour séparer vos opérateurs</li>
+</ul></li>
+</ul>
+</section>
+<section id="exercice-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 1</h2>
+<ul>
+<li>supprimer les données dupliquées dans le jeu de données “global_reef_fish_abundance_and_biomass”</li>
+<li>En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l’espèce est différente de “Mullidae” ou “Kyphosidae” et pour finir ou la classe de taille associé est &lt;= 10.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a href="#cb4-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-1-corrigé" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 1 corrigé</h2>
+<ul>
+<li>A l’aide d’une fonction dplyr, verifier s’il y a des données dupliquées dans le jeu de données “global_reef_fish_biomass”</li>
+<li>En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l’espèce est différente de “Mullidae” ou “Kyphosidae” et pour finir ou la classe de taille associé est &lt;= 10.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb5-1" class="hljs-ln-code"><a href="#cb5-1"></a><span class="co"># solution</span></span>
+<span id="cb5-2" class="hljs-ln-code"><a href="#cb5-2"></a>tmp1 <span class="ot">&lt;-</span> <span class="fu">distinct</span>(<span class="at">.data =</span> global_reef_fish_biomass)</span>
+<span id="cb5-3" class="hljs-ln-code"><a href="#cb5-3"></a>tmp2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="at">.data =</span> tmp1,</span>
+<span id="cb5-4" class="hljs-ln-code"><a href="#cb5-4"></a>               biomass <span class="sc">!=</span> <span class="dv">0</span></span>
+<span id="cb5-5" class="hljs-ln-code"><a href="#cb5-5"></a>               <span class="sc">&amp;</span> <span class="sc">!</span> family <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mullidae"</span>,</span>
+<span id="cb5-6" class="hljs-ln-code"><a href="#cb5-6"></a>                                 <span class="st">"Kyphosidae"</span>)</span>
+<span id="cb5-7" class="hljs-ln-code"><a href="#cb5-7"></a>               <span class="sc">&amp;</span> size_class <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="amélioration-de-la-lisibilité-du-code" class="slide level2">
+<h2>Amélioration de la lisibilité du code</h2>
+<p>Ici on a effectué 2 opérations, mais on peut imaginer en faire beaucoup plus dans la réalité.</p>
+<p>Grâce à syntaxe de dplyr, on peut répondre à ce besoin de deux manières différentes.</p>
+<p>La première est d’effectuer toutes les opérations en une fois en les emboîtant :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>tmp1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="at">.data =</span> <span class="fu">distinct</span>(<span class="at">.data =</span> global_reef_fish_biomass),</span>
+<span id="cb6-2"><a href="#cb6-2"></a>               biomass <span class="sc">!=</span> <span class="dv">0</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>               <span class="sc">&amp;</span> <span class="sc">!</span> family <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mullidae"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>                                 <span class="st">"Kyphosidae"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a>               <span class="sc">&amp;</span> size_class <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Cependant cela à plusieurs inconvénients. La structure est peu lisible, les opérations apparaissent dans l’ordre inverse de leur réalisation et il est difficile de voir quel paramètre se rapporte à quelle fonction.</p>
+</section>
+<section id="aller-encore-plus-loin" class="slide level2">
+<h2>Aller encore plus loin</h2>
+<h3 id="utilisation-dun-nouvelle-opérateur-baptisé-pipe">Utilisation d’un nouvelle opérateur baptisé <a href="https://magrittr.tidyverse.org/" target="_blank">pipe</a></h3>
+<ul>
+<li><p>Il se note %&gt;%</p></li>
+<li><p>Son fonctionnement est le suivant : si j’exécute expr %&gt;% f, le résultat de l’expression expr, à gauche du pipe, sera passé comme premier argument à la fonction f, à droite du pipe, ce qui revient à exécuter f(expr)</p></li>
+<li><p>L’intérêt est que l’on peut enchainer plusieurs pipes</p></li>
+<li><p>Avec notre exemple précédent cela donne :</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># solution</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>tmp1 <span class="ot">&lt;-</span> <span class="fu">distinct</span>(<span class="at">.data =</span> global_reef_fish_biomass) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">filter</span>(biomass <span class="sc">!=</span> <span class="dv">0</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>               <span class="sc">&amp;</span> <span class="sc">!</span> family <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mullidae"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5"></a>                                 <span class="st">"Kyphosidae"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6"></a>               <span class="sc">&amp;</span> size_class <span class="sc">&lt;=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="encore-quelques-fonctions-de-manipulation-de-lignes" class="slide level2">
+<h2>Encore quelques fonctions de manipulation de lignes</h2>
+<h3 id="manipulation-de-type-trie">Manipulation de type “trie”</h3>
+<ul>
+<li>Ordonner les lignes d’une ou plusieurs colonnes</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># par défaut ordre croissant, utiliser l'argument desc pour ordre décroissant</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">arrange</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<h3 id="manipulation-de-type-ajout">Manipulation de type “ajout”</h3>
+<ul>
+<li>Ajouter une ligne dans un jeu de données</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># interet des arguments .before and .after</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">add_row</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="manipulation-des-variables" class="slide level2">
+<h2>Manipulation des variables</h2>
+<h3 id="extraction-dune-ou-plusieurs-colonnes">Extraction d’une ou plusieurs colonnes</h3>
+<p>Type de fonctions qui retournent un sous-ensemble de colonnes sous la forme d’un vecteur ou d’une table</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># extraction des valeurs d'une colonne sous la forme d'un vecteur</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co"># on peut utiliser des noms ou les ids</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">pull</span>()</span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co"># extraction d'une colonne sous la forme d'une table</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co"># bien regarder les arguments de la fonction car on peut faire beaucoup</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="fu">select</span>()</span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co"># Changer l'ordre ou la place d'une ou plusieurs colonnes</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co"># ne pas oublier les arguments .after et .before</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="fu">relocate</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fonctions-de-vectorisation" class="slide level2">
+<h2>Fonctions de vectorisation</h2>
+<h3 id="une-des-deux-grandes-familles-de-fonction-avec-dplyr">Une des deux grandes familles de fonction avec dplyr</h3>
+<ul>
+<li><p>On a commencé à l’aborder de manière instinctive avec relocate()</p></li>
+<li><p>Globalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie <br> <br> <br> <img data-src="images/vectorized_function.png" class="absolute" style="top: 300px; left: 250px; width: 50%; "></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># créer une nouvelle variable</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">mutate</span>()</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co"># créer une nouvelle variable mais ne conserve pas les anciennes</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="fu">transmute</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Petit bonus pour renomer les variables</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">rename</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-2" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 2</h2>
+<ul>
+<li>À partir du jeu de données de sortie de l’exercice 1</li>
+<li>Crée une variable “survey_id_full” qui est la concaténation des variables survey_id, species_name et size_class</li>
+<li>Placer cette nouvelle colonne avant la colonne survey_id</li>
+<li>Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne survey_id</li>
+<li>Renommer la variable size_class en size_class_cm</li>
+<li>Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm</li>
+<li>Supprimer les variables size_class et size_class_cm</li>
+<li>Trier par ordre décroissant les données en fonction de la variable size_class_mm</li>
+<li>Utiliser des pipes à la fin pour avoir une syntaxe “propre” et souffler un bon coup :)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb13-1" class="hljs-ln-code"><a href="#cb13-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-2-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 2 corrigé</h2>
+<ul>
+<li>À partir du jeu de données de sortie de l’exercice 1</li>
+<li>Crée une variable “survey_id_full” qui est la concaténation des variables survey_id, species_name et size_class</li>
+<li>Placer cette nouvelle colonne avant la colonne survey_id</li>
+<li>Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne survey_id</li>
+<li>Renommer la variable size_class en size_class_cm</li>
+<li>Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm</li>
+<li>Supprimer la variable size_class_cm</li>
+<li>Trier par ordre décroissant les données en fonction de la variable size_class_mm</li>
+<li>Utiliser des pipes à la fin pour avoir une syntaxe “propre” et souffler un bon coup :)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb14-1" class="hljs-ln-code"><a href="#cb14-1"></a><span class="co"># solution</span></span>
+<span id="cb14-2" class="hljs-ln-code"><a href="#cb14-2"></a>tmp3 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">.data =</span> tmp1,</span>
+<span id="cb14-3" class="hljs-ln-code"><a href="#cb14-3"></a>               <span class="at">survey_id_full =</span> <span class="fu">paste</span>(survey_id,</span>
+<span id="cb14-4" class="hljs-ln-code"><a href="#cb14-4"></a>                                      species_name,</span>
+<span id="cb14-5" class="hljs-ln-code"><a href="#cb14-5"></a>                                      size_class,</span>
+<span id="cb14-6" class="hljs-ln-code"><a href="#cb14-6"></a>                                      <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-7" class="hljs-ln-code"><a href="#cb14-7"></a>  <span class="fu">relocate</span>(survey_id_full,</span>
+<span id="cb14-8" class="hljs-ln-code"><a href="#cb14-8"></a>           <span class="at">.before =</span> survey_id) <span class="sc">%&gt;%</span></span>
+<span id="cb14-9" class="hljs-ln-code"><a href="#cb14-9"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb14-10" class="hljs-ln-code"><a href="#cb14-10"></a>                <span class="sc">-</span>survey_id) <span class="sc">%&gt;%</span></span>
+<span id="cb14-11" class="hljs-ln-code"><a href="#cb14-11"></a>  <span class="fu">rename</span>(<span class="at">size_class_cm =</span> size_class) <span class="sc">%&gt;%</span></span>
+<span id="cb14-12" class="hljs-ln-code"><a href="#cb14-12"></a>  <span class="fu">mutate</span>(<span class="at">size_class_mm =</span> size_class_cm <span class="sc">*</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-13" class="hljs-ln-code"><a href="#cb14-13"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>size_class_cm) <span class="sc">%&gt;%</span></span>
+<span id="cb14-14" class="hljs-ln-code"><a href="#cb14-14"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(size_class_mm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fonctions-de-resumé" class="slide level2 smaller">
+<h2>Fonctions de resumé</h2>
+<h3 id="la-deuxième-grande-famille">La deuxième grande famille</h3>
+<ul>
+<li><p>Fonctions qui vont créer une nouvelle table avec des resumés statistique. De manière globale, les fonctions associées vont utiliser en entrée des vecteurs et en sortie une ou plusieurs valeurs (inférieur en nombre au nombre de vecteurs d’entrée) <br> <br> <br> <img data-src="images/summary_function.png" class="absolute" style="top: 200px; left: 250px; width: 50%; "></p></li>
+<li><p>Fonction clé</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">summarise</span>()</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># Beaucoup, beaucoup d'options et de possibilités</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co"># Compter le nombre de valeurs/lignes</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="fu">n</span>()</span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="co"># Compter le nombre de valeurs/lignes distinctes</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="fu">n_distinct</span>()</span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="co"># Faire un moyenne</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="fu">mean</span>()</span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="co"># Faire une somme, option na.rm disponible</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="fu">sum</span>()</span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="co"># Utiliser des notions de position</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="fu">first</span>()</span>
+<span id="cb15-13"><a href="#cb15-13"></a><span class="fu">last</span>()</span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="co"># Ou de rang</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a><span class="fu">quantile</span>()</span>
+<span id="cb15-16"><a href="#cb15-16"></a><span class="fu">min</span>()</span>
+<span id="cb15-17"><a href="#cb15-17"></a><span class="fu">max</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="introduction-à-la-notion-de-groupe" class="slide level2">
+<h2>Introduction à la notion de groupe</h2>
+<ul>
+<li><p>Pour le moment on à fait des opérations sur l’ensemble du jeu de données, pas très pertinent non ?</p></li>
+<li><p>Fonction de création de groupe</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># on peut définir nos groupes en fonction des modalités des variables</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">group_by</span>()</span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># ou alors en isolant chaque ligne</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="fu">rowwise</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Attention à ce que vous faite ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R). Pour y remédier :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># via un summarise (argument experimental, attention à la pérénité)</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>.groups</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="co"># de manière plus générale</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="fu">ungroups</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Cette notion de groupe peut être utilisé avec d’autres fonctions (comme un mutate)</li>
+</ul>
+</section>
+<section id="exercice-3" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3</h2>
+<ul>
+<li>À partir du jeu de données de sortie de l’exercice 2</li>
+<li>Calculer la biomasse moyenne par espèce et classe de taille</li>
+<li>Créer un nouveau jeu de données qui exprime le nombre d’échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb18-1" class="hljs-ln-code"><a href="#cb18-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-3-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3 corrigé</h2>
+<ul>
+<li>À partir du jeu de données de sortie de l’exercice 2</li>
+<li>Calculer la biomasse moyenne par espèce et classe de taille</li>
+<li>Créer un nouveau jeu de données qui exprime le nombre d’échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb19-1" class="hljs-ln-code"><a href="#cb19-1"></a><span class="co"># solution</span></span>
+<span id="cb19-2" class="hljs-ln-code"><a href="#cb19-2"></a><span class="co"># group_by sur espece et class de taille, faire la somme à ce moment la</span></span>
+<span id="cb19-3" class="hljs-ln-code"><a href="#cb19-3"></a>tmp4 <span class="ot">&lt;-</span> tmp3 <span class="sc">%&gt;%</span></span>
+<span id="cb19-4" class="hljs-ln-code"><a href="#cb19-4"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(species_name,</span>
+<span id="cb19-5" class="hljs-ln-code"><a href="#cb19-5"></a>                  size_class_mm) <span class="sc">%&gt;%</span></span>
+<span id="cb19-6" class="hljs-ln-code"><a href="#cb19-6"></a>  <span class="fu">summarise</span>(<span class="at">mean_biomass =</span> <span class="fu">mean</span>(<span class="at">x =</span> biomass),</span>
+<span id="cb19-7" class="hljs-ln-code"><a href="#cb19-7"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb19-8" class="hljs-ln-code"><a href="#cb19-8"></a></span>
+<span id="cb19-9" class="hljs-ln-code"><a href="#cb19-9"></a>tmp5 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(<span class="at">.data =</span> tmp3,</span>
+<span id="cb19-10" class="hljs-ln-code"><a href="#cb19-10"></a>                        family) <span class="sc">%&gt;%</span></span>
+<span id="cb19-11" class="hljs-ln-code"><a href="#cb19-11"></a>  <span class="fu">summarise</span>(<span class="at">nb_sample_family =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb19-12" class="hljs-ln-code"><a href="#cb19-12"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> <span class="fu">sum</span>(nb_sample_family))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fonction-bonus-très-utile" class="slide level2 smaller">
+<h2>Fonction bonus très utile</h2>
+<h3 id="case_when-généralisation-vectorisé-de-ifs">case_when : généralisation vectorisé de if(s)</h3>
+<ul>
+<li>Vectorisation de multiple if_else sous R et CASE WHEN en SQL</li>
+<li>Améliore grandement la lisibilité de vos fonctions</li>
+<li>Syntaxe de base :</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">case_when</span>(</span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">operateur</span>(s) booléen(s) ou <span class="fu">logique</span>(s) <span class="sc">~</span> output1,</span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">operateur</span>(s) booléen(s) ou <span class="fu">logique</span>(s) <span class="sc">~</span> output2,</span>
+<span id="cb20-4"><a href="#cb20-4"></a>  ....</span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="fu">operateur</span>(s) booléen(s) ou <span class="fu">logique</span>(s) <span class="sc">~</span> output_n,</span>
+<span id="cb20-6"><a href="#cb20-6"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> output si rien ne marche au dessus</span>
+<span id="cb20-7"><a href="#cb20-7"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Pensez bien à toujours mettre un TRUE (=valeur par défaut)</li>
+<li>Attention à ne pas mélanger les types, il existe différent NA :
+<ul>
+<li>NA_integer_</li>
+<li>NA_real_</li>
+<li>NA_complex_</li>
+<li>NA_character_</li>
+</ul></li>
+</ul>
+</section>
+<section id="combinaison-de-jeux-de-données-1" class="slide level2">
+<h2>Combinaison de jeux de données 1</h2>
+<h3 id="jointures-simples">Jointures “simples”</h3>
+<ul>
+<li>Il doit y avoir une cohérence entre le nombre de colonnes ou de lignes</li>
+<li>Attention, aucune verification de cohérence des jointures</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># "Coller" deux jeux de données</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">bind_cols</span>()</span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="fu">bind_rows</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="combinaison-de-jeux-de-données-2" class="slide level2 smaller">
+<h2>Combinaison de jeux de données 2</h2>
+<h3 id="jointures-de-type-relationnelle">Jointures de type relationnelle</h3>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li>Très proche du SQL</li>
+<li>Très puissantes et permettent de se poser les bonnes questions !</li>
+<li>Attention à bien spécifier l’argument by (ne pas laisser place à l’interprétation !)
+<ul>
+<li>On peut spécifier un seul ou plusieurs colonnes si les noms sont identiques entre les deux jeux de données</li>
+<li>Sinon on spécifier le nom du jeu de données à “gauche” et celui qui est à “droite”</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><img data-src="images/jointure.png"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># jointure à gauche</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">left_join</span>()</span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="co"># jointure à droite</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="fu">right_join</span>()</span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="co"># jointure commune</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="fu">inner_join</span>()</span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="co"># jointure complete</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="fu">full_join</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-4" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 4</h2>
+<ul>
+<li>À partir du jeu de données de sortie de l’exercice 2</li>
+<li>Calculer la biomasse moyenne par espèce et classe de taille</li>
+<li>Créer un nouveau jeu de données qui exprime le nombre d’échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb23-1" class="hljs-ln-code"><a href="#cb23-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-4-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 4 corrigé</h2>
+<ul>
+<li>À partir du jeu de données de sortie de l’exercice précédent</li>
+<li>Calculer la biomasse moyenne par espèce et classe de taille</li>
+<li>Créer un nouveau jeu de données qui exprime le nombre d’échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb24-1" class="hljs-ln-code"><a href="#cb24-1"></a><span class="co"># solution</span></span>
+<span id="cb24-2" class="hljs-ln-code"><a href="#cb24-2"></a>global_reef_fish_biomass_light <span class="ot">&lt;-</span> <span class="fu">slice_sample</span>(<span class="at">.data =</span> global_reef_fish_biomass,</span>
+<span id="cb24-3" class="hljs-ln-code"><a href="#cb24-3"></a>                                               <span class="at">prop =</span> <span class="fl">0.5</span>)</span>
+<span id="cb24-4" class="hljs-ln-code"><a href="#cb24-4"></a>tmp6 <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(<span class="at">x =</span> global_reef_fish_biomass_light,</span>
+<span id="cb24-5" class="hljs-ln-code"><a href="#cb24-5"></a>                   <span class="at">y =</span> global_reef_fish_abundance,</span>
+<span id="cb24-6" class="hljs-ln-code"><a href="#cb24-6"></a>                   <span class="at">by =</span> <span class="st">"survey_id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="partie-iii-nettoyage-des-données-avec-tidyr" class="title-slide slide level1 center">
+<h1>Partie III : Nettoyage des données avec <code>tidyr</code></h1>
+
+<img data-src="images/logo_tidyr.png" class="r-stretch"></section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>L’objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format “tidy”</p>
+<p>Les différents verbes viennent s’ajouter à tous ceux que nous avons déjà vu avec readr et dplyr et ils s’intègrent parfaitement dans la série de pipe %&gt;% permettant d’enchainer les opérations</p>
+<ul>
+<li><p>Les données “tidy”, qu’est ce que c’est?</p>
+<ul>
+<li><p>1 variable = 1 colonne</p></li>
+<li><p>1 observation = 1 ligne/case</p></li>
+<li><p>1 type d’observations par table</p></li>
+</ul></li>
+</ul>
+<p>Pour visualiser le cheatsheet <code>tidyr</code> <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf">cliquez ici</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Pour illustrer cette partie nous utiliserons le jeu de données popEU</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>popEU <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"popEU.rds"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="fu">dim</span>(popEU)</span>
+<span id="cb25-4"><a href="#cb25-4"></a>popEU</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="les-principaux-verbes-de-la-librairie-tidyr" class="slide level2 smaller">
+<h2>Les principaux verbes de la librairie tidyr</h2>
+<h3 id="modelage-des-tableaux">Modelage des tableaux</h3>
+<p><code>pivot_wider()</code>et <code>pivot_longer()</code>sont les successeurs des fonctions en base R du package <code>reshape</code> puis <code>reshape2</code>. Et se nommaient <code>spread()</code>et <code>gather()</code> dans les premières versions de <code>tidyr</code></p>
+<div>
+<ul>
+<li class="fragment"><p>Transformer un tableau long en format large</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Les arguments names_from et values_from renseignent les noms de colonnes </span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="co">#à partir desquelles nous obtenons les colonnes de sortie et les valeurs des cellules</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="fu">pivot_wider</span>(names_from, values_from)</span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="co"># L'argument values_fill permet de spécifier une valeur que l'on choisit </span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="co">#quand la combinaison names_from/values_from est manquante. Par défaut NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li class="fragment"><p>Transformer un tableau large en format long</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Les arguments cols,names_to et values_to renseignent les noms de colonnes à créer ainsi que les colonnes à faire pivoter</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">pivot_longer</span>(cols, names_to, values_to, ...)</span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="co"># Si l'argument values_drop_na = TRUE les lignes contenant des NA dans la colonne créée avec values_to seront supprimées. </span></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="co">#Par défaut FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</div>
+</section>
+<section id="section-2" class="slide level2 smaller">
+<h2></h2>
+<ul>
+<li><p>Applications</p>
+<ul>
+<li>Transformer le jeu de données en format “wide” en utilisant la fonction <code>pivot_wider()</code>. Nous voulons obtenir une colonne par année</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Créer un nouvel objet que l'on nomme popEU_wide</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>popEU_wide <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(popEU,<span class="at">names_from=</span><span class="st">"year"</span>,<span class="at">values_from=</span><span class="st">"pop"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="fu">dim</span>(popEU_wide)</span>
+<span id="cb28-4"><a href="#cb28-4"></a>popEU_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<h3 id="gestion-des-valeurs-manquantes-na">Gestion des valeurs manquantes “NA”</h3>
+<div>
+<ul>
+<li class="fragment"><p>Remplacer des “NA” par des valeurs spécifiques</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Si la donnée est un data frame alors l'argument replace prend une liste de valeurs. </span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="co">#Si la donnée est un vecteur alors replace prend une seule valeur</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="fu">replace_na</span>(data, replace, …)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li class="fragment"><p>Supprimer les lignes contenant des “NA”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># Il est possible en 2ème argument de spécifier le nom d'une colonne en particulier</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">drop_na</span>(data, …)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li class="fragment"><p>Remplir les “NA” en utilisant les valeurs précédentes ou suivantes de la même colonne</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Importance de l'argument .direction ("down","up","updown","downup")</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">fill</span>(data, …, .direction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</div>
+</section>
+<section id="section-4" class="slide level2 smaller">
+<h2></h2>
+<ul>
+<li><p>Applications</p>
+<div>
+<ul>
+<li class="fragment"><p>Re-transformer le jeu de données en format “long” en utilisant la fonction <code>pivot_longer()</code> et remplacer les valeurs de NA dans la colonne “pop”, par la population moyenne de la Belgique pour ces 2 années (11,27 M)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Créer un nouvel objet que l'on nomme popEU_long</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>popEU_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(popEU_wide,<span class="at">cols=</span><span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>),<span class="at">names_to=</span><span class="st">"year"</span>,<span class="at">values_to=</span><span class="st">"pop"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="fu">dim</span>(popEU_long)</span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="co"># Afficher popEU_long</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>popEU_long</span>
+<span id="cb32-6"><a href="#cb32-6"></a>popEU_long <span class="ot">&lt;-</span> <span class="fu">mutate</span>(popEU_long,<span class="at">pop =</span> <span class="fu">replace_na</span>(pop,<span class="fl">11.27</span>))</span>
+<span id="cb32-7"><a href="#cb32-7"></a>popEU_long</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li class="fragment"><p>Re-transformer le jeu de données en format “long” en utilisant la fonction `pivot_longer()` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d’enchainer les opérations à l’aide du pipe %\&gt;%</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># Créer un nouvel objet que l'on nomme popEU_long</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>popEU_long <span class="ot">&lt;-</span> popEU_wide <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(.,<span class="at">cols=</span><span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>),<span class="at">names_to=</span><span class="st">"year"</span>,<span class="at">values_to=</span><span class="st">"pop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">drop_na</span>(.,pop)</span>
+<span id="cb33-5"><a href="#cb33-5"></a>popEU_long</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li class="fragment"><p>Re-transformer le jeu de données en format “long” en utilisant la fonction `pivot_longer()` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d’enchainer les opérations à l’aide du pipe %\&gt;%</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Créer un nouvel objet que l'on nomme popEU_long</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>popEU_long <span class="ot">&lt;-</span> popEU_wide <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(.,<span class="at">cols=</span><span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>),<span class="at">names_to=</span><span class="st">"year"</span>,<span class="at">values_to=</span><span class="st">"pop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a>  <span class="fu">fill</span>(.,pop,<span class="at">.direction=</span><span class="st">"down"</span>)</span>
+<span id="cb34-5"><a href="#cb34-5"></a>popEU_long</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</div></li>
+</ul>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<h3 id="combinaison-des-variables">Combinaison des variables</h3>
+<div>
+<ul>
+<li class="fragment"><p>Séparer une colonne en plusieurs colonnes</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># par défaut le séparateur est un caractère non alpha-numérique. </span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="co">#Si l'on souhaite un autre séparateur il faut le spécifier aec l'argument sep</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="fu">separate</span>(data, col, into)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li class="fragment"><p>Créer une seule colonne à partir de plusieurs colonnes</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">unite</span>(col, ..., sep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li class="fragment"><p>Générer toutes les combinaisons 2 à 2 possibles entre les variables définies</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">expand</span>(data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</div>
+</section>
+<section id="section-6" class="slide level2 smaller">
+<h2></h2>
+<ul>
+<li><p>Applications</p>
+<div>
+<ul>
+<li class="fragment"><p>A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles “millions” et “milliers”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>popEU_sep <span class="ot">&lt;-</span> popEU_long <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="fu">mutate</span>(<span class="at">pop =</span> <span class="fu">as.character</span>(pop))<span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a><span class="fu">separate</span>(.,<span class="at">col=</span>pop,<span class="at">into=</span><span class="fu">c</span>(<span class="st">"millions"</span>,<span class="st">"milliers"</span>))</span>
+<span id="cb38-4"><a href="#cb38-4"></a>popEU_sep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li class="fragment"><p>Recréer la colonne pop comme à l’origine en la nommant population</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>popEU_unite <span class="ot">&lt;-</span> popEU_sep <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="fu">unite</span>(.,population,<span class="fu">c</span>(millions,milliers),<span class="at">sep=</span><span class="st">"."</span>)</span>
+<span id="cb39-3"><a href="#cb39-3"></a>popEU_unite</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li class="fragment"><p>Générer un tableau avec toutes les combinaisons possibles pays/population</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>popEU_expand <span class="ot">&lt;-</span> popEU_unite <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="fu">expand</span>(.,pays,population)</span>
+<span id="cb40-3"><a href="#cb40-3"></a>popEU_expand</span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="co"># Que remarquons nous ?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>popEU_expand</span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="co"># la valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</div></li>
+</ul>
+</section>
+<section id="exercice-1-1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 1</h2>
+<ul>
+<li>Chargez les données d’abondance. Les données sont elles Tidy ?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb42-1" class="hljs-ln-code"><a href="#cb42-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-1-corrigé-1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 1 corrigé</h2>
+<ul>
+<li>Chargez les données d’abondance. Les données sont elles Tidy ?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb43-1" class="hljs-ln-code"><a href="#cb43-1"></a><span class="co"># solution</span></span>
+<span id="cb43-2" class="hljs-ln-code"><a href="#cb43-2"></a>abundance <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">".data/Global_reef_fish_abundance.csv"</span>)</span>
+<span id="cb43-3" class="hljs-ln-code"><a href="#cb43-3"></a><span class="co"># Non les données ne sont pas tidy, car elles sont en format wide</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-2-1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 2</h2>
+<ul>
+<li>Transformez les en format tidy. Les nouvelles colonnes seront “sp_size” et “abundance”</li>
+<li>Créez une nouvelle variables “pk” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”. Pensez à enchainer les opérations</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb44-1" class="hljs-ln-code"><a href="#cb44-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-2-corrigé-1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 2 corrigé</h2>
+<ul>
+<li>Transformez les en format tidy. Les nouvelles colonnes seront “sp_size” et “abundance”</li>
+<li>Créez une nouvelle variables “pk” à partir des colonnes survey_id et sp_size avec comme séparateur un “_”. Pensez à enchainer les opérations</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb45-1" class="hljs-ln-code"><a href="#cb45-1"></a><span class="co"># solution</span></span>
+<span id="cb45-2" class="hljs-ln-code"><a href="#cb45-2"></a><span class="co"># Attention à l'argument values_dop_na</span></span>
+<span id="cb45-3" class="hljs-ln-code"><a href="#cb45-3"></a>abundance_long <span class="ot">&lt;-</span> abundance <span class="sc">%&gt;%</span></span>
+<span id="cb45-4" class="hljs-ln-code"><a href="#cb45-4"></a>  <span class="fu">pivot_longer</span>(.,<span class="at">cols=</span><span class="dv">2</span><span class="sc">:</span><span class="dv">17523</span>,<span class="at">names_to=</span><span class="st">"sp_size"</span>,<span class="at">values_to=</span><span class="st">"abundance"</span>,<span class="at">values_drop_na =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-5" class="hljs-ln-code"><a href="#cb45-5"></a>  <span class="fu">unite</span>(.,<span class="at">col=</span><span class="st">"pk"</span>,<span class="fu">c</span>(survey_id,sp_size),<span class="at">sep=</span><span class="st">"_"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-3-1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3</h2>
+<ul>
+<li>Créez un seul tableau regroupant biomasse et abondance</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb46-1" class="hljs-ln-code"><a href="#cb46-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-3-corrigé-1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 3 corrigé</h2>
+<ul>
+<li>Créez un seul tableau regroupant biomasse et abondance</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb47-1" class="hljs-ln-code"><a href="#cb47-1"></a><span class="co"># solution</span></span>
+<span id="cb47-2" class="hljs-ln-code"><a href="#cb47-2"></a>biomass_abundance <span class="ot">&lt;-</span> biomass <span class="sc">%&gt;%</span></span>
+<span id="cb47-3" class="hljs-ln-code"><a href="#cb47-3"></a>  <span class="fu">left_join</span>(.,abundance_long,<span class="at">by=</span><span class="st">"pk"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-4-1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 4</h2>
+<ul>
+<li>Créez 2 nouvelles colonnes “genus” et “species” à partir de species_name</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb48-1" class="hljs-ln-code"><a href="#cb48-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-4-corrigé-1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 4 corrigé</h2>
+<ul>
+<li>Créez 2 nouvelles colonnes “genus” et “species” à partir de species_name</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb49-1" class="hljs-ln-code"><a href="#cb49-1"></a><span class="co"># solution</span></span>
+<span id="cb49-2" class="hljs-ln-code"><a href="#cb49-2"></a>biomass_abundance <span class="ot">&lt;-</span> biomass_abundance <span class="sc">%&gt;%</span></span>
+<span id="cb49-3" class="hljs-ln-code"><a href="#cb49-3"></a>  <span class="fu">separate</span>(.,species_name,<span class="at">into =</span> <span class="fu">c</span>(<span class="st">"genus"</span>,<span class="st">"species"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5</h2>
+<ul>
+<li>Transformez le tibble en sf object avec la commande sf::st_as_sf(survey,coords =c(“latitude”,“longitude”) ,remove=FALSE).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb50-1" class="hljs-ln-code"><a href="#cb50-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5 corrigé</h2>
+<ul>
+<li>Transformez le tibble en sf object avec la commande sf::st_as_sf(survey,coords =c(“latitude”,“longitude”) ,remove=FALSE).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb51-1" class="hljs-ln-code"><a href="#cb51-1"></a><span class="co"># solution</span></span>
+<span id="cb51-2" class="hljs-ln-code"><a href="#cb51-2"></a>data_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(biomass_abundance,<span class="at">coords =</span><span class="fu">c</span>(<span class="st">"latitude"</span>,<span class="st">"longitude"</span>) ,<span class="at">remove=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-6" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6</h2>
+<ul>
+<li>Corrigez l’erreur</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb52-1" class="hljs-ln-code"><a href="#cb52-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-6-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6 corrigé</h2>
+<ul>
+<li>Corrigez l’erreur</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb53-1" class="hljs-ln-code"><a href="#cb53-1"></a><span class="co"># solution</span></span>
+<span id="cb53-2" class="hljs-ln-code"><a href="#cb53-2"></a>data_sf <span class="ot">&lt;-</span> biomass_abundance <span class="sc">%&gt;%</span></span>
+<span id="cb53-3" class="hljs-ln-code"><a href="#cb53-3"></a>  <span class="fu">drop_na</span>(latitude) <span class="sc">%&gt;%</span></span>
+<span id="cb53-4" class="hljs-ln-code"><a href="#cb53-4"></a>  <span class="fu">drop_na</span>(longitude) <span class="sc">%&gt;%</span></span>
+<span id="cb53-5" class="hljs-ln-code"><a href="#cb53-5"></a>  sf<span class="sc">::</span><span class="fu">st_as_sf</span>(.,<span class="at">coords =</span><span class="fu">c</span>(<span class="st">"latitude"</span>,<span class="st">"longitude"</span>) ,<span class="at">remove=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section id="partie-v-manipulation-des-dates-avec-lubridate" class="title-slide slide level1 center">
+<h1>Partie V : Manipulation des dates avec <code>lubridate</code></h1>
+
+</section>
+
+<section>
+<section id="partie-vi-visualisation-des-données-avec-ggplot2" class="title-slide slide level1 center">
+<h1>Partie VI : Visualisation des données avec <code>ggplot2</code></h1>
 
 </section>
 <section id="ggplot-cest-comme-la-chirurgie-aesthétique" class="slide level2">
@@ -805,9 +1385,29 @@ Un grand nombre d’exemples est disponible sur le site <a href="https://www.dat
 <center>
 Un grand notre d’exemples est disponible sur le site <a href="https://www.data-to-viz.com/"><strong><em>from Data to Viz</em></strong></a>
 </center>
+</section></section>
+<section>
+<section id="partie-ii-extension-à-la-manipulation-de-données-cas-spécifiques" class="title-slide slide level1 center">
+<h1>Partie II : Extension à la manipulation de données, cas spécifiques</h1>
+
 </section>
-<section id="section-1" class="slide level2">
-<h2></h2>
+<section id="ggplot-cest-comme-la-chirurgie-aesthétique-1" class="slide level2">
+<h2>Ggplot c’est comme la chirurgie <em><code>aes</code></em>thétique :</h2>
+<div>
+<div class="columns">
+<ol type="1">
+<li class="fragment"><p>Les jeunes s’y mettent très tôt !</p></li>
+<li class="fragment"><p>Les moins jeunes sont réticents puis CERTAINS finissent par s’y mettre</p>
+<center>
+<p><img data-src="images/nancy_pelosi.jpg" style="width:20.0%"></p>
+</center></li>
+<li class="fragment"><p>C’est un enchainement plus ou moins long d’opérations.</p>
+<center>
+<p><img data-src="images/bogdanoff1.jpg" style="width:21.0%"><img data-src="images/bogdanoff1.5.jpg" style="width:25.0%"><img data-src="images/bogdanoff2.jpg" style="width:25.0%"></p>
+</center></li>
+</ol>
+</div>
+</div>
 </section>
 <section id="ggplot-une-succession-de-couches" class="slide level2">
 <h2>Ggplot, une succession de couches</h2>
@@ -818,7 +1418,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <li class="fragment"><p>La Structure</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-7-1.png" style="width:85.0%"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-54-1.png" style="width:85.0%"></p>
 </div>
 </div></li>
 </ol>
@@ -827,7 +1427,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <li class="fragment"><p>Le type de représentation</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:85.0%"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-55-1.png" style="width:85.0%"></p>
 </div>
 </div></li>
 </ol>
@@ -839,7 +1439,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <li class="fragment"><p>Les Couleurs</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-9-1.png" style="width:85.0%"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-56-1.png" style="width:85.0%"></p>
 </div>
 </div></li>
 </ol>
@@ -848,7 +1448,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <li class="fragment"><p>Le Lifting final</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:85.0%"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-57-1.png" style="width:85.0%"></p>
 </div>
 </div></li>
 </ol>
@@ -860,13 +1460,13 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <h2>La structure des données</h2>
 <p>Pour la démonstration nous allons utiliser le jeu de données <code>crabs</code> de la librairie <code>MASS</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb7-2"><a href="#cb7-2"></a>data_crabs <span class="ot">&lt;-</span> crabs <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(sp, sex, CL, CW)</span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a>data_crabs <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">head</span>(<span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">4</span>, <span class="at">caption =</span> <span class="st">"Crabs data"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">kable_classic</span>(<span class="at">html_font =</span> <span class="st">"Computer Modern"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb54-2"><a href="#cb54-2"></a>data_crabs <span class="ot">&lt;-</span> crabs <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(sp, sex, CL, CW)</span>
+<span id="cb54-3"><a href="#cb54-3"></a></span>
+<span id="cb54-4"><a href="#cb54-4"></a>data_crabs <span class="sc">%&gt;%</span></span>
+<span id="cb54-5"><a href="#cb54-5"></a>  <span class="fu">head</span>(<span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-6"><a href="#cb54-6"></a>  <span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">4</span>, <span class="at">caption =</span> <span class="st">"Crabs data"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-7"><a href="#cb54-7"></a>  <span class="fu">kable_classic</span>(<span class="at">html_font =</span> <span class="st">"Computer Modern"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <div class="cell">
@@ -944,15 +1544,15 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 </div>
 </div>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>couche<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data    =</span> data_crabs,</span>
-<span id="cb8-2"><a href="#cb8-2"></a>                   <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CL, <span class="at">y =</span> CW))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>couche<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data    =</span> data_crabs,</span>
+<span id="cb55-2"><a href="#cb55-2"></a>                   <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CL, <span class="at">y =</span> CW))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-61-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1029,17 +1629,17 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <ul>
 <li class="fragment"><p><code>aes()</code> dans <code>ggplot()</code></p>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>couche<span class="fl">.2</span> <span class="ot">&lt;-</span> couche<span class="fl">.1</span> <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>couche<span class="fl">.2</span> <span class="ot">&lt;-</span> couche<span class="fl">.1</span> <span class="sc">+</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p><code>aes()</code> dans <code>geom_point()</code></p>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>couche.<span class="fl">2.2</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data_crabs,</span>
-<span id="cb10-3"><a href="#cb10-3"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CL, <span class="at">y =</span> CW))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>couche.<span class="fl">2.2</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data_crabs,</span>
+<span id="cb57-3"><a href="#cb57-3"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CL, <span class="at">y =</span> CW))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ul>
 </div>
@@ -1049,7 +1649,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <div class="fragment">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-64-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1059,8 +1659,8 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <p>Traçons un modèle linéaire et ajoutons la formule et le R² correspondant</p>
 <div class="fragment">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb11-1" class="hljs-ln-code"><a href="#cb11-1"></a>couche<span class="fl">.3</span> <span class="ot">&lt;-</span> couche<span class="fl">.2</span> <span class="sc">+</span></span>
-<span id="cb11-2" class="hljs-ln-code"><a href="#cb11-2"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">method =</span> <span class="st">"lm"</span>) <span class="co"># le modèle linéaire </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb58-1" class="hljs-ln-code"><a href="#cb58-1"></a>couche<span class="fl">.3</span> <span class="ot">&lt;-</span> couche<span class="fl">.2</span> <span class="sc">+</span></span>
+<span id="cb58-2" class="hljs-ln-code"><a href="#cb58-2"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">method =</span> <span class="st">"lm"</span>) <span class="co"># le modèle linéaire </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
@@ -1068,7 +1668,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-66-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1079,25 +1679,25 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <h2 data-id="quarto-animate-title">Ggplot pas à pas</h2>
 <p>Traçons un modèle linéaire et ajoutons la formule et le R² correspondant</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb12-1" class="hljs-ln-code"><a href="#cb12-1"></a>couche<span class="fl">.3</span> <span class="ot">&lt;-</span> couche<span class="fl">.2</span> <span class="sc">+</span></span>
-<span id="cb12-2" class="hljs-ln-code"><a href="#cb12-2"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> <span class="co"># le modèle linéaire </span></span>
-<span id="cb12-3" class="hljs-ln-code"><a href="#cb12-3"></a>  <span class="fu">stat_regline_equation</span>(<span class="at">label.y =</span> <span class="dv">52</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..eq.label..)) <span class="co"># la formule</span></span>
-<span id="cb12-4" class="hljs-ln-code"><a href="#cb12-4"></a>couche<span class="fl">.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb59-1" class="hljs-ln-code"><a href="#cb59-1"></a>couche<span class="fl">.3</span> <span class="ot">&lt;-</span> couche<span class="fl">.2</span> <span class="sc">+</span></span>
+<span id="cb59-2" class="hljs-ln-code"><a href="#cb59-2"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> <span class="co"># le modèle linéaire </span></span>
+<span id="cb59-3" class="hljs-ln-code"><a href="#cb59-3"></a>  <span class="fu">stat_regline_equation</span>(<span class="at">label.y =</span> <span class="dv">52</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..eq.label..)) <span class="co"># la formule</span></span>
+<span id="cb59-4" class="hljs-ln-code"><a href="#cb59-4"></a>couche<span class="fl">.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-67-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="ggplot-pas-à-pas-6" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Ggplot pas à pas</h2>
 <p>Traçons un modèle linéaire et ajoutons la formule et le R² correspondant</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb13-1" class="hljs-ln-code"><a href="#cb13-1"></a>couche<span class="fl">.3</span> <span class="ot">&lt;-</span> couche<span class="fl">.2</span> <span class="sc">+</span></span>
-<span id="cb13-2" class="hljs-ln-code"><a href="#cb13-2"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> <span class="co"># le modèle linéaire </span></span>
-<span id="cb13-3" class="hljs-ln-code"><a href="#cb13-3"></a>  <span class="fu">stat_regline_equation</span>(<span class="at">label.y =</span> <span class="dv">52</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..eq.label..)) <span class="sc">+</span> <span class="co"># la formule</span></span>
-<span id="cb13-4" class="hljs-ln-code"><a href="#cb13-4"></a>  <span class="fu">stat_regline_equation</span>(<span class="at">label.y =</span> <span class="dv">48</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..adj.rr.label..)) <span class="co"># R²</span></span>
-<span id="cb13-5" class="hljs-ln-code"><a href="#cb13-5"></a>couche<span class="fl">.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb60-1" class="hljs-ln-code"><a href="#cb60-1"></a>couche<span class="fl">.3</span> <span class="ot">&lt;-</span> couche<span class="fl">.2</span> <span class="sc">+</span></span>
+<span id="cb60-2" class="hljs-ln-code"><a href="#cb60-2"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> <span class="co"># le modèle linéaire </span></span>
+<span id="cb60-3" class="hljs-ln-code"><a href="#cb60-3"></a>  <span class="fu">stat_regline_equation</span>(<span class="at">label.y =</span> <span class="dv">52</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..eq.label..)) <span class="sc">+</span> <span class="co"># la formule</span></span>
+<span id="cb60-4" class="hljs-ln-code"><a href="#cb60-4"></a>  <span class="fu">stat_regline_equation</span>(<span class="at">label.y =</span> <span class="dv">48</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..adj.rr.label..)) <span class="co"># R²</span></span>
+<span id="cb60-5" class="hljs-ln-code"><a href="#cb60-5"></a>couche<span class="fl">.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-68-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="ggplot-pas-à-pas-7" class="slide level2">
 <h2>Ggplot pas à pas</h2>
 <ol start="4" type="1">
@@ -1108,11 +1708,11 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 </div>
 <div class="fragment">
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>couche<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data_crabs,</span>
-<span id="cb14-3"><a href="#cb14-3"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x     =</span> CL, </span>
-<span id="cb14-4"><a href="#cb14-4"></a>                           <span class="at">y     =</span> CW, </span>
-<span id="cb14-5"><a href="#cb14-5"></a>                           <span class="at">color =</span> sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>couche<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data_crabs,</span>
+<span id="cb61-3"><a href="#cb61-3"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x     =</span> CL, </span>
+<span id="cb61-4"><a href="#cb61-4"></a>                           <span class="at">y     =</span> CW, </span>
+<span id="cb61-5"><a href="#cb61-5"></a>                           <span class="at">color =</span> sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
@@ -1120,7 +1720,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-70-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1137,10 +1737,10 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 </div>
 <div class="fragment">
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>couche<span class="fl">.5</span> <span class="ot">&lt;-</span> couche<span class="fl">.4</span> <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name   =</span> <span class="st">"Sex :"</span>,</span>
-<span id="cb15-3"><a href="#cb15-3"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, </span>
-<span id="cb15-4"><a href="#cb15-4"></a>                                <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>couche<span class="fl">.5</span> <span class="ot">&lt;-</span> couche<span class="fl">.4</span> <span class="sc">+</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name   =</span> <span class="st">"Sex :"</span>,</span>
+<span id="cb62-3"><a href="#cb62-3"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, </span>
+<span id="cb62-4"><a href="#cb62-4"></a>                                <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
@@ -1148,7 +1748,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-72-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1167,10 +1767,10 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 </ol>
 <div class="fragment">
 <div class="cell" data-layout-align="center" data-warnings="false">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>couche<span class="fl">.6</span> <span class="ot">&lt;-</span> couche<span class="fl">.5</span> <span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">labs</span>(<span class="at">x     =</span> <span class="st">"Carapace Length (mm)"</span>,</span>
-<span id="cb16-3"><a href="#cb16-3"></a>       <span class="at">y     =</span> <span class="st">"Carapace Width (mm)"</span>,</span>
-<span id="cb16-4"><a href="#cb16-4"></a>       <span class="at">color =</span> <span class="st">"Sex :"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>couche<span class="fl">.6</span> <span class="ot">&lt;-</span> couche<span class="fl">.5</span> <span class="sc">+</span></span>
+<span id="cb63-2"><a href="#cb63-2"></a>  <span class="fu">labs</span>(<span class="at">x     =</span> <span class="st">"Carapace Length (mm)"</span>,</span>
+<span id="cb63-3"><a href="#cb63-3"></a>       <span class="at">y     =</span> <span class="st">"Carapace Width (mm)"</span>,</span>
+<span id="cb63-4"><a href="#cb63-4"></a>       <span class="at">color =</span> <span class="st">"Sex :"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
@@ -1178,7 +1778,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-27-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-74-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1192,7 +1792,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 </ol>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>couche<span class="fl">.7</span> <span class="ot">&lt;-</span> couche<span class="fl">.6</span> <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>sp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>couche<span class="fl">.7</span> <span class="ot">&lt;-</span> couche<span class="fl">.6</span> <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>sp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
@@ -1200,7 +1800,7 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-76-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1214,29 +1814,29 @@ Un grand notre d’exemples est disponible sur le site <a href="https://www.data
 </ol>
 <div class="fragment">
 <div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
-<span id="cb18-2"><a href="#cb18-2"></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
-<span id="cb18-3"><a href="#cb18-3"></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_dark</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb65-2"><a href="#cb65-2"></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
+<span id="cb65-3"><a href="#cb65-3"></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_dark</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel" data-warnings="false">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-77-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-30-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-77-2.png" width="960"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-30-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-77-3.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1257,13 +1857,13 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 </ol>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>couche<span class="fl">.8</span> <span class="ot">&lt;-</span> couche<span class="fl">.7</span> <span class="sc">+</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">theme</span>(<span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
-<span id="cb19-4"><a href="#cb19-4"></a>        <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
-<span id="cb19-5"><a href="#cb19-5"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
-<span id="cb19-6"><a href="#cb19-6"></a>        <span class="at">legend.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
-<span id="cb19-7"><a href="#cb19-7"></a>        <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>couche<span class="fl">.8</span> <span class="ot">&lt;-</span> couche<span class="fl">.7</span> <span class="sc">+</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb66-3"><a href="#cb66-3"></a>  <span class="fu">theme</span>(<span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb66-4"><a href="#cb66-4"></a>        <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb66-5"><a href="#cb66-5"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb66-6"><a href="#cb66-6"></a>        <span class="at">legend.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb66-7"><a href="#cb66-7"></a>        <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
@@ -1271,7 +1871,7 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-79-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1300,15 +1900,15 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 <p>Pour choisir ses couleurs de contour <em>vs.</em> de remplissage, on utilise les fonctions<br>
 <code>scale_color_manual()</code> <em>vs.</em> <code>scale_fill_manual()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># fish_data %&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="co">#   group_by(order) %&gt;%</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="co">#   summarise(biomass = sum(biomass)) %&gt;%</span></span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="co">#   ggplot() +</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a><span class="co">#   geom_col(data    = fish_data,</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a><span class="co">#                     mapping = aes(x = order, </span></span>
-<span id="cb20-7"><a href="#cb20-7"></a><span class="co">#                                            y = biomass, </span></span>
-<span id="cb20-8"><a href="#cb20-8"></a><span class="co">#                                            fill = order)) +</span></span>
-<span id="cb20-9"><a href="#cb20-9"></a><span class="co">#   scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="co"># fish_data %&gt;%</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a><span class="co">#   group_by(order) %&gt;%</span></span>
+<span id="cb67-3"><a href="#cb67-3"></a><span class="co">#   summarise(biomass = sum(biomass)) %&gt;%</span></span>
+<span id="cb67-4"><a href="#cb67-4"></a><span class="co">#   ggplot() +</span></span>
+<span id="cb67-5"><a href="#cb67-5"></a><span class="co">#   geom_col(data    = fish_data,</span></span>
+<span id="cb67-6"><a href="#cb67-6"></a><span class="co">#                     mapping = aes(x = order, </span></span>
+<span id="cb67-7"><a href="#cb67-7"></a><span class="co">#                                            y = biomass, </span></span>
+<span id="cb67-8"><a href="#cb67-8"></a><span class="co">#                                            fill = order)) +</span></span>
+<span id="cb67-9"><a href="#cb67-9"></a><span class="co">#   scale_fill_manual(values = c("pink", "green", "red", "blue", "yellow"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -1324,11 +1924,11 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 <div class="fragment">
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># plot &lt;- ggplot() +</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="co">#   geom_point(data    = fish_data,</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="co">#                       mapping = aes(x = total, y = biomass, </span></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="co">#                                              color = total))</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="co"># plot + scale_color_manual(values = "blue")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="co"># plot &lt;- ggplot() +</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a><span class="co">#   geom_point(data    = fish_data,</span></span>
+<span id="cb68-3"><a href="#cb68-3"></a><span class="co">#                       mapping = aes(x = total, y = biomass, </span></span>
+<span id="cb68-4"><a href="#cb68-4"></a><span class="co">#                                              color = total))</span></span>
+<span id="cb68-5"><a href="#cb68-5"></a><span class="co"># plot + scale_color_manual(values = "blue")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1361,34 +1961,34 @@ Testons les une par une à partir de la figure suivante
 <h3 id="scale_color_continuous"><code>scale_color_continuous</code></h3>
 <p>La plus simple, mais pas beaucoup d’options. C’est aussi la palette de couleur par défaut.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># plot &lt;- ggplot(faithfuld) +</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="co">#   geom_tile(aes(waiting, eruptions, fill = density)) +</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a><span class="co">#   labs(x = "Waiting", y = "Eruptions", fill = "Density") +</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="co">#   theme_bw()</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a></span>
-<span id="cb22-6"><a href="#cb22-6"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(faithfuld, <span class="fu">aes</span>(waiting, eruptions, <span class="at">fill =</span> density)) <span class="sc">+</span></span>
-<span id="cb22-7"><a href="#cb22-7"></a>  <span class="fu">geom_raster</span>() <span class="sc">+</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a>  <span class="fu">scale_x_continuous</span>(<span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
-<span id="cb22-9"><a href="#cb22-9"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
-<span id="cb22-10"><a href="#cb22-10"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="co"># plot &lt;- ggplot(faithfuld) +</span></span>
+<span id="cb69-2"><a href="#cb69-2"></a><span class="co">#   geom_tile(aes(waiting, eruptions, fill = density)) +</span></span>
+<span id="cb69-3"><a href="#cb69-3"></a><span class="co">#   labs(x = "Waiting", y = "Eruptions", fill = "Density") +</span></span>
+<span id="cb69-4"><a href="#cb69-4"></a><span class="co">#   theme_bw()</span></span>
+<span id="cb69-5"><a href="#cb69-5"></a></span>
+<span id="cb69-6"><a href="#cb69-6"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(faithfuld, <span class="fu">aes</span>(waiting, eruptions, <span class="at">fill =</span> density)) <span class="sc">+</span></span>
+<span id="cb69-7"><a href="#cb69-7"></a>  <span class="fu">geom_raster</span>() <span class="sc">+</span></span>
+<span id="cb69-8"><a href="#cb69-8"></a>  <span class="fu">scale_x_continuous</span>(<span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb69-9"><a href="#cb69-9"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb69-10"><a href="#cb69-10"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>plot</span>
-<span id="cb23-2"><a href="#cb23-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_continuous</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a>plot</span>
+<span id="cb70-2"><a href="#cb70-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_continuous</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-36-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-83-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-36-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-83-2.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1404,19 +2004,19 @@ Testons les une par une à partir de la figure suivante
 <div class="fragment">
 <div>
 <div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>)</span>
-<span id="cb24-3"><a href="#cb24-3"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>)</span>
+<span id="cb71-2"><a href="#cb71-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>)</span>
+<span id="cb71-3"><a href="#cb71-3"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-84-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-37-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-84-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-37-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-84-3.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1430,9 +2030,9 @@ Testons les une par une à partir de la figure suivante
 <p>Permet d’utiliser les palettes de couleurs issues de <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">BrewerPalettes</a>.</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>RColorBrewer<span class="sc">::</span><span class="fu">display.brewer.all</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>RColorBrewer<span class="sc">::</span><span class="fu">display.brewer.all</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-38-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-85-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1443,19 +2043,19 @@ Testons les une par une à partir de la figure suivante
 <div class="fragment">
 <p>Permet d’utiliser les palettes de couleurs issues de <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">BrewerPalettes</a>.</p>
 <div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"Reds"</span>)</span>
-<span id="cb26-2"><a href="#cb26-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"YlGn"</span>)</span>
-<span id="cb26-3"><a href="#cb26-3"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"Reds"</span>)</span>
+<span id="cb73-2"><a href="#cb73-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"YlGn"</span>)</span>
+<span id="cb73-3"><a href="#cb73-3"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-39-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-86-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-39-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-86-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-39-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-86-3.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1468,12 +2068,12 @@ Testons les une par une à partir de la figure suivante
 <p>Petite info utile, toutes les palettes peuvent passer le test <strong><em>ColorBlind Friendly</em></strong> :</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># install.packages("colorBlindness")</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="co"># install.packages("RColorBrewer")</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>color_pal <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">10</span>, <span class="at">name=</span><span class="st">"Spectral"</span>)</span>
-<span id="cb27-4"><a href="#cb27-4"></a>colorBlindness<span class="sc">::</span><span class="fu">displayAllColors</span>(color_pal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="co"># install.packages("colorBlindness")</span></span>
+<span id="cb74-2"><a href="#cb74-2"></a><span class="co"># install.packages("RColorBrewer")</span></span>
+<span id="cb74-3"><a href="#cb74-3"></a>color_pal <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">10</span>, <span class="at">name=</span><span class="st">"Spectral"</span>)</span>
+<span id="cb74-4"><a href="#cb74-4"></a>colorBlindness<span class="sc">::</span><span class="fu">displayAllColors</span>(color_pal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-40-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-87-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1491,19 +2091,19 @@ Testons les une par une à partir de la figure suivante
 </div>
 <div class="fragment">
 <div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>)</span>
-<span id="cb28-2"><a href="#cb28-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">midpoint =</span> <span class="fl">0.02</span>)</span>
-<span id="cb28-3"><a href="#cb28-3"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> colorspace<span class="sc">::</span><span class="fu">diverge_hcl</span>(<span class="dv">7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>)</span>
+<span id="cb75-2"><a href="#cb75-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">midpoint =</span> <span class="fl">0.02</span>)</span>
+<span id="cb75-3"><a href="#cb75-3"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> colorspace<span class="sc">::</span><span class="fu">diverge_hcl</span>(<span class="dv">7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-41-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-88-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-41-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-88-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-41-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-88-3.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1528,21 +2128,21 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <p>Les couleurs sont par défaut des nuances de bleu. Certaines précisions peuvent cependant être apportées.</p>
 <div class="fragment">
 <div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">n.breaks =</span> <span class="dv">4</span>)</span>
-<span id="cb29-2"><a href="#cb29-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">n.breaks =</span> <span class="dv">7</span>,</span>
-<span id="cb29-3"><a href="#cb29-3"></a>                         <span class="at">guide =</span> <span class="fu">guide_colorsteps</span>(<span class="at">show.limits =</span> T))</span>
-<span id="cb29-4"><a href="#cb29-4"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">breaks =</span> <span class="fu">quantile</span>(faithfuld<span class="sc">$</span>density, </span>
-<span id="cb29-5"><a href="#cb29-5"></a>                                           <span class="at">probs =</span> (<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.3</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">n.breaks =</span> <span class="dv">4</span>)</span>
+<span id="cb76-2"><a href="#cb76-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">n.breaks =</span> <span class="dv">7</span>,</span>
+<span id="cb76-3"><a href="#cb76-3"></a>                         <span class="at">guide =</span> <span class="fu">guide_colorsteps</span>(<span class="at">show.limits =</span> T))</span>
+<span id="cb76-4"><a href="#cb76-4"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">breaks =</span> <span class="fu">quantile</span>(faithfuld<span class="sc">$</span>density, </span>
+<span id="cb76-5"><a href="#cb76-5"></a>                                           <span class="at">probs =</span> (<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.3</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-42-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-89-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-42-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-89-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-42-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-89-3.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1555,19 +2155,19 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <p>La fonction analogue à <code>scale_fill_distiller()</code> et <code>scale_fill_brewer()</code>.</p>
 <div class="fragment">
 <div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_fermenter</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">palette =</span> <span class="st">"BuGn"</span>)</span>
-<span id="cb30-2"><a href="#cb30-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_fermenter</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">palette =</span> <span class="st">"BuGn"</span>, <span class="at">direction =</span> <span class="dv">1</span>)</span>
-<span id="cb30-3"><a href="#cb30-3"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_fermenter</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">palette =</span> <span class="st">"RdBu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_fermenter</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">palette =</span> <span class="st">"BuGn"</span>)</span>
+<span id="cb77-2"><a href="#cb77-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_fermenter</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">palette =</span> <span class="st">"BuGn"</span>, <span class="at">direction =</span> <span class="dv">1</span>)</span>
+<span id="cb77-3"><a href="#cb77-3"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_fermenter</span>(<span class="at">n.breaks =</span> <span class="dv">8</span>, <span class="at">palette =</span> <span class="st">"RdBu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-90-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-43-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-90-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-43-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-90-3.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1587,19 +2187,19 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 </div>
 <div class="fragment">
 <div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_steps</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">n.breaks =</span> <span class="dv">8</span>)</span>
-<span id="cb31-2"><a href="#cb31-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_steps2</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">midpoint =</span> <span class="fl">0.02</span>, <span class="at">n.breaks =</span> <span class="dv">8</span>)</span>
-<span id="cb31-3"><a href="#cb31-3"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_stepsn</span>(<span class="at">colors =</span> <span class="fu">magma</span>(<span class="dv">9</span>), <span class="at">n.breaks =</span> <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_steps</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">n.breaks =</span> <span class="dv">8</span>)</span>
+<span id="cb78-2"><a href="#cb78-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_steps2</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">midpoint =</span> <span class="fl">0.02</span>, <span class="at">n.breaks =</span> <span class="dv">8</span>)</span>
+<span id="cb78-3"><a href="#cb78-3"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_stepsn</span>(<span class="at">colors =</span> <span class="fu">magma</span>(<span class="dv">9</span>), <span class="at">n.breaks =</span> <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-91-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-44-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-91-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-44-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-91-3.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1621,30 +2221,30 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <h2>Couleurs &amp; variables discrètes</h2>
 <div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">geom_violin</span>(<span class="at">data    =</span> data_crabs,</span>
-<span id="cb32-3"><a href="#cb32-3"></a>              <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> CL, <span class="at">fill =</span> sex), </span>
-<span id="cb32-4"><a href="#cb32-4"></a>              <span class="at">alpha   =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb32-5"><a href="#cb32-5"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sp) <span class="sc">+</span></span>
-<span id="cb32-6"><a href="#cb32-6"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb79-2"><a href="#cb79-2"></a>  <span class="fu">geom_violin</span>(<span class="at">data    =</span> data_crabs,</span>
+<span id="cb79-3"><a href="#cb79-3"></a>              <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> CL, <span class="at">fill =</span> sex), </span>
+<span id="cb79-4"><a href="#cb79-4"></a>              <span class="at">alpha   =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb79-5"><a href="#cb79-5"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sp) <span class="sc">+</span></span>
+<span id="cb79-6"><a href="#cb79-6"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="fragment">
 <div>
 <div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_discrete</span>()</span>
-<span id="cb33-2"><a href="#cb33-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span>
-<span id="cb33-3"><a href="#cb33-3"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_discrete</span>()</span>
+<span id="cb80-2"><a href="#cb80-2"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span>
+<span id="cb80-3"><a href="#cb80-3"></a>plot <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-1.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-93-1.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-2.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-93-2.png" width="960"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-46-3.png" width="960"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-93-3.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1662,50 +2262,50 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <h2>Utiliser ggplot pour détecter des erreurs dans les données</h2>
 <center>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># fish_data &lt;- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a><span class="co"># fish_data &lt;- read_csv("data/Global_reef_fish_biomass.csv")</span></span>
-<span id="cb34-3"><a href="#cb34-3"></a></span>
-<span id="cb34-4"><a href="#cb34-4"></a><span class="co"># survey &lt;- read_delim("data/Survey_metadata.csv", </span></span>
-<span id="cb34-5"><a href="#cb34-5"></a><span class="co">#      delim = ";", escape_double = FALSE, trim_ws = TRUE, </span></span>
-<span id="cb34-6"><a href="#cb34-6"></a><span class="co">#      skip = 70)</span></span>
-<span id="cb34-7"><a href="#cb34-7"></a></span>
-<span id="cb34-8"><a href="#cb34-8"></a><span class="co"># Selection des données pour le site n°2000951</span></span>
-<span id="cb34-9"><a href="#cb34-9"></a><span class="co"># site1 &lt;- fish_data %&gt;%</span></span>
-<span id="cb34-10"><a href="#cb34-10"></a><span class="co">#   filter(survey_id == 2000951) %&gt;%</span></span>
-<span id="cb34-11"><a href="#cb34-11"></a><span class="co">#   select(survey_id, class, order, family, species_name, total, biomass)</span></span>
-<span id="cb34-12"><a href="#cb34-12"></a><span class="co"># </span></span>
-<span id="cb34-13"><a href="#cb34-13"></a><span class="co"># site1 %&gt;%</span></span>
-<span id="cb34-14"><a href="#cb34-14"></a><span class="co">#   head(5) %&gt;% </span></span>
-<span id="cb34-15"><a href="#cb34-15"></a><span class="co">#   kbl(digits = 4, caption = "Data to check") %&gt;% </span></span>
-<span id="cb34-16"><a href="#cb34-16"></a><span class="co">#   kable_classic(html_font = "Computer Modern", full_width = F)  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a><span class="co"># fish_data &lt;- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")</span></span>
+<span id="cb81-2"><a href="#cb81-2"></a><span class="co"># fish_data &lt;- read_csv("data/Global_reef_fish_biomass.csv")</span></span>
+<span id="cb81-3"><a href="#cb81-3"></a></span>
+<span id="cb81-4"><a href="#cb81-4"></a><span class="co"># survey &lt;- read_delim("data/Survey_metadata.csv", </span></span>
+<span id="cb81-5"><a href="#cb81-5"></a><span class="co">#      delim = ";", escape_double = FALSE, trim_ws = TRUE, </span></span>
+<span id="cb81-6"><a href="#cb81-6"></a><span class="co">#      skip = 70)</span></span>
+<span id="cb81-7"><a href="#cb81-7"></a></span>
+<span id="cb81-8"><a href="#cb81-8"></a><span class="co"># Selection des données pour le site n°2000951</span></span>
+<span id="cb81-9"><a href="#cb81-9"></a><span class="co"># site1 &lt;- fish_data %&gt;%</span></span>
+<span id="cb81-10"><a href="#cb81-10"></a><span class="co">#   filter(survey_id == 2000951) %&gt;%</span></span>
+<span id="cb81-11"><a href="#cb81-11"></a><span class="co">#   select(survey_id, class, order, family, species_name, total, biomass)</span></span>
+<span id="cb81-12"><a href="#cb81-12"></a><span class="co"># </span></span>
+<span id="cb81-13"><a href="#cb81-13"></a><span class="co"># site1 %&gt;%</span></span>
+<span id="cb81-14"><a href="#cb81-14"></a><span class="co">#   head(5) %&gt;% </span></span>
+<span id="cb81-15"><a href="#cb81-15"></a><span class="co">#   kbl(digits = 4, caption = "Data to check") %&gt;% </span></span>
+<span id="cb81-16"><a href="#cb81-16"></a><span class="co">#   kable_classic(html_font = "Computer Modern", full_width = F)  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </center>
 <p>Comment détécter les outliers ?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># ggplot(data = site1, mapping = aes(x = order, y = biomass)) +</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a><span class="co">#   geom_boxplot() +</span></span>
-<span id="cb35-3"><a href="#cb35-3"></a><span class="co">#   theme_bw()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a><span class="co"># ggplot(data = site1, mapping = aes(x = order, y = biomass)) +</span></span>
+<span id="cb82-2"><a href="#cb82-2"></a><span class="co">#   geom_boxplot() +</span></span>
+<span id="cb82-3"><a href="#cb82-3"></a><span class="co">#   theme_bw()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <h3 id="séparer-les-elasmobranches-des-actinoptérygiens">Séparer les Elasmobranches des Actinoptérygiens</h3>
 <center>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># ggplot(data = site1, mapping = aes(x = order, y = biomass)) +</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="co">#   geom_boxplot() +</span></span>
-<span id="cb36-3"><a href="#cb36-3"></a><span class="co">#   facet_grid(.~class, scales = "free", space = "free") +</span></span>
-<span id="cb36-4"><a href="#cb36-4"></a><span class="co">#   theme_bw() +</span></span>
-<span id="cb36-5"><a href="#cb36-5"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a><span class="co"># ggplot(data = site1, mapping = aes(x = order, y = biomass)) +</span></span>
+<span id="cb83-2"><a href="#cb83-2"></a><span class="co">#   geom_boxplot() +</span></span>
+<span id="cb83-3"><a href="#cb83-3"></a><span class="co">#   facet_grid(.~class, scales = "free", space = "free") +</span></span>
+<span id="cb83-4"><a href="#cb83-4"></a><span class="co">#   theme_bw() +</span></span>
+<span id="cb83-5"><a href="#cb83-5"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Interrogation au niveau des perciformes …</p>
 </center>
 <h3 id="quest-ce-quil-se-passe-avec-les-perciformes">Qu’est-ce qu’il se passe avec les Perciformes ?</h3>
 <center>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># site1 %&gt;%</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="co">#   filter(order == "Perciformes") %&gt;%</span></span>
-<span id="cb37-3"><a href="#cb37-3"></a><span class="co">#   ggplot(., mapping = aes(x = family, y = biomass)) +</span></span>
-<span id="cb37-4"><a href="#cb37-4"></a><span class="co">#   geom_boxplot() +</span></span>
-<span id="cb37-5"><a href="#cb37-5"></a><span class="co">#   theme_bw() +</span></span>
-<span id="cb37-6"><a href="#cb37-6"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="co"># site1 %&gt;%</span></span>
+<span id="cb84-2"><a href="#cb84-2"></a><span class="co">#   filter(order == "Perciformes") %&gt;%</span></span>
+<span id="cb84-3"><a href="#cb84-3"></a><span class="co">#   ggplot(., mapping = aes(x = family, y = biomass)) +</span></span>
+<span id="cb84-4"><a href="#cb84-4"></a><span class="co">#   geom_boxplot() +</span></span>
+<span id="cb84-5"><a href="#cb84-5"></a><span class="co">#   theme_bw() +</span></span>
+<span id="cb84-6"><a href="#cb84-6"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </center>
 
