@@ -45,7 +45,7 @@ library(rnaturalearth)
 
 [Collection de packages tidyverse]{style="color:#ffffff; font-size: 1.5em"}
 
-[Monique Simier (monique.simier\@ird.fr)]{style="color:#ffffff; font-size: 1em"} <br/> [Laure Velez (laure.velez\@umontpellier.fr)]{style="color:#ffffff; font-size: 1em"} <br/> [Gael Mariani (gael.mariani\@umontpellier.fr)]{style="color:#ffffff; font-size: 1em"} <br/> [Mathieu Depetris (mathieu.depetris\@ird.fr)]{style="color:#ffffff; font-size: 1em"} <br/> <br/> [05-06 decembre 2022]{style="color:#ffffff; font-size: 1em"} <br/> <br/> <br/> [© RStudio]{style="color:#ffffff; font-size: 0.4em"}
+[Laure Velez (laure.velez\@umontpellier.fr)]{style="color:#ffffff; font-size: 1em"} <br/> [Gael Mariani (gael.mariani\@umontpellier.fr)]{style="color:#ffffff; font-size: 1em"} <br/> [Mathieu Depetris (mathieu.depetris\@ird.fr)]{style="color:#ffffff; font-size: 1em"} <br/> [Monique Simier (monique.simier\@ird.fr)]{style="color:#ffffff; font-size: 1em"} <br/> <br/> [05-06 decembre 2022]{style="color:#ffffff; font-size: 1em"} <br/> <br/> <br/> [© RStudio]{style="color:#ffffff; font-size: 0.4em"}
 
 ![](images/tidyverse_packages.png){.absolute top="60" right="20" width="35%"}
 
@@ -158,24 +158,345 @@ library(tidyverse)
 
 ![](images/logo_readr.png)
 
-## Utilisation du package readr
 
--   Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (read.csv) ou avec séparateurs tabulation (read.table)
--   La librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects
--   Elles sont compatibles avec l'esprit Tidyverse car elles permettent de générer des tibbles
+## La librairie **readr**
 
-## A voir avec Monique
+-   Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (`read.csv`, `read.csv2`) ou tabulés (`read.table`) ou avec des séparateurs quelconques (`read.delim`)
+-   La librairie **readr** propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects.
+-   Ces fonctions de **readr** sont compatibles avec l'esprit **Tidyverse** car elles permettent de générer des *tibbles*
 
-```{r, echo=TRUE, eval=FALSE}
-global_reef_fish_abundance <- read_delim(file = "./data/global_reef_fish_abundance.csv",
-                                         delim = ",",
-                                         quote = "\"")
-global_reef_fish_biomass <- read_delim(file = "./data/global_reef_fish_biomass.csv",
-                                       delim = ",",
-                                       quote = "\"")
+```{r echo=TRUE, eval=TRUE}
+# install.packages("readr", dependencies = T)
+# install.packages("tibble", dependencies = T)
+library(readr)
+library(tibble)
+```
+
+## Un ***tibble*** ... Cékoiça ???
+
+-   Le *tibble* est une évolution du *data frame* du R de base
+-   Ce format est géré par le package du même nom qui fait partie du coeur de tidyverse
+-   Les *tibbles* contiennent un attribut *spec* qui précise les spécifications des colonnes (nom et type)
+-   Ils s'affichent plus intelligemment que les *data frames* : seules les premières lignes sont affichées, ainsi que quelques informations supplémentaires utiles
+-   Ils autorisent des noms de colonnes qui sont invalides pour les *data frames* (espaces, caractères spéciaux, nombres...)
+-   Ils affichent un avertissement si on essaie d'accéder à une colonne qui n'existe pas
+-   Ils n'ont pas de noms de lignes (*rownames*).
+
+## Pour passer du *tibble* au *dataframe* et vice-versa
+
+-   La plupart des fonctions du tidyverse acceptent des *data frames* en entrée, mais retournent un objet de classe *tibble*
+-   On peut convertir un *data frame* en *tibble* avec la fonction `as_tibble`, ou l'inverse avec la fonction `as.data.frame`
+
+## Les principales fonctions de la librairie **readr**
+
+Les fonctions de readr les plus utilisées sont :
+
+-   `read_delim` : la plus générale, pour lire un fichier avec un délimiteur quelconque
+-   `read_csv` : fichiers csv au format anglais (point décimal et séparateur virgule)
+-   `read_csv2` : fichiers csv au format français (virgule décimale et séparateur point-virgule)
+-   `read_xxx_chunked` (où xxx = csv, csv2, delim) : pour lire un fichier en "chunks", c'est à dire en tranches dont on définit la taille en nombre de lignes. Cette fonction permet de lire de très gros fichiers et aussi d'appliquer une fonction (CallBack) sur les données à chaque tranche.
+
+## Importer en ***tibble*** le fichier Global_reef_fish_biomass.csv
+
+-   Ce fichier est au format csv anglais (séparateur décimal = point et séparateur de colonnes = virgule).
+
+-   Chaque ligne donne une valeur de biomasse pour une campagne (survey_id), une espèce de poisson (species_name) et une classe de taille de 0.5cm (size_class).
+
+-   Lecture avec `read_delim` : preciser le delimiteur de colonnes (ici la virgule)
+
+```{r echo=TRUE, eval=TRUE}
+
+global_reef_fish_biomass <- read_delim(file = "./data/Global_reef_fish_biomass.csv", delim = ",")
+
+```
+
+-   0u bien avec `read_csv` : delimiteur par defaut = virgule
+
+```{r echo=TRUE, eval=TRUE}
+global_reef_fish_biomass <- read_csv(file = "./data/Global_reef_fish_biomass.csv")
+```
+
+## Le ***tibble*** global_reef_fish_biomass
+
+On vérifie sa classe avec `class()`
+
+```{r echo=TRUE, eval=TRUE}
+class(global_reef_fish_biomass)
+```
+
+## Le ***tibble*** global_reef_fish_biomass
+
+On vérifie sa structure avec `str()`
+
+```{r echo=TRUE, eval=TRUE}
+str(global_reef_fish_biomass)
+```
+
+## Le ***tibble*** global_reef_fish_biomass
+
+On vérifie son contenu avec `head()`
+
+```{r echo=TRUE, eval=TRUE}
+head(global_reef_fish_biomass)
+```
+
+## La fonction inverse : `write_...` pour exporter un fichier
+
+-   `write_csv` pour exporter un tibble en csv
+
+```{r echo=TRUE, eval=TRUE}
+write_csv(global_reef_fish_biomass, "./data/global_reef_fish_biomass_out.csv")
+```
+
+-   ou `write_delim` pour choisir le délimiteur de colonnes (ici tabulation)
+
+```{r echo=TRUE, eval=TRUE}
+write_delim(global_reef_fish_biomass, "./data/global_reef_fish_biomass_out2.txt", delim="\t")
+```
+
+## Comment lire un fichier avec d'autres séparateurs des colonnes et des décimales ?
+
+-   Pour générer un autre format de fichier, on exporte biomass au format csv "francais" (séparateur décimal=",' et séparateur des colonnes=";")
+
+```{r echo=TRUE, eval=TRUE}
+write_csv2(global_reef_fish_biomass, "./data/global_reef_fish_biomass_out3.csv")
+```
+
+-   Puis on essaie de lire ce nouveau csv au format francais
+
+## Option 1 : `read_csv2`
+
+```{r echo=TRUE, eval=TRUE}
+global_reef_fish_biomass3 <- read_csv2(file = "./data/global_reef_fish_biomass_out3.csv")
+str(global_reef_fish_biomass3)
+```
+
+## Option 2 : `read_delim` sans préciser le séparateur décimal
+
+PAS BON car les nombres décimaux (ex: biomass) sont lus comme du caractère
+
+```{r echo=TRUE, eval=TRUE}
+global_reef_fish_biomass3 <- read_delim(file = "./data/global_reef_fish_biomass_out3.csv",
+                                       delim = ";")
+str(global_reef_fish_biomass3) 
+```
+
+## Option 3 : read_delim en précisant le séparateur décimal avec locale()
+
+```{r echo=TRUE, eval=TRUE}
+global_reef_fish_biomass3 <- read_delim(file = "./data/global_reef_fish_biomass_out3.csv",
+                                        delim = ";",
+                                        locale = locale(decimal_mark = ","))
+str(global_reef_fish_biomass3) 
+```
+
+## Le type des colonnes
+
+Afficher les specifications avec `spec`
+
+```{r echo=TRUE, eval=TRUE}
+spec(global_reef_fish_biomass)
+```
+
+Simplifier les specifications avec `col_condense`
+
+```{r echo=TRUE, eval=TRUE}
+cols_condense(spec(global_reef_fish_biomass))
+```
+
+## Forcer le type d'une colonne
+
+Avec le paramètre `col_types = list(...)`, on choisit de lire survey_id comme un entier `col_integer()`, method et block comme des facteurs `col_factor()`. Pour block on définit aussi des levels avec un certain ordre :
+
+```{r echo=TRUE, eval=TRUE}
+global_reef_fish_biomass <- read_csv(file = "./data/Global_reef_fish_biomass.csv",
+                  col_types = list(survey_id = col_integer(),
+                                   method = col_factor(),
+                                   block = col_factor(levels=c("3","2","1"))))
+spec(global_reef_fish_biomass)
+
+levels(global_reef_fish_biomass$block)
+
+global_reef_fish_biomass <- droplevels(global_reef_fish_biomass)
+levels(global_reef_fish_biomass$block)
+```
+
+## Importer en ***tibble*** le fichier Survey_metadata.csv
+
+Ce fichier contient des métadonnées caractérisant les campagnes (survey_id) Particularités : séparateur ";" et 70 lignes de commentaires au début qui ne doivent pas être lues : utilisation du paramètre `skip =`
+
+```{r echo=TRUE, eval=TRUE}
 survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
                               delim = ";",
                               skip = 70)
+head(survey_metadata,3)
+```
+
+# Avantages de ***readr*** *vs.* les fonctions de base
+
+## Pour les gros fichiers, ***readr*** est plus rapide
+
+-   Lecture du fichier biomasse avec la fonction `read.csv` de base
+
+```{r echo=TRUE, eval=TRUE}
+debut <- Sys.time()
+fish1 <- read.delim("./data/Global_reef_fish_biomass.csv", 
+                   sep = ",")
+fin <- Sys.time()
+print(paste("L'import a duré : ", fin-debut, "secondes"))
+```
+
+-   Lecture du même fichier avec `read_csv` de la librairie **readr**
+
+```{r echo=TRUE, eval=TRUE}
+debut <- Sys.time()
+fish2 <- read_delim(file = "./data/Global_reef_fish_biomass.csv", 
+                                         delim = ",")
+fin <- Sys.time()
+print(paste("L'import a duré : ", fin-debut, "secondes"))
+
+```
+
+## `read_csv` permet de lire depuis une archive, ce que ne permet pas `read.csv`
+
+```{r echo=TRUE, eval=FALSE}
+survey_metadata_zip <- read_delim(file = "./data/survey_metadata.zip",
+                              delim = ";",
+                              skip = 70)
+```
+
+## `read_csv` permet de lire depuis plusieurs fichiers et mêmes répertoires
+
+```{r echo=TRUE, eval=FALSE}
+continents <- c("africa", "americas", "asia", "europe", "oceania")
+filepaths <- vapply(
+  paste0("mini-gapminder-", continents, ".csv"),
+  FUN = readr_example,
+  FUN.VALUE = character(1)
+)
+conti <- read_csv(filepaths, id = "file")
+
+```
+
+## La sélection de colonnes lors de la lecture avec `read_csv` est facilitée
+
+-   Par nom de colonne
+
+```{r echo=TRUE, eval=TRUE}
+survey_metadata_1 <- read_delim(file = "./data/Survey_metadata.csv",
+                              delim = ";",
+                              skip = 70,
+                              col_select = c(survey_id,country, site_code, site_name))
+head(survey_metadata_1)
+```
+
+## La sélection de colonnes lors de la lecture avec `read_csv` est facilitée
+
+-   Par numéro de colonne
+
+```{r echo=TRUE, eval=TRUE}
+survey_metadata_2 <- read_delim(file = "./data/Survey_metadata.csv",
+                                delim = ";",
+                                skip = 70,
+                                col_select = c(1,2,5:8))
+head(survey_metadata_2)
+```
+
+## La sélection de colonnes lors de la lecture avec `read_csv` est facilitée
+
+-   Par numéro de colonne, en omettant certaines colonnes
+
+```{r echo=TRUE, eval=TRUE}
+survey_metadata_3 <- read_delim(file = "./data/Survey_metadata.csv",
+                                delim = ";",
+                                skip = 70,
+                                col_select = -c(11:22,24))
+head(survey_metadata_3)
+```
+
+## On peut renommer certaines colonnes
+
+NB : ne pas oublier `everything()` pour conserver à l'identique toutes les colonnes non renommées
+
+```{r echo=TRUE, eval=TRUE}
+survey_metadata_4 <- read_delim(file = "./data/Survey_metadata.csv",
+                                delim = ";",
+                                skip = 70,
+                                col_select = c(projet = survey_id, pays = country, everything()))
+head(survey_metadata_4)
+
+```
+
+## On peut faire un filtre en entrée sur les valeurs d'une colonne avec `read_..._chunked`
+
+-   Pour sélectionner sur une colonne (ici la famille)
+
+```{r echo=TRUE, eval=TRUE}
+f1 <- function(x, pos) subset(x, family %in% c("Kyphosidae", "Labridae", "Sparidae"))
+kyphosidae_labridae_sparidae_biomass <- read_csv_chunked(file = "./data/Global_reef_fish_biomass.csv", 
+                               callback = DataFrameCallback$new(f1), 
+                               chunk_size = 1000)
+table(kyphosidae_labridae_sparidae_biomass$family)
+```
+
+## On peut faire un filtre en entrée sur les valeurs d'une colonne avec `read_..._chunked`
+
+-   Pour sélectionner sur plusieurs colonnes (ici la famille et la classe de taille)
+
+```{r echo=TRUE, eval=TRUE}
+f2 <- function(x, pos) subset(x, family == "Kyphosidae" & size_class>9 & size_class < 31)
+kyphosidae_10_30_cm_biomass <- read_csv_chunked(file = "./data/Global_reef_fish_biomass.csv", 
+                                       callback = DataFrameCallback$new(f2), 
+                                       chunk_size = 1000)
+table(kyphosidae_10_30_cm_biomass$family, kyphosidae_10_30_cm_biomass$size_class)
+```
+
+## Exercice 1.1 {auto-animate="true"}
+
+-   Lire le fichier Survey_metadata.csv =\> tibble `survey_metadata`,
+-   Lire le fichier Global_reef_fish_biomass.csv =\> tibble `global_reef_fish_biomass`
+-   Lire le fichier Global_reef_fish_abundance.csv =\> tibble `global_reef_fish_abundance`
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 1.1 corrigé {auto-animate="true"}
+
+-   Lire le fichier Survey_metadata.csv =\> tibble `survey_metadata`,
+-   Lire le fichier Global_reef_fish_biomass.csv =\> tibble `global_reef_fish_biomass`
+-   Lire le fichier Global_reef_fish_abundance.csv =\> tibble `global_reef_fish_abundance`
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+global_reef_fish_biomass <- read_csv(file = "./data/Global_reef_fish_biomass.csv")
+global_reef_fish_abundance <- read_csv(file = "./data/Global_reef_fish_abundance.csv")
+survey_metadata <- read_delim(file = "./data/Survey_metadata.csv",
+                              delim = ";",
+                              skip = 70)
+```
+
+## Exercice 1.2 {auto-animate="true"}
+
+Lire le fichier Survey_metadata.csv =\> tibble `Survey_selection` en sélectionnant le pays=Indonésie, la profondeur inférieure à 20m et la visibilité supérieure à 10m.
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 1.2 corrigé {auto-animate="true"}
+
+Lire le fichier Survey_metadata.csv =\> tibble `Survey_selection` en sélectionnant le pays Indonésie, la profondeur inférieure à 20m et la visibilité supérieure à 10m.
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+f3 <- function(x, pos) subset(x, country == "Indonesia" & depth<20 & visibility>10 )
+survey_selection <- read_delim_chunked(file = "./data/survey_metadata.csv", 
+                                       callback = DataFrameCallback$new(f3), 
+                                       chunk_size = 1000,
+                                       delim = ";",
+                                       skip = 70)
+dim(survey_selection)
 ```
 
 # Partie 2 : Manipulation de données avec dplyr
@@ -1026,12 +1347,12 @@ Solution décomposée
 
 ::: columns
 ::: {.column width="60%"}
-- Il faut savoir que cela existe, mais demande un peu de patience et d'entrainement pour être utilisé
-- Regardez le [deuxième volet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){target="_blank"} du cheatsheet de stringr
-- Permet de "selectionner" de manière "dynamique" des patterns dans vos données
-- Le plus difficle est de formuler de la meilleur façon ce que vous voulez
-    - Il y a souvent plusieurs façon d'arriver à ce que vous voulez 
-    - Parfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle
+-   Il faut savoir que cela existe, mais demande un peu de patience et d'entrainement pour être utilisé
+-   Regardez le [deuxième volet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){target="_blank"} du cheatsheet de stringr
+-   Permet de "selectionner" de manière "dynamique" des patterns dans vos données
+-   Le plus difficle est de formuler de la meilleur façon ce que vous voulez
+    -   Il y a souvent plusieurs façon d'arriver à ce que vous voulez
+    -   Parfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle
 :::
 
 ::: {.column width="40%"}
@@ -1040,7 +1361,7 @@ Solution décomposée
 :::
 
 ## Exemple concret
-    
+
 ```{r echo=TRUE, eval=FALSE}
 load(file = "./data/exemple_regular_expressions.RData")
 
