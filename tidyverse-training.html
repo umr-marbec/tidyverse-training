@@ -965,8 +965,10 @@
 <section>
 <section id="partie-3-nettoyage-des-données-avec-tidyr" class="title-slide slide level1 center">
 <h1>Partie 3 : Nettoyage des données avec <code>tidyr</code></h1>
-
-<img data-src="images/logo_tidyr.png" class="r-stretch"></section>
+<center>
+<p><img data-src="images/logo_tidyr.png" style="width:20.0%"></p>
+<center>
+</center></center></section>
 <section id="section-1" class="slide level2">
 <h2></h2>
 <p>L’objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format “tidy”</p>
@@ -2510,6 +2512,377 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <span id="cb94-6"><a href="#cb94-6"></a><span class="co">#   theme(axis.text.x = element_text(angle = 45, hjust = 1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </center>
+</section>
+<section id="la-cartographie-avec-ggplot2" class="slide level2">
+<h2>La cartographie avec ggplot2</h2>
+<p>Toutes les fonctions et la syntaxe montraient précédemment fonctionnent ici</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1"></a><span class="co"># Pour cette partie nous utiliserons un shape file des pays de la librarie rnaturalearth</span></span>
+<span id="cb95-2"><a href="#cb95-2"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb95-3"><a href="#cb95-3"></a><span class="co"># install.packages("rnaturalearthdata")</span></span>
+<span id="cb95-4"><a href="#cb95-4"></a>world_boundaries <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">returnclass =</span> <span class="st">"sf"</span>, <span class="at">scale =</span><span class="st">"medium"</span>) </span>
+<span id="cb95-5"><a href="#cb95-5"></a><span class="co"># dim(world_boundaries)</span></span>
+<span id="cb95-6"><a href="#cb95-6"></a><span class="co"># head(world_boundaries)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Plotter des données spatialisées</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1"></a><span class="co"># Pour les objets spatialisés de type vectoriels au format sf</span></span>
+<span id="cb96-2"><a href="#cb96-2"></a><span class="fu">geom_sf</span>()</span>
+<span id="cb96-3"><a href="#cb96-3"></a><span class="co"># Permet d'extraire les coordonnées d'un objet sf</span></span>
+<span id="cb96-4"><a href="#cb96-4"></a><span class="fu">stat_sf_coordinates</span>()</span>
+<span id="cb96-5"><a href="#cb96-5"></a><span class="co"># Pour les objets spatialisés au format raster</span></span>
+<span id="cb96-6"><a href="#cb96-6"></a><span class="fu">geom_raster</span>()</span>
+<span id="cb96-7"><a href="#cb96-7"></a><span class="co"># Attention geom_raster ne reçoit pas un objet directement au format raster </span></span>
+<span id="cb96-8"><a href="#cb96-8"></a><span class="co">#mais un data frame</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<ul>
+<li><p>Applications</p>
+<ul>
+<li>Visualiser la carte</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1"></a>map1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> world_boundaries) <span class="sc">+</span> </span>
+<span id="cb97-2"><a href="#cb97-2"></a>  <span class="fu">geom_sf</span>(<span class="at">fill=</span><span class="st">"transparent"</span>) <span class="sc">+</span></span>
+<span id="cb97-3"><a href="#cb97-3"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb97-4"><a href="#cb97-4"></a>map1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-110-1.png" width="960" class="r-stretch"></section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<ul>
+<li><p>Applications</p>
+<ul>
+<li>Afficher sur chaque pays correspond un rond dont la taille est proportionnelle à la population</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1"></a>map2 <span class="ot">&lt;-</span> map_1 <span class="sc">+</span> </span>
+<span id="cb98-2"><a href="#cb98-2"></a>  <span class="fu">stat_sf_coordinates</span>(<span class="fu">aes</span>(<span class="at">size=</span>pop_est, <span class="at">fill=</span>gdp_md_est),<span class="at">color =</span> <span class="st">"black"</span>,<span class="at">shape=</span><span class="dv">21</span>, <span class="at">data =</span> world_boundaries) <span class="sc">+</span></span>
+<span id="cb98-3"><a href="#cb98-3"></a>  <span class="fu">labs</span>(<span class="at">fill=</span><span class="st">"GDP"</span>) <span class="sc">+</span></span>
+<span id="cb98-4"><a href="#cb98-4"></a><span class="fu">scale_size_binned</span>(<span class="at">breaks =</span> <span class="fu">quantile</span>(world_boundaries<span class="sc">$</span>pop_est, <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>),<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">+</span></span>
+<span id="cb98-5"><a href="#cb98-5"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb98-6"><a href="#cb98-6"></a>map2 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-9" class="slide level2">
+<h2></h2>
+<ul>
+<li><p>Applications</p>
+<ul>
+<li>Créer un raster et le visualiser</li>
+</ul></li>
+</ul>
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a>r <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="at">ncols=</span><span class="dv">5</span>, <span class="at">nrows=</span><span class="dv">5</span>)</span>
+<span id="cb99-2"><a href="#cb99-2"></a>r1 <span class="ot">&lt;-</span> <span class="fu">setValues</span>(r, <span class="fu">runif</span>(<span class="fu">ncell</span>(r)))</span>
+<span id="cb99-3"><a href="#cb99-3"></a></span>
+<span id="cb99-4"><a href="#cb99-4"></a>rastdf <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(r1,<span class="at">xy=</span><span class="cn">TRUE</span>)</span>
+<span id="cb99-5"><a href="#cb99-5"></a><span class="fu">head</span>(rastdf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a>map3<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb100-2"><a href="#cb100-2"></a>    <span class="fu">geom_raster</span>(<span class="at">data=</span>rastdf, <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y))</span>
+<span id="cb100-3"><a href="#cb100-3"></a>Map3<span class="fl">.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a><span class="co"># Ajouter l'argument fill </span></span>
+<span id="cb101-2"><a href="#cb101-2"></a>map3<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb101-3"><a href="#cb101-3"></a>    <span class="fu">geom_raster</span>(<span class="at">data=</span>rastdf, <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y,<span class="at">fill=</span>layer))</span>
+<span id="cb101-4"><a href="#cb101-4"></a>map3<span class="fl">.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<ul>
+<li>Ajouter des étiquettes et du texte</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a><span class="co"># Afficher du texte</span></span>
+<span id="cb102-2"><a href="#cb102-2"></a><span class="co">#Interet de l'argument check_overlap</span></span>
+<span id="cb102-3"><a href="#cb102-3"></a><span class="fu">geom_sf_text</span>()</span>
+<span id="cb102-4"><a href="#cb102-4"></a><span class="co"># Afficher des étiquettes</span></span>
+<span id="cb102-5"><a href="#cb102-5"></a><span class="fu">geom_sf_label</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-11" class="slide level2 smaller">
+<h2></h2>
+<ul>
+<li><p>Applications</p>
+<ul>
+<li>Afficher sous format texte le code ISO3 des pays</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a>map_4<span class="fl">.1</span> <span class="ot">&lt;-</span> map1 <span class="sc">+</span></span>
+<span id="cb103-2"><a href="#cb103-2"></a>  <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> adm0_a3),<span class="at">vjust=</span><span class="sc">-</span><span class="fl">0.5</span>,<span class="at">fontface=</span><span class="st">"italic"</span>,<span class="at">colour=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb103-3"><a href="#cb103-3"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb103-4"><a href="#cb103-4"></a>map4<span class="fl">.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Ajout de l’argument check_overlap. Que se passe t’il?</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a>map_4<span class="fl">.2</span> <span class="ot">&lt;-</span> map1 <span class="sc">+</span></span>
+<span id="cb104-2"><a href="#cb104-2"></a>  <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> adm0_a3),<span class="at">vjust=</span><span class="sc">-</span><span class="fl">0.5</span>,<span class="at">check_overlap=</span><span class="cn">TRUE</span>,<span class="at">fontface=</span><span class="st">"italic"</span>,<span class="at">colour=</span><span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb104-3"><a href="#cb104-3"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb104-4"><a href="#cb104-4"></a>map4<span class="fl">.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>- Afficher sous format étiquette le code ISO3 des pays</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1"></a>map_5 <span class="ot">&lt;-</span> map1 <span class="sc">+</span></span>
+<span id="cb106-2"><a href="#cb106-2"></a>  <span class="fu">geom_sf_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> adm0_a3),<span class="at">vjust=</span><span class="sc">-</span><span class="fl">0.5</span>,<span class="at">colour=</span><span class="st">"blue"</span>,<span class="at">fill=</span><span class="st">"cyan"</span>) <span class="sc">+</span></span>
+<span id="cb106-3"><a href="#cb106-3"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb106-4"><a href="#cb106-4"></a>Map5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-12" class="slide level2">
+<h2></h2>
+<ul>
+<li>Peaufiner les cartes avec <code>ggspatial</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1"></a><span class="co"># Ajout de la barre d'échelle</span></span>
+<span id="cb107-2"><a href="#cb107-2"></a><span class="fu">annotation_scale</span>()</span>
+<span id="cb107-3"><a href="#cb107-3"></a><span class="co"># Ajout de la flèche du nord</span></span>
+<span id="cb107-4"><a href="#cb107-4"></a><span class="fu">annotation_north_arrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-13" class="slide level2">
+<h2></h2>
+<ul>
+<li><p>Application</p>
+<ul>
+<li>Ajouter la barre d’échelle</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1"></a><span class="co"># Le filter peut aussi etre fait directement dans le graphe</span></span>
+<span id="cb108-2"><a href="#cb108-2"></a>map6 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> world_boundaries <span class="sc">%&gt;%</span> <span class="fu">filter</span>(continent<span class="sc">==</span><span class="st">"South America"</span>)) <span class="sc">+</span></span>
+<span id="cb108-3"><a href="#cb108-3"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb108-4"><a href="#cb108-4"></a> <span class="fu">annotation_scale</span>(<span class="at">location =</span> <span class="st">"br"</span>, <span class="at">line_width =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb108-5"><a href="#cb108-5"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb108-6"><a href="#cb108-6"></a>map6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-14" class="slide level2">
+<h2></h2>
+<ul>
+<li><p>Application</p>
+<ul>
+<li>Ajouter la flèche du nord</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1"></a>map_6 <span class="ot">&lt;-</span> map_5 <span class="sc">+</span></span>
+<span id="cb109-2"><a href="#cb109-2"></a>  <span class="fu">annotation_north_arrow</span>(<span class="at">location =</span> <span class="st">"tl"</span>, <span class="at">height =</span> <span class="fu">unit</span>(<span class="fl">0.7</span>, <span class="st">"cm"</span>), <span class="at">width =</span> <span class="fu">unit</span>(<span class="fl">0.7</span>, <span class="st">"cm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5.x" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5.X</h2>
+<ul>
+<li>Construisez une carte des transects en Méditerranée avec une couleur par “site_name” et un shape par “method”. Choisissez une palette de couleur cohérente avec les données et masquez la légende</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb110-1" class="hljs-ln-code"><a href="#cb110-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5.x-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5.X corrigé</h2>
+<ul>
+<li>Construisez une carte des transects en Méditerranée avec une couleur par “site_name” et un shape par “method”. Choisissez une palette de couleur cohérente avec les données et masquez la légende</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb111-1" class="hljs-ln-code"><a href="#cb111-1"></a><span class="co"># solution</span></span>
+<span id="cb111-2" class="hljs-ln-code"><a href="#cb111-2"></a>med_map1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> survey_med) <span class="sc">+</span></span>
+<span id="cb111-3" class="hljs-ln-code"><a href="#cb111-3"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color=</span>site_name, <span class="at">shape=</span>method), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb111-4" class="hljs-ln-code"><a href="#cb111-4"></a>  <span class="fu">scale_colour_viridis_d</span>() <span class="sc">+</span></span>
+<span id="cb111-5" class="hljs-ln-code"><a href="#cb111-5"></a>  <span class="co">#scale_shape_manual(values = rep(15:17, len = 8)) +</span></span>
+<span id="cb111-6" class="hljs-ln-code"><a href="#cb111-6"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb111-7" class="hljs-ln-code"><a href="#cb111-7"></a>med_map1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5.x1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5.X+1</h2>
+<ul>
+<li>Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb112-1" class="hljs-ln-code"><a href="#cb112-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5.x1-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5.X+1 corrigé</h2>
+<ul>
+<li>Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb113-1" class="hljs-ln-code"><a href="#cb113-1"></a><span class="co"># solution</span></span>
+<span id="cb113-2" class="hljs-ln-code"><a href="#cb113-2"></a>med_countries <span class="ot">&lt;-</span> world_boundaries <span class="sc">%&gt;%</span></span>
+<span id="cb113-3" class="hljs-ln-code"><a href="#cb113-3"></a>  <span class="fu">filter</span>(continent <span class="sc">%in%</span><span class="fu">c</span>(<span class="st">"Europe"</span>,<span class="st">"Africa"</span>,<span class="st">"Asia"</span>))</span>
+<span id="cb113-4" class="hljs-ln-code"><a href="#cb113-4"></a>med_map2 <span class="ot">&lt;-</span> med_map1  <span class="sc">+</span></span>
+<span id="cb113-5" class="hljs-ln-code"><a href="#cb113-5"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>med_country, <span class="at">fill=</span><span class="st">"gray92"</span>)</span>
+<span id="cb113-6" class="hljs-ln-code"><a href="#cb113-6"></a>med_map2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5.x2" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5.X+2</h2>
+<ul>
+<li>Recentrez la carte autour des pays d’intérêts</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb114-1" class="hljs-ln-code"><a href="#cb114-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5.x2-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5.X+2 corrigé</h2>
+<ul>
+<li>Recentrez la carte autour des pays d’intérêts</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb115-1" class="hljs-ln-code"><a href="#cb115-1"></a><span class="co"># solution</span></span>
+<span id="cb115-2" class="hljs-ln-code"><a href="#cb115-2"></a>med_map2 <span class="ot">&lt;-</span> med_map1  <span class="sc">+</span></span>
+<span id="cb115-3" class="hljs-ln-code"><a href="#cb115-3"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>med_country, <span class="at">fill=</span><span class="st">"gray92"</span>) <span class="sc">+</span></span>
+<span id="cb115-4" class="hljs-ln-code"><a href="#cb115-4"></a><span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">20</span>,<span class="dv">60</span>) <span class="sc">+</span></span>
+<span id="cb115-5" class="hljs-ln-code"><a href="#cb115-5"></a><span class="fu">ylim</span>(<span class="dv">4</span>,<span class="sc">-</span><span class="dv">10</span>)</span>
+<span id="cb115-6" class="hljs-ln-code"><a href="#cb115-6"></a>med_map2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5.x3" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5.X+3</h2>
+<ul>
+<li>Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb116-1" class="hljs-ln-code"><a href="#cb116-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-.x3-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice .X+3 corrigé</h2>
+<ul>
+<li>Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a><span class="co"># solution</span></span>
+<span id="cb117-2"><a href="#cb117-2"></a>survey_med_nsample <span class="ot">&lt;-</span> survey_med <span class="sc">%&gt;%</span></span>
+<span id="cb117-3"><a href="#cb117-3"></a>  <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
+<span id="cb117-4"><a href="#cb117-4"></a>  <span class="fu">mutate</span>(<span class="at">n_sample =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb117-5"><a href="#cb117-5"></a>  <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb117-6"><a href="#cb117-6"></a>  <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb117-7"><a href="#cb117-7"></a>  <span class="fu">select</span>(<span class="fu">c</span>(country,n_sample))</span>
+<span id="cb117-8"><a href="#cb117-8"></a>country_med_nsample <span class="ot">&lt;-</span> <span class="fu">left_join</span>(med_country,survey_med_sample,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"name"</span><span class="ot">=</span><span class="st">"country"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1"></a>med_map3 <span class="ot">&lt;-</span> med_map2 <span class="sc">+</span></span>
+<span id="cb118-2"><a href="#cb118-2"></a>  <span class="fu">stat_sf_coordinates</span>(<span class="fu">aes</span>(<span class="at">size=</span>n_sample),<span class="at">color =</span> <span class="st">"white"</span>,<span class="at">fill=</span><span class="st">"red"</span>,<span class="at">shape=</span><span class="dv">21</span>, <span class="at">data =</span> country_med_nsample)</span>
+<span id="cb118-3"><a href="#cb118-3"></a>med_map3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-x4" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice X+4</h2>
+<ul>
+<li>Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster(“bathy_med.tif) Que remarquez vous ?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb119-1" class="hljs-ln-code"><a href="#cb119-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-x4-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice X+4 corrigé</h2>
+<ul>
+<li>Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster(“bathy_med.tif) Que remarquez vous ?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1"></a><span class="co"># solution</span></span>
+<span id="cb120-2"><a href="#cb120-2"></a>bathy_med <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(<span class="st">"bathy_med.tif)</span></span>
+<span id="cb120-3"><a href="#cb120-3"></a><span class="st">rasdf &lt;- as.data.frame(bathy_med,xy=TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1"></a><span class="co"># solution</span></span>
+<span id="cb121-2"><a href="#cb121-2"></a>med_map4 <span class="ot">&lt;-</span> med_map3 <span class="sc">+</span> <span class="fu">geom_raster</span>(<span class="at">data=</span>rasdf, <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y,<span class="at">fill=</span>Gebco2019_500m))</span>
+<span id="cb121-3"><a href="#cb121-3"></a>med_map4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-x4-corrigé-1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice X+4 corrigé</h2>
+<ul>
+<li>Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster(“bathy_med.tif) Que remarquez vous ?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1"></a><span class="co"># solution</span></span>
+<span id="cb122-2"><a href="#cb122-2"></a>bathy_med <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(<span class="st">"bathy_med.tif)</span></span>
+<span id="cb122-3"><a href="#cb122-3"></a><span class="st">rasdf &lt;- as.data.frame(bathy_med,xy=TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1"></a><span class="co"># solution</span></span>
+<span id="cb123-2"><a href="#cb123-2"></a>med_map4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> survey_med) <span class="sc">+</span></span>
+<span id="cb123-3"><a href="#cb123-3"></a>  <span class="fu">geom_raster</span>(<span class="at">data=</span>rasdf, <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y,<span class="at">fill=</span>Gebco2019_500m)) <span class="sc">+</span></span>
+<span id="cb123-4"><a href="#cb123-4"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>med_country, <span class="at">fill=</span><span class="st">"gray92"</span>) <span class="sc">+</span></span>
+<span id="cb123-5"><a href="#cb123-5"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color=</span>site_name, <span class="at">shape=</span>methods), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb123-6"><a href="#cb123-6"></a>  <span class="fu">scale_colour_viridis_d</span>() <span class="sc">+</span></span>
+<span id="cb123-7"><a href="#cb123-7"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">rep</span>(<span class="dv">15</span><span class="sc">:</span><span class="dv">17</span>, <span class="at">len =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb123-8"><a href="#cb123-8"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb123-9"><a href="#cb123-9"></a>med_map4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5.x5" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5.X+5</h2>
+<ul>
+<li>Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajouter une palette de couleur distinguant terre et mer pour la bathymétrie</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb124-1" class="hljs-ln-code"><a href="#cb124-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5.x5-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5.X+5 corrigé</h2>
+<ul>
+<li>Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajouter une palette de couleur distinguant terre et mer pour la bathymétrie</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb125-1" class="hljs-ln-code"><a href="#cb125-1"></a><span class="co"># solution</span></span>
+<span id="cb125-2" class="hljs-ln-code"><a href="#cb125-2"></a>med_map5 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> survey_med) <span class="sc">+</span></span>
+<span id="cb125-3" class="hljs-ln-code"><a href="#cb125-3"></a>  <span class="fu">geom_raster</span>(<span class="at">data=</span>rasdf, <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y,<span class="at">fill=</span>Gebco2019_500m)) <span class="sc">+</span></span>
+<span id="cb125-4" class="hljs-ln-code"><a href="#cb125-4"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>med_country, <span class="at">fill=</span><span class="st">"gray92"</span>) <span class="sc">+</span></span>
+<span id="cb125-5" class="hljs-ln-code"><a href="#cb125-5"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color=</span>site_name, <span class="at">shape=</span>methods), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb125-6" class="hljs-ln-code"><a href="#cb125-6"></a>  <span class="fu">scale_colour_viridis_d</span>() <span class="sc">+</span></span>
+<span id="cb125-7" class="hljs-ln-code"><a href="#cb125-7"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">rep</span>(<span class="dv">15</span><span class="sc">:</span><span class="dv">17</span>, <span class="at">len =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb125-8" class="hljs-ln-code"><a href="#cb125-8"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb125-9" class="hljs-ln-code"><a href="#cb125-9"></a>  <span class="fu">annotation_north_arrow</span>(<span class="at">location =</span> <span class="st">"tl"</span>, <span class="at">height =</span> <span class="fu">unit</span>(<span class="fl">0.7</span>, <span class="st">"cm"</span>), <span class="at">width =</span> <span class="fu">unit</span>(<span class="fl">0.7</span>, <span class="st">"cm"</span>)) <span class="sc">+</span> </span>
+<span id="cb125-10" class="hljs-ln-code"><a href="#cb125-10"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"longitude"</span>,</span>
+<span id="cb125-11" class="hljs-ln-code"><a href="#cb125-11"></a>       <span class="at">y=</span><span class="st">"latitude"</span>,</span>
+<span id="cb125-12" class="hljs-ln-code"><a href="#cb125-12"></a>       <span class="at">title=</span><span class="st">"RLS mediterranean survey"</span>,</span>
+<span id="cb125-13" class="hljs-ln-code"><a href="#cb125-13"></a>       <span class="at">fill =</span><span class="st">"bathymétrie"</span>) <span class="sc">+</span></span>
+<span id="cb125-14" class="hljs-ln-code"><a href="#cb125-14"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"blue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"brown"</span>)</span>
+<span id="cb125-15" class="hljs-ln-code"><a href="#cb125-15"></a>med_map5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5.x6" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5.X+6</h2>
+<ul>
+<li>Sauvegardez votre belle carte :)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb126-1" class="hljs-ln-code"><a href="#cb126-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercice-5.x6-corrigé" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 5.X+6 corrigé</h2>
+<ul>
+<li>Sauvegardez votre belle carte :)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb127-1" class="hljs-ln-code"><a href="#cb127-1"></a><span class="co"># solution</span></span>
+<span id="cb127-2" class="hljs-ln-code"><a href="#cb127-2"></a><span class="fu">ggsave</span>(<span class="st">"RLS_med.pdf"</span>,<span class="at">plot=</span>med_map5, <span class="at">width =</span> <span class="dv">15</span>, <span class="at">height =</span> <span class="dv">10</span>, <span class="at">units =</span> <span class="st">"cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 <img src="template/logo_marbec.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://github.com/umr-marbec/tidyverse-training">https://github.com/umr-marbec/tidyverse-training</a></p>
