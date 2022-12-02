@@ -582,7 +582,11 @@ biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
 
 # Partie 3 : Nettoyage des données avec `tidyr`
 
-<center>![](images/logo_tidyr.png){width="20%"}<center>
+<center>
+
+![](images/logo_tidyr.png){width="20%"}
+
+<center>
 
 ## 
 
@@ -1936,18 +1940,17 @@ Interrogation au niveau des perciformes ...
 
 </center>
 
-
-  
- ## La cartographie avec ggplot2
+## La cartographie avec ggplot2
 
 Toutes les fonctions et la syntaxe montraient précédemment fonctionnent ici
 
-```{r echo=TRUE, eval=FALSE}
+```{r echo=TRUE, eval=TRUE}
 # Pour cette partie nous utiliserons un shape file des pays de la librarie rnaturalearth
 library(rnaturalearth)
+# install.packages("rnaturalearthdata")
 world_boundaries <- ne_countries(returnclass = "sf", scale ="medium") 
-dim(world_boundaries)
-head(world_boundaries)
+# dim(world_boundaries)
+# head(world_boundaries)
 ```
 
 -   Plotter des données spatialisées
@@ -1963,12 +1966,12 @@ geom_raster()
 #mais un data frame
 ```
 
-##
+## 
 
 -   Applications
 
-	- Visualiser la carte
- 
+    -   Visualiser la carte
+
 ```{r}
 map1 <- ggplot(data = world_boundaries) + 
   geom_sf(fill="transparent") +
@@ -1976,11 +1979,11 @@ map1 <- ggplot(data = world_boundaries) +
 map1
 ```
 
-##
+## 
 
 -   Applications
 
-	- Afficher sur chaque pays correspond un rond dont la taille est proportionnelle à la population
+    -   Afficher sur chaque pays correspond un rond dont la taille est proportionnelle à la population
 
 ```{r, eval=FALSE}
 map2 <- map_1 + 
@@ -1989,16 +1992,15 @@ map2 <- map_1 +
 scale_size_binned(breaks = quantile(world_boundaries$pop_est, probs = seq(0,1,0.1),na.rm=TRUE)) +
   theme_bw()
 map2 
-``` 
+```
 
-##
+## 
 
 -   Applications
 
-	- Créer un raster et le visualiser
+    -   Créer un raster et le visualiser
 
 ::: incremental
-
 ```{r, eval=FALSE}
 r <- raster(ncols=5, nrows=5)
 r1 <- setValues(r, runif(ncell(r)))
@@ -2006,6 +2008,7 @@ r1 <- setValues(r, runif(ncell(r)))
 rastdf <- as.data.frame(r1,xy=TRUE)
 head(rastdf)
 ```
+
 ```{r, eval=FALSE}
 map3.1 <- ggplot() +
     geom_raster(data=rastdf, aes(x=x,y=y))
@@ -2020,7 +2023,7 @@ map3.2
 ```
 :::
 
-##
+## 
 
 -   Ajouter des étiquettes et du texte
 
@@ -2032,18 +2035,20 @@ geom_sf_text()
 geom_sf_label()
 ```
 
-## {.smaller}
+##  {.smaller}
 
 -   Applications
 
-	- Afficher sous format texte le code ISO3 des pays
-```{r, eval=FALSE}
-map_4.1 <- map1 +
-  geom_sf_text(aes(label = adm0_a3),vjust=-0.5,fontface="italic",colour="blue") +
-  theme_bw()
-map4.1
-```
-	- Ajout de l'argument check_overlap. Que se passe t'il?
+    -   Afficher sous format texte le code ISO3 des pays
+
+    ```{r, eval=FALSE}
+    map_4.1 <- map1 +
+      geom_sf_text(aes(label = adm0_a3),vjust=-0.5,fontface="italic",colour="blue") +
+      theme_bw()
+    map4.1
+    ```
+
+    -   Ajout de l'argument check_overlap. Que se passe t'il?
 
 ```{r, eval=FALSE}
 map_4.2 <- map1 +
@@ -2052,7 +2057,7 @@ map_4.2 <- map1 +
 map4.2
 ```
 
-	- Afficher sous format étiquette le code ISO3 des pays
+    - Afficher sous format étiquette le code ISO3 des pays
 
 ```{r, eval=FALSE}
 map_5 <- map1 +
@@ -2061,7 +2066,7 @@ map_5 <- map1 +
 Map5
 ```
 
-##
+## 
 
 -   Peaufiner les cartes avec `ggspatial`
 
@@ -2072,11 +2077,11 @@ annotation_scale()
 annotation_north_arrow()
 ```
 
-##
+## 
 
-- Application
+-   Application
 
-	- Ajouter la barre d'échelle
+    -   Ajouter la barre d'échelle
 
 ```{r, eval=FALSE}
 # Le filter peut aussi etre fait directement dans le graphe
@@ -2087,29 +2092,28 @@ map6 <- ggplot(data = world_boundaries %>% filter(continent=="South America")) +
 map6
 ```
 
-##
+## 
 
-- Application 
+-   Application
 
-	- Ajouter la flèche du nord
+    -   Ajouter la flèche du nord
 
 ```{r, eval=FALSE}
 map_6 <- map_5 +
   annotation_north_arrow(location = "tl", height = unit(0.7, "cm"), width = unit(0.7, "cm"))
 ```
-  
 
 ## Exercice 5.X {.smaller auto-animate="true"}
-  
-- Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleur cohérente avec les données et masquez la légende
+
+-   Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleur cohérente avec les données et masquez la légende
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
 ```
 
 ## Exercice 5.X corrigé {.smaller auto-animate="true"}
-  
-- Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleur cohérente avec les données et masquez la légende
+
+-   Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleur cohérente avec les données et masquez la légende
 
 ```{r, eval=FALSE}
 # solution
@@ -2121,10 +2125,9 @@ med_map1 <- ggplot(data = survey_med) +
 med_map1
 ```
 
-
 ## Exercice 5.X+1 {.smaller auto-animate="true"}
 
-- Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)
+-   Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -2132,7 +2135,7 @@ med_map1
 
 ## Exercice 5.X+1 corrigé {.smaller auto-animate="true"}
 
-- Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)
+-   Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -2145,7 +2148,7 @@ med_map2
 
 ## Exercice 5.X+2 {.smaller auto-animate="true"}
 
-- Recentrez la carte autour des pays d'intérêts	
+-   Recentrez la carte autour des pays d'intérêts
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -2153,7 +2156,7 @@ med_map2
 
 ## Exercice 5.X+2 corrigé {.smaller auto-animate="true"}
 
-- Recentrez la carte autour des pays d'intérêts	
+-   Recentrez la carte autour des pays d'intérêts
 
 ```{r, eval=FALSE}
 # solution
@@ -2166,7 +2169,7 @@ med_map2
 
 ## Exercice 5.X+3 {.smaller auto-animate="true"}
 
-- Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes
+-   Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -2174,7 +2177,7 @@ med_map2
 
 ## Exercice .X+3 corrigé {.smaller auto-animate="true"}
 
-- Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes
+-   Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -2195,8 +2198,7 @@ med_map3
 
 ## Exercice X+4 {.smaller auto-animate="true"}
 
-- Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif)
-Que remarquez vous ?
+-   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif) Que remarquez vous ?
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -2204,14 +2206,14 @@ Que remarquez vous ?
 
 ## Exercice X+4 corrigé {.smaller auto-animate="true"}
 
-- Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif)
-Que remarquez vous ?
+-   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif) Que remarquez vous ?
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
 bathy_med <- raster::raster("bathy_med.tif)
 rasdf <- as.data.frame(bathy_med,xy=TRUE)
 ```
+
 ```{r, eval=FALSE}
 # solution
 med_map4 <- med_map3 + geom_raster(data=rasdf, aes(x=x,y=y,fill=Gebco2019_500m))
@@ -2220,14 +2222,14 @@ med_map4
 
 ## Exercice X+4 corrigé {.smaller auto-animate="true"}
 
-- Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif)
-Que remarquez vous ?
+-   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif) Que remarquez vous ?
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
 bathy_med <- raster::raster("bathy_med.tif)
 rasdf <- as.data.frame(bathy_med,xy=TRUE)
 ```
+
 ```{r, eval=FALSE}
 # solution
 med_map4 <- ggplot(data = survey_med) +
@@ -2238,11 +2240,11 @@ med_map4 <- ggplot(data = survey_med) +
   scale_shape_manual(values = rep(15:17, len = 8)) +
   theme_bw()
 med_map4
-``` 
+```
 
 ## Exercice 5.X+5 {.smaller auto-animate="true"}
 
-- Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajouter une palette de couleur distinguant terre et mer pour la bathymétrie
+-   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajouter une palette de couleur distinguant terre et mer pour la bathymétrie
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -2250,7 +2252,7 @@ med_map4
 
 ## Exercice 5.X+5 corrigé {.smaller auto-animate="true"}
 
-- Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajouter une palette de couleur distinguant terre et mer pour la bathymétrie
+-   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajouter une palette de couleur distinguant terre et mer pour la bathymétrie
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -2272,7 +2274,7 @@ med_map5
 
 ## Exercice 5.X+6 {.smaller auto-animate="true"}
 
-- Sauvegardez votre belle carte :)
+-   Sauvegardez votre belle carte :)
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -2280,7 +2282,7 @@ med_map5
 
 ## Exercice 5.X+6 corrigé {.smaller auto-animate="true"}
 
-- Sauvegardez votre belle carte :)
+-   Sauvegardez votre belle carte :)
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
