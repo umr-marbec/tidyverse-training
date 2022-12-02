@@ -22,6 +22,12 @@ jobs:
         with:
           use-public-rspm: true
           r-version: '4.1.0'
+      
+      - name: Install rnaturalearthhires dependency
+        run: |
+          install.packages("sp")
+          install.packages("rnaturalearthhires", repos = "http://packages.ropensci.org", type = "source")
+        shell: Rscript {0}
 
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
@@ -50,9 +56,6 @@ jobs:
             sp
             rnaturalearth
             rnaturalearthdata
-        run: |
-          install.packages("rnaturalearthhires", repos = "http://packages.ropensci.org", type = "source")
-        shell: Rscript {0}
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
