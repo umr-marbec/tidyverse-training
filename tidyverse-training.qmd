@@ -360,7 +360,7 @@ rename()
 -   À partir du jeu de données de sortie de l'exercice 1
 -   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
 -   Placer cette nouvelle colonne avant la colonne survey_id
--   Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name
+-   Supprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name
 -   Renommer la variable size_class en size_class_cm
 -   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm
 -   Supprimer la variable size_class_cm
@@ -376,7 +376,7 @@ rename()
 -   À partir du jeu de données de sortie de l'exercice 1
 -   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
 -   Placer cette nouvelle colonne avant la colonne survey_id
--   Supprimer la première colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name
+-   Supprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name
 -   Renommer la variable size_class en size_class_cm
 -   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm
 -   Supprimer la variable size_class_cm
@@ -392,7 +392,7 @@ biomass_exercice2_2 <- mutate(.data = biomass_exercice2_1_distinct_filter,
                                                      sep = "_")) %>%
   relocate(survey_id_full,
            .before = survey_id) %>%
-  dplyr::select(-1,
+  dplyr::select(-4,
                 -reporting_name) %>%
   rename(size_class_cm = size_class) %>%
   mutate(size_class_mm = size_class_cm * 10) %>%
@@ -576,7 +576,7 @@ full_join()
 # solution
 survey_metadata_distinct <- distinct(.data = survey_metadata)
 biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
-  right_join(survey_metadata_distinct,
+  left_join(survey_metadata_distinct,
              by = "survey_id")
 ```
 
@@ -1020,11 +1020,52 @@ Solution décomposée
 #   summarise(n_class = n())
 ```
 
-## Les expressions régulières
+## Les expressions régulières {.smaller}
 
-### Les expressions régulères
+### Outil très très puissant !
 
-Pour toi Mathieu ;)
+::: columns
+::: {.column width="60%"}
+- Il faut savoir que cela existe, mais demande un peu de patience et d'entrainement pour être utilisé
+- Regardez le [deuxième volet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){target="_blank"} du cheatsheet de stringr
+- Permet de "selectionner" de manière "dynamique" des patterns dans vos données
+- Le plus difficle est de formuler de la meilleur façon ce que vous voulez
+    - Il y a souvent plusieurs façon d'arriver à ce que vous voulez 
+    - Parfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle
+:::
+
+::: {.column width="40%"}
+![](images/regular_expressions.png)
+:::
+:::
+
+## Exemple concret
+    
+```{r echo=TRUE, eval=FALSE}
+load(file = "./data/exemple_regular_expressions.RData")
+
+tac_final_modif_level1 <- tac_final %>%
+  mutate(adapted_quota = as.numeric(x = adapted_quota_ori)) %>%
+  relocate(adapted_quota,
+           .after = adapted_quota_ori)
+
+tac_final_modif_level1_check <- filter(.data = tac_final_modif_level1,
+                                       is.na(x = adapted_quota)) %>%
+  dplyr::select(adapted_quota_ori,
+                adapted_quota)
+
+tac_final_modif_level2 <- tac_final %>%
+  rowwise() %>%
+  mutate(adapted_quota = case_when(
+    str_detect(string = adapted_quota_ori,
+               pattern = "^[:digit:]+[:punct:][:digit:]+$") ~ str_replace(string = adapted_quota_ori,
+                                                                          pattern = "[:punct:]", 
+                                                                          replacement = "."),
+    TRUE ~ adapted_quota_ori)) %>%
+  relocate(adapted_quota,
+           .after = adapted_quota_ori) %>%
+  mutate(adapted_quota = as.numeric(x = adapted_quota))
+```
 
 # 4.2 : Manipuler des dates avec lubridate
 
