@@ -4,11 +4,7 @@
 .Ruserdata
 /.quarto/
 /_site/
-<<<<<<< HEAD
-/data/
-=======
 /data/
 *.html
 /tidyverse-training_files
->>>>>>> 0b8d7a96306e3bf36ffdb4c2e4af8bb295969536
 *.pdf
