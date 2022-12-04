@@ -1531,8 +1531,8 @@ survey_med <- biomass_survey_abundance_exercice3_6 %>%
 
 . . .
 
-```{r results='hide'}
-global_reef_fish_biomass <- read_delim(file = "./data/global_reef_fish_biomass.csv")
+```{r results='hide', eval = FALSE}
+load("data/global_reef_fish_abundance.csv")
 
 global_reef_fish_biomass %>%
   filter(survey_id == "2000951") %>%
@@ -1541,11 +1541,8 @@ global_reef_fish_biomass %>%
 ```
 
 ```{r echo=FALSE}
-tmp <- global_reef_fish_biomass %>%
-  filter(survey_id == "2000951") %>%
-  group_by(class) %>%
-  summarise(n_class = n())
-kable(tmp, html_font = "Computer Modern", table.attr = "style='width:50%;'")
+load("global_reef_fish_biomass_2000951.RData")
+kable(global_reef_fish_biomass_2000951, html_font = "Computer Modern", table.attr = "style='width:50%;'")
 ```
 
 ## Exercice 4.1.1 - Correction Q4 {auto-animate="true"}
@@ -1554,7 +1551,7 @@ kable(tmp, html_font = "Computer Modern", table.attr = "style='width:50%;'")
 
 . . .
 
-```{r results='hide'}
+```{r results='hide', eval = FALSE}
 global_reef_fish_biomass %>%
   filter(survey_id == "2000951") %>%
   mutate(class = str_trim(class)) %>%
@@ -1562,11 +1559,7 @@ global_reef_fish_biomass %>%
   summarise(n_class = n())
 ```
 ```{r echo=FALSE}
-tmp <- global_reef_fish_biomass %>%
-  filter(survey_id == "2000951") %>%
-  mutate(class = str_trim(class)) %>%
-  group_by(class) %>%
-  summarise(n_class = n())
+load("global_reef_fish_biomass_2000951OK.RData")
 kable(tmp, html_font = "Computer Modern", table.attr = "style='width:50%;'")
 ```
 
