@@ -1486,7 +1486,6 @@ str_glue_data(tmp, "{nom}, habite au {num_rue} {nom_rue} dans la ville de {ville
 
 
 ```{r}
-load("./data/biomass_survey_abundance_exercice3_6.RData")
 survey_med <- biomass_survey_abundance_exercice3_6 %>%
   filter(str_detect(location, "Mediterranean") == TRUE)
 
