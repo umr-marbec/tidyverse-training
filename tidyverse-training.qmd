@@ -164,7 +164,7 @@ library(tidyverse)
 -   La librairie **readr** propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects.
 -   Ces fonctions de **readr** sont compatibles avec l'esprit **Tidyverse** car elles permettent de générer des *tibbles*
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 # install.packages("readr", dependencies = T)
 # install.packages("tibble", dependencies = T)
 library(readr)
@@ -203,23 +203,23 @@ Les fonctions de readr les plus utilisées sont :
 
 -   Lecture avec `read_delim` : preciser le delimiteur de colonnes (ici la virgule)
 
-```{r echo=TRUE, eval=TRUE}
-
-global_reef_fish_biomass <- read_delim(file = "./data/Global_reef_fish_biomass.csv", delim = ",")
+```{r echo=TRUE, eval=FALSE}
+global_reef_fish_biomass <- read_delim(file = "./data/global_reef_fish_biomass.csv",
+                                       delim = ",")
 
 ```
 
 -   0u bien avec `read_csv` : delimiteur par defaut = virgule
 
-```{r echo=TRUE, eval=TRUE}
-global_reef_fish_biomass <- read_csv(file = "./data/Global_reef_fish_biomass.csv")
+```{r echo=TRUE, eval=FALSE}
+global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv")
 ```
 
 ## Le ***tibble*** global_reef_fish_biomass
 
 On vérifie sa classe avec `class()`
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 class(global_reef_fish_biomass)
 ```
 
@@ -227,7 +227,7 @@ class(global_reef_fish_biomass)
 
 On vérifie sa structure avec `str()`
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 str(global_reef_fish_biomass)
 ```
 
@@ -235,7 +235,7 @@ str(global_reef_fish_biomass)
 
 On vérifie son contenu avec `head()`
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 head(global_reef_fish_biomass)
 ```
 
@@ -243,13 +243,13 @@ head(global_reef_fish_biomass)
 
 -   `write_csv` pour exporter un tibble en csv
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 write_csv(global_reef_fish_biomass, "./data/global_reef_fish_biomass_out.csv")
 ```
 
 -   ou `write_delim` pour choisir le délimiteur de colonnes (ici tabulation)
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 write_delim(global_reef_fish_biomass, "./data/global_reef_fish_biomass_out2.txt", delim="\t")
 ```
 
@@ -257,7 +257,7 @@ write_delim(global_reef_fish_biomass, "./data/global_reef_fish_biomass_out2.txt"
 
 -   Pour générer un autre format de fichier, on exporte biomass au format csv "francais" (séparateur décimal=",' et séparateur des colonnes=";")
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 write_csv2(global_reef_fish_biomass, "./data/global_reef_fish_biomass_out3.csv")
 ```
 
@@ -265,7 +265,7 @@ write_csv2(global_reef_fish_biomass, "./data/global_reef_fish_biomass_out3.csv")
 
 ## Option 1 : `read_csv2`
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 global_reef_fish_biomass3 <- read_csv2(file = "./data/global_reef_fish_biomass_out3.csv")
 str(global_reef_fish_biomass3)
 ```
@@ -274,7 +274,7 @@ str(global_reef_fish_biomass3)
 
 PAS BON car les nombres décimaux (ex: biomass) sont lus comme du caractère
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 global_reef_fish_biomass3 <- read_delim(file = "./data/global_reef_fish_biomass_out3.csv",
                                        delim = ";")
 str(global_reef_fish_biomass3) 
@@ -282,7 +282,7 @@ str(global_reef_fish_biomass3)
 
 ## Option 3 : read_delim en précisant le séparateur décimal avec locale()
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 global_reef_fish_biomass3 <- read_delim(file = "./data/global_reef_fish_biomass_out3.csv",
                                         delim = ";",
                                         locale = locale(decimal_mark = ","))
@@ -293,13 +293,13 @@ str(global_reef_fish_biomass3)
 
 Afficher les specifications avec `spec`
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 spec(global_reef_fish_biomass)
 ```
 
 Simplifier les specifications avec `col_condense`
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 cols_condense(spec(global_reef_fish_biomass))
 ```
 
@@ -307,8 +307,8 @@ cols_condense(spec(global_reef_fish_biomass))
 
 Avec le paramètre `col_types = list(...)`, on choisit de lire survey_id comme un entier `col_integer()`, method et block comme des facteurs `col_factor()`. Pour block on définit aussi des levels avec un certain ordre :
 
-```{r echo=TRUE, eval=TRUE}
-global_reef_fish_biomass <- read_csv(file = "./data/Global_reef_fish_biomass.csv",
+```{r echo=TRUE, eval=FALSE}
+global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv",
                   col_types = list(survey_id = col_integer(),
                                    method = col_factor(),
                                    block = col_factor(levels=c("3","2","1"))))
@@ -324,7 +324,7 @@ levels(global_reef_fish_biomass$block)
 
 Ce fichier contient des métadonnées caractérisant les campagnes (survey_id) Particularités : séparateur ";" et 70 lignes de commentaires au début qui ne doivent pas être lues : utilisation du paramètre `skip =`
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
                               delim = ";",
                               skip = 70)
@@ -337,22 +337,24 @@ head(survey_metadata,3)
 
 -   Lecture du fichier biomasse avec la fonction `read.csv` de base
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 debut <- Sys.time()
-fish1 <- read.delim("./data/Global_reef_fish_biomass.csv", 
+fish1 <- read.delim("./data/global_reef_fish_biomass.csv", 
                    sep = ",")
 fin <- Sys.time()
-print(paste("L'import a duré : ", fin-debut, "secondes"))
+print(paste("L'import a duré : ",
+            fin-debut, "secondes"))
 ```
 
 -   Lecture du même fichier avec `read_csv` de la librairie **readr**
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 debut <- Sys.time()
-fish2 <- read_delim(file = "./data/Global_reef_fish_biomass.csv", 
-                                         delim = ",")
+fish2 <- read_delim(file = "./data/global_reef_fish_biomass.csv", 
+                    delim = ",")
 fin <- Sys.time()
-print(paste("L'import a duré : ", fin-debut, "secondes"))
+print(paste("L'import a duré : ",
+            fin-debut, "secondes"))
 
 ```
 
@@ -360,8 +362,8 @@ print(paste("L'import a duré : ", fin-debut, "secondes"))
 
 ```{r echo=TRUE, eval=FALSE}
 survey_metadata_zip <- read_delim(file = "./data/survey_metadata.zip",
-                              delim = ";",
-                              skip = 70)
+                                  delim = ";",
+                                  skip = 70)
 ```
 
 ## `read_csv` permet de lire depuis plusieurs fichiers et mêmes répertoires
@@ -381,11 +383,11 @@ conti <- read_csv(filepaths, id = "file")
 
 -   Par nom de colonne
 
-```{r echo=TRUE, eval=TRUE}
-survey_metadata_1 <- read_delim(file = "./data/Survey_metadata.csv",
-                              delim = ";",
-                              skip = 70,
-                              col_select = c(survey_id,country, site_code, site_name))
+```{r echo=TRUE, eval=FALSE}
+survey_metadata_1 <- read_delim(file = "./data/survey_metadata.csv",
+                                delim = ";",
+                                skip = 70,
+                                col_select = c(survey_id,country, site_code, site_name))
 head(survey_metadata_1)
 ```
 
@@ -393,8 +395,8 @@ head(survey_metadata_1)
 
 -   Par numéro de colonne
 
-```{r echo=TRUE, eval=TRUE}
-survey_metadata_2 <- read_delim(file = "./data/Survey_metadata.csv",
+```{r echo=TRUE, eval=FALSE}
+survey_metadata_2 <- read_delim(file = "./data/survey_metadata.csv",
                                 delim = ";",
                                 skip = 70,
                                 col_select = c(1,2,5:8))
@@ -405,8 +407,8 @@ head(survey_metadata_2)
 
 -   Par numéro de colonne, en omettant certaines colonnes
 
-```{r echo=TRUE, eval=TRUE}
-survey_metadata_3 <- read_delim(file = "./data/Survey_metadata.csv",
+```{r echo=TRUE, eval=FALSE}
+survey_metadata_3 <- read_delim(file = "./data/survey_metadata.csv",
                                 delim = ";",
                                 skip = 70,
                                 col_select = -c(11:22,24))
@@ -417,8 +419,8 @@ head(survey_metadata_3)
 
 NB : ne pas oublier `everything()` pour conserver à l'identique toutes les colonnes non renommées
 
-```{r echo=TRUE, eval=TRUE}
-survey_metadata_4 <- read_delim(file = "./data/Survey_metadata.csv",
+```{r echo=TRUE, eval=FALSE}
+survey_metadata_4 <- read_delim(file = "./data/survey_metadata.csv",
                                 delim = ";",
                                 skip = 70,
                                 col_select = c(projet = survey_id, pays = country, everything()))
@@ -430,9 +432,9 @@ head(survey_metadata_4)
 
 -   Pour sélectionner sur une colonne (ici la famille)
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 f1 <- function(x, pos) subset(x, family %in% c("Kyphosidae", "Labridae", "Sparidae"))
-kyphosidae_labridae_sparidae_biomass <- read_csv_chunked(file = "./data/Global_reef_fish_biomass.csv", 
+kyphosidae_labridae_sparidae_biomass <- read_csv_chunked(file = "./data/global_reef_fish_biomass.csv", 
                                callback = DataFrameCallback$new(f1), 
                                chunk_size = 1000)
 table(kyphosidae_labridae_sparidae_biomass$family)
@@ -442,9 +444,9 @@ table(kyphosidae_labridae_sparidae_biomass$family)
 
 -   Pour sélectionner sur plusieurs colonnes (ici la famille et la classe de taille)
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 f2 <- function(x, pos) subset(x, family == "Kyphosidae" & size_class>9 & size_class < 31)
-kyphosidae_10_30_cm_biomass <- read_csv_chunked(file = "./data/Global_reef_fish_biomass.csv", 
+kyphosidae_10_30_cm_biomass <- read_csv_chunked(file = "./data/global_reef_fish_biomass.csv", 
                                        callback = DataFrameCallback$new(f2), 
                                        chunk_size = 1000)
 table(kyphosidae_10_30_cm_biomass$family, kyphosidae_10_30_cm_biomass$size_class)
@@ -468,9 +470,9 @@ table(kyphosidae_10_30_cm_biomass$family, kyphosidae_10_30_cm_biomass$size_class
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-global_reef_fish_biomass <- read_csv(file = "./data/Global_reef_fish_biomass.csv")
-global_reef_fish_abundance <- read_csv(file = "./data/Global_reef_fish_abundance.csv")
-survey_metadata <- read_delim(file = "./data/Survey_metadata.csv",
+global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv")
+global_reef_fish_abundance <- read_csv(file = "./data/global_reef_fish_abundance.csv")
+survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
                               delim = ";",
                               skip = 70)
 ```
