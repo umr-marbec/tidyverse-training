@@ -158,7 +158,6 @@ library(tidyverse)
 
 ![](images/logo_readr.png)
 
-
 ## La librairie **readr**
 
 -   Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (`read.csv`, `read.csv2`) ou tabulés (`read.table`) ou avec des séparateurs quelconques (`read.delim`)
@@ -899,6 +898,8 @@ survey_metadata_distinct <- distinct(.data = survey_metadata)
 biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
   left_join(survey_metadata_distinct,
              by = "survey_id")
+
+save(biomass_survey_exercice2_4, file = "./data/biomass_survey_exercice2_4.RData")
 ```
 
 # Partie 3 : Nettoyage des données avec `tidyr`
@@ -927,7 +928,7 @@ Pour visualiser le cheatsheet `tidyr` [cliquez ici](https://github.com/rstudio/c
 
 ```{r echo=TRUE, eval=FALSE}
 # Pour illustrer cette partie nous utiliserons le jeu de données popEU
-popEU <- read_rds("popEU.rds")
+popEU <- read_rds("./data/popEU.rds")
 dim(popEU)
 popEU
 ```
@@ -969,7 +970,7 @@ popEU
 # Créer un nouvel objet que l'on nomme popEU_wide
 popEU_wide <- pivot_wider(popEU,names_from="year",values_from="pop")
 dim(popEU_wide)
-popEU_wide
+kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;'")
 ```
 
 ## 
@@ -1004,38 +1005,40 @@ popEU_wide
 
 -   Applications
 
-    ::: incremental
+::: incremental
     -   Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
 
-        ```{r echo=TRUE, eval=FALSE}
-        # Créer un nouvel objet que l'on nomme popEU_long
-        popEU_long <- pivot_longer(popEU_wide,cols=c(2:4),names_to="year",values_to="pop")
-        dim(popEU_long)
-        # Afficher popEU_long
-        popEU_long
-        popEU_long <- mutate(popEU_long,pop = replace_na(pop,11.27))
-        popEU_long
-        ```
+    ```{r echo=TRUE, eval=FALSE}
+    # Créer un nouvel objet que l'on nomme popEU_long
+    popEU_long <- pivot_longer(popEU_wide,cols=c(2:4),names_to="year",values_to="pop")
+    dim(popEU_long)
+    # Afficher popEU_long
+    kable(popEU_long[10:15,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+
+    popEU_long <- mutate(popEU_long,pop = replace_na(pop,11.27))
+    kable(popEU_long[10:15,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+    ```
 
     -   Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d'enchainer les opérations à l'aide du pipe %\\\>%
 
-        ```{r echo=TRUE, eval=FALSE}
-        # Créer un nouvel objet que l'on nomme popEU_long
-        popEU_long <- popEU_wide %>%
-          tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
-          drop_na(.,pop)
-        popEU_long
-        ```
+    ```{r echo=TRUE, eval=FALSE}
+    # Créer un nouvel objet que l'on nomme popEU_long
+    popEU_long <- popEU_wide %>%
+      tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
+      drop_na(.,pop)
+    dim(popEU_long)
+    ```
 
     -   Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d'enchainer les opérations à l'aide du pipe %\\\>%
 
-        ```{r echo=TRUE, eval=FALSE}
-        # Créer un nouvel objet que l'on nomme popEU_long
-        popEU_long <- popEU_wide %>%
-          tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
-          fill(.,pop,.direction="down")
-        popEU_long
-        ```
+    ```{r echo=TRUE, eval=FALSE}
+    # Créer un nouvel objet que l'on nomme popEU_long
+    popEU_long <- popEU_wide %>%
+      tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
+      fill(.,pop,.direction="down")
+    
+    kable(popEU_long[10:15,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+    ```
     :::
 
 ## 
@@ -1068,38 +1071,39 @@ popEU_wide
 
 -   Applications
 
-    ::: incremental
+::: incremental
     -   A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
 
-        ```{r echo=TRUE, eval=FALSE}
-        popEU_sep <- popEU_long %>%
-        mutate(pop = as.character(pop))%>%
-        separate(.,col=pop,into=c("millions","milliers"))
-        popEU_sep
-        ```
+    ```{r echo=TRUE, eval=FALSE}
+    popEU_sep <- popEU_long %>%
+    mutate(pop = as.character(pop))%>%
+    separate(.,col=pop,into=c("millions","milliers"))
+    
+    kable(popEU_long[1:5,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+    ```
 
     -   Recréer la colonne pop comme à l'origine en la nommant population
 
-        ```{r echo=TRUE, eval=FALSE}
-        popEU_unite <- popEU_sep %>%
-        unite(.,population,c(millions,milliers),sep=".")
-        popEU_unite
-        ```
+    ```{r echo=TRUE, eval=FALSE}
+    popEU_unite <- popEU_sep %>%
+    unite(.,population,c(millions,milliers),sep=".")
+    
+    kable(popEU_unite[1:5,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+    ```
 
     -   Générer un tableau avec toutes les combinaisons possibles pays/population
 
-        ```{r echo=TRUE, eval=FALSE}
-        popEU_expand <- popEU_unite %>%
-        expand(.,pays,population)
-        popEU_expand
-        # Que remarquons nous ?
-        ```
+    ```{r echo=TRUE, eval=FALSE}
+    popEU_expand <- popEU_unite %>%
+    expand(.,pays,population)
+    popEU_expand
+    
+    kable(popEU_expand[1:5,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+    # Que remarquons nous ?
+    ```
 
-        ```{r echo=TRUE, eval=FALSE}
-        popEU_expand
-        # la valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques
-        ```
-    :::
+<center>La valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques.<\center>
+:::
 
 ## Exercice 3.1 {.smaller auto-animate="true"}
 
@@ -1214,6 +1218,7 @@ biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
   sf::st_as_sf(.,coords =c("latitude","longitude") ,remove=FALSE)
 ```
 
+
 # Partie 4 : Extension à la manipulation de données, cas spécifiques
 
 ![](images/logo_stringr.png){.absolute top="300" width="20%"} ![](images/logo_lubridate.png){.absolute top="300" left="300" width="20%"}
@@ -1222,6 +1227,8 @@ biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
 
 Conçu pour manipuler les chaines de caractères "facilement". <br>En plus d'être plus faciles à utiliser, le nom des fonctions dans\
 `stringr` représentent bien ce qu'elles permettent de faire.
+
+![](images/logo_stringr.png){.absolute top="40" right="20" width="15%"}
 
 . . .
 
@@ -1257,88 +1264,302 @@ Voici quelques exemples :
 
 <center>Le cheat-sheet du package `stringr` est disponible [ici](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf).</center>
 
-## Exercice
+## Création d'un dataframe de chaines de caractères
 
-***Question 1 : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location***
+```{r}
+tmp <- tibble(nom = c("Micheline Sétou", "Jean-Jacques Apeprès",  "Martine Sérien"),
+              num_rue = c("12", "15 ou 16", "NA"), 
+              nom_rue = c("Rue des peupliers", "Rue + un arbre", "NA"),
+              ville = c("Montpellier", "Montpellier", "Montpellier"))
 
-. . .
-
-***Question 2 : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses.***
-
-. . .
-
-***Question 3 : En enchainant les pipes, obtenez un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.***
-
-. . .
-
-***Question 4 : Résolvez le problème de façon à obtenir un data.frame de dimension 2x2.***
-
-## Réponses {auto-animate="true"}
-
-***Question 1 : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location***
-
-. . .
-
-```{r echo=TRUE, eval=FALSE}
-# metadata.med <- survey %>%
-#   filter(str_detect(survey$location, "Mediterranean") == TRUE)
+kable(tmp, html_font = "Computer Modern", table.attr = "style='width:60%;'")
 ```
 
-## Réponses {auto-animate="true"}
+## Détection de caractères
 
-***Question 1 : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location***
+On utilise la fonction `str_detect()` et les deux arguments principaux :
 
-***Question 2 : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses.***
+::: incremental
+-   `string` : Le/Les caractère(s) qui vont passer au détecteur.
+-   `pattern` : Le caractère à détecter.
+:::
 
 . . .
 
-```{r echo=TRUE, eval=FALSE}
-# metadata.med <- survey %>%
-#   filter(str_detect(survey$location, "Mediterranean") == TRUE) %>%
-#   mutate(orientation = str_replace_all(word(tmp$location, 2, -1), 
-#                                        c(" " = "", "\\(" = "", "\\)" = "")))
+La fonction renvoie `TRUE` ou `FALSE` en fonction de la présence ou non du caractère.
+
+. . .
+
+### Exemple
+
+::: columns
+::: {.column width="50%"}
+```{r results='hide'}
+tmp$nom
+```
+
+```{r echo = FALSE}
+cat(tmp$nom, sep = "\n")
+```
+:::
+
+::: {.column width="50%"}
+```{r results='hide'}
+str_detect(string  = tmp$nom, pattern = "ine")
+```
+
+```{r echo = FALSE}
+cat(str_detect(string  = tmp$nom, 
+           pattern = "ine"), sep = "\n")
+```
+:::
+:::
+
+. . .
+
+<center>
+
+La fonction `str_detect()` peut donc être utilisée avec `filter()` pour faire une <br> sélection des lignes qui nous intéresse dans le tableau.\<\center\>
+
+## Sous-sélection de certains caractères
+
+On utilise la fonction `str_subset()` et les deux arguments principaux :
+
+::: incremental
+-   `string` : Le/Les caractère(s) qui vont passer au détecteur.
+-   `pattern` : Le caractère à détecter.
+:::
+
+. . .
+
+Contrairement à `str_detect()`, la fonction `str_subset()` renvoie les caractères qui contiennent le pattern à détecter.
+
+. . .
+
+### Exemple
+
+```{r}
+str_subset(string  = tmp$nom, 
+           pattern = "ine")
+```
+
+## Extraction de caractères
+
+On utilise la fonction `str_extract()` et ces arguments principaux :
+
+::: incremental
+-   `string` : Le/Les caractère(s) qui vont passer à l'extracteur.
+-   `pattern` : Le caractère à extraire.
+:::
+
+. . .
+
+### Exemple
+
+::: columns
+::: {.column width="50%"}
+```{r results='hide'}
+tmp$ville
+```
+
+```{r echo = FALSE}
+cat(tmp$ville, sep = "\n")
+```
+:::
+
+::: {.column width="50%"}
+```{r results='hide'}
+str_extract(string  = tmp$ville, pattern = "Montpel")
+```
+
+```{r echo = FALSE}
+cat(str_detect(string  = tmp$ville, 
+               pattern = "Montpel"), sep = "\n")
+```
+:::
+:::
+
+## Remplacer un caractère par un autre
+
+On utilise la fonction `str_replace()` et ces arguments principaux :
+
+::: incremental
+-   `string` : Le/Les caractère(s) qui vont passer à l'extracteur.
+-   `pattern` : Le caractère à remplacer.
+-   `replacement` : Le caractère de remplacement.
+:::
+
+. . .
+
+### Exemple
+
+::: columns
+::: {.column width="50%"}
+```{r results='hide'}
+# Les noms à avant le replacement
+tmp$nom
+
+```
+
+```{r echo = FALSE}
+cat(tmp$nom, sep = "\n")
+```
+:::
+
+::: {.column width="50%"}
+```{r results='hide'}
+str_replace(string      = tmp$nom, 
+            pattern     = "Jacques", 
+            replacement = "Michel")
+```
+
+```{r echo = FALSE}
+cat(str_replace(string      = tmp$nom, 
+                pattern     = "Jacques", 
+                replacement = "Michel"), sep = "\n")
+```
+:::
+:::
+
+## Concaténer des chaînes de caractères {auto-animate="true"}
+
+On utilise la fonction `str_glue()` et ces deux principaux arguments :
+
+::: incremental
+-   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
+-   `.sep` = le séparateur
+:::
+
+. . .
+
+### Exemple sur une ligne du data.frame
+
+```{r}
+str_glue("{tmp$nom[1]} habite au {tmp$num_rue[1]} {tmp$nom_rue[1]}", .sep = " ")
+```
+
+
+## Concaténer des chaînes de caractères {auto-animate="true"}
+
+On utilise la fonction `str_glue()` et ces deux principaux arguments :
+
+
+-   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
+-   `.sep` = le séparateur
+
+
+### Exemple sur une ligne du data.frame
+
+```{r}
+str_glue("{tmp$nom[1]} habite au {tmp$num_rue[1]} {tmp$nom_rue[1]}", .sep = " ")
+```
+
+
+### Exemple pour tout un data.frame
+
+```{r}
+str_glue_data(tmp, "{nom}, habite au {num_rue} {nom_rue} dans la ville de {ville}")
+```
+
+
+## Exercice 4.1.1 {auto-animate="true"}
+
+**Question 1** : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location.
+
+. . .
+
+**Question 2** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses.***
+
+. . .
+
+**Question 3** : En enchainant les pipes, obtenez un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.
+
+. . .
+
+**Question 4** : Résolvez le problème de façon à obtenir un data.frame de dimension 2x2.
+
+## Exercice 4.1.1 - Correction Q1 {auto-animate="true"}
+
+**Question 1** : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location.
+
+
+```{r}
+survey_med <- biomass_survey_abundance_exercice3_6 %>%
+  filter(str_detect(location, "Mediterranean") == TRUE)
+```
+
+## Exercice 4.1.1 - Correction Q2
+
+**Question 2** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses. Enregistrer le **survey_med** au format .RData
+
+. . .
+
+```{r}
+survey_med <- biomass_survey_abundance_exercice3_6 %>%
+  filter(str_detect(location, "Mediterranean") == TRUE) %>%
+  mutate(orientation = str_replace_all(word(location, 2, -1),
+                                       c(" " = "", "\\(" = "", "\\)" = "")))
+
+save(survey_med, file = "./data/survey_med.RData")
 ```
 
 . . .
 
 Solution décomposée
 
-```{r echo=TRUE, eval=FALSE}
-# metadata.med <- survey %>%
-#   filter(str_detect(survey$location, "Mediterranean") == TRUE) %>%
-#   mutate(orientation = word(tmp$location, 2, -1)) %>%
-#   mutate(orientation = str_replace(orientation, " ", "")) %>%
-#   mutate(orientation = str_replace(orientation, "\\(", "")) %>%
-#   mutate(orientation = str_replace(orientation, "\\)", ""))
+```{r}
+survey_med <- biomass_survey_abundance_exercice3_6 %>%
+  filter(str_detect(location, "Mediterranean") == TRUE) %>%
+  mutate(orientation = word(location, 2, -1)) %>%
+  mutate(orientation = str_replace(orientation, " ", "")) %>%
+  mutate(orientation = str_replace(orientation, "\\(", "")) %>%
+  mutate(orientation = str_replace(orientation, "\\)", ""))
+
+
+
 ```
 
-## Réponses {auto-animate="true"}
+## Exercice 4.1.1 - Correction Q3
 
-***Question 3 : En enchainant les pipes, obtenez un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.***
+**Question 3** : En enchainant les pipes, obtenez un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.
 
 . . .
 
-```{r echo=TRUE, eval=FALSE}
-# fish_data %>%
-#   filter(survey_id == "2000951") %>%
-#   group_by(class) %>%
-#   summarise(n_class = n())
+```{r results='hide'}
+global_reef_fish_biomass %>%
+  filter(survey_id == "2000951") %>%
+  group_by(class) %>%
+  summarise(n_class = n())
 ```
 
-## Réponses {auto-animate="true"}
+```{r echo=FALSE}
+tmp <- global_reef_fish_biomass %>%
+  filter(survey_id == "2000951") %>%
+  group_by(class) %>%
+  summarise(n_class = n())
+kable(tmp, html_font = "Computer Modern", table.attr = "style='width:50%;'")
+```
 
-***Question 3 : En enchainant les pipes, obtenez un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.***
+## Exercice 4.1.1 - Correction Q4 {auto-animate="true"}
 
-***Question 4 : Résolvez le problème de façon à obtenir un data.frame de dimension 2x2.***
+**Question 4** : Résolvez le problème de façon à obtenir une tibble de dimension 2x2.
 
 . . .
 
-```{r echo=TRUE, eval=FALSE}
-# fish_data %>%
-#   filter(survey_id == "2000951") %>%
-#   mutate(class = str_trim(class)) %>%
-#   group_by(class) %>%
-#   summarise(n_class = n())
+```{r results='hide'}
+global_reef_fish_biomass %>%
+  filter(survey_id == "2000951") %>%
+  mutate(class = str_trim(class)) %>%
+  group_by(class) %>%
+  summarise(n_class = n())
+```
+```{r echo=FALSE}
+tmp <- global_reef_fish_biomass %>%
+  filter(survey_id == "2000951") %>%
+  mutate(class = str_trim(class)) %>%
+  group_by(class) %>%
+  summarise(n_class = n())
+kable(tmp, html_font = "Computer Modern", table.attr = "style='width:50%;'")
 ```
 
 ## Les expressions régulières {.smaller}
@@ -1488,55 +1709,10 @@ ceiling_date()
 
 ## Petit apperçu des possibilités :
 
-::: {layout-ncol="3"}
-![Nuage de points](images/Diagramme_empile.png){width="\"30%"}
+<center>[Le site **From Data To Viz**, une pépite](https://r-graph-gallery.com/){preview-link="true"}
 
-![Boxplots](images/Diagramme_empile.png){width="30%"}
+![](images/R_graph_gallery.PNG){.absolute top="150" left="200" width="65%"}
 
-![Violin Plot](images/Diagramme_empile.png){width="30%"}
-:::
-
-<center>Un grand nombre d'exemples est disponible sur le site [***from Data to Viz***](https://www.data-to-viz.com/)</center>
-
-## Petit apperçu des possibilités :
-
-::: {layout-ncol="3"}
-![Barplot](images/barplot.png){width="30%"}
-
-![Barplot](images/barplot2.png){width="30%"}
-
-![Barplot Circulaire](images/Figure3.png){width="30%"}
-:::
-
-## Petit apperçu des possibilités :
-
-::: {layout-ncol="3"}
-![Données temporelles](images/Series_temporelles.png){width="\"30%"}
-
-![Données temporelles empillées](images/Diagramme_empile.png){width="30%"}
-
-![Cartes](images/map2.png){width="30%"}
-:::
-
-<center>Un grand notre d'exemples est disponible sur le site [***from Data to Viz***](https://www.data-to-viz.com/)</center>
-
-# Partie II : Extension à la manipulation de données, cas spécifiques
-
-## Ggplot c'est comme la chirurgie *`aes`*thétique :
-
-::: incremental
-::: columns
-1)  Les jeunes s'y mettent très tôt !
-
-2)  Les moins jeunes sont réticents puis CERTAINS finissent par s'y mettre
-
-    <center>![](images/nancy_pelosi.jpg){width="20%"}</center>
-
-3)  C'est un enchainement plus ou moins long d'opérations.
-
-    <center>![](images/bogdanoff1.jpg){width="21%"}![](images/bogdanoff1.5.jpg){width="25%"}![](images/bogdanoff2.jpg){width="25%"}</center>
-:::
-:::
 
 ## Ggplot, une succession de couches
 
@@ -1610,14 +1786,12 @@ data_crabs %>%
   kable_classic(html_font = "Computer Modern", full_width = F)
 ```
 
-## Ggplot pas à pas
-
-### 1. Construction de la structure
+## Ggplot pas à pas : La Structure
 
 ::: incremental
 <div>
 
-Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
+Pour la structure du la figure, la fonction é toujours utiliser est `ggplot()` . Les arguments principaux sont :
 
 ::: incremental
 -   `data = nom.du.dataframe`
@@ -1634,20 +1808,18 @@ Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` 
 </div>
 :::
 
-## Ggplot pas à pas
-
-### 1. Construction de la structure
+## Ggplot pas à pas : La Structure
 
 ::: nonincremental
 <div>
 
-Pour la structure du la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
+Pour la structure du la figure, la fonction é toujours utiliser est `ggplot()` . Les arguments principaux sont :
 
 <div>
 
 -   `data = nom.du.dataframe`
 
--   `mapping = aes(x = varaible.x, y = variable.y)`
+-   `mapping = aes(x = variable.x, y = variable.y)`
 
 </div>
 
@@ -1661,13 +1833,12 @@ couche.1 <- ggplot(data    = data_crabs,
 
 . . .
 
-```{r echo=FALSE, fig.align='center'}
+```{r echo=FALSE, fig.align='center', out.width="50%"}
 couche.1
 ```
 
-## Ggplot pas à pas
 
-### 2. Choix du type de représentation
+## Ggplot pas à pas : Choix du plot
 
 ::: incremental
 ::: incremental
@@ -1721,9 +1892,7 @@ Plusieurs représentations existent selon le type de variables que l'on a :
 :::
 :::
 
-## Ggplot pas à pas
-
-### 2. Choix du type de représentation
+## Ggplot pas à pas : Choix du plot
 
 ::: incremental
 L'exemple ici va mener à la réalisation d'un **nuage de points**. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou autres.
@@ -1734,7 +1903,8 @@ L'exemple ici va mener à la réalisation d'un **nuage de points**. Mais `ggplot
 -   `aes()` dans `ggplot()`
 
     ```{r warnings=FALSE}
-    couche.2 <- couche.1 +
+    couche.2 <- ggplot(data    = data_crabs,
+                       mapping = aes(x = CL, y = CW)) +
       geom_point()
     ```
 :::
@@ -1754,11 +1924,11 @@ L'exemple ici va mener à la réalisation d'un **nuage de points**. Mais `ggplot
 
 . . .
 
-```{r echo = FALSE}
+```{r echo = FALSE, out.width="50%"}
 couche.2
 ```
 
-## Ggplot pas à pas {auto-animate="true"}
+## Ggplot pas à pas : Modèle linéaire {auto-animate="true"}
 
 Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
 
@@ -1771,26 +1941,26 @@ couche.3 <- couche.2 +
 
 . . .
 
-```{r echo=FALSE, fig.align='center'}
+```{r echo=FALSE, fig.align='center', out.width="70%"}
 couche.3
 ```
 
-## Ggplot pas à pas {auto-animate="true"}
+## Ggplot pas à pas : Modèle linéaire {auto-animate="true"}
 
-Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
+Traçons un modéle linéaire et ajoutons la formule et le R² correspondant
 
-```{r echo = TRUE, fig.align='center'}
+```{r echo = TRUE, fig.align='center', out.width="65%"}
 couche.3 <- couche.2 +
   geom_smooth(color = "red", method = "lm") + # le modèle linéaire 
   stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) # la formule
 couche.3
 ```
 
-## Ggplot pas à pas {auto-animate="true"}
+## Ggplot pas à pas : Modèle linéaire {auto-animate="true"}
 
 Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
 
-```{r echo = TRUE, fig.align='center'}
+```{r echo = TRUE, fig.align='center', out.width="60%"}
 couche.3 <- couche.2 +
   geom_smooth(color = "red", method = "lm") + # le modèle linéaire 
   stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) + # la formule
@@ -1798,13 +1968,91 @@ couche.3 <- couche.2 +
 couche.3
 ```
 
-## Ggplot pas à pas
+## Exercice 5.1 {auto-animate="true"}
 
-4.  Différencions les mâles et les femelles avec de la couleur
+Quel est le pays dans lequel on retrouve le plus de biomasse par transect. Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache.
+
+```{r}
+# Etape 1
+```
+
+## Exercice 5.1 : Correction {auto-animate="true"}
+
+Quel est le pays dans lequel on retrouve le plus de biomasse par transect. Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache.
+
+```{r}
+# Etape 1 : Formatter les données
+load("../data/biomass_survey_abundance_exercice3_6.RData")
+data_biomass_country <- biomass_survey_abundance_exercice3_6 %>%
+  st_drop_geometry() %>%
+  group_by(country, survey_id) %>%
+  summarise(biomass = sum(biomass)) 
+```
+
+## Exercice 5.1 : Correction {auto-animate="true"}
+
+Quel est le pays dans lequel on retrouve le plus de biomasse par transect. Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache.
+
+```{r}
+# Etape 1 : Formatter les données
+data_biomass_country <- biomass_survey_abundance_exercice3_6 %>%
+  st_drop_geometry() %>%
+  group_by(country, survey_id) %>%
+  summarise(biomass = sum(biomass)) 
+```
+
+## Exercice 5.1 : Correction {auto-animate="true"}
+
+Quel est le pays dans lequel on retrouve le plus de biomasse par transect. Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache.
+
+```{r fig.align="center"}
+# Etape 1 : Formatter les données
+data_biomass_country <- biomass_survey_abundance_exercice3_6 %>%
+  st_drop_geometry() %>%
+  group_by(country, survey_id) %>%
+  summarise(biomass = sum(biomass)) 
+
+# Etape 2 : Realiser les boites à moustache
+ggplot(data = data_biomass_country) +
+  geom_boxplot(aes(x = country, y = biomass)) +
+  theme_bw() 
+```
+
+## Exercice 5.2 {auto-animate="true"}
+
+Ce ggplot n'est cependant pas entièrement satisfaisant ... <br> Nous avons du mal à savoir visuellemenent quelle est la 2nd ou 3ème nation avec le <br> plus de biomasse.
 
 . . .
 
-=\> Une couleur par ordre. Comme c'est lié à l'esthétisme de la figure, il faut retourner à l'argument `color` dans la fonction `aes`.
+Une solution est d'uiliser la fonction `reorder()` pour ordonner l'axe des x. N'hésitez pas à regarder l'aire `éreorder` ou à chercher sur internet.
+
+```{r}
+# Utilisation de reorder
+```
+
+## Exercice 5.2 {auto-animate="true"}
+
+Ce ggplot n'est cependant pas entièrement satisfaisant ... <br> Nous avons du mal à savoir visuellemenent quelle est la 2nd ou 3ème nation avec le <br> plus de biomasse.
+
+. . .
+
+Une solution est d'utiliser la fonction `reorder()` pour ordonner l'axe des x.
+
+Utiliser cette fonction pour ordonner l'axe des x de façon décroissance selon la valeur **médiane**. Nommer le plot **boxplot_biomass_country**. <br> N'hésitez pas à regarder l'aide `éreorder` ou à chercher sur internet.
+
+```{r fig.align="center"}
+# Reoder en fonction de la valeur médiane 
+boxplot_biomass_country <- ggplot(data = data_biomass_country) +
+  geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass))
+
+boxplot_biomass_country
+```
+
+
+
+## Ggplot pas à pas : La couleur
+
+Donnons une couleur par sexe. Comme c'est liée à l'esthétisme de la figure, il faut retourner à l'argument `color` dans la fonction `aes()`.
 
 . . .
 
@@ -1822,11 +2070,7 @@ couche.4 <- ggplot() +
 couche.4
 ```
 
-## Ggplot pas à pas
-
-5.  Modifions les couleurs des points + Le titre de la légende
-
-. . .
+## Ggplot pas à pas : Couleurs & légende
 
 Pour cela, on peut utiliser la fonction `scale_color_manual()` et les arguments `name` et `values`.
 
@@ -1848,9 +2092,9 @@ couche.5
 
 . . .
 
-<center>*Une autre façon de faire est d'utiliser la fonction `labs` qui permet de changer les diverses légendes (axes x et y + légende de couleur). A vous de jouer !!!*</center>
+<center>*Une autre façon de faire est d'utiliser la fonction `labs` qui permet de changer les diverses légendes (axes x et y + légende de couleur)</center>
 
-## Ggplot pas à pas
+## Ggplot pas à pas :
 
 6.  Nommons proprement les axes + la légende
 
