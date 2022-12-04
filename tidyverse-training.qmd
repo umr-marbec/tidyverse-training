@@ -1217,7 +1217,9 @@ data_sf <- sf::st_as_sf(biomass_abundance,coords =c("latitude","longitude") ,rem
 biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
   drop_na(latitude) %>%
   drop_na(longitude) %>%
-  sf::st_as_sf(.,coords =c("latitude","longitude") ,remove=FALSE)
+  sf::st_as_sf(.,coords =c("latitude","longitude"), remove=FALSE)
+
+save(biomass_survey_abundance_exercice3_6, file = "./data/biomass_survey_abundance_exercice3_6.RData")
 ```
 
 
@@ -1486,6 +1488,7 @@ str_glue_data(tmp, "{nom}, habite au {num_rue} {nom_rue} dans la ville de {ville
 
 
 ```{r}
+load("./data/biomass_survey_abundance_exercice3_6.RData")
 survey_med <- biomass_survey_abundance_exercice3_6 %>%
   filter(str_detect(location, "Mediterranean") == TRUE)
 
