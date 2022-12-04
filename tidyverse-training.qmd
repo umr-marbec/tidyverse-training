@@ -84,7 +84,7 @@ Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.
 
 -   Avoir des notions de base dans l'utilisation de R
 -   Avoir une instance valide de [R](https://cran.r-project.org/){target="_blank"} sur son poste (durant la formation utilisation de la version 4.2.1)
--   Avoir installé correctement les versions des packages dplyr (utilisation de la version 1.0.10), lubridate (utilisation de la version 1.8.0), ggp- lot2 (utilisation de la version 3.3.6) et stringr (utilisation de la version 1.4.1)
+-   Avoir installé correctement les versions des packages dplyr (utilisation de la version 1.0.10), lubridate (utilisation de la version 1.8.0), ggplot2 (utilisation de la version 3.3.6) et stringr (utilisation de la version 1.4.1)
 
 ## Bonus non obligatoire
 
@@ -98,7 +98,7 @@ Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.
 ::: columns
 ::: {.column width="60%"}
 -   Vous présenter un panel de ce que l'on peut faire avec ces nouvelles méthodes et surtout vous donner les clés pour aller plus loin
--   Un expert n'est pas forcément quelqu'un qui connaît toutes les fonctions de R par cœur, mais qui sait écoute, comprendre et aller chercher les informations dont il a besoin
+-   Un expert n'est pas forcément quelqu'un qui connaît toutes les fonctions de R par cœur, mais qui sait écouter, comprendre et aller chercher les informations dont il a besoin
     -   Pensez à jeter un coup d'œil aux [cheatsheets](https://github.com/rstudio/cheatsheets){target="_blank"}
 -   Prendre le temps de discuter et de regarder vos données et/ou problèmes
 :::
@@ -149,7 +149,7 @@ library(tidyverse)
 ## Avant d'aller plus loin
 
 -   L'utilisation de ces packages permet de faire beaucoup de choses, mais ne rend pas tout le reste obsolète
--   Il y a plusieurs stratégies pour réaliser une action, il faut juste trouver le bon compromis (connaissances, temps de calcul, contexte global de votre projet, ...)
+-   Il y a plusieurs stratégies pour réaliser une action, il faut juste trouver le bon compromis (connaissances, temps de calcul, contexte global de votre projet...)
 -   Attention aux règles et conventions de nommages
     -   Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d'espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (\_), ne pas utiliser de mots réservés (comme par exemple TRUE)
     -   Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des \_ et les noms choisis doivent pouvoir donner l'information du contenu associé
@@ -466,12 +466,10 @@ table(kyphosidae_10_30_cm_biomass$family, kyphosidae_10_30_cm_biomass$size_class
 
 -   Lire le fichier Survey_metadata.csv =\> tibble `survey_metadata`,
 -   Lire le fichier Global_reef_fish_biomass.csv =\> tibble `global_reef_fish_biomass`
--   Lire le fichier Global_reef_fish_abundance.csv =\> tibble `global_reef_fish_abundance`
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
 global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv")
-global_reef_fish_abundance <- read_csv(file = "./data/global_reef_fish_abundance.csv")
 survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
                               delim = ";",
                               skip = 70)
@@ -510,7 +508,7 @@ dim(survey_selection)
 
 -   Syntaxe claire et cohérente
     -   "lien" avec le SQL
-    -   deux "familles" de fonctions : résumer et vectorisation <br/> <br/> <br/> ![](images/summary_function.png){.absolute top="320" left="15"} ![](images/vectorized_function.png){.absolute top="320" right="15"}
+    -   deux "familles" de fonctions : résumé et vectorisation <br/> <br/> <br/> ![](images/summary_function.png){.absolute top="320" left="15"} ![](images/vectorized_function.png){.absolute top="320" right="15"}
 -   Utilisation de verbes
 -   Généralement plus rapides que leur équivalent sous R de base
 -   Permets d'enchainer les opérations avec des "pipes" ![](images/pipe.png){.absolute top="450" right="20" width="15%"}
@@ -540,7 +538,7 @@ filter()
 
 ## Petit focus sur les opérateurs booléens et logiques {.smaller}
 
-Renvoi une valeur TRUE ou FALSE
+Renvoient une valeur TRUE ou FALSE
 
 -   les communs :
 
@@ -551,13 +549,13 @@ Renvoi une valeur TRUE ou FALSE
 ![](images/booleens_particulier.png){width="25%"}
 
 -   Attention aux priorités dans les interprétations
-    -   & et plus fort que \|, il sera exécuté en premier
+    -   & est plus fort que \|, il sera exécuté en premier
     -   une solution est d'utiliser des () pour séparer vos opérateurs
 
 ## Exercice 2.1 {auto-animate="true"}
 
--   A l'aide d'une fonction dplyr, verifier s'il y a des données dupliquées dans le jeu de données "global_reef_fish_biomass"
--   En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Apogonidae" et pour finir ou la classe de taille associé est \<= 10.
+-   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "global_reef_fish_biomass"
+-   En une seule fois, selectionner les données dont la variable "total" est différent de 0, où la famille de l'espèce est différente de "Mullidae" ou "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -565,8 +563,8 @@ Renvoi une valeur TRUE ou FALSE
 
 ## Exercice 2.1 corrigé {auto-animate="true"}
 
--   A l'aide d'une fonction dplyr, verifier s'il y a des données dupliquées dans le jeu de données "global_reef_fish_biomass"
--   En une seul fois, selectionner les données dont la variable total est différent de 0, ou la famille de l'espèce est différente de "Mullidae" ou "Apogonidae" et pour finir ou la classe de taille associé est \<= 10.
+-   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "global_reef_fish_biomass"
+-   En une seule fois, selectionner les données dont la variable "total" est différent de 0, où la famille de l'espèce est différente de "Mullidae" ou "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -582,7 +580,7 @@ biomass_exercice2_1_filter <- filter(.data = biomass_exercice2_1_distinct,
 
 Ici on a effectué 2 opérations, mais on peut imaginer en faire beaucoup plus dans la réalité.
 
-Grâce à syntaxe de dplyr, on peut répondre à ce besoin de deux manières différentes.
+Grâce à la syntaxe de dplyr, on peut répondre à ce besoin de deux manières différentes.
 
 La première est d'effectuer toutes les opérations en une fois en les emboîtant :
 
@@ -594,7 +592,7 @@ biomass_exercice2_1_distinct_filter <- filter(.data = distinct(.data = global_re
                                               & size_class <= 10)
 ```
 
-Cependant cela à plusieurs inconvénients. La structure est peu lisible, les opérations apparaissent dans l'ordre inverse de leur réalisation et il est difficile de voir quel paramètre se rapporte à quelle fonction.
+Cependant cela a plusieurs inconvénients. La structure est peu lisible, les opérations apparaissent dans l'ordre inverse de leur réalisation et il est difficile de voir quel paramètre se rapporte à quelle fonction.
 
 ## Aller encore plus loin
 
@@ -618,7 +616,7 @@ biomass_exercice2_1_distinct_filter <- distinct(.data = global_reef_fish_biomass
 
 ## Encore quelques fonctions de manipulation de lignes
 
-### Manipulation de type "trie"
+### Manipulation de type "tri"
 
 -   Ordonner les lignes d'une ou plusieurs colonnes
 
@@ -667,11 +665,11 @@ relocate()
 ```{r echo=TRUE, eval=FALSE}
 # créer une nouvelle variable
 mutate()
-# créer une nouvelle variable mais ne conserve pas les anciennes
+# créer une nouvelle variable mais sans conserver les anciennes
 transmute()
 ```
 
--   Petit bonus pour renomer les variables
+-   Petit bonus pour renommer les variables
 
 ```{r echo=TRUE, eval=FALSE}
 rename()
@@ -680,7 +678,7 @@ rename()
 ## Exercice 2.2 {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice 1
--   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
+-   Créer une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
 -   Placer cette nouvelle colonne avant la colonne survey_id
 -   Supprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name
 -   Renommer la variable size_class en size_class_cm
@@ -696,7 +694,7 @@ rename()
 ## Exercice 2.2 corrigé {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice 1
--   Crée une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
+-   Créer une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
 -   Placer cette nouvelle colonne avant la colonne survey_id
 -   Supprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name
 -   Renommer la variable size_class en size_class_cm
@@ -726,7 +724,7 @@ biomass_exercice2_2 <- mutate(.data = biomass_exercice2_1_distinct_filter,
 
 ### La deuxième grande famille
 
--   Fonctions qui vont créer une nouvelle table avec des resumés statistique. De manière globale, les fonctions associées vont utiliser en entrée des vecteurs et en sortie une ou plusieurs valeurs (inférieur en nombre au nombre de vecteurs d'entrée) <br/> <br/> <br/> ![](images/summary_function.png){.absolute top="200" left="250" width="50%"}
+-   Fonctions qui vont créer une nouvelle table avec des resumés statistiques. De manière globale, les fonctions associées vont utiliser en entrée des vecteurs et en sortie une ou plusieurs valeurs ( en nombre inférieur au nombre de vecteurs d'entrée) <br/> <br/> <br/> ![](images/summary_function.png){.absolute top="200" left="250" width="50%"}
 
 -   Fonction clé
 
@@ -737,7 +735,7 @@ summarise()
 n()
 # Compter le nombre de valeurs/lignes distinctes
 n_distinct()
-# Faire un moyenne
+# Faire une moyenne
 mean()
 # Faire une somme, option na.rm disponible
 sum()
@@ -752,7 +750,7 @@ max()
 
 ## Introduction à la notion de groupe
 
--   Pour le moment on à fait des opérations sur l'ensemble du jeu de données, pas très pertinent non ?
+-   Pour le moment on a fait des opérations sur l'ensemble du jeu de données, pas très pertinent non ?
 
 -   Fonction de création de groupe
 
@@ -763,23 +761,23 @@ group_by()
 rowwise()
 ```
 
--   Attention à ce que vous faite ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R). Pour y remédier :
+-   Attention à ce que vous faites ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R). Pour y remédier :
 
 ```{r echo=TRUE, eval=FALSE}
-# via un summarise (argument experimental, attention à la pérénité)
+# via un summarise (argument experimental, attention à la pérennité)
 .groups
 # de manière plus générale
 ungroups()
 ```
 
--   Cette notion de groupe peut être utilisé avec d'autres fonctions (comme un mutate)
+-   Cette notion de groupe peut être utilisée avec d'autres fonctions (comme un mutate)
 
 ## Exercice 2.3 {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice 2
--   Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full crée précédemment
--   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvé" regarder du côté des arguments en option)
--   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+-   Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment
+-   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvée" regarder du côté des arguments en option)
+-   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -788,9 +786,9 @@ ungroups()
 ## Exercice 2.3 corrigé {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice 2
--   Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full crée précédemment
--   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvé" regarder du côté des arguments en option)
--   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponible par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+-   Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment
+-   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvée" regarder du côté des arguments en option)
+-   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -809,9 +807,9 @@ biomass_exercice2_3_sample_verification <- dplyr::group_by(.data = biomass_exerc
 
 ## Fonction bonus très utile {.smaller}
 
-### case_when : généralisation vectorisé de if(s)
+### case_when : généralisation vectoriseé de if(s)
 
--   Vectorisation de multiple if_else sous R et CASE WHEN en SQL
+-   Vectorisation de multiples if_else sous R et CASE WHEN en SQL
 -   Améliore grandement la lisibilité de vos fonctions
 -   Syntaxe de base :
 
@@ -837,7 +835,7 @@ case_when(
 ### Jointures "simples"
 
 -   Il doit y avoir une cohérence entre le nombre de colonnes ou de lignes
--   Attention, aucune verification de cohérence des jointures
+-   Attention, aucune vérification de cohérence des jointures
 
 ```{r echo=TRUE, eval=FALSE}
 # "Coller" deux jeux de données
@@ -847,15 +845,15 @@ bind_rows()
 
 ## Combinaison de jeux de données 2 {.smaller}
 
-### Jointures de type relationnelle
+### Jointures de type relationnel
 
 ::: columns
 ::: {.column width="70%"}
 -   Très proche du SQL
 -   Très puissantes et permettent de se poser les bonnes questions !
 -   Attention à bien spécifier l'argument by (ne pas laisser place à l'interprétation !)
-    -   On peut spécifier un seul ou plusieurs colonnes si les noms sont identiques entre les deux jeux de données
-    -   Sinon on spécifier le nom du jeu de données à "gauche" et celui qui est à "droite"
+    -   On peut spécifier une seule ou plusieurs colonnes si les noms sont identiques entre les deux jeux de données
+    -   Sinon on spécifie le nom du jeu de données à "gauche" et celui qui est à "droite"
 :::
 
 ::: {.column width="30%"}
@@ -877,7 +875,7 @@ full_join()
 ## Exercice 2.4 {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice 2.3 (biomass_exercice2_3)
--   Faire la "meilleure" jointure avec le jeu de données survey_metadata et m'expliquer votre choix
+-   Faire la "meilleure" jointure avec le jeu de données survey_metadata et expliquer votre choix
 -   Pour vous aider :
     -   Y-a-t-il un problème avec le jeu de données survey_metadata ?
     -   Réfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure
@@ -889,7 +887,7 @@ full_join()
 ## Exercice 2.4 corrigé {.smaller auto-animate="true"}
 
 -   À partir du jeu de données de sortie de l'exercice 2.3 (biomass_exercice2_3)
--   Faire la "meilleure" jointure avec le jeu de données survey_metadata et m'expliquer votre choix
+-   Faire la "meilleure" jointure avec le jeu de données survey_metadata et expliquer votre choix
 -   Pour vous aider :
     -   Y-a-t-il un problème avec le jeu de données survey_metadata ?
     -   Réfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure
@@ -916,7 +914,7 @@ save(biomass_survey_exercice2_4, file = "./data/biomass_survey_exercice2_4.RData
 
 L'objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format "tidy"
 
-Les différents verbes viennent s'ajouter à tous ceux que nous avons déjà vu avec readr et dplyr et ils s'intègrent parfaitement dans la série de pipe %\>% permettant d'enchainer les opérations
+Les différents verbes viennent s'ajouter à tous ceux que nous avons déjà vus avec readr et dplyr et ils s'intègrent parfaitement dans la série de pipe %\>% permettant d'enchainer les opérations
 
 -   Les données "tidy", qu'est ce que c'est?
 
@@ -946,16 +944,16 @@ popEU
 
     ```{r echo=TRUE, eval=FALSE}
     # Les arguments names_from et values_from renseignent les noms de colonnes 
-    #à partir desquelles nous obtenons les colonnes de sortie et les valeurs des cellules
+    # à partir desquelles nous obtenons les colonnes de sortie et les valeurs des cellules
     pivot_wider(names_from, values_from)
     # L'argument values_fill permet de spécifier une valeur que l'on choisit 
-    #quand la combinaison names_from/values_from est manquante. Par défaut NA
+    # quand la combinaison names_from/values_from est manquante. Par défaut NA
     ```
 
 -   Transformer un tableau large en format long
 
     ```{r echo=TRUE, eval=FALSE}
-    # Les arguments cols,names_to et values_to renseignent les noms de colonnes à créer ainsi que les colonnes à faire pivoter
+    # Les arguments cols, names_to et values_to renseignent les noms de colonnes à créer ainsi que les colonnes à faire pivoter
     pivot_longer(cols, names_to, values_to, ...)
     # Si l'argument values_drop_na = TRUE les lignes contenant des NA dans la colonne créée avec values_to seront supprimées. 
     #Par défaut FALSE
@@ -984,7 +982,7 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
 
     ```{r echo=TRUE, eval=FALSE}
     # Si la donnée est un data frame alors l'argument replace prend une liste de valeurs. 
-    #Si la donnée est un vecteur alors replace prend une seule valeur
+    # Si la donnée est un vecteur alors replace prend une seule valeur
     replace_na(data, replace, …)
     ```
 
@@ -1007,8 +1005,7 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
 
 -   Applications
 
-::: incremental
-    -   Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
+::: incremental - Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
 
     ```{r echo=TRUE, eval=FALSE}
     # Créer un nouvel objet que l'on nomme popEU_long
@@ -1038,7 +1035,7 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
     popEU_long <- popEU_wide %>%
       tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
       fill(.,pop,.direction="down")
-    
+
     kable(popEU_long[10:15,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
     ```
     :::
@@ -1073,14 +1070,13 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
 
 -   Applications
 
-::: incremental
-    -   A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
+::: incremental - A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
 
     ```{r echo=TRUE, eval=FALSE}
     popEU_sep <- popEU_long %>%
     mutate(pop = as.character(pop))%>%
     separate(.,col=pop,into=c("millions","milliers"))
-    
+
     kable(popEU_long[1:5,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
     ```
 
@@ -1089,7 +1085,7 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
     ```{r echo=TRUE, eval=FALSE}
     popEU_unite <- popEU_sep %>%
     unite(.,population,c(millions,milliers),sep=".")
-    
+
     kable(popEU_unite[1:5,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
     ```
 
@@ -1099,13 +1095,14 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
     popEU_expand <- popEU_unite %>%
     expand(.,pays,population)
     popEU_expand
-    
+
     kable(popEU_expand[1:5,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
     # Que remarquons nous ?
     ```
 
-<center>La valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques.<\center>
-:::
+<center>
+
+La valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques.\<\center\> :::
 
 ## Exercice 3.1 {.smaller auto-animate="true"}
 
@@ -1128,7 +1125,7 @@ abundance <- read_delim(".data/Global_reef_fish_abundance.csv")
 ## Exercice 3.2 {.smaller auto-animate="true"}
 
 -   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
--   Créez une nouvelle variables "pk" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
+-   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -1137,7 +1134,7 @@ abundance <- read_delim(".data/Global_reef_fish_abundance.csv")
 ## Exercice 3.2 corrigé {.smaller auto-animate="true"}
 
 -   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
--   Créez une nouvelle variables "survey_id_full" à partir des colonnes survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
+-   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -1222,7 +1219,6 @@ biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
 save(biomass_survey_abundance_exercice3_6, file = "./data/biomass_survey_abundance_exercice3_6.RData")
 ```
 
-
 # Partie 4 : Extension à la manipulation de données, cas spécifiques
 
 ![](images/logo_stringr.png){.absolute top="300" width="20%"} ![](images/logo_lubridate.png){.absolute top="300" left="300" width="20%"}
@@ -1247,7 +1243,7 @@ Voici quelques exemples :
 ::: incremental
 -   `str_detect` : Détection de caractères
 
--   `str_extract` : Exctraction de caractères
+-   `str_extract` : Extraction de caractères
 
 -   `str_replace` : Remplacement de caractères
 :::
@@ -1349,7 +1345,7 @@ str_subset(string  = tmp$nom,
 
 ## Extraction de caractères
 
-On utilise la fonction `str_extract()` et ces arguments principaux :
+On utilise la fonction `str_extract()` et ses arguments principaux :
 
 ::: incremental
 -   `string` : Le/Les caractère(s) qui vont passer à l'extracteur.
@@ -1385,7 +1381,7 @@ cat(str_detect(string  = tmp$ville,
 
 ## Remplacer un caractère par un autre
 
-On utilise la fonction `str_replace()` et ces arguments principaux :
+On utilise la fonction `str_replace()` et ses arguments principaux :
 
 ::: incremental
 -   `string` : Le/Les caractère(s) qui vont passer à l'extracteur.
@@ -1400,7 +1396,7 @@ On utilise la fonction `str_replace()` et ces arguments principaux :
 ::: columns
 ::: {.column width="50%"}
 ```{r results='hide'}
-# Les noms à avant le replacement
+# Les noms avant le replacement
 tmp$nom
 
 ```
@@ -1427,7 +1423,7 @@ cat(str_replace(string      = tmp$nom,
 
 ## Concaténer des chaînes de caractères {auto-animate="true"}
 
-On utilise la fonction `str_glue()` et ces deux principaux arguments :
+On utilise la fonction `str_glue()` et ses deux principaux arguments :
 
 ::: incremental
 -   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
@@ -1442,15 +1438,12 @@ On utilise la fonction `str_glue()` et ces deux principaux arguments :
 str_glue("{tmp$nom[1]} habite au {tmp$num_rue[1]} {tmp$nom_rue[1]}", .sep = " ")
 ```
 
-
 ## Concaténer des chaînes de caractères {auto-animate="true"}
 
 On utilise la fonction `str_glue()` et ces deux principaux arguments :
 
-
 -   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
 -   `.sep` = le séparateur
-
 
 ### Exemple sur une ligne du data.frame
 
@@ -1458,13 +1451,11 @@ On utilise la fonction `str_glue()` et ces deux principaux arguments :
 str_glue("{tmp$nom[1]} habite au {tmp$num_rue[1]} {tmp$nom_rue[1]}", .sep = " ")
 ```
 
-
 ### Exemple pour tout un data.frame
 
 ```{r}
 str_glue_data(tmp, "{nom}, habite au {num_rue} {nom_rue} dans la ville de {ville}")
 ```
-
 
 ## Exercice 4.1.1 {auto-animate="true"}
 
@@ -1476,16 +1467,15 @@ str_glue_data(tmp, "{nom}, habite au {num_rue} {nom_rue} dans la ville de {ville
 
 . . .
 
-**Question 3** : A partir du fichier global_reef_fish_biomass.csv chargé avec `read_delim()`, enchaîner le pipe pour obtenir un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.
+**Question 3** : A partir du fichier global_reef_fish_biomass.csv chargé avec `read_delim()`, enchaîner le pipe pour obtenir un data.frame résumant le nombre d'observations dans chacune des classes, pour le site n°2000951 seulement.
 
 . . .
 
-**Question 4** : Résolvez le problème de façon à obtenir un data.frame de dimension 2x2.
+**Question 4** : Résolvez le problème de façon à obtenir un tibble de dimension 2x2.
 
 ## Exercice 4.1.1 - Correction Q1 {auto-animate="true"}
 
 **Question 1** : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location.
-
 
 ```{r}
 load("biomass_survey_abundance_exercice3_6.RData")
@@ -1527,7 +1517,7 @@ survey_med <- biomass_survey_abundance_exercice3_6 %>%
 
 ## Exercice 4.1.1 - Correction Q3
 
-**Question 3** : A partir du fichier global_reef_fish_biomass.csv chargé avec `read_delim()`, enchaîner le pipe pour obtenir un data.frame résumant le nombre d'observation dans chacune des classes, pour le site n°2000951 seulement.
+**Question 3** : A partir du fichier global_reef_fish_biomass.csv chargé avec `read_delim()`, enchaîner le pipe pour obtenir un data.frame résumant le nombre d'observations dans chacune des classes, pour le site n°2000951 seulement.
 
 . . .
 
@@ -1547,7 +1537,7 @@ kable(global_reef_fish_biomass_2000951, html_font = "Computer Modern", table.att
 
 ## Exercice 4.1.1 - Correction Q4 {auto-animate="true"}
 
-**Question 4** : Résolvez le problème de façon à obtenir une tibble de dimension 2x2.
+**Question 4** : Résolvez le problème de façon à obtenir un tibble de dimension 2x2.
 
 . . .
 
@@ -1558,6 +1548,7 @@ global_reef_fish_biomass %>%
   group_by(class) %>%
   summarise(n_class = n())
 ```
+
 ```{r echo=FALSE}
 load("global_reef_fish_biomass_2000951OK.RData")
 kable(tmp, html_font = "Computer Modern", table.attr = "style='width:50%;'")
@@ -1572,8 +1563,8 @@ kable(tmp, html_font = "Computer Modern", table.attr = "style='width:50%;'")
 -   Il faut savoir que cela existe, mais demande un peu de patience et d'entrainement pour être utilisé
 -   Regardez le [deuxième volet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){target="_blank"} du cheatsheet de stringr
 -   Permet de "selectionner" de manière "dynamique" des patterns dans vos données
--   Le plus difficle est de formuler de la meilleur façon ce que vous voulez
-    -   Il y a souvent plusieurs façon d'arriver à ce que vous voulez
+-   Le plus difficile est de formuler de la meilleure façon ce que vous voulez
+    -   Il y a souvent plusieurs façons d'arriver à ce que vous voulez
     -   Parfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle
 :::
 
@@ -1627,7 +1618,7 @@ ymd()
 mdy()
 dmy()
 ymd_hms()
-# Beaucoup de possibilité, jeter un coup d'oeil sur le cheatsheet
+# Beaucoup de possibilités, jeter un coup d'oeil sur le cheatsheet
 ```
 
 ## Manipulation des élements date-temps
@@ -1643,19 +1634,19 @@ day()
 wday()
 month()
 ...
-# pour modifier les informations utiliser les fonctions précédentes avec une assignation (<-)
+# pour modifier les informations, utiliser les fonctions précédentes avec une assignation (<-)
 ```
 
 ## Tour d'horizon
 
 -   Les fuseaux horaires, un cauchemar par le passé, maintenant ça va mieux
 
-    -   Deux fonctions clées
+    -   Deux fonctions clés
 
 ```{r echo=TRUE, eval=FALSE}
 # Pour exprimer un élément dans un autre fuseau horaire
 with_tz()
-# Pour forcer le changement d'un fuseau horaire mais on concervant la même heure
+# Pour forcer le changement d'un fuseau horaire mais en conservant la même heure
 force_tz()
 ```
 
@@ -1665,24 +1656,24 @@ force_tz()
 
     -   Periode, durée et intervalle
 
-    -   Le plus "dure" est de définir votre date-temps, après c'est une syntaxe mathématique
+    -   Le plus "dur" est de définir votre date-temps, après c'est une syntaxe mathématique
 
 ## Bonus
 
 -   Les fonctions sont vectorisables !
 
--   Sur certains jeux de données, les dates-temps sont stocké en seconde depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas la :
+-   Sur certains jeux de données, les dates-temps sont stockées en nombre de secondes depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas-là :
 
 ```{r echo=TRUE, eval=FALSE}
 as_datetime()
 ```
 
--   Possibilité de faire des arrondies
+-   Possibilité de faire des arrondis
 
 ```{r echo=TRUE, eval=FALSE}
-# arrondie inférieur sur "l'unité" la plus proche
+# arrondi inférieur sur "l'unité" la plus proche
 floor_date()
-# arrondie inférieur sur "l'unité" la plus proche
+# arrondi inférieur sur "l'unité" la plus proche
 round_date()
 # arrondie supérieur sur "l'unité" la plus proche
 ceiling_date()
@@ -1702,18 +1693,17 @@ ceiling_date()
 
 3)  C'est un enchainement plus ou moins long d'opérations.
 
-    ![](images/bogdanoff1.jpg){.absolute top="500" left="100" width="21%"}
-    ![](images/bogdanoff1.5.jpg){.absolute top="500" left="300" width="25%"}
-    ![](images/bogdanoff2.jpg){.absolute top="500" left="700" width="25%"}
+    ![](images/bogdanoff1.jpg){.absolute top="500" left="100" width="21%"} ![](images/bogdanoff1.5.jpg){.absolute top="500" left="300" width="25%"} ![](images/bogdanoff2.jpg){.absolute top="500" left="700" width="25%"}
 :::
 :::
 
-## Petit apperçu des possibilités :
+## Petit aperçu des possibilités :
 
-<center>[Le site **From Data To Viz**, une pépite](https://r-graph-gallery.com/){preview-link="true"}
+<center>
+
+[Le site **From Data To Viz**, une pépite](https://r-graph-gallery.com/){preview-link="true"}
 
 ![](images/R_graph_gallery.PNG){.absolute top="150" left="200" width="65%"}
-
 
 ## Ggplot, une succession de couches
 
@@ -1732,7 +1722,7 @@ ceiling_date()
 :::
 
 ::: column
-2.  Le type de représentation
+2.  Le Type de représentation
 
     ```{r echo=FALSE, out.width="85%"}
     p2 <- p1 + geom_point(size = 5)
@@ -1792,7 +1782,7 @@ data_crabs %>%
 ::: incremental
 <div>
 
-Pour la structure du la figure, la fonction é toujours utiliser est `ggplot()` . Les arguments principaux sont :
+Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
 
 ::: incremental
 -   `data = nom.du.dataframe`
@@ -1814,7 +1804,7 @@ Pour la structure du la figure, la fonction é toujours utiliser est `ggplot()` 
 ::: nonincremental
 <div>
 
-Pour la structure du la figure, la fonction é toujours utiliser est `ggplot()` . Les arguments principaux sont :
+Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
 
 <div>
 
@@ -1837,7 +1827,6 @@ couche.1 <- ggplot(data    = data_crabs,
 ```{r echo=FALSE, fig.align='center', out.width="50%"}
 couche.1
 ```
-
 
 ## Ggplot pas à pas : Choix du plot
 
@@ -1973,7 +1962,7 @@ couche.3
 
 ## Exercice 5.1 {auto-animate="true"}
 
-Quel est le pays dans lequel on retrouve le plus de biomasse par transect. Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**.
+Quel est le pays dans lequel on retrouve le plus de biomasse par transect (valeur médiane) ? Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**.
 
 ```{r}
 # Etape 1
@@ -1981,7 +1970,7 @@ Quel est le pays dans lequel on retrouve le plus de biomasse par transect. Forma
 
 ## Exercice 5.1 : Correction {auto-animate="true"}
 
-Quel est le pays dans lequel on retrouve le plus de biomasse par transect (valeur médiane). Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**.
+Quel est le pays dans lequel on retrouve le plus de biomasse par transect (valeur médiane) ? Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**.
 
 ```{r warning=FALSE}
 # Etape 1 : Formatter les données
@@ -2005,14 +1994,13 @@ ggplot(data = data_biomass_country) +
 
 ## Exercice 5.2 {auto-animate="true"}
 
-Ce ggplot n'est cependant pas entièrement satisfaisant ... <br> 
-Nous avons du mal à savoir visuellemenent quelle est la 2nd ou la 3ème nation avec le plus de biomasse.
+Ce ggplot n'est cependant pas entièrement satisfaisant ... <br> Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.
 
 . . .
 
-Une solution est d'uiliser la fonction `reorder()` pour ordonner l'axe des x. 
+Une solution est d'utiliser la fonction `reorder()` pour ordonner l'axe des x.
 
-Utiliser cette fonction pour ordonner l'axe des x de façon décroissance selon la valeur **médiane**. Nommer le plot **boxplot_biomass_country**. <br> N'hésitez pas à regarder l'aide `?reorder` ou à chercher sur internet.
+Utiliser cette fonction pour ordonner l'axe des x de façon décroissante selon la valeur **médiane**. Nommer le plot **boxplot_biomass_country**. <br> N'hésitez pas à regarder l'aide `?reorder` ou à chercher sur internet.
 
 ```{r}
 # Utilisation de reorder
@@ -2021,17 +2009,16 @@ Utiliser cette fonction pour ordonner l'axe des x de façon décroissance selon 
 ## Exercice 5.2 : Correction {auto-animate="true"}
 
 ```{r fig.align="center"}
-# Reoder en fonction de la valeur médiane 
+# Reorder en fonction de la valeur médiane 
 boxplot_biomass_country <- ggplot(data = data_biomass_country) +
   geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass))
 
 boxplot_biomass_country
 ```
 
-
 ## Ggplot pas à pas : La couleur
 
-Donnons une couleur par sexe. Comme c'est liée à l'esthétisme de la figure, il faut retourner à l'argument `color` dans la fonction `aes()`.
+Donnons une couleur par sexe. Comme c'est lié à l'esthétisme de la figure, il faut retourner à l'argument `color` dans la fonction `aes()`.
 
 . . .
 
@@ -2090,7 +2077,7 @@ couche.6
 
 ## Exercice 5.3 {auto-animate="true"}
 
-Renomer proprement les axes de boxplot_biomass_country.
+Renommer proprement les axes de boxplot_biomass_country.
 
 ```{r}
 # Solution
@@ -2098,7 +2085,7 @@ Renomer proprement les axes de boxplot_biomass_country.
 
 ## Exercice 5.3 - Corrigé {auto-animate="true"}
 
-Renomer proprement les axes de boxplot_biomass_country.
+Renommer proprement les axes de boxplot_biomass_country.
 
 ```{r}
 # Solution
@@ -2128,8 +2115,7 @@ couche.7
 
 ## Ggplot pas à pas : l'arrière plan
 
-<br>
-On utilise une des fonctions `theme_*`.
+<br> On utilise une des fonctions `theme_*`.
 
 <br>
 
@@ -2147,8 +2133,7 @@ couche.7 + theme_dark()
 
 ## Ggplot pas à pas : le lifting final
 
-La fonction `theme()` permet de lifter BEAUCOUP de choses (`?theme`). <br>
-Elle doit toujours apparaître en dernier de façon à ne pas être écrasée par une autre couche. 
+La fonction `theme()` permet de lifter BEAUCOUP de choses (`?theme`). <br> Elle doit toujours apparaître en dernier de façon à ne pas être écrasée par une autre couche.
 
 . . .
 
@@ -2168,7 +2153,6 @@ couche.8 <- couche.7 +
 couche.8
 ```
 
-
 ## Enregistrer ses figures
 
 <br>
@@ -2187,11 +2171,11 @@ Pour enregistrer votre ggplot, vous pouvez utiliser la fonction `ggsave()` :
 
 <center>
 
-D'autre arguments existent, voir avec `?ggsave`. 
+D'autre arguments existent, voir avec `?ggsave`.
 
 ## Exercice 5.4 {auto-animate="true"}
 
-Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisible. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choissir votre arrière plan préféré.
+Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choisir votre arrière plan préféré.
 
 ```{r}
 # Solution
@@ -2199,7 +2183,7 @@ Dans la fonction `element_text()`, un argument permet de tourner les légendes d
 
 ## Exercice 5.4 - Corrigé {auto-animate="true"}
 
-Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour qu'ils soient plus lisible. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choissir votre arrière plan préféré.
+Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choissir votre arrière plan préféré.
 
 ```{r}
 # Solution
@@ -2234,7 +2218,6 @@ ggsave(filename = "figures/boxplot_biomass_vs_country.png",
        height   = 5)
 ```
 
-
 ## Une petite subtilité concernant les couleurs
 
 ### Exercice 5.6 {auto-animate="true"}
@@ -2244,7 +2227,7 @@ ggsave(filename = "figures/boxplot_biomass_vs_country.png",
 
 2.  Créer une nouvelle colonne qui précise leur continent.
 
-3.  Reconstruire un boxplot en attribuant un couleur pour chaque continent.
+3.  Reconstruire un boxplot en **remplissant** chaque boite d'une couleur pour chaque continent.
 :::
 
 . . .
@@ -2259,7 +2242,7 @@ ggsave(filename = "figures/boxplot_biomass_vs_country.png",
 
 2.  Créer une nouvelle colonne qui précise leur continent.
 
-3.  Reconstruire un boxplot en attribuant un couleur pour chaque continent.
+3.  Reconstruire un boxplot en **remplissant** chaque boite d'une couleur pour chaque continent.
 
 ```{r}
 # Solution questions 1 & 2
@@ -2319,11 +2302,9 @@ Pour choisir ses couleurs de contour *vs.* de remplissage, on utilise les foncti
 
 A vous de jouer en attribuant la couleur **skyblue** à l'Europe, **aquamarine** à l'Am. du Sud et **moccasin** à l'Am. du Nord.
 
-
 ## Exercice 5.6 corrigé {auto-animate="true"}
 
 A vous de jouer en attribuant la couleur **skyblue** à l'Europe, **aquamarine** à l'Am. du Sud et **moccasin** à l'Am. du Nord.
-
 
 ```{r }
 ggplot() +
@@ -2342,7 +2323,7 @@ ggplot() +
 
 Construisons un nuage de points entre la biomasse et la profondeur
 
-. . . 
+. . .
 
 ```{r echo = FALSE}
 data_biomass_depth <- biomass_survey_abundance_exercice3_6 %>%
@@ -2371,14 +2352,16 @@ plot
 
 . . .
 
-<center> On ne peut pas donner une seule couleur à une variable continue !
+<center>
+
+On ne peut pas donner une seule couleur à une variable continue !
 
 ## Couleurs & variables continues
 
-Il existe 4 fonctions principales qui permettent de construire des pallettes de couleurs continues :
+Il existe 4 fonctions principales qui permettent de construire des palettes de couleurs continues :
 
 ::: incremental
--   `scale_fill_contiuous` : avec une palette par defaut (nuances de bleus)
+-   `scale_fill_continuous` : avec une palette par defaut (nuances de bleus)
 
 -   `scale_fill_viridis_c` : Colorblind friendly.
 
@@ -2387,7 +2370,6 @@ Il existe 4 fonctions principales qui permettent de construire des pallettes de 
 
 -   `scale_fill_gradient` : permet de créer ses propres gradients de couleurs. Des variantes existent selon le nombre de couleurs à définir. Il s'agit de `scale_fill_gradient2()` et `scale_fill_gradientn()`.
 :::
-
 
 ## Couleurs & variables continues
 
@@ -2420,7 +2402,7 @@ plot + scale_fill_continuous()
 
 ### `scale_color_viridis_c`
 
-De belles palettes dont les nuances sont captées par les personnes albinos.
+De belles palettes dont les nuances sont captées par les personnes daltoniennes.
 
 . . .
 
@@ -2479,7 +2461,7 @@ colorBlindness::displayAllColors(color_pal)
 
 ### `scale_fill_gradient()`
 
-Permet de créer ces propres palettes de couleurs, à partir de 2, 3 ou n couleurs :
+Permet de créer ses propres palettes de couleurs, à partir de 2, 3 ou n couleurs :
 
 ::: incremental
 -   `scale_fill_gradient()` avec les arguments `low` et `high`.
@@ -2501,10 +2483,10 @@ plot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))
 
 ## Couleurs & variable groupée en classes
 
-Il existe 3 fonctions principales qui permettent de construire ce type de pallettes de couleurs :
+Il existe 3 fonctions principales qui permettent de construire ce type de palettes de couleurs :
 
 ::: incremental
--   `scale_fill_binned` : avec une palette par defaut (nuances de bleus)
+-   `scale_fill_binned` : avec une palette par défaut (nuances de bleus)
 
 -   `scale_fill_fermenter` : utilise les [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) (voir [ici](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html) pour plus d'infos).\
     Pour voir les palettes =\> `RColorBrewer::display.brewer.all()`
@@ -2532,7 +2514,7 @@ plot + scale_fill_binned(breaks = quantile(faithfuld$density, probs = (seq(0,1,0
 
 ### `scale_fill_fermenter()`
 
-La fonction analogue à `scale_fill_distiller()` et `scale_fill_brewer()`.
+Fonction analogue à `scale_fill_distiller()` et `scale_fill_brewer()`.
 
 . . .
 
@@ -2570,12 +2552,12 @@ plot + scale_fill_stepsn(colors = magma(9), n.breaks = 9)
 
 ## Couleurs & variables discrètes
 
-Les principales fonctions utilisées permettant de construire des pallettes de couleurs continues :
+Les principales fonctions utilisées permettant de construire des palettes de couleurs continues :
 
 ::: incremental
 -   `scale_fill_discrete` : Couleurs par défaut
 
--   `scale_fill_manual` : choix de la couleur parmis toutes les couleurs existantes.
+-   `scale_fill_manual` : choix de la couleur parmi toutes les couleurs existantes.
 
 -   `scale_fill_brewer` : utilise les [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) (voir [ici](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html) pour plus d'infos). Equivalent de `scale_fill_distiller` pour les variables discrètes.
 :::
@@ -2613,14 +2595,13 @@ https://stackoverflow.com/questions/70942728/understanding-color-scales-in-ggplo
 
 https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 
-
 ## Diagrammes en barres & barres d'erreurs
 
-Pour ajouter les barres d'erreurs, on utilise la fonction `geom_errorbar()`. 
+Pour ajouter les barres d'erreurs, on utilise la fonction `geom_errorbar()`.
 
 . . .
 
-L'utilisation de cette fonction nécessite le calcul préalable de l'écart-type. 
+L'utilisation de cette fonction nécessite le calcul préalable de l'écart-type.
 
 . . .
 
@@ -2645,17 +2626,11 @@ ggplot(crabs_mean) +
 
 ## Exercice 5.7 {auto-animate="true"}
 
-A partir des données data_biomass_5country, construire un diagramme en barres en de la biomasse moyenne par transect.
-Classer l'axe des x de la plus dans l'ordre **croissant**. 
-Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
-
+A partir des données data_biomass_5country, construire un diagramme en barres  de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
 ## Exercice 5.7 - Corrigé {auto-animate="true"}
 
-A partir des données data_biomass_5country, construire un diagramme en barres en de la biomasse moyenne par transect.
-Classer l'axe des x de la plus dans l'ordre **croissant**. 
-Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
-
+A partir des données data_biomass_5country, construire un diagramme en barres  de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
 ```{r fig.align='center', out.width="40%"}
 # Formattage
@@ -2667,10 +2642,7 @@ country_mean <- data_biomass_5country %>%
 
 ## Exercice 5.7 - Corrigé {auto-animate="true"}
 
-A partir des données data_biomass_5country, construire un diagramme en barres en de la biomasse moyenne par transect.
-Classer l'axe des x de la plus dans l'ordre **croissant**. 
-Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
-
+A partir des données data_biomass_5country, construire un diagramme en barres  de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
 ```{r fig.align='center', out.width="70%"}
 # Figure 
@@ -2682,10 +2654,7 @@ ggplot(country_mean) +
   theme_bw()
 ```
 
-
 ## Utiliser ggplot pour détecter des erreurs dans les données
-
-
 
 <center>
 
@@ -2711,7 +2680,7 @@ ggplot(country_mean) +
 
 </center>
 
-Comment détécter les outliers ?
+Comment détecter les outliers ?
 
 ```{r echo = TRUE, warning = FALSE}
 # ggplot(data = site1, mapping = aes(x = order, y = biomass)) +
@@ -2731,7 +2700,7 @@ Comment détécter les outliers ?
 #   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-Interrogation au niveau des perciformes ...
+Interrogation au niveau des Perciformes ...
 
 </center>
 
@@ -2754,7 +2723,7 @@ Interrogation au niveau des perciformes ...
 
 ## La cartographie avec ggplot2
 
-Toutes les fonctions et la syntaxe montraient précédemment fonctionnent ici
+Toutes les fonctions et la syntaxe montrées précédemment fonctionnent ici
 
 ```{r echo=TRUE, eval=TRUE}
 # Pour cette partie nous utiliserons un shape file des pays de la librarie rnaturalearth
@@ -2768,14 +2737,14 @@ world_boundaries <- ne_countries(returnclass = "sf", scale ="medium")
 -   Plotter des données spatialisées
 
 ```{r echo=TRUE, eval=FALSE}
-# Pour les objets spatialisés de type vectoriels au format sf
+# Pour les objets spatialisés de type vectoriel au format sf
 geom_sf()
 # Permet d'extraire les coordonnées d'un objet sf
 stat_sf_coordinates()
 # Pour les objets spatialisés au format raster
 geom_raster()
 # Attention geom_raster ne reçoit pas un objet directement au format raster 
-#mais un data frame
+# mais un data frame
 ```
 
 ## 
@@ -2795,7 +2764,7 @@ map1
 
 -   Applications
 
-    -   Afficher sur chaque pays correspond un rond dont la taille est proportionnelle à la population
+    -   Afficher sur chaque pays un rond dont la taille est proportionnelle à la population
 
 ```{r, eval=FALSE}
 map2 <- map_1 + 
@@ -2917,7 +2886,7 @@ map_6 <- map_5 +
 
 ## Exercice 5.X {.smaller auto-animate="true"}
 
--   Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleur cohérente avec les données et masquez la légende
+-   Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleurs cohérente avec les données et masquez la légende
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -2925,7 +2894,7 @@ map_6 <- map_5 +
 
 ## Exercice 5.X corrigé {.smaller auto-animate="true"}
 
--   Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleur cohérente avec les données et masquez la légende
+-   Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleurs cohérente avec les données et masquez la légende
 
 ```{r, eval=FALSE}
 # solution
@@ -2960,7 +2929,7 @@ med_map2
 
 ## Exercice 5.X+2 {.smaller auto-animate="true"}
 
--   Recentrez la carte autour des pays d'intérêts
+-   Recentrez la carte autour des pays d'intérêt
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -2968,7 +2937,7 @@ med_map2
 
 ## Exercice 5.X+2 corrigé {.smaller auto-animate="true"}
 
--   Recentrez la carte autour des pays d'intérêts
+-   Recentrez la carte autour des pays d'intérêt
 
 ```{r, eval=FALSE}
 # solution
@@ -3056,7 +3025,7 @@ med_map4
 
 ## Exercice 5.X+5 {.smaller auto-animate="true"}
 
--   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajouter une palette de couleur distinguant terre et mer pour la bathymétrie
+-   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -3064,7 +3033,7 @@ med_map4
 
 ## Exercice 5.X+5 corrigé {.smaller auto-animate="true"}
 
--   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajouter une palette de couleur distinguant terre et mer pour la bathymétrie
+-   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
