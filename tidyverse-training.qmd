@@ -1369,19 +1369,20 @@ cat(tmp$ville, sep = "\n")
 
 ::: {.column width="50%"}
 ```{r results='hide'}
-str_extract(string  = tmp$ville, pattern = "Montpel")
+str_extract(string  = tmp$ville, 
+            pattern = "Montpel")
 ```
 
 ```{r echo = FALSE}
-cat(str_detect(string  = tmp$ville, 
-               pattern = "Montpel"), sep = "\n")
+cat(str_extract(string  = tmp$ville, 
+                pattern = "Montpel"), sep = "\n")
 ```
 :::
 :::
 
 ## Remplacer un caractère par un autre
 
-On utilise la fonction `str_replace()` et ses arguments principaux :
+On utilise la fonction `str_replace()` et ces arguments principaux :
 
 ::: incremental
 -   `string` : Le/Les caractère(s) qui vont passer à l'extracteur.
@@ -1423,7 +1424,7 @@ cat(str_replace(string      = tmp$nom,
 
 ## Concaténer des chaînes de caractères {auto-animate="true"}
 
-On utilise la fonction `str_glue()` et ses deux principaux arguments :
+On utilise la fonction `str_glue()` et ces deux principaux arguments :
 
 ::: incremental
 -   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
@@ -1481,26 +1482,17 @@ str_glue_data(tmp, "{nom}, habite au {num_rue} {nom_rue} dans la ville de {ville
 load("biomass_survey_abundance_exercice3_6.RData")
 survey_med <- biomass_survey_abundance_exercice3_6 %>%
   filter(str_detect(location, "Mediterranean") == TRUE)
+```
 
-kable(survey_med[1:5,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+. . .
+
+```{r}
+kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr = "style='width:50%;'")
 ```
 
 ## Exercice 4.1.1 - Correction Q2
 
 **Question 2** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses. Enregistrer le **survey_med** au format .RData
-
-. . .
-
-```{r}
-survey_med <- biomass_survey_abundance_exercice3_6 %>%
-  filter(str_detect(location, "Mediterranean") == TRUE) %>%
-  mutate(orientation = str_replace_all(word(location, 2, -1),
-                                       c(" " = "", "\\(" = "", "\\)" = "")))
-
-kable(survey_med[1:3,], html_font = "Computer Modern", table.attr = "style='width:50%;'")
-
-# save(survey_med, file = "survey_med.RData")
-```
 
 . . .
 
@@ -1515,6 +1507,33 @@ survey_med <- biomass_survey_abundance_exercice3_6 %>%
   mutate(orientation = str_replace(orientation, "\\)", ""))
 ```
 
+. . .
+
+```{r}
+kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr = "style='width:50%;'")
+```
+
+
+## Exercice 4.1.1 - Correction Q2
+
+**Question 2** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses. Enregistrer le **survey_med** au format .RData
+
+. . .
+
+Solution plus courte
+
+```{r}
+survey_med <- biomass_survey_abundance_exercice3_6 %>%
+  filter(str_detect(location, "Mediterranean") == TRUE) %>%
+  mutate(orientation = str_replace_all(word(location, 2, -1),
+                                       c(" " = "", "\\(" = "", "\\)" = "")))
+```
+. . .
+
+```{r}
+kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr = "style='width:50%;'")
+```
+
 ## Exercice 4.1.1 - Correction Q3
 
 **Question 3** : A partir du fichier global_reef_fish_biomass.csv chargé avec `read_delim()`, enchaîner le pipe pour obtenir un data.frame résumant le nombre d'observations dans chacune des classes, pour le site n°2000951 seulement.
@@ -1522,13 +1541,15 @@ survey_med <- biomass_survey_abundance_exercice3_6 %>%
 . . .
 
 ```{r results='hide', eval = FALSE}
-load("data/global_reef_fish_abundance.csv")
+global_reef_fish_biomass <- read_delim("./data/global_reef_fish_abundance.csv")
 
 global_reef_fish_biomass %>%
   filter(survey_id == "2000951") %>%
   group_by(class) %>%
   summarise(n_class = n())
 ```
+
+. . .
 
 ```{r echo=FALSE}
 load("global_reef_fish_biomass_2000951.RData")
@@ -1549,9 +1570,11 @@ global_reef_fish_biomass %>%
   summarise(n_class = n())
 ```
 
+. . .
+
 ```{r echo=FALSE}
 load("global_reef_fish_biomass_2000951OK.RData")
-kable(tmp, html_font = "Computer Modern", table.attr = "style='width:50%;'")
+kable(global_reef_fish_biomass_2000951OK, html_font = "Computer Modern", table.attr = "style='width:50%;'")
 ```
 
 ## Les expressions régulières {.smaller}
