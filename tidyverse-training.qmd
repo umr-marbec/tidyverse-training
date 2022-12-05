@@ -1005,7 +1005,9 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
 
 -   Applications
 
-::: incremental - Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
+::: incremental 
+
+    - Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
 
     ```{r echo=TRUE, eval=FALSE}
     # Créer un nouvel objet que l'on nomme popEU_long
