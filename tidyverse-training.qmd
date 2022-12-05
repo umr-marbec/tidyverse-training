@@ -1462,17 +1462,15 @@ str_glue_data(tmp, "{nom}, habite au {num_rue} {nom_rue} dans la ville de {ville
 
 **Question 1** : Dans le fichier biomass_survey_abundance_exercice3_6.RData, filter les données qui mentionnent la Méditerranée dans la colonne location.
 
-. . .
 
-**Question 2** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses.
+**Question 2** : A partir du fichier global_reef_fish_biomass.csv chargé avec `read_delim()`, enchaîner le pipe pour obtenir un data.frame résumant le nombre d'observations dans chacune des classes, pour le site n°2000951 seulement.
 
-. . .
 
-**Question 3** : A partir du fichier global_reef_fish_biomass.csv chargé avec `read_delim()`, enchaîner le pipe pour obtenir un data.frame résumant le nombre d'observations dans chacune des classes, pour le site n°2000951 seulement.
+**Question 3** : Résolvez le problème de façon à obtenir un tibble de dimension 2x2.
 
-. . .
 
-**Question 4** : Résolvez le problème de façon à obtenir un tibble de dimension 2x2.
+**Question bonus** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses.
+
 
 ## Exercice 4.1.1 - Correction Q1 {auto-animate="true"}
 
@@ -1482,11 +1480,56 @@ str_glue_data(tmp, "{nom}, habite au {num_rue} {nom_rue} dans la ville de {ville
 load("biomass_survey_abundance_exercice3_6.RData")
 survey_med <- biomass_survey_abundance_exercice3_6 %>%
   filter(str_detect(location, "Mediterranean") == TRUE)
+dim(survey_med)
 ```
+
 
 ## Exercice 4.1.1 - Correction Q2
 
-**Question 2** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses. Enregistrer le **survey_med** au format .RData
+**Question 2** : A partir du fichier global_reef_fish_biomass.csv chargé avec `read_delim()`, enchaîner le pipe pour obtenir un data.frame résumant le nombre d'observations dans chacune des classes, pour le site n°2000951 seulement.
+
+. . .
+
+```{r results='hide', eval = FALSE}
+global_reef_fish_biomass <- read_delim("./data/global_reef_fish_biomass.csv")
+
+global_reef_fish_biomass  %>%
+  filter(survey_id == "2000951") %>%
+  group_by(class) %>%
+  summarise(n_class = n())
+```
+
+. . .
+
+```{r echo=FALSE}
+load("global_reef_fish_biomass_2000951.RData")
+kable(global_reef_fish_biomass_2000951, html_font = "Computer Modern", table.attr = "style='width:50%;'")
+```
+
+## Exercice 4.1.1 - Correction Q3 {auto-animate="true"}
+
+**Question 3** : Résolvez le problème de façon à obtenir un tibble de dimension 2x2.
+
+. . .
+
+```{r results='hide', eval = FALSE}
+global_reef_fish_biomass %>%
+  filter(survey_id == "2000951") %>%
+  mutate(class = str_trim(class)) %>%
+  group_by(class) %>%
+  summarise(n_class = n())
+```
+
+. . .
+
+```{r echo=FALSE}
+load("global_reef_fish_biomass_2000951OK.RData")
+kable(global_reef_fish_biomass_2000951OK, html_font = "Computer Modern", table.attr = "style='width:50%;'")
+```
+
+## Exercice 4.1.1 - Correction Q+
+
+**Question bonus** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses. Enregistrer le **survey_med** au format .RData
 
 . . .
 
@@ -1507,10 +1550,9 @@ survey_med <- biomass_survey_abundance_exercice3_6 %>%
 kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr = "style='width:50%;'")
 ```
 
+## Exercice 4.1.1 - Correction Q+
 
-## Exercice 4.1.1 - Correction Q2
-
-**Question 2** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses. Enregistrer le **survey_med** au format .RData
+**Question bonus** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses. Enregistrer le **survey_med** au format .RData
 
 . . .
 
@@ -1528,48 +1570,6 @@ survey_med <- biomass_survey_abundance_exercice3_6 %>%
 kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr = "style='width:50%;'")
 ```
 
-## Exercice 4.1.1 - Correction Q3
-
-**Question 3** : A partir du fichier global_reef_fish_biomass.csv chargé avec `read_delim()`, enchaîner le pipe pour obtenir un data.frame résumant le nombre d'observations dans chacune des classes, pour le site n°2000951 seulement.
-
-. . .
-
-```{r results='hide', eval = FALSE}
-global_reef_fish_biomass <- read_delim("./data/global_reef_fish_abundance.csv")
-
-global_reef_fish_biomass %>%
-  filter(survey_id == "2000951") %>%
-  group_by(class) %>%
-  summarise(n_class = n())
-```
-
-. . .
-
-```{r echo=FALSE}
-load("global_reef_fish_biomass_2000951.RData")
-kable(global_reef_fish_biomass_2000951, html_font = "Computer Modern", table.attr = "style='width:50%;'")
-```
-
-## Exercice 4.1.1 - Correction Q4 {auto-animate="true"}
-
-**Question 4** : Résolvez le problème de façon à obtenir un tibble de dimension 2x2.
-
-. . .
-
-```{r results='hide', eval = FALSE}
-global_reef_fish_biomass %>%
-  filter(survey_id == "2000951") %>%
-  mutate(class = str_trim(class)) %>%
-  group_by(class) %>%
-  summarise(n_class = n())
-```
-
-. . .
-
-```{r echo=FALSE}
-load("global_reef_fish_biomass_2000951OK.RData")
-kable(global_reef_fish_biomass_2000951OK, html_font = "Computer Modern", table.attr = "style='width:50%;'")
-```
 
 ## Les expressions régulières {.smaller}
 
@@ -1700,19 +1700,7 @@ ceiling_date()
 
 ![](images/ggplot2_logo.png)
 
-## Ggplot c'est comme la chirurgie *`aes`*thétique :
 
-::: incremental
-::: columns
-1)  Les jeunes s'y mettent très tôt !
-
-2)  Les moins jeunes sont réticents puis CERTAINS finissent par s'y mettre ![](images/nancy_pelosi.jpg){.absolute top="250" left="300" width="20%"}
-
-3)  C'est un enchainement plus ou moins long d'opérations.
-
-    ![](images/bogdanoff1.jpg){.absolute top="500" left="100" width="21%"} ![](images/bogdanoff1.5.jpg){.absolute top="500" left="300" width="25%"} ![](images/bogdanoff2.jpg){.absolute top="500" left="700" width="25%"}
-:::
-:::
 
 ## Petit aperçu des possibilités :
 
@@ -1722,14 +1710,35 @@ ceiling_date()
 
 ![](images/R_graph_gallery.PNG){.absolute top="150" left="200" width="65%"}
 
-## Ggplot, une succession de couches
+
+## Ggplot c'est comme la chirurgie *`aes`*thétique :
+
+::: incremental
+::: columns
+1)  Les jeunes s'y mettent très tôt !
+
+2)  Les moins jeunes sont réticents puis CERTAINS finissent par s'y mettre             
+![](images/nancy_pelosi.jpg){.absolute top="260" left="370" width="22%"}
+
+<br><br><br>
+
+3)  C'est un enchainement plus ou moins long d'opérations.
+![](images/bogdanoff1.jpg){.absolute top="521" left="50" width="22%"}         
+![](images/bogdanoff1.5.jpg){.absolute top="500" left="360" width="25%"} 
+![](images/bogdanoff2.jpg){.absolute top="500" left="700" width="25%"}
+
+:::
+:::
+
+
+## Ggplot, une succession de couches {auto-animate="true"}
 
 ::: incremental
 ::: columns
 ::: column
 1.  La Structure
 
-    ```{r echo=FALSE, out.width="85%"}
+    ```{r echo=FALSE, out.width="75%"}
     data <- iris
     p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
       theme(axis.text  = element_text(size = 25),
@@ -1741,7 +1750,7 @@ ceiling_date()
 ::: column
 2.  Le Type de représentation
 
-    ```{r echo=FALSE, out.width="85%"}
+    ```{r echo=FALSE, out.width="75%"}
     p2 <- p1 + geom_point(size = 5)
     p2
     ```
@@ -1752,7 +1761,7 @@ ceiling_date()
 ::: column
 3.  Les Couleurs
 
-    ```{r echo=FALSE, out.width="85%"}
+    ```{r echo=FALSE, out.width="75%"}
     p3 <- p1 + geom_point(mapping = aes(color = Petal.Width), size = 5) + scale_color_viridis_c()
     p3
     ```
@@ -1761,8 +1770,9 @@ ceiling_date()
 ::: column
 4.  Le Lifting final
 
-    ```{r echo=FALSE, out.width="85%"}
-    p4 <- p3 + theme_bw() +
+    ```{r echo=FALSE, out.width="75%"}
+    p4 <- p3 +
+      theme_bw() +
       theme(axis.text = element_text(size = 25),
                      axis.title = element_text(size = 25))
     p4
@@ -1770,6 +1780,57 @@ ceiling_date()
 :::
 :::
 :::
+
+
+## Ggplot, une succession de couches {auto-animate="true"}
+
+::: columns
+::: column
+1.  La Structure
+
+    ```{r echo=FALSE, out.width="75%"}
+    data <- iris
+    p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
+      theme(axis.text  = element_text(size = 25),
+            axis.title = element_text(size = 25))
+    p1
+    ```
+:::
+
+::: column
+2.  Le Type de représentation
+
+    ```{r echo=FALSE, out.width="75%"}
+    p2 <- p1 + geom_point(size = 5)
+    p2
+    ```
+:::
+:::
+
+::: columns
+::: column
+3.  Les Couleurs
+
+    ```{r echo=FALSE, out.width="75%"}
+    p3 <- p1 + geom_point(mapping = aes(color = Petal.Width), size = 5) + scale_color_viridis_c()
+    p3
+    ```
+:::
+
+::: column
+4.  Le Lifting final
+
+    ```{r echo=FALSE, out.width="75%"}
+    p4 <- p3 +
+      geom_line(size = 2) +
+      theme_bw() +
+      theme(axis.text = element_text(size = 25),
+                     axis.title = element_text(size = 25))
+    p4
+    ```
+:::
+:::
+
 
 ## La structure des données
 
@@ -1977,61 +2038,6 @@ couche.3 <- couche.2 +
 couche.3
 ```
 
-## Exercice 5.1 {auto-animate="true"}
-
-Quel est le pays dans lequel on retrouve le plus de biomasse par transect (valeur médiane) ? Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**.
-
-```{r}
-# Etape 1
-```
-
-## Exercice 5.1 : Correction {auto-animate="true"}
-
-Quel est le pays dans lequel on retrouve le plus de biomasse par transect (valeur médiane) ? Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**.
-
-```{r warning=FALSE}
-# Etape 1 : Formatter les données
-data_biomass_country <- biomass_survey_abundance_exercice3_6 %>%
-  st_drop_geometry() %>%
-  filter(str_detect(string = survey_date, pattern = "2011")) %>%
-  group_by(country, survey_id) %>%
-  summarise(biomass = sum(biomass)) 
-```
-
-## Exercice 5.1 : Correction {auto-animate="true"}
-
-Quel est le pays dans lequel on retrouve le plus de biomasse par transect (valeur médiane). Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**.
-
-```{r fig.align="center", out.width="50", warning=FALSE}
-# Etape 2 : Realiser les boites à moustache
-ggplot(data = data_biomass_country) +
-  geom_boxplot(aes(x = country, y = biomass)) +
-  theme_bw() 
-```
-
-## Exercice 5.2 {auto-animate="true"}
-
-Ce ggplot n'est cependant pas entièrement satisfaisant ... <br> Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.
-
-. . .
-
-Une solution est d'utiliser la fonction `reorder()` pour ordonner l'axe des x.
-
-Utiliser cette fonction pour ordonner l'axe des x de façon décroissante selon la valeur **médiane**. Nommer le plot **boxplot_biomass_country**. <br> N'hésitez pas à regarder l'aide `?reorder` ou à chercher sur internet.
-
-```{r}
-# Utilisation de reorder
-```
-
-## Exercice 5.2 : Correction {auto-animate="true"}
-
-```{r fig.align="center"}
-# Reorder en fonction de la valeur médiane 
-boxplot_biomass_country <- ggplot(data = data_biomass_country) +
-  geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass))
-
-boxplot_biomass_country
-```
 
 ## Ggplot pas à pas : La couleur
 
@@ -2053,7 +2059,7 @@ couche.4 <- ggplot() +
 couche.4
 ```
 
-## Ggplot pas à pas : Couleurs & légende
+## Ggplot pas à pas : Couleurs & légende {.smaller}
 
 Pour cela, on peut utiliser la fonction `scale_color_manual()` et les arguments `name` et `values`.
 
@@ -2092,27 +2098,6 @@ couche.6 <- couche.5 +
 couche.6
 ```
 
-## Exercice 5.3 {auto-animate="true"}
-
-Renommer proprement les axes de boxplot_biomass_country.
-
-```{r}
-# Solution
-```
-
-## Exercice 5.3 - Corrigé {auto-animate="true"}
-
-Renommer proprement les axes de boxplot_biomass_country.
-
-```{r}
-# Solution
-boxplot_biomass_country_v2 <- boxplot_biomass_country +
-  labs(x = "Country", y = "Biomass (g)")
-```
-
-```{r echo = FALSE, fig.align="center", out.width="70%"}
-boxplot_biomass_country_v2
-```
 
 ## Ggplot pas à pas : le FACET
 
@@ -2134,7 +2119,6 @@ couche.7
 
 <br> On utilise une des fonctions `theme_*`.
 
-<br>
 
 ```{r warnings=FALSE, fig.align='center'}
 #| fig-height: 8
@@ -2172,11 +2156,7 @@ couche.8
 
 ## Enregistrer ses figures
 
-<br>
-
 Pour enregistrer votre ggplot, vous pouvez utiliser la fonction `ggsave()` :
-
-<br>
 
 ::: incremental
 -   `plot` : le nom du ggplot à enregistrer.
@@ -2186,9 +2166,96 @@ Pour enregistrer votre ggplot, vous pouvez utiliser la fonction `ggsave()` :
 
 . . .
 
-<center>
+```{r eval = FALSE}
+ggsave(filename = "le_chemin_vers_le_bon_dossier", 
+       plot     = boxplot_biomass_country_v3,
+       width    = 8,
+       height   = 5)
+```
 
-D'autre arguments existent, voir avec `?ggsave`.
+## Exercice 5.1 {auto-animate="true"}
+
+Quel est le pays dans lequel on retrouve le plus de biomasse par transect (valeur médiane) ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**.
+Nommer le jeu de données **data_biomass_country**.
+
+```{r}
+# Etape 1
+```
+
+## Exercice 5.1 : Correction {auto-animate="true"}
+
+Quel est le pays dans lequel on retrouve le plus de biomasse par transect (valeur médiane) ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**.
+Nommer le jeu de données **data_biomass_country**.
+
+```{r warning=FALSE}
+# Etape 1 : Formatter les données
+data_biomass_country <- biomass_survey_abundance_exercice3_6 %>%
+  st_drop_geometry() %>%
+  filter(str_detect(string = survey_date, pattern = "2011")) %>%
+  group_by(country, survey_id) %>%
+  summarise(biomass = sum(biomass)) 
+```
+
+## Exercice 5.1 : Correction {auto-animate="true"}
+
+Quel est le pays dans lequel on retrouve le plus de biomasse par transect (valeur médiane). Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**.
+Nommer le jeu de données **data_biomass_country**.
+
+
+```{r fig.align="center", out.width="50", warning=FALSE}
+# Etape 2 : Realiser les boites à moustache
+ggplot(data = data_biomass_country) +
+  geom_boxplot(aes(x = country, y = biomass)) +
+  theme_bw() 
+```
+
+## Exercice 5.2 {auto-animate="true"}
+
+Ce ggplot n'est cependant pas entièrement satisfaisant ... <br> Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.
+
+. . .
+
+Une solution est d'utiliser la fonction `reorder()` pour ordonner l'axe des x.
+
+Utiliser cette fonction pour ordonner l'axe des x de façon décroissante selon la valeur **médiane**. Nommer le plot **boxplot_biomass_country**. <br> N'hésitez pas à regarder l'aide `?reorder` ou à chercher sur internet.
+
+```{r}
+# Utilisation de reorder
+```
+
+## Exercice 5.2 : Correction {auto-animate="true"}
+
+```{r fig.align="center", out.width="80%"}
+# Reorder en fonction de la valeur médiane 
+boxplot_biomass_country <- ggplot(data = data_biomass_country) +
+  geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass))
+
+boxplot_biomass_country
+```
+
+
+## Exercice 5.3 {auto-animate="true"}
+
+Renommer proprement les axes de boxplot_biomass_country.
+
+```{r}
+# Solution
+```
+
+## Exercice 5.3 - Corrigé {auto-animate="true"}
+
+Renommer proprement les axes de boxplot_biomass_country.
+
+```{r}
+# Solution
+boxplot_biomass_country_v2 <- boxplot_biomass_country +
+  labs(x = "Country", y = "Biomass (g)")
+```
+
+```{r echo = FALSE, fig.align="center", out.width="70%"}
+boxplot_biomass_country_v2
+```
+
 
 ## Exercice 5.4 {auto-animate="true"}
 
@@ -2202,7 +2269,7 @@ Dans la fonction `element_text()`, un argument permet de tourner les légendes d
 
 Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choissir votre arrière plan préféré.
 
-```{r}
+```{r out.width="80%"}
 # Solution
 boxplot_biomass_country_v3 <- boxplot_biomass_country_v2 +
   theme_bw() +
@@ -2217,7 +2284,7 @@ boxplot_biomass_country_v3
 
 ## Exercice 5.5 {auto-animate="true"}
 
-Enregistrer la **boxplot_biomass_country_v3** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
+Enregistrer la figure **boxplot_biomass_country_v3** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
 
 ```{r}
 # Solution
@@ -2225,7 +2292,7 @@ Enregistrer la **boxplot_biomass_country_v3** au format **.png**, avec une large
 
 ## Exercice 5.5 corrigé {auto-animate="true"}
 
-Enregistrer la **boxplot_biomass_country_v3** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
+Enregistrer la figure **boxplot_biomass_country_v3** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
 
 ```{r eval = FALSE}
 # Solution
@@ -2235,31 +2302,9 @@ ggsave(filename = "figures/boxplot_biomass_vs_country.png",
        height   = 5)
 ```
 
-## Une petite subtilité concernant les couleurs
+## Une petite subtilité concernant les couleurs {auto-animate="true"}
 
-### Exercice 5.6 {auto-animate="true"}
-
-::: incremental
-1.  A partir de data_biomass_country, selectionnez les pays **Spain**, **United States**, **Canada**, **Costa Rica** et **Mexico**.
-
-2.  Créer une nouvelle colonne qui précise leur continent.
-
-3.  Reconstruire un boxplot en **remplissant** chaque boite d'une couleur pour chaque continent.
-:::
-
-. . .
-
-```{r}
-# Solution
-```
-
-## Exercice 5.6 corrigé {auto-animate="true"}
-
-1.  A partir de data_biomass_country, selectionnez les pays **Spain**, **United States**, **Canada**, **Costa Rica** et **Mexique**.
-
-2.  Créer une nouvelle colonne qui précise leur continent.
-
-3.  Reconstruire un boxplot en **remplissant** chaque boite d'une couleur pour chaque continent.
+**fill** vs. **color** 
 
 ```{r}
 # Solution questions 1 & 2
@@ -2272,24 +2317,13 @@ data_biomass_5country <- data_biomass_country %>%
 # Solution pour le plot
 ```
 
-## Exercice 5.6 corrigé {auto-animate="true"}
+## Une petite subtilité concernant les couleurs {auto-animate="true"}
 
-1.  A partir de data_biomass_country, selectionnez les pays <br> **Spain**, **United States**, **Canada**, **Costa Rica** et **Mexique**.
+Reconstruction d'un boxplot en **remplissant** chaque boite d'une couleur pour chaque continent.
 
-2.  Créer une nouvelle colonne qui précise leur continent.
-
-3.  Reconstruire un boxplot en **remplissant** chaque boite d'une couleur propre à son continent.
-
-```{r}
-# Solution questions 1 & 2
-data_biomass_5country <- data_biomass_country %>%
-  filter(country %in% c("Spain", "United States", "Italy", "Costa Rica", "Panama")) %>%
-  mutate(Continent = case_when((country == "Spain"| country == "Italy") ~ "Europe",
-                                country == "United States" ~ "North America",
-                                TRUE ~ "South America"))
-
+```{r fig.align="center"}
 # Solution pour le plot
-plot <- ggplot() +
+ggplot() +
   geom_boxplot(data    = data_biomass_5country,
                mapping = aes(x = reorder(country, -biomass, FUN = median), 
                              y = biomass, 
@@ -2298,11 +2332,8 @@ plot <- ggplot() +
   theme_bw()
 ```
 
-## Exercice 5.6 corrigé {auto-animate="true"}
 
-```{r echo = FALSE, fig.align="center", out.width="50%"}
-plot
-```
+## Une petite subtilité concernant les couleurs {auto-animate="true"}
 
 ::: incremental
 Ggplot fait la différence entre :
@@ -2314,16 +2345,12 @@ Ggplot fait la différence entre :
 
 . . .
 
-Pour choisir ses couleurs de contour *vs.* de remplissage, on utilise les fonctions\
+Pour choisir ses couleurs de contour *vs.* de remplissage, on utilise les fonctions
 `scale_color_manual()` *vs.* `scale_fill_manual()`.
 
-A vous de jouer en attribuant la couleur **skyblue** à l'Europe, **aquamarine** à l'Am. du Sud et **moccasin** à l'Am. du Nord.
+. . .
 
-## Exercice 5.6 corrigé {auto-animate="true"}
-
-A vous de jouer en attribuant la couleur **skyblue** à l'Europe, **aquamarine** à l'Am. du Sud et **moccasin** à l'Am. du Nord.
-
-```{r }
+```{r fig.align='center'}
 ggplot() +
   geom_boxplot(data    = data_biomass_5country,
                mapping = aes(x = reorder(country, -biomass, FUN = median), 
@@ -2382,9 +2409,6 @@ Il existe 4 fonctions principales qui permettent de construire des palettes de c
 
 -   `scale_fill_viridis_c` : Colorblind friendly.
 
--   `scale_fill_distiller` : utilise les [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) (voir [ici](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html) pour plus d'infos).\
-    Pour voir les palettes =\> `RColorBrewer::display.brewer.all()`
-
 -   `scale_fill_gradient` : permet de créer ses propres gradients de couleurs. Des variantes existent selon le nombre de couleurs à définir. Il s'agit de `scale_fill_gradient2()` et `scale_fill_gradientn()`.
 :::
 
@@ -2409,7 +2433,7 @@ La plus simple, mais pas beaucoup d'options. C'est aussi la palette de couleur p
 . . .
 
 ```{r fig.align='center'}
-#| fig-height: 8
+#| fig-height: 7
 #| layout: "[50, 50]"
 plot
 plot + scale_fill_continuous()
@@ -2433,37 +2457,8 @@ plot + scale_fill_viridis_c(option = "turbo")
 ```
 :::
 
-## Couleurs & variables continues
 
-### `scale_fill_distiller()`
-
-Permet d'utiliser les palettes de couleurs issues de [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
-
-. . .
-
-```{r fig.align='center'}
-RColorBrewer::display.brewer.all()
-```
-
-## Couleurs & variables continues
-
-### `scale_fill_distiller()`
-
-. . .
-
-Permet d'utiliser les palettes de couleurs issues de [BrewerPalettes](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
-
-```{r}
-#| fig-height: 8
-#| layout: "[30, 30, 30]"
-plot + scale_fill_distiller(palette = "Reds")
-plot + scale_fill_distiller(palette = "YlGn")
-plot + scale_fill_distiller(palette = "Spectral")
-```
-
-## Couleurs & variables continues
-
-### `scale_fill_distiller()`
+## Info générale sur les palettes
 
 Petite info utile, toutes les palettes peuvent passer le test ***ColorBlind Friendly*** :
 
@@ -2527,23 +2522,8 @@ plot + scale_fill_binned(n.breaks = 7)
 plot + scale_fill_binned(breaks = quantile(faithfuld$density, probs = (seq(0,1,0.3))))
 ```
 
-## Couleurs & variable groupée en classes
 
-### `scale_fill_fermenter()`
-
-Fonction analogue à `scale_fill_distiller()` et `scale_fill_brewer()`.
-
-. . .
-
-```{r}
-#| fig-height: 8
-#| layout: "[30, 30, 30]"
-plot + scale_fill_fermenter(n.breaks = 8, palette = "BuGn")
-plot + scale_fill_fermenter(n.breaks = 8, palette = "BuGn", direction = 1)
-plot + scale_fill_fermenter(n.breaks = 8, palette = "RdBu")
-```
-
-## Couleurs & variable groupée en classes
+## Couleurs & variable groupée en classes {.smaller}
 
 ### `scale_fill_steps()`
 
@@ -2612,6 +2592,7 @@ https://stackoverflow.com/questions/70942728/understanding-color-scales-in-ggplo
 
 https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
 
+
 ## Diagrammes en barres & barres d'erreurs
 
 Pour ajouter les barres d'erreurs, on utilise la fonction `geom_errorbar()`.
@@ -2643,11 +2624,11 @@ ggplot(crabs_mean) +
 
 ## Exercice 5.7 {auto-animate="true"}
 
-A partir des données data_biomass_5country, construire un diagramme en barres  de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
+A partir des données **data_biomass_5country**, construire un diagramme en barres  de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
 ## Exercice 5.7 - Corrigé {auto-animate="true"}
 
-A partir des données data_biomass_5country, construire un diagramme en barres  de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
+A partir des données **data_biomass_5country**, construire un diagramme en barres  de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
 ```{r fig.align='center', out.width="40%"}
 # Formattage
@@ -2657,7 +2638,7 @@ country_mean <- data_biomass_5country %>%
             biom_sd   = sd(biomass)) 
 ```
 
-## Exercice 5.7 - Corrigé {auto-animate="true"}
+## Exercice 5.7 : Correction {auto-animate="true"}
 
 A partir des données data_biomass_5country, construire un diagramme en barres  de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
@@ -2671,72 +2652,175 @@ ggplot(country_mean) +
   theme_bw()
 ```
 
-## Utiliser ggplot pour détecter des erreurs dans les données
 
-<center>
+## Gestion des facteurs & groupes {auto-animate="true"}
 
-```{r echo = TRUE, warning = FALSE}
-# fish_data <- read_csv("data/Global_reef_fish_abundance_and_biomass.csv")
-# fish_data <- read_csv("data/Global_reef_fish_biomass.csv")
+Obtient-on les mêmes résultats entre la biomasse totale et l'abondance ? 
 
-# survey <- read_delim("data/Survey_metadata.csv", 
-#      delim = ";", escape_double = FALSE, trim_ws = TRUE, 
-#      skip = 70)
+. . .
 
-# Selection des données pour le site n°2000951
-# site1 <- fish_data %>%
-#   filter(survey_id == 2000951) %>%
-#   select(survey_id, class, order, family, species_name, total, biomass)
-# 
-# site1 %>%
-#   head(5) %>% 
-#   kbl(digits = 4, caption = "Data to check") %>% 
-#   kable_classic(html_font = "Computer Modern", full_width = F)  
+### Exercice 5.8
 
+A partir de **biomass_survey_abundance_exercice3_6**, obtenez un data.frame de trois colonnes 
+**size_class_mm**, **biom_abun**, **value** pour les données prélevées en 2011.
+
+. . .
+
+```{r}
+ # 1. Enlever la colonne geometry.
+ # 2. Filtrer les données 2011.
+ # 3. Sélectionner les colonnes size_class_mm, biomass, abundance.
+ # 4. Transformer la colonne size_class_mm en facteur.
+ # 5. Sommer la biomass et l'abondunce par classe de taille.
+ # 6. Pivoter le tableau au format long en gardant size_class_mm.
 ```
 
-</center>
 
-Comment détecter les outliers ?
+## Gestion des facteurs & groupes {auto-animate="true"}
 
-```{r echo = TRUE, warning = FALSE}
-# ggplot(data = site1, mapping = aes(x = order, y = biomass)) +
-#   geom_boxplot() +
-#   theme_bw()
+Obtient-on les mêmes résultats entre la biomasse totale et l'abondance ? 
+
+### Exercice 5.8 : Correction
+
+A partir de **biomass_survey_abundance_exercice3_6**, obtenez un data.frame de trois colonnes 
+**size_class_mm**, **biom_abun**, **value** pour les données prélevées en 2011.
+
+```{r}
+biomass_abundance <- biomass_survey_abundance_exercice3_6 %>%
+  # 1. Enlever la colonne geometry.
+  st_drop_geometry() %>%
+  # 2. Filtrer les données 2011.
+  filter(str_detect(string = survey_date, pattern = "2011")) %>%
+  # 3. Sélectionner les colonnes size_class_mm, biomass, abundance.
+  dplyr::select(size_class_mm, biomass, abundance) %>%
+  # 4. Transformer la colonne size_class_mm en facteur.
+  mutate(size_class_mm = as.factor(size_class_mm)) %>%
+  # 5. Sommer la biomass et l'abondunce par classe de taille.
+  group_by(size_class_mm) %>%
+  summarise_all(sum) %>%
+  # 6. Pivoter le tableau au format long en gardant size_class_mm.
+  pivot_longer(cols = 2:3, names_to = "biom_abun", values_to = "value")
 ```
 
-### Séparer les Elasmobranches des Actinoptérygiens
+## Gestion des facteurs & groupes {auto-animate="true"}
 
-<center>
+Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.
 
-```{r echo=TRUE, warning=FALSE}
-# ggplot(data = site1, mapping = aes(x = order, y = biomass)) +
-#   geom_boxplot() +
-#   facet_grid(.~class, scales = "free", space = "free") +
-#   theme_bw() +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```{r fig.align='center'}
+ggplot(data = biomass_abundance,
+       mapping = aes(x    = biom_abun, 
+                     y    = value, 
+                     fill = size_class_mm)) +
+  geom_col()
 ```
 
-Interrogation au niveau des Perciformes ...
 
-</center>
+## Gestion des facteurs & groupes {auto-animate="true"}
 
-### Qu'est-ce qu'il se passe avec les Perciformes ?
+Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.
 
-<center>
-
-```{r echo=TRUE, warning=FALSE}
-# site1 %>%
-#   filter(order == "Perciformes") %>%
-#   ggplot(., mapping = aes(x = family, y = biomass)) +
-#   geom_boxplot() +
-#   theme_bw() +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-  
-
+```{r fig.align='center', out.width="80%"}
+ggplot(data = biomass_abundance,
+       mapping = aes(x    = biom_abun, 
+                     y    = value, 
+                     fill = size_class_mm)) +
+  geom_col(position = "dodge", 
+           stat     = "identity")
 ```
 
-</center>
+## Gestion des facteurs & groupes {auto-animate="true"}
+
+Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.
+
+```{r fig.align='center', out.width="70%"}
+ggplot(data = biomass_abundance,
+       mapping = aes(x    = biom_abun, 
+                     y    = value, 
+                     fill = size_class_mm)) +
+  geom_col(position="dodge", stat="identity") +
+  labs(x = NULL, y = "Biomass (g)", fill = "Size class (mm)") + 
+  scale_fill_viridis_d(labels = c("[0, 25[", "[25, 50[", "[50, 75[", "[75, 100[")) +
+  theme_bw()
+```
+
+## Gestion des facteurs & groupes {auto-animate="true"}
+
+Changeons l'ordre des facteurs de façon à ce que la classe [75,100[ soient en 1ère.
+
+. . .
+
+```{r echo=FALSE, results="hide", warnings = FALSE}
+plot1 <- ggplot(data = biomass_abundance,
+                mapping = aes(x    = biom_abun, 
+                              y    = value, 
+                              fill = size_class_mm)) +
+  geom_col(position="dodge", stat="identity") +
+  labs(x = NULL, y = "Biomass (g)", fill = "Size class (mm)") + 
+  scale_fill_viridis_d(labels = c("[0, 25[", "[25, 50[", "[50, 75[", "[75, 100[")) +
+  theme_bw()
+```
+
+```{r}
+#| fig-height: 8
+#| layout: "[45, 45]"
+plot1
+ggplot(data = biomass_abundance,
+       mapping = aes(x    = biom_abun, 
+                     y    = value, 
+                     fill = rev(size_class_mm))) +
+  geom_col(position="dodge", stat="identity") +
+  labs(x = NULL, y = "Biomass (g)", fill = "Size class (mm)") + 
+  scale_fill_viridis_d(labels = rev(c("[0, 25[", "[25, 50[", "[50, 75[", "[75, 100["))) +
+  theme_bw()
+```
+
+## Gestion des facteurs & groupes {auto-animate="true"}
+
+Changeons l'ordre des facteurs de façon à ce que la classe [75,100[ soient en 1ère. 
+
+. . .
+
+```{r fig.align='center', out.width="80%"}
+biomass_abundance2 <- biomass_abundance %>%
+  mutate(size_class_mm = factor(x      = biomass_abundance$size_class_mm, 
+                                levels = c("100", "75", "50", "25"))) 
+
+ggplot(data = biomass_abundance2,
+       mapping = aes(x    = biom_abun, 
+                     y    = value, 
+                     fill = size_class_mm)) +
+  geom_col(position="dodge") +
+  labs(x = NULL, y = "Biomass (g)", fill = "Size class (mm)") + 
+  scale_fill_viridis_d(labels = c("[75, 100[", "[50, 75[", "[25, 50[",  "[0, 25[")) +
+  theme_bw()
+```
+
+## Exercice 5.8 {auto-animate="true"}
+
+Réaliser un diagramme en barre permettant illustre le mieux les cas où l'abondance est supérieure à la biomasse
+et vise-versa.
+
+```{r}
+# Correction
+```
+
+## Exercice 5.8 : Correction {auto-animate="true"}
+
+Réaliser un diagramme en barre permettant illustre le mieux les cas où l'abondance est supérieure à la biomasse
+et vise-versa.
+
+```{r fig.align='center'}
+# Correction
+ggplot(data = biomass_abundance,
+       mapping = aes(x    = size_class_mm, 
+                     y    = value, 
+                     fill = biom_abun)) +
+  geom_col(position="dodge", stat="identity") +
+  labs(x = "Size class (mm)", y = "Biomass (g)", fill = NULL) + 
+  scale_fill_viridis_d(labels = c("Abundance", "Biomass")) +
+  theme_bw()
+```
+
 
 ## La cartographie avec ggplot2
 
@@ -2768,7 +2852,7 @@ geom_raster()
 
 -   Applications
 
-    -   Visualiser la carte
+-   Visualiser la carte
 
 ```{r}
 map1 <- ggplot(data = world_boundaries) + 
@@ -2781,13 +2865,13 @@ map1
 
 -   Applications
 
-    -   Afficher sur chaque pays un rond dont la taille est proportionnelle à la population
+-   Afficher sur chaque pays un rond dont la taille est proportionnelle à la population et la couleur fonction du GDP
 
-```{r, eval=FALSE}
-map2 <- map_1 + 
+```{r, eval=TRUE, fig.align='center'}
+map2 <- map1 + 
   stat_sf_coordinates(aes(size=pop_est, fill=gdp_md_est),color = "black",shape=21, data = world_boundaries) +
   labs(fill="GDP") +
-scale_size_binned(breaks = quantile(world_boundaries$pop_est, probs = seq(0,1,0.1),na.rm=TRUE)) +
+  scale_size_binned(breaks = quantile(world_boundaries$pop_est, probs = seq(0,1,0.1),na.rm=TRUE)) +
   theme_bw()
 map2 
 ```
@@ -2796,30 +2880,35 @@ map2
 
 -   Applications
 
-    -   Créer un raster et le visualiser
+-   Créer un raster et le visualiser
 
-::: incremental
-```{r, eval=FALSE}
+
+```{r, eval=TRUE, fig.align='center'}
 r <- raster(ncols=5, nrows=5)
 r1 <- setValues(r, runif(ncell(r)))
 
 rastdf <- as.data.frame(r1,xy=TRUE)
-head(rastdf)
+#head(rastdf)
 ```
+##
+-   Applications
 
-```{r, eval=FALSE}
+-   Créer un raster et le visualiser
+```{r, eval=TRUE, fig.align='center'}
 map3.1 <- ggplot() +
-    geom_raster(data=rastdf, aes(x=x,y=y))
-Map3.1
+  geom_raster(data=rastdf, aes(x=x,y=y))
+map3.1
 ```
+##
+-   Applications
 
-```{r, eval=FALSE}
+-   Créer un raster et le visualiser
+```{r, eval=TRUE, fig.align='center'}
 # Ajouter l'argument fill 
 map3.2 <- ggplot() +
-    geom_raster(data=rastdf, aes(x=x,y=y,fill=layer))
+  geom_raster(data=rastdf, aes(x=x,y=y,fill=layer))
 map3.2
 ```
-:::
 
 ## 
 
@@ -2833,35 +2922,35 @@ geom_sf_text()
 geom_sf_label()
 ```
 
-##  {.smaller}
+##
 
 -   Applications
 
-    -   Afficher sous format texte le code ISO3 des pays
+-   Afficher sous format texte le code ISO3 des pays
 
-    ```{r, eval=FALSE}
-    map_4.1 <- map1 +
-      geom_sf_text(aes(label = adm0_a3),vjust=-0.5,fontface="italic",colour="blue") +
-      theme_bw()
-    map4.1
-    ```
+```{r, eval=TRUE, fig.align='center'}
+map4.1 <- map1 +
+  geom_sf_text(aes(label = adm0_a3),vjust=-0.5,fontface="italic",colour="blue") +
+  theme_bw()
+map4.1
+```
 
-    -   Ajout de l'argument check_overlap. Que se passe t'il?
-
-```{r, eval=FALSE}
-map_4.2 <- map1 +
+-   Ajout de l'argument check_overlap. Que se passe t'il?
+  
+```{r, eval=TRUE, fig.align='center'}
+map4.2 <- map1 +
   geom_sf_text(aes(label = adm0_a3),vjust=-0.5,check_overlap=TRUE,fontface="italic",colour="blue") +
   theme_bw()
 map4.2
 ```
 
-    - Afficher sous format étiquette le code ISO3 des pays
+- Afficher sous format étiquette le code ISO3 des pays
 
-```{r, eval=FALSE}
-map_5 <- map1 +
+```{r, eval=TRUE, fig.align='center'}
+map5 <- map1 +
   geom_sf_label(aes(label = adm0_a3),vjust=-0.5,colour="blue",fill="cyan") +
   theme_bw()
-Map5
+map5
 ```
 
 ## 
@@ -2879,51 +2968,51 @@ annotation_north_arrow()
 
 -   Application
 
-    -   Ajouter la barre d'échelle
+-   Ajouter la barre d'échelle
 
-```{r, eval=FALSE}
-# Le filter peut aussi etre fait directement dans le graphe
-map6 <- ggplot(data = world_boundaries %>% filter(continent=="South America")) +
+```{r, eval=FALSE, fig.align='center'}
+
+map6.1 <- map5 +
   geom_sf() +
  annotation_scale(location = "br", line_width = .5) +
   theme_bw()
-map6
+map6.1
 ```
 
-## 
 
 -   Application
 
     -   Ajouter la flèche du nord
 
-```{r, eval=FALSE}
-map_6 <- map_5 +
+```{r, eval=FALSE, fig.align='center'}
+map6.2 <- map5 +
   annotation_north_arrow(location = "tl", height = unit(0.7, "cm"), width = unit(0.7, "cm"))
 ```
 
-## Exercice 5.X {.smaller auto-animate="true"}
+## Exercice 5.9 {.smaller auto-animate="true"}
 
 -   Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleurs cohérente avec les données et masquez la légende
 
 ```{r echo=TRUE, eval=FALSE}
+# Assigner le système de coordonnées
+survey_med <- st_set_crs(survey_med,"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs") 
 # solution
 ```
 
-## Exercice 5.X corrigé {.smaller auto-animate="true"}
+## Exercice 5.9 corrigé {.smaller auto-animate="true"}
 
--   Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleurs cohérente avec les données et masquez la légende
+-   Construisez une carte des transects en Méditerranée avec une couleur par profondeur. Choisissez une palette de couleurs cohérente avec les données et masquez la légende
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, fig.align='center'}
 # solution
 med_map1 <- ggplot(data = survey_med) +
-  geom_sf(aes(color=site_name, shape=method), show.legend = FALSE) +
+  geom_sf(aes(color=as.factor(depth)),show.legend=FALSE) +
   scale_colour_viridis_d() +
-  #scale_shape_manual(values = rep(15:17, len = 8)) +
   theme_bw()
 med_map1
 ```
 
-## Exercice 5.X+1 {.smaller auto-animate="true"}
+## Exercice 5.10 {.smaller auto-animate="true"}
 
 -   Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)
 
@@ -2931,41 +3020,41 @@ med_map1
 # solution
 ```
 
-## Exercice 5.X+1 corrigé {.smaller auto-animate="true"}
+## Exercice 5.10 corrigé {.smaller auto-animate="true"}
 
 -   Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)
 
-```{r echo=TRUE, eval=FALSE}
+```{r echo=TRUE, eval=FALSE, fig.align='center'}
 # solution
 med_countries <- world_boundaries %>%
   filter(continent %in%c("Europe","Africa","Asia"))
 med_map2 <- med_map1  +
-  geom_sf(data=med_country, fill="gray92")
+  geom_sf(data=med_countries, fill="gray92")
 med_map2
 ```
 
-## Exercice 5.X+2 {.smaller auto-animate="true"}
+## Exercice 5.11 {.smaller auto-animate="true"}
 
--   Recentrez la carte autour des pays d'intérêt
+-   Recentrez la carte autour des pays d'intérêt (xmin=-20,xmax=60,ymin=25,ymax=45)
 
-```{r echo=TRUE, eval=FALSE}
+```{r echo=TRUE, eval=FALSE, fig.align='center'}
 # solution
 ```
 
-## Exercice 5.X+2 corrigé {.smaller auto-animate="true"}
+## Exercice 5.11 corrigé {.smaller auto-animate="true"}
 
 -   Recentrez la carte autour des pays d'intérêt
+(xmin=-20,xmax=60,ymin=25,ymax=45)
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, fig.align='center'}
 # solution
-med_map2 <- med_map1  +
-  geom_sf(data=med_country, fill="gray92") +
+med_map3 <- med_map2  +
 xlim(-20,60) +
-ylim(4,-10)
-med_map2
+ylim(25,45)
+med_map3
 ```
 
-## Exercice 5.X+3 {.smaller auto-animate="true"}
+## Exercice 5.12 {.smaller auto-animate="true"}
 
 -   Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes
 
@@ -2973,7 +3062,7 @@ med_map2
 # solution
 ```
 
-## Exercice .X+3 corrigé {.smaller auto-animate="true"}
+## Exercice 5.12 corrigé {.smaller auto-animate="true"}
 
 -   Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes
 
@@ -2984,82 +3073,81 @@ survey_med_nsample <- survey_med %>%
   mutate(n_sample = n()) %>%
   slice(1) %>%
   data.frame() %>%
-  select(c(country,n_sample))
-country_med_nsample <- left_join(med_country,survey_med_sample,by=c("name"="country"))
+  dplyr::select(c(country,n_sample))
+country_med_nsample <- left_join(med_countries,survey_med_nsample,by=c("name"="country")) %>%
+  drop_na(n_sample)
 ```
 
-```{r, eval=FALSE}
-med_map3 <- med_map2 +
+```{r, eval=FALSE, fig.align='center'}
+med_map4 <- med_map3 +
   stat_sf_coordinates(aes(size=n_sample),color = "white",fill="red",shape=21, data = country_med_nsample)
-med_map3
-```
-
-## Exercice X+4 {.smaller auto-animate="true"}
-
--   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif) Que remarquez vous ?
-
-```{r echo=TRUE, eval=FALSE}
-# solution
-```
-
-## Exercice X+4 corrigé {.smaller auto-animate="true"}
-
--   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif) Que remarquez vous ?
-
-```{r echo=TRUE, eval=FALSE}
-# solution
-bathy_med <- raster::raster("bathy_med.tif)
-rasdf <- as.data.frame(bathy_med,xy=TRUE)
-```
-
-```{r, eval=FALSE}
-# solution
-med_map4 <- med_map3 + geom_raster(data=rasdf, aes(x=x,y=y,fill=Gebco2019_500m))
 med_map4
 ```
 
-## Exercice X+4 corrigé {.smaller auto-animate="true"}
+## Exercice 5.13 {.smaller auto-animate="true"}
 
 -   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif) Que remarquez vous ?
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-bathy_med <- raster::raster("bathy_med.tif)
-rasdf <- as.data.frame(bathy_med,xy=TRUE)
 ```
 
-```{r, eval=FALSE}
-# solution
-med_map4 <- ggplot(data = survey_med) +
-  geom_raster(data=rasdf, aes(x=x,y=y,fill=Gebco2019_500m)) +
-  geom_sf(data=med_country, fill="gray92") +
-  geom_sf(aes(color=site_name, shape=methods), show.legend = FALSE) +
-  scale_colour_viridis_d() +
-  scale_shape_manual(values = rep(15:17, len = 8)) +
-  theme_bw()
-med_map4
-```
+## Exercice 5.13 corrigé {.smaller auto-animate="true"}
 
-## Exercice 5.X+5 {.smaller auto-animate="true"}
-
--   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
+-   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif) Que remarquez vous ?
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
+bathy_med <- raster::raster("bathy_med.tif")
+rastdf <- as.data.frame(bathy_med,xy=TRUE)
 ```
 
-## Exercice 5.X+5 corrigé {.smaller auto-animate="true"}
+```{r, eval=FALSE, fig.align='center'}
+# solution
+med_map5 <- med_map4 + geom_raster(data=rasdf, aes(x=x,y=y,fill=bathy_med))
+med_map5
+```
 
--   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
+## Exercice 5.13 corrigé {.smaller auto-animate="true"}
+
+-   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif) Que remarquez vous ?
 
 ```{r echo=TRUE, eval=FALSE}
+# solution
+bathy_med <- raster::raster("./data/bathy_med.tif")
+rastdf <- as.data.frame(bathy_med,xy=TRUE)
+```
+
+```{r, eval=FALSE, fig.align='center'}
 # solution
 med_map5 <- ggplot(data = survey_med) +
-  geom_raster(data=rasdf, aes(x=x,y=y,fill=Gebco2019_500m)) +
-  geom_sf(data=med_country, fill="gray92") +
-  geom_sf(aes(color=site_name, shape=methods), show.legend = FALSE) +
+  geom_raster(data=rastdf, aes(x=x,y=y,fill=bathy_med)) +
+  geom_sf(data=med_countries, fill="gray92") +
+  geom_sf(aes(color=as.factor(depth)), show.legend = FALSE) +
   scale_colour_viridis_d() +
-  scale_shape_manual(values = rep(15:17, len = 8)) +
+  theme_bw()
+med_map5
+```
+
+## Exercice 5.14 {.smaller auto-animate="true"}
+
+-   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
+
+```{r echo=TRUE, eval=FALSE}
+# solution
+```
+
+## Exercice 5.14 corrigé {.smaller auto-animate="true"}
+
+-   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
+
+```{r echo=TRUE, eval=FALSE, fig.align='center'}
+# solution
+med_map6 <- ggplot(data = survey_med) +
+  geom_raster(data=rasdf, aes(x=x,y=y,fill=bathy_med)) +
+  geom_sf(data=med_countries, fill="gray92") +
+  geom_sf(aes(color=as.factor(depth)), show.legend = FALSE) +
+  scale_colour_viridis_d() +
   theme_bw() +
   annotation_north_arrow(location = "tl", height = unit(0.7, "cm"), width = unit(0.7, "cm")) + 
   labs(x="longitude",
@@ -3067,10 +3155,10 @@ med_map5 <- ggplot(data = survey_med) +
        title="RLS mediterranean survey",
        fill ="bathymétrie") +
   scale_fill_gradient2(low = "blue", mid = "white", high = "brown")
-med_map5
+med_map6
 ```
 
-## Exercice 5.X+6 {.smaller auto-animate="true"}
+## Exercice 5.15 {.smaller auto-animate="true"}
 
 -   Sauvegardez votre belle carte :)
 
@@ -3078,11 +3166,12 @@ med_map5
 # solution
 ```
 
-## Exercice 5.X+6 corrigé {.smaller auto-animate="true"}
+## Exercice 5.15 corrigé {.smaller auto-animate="true"}
 
 -   Sauvegardez votre belle carte :)
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-ggsave("RLS_med.pdf",plot=med_map5, width = 15, height = 10, units = "cm")
+ggsave("RLS_med.pdf",plot=med_map6, width = 15, height = 10, units = "cm")
 ```
+
