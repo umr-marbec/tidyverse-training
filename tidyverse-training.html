@@ -1380,8 +1380,11 @@
 <ul>
 <li>Applications</li>
 </ul>
-<p>::: incremental - Re-transformer le jeu de données en format “long” en utilisant la fonction <code>pivot_longer()</code> et remplacer les valeurs de NA dans la colonne “pop”, par la population moyenne de la Belgique pour ces 2 années (11,27 M)</p>
-<pre><code>::: {.cell}
+<p>::: incremental</p>
+<pre><code>- Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
+
+
+::: {.cell}
 
 ```{.r .cell-code}
 # Créer un nouvel objet que l'on nomme popEU_long
@@ -1455,8 +1458,11 @@ kable(popEU_long[10:15,], html_font = "Computer Modern", table.attr = "style='wi
 <ul>
 <li>Applications</li>
 </ul>
-<p>::: incremental - A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles “millions” et “milliers”</p>
-<pre><code>::: {.cell}
+<p>::: incremental</p>
+<pre><code>- A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
+
+
+::: {.cell}
 
 ```{.r .cell-code}
 popEU_sep &lt;- popEU_long %&gt;%
@@ -1497,7 +1503,8 @@ kable(popEU_expand[1:5,], html_font = "Computer Modern", table.attr = "style='wi
 ```
 :::</code></pre>
 <center>
-<p>La valeur 11.21 n’apparait qu’une seule fois, ce sont bien les combinaisons uniques.&lt;&gt; :::</p>
+<p>La valeur 11.21 n’apparait qu’une seule fois, ce sont bien les combinaisons uniques.&lt;&gt;</p>
+<p>:::</p>
 </center></section>
 <section id="exercice-3.1" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 3.1</h2>
