@@ -1003,24 +1003,22 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
 
 ##  {.smaller}
 
--   Applications
+Applications
 
 ::: incremental 
 
-    - Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
+-   Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
 
     ```{r echo=TRUE, eval=FALSE}
     # Créer un nouvel objet que l'on nomme popEU_long
     popEU_long <- pivot_longer(popEU_wide,cols=c(2:4),names_to="year",values_to="pop")
     dim(popEU_long)
     # Afficher popEU_long
-    kable(popEU_long[10:15,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
 
     popEU_long <- mutate(popEU_long,pop = replace_na(pop,11.27))
-    kable(popEU_long[10:15,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
     ```
 
-    -   Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d'enchainer les opérations à l'aide du pipe %\\\>%
+-   Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d'enchainer les opérations à l'aide du pipe %\\\>%
 
     ```{r echo=TRUE, eval=FALSE}
     # Créer un nouvel objet que l'on nomme popEU_long
@@ -1030,7 +1028,7 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
     dim(popEU_long)
     ```
 
-    -   Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d'enchainer les opérations à l'aide du pipe %\\\>%
+-   Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d'enchainer les opérations à l'aide du pipe %\\\>%
 
     ```{r echo=TRUE, eval=FALSE}
     # Créer un nouvel objet que l'on nomme popEU_long
@@ -1038,7 +1036,6 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
       tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
       fill(.,pop,.direction="down")
 
-    kable(popEU_long[10:15,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
     ```
     :::
 
@@ -1047,6 +1044,7 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
 ### Combinaison des variables
 
 ::: incremental
+
 -   Séparer une colonne en plusieurs colonnes
 
     ```{r echo=TRUE, eval=FALSE}
@@ -1070,37 +1068,33 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
 
 ##  {.smaller}
 
--   Applications
+Applications
 
 ::: incremental 
 
-    - A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
+-   A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
 
     ```{r echo=TRUE, eval=FALSE}
     popEU_sep <- popEU_long %>%
     mutate(pop = as.character(pop))%>%
     separate(.,col=pop,into=c("millions","milliers"))
 
-    kable(popEU_long[1:5,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
     ```
 
-    -   Recréer la colonne pop comme à l'origine en la nommant population
+-   Recréer la colonne pop comme à l'origine en la nommant population
 
     ```{r echo=TRUE, eval=FALSE}
     popEU_unite <- popEU_sep %>%
     unite(.,population,c(millions,milliers),sep=".")
 
-    kable(popEU_unite[1:5,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
     ```
 
-    -   Générer un tableau avec toutes les combinaisons possibles pays/population
+-   Générer un tableau avec toutes les combinaisons possibles pays/population
 
     ```{r echo=TRUE, eval=FALSE}
     popEU_expand <- popEU_unite %>%
     expand(.,pays,population)
     popEU_expand
-
-    kable(popEU_expand[1:5,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
     # Que remarquons nous ?
     ```
 
