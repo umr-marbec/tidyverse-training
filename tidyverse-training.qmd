@@ -1070,7 +1070,9 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
 
 -   Applications
 
-::: incremental - A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
+::: incremental 
+
+    - A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
 
     ```{r echo=TRUE, eval=FALSE}
     popEU_sep <- popEU_long %>%
@@ -1102,7 +1104,9 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
 
 <center>
 
-La valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques.\<\center\> :::
+La valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques.\<\center\> 
+
+:::
 
 ## Exercice 3.1 {.smaller auto-animate="true"}
 
