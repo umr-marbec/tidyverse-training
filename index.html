@@ -3611,13 +3611,13 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <section id="exercice-5.9-corrigé" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 5.9 corrigé</h2>
 <ul>
-<li>Construisez une carte des transects en Méditerranée avec une couleur par profondeur. Choisissez une palette de couleurs cohérente avec les données et masquez la légende</li>
+<li>Construisez une carte des transects en Méditerranée avec une couleur par profondeur. Choisissez une palette de couleurs cohérente avec les données</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb184"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb184-1" class="hljs-ln-code"><a href="#cb184-1"></a><span class="co"># solution</span></span>
 <span id="cb184-2" class="hljs-ln-code"><a href="#cb184-2"></a>med_map1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> survey_med) <span class="sc">+</span></span>
-<span id="cb184-3" class="hljs-ln-code"><a href="#cb184-3"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="fu">as.factor</span>(depth)),<span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb184-4" class="hljs-ln-code"><a href="#cb184-4"></a>  <span class="fu">scale_colour_viridis_d</span>() <span class="sc">+</span></span>
+<span id="cb184-3" class="hljs-ln-code"><a href="#cb184-3"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color=</span>depth)) <span class="sc">+</span></span>
+<span id="cb184-4" class="hljs-ln-code"><a href="#cb184-4"></a>  <span class="fu">scale_colour_viridis_c</span>() <span class="sc">+</span></span>
 <span id="cb184-5" class="hljs-ln-code"><a href="#cb184-5"></a>  <span class="fu">theme_bw</span>()</span>
 <span id="cb184-6" class="hljs-ln-code"><a href="#cb184-6"></a>med_map1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -3738,8 +3738,8 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <span id="cb196-2"><a href="#cb196-2"></a>med_map5 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> survey_med) <span class="sc">+</span></span>
 <span id="cb196-3"><a href="#cb196-3"></a>  <span class="fu">geom_raster</span>(<span class="at">data=</span>rastdf, <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y,<span class="at">fill=</span>bathy_med)) <span class="sc">+</span></span>
 <span id="cb196-4"><a href="#cb196-4"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>med_countries, <span class="at">fill=</span><span class="st">"gray92"</span>) <span class="sc">+</span></span>
-<span id="cb196-5"><a href="#cb196-5"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="fu">as.factor</span>(depth)), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb196-6"><a href="#cb196-6"></a>  <span class="fu">scale_colour_viridis_d</span>() <span class="sc">+</span></span>
+<span id="cb196-5"><a href="#cb196-5"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color=</span>depth)) <span class="sc">+</span></span>
+<span id="cb196-6"><a href="#cb196-6"></a>  <span class="fu">scale_colour_viridis_c</span>() <span class="sc">+</span></span>
 <span id="cb196-7"><a href="#cb196-7"></a>  <span class="fu">theme_bw</span>()</span>
 <span id="cb196-8"><a href="#cb196-8"></a>med_map5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -3763,8 +3763,8 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <span id="cb198-2" class="hljs-ln-code"><a href="#cb198-2"></a>med_map6 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> survey_med) <span class="sc">+</span></span>
 <span id="cb198-3" class="hljs-ln-code"><a href="#cb198-3"></a>  <span class="fu">geom_raster</span>(<span class="at">data=</span>rasdf, <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y,<span class="at">fill=</span>bathy_med)) <span class="sc">+</span></span>
 <span id="cb198-4" class="hljs-ln-code"><a href="#cb198-4"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>med_countries, <span class="at">fill=</span><span class="st">"gray92"</span>) <span class="sc">+</span></span>
-<span id="cb198-5" class="hljs-ln-code"><a href="#cb198-5"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="fu">as.factor</span>(depth)), <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb198-6" class="hljs-ln-code"><a href="#cb198-6"></a>  <span class="fu">scale_colour_viridis_d</span>() <span class="sc">+</span></span>
+<span id="cb198-5" class="hljs-ln-code"><a href="#cb198-5"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color=</span>depth)), show.legend <span class="ot">=</span> <span class="cn">FALSE</span><span class="er">)</span> <span class="sc">+</span></span>
+<span id="cb198-6" class="hljs-ln-code"><a href="#cb198-6"></a>  <span class="fu">scale_colour_viridis_c</span>() <span class="sc">+</span></span>
 <span id="cb198-7" class="hljs-ln-code"><a href="#cb198-7"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb198-8" class="hljs-ln-code"><a href="#cb198-8"></a>  <span class="fu">annotation_north_arrow</span>(<span class="at">location =</span> <span class="st">"tl"</span>, <span class="at">height =</span> <span class="fu">unit</span>(<span class="fl">0.7</span>, <span class="st">"cm"</span>), <span class="at">width =</span> <span class="fu">unit</span>(<span class="fl">0.7</span>, <span class="st">"cm"</span>)) <span class="sc">+</span> </span>
 <span id="cb198-9" class="hljs-ln-code"><a href="#cb198-9"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"longitude"</span>,</span>
