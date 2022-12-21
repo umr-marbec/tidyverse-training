@@ -37,6 +37,7 @@ library(ggpubr)
 library(raster)
 library(sf)
 library(rnaturalearth)
+library(ggspatial)
 ```
 
 #  {background-image="images/background_title.png"}
@@ -504,7 +505,7 @@ dim(survey_selection)
 
 ## [dplyr](https://dplyr.tidyverse.org/){target="_blank"}
 
-### Pourquoi utiliser dplyr et ca syntaxe ?
+### Pourquoi utiliser dplyr et sa syntaxe ?
 
 -   Syntaxe claire et cohérente
     -   "lien" avec le SQL
@@ -910,11 +911,11 @@ save(biomass_survey_exercice2_4, file = "./data/biomass_survey_exercice2_4.RData
 
 <center>
 
-## 
+## Tidyr
 
 L'objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format "tidy"
 
-Les différents verbes viennent s'ajouter à tous ceux que nous avons déjà vus avec readr et dplyr et ils s'intègrent parfaitement dans la série de pipe %\>% permettant d'enchainer les opérations
+Les différents verbes viennent s'ajouter à tous ceux que nous avons déjà vus avec `readr` et `dplyr` et ils s'intègrent parfaitement dans la série de pipe %\>% permettant d'enchainer les opérations
 
 -   Les données "tidy", qu'est ce que c'est?
 
@@ -926,50 +927,54 @@ Les différents verbes viennent s'ajouter à tous ceux que nous avons déjà vus
 
 Pour visualiser le cheatsheet `tidyr` [cliquez ici](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf)
 
-```{r echo=TRUE, eval=FALSE}
-# Pour illustrer cette partie nous utiliserons le jeu de données popEU
-popEU <- read_rds("./data/popEU.rds")
-dim(popEU)
-popEU
+## Tidyr
+
+Pour illustrer cette partie nous utiliserons le jeu de données popEU qui décrit le nombre d'habitants par pays pour les années 2014, 2015 et 2016
+
+```{r echo=FALSE, eval=TRUE}
+popEU <- read_rds("./data_tmp/popEU.rds")
 ```
 
-## Les principaux verbes de la librairie tidyr {.smaller}
+```{r echo=TRUE, eval=FALSE}
+popEU <- read_rds("./data/popEU.rds")
+slice_tail(popEU)
+```
+
+```{r echo=FALSE, eval=TRUE}
+kable(popEU[10:15, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+```
+
+## Les principales fonctions de tidyr
 
 ### Modelage des tableaux
 
 `pivot_wider()`et `pivot_longer()`sont les successeurs des fonctions en base R du package `reshape` puis `reshape2`. Et se nommaient `spread()`et `gather()` dans les premières versions de `tidyr`
 
-::: incremental
--   Transformer un tableau long en format large
-
-    ```{r echo=TRUE, eval=FALSE}
-    # Les arguments names_from et values_from renseignent les noms de colonnes 
-    # à partir desquelles nous obtenons les colonnes de sortie et les valeurs des cellules
-    pivot_wider(names_from, values_from)
-    # L'argument values_fill permet de spécifier une valeur que l'on choisit 
-    # quand la combinaison names_from/values_from est manquante. Par défaut NA
-    ```
-
--   Transformer un tableau large en format long
-
-    ```{r echo=TRUE, eval=FALSE}
-    # Les arguments cols, names_to et values_to renseignent les noms de colonnes à créer ainsi que les colonnes à faire pivoter
-    pivot_longer(cols, names_to, values_to, ...)
-    # Si l'argument values_drop_na = TRUE les lignes contenant des NA dans la colonne créée avec values_to seront supprimées. 
-    #Par défaut FALSE
-    ```
-:::
+```{r echo=TRUE, eval=FALSE}
+ # Transformer un tableau long en format large
+pivot_wider(names_from, values_from)
+# Transformer un tableau large en format long
+pivot_longer(cols, names_to, values_to, ...)
+```
 
 ##  {.smaller}
 
--   Applications
+### Applications - pivot_wider
 
-    -   Transformer le jeu de données en format "wide" en utilisant la fonction `pivot_wider()`. Nous voulons obtenir une colonne par année
+Transformer le jeu de données en format "wide" en utilisant la fonction `pivot_wider()`. Nous voulons obtenir une colonne par année
+
+```{r echo=FALSE, eval=TRUE}
+# Créer un nouvel objet que l'on nomme popEU_wide
+popEU_wide <- pivot_wider(popEU, names_from = "year", values_from = "pop")
+```
 
 ```{r echo=TRUE, eval=FALSE}
 # Créer un nouvel objet que l'on nomme popEU_wide
-popEU_wide <- pivot_wider(popEU,names_from="year",values_from="pop")
-dim(popEU_wide)
+popEU_wide <- pivot_wider(popEU, names_from = "year", values_from = "pop")
+popEU_wide
+```
+
+```{r echo=FALSE, eval=TRUE}
 kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;'")
 ```
 
@@ -977,134 +982,178 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
 
 ### Gestion des valeurs manquantes "NA"
 
-::: incremental
--   Remplacer des "NA" par des valeurs spécifiques
-
-    ```{r echo=TRUE, eval=FALSE}
-    # Si la donnée est un data frame alors l'argument replace prend une liste de valeurs. 
-    # Si la donnée est un vecteur alors replace prend une seule valeur
-    replace_na(data, replace, …)
-    ```
-
--   Supprimer les lignes contenant des "NA"
-
-    ```{r echo=TRUE, eval=FALSE}
-    # Il est possible en 2ème argument de spécifier le nom d'une colonne en particulier
-    drop_na(data, …)
-    ```
-
--   Remplir les "NA" en utilisant les valeurs précédentes ou suivantes de la même colonne
-
-    ```{r echo=TRUE, eval=FALSE}
-    # Importance de l'argument .direction ("down","up","updown","downup")
-    fill(data, …, .direction)
-    ```
-:::
+```{r echo=TRUE, eval=FALSE}
+# Remplacer des "NA" par des valeurs spécifiques
+replace_na(data, replace, …)
+# Supprimer les lignes contenant des "NA"
+drop_na(data, …)
+#  Remplir les "NA" en utilisant les valeurs précédentes ou suivantes de la même colonne
+fill(data, …, .direction)
+```
 
 ##  {.smaller}
 
-Applications
+### Applications - pivot_longer/replace_na
 
-::: incremental
+Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
 
--   Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
+```{r echo=TRUE, eval=FALSE}
+# Créer un nouvel objet que l'on nomme popEU_long
+popEU_long <-
+  pivot_longer(
+    popEU_wide,
+    cols = c(2:4),
+    names_to = "year",
+    values_to = "pop"
+  )
+popEU_long <- mutate(popEU_long, pop = replace_na(pop, 11.27))
+slice_tail(popEU_long, 6)
+```
 
-    ```{r echo=TRUE, eval=FALSE}
-    # Créer un nouvel objet que l'on nomme popEU_long
-    popEU_long <- pivot_longer(popEU_wide,cols=c(2:4),names_to="year",values_to="pop")
-    dim(popEU_long)
-    # Afficher popEU_long
+```{r echo=FALSE, eval=TRUE}
+popEU_long <-
+  pivot_longer(
+    popEU_wide,
+    cols = c(2:4),
+    names_to = "year",
+    values_to = "pop"
+  )
+popEU_long <- mutate(popEU_long, pop = replace_na(pop, 11.27))
+kable(popEU_long[10:15, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+```
 
-    popEU_long <- mutate(popEU_long,pop = replace_na(pop,11.27))
-    ```
+##  {.smaller}
 
--   Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d'enchainer les opérations à l'aide du pipe %\\\>%
+### Applications - pivot_longer/drop_na
 
-    ```{r echo=TRUE, eval=FALSE}
-    # Créer un nouvel objet que l'on nomme popEU_long
-    popEU_long <- popEU_wide %>%
-      tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
-      drop_na(.,pop)
-    dim(popEU_long)
-    ```
+Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d'enchainer les opérations à l'aide du pipe %\>%
 
--   Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d'enchainer les opérations à l'aide du pipe %\\\>%
+```{r echo=TRUE, eval=FALSE}
+# Créer un nouvel objet que l'on nomme popEU_long
+popEU_long <- popEU_wide %>%
+  pivot_longer(.,
+               cols = c(2:4),
+               names_to = "year",
+               values_to = "pop") %>%
+  drop_na(., pop)
+slice_tail(popEU_long, 6)
+```
 
-    ```{r echo=TRUE, eval=FALSE}
-    # Créer un nouvel objet que l'on nomme popEU_long
-    popEU_long <- popEU_wide %>%
-      tidyr::pivot_longer(.,cols=c(2:4),names_to="year",values_to="pop") %>%
-      fill(.,pop,.direction="down")
+```{r echo=FALSE, eval=TRUE}
+popEU_long <- popEU_wide %>%
+  pivot_longer(.,
+               cols = c(2:4),
+               names_to = "year",
+               values_to = "pop") %>%
+  drop_na(., pop)
+kable(popEU_long[8:13, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+```
 
-    ```
+##  {.smaller}
 
-    :::
+### Applications - pivot_longer/fill
+
+Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d'enchainer les opérations à l'aide du pipe %\>%
+
+```{r echo=TRUE, eval=FALSE}
+# Créer un nouvel objet que l'on nomme popEU_long
+popEU_long <- popEU_wide %>%
+  pivot_longer(.,
+               cols = c(2:4),
+               names_to = "year",
+               values_to = "pop") %>%
+  fill(., pop, .direction = "down")
+slice_tail(popEU_long, 6)
+```
+
+```{r echo=FALSE, eval=TRUE}
+popEU_long <- popEU_wide %>%
+  pivot_longer(.,
+               cols = c(2:4),
+               names_to = "year",
+               values_to = "pop") %>%
+  fill(., pop, .direction = "down")
+kable(popEU_long[10:15, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+```
 
 ## 
 
 ### Combinaison des variables
 
-::: incremental
--   Séparer une colonne en plusieurs colonnes
-
-    ```{r echo=TRUE, eval=FALSE}
-    # par défaut le séparateur est un caractère non alpha-numérique. 
-    #Si l'on souhaite un autre séparateur il faut le spécifier aec l'argument sep
-    separate(data, col, into)
-    ```
-
--   Créer une seule colonne à partir de plusieurs colonnes
-
-    ```{r echo=TRUE, eval=FALSE}
-    unite(col, ..., sep)
-    ```
-
--   Générer toutes les combinaisons 2 à 2 possibles entre les variables définies
-
-    ```{r echo=TRUE, eval=FALSE}
-    expand(data, ...)
-    ```
-:::
+```{r echo=TRUE, eval=FALSE}
+# Séparer une colonne en plusieurs colonnes
+separate(data, col, into)
+# Créer une seule colonne à partir de plusieurs colonnes
+unite(col, ..., sep)
+# Générer toutes les combinaisons 2 à 2 possibles entre les variables définies
+expand(data, ...)
+```
 
 ##  {.smaller}
 
-Applications
+### Applications - separate
 
-::: incremental
+A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
 
--   A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
+```{r echo=TRUE, eval=FALSE}
+popEU_sep <- popEU_long %>%
+  mutate(pop = as.character(pop)) %>%
+  separate(., col = pop, into = c("millions", "milliers"))
+slice_head(popEU_sep)
+```
 
-    ```{r echo=TRUE, eval=FALSE}
-    popEU_sep <- popEU_long %>%
-    mutate(pop = as.character(pop))%>%
-    separate(.,col=pop,into=c("millions","milliers"))
+```{r echo=FALSE, eval=TRUE}
+popEU_sep <- popEU_long %>%
+  mutate(pop = as.character(pop)) %>%
+  separate(., col = pop, into = c("millions", "milliers"))
+kable(popEU_sep[1:6, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+```
 
-    ```
+##  {.smaller}
 
--   Recréer la colonne pop comme à l'origine en la nommant population
+### Applications - unite
 
-    ```{r echo=TRUE, eval=FALSE}
-    popEU_unite <- popEU_sep %>%
-    unite(.,population,c(millions,milliers),sep=".")
+Recréer la colonne pop comme à l'origine en la nommant population
 
-    ```
+```{r echo=TRUE, eval=FALSE}
+popEU_unite <- popEU_sep %>%
+  unite(., population, c(millions, milliers), sep = ".")
+slice_head(popEU_unite)
+```
 
--   Générer un tableau avec toutes les combinaisons possibles pays/population
+```{r echo=FALSE, eval=TRUE}
+popEU_unite <- popEU_sep %>%
+  unite(., population, c(millions, milliers), sep = ".")
+kable(popEU_unite[1:6, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+```
 
-    ```{r echo=TRUE, eval=FALSE}
-    popEU_expand <- popEU_unite %>%
-    expand(.,pays,population)
-    popEU_expand
-    # Que remarquons nous ?
-    ```
+##  {.smaller}
+
+### Applications - expand
+
+Générer un tableau avec toutes les combinaisons possibles pays/population. Que remarquons-nous ?
+
+```{r echo=TRUE, eval=FALSE}
+popEU_expand <- popEU_unite %>%
+  expand(., pays, population)
+slice_head(popEU_expand)
+```
+
+```{r echo = FALSE, eval = TRUE}
+popEU_expand <- popEU_unite %>%
+  expand(., pays, population)
+kable(popEU_expand[1:6,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+```
+
+<br>
 
 <center>
 
-La valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques.\<\center\>
+La valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques.
 
-:::
+<center>
 
-## Exercice 3.1 {.smaller auto-animate="true"}
+## Exercice 3.1 {auto-animate="true"}
 
 -   Chargez les données d'abondance. Les données sont elles Tidy ?
 
@@ -1112,19 +1161,26 @@ La valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniq
 # solution
 ```
 
-## Exercice 3.1 corrigé {.smaller auto-animate="true"}
+## Exercice 3.1 corrigé {auto-animate="true"}
 
--   Chargez les données d'abondance. Les données sont elles Tidy ?
+-   Chargez les données d'abondance. Les données sont elles tidy ?
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-abundance <- read_delim(".data/Global_reef_fish_abundance.csv")
-# Non les données ne sont pas tidy, car elles sont en format wide
+abundance <- read_delim("./data/Global_reef_fish_abundance.csv")
 ```
+
+<br>
+
+<center>
+
+Non les données ne sont pas tidy, car elles sont en format "wide"
+
+<center>
 
 ## Exercice 3.2 {.smaller auto-animate="true"}
 
--   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
+-   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance" 
 -   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
 
 ```{r echo=TRUE, eval=FALSE}
@@ -1133,18 +1189,30 @@ abundance <- read_delim(".data/Global_reef_fish_abundance.csv")
 
 ## Exercice 3.2 corrigé {.smaller auto-animate="true"}
 
--   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
+-   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance" 
 -   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-# Attention à l'argument values_dop_na
 abundance_long <- abundance %>%
-  pivot_longer(.,cols=2:17523,names_to="sp_size",values_to="abundance",values_drop_na = TRUE) %>%
-  unite(.,col="survey_id_full",c(survey_id,sp_size),sep="_")
+  pivot_longer(
+    .,
+    cols = 2:17523,
+    names_to = "sp_size",
+    values_to = "abundance",
+    values_drop_na = TRUE # Attention à l'argument values_dop_na
+  ) %>%
+  unite(., col = "survey_id_full", c(survey_id, sp_size), sep = "_")
+
+slice_head(abundance_long)
+```
+<br>
+```{r echo=FALSE, eval=TRUE}
+load("./data_tmp/abundance_long.RData")
+kable(abundance_long[1:6,], html_font = "Computer Modern", table.attr = "style='width:30%;'")
 ```
 
-## Exercice 3.3 {.smaller auto-animate="true"}
+## Exercice 3.3 {auto-animate="true"}
 
 -   Créez un seul tableau regroupant biomasse et abondance
 
@@ -1152,14 +1220,23 @@ abundance_long <- abundance %>%
 # solution
 ```
 
-## Exercice 3.3 corrigé {.smaller auto-animate="true"}
+## Exercice 3.3 corrigé {auto-animate="true"}
 
 -   Créez un seul tableau regroupant biomasse et abondance
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
-biomass_abundance <- biomass %>%
-  left_join(.,abundance_long,by="pk")
+load("./data/biomass_survey_exercice2_4.RData")
+biomass_abundance <- biomass_survey_exercice2_4 %>%
+  left_join(., abundance_long, by = "survey_id_full")
+
+```
+```{r echo=FALSE, eval=TRUE}
+# solution
+load("./data_tmp/biomass_survey_exercice2_4.RData")
+biomass_abundance <- biomass_survey_exercice2_4 %>%
+  left_join(., abundance_long, by = "survey_id_full")
+
 ```
 
 ## Exercice 3.4 {.smaller auto-animate="true"}
@@ -1177,27 +1254,52 @@ biomass_abundance <- biomass %>%
 ```{r echo=TRUE, eval=FALSE}
 # solution
 biomass_abundance <- biomass_abundance %>%
-  separate(.,species_name,into = c("genus","species"))
+  separate(., species_name, into = c("genus", "species"))
+slice_head(biomass_abundance[,8:11])
+```
+<br>
+```{r echo=FALSE, eval=TRUE}
+# solution
+biomass_abundance <- biomass_abundance %>%
+  separate(., species_name, into = c("genus", "species"))
+kable(biomass_abundance[1:6,8:11],
+      html_font = "Computer Modern",
+      table.attr = "style='width:30%;'")
 ```
 
-## Exercice 3.5 {.smaller auto-animate="true"}
+## Exercice 3.5 {auto-animate="true"}
 
--   Transformez le tibble en sf object avec la commande sf::st_as_sf(survey,coords =c("latitude","longitude") ,remove=FALSE).
+-   Transformez le tibble en sf object avec la commande 
+sf::st_as_sf(survey, coords = c("longitude", "latitude"), remove = FALSE)
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
 ```
 
-## Exercice 3.5 corrigé {.smaller auto-animate="true"}
+## Exercice 3.5 corrigé {auto-animate="true"}
 
--   Transformez le tibble en sf object avec la commande sf::st_as_sf(survey,coords =c("latitude","longitude") ,remove=FALSE).
+-   Transformez le tibble en sf object avec la commande
+sf::st_as_sf(survey, coords = c("longitude", "latitude"), remove = FALSE)
 
-```{r echo=TRUE, eval=FALSE}
+```{r echo=TRUE, eval=TRUE, error=TRUE}
 # solution
-data_sf <- sf::st_as_sf(biomass_abundance,coords =c("latitude","longitude") ,remove=FALSE)
+data_sf <-
+  sf::st_as_sf(
+    biomass_abundance,
+    coords = c("longitude", "latitude") ,
+    remove = FALSE,
+    crs = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+  )
 ```
 
-## Exercice 3.6 {.smaller auto-animate="true"}
+<br>
+<center>
+
+Nous obtenons une erreur, car il n'est pas possible de convertir un tibble en objet sf s'il y a des valeurs manquantes dans les colonnes longitude et latitude
+
+<center>
+
+## Exercice 3.6 {auto-animate="true"}
 
 -   Corrigez l'erreur
 
@@ -1205,18 +1307,39 @@ data_sf <- sf::st_as_sf(biomass_abundance,coords =c("latitude","longitude") ,rem
 # solution
 ```
 
-## Exercice 3.6 corrigé {.smaller auto-animate="true"}
+## Exercice 3.6 corrigé {auto-animate="true"}
 
 -   Corrigez l'erreur
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
 biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
-  drop_na(latitude) %>%
-  drop_na(longitude) %>%
-  sf::st_as_sf(.,coords =c("latitude","longitude"), remove=FALSE)
+  drop_na(latitude) %>% #supression des lignes contenant des NA dans la colonne latitude
+  drop_na(longitude) %>% #supression des lignes contenant des NA dans la colonne longitude
+  sf::st_as_sf(
+    .,
+    coords = c("longitude", "latitude"),
+    remove = FALSE,
+    crs = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+  )
 
-save(biomass_survey_abundance_exercice3_6, file = "./data/biomass_survey_abundance_exercice3_6.RData")
+save(biomass_survey_abundance_exercice3_6,
+     file = "./data/biomass_survey_abundance_exercice3_6.RData")
+```
+```{r echo=FALSE, eval=TRUE}
+# solution
+biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
+  drop_na(latitude) %>% #supression des lignes contenant des NA dans la colonne latitude
+  drop_na(longitude) %>% #supression des lignes contenant des NA dans la colonne longitude
+  sf::st_as_sf(
+    .,
+    coords = c("longitude", "latitude"),
+    remove = FALSE,
+    crs = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+  )
+
+save(biomass_survey_abundance_exercice3_6,
+     file = "./data_tmp/biomass_survey_abundance_exercice3_6.RData")
 ```
 
 # Partie 4 : Extension à la manipulation de données, cas spécifiques
@@ -1237,8 +1360,8 @@ Le nom de toutes les fonctions dans `stringr` commence par `str_`.
 . . .
 
 Voici quelques exemples :
-
-::: columns
+  
+  ::: columns
 ::: {.column width="50%"}
 ::: incremental
 -   `str_detect` : Détection de caractères
@@ -1247,9 +1370,9 @@ Voici quelques exemples :
 
 -   `str_replace` : Remplacement de caractères
 :::
-:::
-
-::: {.column width="50%"}
+  :::
+  
+  ::: {.column width="50%"}
 ::: incremental
 -   `str_trim` : Enlève les espaces
 
@@ -1257,16 +1380,16 @@ Voici quelques exemples :
 
 -   `str_length` : Nombre de caractère
 :::
-:::
-:::
-
-. . .
+  :::
+  :::
+  
+  . . .
 
 <center>Le cheat-sheet du package `stringr` est disponible [ici](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf).</center>
-
-## Création d'un dataframe de chaines de caractères
-
-```{r}
+  
+  ## Création d'un dataframe de chaines de caractères
+  
+  ```{r}
 tmp <- tibble(nom = c("Micheline Sétou", "Jean-Jacques Apeprès",  "Martine Sérien"),
               num_rue = c("12", "15 ou 16", "NA"), 
               nom_rue = c("Rue des peupliers", "Rue + un arbre", "NA"),
@@ -1278,13 +1401,13 @@ kable(tmp, html_font = "Computer Modern", table.attr = "style='width:60%;'")
 ## Détection de caractères
 
 On utilise la fonction `str_detect()` et les deux arguments principaux :
-
-::: incremental
+  
+  ::: incremental
 -   `string` : Le/Les caractère(s) qui vont passer au détecteur.
 -   `pattern` : Le caractère à détecter.
 :::
-
-. . .
+  
+  . . .
 
 La fonction renvoie `TRUE` ou `FALSE` en fonction de la présence ou non du caractère.
 
@@ -1302,35 +1425,35 @@ tmp$nom
 cat(tmp$nom, sep = "\n")
 ```
 :::
-
-::: {.column width="50%"}
+  
+  ::: {.column width="50%"}
 ```{r results='hide'}
 str_detect(string  = tmp$nom, pattern = "ine")
 ```
 
 ```{r echo = FALSE}
 cat(str_detect(string  = tmp$nom, 
-           pattern = "ine"), sep = "\n")
+               pattern = "ine"), sep = "\n")
 ```
 :::
-:::
-
-. . .
+  :::
+  
+  . . .
 
 <center>
-
-La fonction `str_detect()` peut donc être utilisée avec `filter()` pour faire une <br> sélection des lignes qui nous intéresse dans le tableau.
+  
+  La fonction `str_detect()` peut donc être utilisée avec `filter()` pour faire une <br> sélection des lignes qui nous intéresse dans le tableau.
 
 ## Sous-sélection de certains caractères
 
 On utilise la fonction `str_subset()` et les deux arguments principaux :
-
-::: incremental
+  
+  ::: incremental
 -   `string` : Le/Les caractère(s) qui vont passer au détecteur.
 -   `pattern` : Le caractère à détecter.
 :::
-
-. . .
+  
+  . . .
 
 Contrairement à `str_detect()`, la fonction `str_subset()` renvoie les caractères qui contiennent le pattern à détecter.
 
@@ -1346,8 +1469,8 @@ str_subset(string  = tmp$nom,
 ## Extraction de caractères
 
 On utilise la fonction `str_extract()` et ses arguments principaux :
-
-::: incremental
+  
+  ::: incremental
 -   `string` : Le/Les caractère(s) qui vont passer à l'extracteur.
 -   `pattern` : Le caractère à extraire.
 :::
@@ -1389,8 +1512,8 @@ On utilise la fonction `str_replace()` et ces arguments principaux :
 -   `pattern` : Le caractère à remplacer.
 -   `replacement` : Le caractère de remplacement.
 :::
-
-. . .
+  
+  . . .
 
 ### Exemple
 
@@ -1406,8 +1529,8 @@ tmp$nom
 cat(tmp$nom, sep = "\n")
 ```
 :::
-
-::: {.column width="50%"}
+  
+  ::: {.column width="50%"}
 ```{r results='hide'}
 str_replace(string      = tmp$nom, 
             pattern     = "Jacques", 
@@ -1420,18 +1543,18 @@ cat(str_replace(string      = tmp$nom,
                 replacement = "Michel"), sep = "\n")
 ```
 :::
-:::
-
-## Concaténer des chaînes de caractères {auto-animate="true"}
-
-On utilise la fonction `str_glue()` et ces deux principaux arguments :
-
-::: incremental
+  :::
+  
+  ## Concaténer des chaînes de caractères {auto-animate="true"}
+  
+  On utilise la fonction `str_glue()` et ces deux principaux arguments :
+  
+  ::: incremental
 -   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
 -   `.sep` = le séparateur
 :::
-
-. . .
+  
+  . . .
 
 ### Exemple sur une ligne du data.frame
 
@@ -1442,8 +1565,8 @@ str_glue("{tmp$nom[1]} habite au {tmp$num_rue[1]} {tmp$nom_rue[1]}", .sep = " ")
 ## Concaténer des chaînes de caractères {auto-animate="true"}
 
 On utilise la fonction `str_glue()` et ces deux principaux arguments :
-
--   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
+  
+  -   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
 -   `.sep` = le séparateur
 
 ### Exemple sur une ligne du data.frame
@@ -1577,17 +1700,17 @@ kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr 
 -   Permet de "selectionner" de manière "dynamique" des patterns dans vos données
 -   Le plus difficile est de formuler de la meilleure façon ce que vous voulez
     -   Il y a souvent plusieurs façons d'arriver à ce que vous voulez
-    -   Parfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle
+-   Parfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle
 :::
-
-::: {.column width="40%"}
+  
+  ::: {.column width="40%"}
 ![](images/regular_expressions.png)
 :::
-:::
-
-## Exemple concret
-
-```{r echo=TRUE, eval=FALSE}
+  :::
+  
+  ## Exemple concret
+  
+  ```{r echo=TRUE, eval=FALSE}
 load(file = "./data/exemple_regular_expressions.RData")
 
 tac_final_modif_level1 <- tac_final %>%
@@ -1653,7 +1776,7 @@ month()
 
 -   Les fuseaux horaires, un cauchemar par le passé, maintenant ça va mieux
 
-    -   Deux fonctions clés
+-   Deux fonctions clés
 
 ```{r echo=TRUE, eval=FALSE}
 # Pour exprimer un élément dans un autre fuseau horaire
@@ -1663,12 +1786,12 @@ force_tz()
 ```
 
 <br/>
+  
+  -   3 classes pour calculer des intervalles de temps
 
--   3 classes pour calculer des intervalles de temps
+-   Periode, durée et intervalle
 
-    -   Periode, durée et intervalle
-
-    -   Le plus "dur" est de définir votre date-temps, après c'est une syntaxe mathématique
+-   Le plus "dur" est de définir votre date-temps, après c'est une syntaxe mathématique
 
 ## Bonus
 
@@ -2712,9 +2835,9 @@ ggplot(data = biomass_abundance,
 
 ## Gestion des facteurs & groupes {auto-animate="true"}
 
-Changeons l'ordre des facteurs de façon à ce que la classe \[75,100\[ soient en 1ère.
+Changeons l'ordre des facteurs de façon à ce que la classe [75,100[ soient en 1ère.
 
-. . .
+
 
 ```{r echo=FALSE, results="hide", warnings = FALSE}
 plot1 <- ggplot(data = biomass_abundance,
@@ -2743,9 +2866,9 @@ ggplot(data = biomass_abundance,
 
 ## Gestion des facteurs & groupes {auto-animate="true"}
 
-Changeons l'ordre des facteurs de façon à ce que la classe \[75,100\[ soient en 1ère.
+Changeons l'ordre des facteurs de façon à ce que la classe [75,100[ soient en 1ère.
 
-. . .
+
 
 ```{r fig.align='center', out.width="80%"}
 biomass_abundance2 <- biomass_abundance %>%
@@ -2786,18 +2909,31 @@ ggplot(data = biomass_abundance,
   theme_bw()
 ```
 
-## La cartographie avec ggplot2
+## La cartographie avec ggplot2 {.smaller}
 
-Toutes les fonctions et la syntaxe montrées précédemment fonctionnent ici
+### Une petite introduction pour commencer
 
-```{r echo=TRUE, eval=TRUE}
-# Pour cette partie nous utiliserons un shape file des pays de la librarie rnaturalearth
-library(rnaturalearth)
-# install.packages("rnaturalearthdata")
-world_boundaries <- ne_countries(returnclass = "sf", scale ="medium") 
-# dim(world_boundaries)
-# head(world_boundaries)
-```
+-   Les données géographiques 
+
+Ce sont des données ayant une localisation dans l'espace. On peut les représenter et les visualiser sur une carte. Pour les répresenter il existe deux formats principaux : le vecteur et le raster.
+
+### Un raster c'est quoi ?
+
+Un raster est une image dans laquelle chaque pixel a une seule valeur et est géo-référencé.
+Chaque pixel a la meme taille et la résolution dépend du nombre de pixel.
+Sous R, il existe une librairie spécialement développée pour traiter des fichiers raster. c'est la librairie `raster`
+
+### vecteur c'est quoi ?
+
+Un vecteur est composé de 2 élèments principaux:
+  - la table attributaire : permet de décrire les informations qui lui sont associées. le nombre d'informations n'est pas limitées
+  - la partie graphique (sa forme) : il existe trois types de géometrie pour définir les vecteurs (point, ligne, polygone)
+L'ensemble de ces composantes (informations, géométrie, projection, ...) forme un objet que l'on appelle shapefile.
+La librairie `sf` permet de gérer les format vecteur sous R. 
+  
+Pour plus d'informations détaillées [cliquez ici](https://naturagis.fr/cartographie-sig/difference-vecteur-raster/)  
+
+##
 
 -   Plotter des données spatialisées
 
@@ -2812,70 +2948,74 @@ geom_raster()
 # mais un data frame
 ```
 
-## 
+##  {.smaller}
 
--   Applications
+### Applications - geom_sf
 
--   Visualiser la carte
+-   Charger les données et visualiser la carte
 
-```{r}
-map1 <- ggplot(data = world_boundaries) + 
-  geom_sf(fill="transparent") +
+```{r echo=TRUE, eval=TRUE, fig.align='center'}
+# Pour cette partie nous utiliserons un shapefile des pays de la librarie rnaturalearth
+library(rnaturalearth)
+# install.packages("rnaturalearthdata")
+world_boundaries <-
+  ne_countries(returnclass = "sf", scale = "medium")
+# dim(world_boundaries)
+# head(world_boundaries)
+
+map1 <- ggplot(data = world_boundaries) +
+  geom_sf(fill = "transparent") +
   theme_bw()
 map1
 ```
 
-## 
+## {.smaller}
 
--   Applications
+###Applications - stat_sf_coordinates
 
 -   Afficher sur chaque pays un rond dont la taille est proportionnelle à la population et la couleur fonction du GDP
 
 ```{r, eval=TRUE, fig.align='center'}
-map2 <- map1 + 
-  stat_sf_coordinates(aes(size=pop_est, fill=gdp_md_est),color = "black",shape=21, data = world_boundaries) +
-  labs(fill="GDP") +
-  scale_size_binned(breaks = quantile(world_boundaries$pop_est, probs = seq(0,1,0.1),na.rm=TRUE)) +
+map2 <- map1 +
+  stat_sf_coordinates(
+    aes(size = pop_est, fill = gdp_md_est),
+    color = "black",
+    shape = 21,
+    data = world_boundaries
+  ) +
+  labs(fill = "GDP") +
+  scale_size_binned(breaks = quantile(
+    world_boundaries$pop_est,
+    probs = seq(0, 1, 0.1),
+    na.rm = TRUE
+  )) +
   theme_bw()
 map2 
 ```
 
-## 
+## {.smaller}
 
--   Applications
-
--   Créer un raster et le visualiser
-
-```{r, eval=TRUE, fig.align='center'}
-r <- raster(ncols=5, nrows=5)
-r1 <- setValues(r, runif(ncell(r)))
-
-rastdf <- as.data.frame(r1,xy=TRUE)
-#head(rastdf)
-```
-
-## 
-
--   Applications
+### Applications - geom_raster
 
 -   Créer un raster et le visualiser
 
 ```{r, eval=TRUE, fig.align='center'}
+r <- raster(ncols = 5, nrows = 5) # Création d'un raster vide
+r1 <- setValues(r, runif(ncell(r))) # Remplissage du raster avec des valeurs
+rastdf <- as.data.frame(r1, xy = TRUE) # Transformation du raster en data frame
+
 map3.1 <- ggplot() +
-  geom_raster(data=rastdf, aes(x=x,y=y))
+  geom_raster(data = rastdf, aes(x = x, y = y))
 map3.1
 ```
 
-## 
+##
 
--   Applications
-
--   Créer un raster et le visualiser
+### Applications - geom_raster
 
 ```{r, eval=TRUE, fig.align='center'}
-# Ajouter l'argument fill 
 map3.2 <- ggplot() +
-  geom_raster(data=rastdf, aes(x=x,y=y,fill=layer))
+  geom_raster(data = rastdf, aes(x = x, y = y, fill = layer)) # Ajout de l'argument fill
 map3.2
 ```
 
@@ -2885,46 +3025,67 @@ map3.2
 
 ```{r echo=TRUE, eval=FALSE}
 # Afficher du texte
-#Interet de l'argument check_overlap
 geom_sf_text()
 # Afficher des étiquettes
 geom_sf_label()
 ```
 
-## 
-
--   Applications
+##
+### Applications - geom_sf_text
 
 -   Afficher sous format texte le code ISO3 des pays
 
 ```{r, eval=TRUE, fig.align='center'}
 map4.1 <- map1 +
-  geom_sf_text(aes(label = adm0_a3),vjust=-0.5,fontface="italic",colour="blue") +
+  geom_sf_text(
+    aes(label = adm0_a3),
+    vjust = -0.5,
+    fontface = "italic",
+    colour = "blue"
+  ) +
   theme_bw()
 map4.1
 ```
 
--   Ajout de l'argument check_overlap. Que se passe t'il?
+##
+### Applications - geom_sf_text
+
+-   Afficher sous format texte le code ISO3 des pays
 
 ```{r, eval=TRUE, fig.align='center'}
 map4.2 <- map1 +
-  geom_sf_text(aes(label = adm0_a3),vjust=-0.5,check_overlap=TRUE,fontface="italic",colour="blue") +
+  geom_sf_text(
+    aes(label = adm0_a3),
+    vjust = -0.5,
+    check_overlap = TRUE,
+    fontface = "italic",
+    colour = "blue"
+  ) +
+  # Ajout de l'argument check_overlap = TRUE
   theme_bw()
 map4.2
 ```
+
+##
+### Applications - geom_sf_label
 
 -   Afficher sous format étiquette le code ISO3 des pays
 
 ```{r, eval=TRUE, fig.align='center'}
 map5 <- map1 +
-  geom_sf_label(aes(label = adm0_a3),vjust=-0.5,colour="blue",fill="cyan") +
+  geom_sf_label(
+    aes(label = adm0_a3),
+    vjust = -0.5,
+    colour = "blue",
+    fill = "cyan"
+  ) +
   theme_bw()
 map5
 ```
 
 ## 
 
--   Peaufiner les cartes avec `ggspatial`
+-   Peaufiner les cartes avec la librairie `ggspatial`
 
 ```{r echo=TRUE, eval=FALSE}
 # Ajout de la barre d'échelle
@@ -2935,46 +3096,53 @@ annotation_north_arrow()
 
 ## 
 
--   Application
+### Application - annotation_scale
 
 -   Ajouter la barre d'échelle
 
-```{r, eval=FALSE, fig.align='center'}
-
+```{r, eval=TRUE, fig.align='center'}
 map6.1 <- map5 +
   geom_sf() +
- annotation_scale(location = "br", line_width = .5) +
+  annotation_scale(location = "br", line_width = .5) +
   theme_bw()
 map6.1
 ```
 
--   Application
+##
+### Application - annotation_north_arrow
 
-    -   Ajouter la flèche du nord
+-   Ajouter la flèche du nord
 
-```{r, eval=FALSE, fig.align='center'}
+```{r, eval=TRUE, fig.align='center'}
 map6.2 <- map5 +
-  annotation_north_arrow(location = "tl", height = unit(0.7, "cm"), width = unit(0.7, "cm"))
+  annotation_north_arrow(
+    location = "tl",
+    height = unit(0.7, "cm"),
+    width = unit(0.7, "cm")
+  )
+map6.2
 ```
 
 ## Exercice 5.9 {.smaller auto-animate="true"}
 
--   Construisez une carte des transects en Méditerranée avec une couleur par "site_name" et un shape par "method". Choisissez une palette de couleurs cohérente avec les données et masquez la légende
+-   Construisez une carte des transects en Méditerranée avec une couleur par profondeur. Choisissez une palette de couleurs cohérente avec les données
 
 ```{r echo=TRUE, eval=FALSE}
-# Assigner le système de coordonnées
-survey_med <- st_set_crs(survey_med,"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs") 
 # solution
 ```
 
 ## Exercice 5.9 corrigé {.smaller auto-animate="true"}
 
 -   Construisez une carte des transects en Méditerranée avec une couleur par profondeur. Choisissez une palette de couleurs cohérente avec les données
+```{r echo=FALSE, eval=TRUE, fig.align='center'}
+# solution
+load("./data_tmp/survey_med.RData")
+```
 
-```{r, eval=FALSE, fig.align='center'}
+```{r, eval=TRUE, fig.align='center'}
 # solution
 med_map1 <- ggplot(data = survey_med) +
-  geom_sf(aes(color=depth)) +
+  geom_sf(aes(color = depth)) +
   scale_colour_viridis_c() +
   theme_bw()
 med_map1
@@ -2992,12 +3160,10 @@ med_map1
 
 -   Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)
 
-```{r echo=TRUE, eval=FALSE, fig.align='center'}
+```{r echo=TRUE, eval=TRUE, fig.align='center'}
 # solution
-med_countries <- world_boundaries %>%
-  filter(continent %in%c("Europe","Africa","Asia"))
 med_map2 <- med_map1  +
-  geom_sf(data=med_countries, fill="gray92")
+  geom_sf(data = world_boundaries, fill = "gray92")
 med_map2
 ```
 
@@ -3013,15 +3179,15 @@ med_map2
 
 -   Recentrez la carte autour des pays d'intérêt (xmin=-20,xmax=60,ymin=25,ymax=45)
 
-```{r, eval=FALSE, fig.align='center'}
+```{r, eval=TRUE, fig.align='center'}
 # solution
 med_map3 <- med_map2  +
-xlim(-20,60) +
-ylim(25,45)
+  xlim(-20, 60) +
+  ylim(25, 45)
 med_map3
 ```
 
-## Exercice 5.12 {.smaller auto-animate="true"}
+## Exercice 5.12 {auto-animate="true"}
 
 -   Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes
 
@@ -3029,7 +3195,7 @@ med_map3
 # solution
 ```
 
-## Exercice 5.12 corrigé {.smaller auto-animate="true"}
+## Exercice 5.12 corrigé {auto-animate="true"}
 
 -   Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes
 
@@ -3040,63 +3206,132 @@ survey_med_nsample <- survey_med %>%
   mutate(n_sample = n()) %>%
   slice(1) %>%
   data.frame() %>%
-  dplyr::select(c(country,n_sample))
-country_med_nsample <- left_join(med_countries,survey_med_nsample,by=c("name"="country")) %>%
+  dplyr::select(c(country, n_sample))
+country_med_nsample <-
+  left_join(world_boundaries, survey_med_nsample, by = c("name" = "country")) %>%
   drop_na(n_sample)
-```
 
-```{r, eval=FALSE, fig.align='center'}
 med_map4 <- med_map3 +
-  stat_sf_coordinates(aes(size=n_sample),color = "white",fill="red",shape=21, data = country_med_nsample)
+  stat_sf_coordinates(
+    aes(size = n_sample),
+    color = "white",
+    fill = "red",
+    shape = 21,
+    data = country_med_nsample
+  )
 med_map4
 ```
+## Exercice 5.12 corrigé {auto-animate="true"}
 
-## Exercice 5.13 {.smaller auto-animate="true"}
+```{r echo=FALSE, eval=TRUE}
+# solution
+survey_med_nsample <- survey_med %>%
+  group_by(country) %>%
+  mutate(n_sample = n()) %>%
+  slice(1) %>%
+  data.frame() %>%
+  dplyr::select(c(country, n_sample))
+country_med_nsample <-
+  left_join(world_boundaries, survey_med_nsample, by = c("name" = "country")) %>%
+  drop_na(n_sample)
+
+med_map4 <- med_map3 +
+  stat_sf_coordinates(
+    aes(size = n_sample),
+    color = "white",
+    fill = "red",
+    shape = 21,
+    data = country_med_nsample
+  )
+med_map4
+```
+## Exercice 5.13 {auto-animate="true"}
 
 -   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif) Que remarquez vous ?
-
+  
 ```{r echo=TRUE, eval=FALSE}
 # solution
 ```
 
-## Exercice 5.13 corrigé {.smaller auto-animate="true"}
+## Exercice 5.13 corrigé {auto-animate="true"}
 
--   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif) Que remarquez vous ?
+-   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("./data/bathy_med.tif") Que remarquez vous ?
 
-```{r echo=TRUE, eval=FALSE}
-# solution
-bathy_med <- raster::raster("bathy_med.tif")
-rastdf <- as.data.frame(bathy_med,xy=TRUE)
-```
-
-```{r, eval=FALSE, fig.align='center'}
-# solution
-med_map5 <- med_map4 + geom_raster(data=rasdf, aes(x=x,y=y,fill=bathy_med))
-med_map5
-```
-
-## Exercice 5.13 corrigé {.smaller auto-animate="true"}
-
--   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif) Que remarquez vous ?
-
-```{r echo=TRUE, eval=FALSE}
+```{r echo=TRUE, eval=FALSE, fig.align='center'}
 # solution
 bathy_med <- raster::raster("./data/bathy_med.tif")
-rastdf <- as.data.frame(bathy_med,xy=TRUE)
+rastdf <- as.data.frame(bathy_med, xy = TRUE)
+med_map5 <-
+  med_map4 + geom_raster(data = rastdf, aes(x = x, y = y, fill = bathy_med))
+med_map5
 ```
+## Exercice 5.13 corrigé {auto-animate="true"}
 
-```{r, eval=FALSE, fig.align='center'}
+
+```{r echo=FALSE, eval=TRUE, fig.align='center'}
 # solution
+bathy_med <- raster::raster("./data_tmp/bathy_med.tif")
+rastdf <- as.data.frame(bathy_med, xy = TRUE)
+med_map5 <-
+  med_map4 + geom_raster(data = rastdf, aes(x = x, y = y, fill = bathy_med))
+med_map5
+```
+<br>
+<center>Importance dans l'ordre d'ajout des couches<center>
+
+## Exercice 5.13 corrigé {auto-animate="true"}
+
+-   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("./data/bathy_med.tif") Que remarquez vous ?
+  
+```{r echo=TRUE, eval=FALSE, fig.align='center'}
+# solution
+bathy_med <- raster::raster("./data/bathy_med.tif")
+rastdf <- as.data.frame(bathy_med, xy = TRUE)
+
 med_map5 <- ggplot(data = survey_med) +
-  geom_raster(data=rastdf, aes(x=x,y=y,fill=bathy_med)) +
-  geom_sf(data=med_countries, fill="gray92") +
-  geom_sf(aes(color=depth)) +
+  geom_raster(data = rastdf, aes(x = x, y = y, fill = bathy_med)) +
+  geom_sf(data = world_boundaries, fill = "gray92")  +
+  geom_sf(aes(color = depth)) +
   scale_colour_viridis_c() +
+  xlim(-20, 60) +
+  ylim(25, 45) +
+  stat_sf_coordinates(
+    aes(size = n_sample),
+    color = "white",
+    fill = "red",
+    shape = 21,
+    data = country_med_nsample
+  ) +
+  theme_bw()
+med_map5
+```
+## Exercice 5.13 corrigé {auto-animate="true"}
+
+  
+```{r echo=FALSE, eval=TRUE, fig.align='center'}
+# solution
+bathy_med <- raster::raster("./data_tmp/bathy_med.tif")
+rastdf <- as.data.frame(bathy_med, xy = TRUE)
+
+med_map5 <- ggplot(data = survey_med) +
+  geom_raster(data = rastdf, aes(x = x, y = y, fill = bathy_med)) +
+  geom_sf(data = world_boundaries, fill = "gray92")  +
+  geom_sf(aes(color = depth)) +
+  scale_colour_viridis_c() +
+  xlim(-20, 60) +
+  ylim(25, 45) +
+  stat_sf_coordinates(
+    aes(size = n_sample),
+    color = "white",
+    fill = "red",
+    shape = 21,
+    data = country_med_nsample
+  ) +
   theme_bw()
 med_map5
 ```
 
-## Exercice 5.14 {.smaller auto-animate="true"}
+## Exercice 5.14 {auto-animate="true"}
 
 -   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
 
@@ -3104,28 +3339,43 @@ med_map5
 # solution
 ```
 
-## Exercice 5.14 corrigé {.smaller auto-animate="true"}
+## Exercice 5.14 corrigé {auto-animate="true"}
 
 -   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
 
 ```{r echo=TRUE, eval=FALSE, fig.align='center'}
 # solution
-med_map6 <- ggplot(data = survey_med) +
-  geom_raster(data=rasdf, aes(x=x,y=y,fill=bathy_med)) +
-  geom_sf(data=med_countries, fill="gray92") +
-  geom_sf(aes(color=depth)), show.legend = FALSE) +
-  scale_colour_viridis_c() +
-  theme_bw() +
-  annotation_north_arrow(location = "tl", height = unit(0.7, "cm"), width = unit(0.7, "cm")) + 
-  labs(x="longitude",
-       y="latitude",
-       title="RLS mediterranean survey",
-       fill ="bathymétrie") +
-  scale_fill_gradient2(low = "blue", mid = "white", high = "brown")
+med_map6 <- med_map5 +
+  scale_fill_gradient2(low = "blue", mid = "white", high = "brown") +
+  annotation_north_arrow(
+    location = "tl",
+    height = unit(0.7, "cm"),
+    width = unit(0.7, "cm")
+  ) +
+  labs(x = "longitude",
+       y = "latitude",
+       title = "RLS mediterranean survey",
+       fill = "bathymétrie")
 med_map6
 ```
+## Exercice 5.14 corrigé {auto-animate="true"}
 
-## Exercice 5.15 {.smaller auto-animate="true"}
+```{r echo=FALSE, eval=TRUE, fig.align='center'}
+# solution
+med_map6 <- med_map5 +
+  scale_fill_gradient2(low = "blue", mid = "white", high = "brown") +
+  annotation_north_arrow(
+    location = "tl",
+    height = unit(0.7, "cm"),
+    width = unit(0.7, "cm")
+  ) +
+  labs(x = "longitude",
+       y = "latitude",
+       title = "RLS mediterranean survey",
+       fill = "bathymétrie")
+med_map6
+```
+## Exercice 5.15 {auto-animate="true"}
 
 -   Sauvegardez votre belle carte :)
 
@@ -3133,11 +3383,17 @@ med_map6
 # solution
 ```
 
-## Exercice 5.15 corrigé {.smaller auto-animate="true"}
+## Exercice 5.15 corrigé {auto-animate="true"}
 
 -   Sauvegardez votre belle carte :)
 
-```{r echo=TRUE, eval=FALSE}
+```{r echo=TRUE, eval=TRUE}
 # solution
-ggsave("RLS_med.pdf",plot=med_map6, width = 15, height = 10, units = "cm")
+ggsave(
+  "./figures/RLS_med.pdf",
+  plot = med_map6,
+  width = 29,
+  height = 21,
+  units = "cm"
+)
 ```

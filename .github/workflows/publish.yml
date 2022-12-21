@@ -51,6 +51,7 @@ jobs:
             sp
             rnaturalearth
             rnaturalearthdata
+            ggspatial
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
