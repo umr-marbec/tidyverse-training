@@ -3387,7 +3387,7 @@ med_map6
 
 -   Sauvegardez votre belle carte :)
 
-```{r echo=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 # solution
 ggsave(
   "./figures/RLS_med.pdf",
