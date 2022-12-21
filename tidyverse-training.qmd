@@ -932,11 +932,11 @@ Pour visualiser le cheatsheet `tidyr` [cliquez ici](https://github.com/rstudio/c
 Pour illustrer cette partie nous utiliserons le jeu de données popEU qui décrit le nombre d'habitants par pays pour les années 2014, 2015 et 2016
 
 ```{r echo=FALSE, eval=TRUE}
-popEU <- read_rds("./data_tmp/popEU.rds")
+popEU <- readRDS("./data_tmp/popEU.rds")
 ```
 
 ```{r echo=TRUE, eval=FALSE}
-popEU <- read_rds("./data/popEU.rds")
+popEU <- readRDS("./data/popEU.rds")
 slice_tail(popEU)
 ```
 
