@@ -1353,32 +1353,25 @@ Conçu pour manipuler les chaines de caractères "facilement". <br>En plus d'êt
 
 ![](images/logo_stringr.png){.absolute top="40" right="20" width="15%"}
 
-  
-```
-
 Le nom de toutes les fonctions dans `stringr` commence par `str_`.
 
-```
-
 Voici quelques exemples :
-  
+
 ::: columns
-  ::: {.column width="50"} 
-    ::: incremental
+::: {.column width="60%"}
+
+::: columns
+::: {.column width="50"} 
 -   `str_detect` : Détection de caractères
 -   `str_extract` : Extraction de caractères
 -   `str_replace` : Remplacement de caractères
-    :::
-  :::
+:::
   
-  ::: {.column width="50%"}
-    ::: incremental
+::: {.column width="50%"}
 -   `str_trim` : Enlève les espaces
 -   `str_split` : Sépare une chaine de caractères
 -   `str_length` : Nombre de caractères
-    :::
-  :::
- :::
+:::
   
 <center>Le cheat-sheet du package `stringr` est disponible [ici](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf).</center>
   
