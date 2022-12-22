@@ -1361,7 +1361,7 @@ Le nom de toutes les fonctions dans `stringr` commence par `str_`.
 
 Voici quelques exemples :
   
-  ::: columns
+::: columns
 ::: {.column width="50%"}
 ::: incremental
 -   `str_detect` : Détection de caractères
@@ -1370,9 +1370,9 @@ Voici quelques exemples :
 
 -   `str_replace` : Remplacement de caractères
 :::
-  :::
+:::
   
-  ::: {.column width="50%"}
+::: {.column width="50%"}
 ::: incremental
 -   `str_trim` : Enlève les espaces
 
@@ -1380,16 +1380,16 @@ Voici quelques exemples :
 
 -   `str_length` : Nombre de caractère
 :::
-  :::
-  :::
+:::
+:::
   
-  . . .
+. . .
 
 <center>Le cheat-sheet du package `stringr` est disponible [ici](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf).</center>
   
-  ## Création d'un dataframe de chaines de caractères
+## Création d'un dataframe de chaines de caractères
   
-  ```{r}
+```{r}
 tmp <- tibble(nom = c("Micheline Sétou", "Jean-Jacques Apeprès",  "Martine Sérien"),
               num_rue = c("12", "15 ou 16", "NA"), 
               nom_rue = c("Rue des peupliers", "Rue + un arbre", "NA"),
@@ -1402,12 +1402,12 @@ kable(tmp, html_font = "Computer Modern", table.attr = "style='width:60%;'")
 
 On utilise la fonction `str_detect()` et les deux arguments principaux :
   
-  ::: incremental
+::: incremental
 -   `string` : Le/Les caractère(s) qui vont passer au détecteur.
 -   `pattern` : Le caractère à détecter.
 :::
   
-  . . .
+. . .
 
 La fonction renvoie `TRUE` ou `FALSE` en fonction de la présence ou non du caractère.
 
@@ -1426,7 +1426,7 @@ cat(tmp$nom, sep = "\n")
 ```
 :::
   
-  ::: {.column width="50%"}
+::: {.column width="50%"}
 ```{r results='hide'}
 str_detect(string  = tmp$nom, pattern = "ine")
 ```
@@ -1436,9 +1436,9 @@ cat(str_detect(string  = tmp$nom,
                pattern = "ine"), sep = "\n")
 ```
 :::
-  :::
+:::
   
-  . . .
+. . .
 
 <center>
   
@@ -1448,12 +1448,12 @@ cat(str_detect(string  = tmp$nom,
 
 On utilise la fonction `str_subset()` et les deux arguments principaux :
   
-  ::: incremental
+::: incremental
 -   `string` : Le/Les caractère(s) qui vont passer au détecteur.
 -   `pattern` : Le caractère à détecter.
 :::
   
-  . . .
+. . .
 
 Contrairement à `str_detect()`, la fonction `str_subset()` renvoie les caractères qui contiennent le pattern à détecter.
 
@@ -1470,7 +1470,7 @@ str_subset(string  = tmp$nom,
 
 On utilise la fonction `str_extract()` et ses arguments principaux :
   
-  ::: incremental
+::: incremental
 -   `string` : Le/Les caractère(s) qui vont passer à l'extracteur.
 -   `pattern` : Le caractère à extraire.
 :::
@@ -1513,7 +1513,7 @@ On utilise la fonction `str_replace()` et ces arguments principaux :
 -   `replacement` : Le caractère de remplacement.
 :::
   
-  . . .
+. . .
 
 ### Exemple
 
@@ -1530,7 +1530,7 @@ cat(tmp$nom, sep = "\n")
 ```
 :::
   
-  ::: {.column width="50%"}
+::: {.column width="50%"}
 ```{r results='hide'}
 str_replace(string      = tmp$nom, 
             pattern     = "Jacques", 
@@ -1543,18 +1543,18 @@ cat(str_replace(string      = tmp$nom,
                 replacement = "Michel"), sep = "\n")
 ```
 :::
-  :::
+:::
   
-  ## Concaténer des chaînes de caractères {auto-animate="true"}
+## Concaténer des chaînes de caractères {auto-animate="true"}
   
-  On utilise la fonction `str_glue()` et ces deux principaux arguments :
+On utilise la fonction `str_glue()` et ces deux principaux arguments :
   
-  ::: incremental
+::: incremental
 -   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
 -   `.sep` = le séparateur
 :::
   
-  . . .
+. . .
 
 ### Exemple sur une ligne du data.frame
 
@@ -1566,7 +1566,7 @@ str_glue("{tmp$nom[1]} habite au {tmp$num_rue[1]} {tmp$nom_rue[1]}", .sep = " ")
 
 On utilise la fonction `str_glue()` et ces deux principaux arguments :
   
-  -   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
+-   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
 -   `.sep` = le séparateur
 
 ### Exemple sur une ligne du data.frame
