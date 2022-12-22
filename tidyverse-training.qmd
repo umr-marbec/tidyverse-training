@@ -2281,15 +2281,18 @@ ggsave(filename = "le_chemin_vers_le_bon_dossier",
 
 ## Exercice 5.1 {auto-animate="true"}
 
-Quel est le pays dans lequel on retrouve le plus de biomasse par transect (valeur médiane) ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
+Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
 ```{r}
-# Etape 1
+# 1 - Filter les données obtenues en 2011
+
+# 2 - Grouper les données pour obtenir la biomasse totale
+#     par transect dans chacun des pays
 ```
 
 ## Exercice 5.1 : Correction {auto-animate="true"}
 
-Quel est le pays dans lequel on retrouve le plus de biomasse par transect (valeur médiane) ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
+Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
 ```{r warning=FALSE}
 # Etape 1 : Formatter les données
