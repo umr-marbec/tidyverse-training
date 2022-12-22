@@ -512,7 +512,7 @@ dim(survey_selection)
     -   deux "familles" de fonctions : résumé et vectorisation <br/> <br/> <br/> ![](images/summary_function.png){.absolute top="320" left="15"} ![](images/vectorized_function.png){.absolute top="320" right="15"}
 -   Utilisation de verbes
 -   Généralement plus rapides que leur équivalent sous R de base
--   Permets d'enchainer les opérations avec des "pipes" ![](images/pipe.png){.absolute top="450" right="20" width="15%"}
+-   Permet d'enchainer les opérations avec des "pipes" ![](images/pipe.png){.absolute top="450" right="20" width="15%"}
 
 ## Manipulation des lignes
 
@@ -556,7 +556,7 @@ Renvoient une valeur TRUE ou FALSE
 ## Exercice 2.1 {auto-animate="true"}
 
 -   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "global_reef_fish_biomass"
--   En une seule fois, selectionner les données dont la variable "total" est différent de 0, où la famille de l'espèce est différente de "Mullidae" ou "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
+-   En une seule fois, selectionner les données dont la variable "biomass" est différent de 0, où la famille de l'espèce est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -808,7 +808,7 @@ biomass_exercice2_3_sample_verification <- dplyr::group_by(.data = biomass_exerc
 
 ## Fonction bonus très utile {.smaller}
 
-### case_when : généralisation vectoriseé de if(s)
+### case_when : généralisation vectorisée de if(s)
 
 -   Vectorisation de multiples if_else sous R et CASE WHEN en SQL
 -   Améliore grandement la lisibilité de vos fonctions
@@ -825,7 +825,7 @@ case_when(
 ```
 
 -   Pensez bien à toujours mettre un TRUE (=valeur par défaut)
--   Attention à ne pas mélanger les types, il existe différent NA :
+-   Attention à ne pas mélanger les types, il existe différents NA :
     -   NA_integer\_
     -   NA_real\_
     -   NA_complex\_
@@ -923,7 +923,7 @@ Les différents verbes viennent s'ajouter à tous ceux que nous avons déjà vus
 
     -   1 observation = 1 ligne/case
 
-    -   1 type d'observations par table
+    -   1 type d'observation par table
 
 Pour visualiser le cheatsheet `tidyr` [cliquez ici](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf)
 
@@ -1093,7 +1093,7 @@ expand(data, ...)
 
 ### Applications - separate
 
-A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles "millions" et "milliers"
+A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles colonnes "millions" et "milliers"
 
 ```{r echo=TRUE, eval=FALSE}
 popEU_sep <- popEU_long %>%
@@ -1155,7 +1155,7 @@ La valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniq
 
 ## Exercice 3.1 {auto-animate="true"}
 
--   Chargez les données d'abondance. Les données sont elles Tidy ?
+-   Chargez les données d'abondance. Les données sont elles tidy ?
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -1362,6 +1362,7 @@ Le nom de toutes les fonctions dans `stringr` commence par `str_`.
 Voici quelques exemples :
   
 ::: columns
+
 ::: {.column width="50%"}
 ::: incremental
 -   `str_detect` : Détection de caractères
@@ -1381,6 +1382,7 @@ Voici quelques exemples :
 -   `str_length` : Nombre de caractère
 :::
 :::
+
 :::
   
 . . .
@@ -1703,14 +1705,14 @@ kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr 
 -   Parfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle
 :::
   
-  ::: {.column width="40%"}
+::: {.column width="40%"}
 ![](images/regular_expressions.png)
 :::
-  :::
+:::
   
-  ## Exemple concret
+## Exemple concret
   
-  ```{r echo=TRUE, eval=FALSE}
+```{r echo=TRUE, eval=FALSE}
 load(file = "./data/exemple_regular_expressions.RData")
 
 tac_final_modif_level1 <- tac_final %>%
@@ -2295,20 +2297,22 @@ Quel est le pays dans lequel la biomasse totale par transect est la plus forte ?
 Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
 ```{r warning=FALSE}
-# Etape 1 : Formatter les données
 data_biomass_country <- biomass_survey_abundance_exercice3_6 %>%
   st_drop_geometry() %>%
+  # 1 - Filter les données obtenues en 2011
   filter(str_detect(string = survey_date, pattern = "2011")) %>%
+  # 2 - Grouper les données pour obtenir la biomasse totale
+  #     par transect dans chacun des pays
   group_by(country, survey_id) %>%
   summarise(biomass = sum(biomass)) 
 ```
 
 ## Exercice 5.1 : Correction {auto-animate="true"}
 
-Quel est le pays dans lequel on retrouve le plus de biomasse par transect (valeur médiane). Formatter le jeu de données issues de l'exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
+Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
 ```{r fig.align="center", out.width="50", warning=FALSE}
-# Etape 2 : Realiser les boites à moustache
+# Réalisation les boites à moustache
 ggplot(data = data_biomass_country) +
   geom_boxplot(aes(x = country, y = biomass)) +
   theme_bw() 
@@ -2333,7 +2337,8 @@ Utiliser cette fonction pour ordonner l'axe des x de façon décroissante selon 
 ```{r fig.align="center", out.width="80%"}
 # Reorder en fonction de la valeur médiane 
 boxplot_biomass_country <- ggplot(data = data_biomass_country) +
-  geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass))
+  geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass)) +
+  theme_bw()
 
 boxplot_biomass_country
 ```
@@ -2353,7 +2358,8 @@ Renommer proprement les axes de boxplot_biomass_country.
 ```{r}
 # Solution
 boxplot_biomass_country_v2 <- boxplot_biomass_country +
-  labs(x = "Country", y = "Biomass (g)")
+  labs(x = "Country", y = "Biomass (g)") +
+  theme_bw()
 ```
 
 ```{r echo = FALSE, fig.align="center", out.width="70%"}
@@ -2723,15 +2729,23 @@ ggplot(crabs_mean) +
 ## Exercice 5.7 {auto-animate="true"}
 
 A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
+```{r}
+# 1 - Grouper les données par pays
+# 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble 
+#     des transects propres à chaque pays
+```
+
 
 ## Exercice 5.7 - Corrigé {auto-animate="true"}
 
 A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
 ```{r fig.align='center', out.width="40%"}
-# Formattage
 country_mean <- data_biomass_5country %>%
+  # 1 - Grouper les données par pays
   group_by(country) %>%
+  # 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble 
+  #     des transects propres à chaque pays
   summarise(biom_mean = mean(biomass),
             biom_sd   = sd(biomass)) 
 ```
