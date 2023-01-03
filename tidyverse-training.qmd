@@ -309,7 +309,9 @@ levels(global_reef_fish_biomass$block)
 
 ## Importer en ***tibble*** le fichier Survey_metadata.csv
 
-Ce fichier contient des métadonnées caractérisant les campagnes (survey_id) Particularités : séparateur ";" et 70 lignes de commentaires au début qui ne doivent pas être lues : utilisation du paramètre `skip =`
+Ce fichier contient des métadonnées caractérisant les campagnes (survey_id) 
+
+Particularités : séparateur ";" et 70 lignes de commentaires au début qui ne doivent pas être lues : utilisation du paramètre `skip =`
 
 ```{r echo=TRUE, eval=FALSE}
 survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
@@ -353,7 +355,7 @@ survey_metadata_zip <- read_delim(file = "./data/survey_metadata.zip",
                                   skip = 70)
 ```
 
-## ***readr*** permet de lire depuis plusieurs fichiers et mêmes répertoires
+## ***readr*** permet de lire depuis plusieurs fichiers et même répertoires
 
 ```{r echo=TRUE, eval=FALSE}
 continents <- c("africa", "americas", "asia", "europe", "oceania")
@@ -411,7 +413,7 @@ head(survey_metadata_4)
 
 ```
 
-## On peut faire un filtre en entrée sur les valeurs d'une colonne avec `read_..._chunked` {.smaller}
+## On peut faire un filtre en entrée sur les valeurs d'une colonne avec `read_..._chunked`
 
 -   Pour sélectionner sur une colonne (ici la famille)
 
