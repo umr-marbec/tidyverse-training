@@ -3910,14 +3910,12 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <section id="la-cartographie-avec-ggplot2" class="slide level2 smaller">
 <h2>La cartographie avec ggplot2</h2>
 <h3 id="une-petite-introduction-pour-commencer">Une petite introduction pour commencer</h3>
-<ul>
-<li>Les données géographiques</li>
-</ul>
+<h3 id="les-données-géographiques">Les données géographiques</h3>
 <p>Ce sont des données ayant une localisation dans l’espace. On peut les représenter et les visualiser sur une carte. Pour les répresenter il existe deux formats principaux : le vecteur et le raster.</p>
 <h3 id="un-raster-cest-quoi">Un raster c’est quoi ?</h3>
-<p>Un raster est une image dans laquelle chaque pixel a une seule valeur et est géo-référencé. Chaque pixel a la meme taille et la résolution dépend du nombre de pixel. Sous R, il existe une librairie spécialement développée pour traiter des fichiers raster. c’est la librairie <code>raster</code></p>
-<h3 id="vecteur-cest-quoi">vecteur c’est quoi ?</h3>
-<p>Un vecteur est composé de 2 élèments principaux: - la table attributaire : permet de décrire les informations qui lui sont associées. le nombre d’informations n’est pas limitées - la partie graphique (sa forme) : il existe trois types de géometrie pour définir les vecteurs (point, ligne, polygone) L’ensemble de ces composantes (informations, géométrie, projection, …) forme un objet que l’on appelle shapefile. La librairie <code>sf</code> permet de gérer les format vecteur sous R.</p>
+<p>Un raster est une image dans laquelle chaque pixel a une seule valeur et est géo-référencé. Chaque pixel a la même taille et la résolution dépend du nombre de pixel. Sous R, il existe une librairie spécialement développée pour traiter des fichiers raster. c’est la librairie <code>raster</code></p>
+<h3 id="un-vecteur-cest-quoi">Un vecteur c’est quoi ?</h3>
+<p>Un vecteur est composé de 2 éléments principaux: - la table attributaire : permet de décrire les informations qui lui sont associées. le nombre d’informations n’est pas limitées - la partie graphique (sa forme) : il existe trois types de géometrie pour définir les vecteurs (point, ligne, polygone) L’ensemble de ces composantes (informations, géométrie, projection, …) forme un objet que l’on appelle shapefile. La librairie <code>sf</code> permet de gérer les format vecteur sous R.</p>
 <p>Pour plus d’informations détaillées <a href="https://naturagis.fr/cartographie-sig/difference-vecteur-raster/">cliquez ici</a></p>
 </section>
 <section id="section-10" class="slide level2">
@@ -3938,7 +3936,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 </section>
 <section id="section-11" class="slide level2 smaller">
 <h2></h2>
-<h3 id="applications---geom_sf">Applications - geom_sf</h3>
+<h3 id="applications-geom_sf">Applications : geom_sf</h3>
 <ul>
 <li>Charger les données et visualiser la carte</li>
 </ul>
@@ -3960,7 +3958,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-198-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="section-12" class="slide level2 smaller">
 <h2></h2>
-<p>###Applications - stat_sf_coordinates</p>
+<h3 id="applications-stat_sf_coordinates">Applications : stat_sf_coordinates</h3>
 <ul>
 <li>Afficher sur chaque pays un rond dont la taille est proportionnelle à la population et la couleur fonction du GDP</li>
 </ul>
@@ -3985,7 +3983,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-199-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="section-13" class="slide level2 smaller">
 <h2></h2>
-<h3 id="applications---geom_raster">Applications - geom_raster</h3>
+<h3 id="applications-geom_raster">Applications : geom_raster</h3>
 <ul>
 <li>Créer un raster et le visualiser</li>
 </ul>
@@ -4002,7 +4000,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-200-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="section-14" class="slide level2">
 <h2></h2>
-<h3 id="applications---geom_raster-1">Applications - geom_raster</h3>
+<h3 id="applications-geom_raster-1">Applications : geom_raster</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb170"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1"></a>map3<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb170-2"><a href="#cb170-2"></a>  <span class="fu">geom_raster</span>(<span class="at">data =</span> rastdf, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">fill =</span> layer)) <span class="co"># Ajout de l'argument fill</span></span>
@@ -4024,7 +4022,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 </section>
 <section id="section-16" class="slide level2">
 <h2></h2>
-<h3 id="applications---geom_sf_text">Applications - geom_sf_text</h3>
+<h3 id="applications-geom_sf_text">Applications : geom_sf_text</h3>
 <ul>
 <li>Afficher sous format texte le code ISO3 des pays</li>
 </ul>
@@ -4043,7 +4041,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-203-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="section-17" class="slide level2">
 <h2></h2>
-<h3 id="applications---geom_sf_text-1">Applications - geom_sf_text</h3>
+<h3 id="applications-geom_sf_text-1">Applications : geom_sf_text</h3>
 <ul>
 <li>Afficher sous format texte le code ISO3 des pays</li>
 </ul>
@@ -4064,7 +4062,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-204-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="section-18" class="slide level2">
 <h2></h2>
-<h3 id="applications---geom_sf_label">Applications - geom_sf_label</h3>
+<h3 id="applications-geom_sf_label">Applications : geom_sf_label</h3>
 <ul>
 <li>Afficher sous format étiquette le code ISO3 des pays</li>
 </ul>
@@ -4095,7 +4093,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 </section>
 <section id="section-20" class="slide level2">
 <h2></h2>
-<h3 id="application---annotation_scale">Application - annotation_scale</h3>
+<h3 id="application-annotation_scale">Application : annotation_scale</h3>
 <ul>
 <li>Ajouter la barre d’échelle</li>
 </ul>
@@ -4110,7 +4108,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-207-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="section-21" class="slide level2">
 <h2></h2>
-<h3 id="application---annotation_north_arrow">Application - annotation_north_arrow</h3>
+<h3 id="application-annotation_north_arrow">Application : annotation_north_arrow</h3>
 <ul>
 <li>Ajouter la flèche du nord</li>
 </ul>
@@ -4177,7 +4175,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <section id="exercice-5.11" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 5.11</h2>
 <ul>
-<li>Recentrez la carte autour des pays d’intérêt (xmin=-20,xmax=60,ymin=25,ymax=45)</li>
+<li>Recentrez la carte autour des pays d’intérêt (xmin=-20, xmax=60, ymin=25, ymax=45)</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb182"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb182-1" class="hljs-ln-code"><a href="#cb182-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -4186,7 +4184,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <section id="exercice-5.11-corrigé" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 5.11 corrigé</h2>
 <ul>
-<li>Recentrez la carte autour des pays d’intérêt (xmin=-20,xmax=60,ymin=25,ymax=45)</li>
+<li>Recentrez la carte autour des pays d’intérêt (xmin=-20, xmax=60, ymin=25, ymax=45)</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb183"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb183-1" class="hljs-ln-code"><a href="#cb183-1"></a><span class="co"># solution</span></span>
@@ -4200,7 +4198,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <section id="exercice-5.12" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 5.12</h2>
 <ul>
-<li>Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes</li>
+<li>Pour chaque pays, ajoutez un cercle proportionnel au nombre de transects réalisés sur ses côtes</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb184"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb184-1" class="hljs-ln-code"><a href="#cb184-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -4209,7 +4207,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <section id="exercice-5.12-corrigé" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 5.12 corrigé</h2>
 <ul>
-<li>Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes</li>
+<li>Pour chaque pays, ajoutez un cercle proportionnel au nombre de transects réalisés sur ses côtes</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb185"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb185-1" class="hljs-ln-code"><a href="#cb185-1"></a><span class="co"># solution</span></span>
@@ -4241,7 +4239,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <section id="exercice-5.13" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 5.13</h2>
 <ul>
-<li>Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster(“bathy_med.tif) Que remarquez vous ?</li>
+<li>Ajoutez la carte de bathymétrie. Pour la charger, utilisez la commande raster::raster(“./data/bathy_med.tif”). Que remarquez vous ?</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb186"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb186-1" class="hljs-ln-code"><a href="#cb186-1"></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -4250,7 +4248,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <section id="exercice-5.13-corrigé" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 5.13 corrigé</h2>
 <ul>
-<li>Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster(“./data/bathy_med.tif”) Que remarquez vous ?</li>
+<li>Ajoutez la carte de bathymétrie. Pour la charger, utilisez la commande raster::raster(“./data/bathy_med.tif”). Que remarquez vous ?</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb187"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb187-1" class="hljs-ln-code"><a href="#cb187-1"></a><span class="co"># solution</span></span>
@@ -4272,7 +4270,7 @@ Importance dans l’ordre d’ajout des couches
 <section id="exercice-5.13-corrigé-2" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 5.13 corrigé</h2>
 <ul>
-<li>Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster(“./data/bathy_med.tif”) Que remarquez vous ?</li>
+<li>Ajoutez la carte de bathymétrie. Pour la charger, utilisez la commande raster::raster(“./data/bathy_med.tif”). Que remarquez vous ?</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb188"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb188-1" class="hljs-ln-code"><a href="#cb188-1"></a><span class="co"># solution</span></span>
