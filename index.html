@@ -2615,8 +2615,8 @@ Martine Sérien, habite au NA NA dans la ville de Montpellier</code></pre>
 <h1>4.2 : Manipuler des dates avec lubridate</h1>
 
 </section>
-<section id="rends-la-manipulation-des-dates-et-du-temps-presque-agréable-sous-r" class="slide level2">
-<h2>Rends la manipulation des dates et du temps presque agréable sous R</h2>
+<section id="rend-la-manipulation-des-dates-et-du-temps-presque-agréable-sous-r" class="slide level2">
+<h2>Rend la manipulation des dates et du temps presque agréable sous R</h2>
 <ul>
 <li><p>Analyse semi-automatique des dates et des heures</p></li>
 <li><p>Les fonctions vont essayer de trouver le séparateur et le format</p></li>
@@ -2634,7 +2634,7 @@ Martine Sérien, habite au NA NA dans la ville de Montpellier</code></pre>
 </section>
 <section id="manipulation-des-élements-date-temps" class="slide level2">
 <h2>Manipulation des élements date-temps</h2>
-<h3 id="modification-et-extration">Modification et extration</h3>
+<h3 id="modification-et-extraction">Modification et extraction</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1"></a>test_date_time <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(<span class="st">"2022-12-05 12:00:00"</span>, <span class="at">tz =</span> <span class="st">"CET"</span>)</span>
 <span id="cb109-2"><a href="#cb109-2"></a><span class="co"># pour une extraction des informations</span></span>
@@ -3124,7 +3124,7 @@ Une autre façon de faire est d’utiliser la fonction <code>labs</code> qui per
 </section>
 <section id="ggplot-pas-à-pas-le-facet" class="slide level2">
 <h2>Ggplot pas à pas : le FACET</h2>
-<p>La fonction <code>facet_grid()</code> permet de générer X plots pour chaque valeur d’une variable qualitative (i.e.&nbsp;le sexe).</p>
+<p>La fonction <code>facet_grid()</code> permet de générer X plots pour chaque valeur d’une variable qualitative (i.e.&nbsp;l’espèce).</p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1"></a>couche<span class="fl">.7</span> <span class="ot">&lt;-</span> couche<span class="fl">.6</span> <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>sp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3311,7 +3311,7 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 </section>
 <section id="exercice-5.4---corrigé" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 5.4 - Corrigé</h2>
-<p>Dans la fonction <code>element_text()</code>, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l’axe x. Choissir votre arrière plan préféré.</p>
+<p>Dans la fonction <code>element_text()</code>, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l’axe x. Choisir votre arrière plan préféré.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb135"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb135-1" class="hljs-ln-code"><a href="#cb135-1"></a><span class="co"># Solution</span></span>
 <span id="cb135-2" class="hljs-ln-code"><a href="#cb135-2"></a>boxplot_biomass_country_v3 <span class="ot">&lt;-</span> boxplot_biomass_country_v2 <span class="sc">+</span></span>
@@ -3697,7 +3697,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1"></a><span class="co"># Formattage des données</span></span>
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1"></a><span class="co"># Formatage des données</span></span>
 <span id="cb152-2"><a href="#cb152-2"></a>crabs_mean <span class="ot">&lt;-</span> data_crabs <span class="sc">%&gt;%</span></span>
 <span id="cb152-3"><a href="#cb152-3"></a>  <span class="fu">group_by</span>(sp) <span class="sc">%&gt;%</span></span>
 <span id="cb152-4"><a href="#cb152-4"></a>  <span class="fu">summarise</span>(<span class="at">CL_mean =</span> <span class="fu">mean</span>(CL),</span>
@@ -3839,7 +3839,7 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-191-1.png" style="width:70.0%" class="r-stretch quarto-figure-center"></section>
 <section id="gestion-des-facteurs-groupes-5" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Gestion des facteurs &amp; groupes</h2>
-<p>Changeons l’ordre des facteurs de façon à ce que la classe [75,100[ soient en 1ère.</p>
+<p>Changeons l’ordre des facteurs de façon à ce que la classe [75,100[ soit en 1ère.</p>
 <div class="cell" data-warnings="false">
 
 </div>
