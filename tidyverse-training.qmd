@@ -210,7 +210,7 @@ global_reef_fish_biomass <- read_delim(file = "./data/global_reef_fish_biomass.c
 
 ```
 
--   0u bien avec `read_csv` : delimiteur par defaut = virgule
+-   Ou bien avec `read_csv` : delimiteur par défaut = virgule
 
 ```{r echo=TRUE, eval=FALSE}
 global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv")
@@ -218,23 +218,19 @@ global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv
 
 ## Le ***tibble*** global_reef_fish_biomass
 
-On vérifie sa classe avec `class()`
+-   On vérifie sa classe avec `class()`
 
 ```{r echo=TRUE, eval=FALSE}
 class(global_reef_fish_biomass)
 ```
 
-## Le ***tibble*** global_reef_fish_biomass
-
-On vérifie sa structure avec `str()`
+-   On vérifie sa structure avec `str()`
 
 ```{r echo=TRUE, eval=FALSE}
 str(global_reef_fish_biomass)
 ```
 
-## Le ***tibble*** global_reef_fish_biomass
-
-On vérifie son contenu avec `head()`
+-   On vérifie son contenu avec `head()`
 
 ```{r echo=TRUE, eval=FALSE}
 head(global_reef_fish_biomass)
@@ -256,32 +252,22 @@ write_delim(global_reef_fish_biomass, "./data/global_reef_fish_biomass_out2.txt"
 
 ## Comment lire un fichier avec d'autres séparateurs des colonnes et des décimales ?
 
--   Pour générer un autre format de fichier, on exporte biomass au format csv "francais" (séparateur décimal=",' et séparateur des colonnes=";")
+Pour générer un autre format de fichier, on exporte biomass au format csv "francais" (séparateur décimal=",' et séparateur des colonnes=";")
 
 ```{r echo=TRUE, eval=FALSE}
 write_csv2(global_reef_fish_biomass, "./data/global_reef_fish_biomass_out3.csv")
 ```
 
--   Puis on essaie de lire ce nouveau csv au format francais
+Puis on essaie d'importer sous R ce nouveau csv au format "francais"
 
-## Option 1 : `read_csv2`
+-   Option 1 : `read_csv2`
 
 ```{r echo=TRUE, eval=FALSE}
 global_reef_fish_biomass3 <- read_csv2(file = "./data/global_reef_fish_biomass_out3.csv")
 str(global_reef_fish_biomass3)
 ```
 
-## Option 2 : `read_delim` sans préciser le séparateur décimal
-
-PAS BON car les nombres décimaux (ex: biomass) sont lus comme du caractère
-
-```{r echo=TRUE, eval=FALSE}
-global_reef_fish_biomass3 <- read_delim(file = "./data/global_reef_fish_biomass_out3.csv",
-                                       delim = ";")
-str(global_reef_fish_biomass3) 
-```
-
-## Option 3 : read_delim en précisant le séparateur décimal avec locale()
+-   Option 2 : `read_delim` en précisant le séparateur décimal avec locale() pour éviter de lire les nombres comme du caractère
 
 ```{r echo=TRUE, eval=FALSE}
 global_reef_fish_biomass3 <- read_delim(file = "./data/global_reef_fish_biomass_out3.csv",
@@ -292,13 +278,13 @@ str(global_reef_fish_biomass3)
 
 ## Le type des colonnes
 
-Afficher les specifications avec `spec`
+-   Afficher les spécifications avec `spec`
 
 ```{r echo=TRUE, eval=FALSE}
 spec(global_reef_fish_biomass)
 ```
 
-Simplifier les specifications avec `col_condense`
+-   Simplifier les spécifications avec `col_condense`
 
 ```{r echo=TRUE, eval=FALSE}
 cols_condense(spec(global_reef_fish_biomass))
@@ -359,7 +345,7 @@ print(paste("L'import a duré : ",
 
 ```
 
-## `read_csv` permet de lire depuis une archive, ce que ne permet pas `read.csv`
+## ***readr*** permet de lire depuis une archive, ce que ne permettent pas les fonctions de base
 
 ```{r echo=TRUE, eval=FALSE}
 survey_metadata_zip <- read_delim(file = "./data/survey_metadata.zip",
@@ -367,7 +353,7 @@ survey_metadata_zip <- read_delim(file = "./data/survey_metadata.zip",
                                   skip = 70)
 ```
 
-## `read_csv` permet de lire depuis plusieurs fichiers et mêmes répertoires
+## ***readr*** permet de lire depuis plusieurs fichiers et mêmes répertoires
 
 ```{r echo=TRUE, eval=FALSE}
 continents <- c("africa", "americas", "asia", "europe", "oceania")
@@ -380,7 +366,7 @@ conti <- read_csv(filepaths, id = "file")
 
 ```
 
-## La sélection de colonnes lors de la lecture avec `read_csv` est facilitée
+## La sélection de colonnes lors de la lecture avec ***readr*** est facilitée
 
 -   Par nom de colonne
 
@@ -392,8 +378,6 @@ survey_metadata_1 <- read_delim(file = "./data/survey_metadata.csv",
 head(survey_metadata_1)
 ```
 
-## La sélection de colonnes lors de la lecture avec `read_csv` est facilitée
-
 -   Par numéro de colonne
 
 ```{r echo=TRUE, eval=FALSE}
@@ -403,8 +387,6 @@ survey_metadata_2 <- read_delim(file = "./data/survey_metadata.csv",
                                 col_select = c(1,2,5:8))
 head(survey_metadata_2)
 ```
-
-## La sélection de colonnes lors de la lecture avec `read_csv` est facilitée
 
 -   Par numéro de colonne, en omettant certaines colonnes
 
@@ -416,7 +398,7 @@ survey_metadata_3 <- read_delim(file = "./data/survey_metadata.csv",
 head(survey_metadata_3)
 ```
 
-## On peut renommer certaines colonnes
+## On peut renommer certaines colonnes avec ***readr***
 
 NB : ne pas oublier `everything()` pour conserver à l'identique toutes les colonnes non renommées
 
@@ -429,7 +411,7 @@ head(survey_metadata_4)
 
 ```
 
-## On peut faire un filtre en entrée sur les valeurs d'une colonne avec `read_..._chunked`
+## On peut faire un filtre en entrée sur les valeurs d'une colonne avec `read_..._chunked` {.smaller}
 
 -   Pour sélectionner sur une colonne (ici la famille)
 
@@ -440,8 +422,6 @@ kyphosidae_labridae_sparidae_biomass <- read_csv_chunked(file = "./data/global_r
                                chunk_size = 1000)
 table(kyphosidae_labridae_sparidae_biomass$family)
 ```
-
-## On peut faire un filtre en entrée sur les valeurs d'une colonne avec `read_..._chunked`
 
 -   Pour sélectionner sur plusieurs colonnes (ici la famille et la classe de taille)
 
@@ -2932,25 +2912,27 @@ ggplot(data = biomass_abundance,
 
 ### Les données géographiques 
 
-Ce sont des données ayant une localisation dans l'espace. On peut les représenter et les visualiser sur une carte. Pour les répresenter il existe deux formats principaux : le vecteur et le raster.
+Ce sont des données ayant une localisation dans l'espace. On peut les visualiser sur une carte. Pour les répresenter il existe deux formats principaux : le vecteur et le raster.
 
 ### Un raster c'est quoi ?
 
-Un raster est une image dans laquelle chaque pixel a une seule valeur et est géo-référencé.
-Chaque pixel a la même taille et la résolution dépend du nombre de pixel.
-Sous R, il existe une librairie spécialement développée pour traiter des fichiers raster. c'est la librairie `raster`
+Un **raster** est une image dans laquelle chaque pixel a une seule valeur et est géo-référencé.
+Chaque pixel a la même taille et la résolution dépend du nombre de pixels.
+Sous R, il existe une librairie spécialement développée pour traiter des fichiers raster. C'est la librairie `raster`
 
 ### Un vecteur c'est quoi ?
 
-Un vecteur est composé de 2 éléments principaux:
+Un **vecteur** est composé de 2 éléments principaux:
   
--   la **table attributaire** : permet de décrire les informations qui lui sont associées. Le nombre d'informations n'est pas limitée
+-   la **table attributaire** : permet de décrire les informations qui lui sont associées. Le nombre d'informations n'est pas limité
   
 -   la **partie graphique** (sa forme) : il existe trois types de géometrie pour définir les vecteurs (point, ligne, polygone)
 
-L'ensemble de ces composantes (informations, géométrie, projection, ...) forme un objet que l'on appelle shapefile. La librairie `sf` permet de gérer les formats vecteur sous R. 
+L'ensemble de ces composantes (informations, géométrie, projection, ...) forme un objet que l'on appelle shapefile. 
+
+La librairie `sf` permet de gérer les formats vecteur sous R. 
   
-Pour plus d'informations détaillées [cliquez ici](https://naturagis.fr/cartographie-sig/difference-vecteur-raster/)  
+Pour plus d'informations [cliquez ici](https://naturagis.fr/cartographie-sig/difference-vecteur-raster/)  
 
 ##
 
@@ -3070,7 +3052,7 @@ map4.1
 ##
 ### Applications : geom_sf_text
 
--   Afficher sous format texte le code ISO3 des pays
+-   Afficher sous format texte le code ISO3 des pays sans superposition des étiquettes (check_overlap)
 
 ```{r, eval=TRUE, fig.align='center'}
 map4.2 <- map1 +
@@ -3355,7 +3337,7 @@ med_map5
 
 ## Exercice 5.14 {auto-animate="true"}
 
--   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
+-   Customisez la carte avec la flèche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -3363,7 +3345,7 @@ med_map5
 
 ## Exercice 5.14 corrigé {auto-animate="true"}
 
--   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
+-   Customisez la carte avec la flèche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
 
 ```{r echo=TRUE, eval=FALSE, fig.align='center'}
 # solution
