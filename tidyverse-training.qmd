@@ -2351,7 +2351,7 @@ Renommer proprement les axes de boxplot_biomass_country.
 # Solution
 ```
 
-## Exercice 5.3 - Corrigé {auto-animate="true"}
+## Exercice 5.3 : Correction {auto-animate="true"}
 
 Renommer proprement les axes de boxplot_biomass_country.
 
@@ -2374,7 +2374,7 @@ Dans la fonction `element_text()`, un argument permet de tourner les légendes d
 # Solution
 ```
 
-## Exercice 5.4 - Corrigé {auto-animate="true"}
+## Exercice 5.4 : Correction {auto-animate="true"}
 
 Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choisir votre arrière plan préféré.
 
@@ -2399,7 +2399,7 @@ Enregistrer la figure **boxplot_biomass_country_v3** au format **.png**, avec un
 # Solution
 ```
 
-## Exercice 5.5 corrigé {auto-animate="true"}
+## Exercice 5.5 : Correction {auto-animate="true"}
 
 Enregistrer la figure **boxplot_biomass_country_v3** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
 
@@ -2736,7 +2736,7 @@ A partir des données **data_biomass_5country**, construire un diagramme en barr
 ```
 
 
-## Exercice 5.7 - Corrigé {auto-animate="true"}
+## Exercice 5.7 : Correction {auto-animate="true"}
 
 A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
@@ -2752,7 +2752,7 @@ country_mean <- data_biomass_5country %>%
 
 ## Exercice 5.7 : Correction {auto-animate="true"}
 
-A partir des données data_biomass_5country, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
+A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
 ```{r fig.align='center', out.width="70%"}
 # Figure 
@@ -2883,7 +2883,7 @@ ggplot(data = biomass_abundance,
 
 ## Gestion des facteurs & groupes {auto-animate="true"}
 
-Changeons l'ordre des facteurs de façon à ce que la classe [75,100[ soient en 1ère.
+Changeons l'ordre des facteurs de façon à ce que la classe [75,100[ soit en 1ère.
 
 
 
@@ -2904,7 +2904,7 @@ ggplot(data = biomass_abundance2,
 
 ## Exercice 5.8 {auto-animate="true"}
 
-Réaliser un diagramme en barre permettant illustre le mieux les cas où l'abondance est supérieure à la biomasse et vise-versa.
+Réaliser un diagramme en barres permettant d'illustrer le mieux les cas où l'abondance est supérieure à la biomasse et vice-versa.
 
 ```{r}
 # Correction
@@ -2912,7 +2912,7 @@ Réaliser un diagramme en barre permettant illustre le mieux les cas où l'abond
 
 ## Exercice 5.8 : Correction {auto-animate="true"}
 
-Réaliser un diagramme en barre permettant illustre le mieux les cas où l'abondance est supérieure à la biomasse et vise-versa.
+Réaliser un diagramme en barres permettant d'illustrer le mieux les cas où l'abondance est supérieure à la biomasse et vice-versa.
 
 ```{r fig.align='center'}
 # Correction
@@ -2943,13 +2943,12 @@ Sous R, il existe une librairie spécialement développée pour traiter des fich
 ### Un vecteur c'est quoi ?
 
 Un vecteur est composé de 2 éléments principaux:
--   la table attributaire : permet de décrire les informations qui lui sont associées. Le nombre d'informations n'est pas limitée
   
--   la partie graphique (sa forme) : il existe trois types de géometrie pour définir les vecteurs (point, ligne, polygone)
+-   la **table attributaire** : permet de décrire les informations qui lui sont associées. Le nombre d'informations n'est pas limitée
   
-L'ensemble de ces composantes (informations, géométrie, projection, ...) forme un objet que l'on appelle shapefile.
-  
-La librairie `sf` permet de gérer les formats vecteur sous R. 
+-   la **partie graphique** (sa forme) : il existe trois types de géometrie pour définir les vecteurs (point, ligne, polygone)
+
+L'ensemble de ces composantes (informations, géométrie, projection, ...) forme un objet que l'on appelle shapefile. La librairie `sf` permet de gérer les formats vecteur sous R. 
   
 Pour plus d'informations détaillées [cliquez ici](https://naturagis.fr/cartographie-sig/difference-vecteur-raster/)  
 
@@ -3173,7 +3172,7 @@ med_map1
 
 ## Exercice 5.10 {.smaller auto-animate="true"}
 
--   Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)
+-   Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (gray92)
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -3181,7 +3180,7 @@ med_map1
 
 ## Exercice 5.10 corrigé {.smaller auto-animate="true"}
 
--   Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (grey92)
+-   Ajoutez au résultat précédent un fond de carte avec les pays en gris clair (gray92)
 
 ```{r echo=TRUE, eval=TRUE, fig.align='center'}
 # solution
