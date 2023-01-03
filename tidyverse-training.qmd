@@ -2930,21 +2930,21 @@ ggplot(data = biomass_abundance,
 
 ### Une petite introduction pour commencer
 
--   Les données géographiques 
+### Les données géographiques 
 
 Ce sont des données ayant une localisation dans l'espace. On peut les représenter et les visualiser sur une carte. Pour les répresenter il existe deux formats principaux : le vecteur et le raster.
 
 ### Un raster c'est quoi ?
 
 Un raster est une image dans laquelle chaque pixel a une seule valeur et est géo-référencé.
-Chaque pixel a la meme taille et la résolution dépend du nombre de pixel.
+Chaque pixel a la même taille et la résolution dépend du nombre de pixel.
 Sous R, il existe une librairie spécialement développée pour traiter des fichiers raster. c'est la librairie `raster`
 
-### vecteur c'est quoi ?
+### Un vecteur c'est quoi ?
 
-Un vecteur est composé de 2 élèments principaux:
-  - la table attributaire : permet de décrire les informations qui lui sont associées. le nombre d'informations n'est pas limitées
-  - la partie graphique (sa forme) : il existe trois types de géometrie pour définir les vecteurs (point, ligne, polygone)
+Un vecteur est composé de 2 éléments principaux:
+-   la table attributaire : permet de décrire les informations qui lui sont associées. le nombre d'informations n'est pas limitées
+-   la partie graphique (sa forme) : il existe trois types de géometrie pour définir les vecteurs (point, ligne, polygone)
 L'ensemble de ces composantes (informations, géométrie, projection, ...) forme un objet que l'on appelle shapefile.
 La librairie `sf` permet de gérer les format vecteur sous R. 
   
@@ -2967,7 +2967,7 @@ geom_raster()
 
 ##  {.smaller}
 
-### Applications - geom_sf
+### Applications : geom_sf
 
 -   Charger les données et visualiser la carte
 
@@ -2988,7 +2988,7 @@ map1
 
 ## {.smaller}
 
-###Applications - stat_sf_coordinates
+### Applications : stat_sf_coordinates
 
 -   Afficher sur chaque pays un rond dont la taille est proportionnelle à la population et la couleur fonction du GDP
 
@@ -3012,7 +3012,7 @@ map2
 
 ## {.smaller}
 
-### Applications - geom_raster
+### Applications : geom_raster
 
 -   Créer un raster et le visualiser
 
@@ -3028,7 +3028,7 @@ map3.1
 
 ##
 
-### Applications - geom_raster
+### Applications : geom_raster
 
 ```{r, eval=TRUE, fig.align='center'}
 map3.2 <- ggplot() +
@@ -3048,7 +3048,8 @@ geom_sf_label()
 ```
 
 ##
-### Applications - geom_sf_text
+     
+### Applications : geom_sf_text
 
 -   Afficher sous format texte le code ISO3 des pays
 
@@ -3065,7 +3066,7 @@ map4.1
 ```
 
 ##
-### Applications - geom_sf_text
+### Applications : geom_sf_text
 
 -   Afficher sous format texte le code ISO3 des pays
 
@@ -3084,7 +3085,8 @@ map4.2
 ```
 
 ##
-### Applications - geom_sf_label
+  
+### Applications : geom_sf_label
 
 -   Afficher sous format étiquette le code ISO3 des pays
 
@@ -3113,7 +3115,7 @@ annotation_north_arrow()
 
 ## 
 
-### Application - annotation_scale
+### Application : annotation_scale
 
 -   Ajouter la barre d'échelle
 
@@ -3126,7 +3128,8 @@ map6.1
 ```
 
 ##
-### Application - annotation_north_arrow
+  
+### Application : annotation_north_arrow
 
 -   Ajouter la flèche du nord
 
@@ -3186,7 +3189,7 @@ med_map2
 
 ## Exercice 5.11 {.smaller auto-animate="true"}
 
--   Recentrez la carte autour des pays d'intérêt (xmin=-20,xmax=60,ymin=25,ymax=45)
+-   Recentrez la carte autour des pays d'intérêt (xmin=-20, xmax=60, ymin=25, ymax=45)
 
 ```{r echo=TRUE, eval=FALSE, fig.align='center'}
 # solution
@@ -3194,7 +3197,7 @@ med_map2
 
 ## Exercice 5.11 corrigé {.smaller auto-animate="true"}
 
--   Recentrez la carte autour des pays d'intérêt (xmin=-20,xmax=60,ymin=25,ymax=45)
+-   Recentrez la carte autour des pays d'intérêt (xmin=-20, xmax=60, ymin=25, ymax=45)
 
 ```{r, eval=TRUE, fig.align='center'}
 # solution
@@ -3206,7 +3209,7 @@ med_map3
 
 ## Exercice 5.12 {auto-animate="true"}
 
--   Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes
+-   Pour chaque pays, ajoutez un cercle proportionnel au nombre de transects réalisés sur ses côtes
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -3214,7 +3217,7 @@ med_map3
 
 ## Exercice 5.12 corrigé {auto-animate="true"}
 
--   Pour chaque pays ajouter un cercle proportionnel au nombre de transects réalisés sur ses côtes
+-   Pour chaque pays, ajoutez un cercle proportionnel au nombre de transects réalisés sur ses côtes
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -3264,7 +3267,7 @@ med_map4
 ```
 ## Exercice 5.13 {auto-animate="true"}
 
--   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("bathy_med.tif) Que remarquez vous ?
+-   Ajoutez la carte de bathymétrie. Pour la charger, utilisez la commande raster::raster("./data/bathy_med.tif"). Que remarquez vous ?
   
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -3272,7 +3275,7 @@ med_map4
 
 ## Exercice 5.13 corrigé {auto-animate="true"}
 
--   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("./data/bathy_med.tif") Que remarquez vous ?
+-   Ajoutez la carte de bathymétrie. Pour la charger, utilisez la commande raster::raster("./data/bathy_med.tif"). Que remarquez vous ?
 
 ```{r echo=TRUE, eval=FALSE, fig.align='center'}
 # solution
@@ -3298,7 +3301,7 @@ med_map5
 
 ## Exercice 5.13 corrigé {auto-animate="true"}
 
--   Ajouter la carte de bathymétrie. Pour la charger utiliser la commande raster::raster("./data/bathy_med.tif") Que remarquez vous ?
+-   Ajoutez la carte de bathymétrie. Pour la charger, utilisez la commande raster::raster("./data/bathy_med.tif"). Que remarquez vous ?
   
 ```{r echo=TRUE, eval=FALSE, fig.align='center'}
 # solution
