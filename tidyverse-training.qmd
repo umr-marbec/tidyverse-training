@@ -2943,10 +2943,13 @@ Sous R, il existe une librairie spécialement développée pour traiter des fich
 ### Un vecteur c'est quoi ?
 
 Un vecteur est composé de 2 éléments principaux:
--   la table attributaire : permet de décrire les informations qui lui sont associées. le nombre d'informations n'est pas limitées
+-   la table attributaire : permet de décrire les informations qui lui sont associées. Le nombre d'informations n'est pas limitée
+  
 -   la partie graphique (sa forme) : il existe trois types de géometrie pour définir les vecteurs (point, ligne, polygone)
+  
 L'ensemble de ces composantes (informations, géométrie, projection, ...) forme un objet que l'on appelle shapefile.
-La librairie `sf` permet de gérer les format vecteur sous R. 
+  
+La librairie `sf` permet de gérer les formats vecteur sous R. 
   
 Pour plus d'informations détaillées [cliquez ici](https://naturagis.fr/cartographie-sig/difference-vecteur-raster/)  
 
