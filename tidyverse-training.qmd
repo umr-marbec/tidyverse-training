@@ -1740,7 +1740,7 @@ tac_final_modif_level2 <- tac_final %>%
 
 # 4.2 : Manipuler des dates avec lubridate
 
-## Rends la manipulation des dates et du temps presque agréable sous R
+## Rend la manipulation des dates et du temps presque agréable sous R
 
 -   Analyse semi-automatique des dates et des heures
 
@@ -1760,7 +1760,7 @@ ymd_hms()
 
 ## Manipulation des élements date-temps
 
-### Modification et extration
+### Modification et extraction
 
 ```{r echo=TRUE, eval=FALSE}
 test_date_time <- ymd_hms("2022-12-05 12:00:00", tz = "CET")
@@ -2210,7 +2210,7 @@ couche.6
 
 ## Ggplot pas à pas : le FACET
 
-La fonction `facet_grid()` permet de générer X plots pour chaque valeur d'une variable qualitative (i.e. le sexe).
+La fonction `facet_grid()` permet de générer X plots pour chaque valeur d'une variable qualitative (i.e. l'espèce).
 
 . . .
 
@@ -2376,7 +2376,7 @@ Dans la fonction `element_text()`, un argument permet de tourner les légendes d
 
 ## Exercice 5.4 - Corrigé {auto-animate="true"}
 
-Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choissir votre arrière plan préféré.
+Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choisir votre arrière plan préféré.
 
 ```{r out.width="80%"}
 # Solution
@@ -2708,7 +2708,7 @@ L'utilisation de cette fonction nécessite le calcul préalable de l'écart-type
 . . .
 
 ```{r}
-# Formattage des données
+# Formatage des données
 crabs_mean <- data_crabs %>%
   group_by(sp) %>%
   summarise(CL_mean = mean(CL),
@@ -2852,7 +2852,7 @@ ggplot(data = biomass_abundance,
 
 ## Gestion des facteurs & groupes {auto-animate="true"}
 
-Changeons l'ordre des facteurs de façon à ce que la classe [75,100[ soient en 1ère.
+Changeons l'ordre des facteurs de façon à ce que la classe [75,100[ soit en 1ère.
 
 
 
