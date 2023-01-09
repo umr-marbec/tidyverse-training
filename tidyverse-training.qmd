@@ -207,10 +207,9 @@ Les fonctions de readr les plus utilisées sont :
 ```{r echo=TRUE, eval=FALSE}
 global_reef_fish_biomass <- read_delim(file = "./data/global_reef_fish_biomass.csv",
                                        delim = ",")
-
 ```
 
--   Ou bien avec `read_csv` : delimiteur par défaut = virgule
+-   0u bien avec `read_csv` : delimiteur par defaut = virgule
 
 ```{r echo=TRUE, eval=FALSE}
 global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv")
@@ -218,19 +217,23 @@ global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv
 
 ## Le ***tibble*** global_reef_fish_biomass
 
--   On vérifie sa classe avec `class()`
+On vérifie sa classe avec `class()`
 
 ```{r echo=TRUE, eval=FALSE}
 class(global_reef_fish_biomass)
 ```
 
--   On vérifie sa structure avec `str()`
+## Le ***tibble*** global_reef_fish_biomass
+
+On vérifie sa structure avec `str()`
 
 ```{r echo=TRUE, eval=FALSE}
 str(global_reef_fish_biomass)
 ```
 
--   On vérifie son contenu avec `head()`
+## Le ***tibble*** global_reef_fish_biomass
+
+On vérifie son contenu avec `head()`
 
 ```{r echo=TRUE, eval=FALSE}
 head(global_reef_fish_biomass)
@@ -252,22 +255,32 @@ write_delim(global_reef_fish_biomass, "./data/global_reef_fish_biomass_out2.txt"
 
 ## Comment lire un fichier avec d'autres séparateurs des colonnes et des décimales ?
 
-Pour générer un autre format de fichier, on exporte biomass au format csv "francais" (séparateur décimal=",' et séparateur des colonnes=";")
+-   Pour générer un autre format de fichier, on exporte biomass au format csv "francais" (séparateur décimal=",' et séparateur des colonnes=";")
 
 ```{r echo=TRUE, eval=FALSE}
 write_csv2(global_reef_fish_biomass, "./data/global_reef_fish_biomass_out3.csv")
 ```
 
-Puis on essaie d'importer sous R ce nouveau csv au format "francais"
+-   Puis on essaie de lire ce nouveau csv au format francais
 
--   Option 1 : `read_csv2`
+## Option 1 : `read_csv2`
 
 ```{r echo=TRUE, eval=FALSE}
 global_reef_fish_biomass3 <- read_csv2(file = "./data/global_reef_fish_biomass_out3.csv")
 str(global_reef_fish_biomass3)
 ```
 
--   Option 2 : `read_delim` en précisant le séparateur décimal avec locale() pour éviter de lire les nombres comme du caractère
+## Option 2 : `read_delim` sans préciser le séparateur décimal
+
+PAS BON car les nombres décimaux (ex: biomass) sont lus comme du caractère
+
+```{r echo=TRUE, eval=FALSE}
+global_reef_fish_biomass3 <- read_delim(file = "./data/global_reef_fish_biomass_out3.csv",
+                                       delim = ";")
+str(global_reef_fish_biomass3) 
+```
+
+## Option 3 : read_delim en précisant le séparateur décimal avec locale()
 
 ```{r echo=TRUE, eval=FALSE}
 global_reef_fish_biomass3 <- read_delim(file = "./data/global_reef_fish_biomass_out3.csv",
@@ -278,13 +291,13 @@ str(global_reef_fish_biomass3)
 
 ## Le type des colonnes
 
--   Afficher les spécifications avec `spec`
+Afficher les specifications avec `spec`
 
 ```{r echo=TRUE, eval=FALSE}
 spec(global_reef_fish_biomass)
 ```
 
--   Simplifier les spécifications avec `col_condense`
+Simplifier les specifications avec `col_condense`
 
 ```{r echo=TRUE, eval=FALSE}
 cols_condense(spec(global_reef_fish_biomass))
@@ -300,18 +313,14 @@ global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv
                                    method = col_factor(),
                                    block = col_factor(levels=c("3","2","1"))))
 spec(global_reef_fish_biomass)
-
 levels(global_reef_fish_biomass$block)
-
 global_reef_fish_biomass <- droplevels(global_reef_fish_biomass)
 levels(global_reef_fish_biomass$block)
 ```
 
 ## Importer en ***tibble*** le fichier Survey_metadata.csv
 
-Ce fichier contient des métadonnées caractérisant les campagnes (survey_id) 
-
-Particularités : séparateur ";" et 70 lignes de commentaires au début qui ne doivent pas être lues : utilisation du paramètre `skip =`
+Ce fichier contient des métadonnées caractérisant les campagnes (survey_id) Particularités : séparateur ";" et 70 lignes de commentaires au début qui ne doivent pas être lues : utilisation du paramètre `skip =`
 
 ```{r echo=TRUE, eval=FALSE}
 survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
@@ -344,10 +353,9 @@ fish2 <- read_delim(file = "./data/global_reef_fish_biomass.csv",
 fin <- Sys.time()
 print(paste("L'import a duré : ",
             fin-debut, "secondes"))
-
 ```
 
-## ***readr*** permet de lire depuis une archive, ce que ne permettent pas les fonctions de base
+## `read_csv` permet de lire depuis une archive, ce que ne permet pas `read.csv`
 
 ```{r echo=TRUE, eval=FALSE}
 survey_metadata_zip <- read_delim(file = "./data/survey_metadata.zip",
@@ -355,7 +363,7 @@ survey_metadata_zip <- read_delim(file = "./data/survey_metadata.zip",
                                   skip = 70)
 ```
 
-## ***readr*** permet de lire depuis plusieurs fichiers et même répertoires
+## `read_csv` permet de lire depuis plusieurs fichiers et mêmes répertoires
 
 ```{r echo=TRUE, eval=FALSE}
 continents <- c("africa", "americas", "asia", "europe", "oceania")
@@ -365,10 +373,9 @@ filepaths <- vapply(
   FUN.VALUE = character(1)
 )
 conti <- read_csv(filepaths, id = "file")
-
 ```
 
-## La sélection de colonnes lors de la lecture avec ***readr*** est facilitée
+## La sélection de colonnes lors de la lecture avec `read_csv` est facilitée
 
 -   Par nom de colonne
 
@@ -380,6 +387,8 @@ survey_metadata_1 <- read_delim(file = "./data/survey_metadata.csv",
 head(survey_metadata_1)
 ```
 
+## La sélection de colonnes lors de la lecture avec `read_csv` est facilitée
+
 -   Par numéro de colonne
 
 ```{r echo=TRUE, eval=FALSE}
@@ -389,6 +398,8 @@ survey_metadata_2 <- read_delim(file = "./data/survey_metadata.csv",
                                 col_select = c(1,2,5:8))
 head(survey_metadata_2)
 ```
+
+## La sélection de colonnes lors de la lecture avec `read_csv` est facilitée
 
 -   Par numéro de colonne, en omettant certaines colonnes
 
@@ -400,7 +411,7 @@ survey_metadata_3 <- read_delim(file = "./data/survey_metadata.csv",
 head(survey_metadata_3)
 ```
 
-## On peut renommer certaines colonnes avec ***readr***
+## On peut renommer certaines colonnes
 
 NB : ne pas oublier `everything()` pour conserver à l'identique toutes les colonnes non renommées
 
@@ -410,7 +421,6 @@ survey_metadata_4 <- read_delim(file = "./data/survey_metadata.csv",
                                 skip = 70,
                                 col_select = c(projet = survey_id, pays = country, everything()))
 head(survey_metadata_4)
-
 ```
 
 ## On peut faire un filtre en entrée sur les valeurs d'une colonne avec `read_..._chunked`
@@ -424,6 +434,8 @@ kyphosidae_labridae_sparidae_biomass <- read_csv_chunked(file = "./data/global_r
                                chunk_size = 1000)
 table(kyphosidae_labridae_sparidae_biomass$family)
 ```
+
+## On peut faire un filtre en entrée sur les valeurs d'une colonne avec `read_..._chunked`
 
 -   Pour sélectionner sur plusieurs colonnes (ici la famille et la classe de taille)
 
@@ -781,7 +793,6 @@ biomass_exercice2_3 <- biomass_exercice2_2 %>%
   ungroup() %>%
   distinct(survey_id_full,
            .keep_all = TRUE)
-
 biomass_exercice2_3_sample_verification <- dplyr::group_by(.data = biomass_exercice2_2,
                                                            family) %>%
   summarise(nb_sample_family = n()) %>%
@@ -881,7 +892,6 @@ survey_metadata_distinct <- distinct(.data = survey_metadata)
 biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
   left_join(survey_metadata_distinct,
              by = "survey_id")
-
 save(biomass_survey_exercice2_4, file = "./data/biomass_survey_exercice2_4.RData")
 ```
 
@@ -1185,7 +1195,6 @@ abundance_long <- abundance %>%
     values_drop_na = TRUE # Attention à l'argument values_dop_na
   ) %>%
   unite(., col = "survey_id_full", c(survey_id, sp_size), sep = "_")
-
 slice_head(abundance_long)
 ```
 <br>
@@ -1211,14 +1220,12 @@ kable(abundance_long[1:6,], html_font = "Computer Modern", table.attr = "style='
 load("./data/biomass_survey_exercice2_4.RData")
 biomass_abundance <- biomass_survey_exercice2_4 %>%
   left_join(., abundance_long, by = "survey_id_full")
-
 ```
 ```{r echo=FALSE, eval=TRUE}
 # solution
 load("./data_tmp/biomass_survey_exercice2_4.RData")
 biomass_abundance <- biomass_survey_exercice2_4 %>%
   left_join(., abundance_long, by = "survey_id_full")
-
 ```
 
 ## Exercice 3.4 {.smaller auto-animate="true"}
@@ -1304,7 +1311,6 @@ biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
     remove = FALSE,
     crs = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
   )
-
 save(biomass_survey_abundance_exercice3_6,
      file = "./data/biomass_survey_abundance_exercice3_6.RData")
 ```
@@ -1319,7 +1325,6 @@ biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
     remove = FALSE,
     crs = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
   )
-
 save(biomass_survey_abundance_exercice3_6,
      file = "./data_tmp/biomass_survey_abundance_exercice3_6.RData")
 ```
@@ -1378,7 +1383,6 @@ tmp <- tibble(nom = c("Micheline Sétou", "Jean-Jacques Apeprès",  "Martine Sé
               num_rue = c("12", "15 ou 16", "NA"), 
               nom_rue = c("Rue des peupliers", "Rue + un arbre", "NA"),
               ville = c("Montpellier", "Montpellier", "Montpellier"))
-
 kable(tmp, html_font = "Computer Modern", table.attr = "style='width:60%;'")
 ```
 
@@ -1506,7 +1510,6 @@ On utilise la fonction `str_replace()` et ces arguments principaux :
 ```{r results='hide'}
 # Les noms avant le replacement
 tmp$nom
-
 ```
 
 ```{r echo = FALSE}
@@ -1594,7 +1597,6 @@ dim(survey_med)
 
 ```{r results='hide', eval = FALSE}
 global_reef_fish_biomass <- read_delim("./data/global_reef_fish_biomass.csv")
-
 global_reef_fish_biomass  %>%
   filter(survey_id == "2000951") %>%
   group_by(class) %>%
@@ -1696,17 +1698,14 @@ kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr 
   
 ```{r echo=TRUE, eval=FALSE}
 load(file = "./data/exemple_regular_expressions.RData")
-
 tac_final_modif_level1 <- tac_final %>%
   mutate(adapted_quota = as.numeric(x = adapted_quota_ori)) %>%
   relocate(adapted_quota,
            .after = adapted_quota_ori)
-
 tac_final_modif_level1_check <- filter(.data = tac_final_modif_level1,
                                        is.na(x = adapted_quota)) %>%
   dplyr::select(adapted_quota_ori,
                 adapted_quota)
-
 tac_final_modif_level2 <- tac_final %>%
   rowwise() %>%
   mutate(adapted_quota = case_when(
@@ -1932,7 +1931,6 @@ Pour la démonstration nous allons utiliser le jeu de données `crabs` de la lib
 ```{r results='hide'}
 library(MASS)
 data_crabs <- crabs %>% dplyr::select(sp, sex, CL, CW)
-
 data_crabs %>%
   head(3) %>%
   kbl(digits = 4, caption = "Crabs data") %>%
@@ -2162,7 +2160,6 @@ couche.5 <- couche.4 +
   scale_color_manual(name   = "Sex :",
                      values = c("M" = "darkblue", 
                                 "F" = "darkgreen"))
-
 ```
 
 . . .
@@ -2269,7 +2266,6 @@ Quel est le pays dans lequel la biomasse totale par transect est la plus forte ?
 
 ```{r}
 # 1 - Filter les données obtenues en 2011
-
 # 2 - Grouper les données pour obtenir la biomasse totale
 #     par transect dans chacun des pays
 ```
@@ -2321,7 +2317,6 @@ Utiliser cette fonction pour ordonner l'axe des x de façon décroissante selon 
 boxplot_biomass_country <- ggplot(data = data_biomass_country) +
   geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass)) +
   theme_bw()
-
 boxplot_biomass_country
 ```
 
@@ -2404,7 +2399,6 @@ data_biomass_5country <- data_biomass_country %>%
   mutate(Continent = case_when((country == "Spain"| country == "Italy") ~ "Europe",
                                 country == "United States" ~ "North America",
                                 TRUE ~ "South America"))
-
 # Solution pour le plot
 ```
 
@@ -2465,7 +2459,6 @@ data_biomass_depth <- biomass_survey_abundance_exercice3_6 %>%
   group_by(country, survey_id) %>%
   summarise(biomass = sum(biomass),
             depth   = unique(depth)) 
-
 ```
 
 ```{r results="hide"}
@@ -2695,7 +2688,6 @@ crabs_mean <- data_crabs %>%
   group_by(sp) %>%
   summarise(CL_mean = mean(CL),
             CL_sd   = sd(CL)) 
-
 ```
 
 . . .
@@ -2873,7 +2865,6 @@ Changeons l'ordre des facteurs de façon à ce que la classe [75,100[ soit en 1�
 biomass_abundance2 <- biomass_abundance %>%
   mutate(size_class_mm = factor(x      = biomass_abundance$size_class_mm, 
                                 levels = c("100", "75", "50", "25"))) 
-
 ggplot(data = biomass_abundance2,
        mapping = aes(x    = biom_abun, 
                      y    = value, 
@@ -2914,27 +2905,25 @@ ggplot(data = biomass_abundance,
 
 ### Les données géographiques 
 
-Ce sont des données ayant une localisation dans l'espace. On peut les visualiser sur une carte. Pour les répresenter il existe deux formats principaux : le vecteur et le raster.
+Ce sont des données ayant une localisation dans l'espace. On peut les représenter et les visualiser sur une carte. Pour les répresenter il existe deux formats principaux : le vecteur et le raster.
 
 ### Un raster c'est quoi ?
 
-Un **raster** est une image dans laquelle chaque pixel a une seule valeur et est géo-référencé.
-Chaque pixel a la même taille et la résolution dépend du nombre de pixels.
-Sous R, il existe une librairie spécialement développée pour traiter des fichiers raster. C'est la librairie `raster`
+Un raster est une image dans laquelle chaque pixel a une seule valeur et est géo-référencé.
+Chaque pixel a la même taille et la résolution dépend du nombre de pixel.
+Sous R, il existe une librairie spécialement développée pour traiter des fichiers raster. c'est la librairie `raster`
 
 ### Un vecteur c'est quoi ?
 
-Un **vecteur** est composé de 2 éléments principaux:
+Un vecteur est composé de 2 éléments principaux:
   
--   la **table attributaire** : permet de décrire les informations qui lui sont associées. Le nombre d'informations n'est pas limité
+-   la **table attributaire** : permet de décrire les informations qui lui sont associées. Le nombre d'informations n'est pas limitée
   
 -   la **partie graphique** (sa forme) : il existe trois types de géometrie pour définir les vecteurs (point, ligne, polygone)
 
-L'ensemble de ces composantes (informations, géométrie, projection, ...) forme un objet que l'on appelle shapefile. 
-
-La librairie `sf` permet de gérer les formats vecteur sous R. 
+L'ensemble de ces composantes (informations, géométrie, projection, ...) forme un objet que l'on appelle shapefile. La librairie `sf` permet de gérer les formats vecteur sous R. 
   
-Pour plus d'informations [cliquez ici](https://naturagis.fr/cartographie-sig/difference-vecteur-raster/)  
+Pour plus d'informations détaillées [cliquez ici](https://naturagis.fr/cartographie-sig/difference-vecteur-raster/)  
 
 ##
 
@@ -2965,7 +2954,6 @@ world_boundaries <-
   ne_countries(returnclass = "sf", scale = "medium")
 # dim(world_boundaries)
 # head(world_boundaries)
-
 map1 <- ggplot(data = world_boundaries) +
   geom_sf(fill = "transparent") +
   theme_bw()
@@ -3006,7 +2994,6 @@ map2
 r <- raster(ncols = 5, nrows = 5) # Création d'un raster vide
 r1 <- setValues(r, runif(ncell(r))) # Remplissage du raster avec des valeurs
 rastdf <- as.data.frame(r1, xy = TRUE) # Transformation du raster en data frame
-
 map3.1 <- ggplot() +
   geom_raster(data = rastdf, aes(x = x, y = y))
 map3.1
@@ -3054,7 +3041,7 @@ map4.1
 ##
 ### Applications : geom_sf_text
 
--   Afficher sous format texte le code ISO3 des pays sans superposition des étiquettes (check_overlap)
+-   Afficher sous format texte le code ISO3 des pays
 
 ```{r, eval=TRUE, fig.align='center'}
 map4.2 <- map1 +
@@ -3216,7 +3203,6 @@ survey_med_nsample <- survey_med %>%
 country_med_nsample <-
   left_join(world_boundaries, survey_med_nsample, by = c("name" = "country")) %>%
   drop_na(n_sample)
-
 med_map4 <- med_map3 +
   stat_sf_coordinates(
     aes(size = n_sample),
@@ -3240,7 +3226,6 @@ survey_med_nsample <- survey_med %>%
 country_med_nsample <-
   left_join(world_boundaries, survey_med_nsample, by = c("name" = "country")) %>%
   drop_na(n_sample)
-
 med_map4 <- med_map3 +
   stat_sf_coordinates(
     aes(size = n_sample),
@@ -3293,7 +3278,6 @@ med_map5
 # solution
 bathy_med <- raster::raster("./data/bathy_med.tif")
 rastdf <- as.data.frame(bathy_med, xy = TRUE)
-
 med_map5 <- ggplot(data = survey_med) +
   geom_raster(data = rastdf, aes(x = x, y = y, fill = bathy_med)) +
   geom_sf(data = world_boundaries, fill = "gray92")  +
@@ -3318,7 +3302,6 @@ med_map5
 # solution
 bathy_med <- raster::raster("./data_tmp/bathy_med.tif")
 rastdf <- as.data.frame(bathy_med, xy = TRUE)
-
 med_map5 <- ggplot(data = survey_med) +
   geom_raster(data = rastdf, aes(x = x, y = y, fill = bathy_med)) +
   geom_sf(data = world_boundaries, fill = "gray92")  +
@@ -3339,7 +3322,7 @@ med_map5
 
 ## Exercice 5.14 {auto-animate="true"}
 
--   Customisez la carte avec la flèche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
+-   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -3347,7 +3330,7 @@ med_map5
 
 ## Exercice 5.14 corrigé {auto-animate="true"}
 
--   Customisez la carte avec la flèche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
+-   Customisez la carte avec la flêche du Nord, le nom des axes et un titre. Renommez la légende et ajoutez une palette de couleurs distinguant terre et mer pour la bathymétrie
 
 ```{r echo=TRUE, eval=FALSE, fig.align='center'}
 # solution
