@@ -1,0 +1,43 @@
+{
+    "title": "Tidyverse training",
+    "description": "Ressources and materials related to the Tidyverse training.",
+    "license": "GPL-3",
+    "upload_type": "lesson",
+    "access_right": "open",
+    "creators": [
+        {
+            "orcid": "0000-0002-8436-5925",
+            "affiliation": "Institut de recherche pour le développement",
+            "name": "Simier, Monique"
+        },
+        {
+            "orcid": "0000-0001-9555-6770",
+            "affiliation": "Montpellier University",
+            "name": "Velez, Laure"
+        },
+        {
+            "orcid": "0000-0003-3816-5583",
+            "affiliation": "Montpellier Universit",
+            "name": "Mariani, Gael"
+        },
+        {
+            "orcid": "0000-0001-8080-0531",
+            "affiliation": "French National Centre for Scientific Research",
+            "name": "Depetris, Mathieu"
+        }
+    ],
+    "keywords": [
+      "training",
+      "tidyverse",
+      "marbec",
+      "dplyr",
+      "ggplot2",
+      "lubridate",
+      "stringr",
+      "readr",
+      "R"
+    ],
+    "communities": [
+        {"identifier": "umr-marbec"}
+    ]
+}
