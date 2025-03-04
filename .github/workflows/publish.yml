@@ -1,9 +1,9 @@
 on:
   workflow_dispatch:
   push:
-    branches: [master]
+    branches: [main, 2025_mathieu]
 
-name: Quarto Publish
+name: Quarto Publish multi-languages website
 
 jobs:
   build-deploy:
@@ -12,50 +12,30 @@ jobs:
       contents: write
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-      
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v2
-        with:
-          use-public-rspm: true
-          r-version: '4.1.0'
-          
-      - name: Install dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: rnaturalearthhires=?ignore
-          packages: |
-            jsonlite
-            patchwork
-            knitr
-            cowplot
-            colorBlindness
-            RColorBrewer
-            kableExtra
-            dplyr
-            tidyr
-            readr
-            ggplot2
-            purrr
-            tibble
-            stringr
-            forcats
-            MASS
-            viridis
-            ggpubr
-            raster
-            sf
-            sp
-            rnaturalearth
-            rnaturalearthdata
-            ggspatial
 
-      - name: Render and Publish
+      - name: Render Quarto Project french version
+        uses: quarto-dev/quarto-actions/render@v2
+        env:
+          QUARTO_PROFILE: french
+        with:
+          to: html
+
+      - name: Render Quarto Project english version
+        uses: quarto-dev/quarto-actions/render@v2
+        env:
+          QUARTO_PROFILE: english
+        with:
+          to: html
+
+      - name: Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
+          path: ./_site/
+          render: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

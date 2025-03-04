@@ -1,0 +1,152 @@
+name: GitHub to git mirror with release assets
+
+on:
+  push: 
+    branches:
+      - '**'
+    tags:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+  delete:
+    branches:
+      - '**'
+    tags:
+      - '**'
+  release:
+    types:
+      - created
+      - published
+      - edited
+      - deleted
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository as bare
+        run: |
+          git clone --bare https://github.com/umr-marbec/tidyverse-training.git my-github-repository.git
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
+
+      - name: Add forge remote
+        run: |
+          cd my-github-repository.git
+          git remote add mirror https://oauth2:${{ secrets.TOKEN_BACKUP_TIDYVERSE_TRAINING }}@forge.ird.fr/marbec/den/backup_tidyverse_training.git
+  
+      - name: Push to forge
+        run: |
+          cd my-github-repository.git
+          git push --mirror mirror
+
+  download-release-assets:
+      runs-on: ubuntu-latest
+      needs: mirror
+
+      steps:
+        - name: Set up Git (Authentication)
+          run: |
+            git config --global user.name "GitHub Actions"
+            git config --global user.email "github-actions@users.noreply.github.com"
+
+        - name: Fetch release(s) from GitHub
+          id: fetch_releases
+          run: |
+            RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/umr-marbec/tidyverse-training/releases")
+          
+            RELEASE_IDS_NAMES=$(echo "$RESPONSE" | jq -r '.[] | "\(.id) \(.name)"')
+
+            if [ -z "$RELEASE_IDS_NAMES" ]; then
+              echo "No release found. No action required."
+              echo "SKIP_NEXT_STEP=true" >> $GITHUB_ENV
+              exit 0
+            fi
+
+            NUM_RELEASES=$(echo "$RELEASE_IDS_NAMES" | wc -l)
+            echo "Number of releases found: $NUM_RELEASES"
+            echo "NUM_RELEASES=$NUM_RELEASES" >> $GITHUB_ENV
+
+            RELEASE_IDS=""
+            RELEASE_NAMES=""
+            
+            while IFS= read -r line; do
+              RELEASE_ID=$(echo "$line" | awk '{print $1}')
+              RELEASE_NAME=$(echo "$line" | awk '{print $2}')
+              RELEASE_IDS="$RELEASE_IDS$RELEASE_ID,"
+              RELEASE_NAMES="$RELEASE_NAMES$RELEASE_NAME,"
+            done <<< "$RELEASE_IDS_NAMES"
+
+            RELEASE_IDS=${RELEASE_IDS%,}
+            RELEASE_NAMES=${RELEASE_NAMES%,}
+
+            echo "RELEASE_IDS=$RELEASE_IDS" >> $GITHUB_ENV
+            echo "RELEASE_NAMES=$RELEASE_NAMES" >> $GITHUB_ENV
+
+        - name: Download release(s) asset(s) from GitHub
+          id: download_assets
+          if: ${{ env.SKIP_NEXT_STEP != 'true' }}
+          run: |
+            ASSETS_FOUND=false
+            NUM_RELEASES=${{ env.NUM_RELEASES }}
+            RELEASE_IDS=${{ env.RELEASE_IDS }}
+            RELEASE_NAMES=${{ env.RELEASE_NAMES }}
+            IFS=',' read -ra RELEASE_IDS_ARRAY <<< "$RELEASE_IDS"
+            IFS=',' read -ra RELEASE_NAMES_ARRAY <<< "$RELEASE_NAMES"
+            for num_release in $(seq 0 $((NUM_RELEASES - 1))); do
+              RELEASE_ID="${RELEASE_IDS_ARRAY[$num_release]}"
+              RELEASE_NAME="${RELEASE_NAMES_ARRAY[$num_release]}"
+              echo "Processing release ID: $RELEASE_ID with Name: $RELEASE_NAME"
+              ASSETS=$(curl -s \
+                -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                "https://api.github.com/repos/umr-marbec/tidyverse-training/releases/$RELEASE_ID/assets" \
+                | jq -r '.[].browser_download_url')
+              if [ -z "$ASSETS" ]; then
+                echo "No assets found for release $RELEASE_ID ($RELEASE_NAME). Skipping download step."
+                continue
+              else
+                ASSETS_FOUND=true
+                mkdir -p "release-assets/$RELEASE_ID"_"$RELEASE_NAME"
+                cd "release-assets/$RELEASE_ID"_"$RELEASE_NAME"
+        
+                for URL in $ASSETS; do
+                  echo "Downloading $URL"
+                  curl -L -o "$(basename "$URL")" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "$URL"
+                done
+        
+                cd -
+              fi
+            done
+            if [ "$ASSETS_FOUND" = false ]; then
+              echo "No assets found for any release. Exiting."
+              echo "SKIP_NEXT_STEP=true" >> $GITHUB_ENV
+              exit 0
+            fi
+
+        - name: Push asset(s) to mirror repository
+          id: push_mirror
+          if: ${{ env.SKIP_NEXT_STEP != 'true' }}
+          run: |
+            git clone https://oauth2:${{ secrets.TOKEN_BACKUP_TIDYVERSE_TRAINING }}@forge.ird.fr/marbec/den/backup_tidyverse_training.git
+            cd test_miroir_github
+
+            if [ -d "release-assets" ]; then
+              echo "Removing existing release-assets directory from the mirror repository."
+              rm -rf release-assets
+            fi
+
+            echo "Copying local release-assets directory to the mirror repository."
+            cp -r "../release-assets" .
+
+            git add .
+            git commit -m "Add release assets from GitHub releases"
+
+            BRANCH_NAME=$(git symbolic-ref --short HEAD)
+
+            git push origin "$BRANCH_NAME"
