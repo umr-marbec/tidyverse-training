@@ -96,7 +96,7 @@ Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.
 
 ## Objectifs de la formation
 
-::: columns
+::::: columns
 ::: {.column width="60%"}
 -   Vous présenter un panel de ce que l'on peut faire avec ces nouvelles méthodes et surtout vous donner les clés pour aller plus loin
 -   Un expert n'est pas forcément quelqu'un qui connaît toutes les fonctions de R par cœur, mais qui sait écouter, comprendre et aller chercher les informations dont il a besoin
@@ -107,11 +107,11 @@ Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.
 ::: {.column width="40%"}
 ![](images/loi_pareto.jpg)
 :::
-:::
+:::::
 
 ## Présentation de Tidyverse {.smaller}
 
-::: columns
+::::: columns
 ::: {.column width="65%"}
 -   Tidyverse c'est quoi ?
     -   tidy + universe ou l'univers du «bien rangé» ou du rangement
@@ -130,7 +130,7 @@ Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.
 ::: {.column width="35%"}
 ![](images/hadley_wickham.png){width="55%"} ![](images/tidyverse_packages.png){width="55%"}
 :::
-:::
+:::::
 
 ## Présentation de Tidyverse
 
@@ -841,7 +841,7 @@ bind_rows()
 
 ### Jointures de type relationnel
 
-::: columns
+::::: columns
 ::: {.column width="70%"}
 -   Très proche du SQL
 -   Très puissantes et permettent de se poser les bonnes questions !
@@ -853,7 +853,7 @@ bind_rows()
 ::: {.column width="30%"}
 ![](images/jointure.png)
 :::
-:::
+:::::
 
 ```{r echo=TRUE, eval=FALSE}
 # jointure à gauche
@@ -1172,7 +1172,7 @@ Non les données ne sont pas tidy, car elles sont en format "wide"
 
 ## Exercice 3.2 {.smaller auto-animate="true"}
 
--   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance" 
+-   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
 -   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
 
 ```{r echo=TRUE, eval=FALSE}
@@ -1181,7 +1181,7 @@ Non les données ne sont pas tidy, car elles sont en format "wide"
 
 ## Exercice 3.2 corrigé {.smaller auto-animate="true"}
 
--   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance" 
+-   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
 -   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
 
 ```{r echo=TRUE, eval=FALSE}
@@ -1197,7 +1197,9 @@ abundance_long <- abundance %>%
   unite(., col = "survey_id_full", c(survey_id, sp_size), sep = "_")
 slice_head(abundance_long)
 ```
+
 <br>
+
 ```{r echo=FALSE, eval=TRUE}
 load("./data_tmp/abundance_long.RData")
 kable(abundance_long[1:6,], html_font = "Computer Modern", table.attr = "style='width:30%;'")
@@ -1221,6 +1223,7 @@ load("./data/biomass_survey_exercice2_4.RData")
 biomass_abundance <- biomass_survey_exercice2_4 %>%
   left_join(., abundance_long, by = "survey_id_full")
 ```
+
 ```{r echo=FALSE, eval=TRUE}
 # solution
 load("./data_tmp/biomass_survey_exercice2_4.RData")
@@ -1246,7 +1249,9 @@ biomass_abundance <- biomass_abundance %>%
   separate(., species_name, into = c("genus", "species"))
 slice_head(biomass_abundance[,8:11])
 ```
+
 <br>
+
 ```{r echo=FALSE, eval=TRUE}
 # solution
 biomass_abundance <- biomass_abundance %>%
@@ -1258,8 +1263,7 @@ kable(biomass_abundance[1:6,8:11],
 
 ## Exercice 3.5 {auto-animate="true"}
 
--   Transformez le tibble en sf object avec la commande 
-sf::st_as_sf(survey, coords = c("longitude", "latitude"), remove = FALSE)
+-   Transformez le tibble en sf object avec la commande sf::st_as_sf(survey, coords = c("longitude", "latitude"), remove = FALSE)
 
 ```{r echo=TRUE, eval=FALSE}
 # solution
@@ -1267,8 +1271,7 @@ sf::st_as_sf(survey, coords = c("longitude", "latitude"), remove = FALSE)
 
 ## Exercice 3.5 corrigé {auto-animate="true"}
 
--   Transformez le tibble en sf object avec la commande
-sf::st_as_sf(survey, coords = c("longitude", "latitude"), remove = FALSE)
+-   Transformez le tibble en sf object avec la commande sf::st_as_sf(survey, coords = c("longitude", "latitude"), remove = FALSE)
 
 ```{r echo=TRUE, eval=TRUE, error=TRUE}
 # solution
@@ -1282,6 +1285,7 @@ data_sf <-
 ```
 
 <br>
+
 <center>
 
 Nous obtenons une erreur, car il n'est pas possible de convertir un tibble en objet sf s'il y a des valeurs manquantes dans les colonnes longitude et latitude
@@ -1314,6 +1318,7 @@ biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
 save(biomass_survey_abundance_exercice3_6,
      file = "./data/biomass_survey_abundance_exercice3_6.RData")
 ```
+
 ```{r echo=FALSE, eval=TRUE}
 # solution
 biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
@@ -1347,10 +1352,9 @@ Le nom de toutes les fonctions dans `stringr` commence par `str_`.
 . . .
 
 Voici quelques exemples :
-  
-::: columns
 
-::: {.column width="50%"}
+::::::: columns
+:::: {.column width="50%"}
 ::: incremental
 -   `str_detect` : Détection de caractères
 
@@ -1358,9 +1362,9 @@ Voici quelques exemples :
 
 -   `str_replace` : Remplacement de caractères
 :::
-:::
-  
-::: {.column width="50%"}
+::::
+
+:::: {.column width="50%"}
 ::: incremental
 -   `str_trim` : Enlève les espaces
 
@@ -1368,16 +1372,15 @@ Voici quelques exemples :
 
 -   `str_length` : Nombre de caractère
 :::
-:::
+::::
+:::::::
 
-:::
-  
 . . .
 
 <center>Le cheat-sheet du package `stringr` est disponible [ici](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf).</center>
-  
+
 ## Création d'un dataframe de chaines de caractères
-  
+
 ```{r}
 tmp <- tibble(nom = c("Micheline Sétou", "Jean-Jacques Apeprès",  "Martine Sérien"),
               num_rue = c("12", "15 ou 16", "NA"), 
@@ -1389,12 +1392,12 @@ kable(tmp, html_font = "Computer Modern", table.attr = "style='width:60%;'")
 ## Détection de caractères
 
 On utilise la fonction `str_detect()` et les deux arguments principaux :
-  
+
 ::: incremental
 -   `string` : Le/Les caractère(s) qui vont passer au détecteur.
 -   `pattern` : Le caractère à détecter.
 :::
-  
+
 . . .
 
 La fonction renvoie `TRUE` ou `FALSE` en fonction de la présence ou non du caractère.
@@ -1403,7 +1406,7 @@ La fonction renvoie `TRUE` ou `FALSE` en fonction de la présence ou non du cara
 
 ### Exemple
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r results='hide'}
 tmp$nom
@@ -1413,7 +1416,7 @@ tmp$nom
 cat(tmp$nom, sep = "\n")
 ```
 :::
-  
+
 ::: {.column width="50%"}
 ```{r results='hide'}
 str_detect(string  = tmp$nom, pattern = "ine")
@@ -1424,23 +1427,23 @@ cat(str_detect(string  = tmp$nom,
                pattern = "ine"), sep = "\n")
 ```
 :::
-:::
-  
+:::::
+
 . . .
 
 <center>
-  
-  La fonction `str_detect()` peut donc être utilisée avec `filter()` pour faire une <br> sélection des lignes qui nous intéresse dans le tableau.
+
+La fonction `str_detect()` peut donc être utilisée avec `filter()` pour faire une <br> sélection des lignes qui nous intéresse dans le tableau.
 
 ## Sous-sélection de certains caractères
 
 On utilise la fonction `str_subset()` et les deux arguments principaux :
-  
+
 ::: incremental
 -   `string` : Le/Les caractère(s) qui vont passer au détecteur.
 -   `pattern` : Le caractère à détecter.
 :::
-  
+
 . . .
 
 Contrairement à `str_detect()`, la fonction `str_subset()` renvoie les caractères qui contiennent le pattern à détecter.
@@ -1457,7 +1460,7 @@ str_subset(string  = tmp$nom,
 ## Extraction de caractères
 
 On utilise la fonction `str_extract()` et ses arguments principaux :
-  
+
 ::: incremental
 -   `string` : Le/Les caractère(s) qui vont passer à l'extracteur.
 -   `pattern` : Le caractère à extraire.
@@ -1467,7 +1470,7 @@ On utilise la fonction `str_extract()` et ses arguments principaux :
 
 ### Exemple
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r results='hide'}
 tmp$ville
@@ -1489,7 +1492,7 @@ cat(str_extract(string  = tmp$ville,
                 pattern = "Montpel"), sep = "\n")
 ```
 :::
-:::
+:::::
 
 ## Remplacer un caractère par un autre
 
@@ -1500,12 +1503,12 @@ On utilise la fonction `str_replace()` et ces arguments principaux :
 -   `pattern` : Le caractère à remplacer.
 -   `replacement` : Le caractère de remplacement.
 :::
-  
+
 . . .
 
 ### Exemple
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r results='hide'}
 # Les noms avant le replacement
@@ -1516,7 +1519,7 @@ tmp$nom
 cat(tmp$nom, sep = "\n")
 ```
 :::
-  
+
 ::: {.column width="50%"}
 ```{r results='hide'}
 str_replace(string      = tmp$nom, 
@@ -1530,17 +1533,17 @@ cat(str_replace(string      = tmp$nom,
                 replacement = "Michel"), sep = "\n")
 ```
 :::
-:::
-  
+:::::
+
 ## Concaténer des chaînes de caractères {auto-animate="true"}
-  
+
 On utilise la fonction `str_glue()` et ces deux principaux arguments :
-  
+
 ::: incremental
 -   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
 -   `.sep` = le séparateur
 :::
-  
+
 . . .
 
 ### Exemple sur une ligne du data.frame
@@ -1552,7 +1555,7 @@ str_glue("{tmp$nom[1]} habite au {tmp$num_rue[1]} {tmp$nom_rue[1]}", .sep = " ")
 ## Concaténer des chaînes de caractères {auto-animate="true"}
 
 On utilise la fonction `str_glue()` et ces deux principaux arguments :
-  
+
 -   Le/les expressions à assembler entre `""`. Quand on veut ajouter l'information issue d'un data.frame, on met entre `{}`.
 -   `.sep` = le séparateur
 
@@ -1679,7 +1682,7 @@ kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr 
 
 ### Outil très très puissant !
 
-::: columns
+::::: columns
 ::: {.column width="60%"}
 -   Il faut savoir que cela existe, mais demande un peu de patience et d'entrainement pour être utilisé
 -   Regardez le [deuxième volet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){target="_blank"} du cheatsheet de stringr
@@ -1688,14 +1691,14 @@ kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr 
     -   Il y a souvent plusieurs façons d'arriver à ce que vous voulez
 -   Parfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle
 :::
-  
+
 ::: {.column width="40%"}
 ![](images/regular_expressions.png)
 :::
-:::
-  
+:::::
+
 ## Exemple concret
-  
+
 ```{r echo=TRUE, eval=FALSE}
 load(file = "./data/exemple_regular_expressions.RData")
 tac_final_modif_level1 <- tac_final %>%
@@ -1769,8 +1772,8 @@ force_tz()
 ```
 
 <br/>
-  
-  -   3 classes pour calculer des intervalles de temps
+
+-   3 classes pour calculer des intervalles de temps
 
 -   Periode, durée et intervalle
 
@@ -1811,7 +1814,7 @@ ceiling_date()
 
 ## Ggplot c'est comme la chirurgie *`aes`*thétique :
 
-::: incremental
+:::: incremental
 ::: columns
 1)  Les jeunes s'y mettent très tôt !
 
@@ -1823,12 +1826,12 @@ ceiling_date()
 3)  C'est un enchainement plus ou moins long d'opérations. ![](images/bogdanoff1.jpg){.absolute top="521" left="50" width="22%"}\
     ![](images/bogdanoff1.5.jpg){.absolute top="500" left="360" width="25%"} ![](images/bogdanoff2.jpg){.absolute top="500" left="700" width="25%"}
 :::
-:::
+::::
 
 ## Ggplot, une succession de couches {auto-animate="true"}
 
-::: incremental
-::: columns
+::::::::: incremental
+::::: columns
 ::: column
 1.  La Structure
 
@@ -1849,9 +1852,9 @@ ceiling_date()
     p2
     ```
 :::
-:::
+:::::
 
-::: columns
+::::: columns
 ::: column
 3.  Les Couleurs
 
@@ -1872,12 +1875,12 @@ ceiling_date()
     p4
     ```
 :::
-:::
-:::
+:::::
+:::::::::
 
 ## Ggplot, une succession de couches {auto-animate="true"}
 
-::: columns
+::::: columns
 ::: column
 1.  La Structure
 
@@ -1898,9 +1901,9 @@ ceiling_date()
     p2
     ```
 :::
-:::
+:::::
 
-::: columns
+::::: columns
 ::: column
 3.  Les Couleurs
 
@@ -1922,7 +1925,7 @@ ceiling_date()
     p4
     ```
 :::
-:::
+:::::
 
 ## La structure des données
 
@@ -1948,7 +1951,7 @@ data_crabs %>%
 
 ## Ggplot pas à pas : La Structure
 
-::: incremental
+::::: incremental
 <div>
 
 Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
@@ -1966,11 +1969,11 @@ Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` 
 :::
 
 </div>
-:::
+:::::
 
 ## Ggplot pas à pas : La Structure
 
-::: nonincremental
+::::: nonincremental
 <div>
 
 Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
@@ -1984,7 +1987,7 @@ Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` 
 </div>
 
 </div>
-:::
+:::::
 
 ```{r warnings=FALSE}
 couche.1 <- ggplot(data    = data_crabs,
@@ -1999,12 +2002,12 @@ couche.1
 
 ## Ggplot pas à pas : Choix du plot
 
-::: incremental
+::::::: incremental
 ::: incremental
 Plusieurs représentations existent selon le type de variables que l'on a :
 :::
 
-::: columns
+::::: columns
 ::: column
 1.  **Une variable continue**
 
@@ -2024,11 +2027,11 @@ Plusieurs représentations existent selon le type de variables que l'on a :
     -   `geom_area()`
     :::
 :::
-:::
-:::
+:::::
+:::::::
 
-::: incremental
-::: columns
+:::::: incremental
+::::: columns
 ::: column
 3.  **Une discrète & une continue**
 
@@ -2048,16 +2051,16 @@ Plusieurs représentations existent selon le type de variables que l'on a :
     -   `geom_sf()`
     :::
 :::
-:::
-:::
+:::::
+::::::
 
 ## Ggplot pas à pas : Choix du plot
 
-::: incremental
+::::::: incremental
 L'exemple ici va mener à la réalisation d'un **nuage de points**. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou autres.
 
-::: incremental
-::: columns
+:::::: incremental
+::::: columns
 ::: {.column width="50%"}
 -   `aes()` dans `ggplot()`
 
@@ -2079,9 +2082,9 @@ L'exemple ici va mener à la réalisation d'un **nuage de points**. Mais `ggplot
                  mapping = aes(x = CL, y = CW))
     ```
 :::
-:::
-:::
-:::
+:::::
+::::::
+:::::::
 
 . . .
 
@@ -2703,12 +2706,12 @@ ggplot(crabs_mean) +
 ## Exercice 5.7 {auto-animate="true"}
 
 A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
+
 ```{r}
 # 1 - Grouper les données par pays
 # 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble 
 #     des transects propres à chaque pays
 ```
-
 
 ## Exercice 5.7 : Correction {auto-animate="true"}
 
@@ -2826,9 +2829,7 @@ ggplot(data = biomass_abundance,
 
 ## Gestion des facteurs & groupes {auto-animate="true"}
 
-Changeons l'ordre des facteurs de façon à ce que la classe [75,100[ soit en 1ère.
-
-
+Changeons l'ordre des facteurs de façon à ce que la classe \[75,100\[ soit en 1ère.
 
 ```{r echo=FALSE, results="hide", warnings = FALSE}
 plot1 <- ggplot(data = biomass_abundance,
@@ -2857,9 +2858,7 @@ ggplot(data = biomass_abundance,
 
 ## Gestion des facteurs & groupes {auto-animate="true"}
 
-Changeons l'ordre des facteurs de façon à ce que la classe [75,100[ soit en 1ère.
-
-
+Changeons l'ordre des facteurs de façon à ce que la classe \[75,100\[ soit en 1ère.
 
 ```{r fig.align='center', out.width="80%"}
 biomass_abundance2 <- biomass_abundance %>%
@@ -2903,29 +2902,27 @@ ggplot(data = biomass_abundance,
 
 ### Une petite introduction pour commencer
 
-### Les données géographiques 
+### Les données géographiques
 
 Ce sont des données ayant une localisation dans l'espace. On peut les représenter et les visualiser sur une carte. Pour les répresenter il existe deux formats principaux : le vecteur et le raster.
 
 ### Un raster c'est quoi ?
 
-Un raster est une image dans laquelle chaque pixel a une seule valeur et est géo-référencé.
-Chaque pixel a la même taille et la résolution dépend du nombre de pixel.
-Sous R, il existe une librairie spécialement développée pour traiter des fichiers raster. c'est la librairie `raster`
+Un raster est une image dans laquelle chaque pixel a une seule valeur et est géo-référencé. Chaque pixel a la même taille et la résolution dépend du nombre de pixel. Sous R, il existe une librairie spécialement développée pour traiter des fichiers raster. c'est la librairie `raster`
 
 ### Un vecteur c'est quoi ?
 
 Un vecteur est composé de 2 éléments principaux:
-  
+
 -   la **table attributaire** : permet de décrire les informations qui lui sont associées. Le nombre d'informations n'est pas limitée
-  
+
 -   la **partie graphique** (sa forme) : il existe trois types de géometrie pour définir les vecteurs (point, ligne, polygone)
 
-L'ensemble de ces composantes (informations, géométrie, projection, ...) forme un objet que l'on appelle shapefile. La librairie `sf` permet de gérer les formats vecteur sous R. 
-  
-Pour plus d'informations détaillées [cliquez ici](https://naturagis.fr/cartographie-sig/difference-vecteur-raster/)  
+L'ensemble de ces composantes (informations, géométrie, projection, ...) forme un objet que l'on appelle shapefile. La librairie `sf` permet de gérer les formats vecteur sous R.
 
-##
+Pour plus d'informations détaillées [cliquez ici](https://naturagis.fr/cartographie-sig/difference-vecteur-raster/)
+
+## 
 
 -   Plotter des données spatialisées
 
@@ -2960,7 +2957,7 @@ map1 <- ggplot(data = world_boundaries) +
 map1
 ```
 
-## {.smaller}
+##  {.smaller}
 
 ### Applications : stat_sf_coordinates
 
@@ -2984,7 +2981,7 @@ map2 <- map1 +
 map2 
 ```
 
-## {.smaller}
+##  {.smaller}
 
 ### Applications : geom_raster
 
@@ -2999,7 +2996,7 @@ map3.1 <- ggplot() +
 map3.1
 ```
 
-##
+## 
 
 ### Applications : geom_raster
 
@@ -3020,8 +3017,8 @@ geom_sf_text()
 geom_sf_label()
 ```
 
-##
-     
+## 
+
 ### Applications : geom_sf_text
 
 -   Afficher sous format texte le code ISO3 des pays
@@ -3038,7 +3035,8 @@ map4.1 <- map1 +
 map4.1
 ```
 
-##
+## 
+
 ### Applications : geom_sf_text
 
 -   Afficher sous format texte le code ISO3 des pays
@@ -3057,8 +3055,8 @@ map4.2 <- map1 +
 map4.2
 ```
 
-##
-  
+## 
+
 ### Applications : geom_sf_label
 
 -   Afficher sous format étiquette le code ISO3 des pays
@@ -3100,8 +3098,8 @@ map6.1 <- map5 +
 map6.1
 ```
 
-##
-  
+## 
+
 ### Application : annotation_north_arrow
 
 -   Ajouter la flèche du nord
@@ -3127,6 +3125,7 @@ map6.2
 ## Exercice 5.9 corrigé {.smaller auto-animate="true"}
 
 -   Construisez une carte des transects en Méditerranée avec une couleur par profondeur. Choisissez une palette de couleurs cohérente avec les données
+
 ```{r echo=FALSE, eval=TRUE, fig.align='center'}
 # solution
 load("./data_tmp/survey_med.RData")
@@ -3213,6 +3212,7 @@ med_map4 <- med_map3 +
   )
 med_map4
 ```
+
 ## Exercice 5.12 corrigé {auto-animate="true"}
 
 ```{r echo=FALSE, eval=TRUE}
@@ -3236,10 +3236,11 @@ med_map4 <- med_map3 +
   )
 med_map4
 ```
+
 ## Exercice 5.13 {auto-animate="true"}
 
 -   Ajoutez la carte de bathymétrie. Pour la charger, utilisez la commande raster::raster("./data/bathy_med.tif"). Que remarquez vous ?
-  
+
 ```{r echo=TRUE, eval=FALSE}
 # solution
 ```
@@ -3256,8 +3257,8 @@ med_map5 <-
   med_map4 + geom_raster(data = rastdf, aes(x = x, y = y, fill = bathy_med))
 med_map5
 ```
-## Exercice 5.13 corrigé {auto-animate="true"}
 
+## Exercice 5.13 corrigé {auto-animate="true"}
 
 ```{r echo=FALSE, eval=TRUE, fig.align='center'}
 # solution
@@ -3267,13 +3268,19 @@ med_map5 <-
   med_map4 + geom_raster(data = rastdf, aes(x = x, y = y, fill = bathy_med))
 med_map5
 ```
+
 <br>
-<center>Importance dans l'ordre d'ajout des couches<center>
+
+<center>
+
+Importance dans l'ordre d'ajout des couches
+
+<center>
 
 ## Exercice 5.13 corrigé {auto-animate="true"}
 
 -   Ajoutez la carte de bathymétrie. Pour la charger, utilisez la commande raster::raster("./data/bathy_med.tif"). Que remarquez vous ?
-  
+
 ```{r echo=TRUE, eval=FALSE, fig.align='center'}
 # solution
 bathy_med <- raster::raster("./data/bathy_med.tif")
@@ -3295,9 +3302,9 @@ med_map5 <- ggplot(data = survey_med) +
   theme_bw()
 med_map5
 ```
+
 ## Exercice 5.13 corrigé {auto-animate="true"}
 
-  
 ```{r echo=FALSE, eval=TRUE, fig.align='center'}
 # solution
 bathy_med <- raster::raster("./data_tmp/bathy_med.tif")
@@ -3347,6 +3354,7 @@ med_map6 <- med_map5 +
        fill = "bathymétrie")
 med_map6
 ```
+
 ## Exercice 5.14 corrigé {auto-animate="true"}
 
 ```{r echo=FALSE, eval=TRUE, fig.align='center'}
@@ -3364,6 +3372,7 @@ med_map6 <- med_map5 +
        fill = "bathymétrie")
 med_map6
 ```
+
 ## Exercice 5.15 {auto-animate="true"}
 
 -   Sauvegardez votre belle carte :)

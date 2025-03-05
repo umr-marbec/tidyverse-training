@@ -1,0 +1,212 @@
+---
+format: 
+  revealjs:
+    theme: template/theme_perso.scss
+    logo: template/logo_marbec.png
+    footer: "[https://github.com/umr-marbec/tidyverse-training](https://github.com/umr-marbec/tidyverse-training)"
+---
+
+#  {background-image="images/background_title.png"}
+
+[Formation R]{style="color:#ffffff; font-size: 2em"}
+
+[Collection de packages tidyverse]{style="color:#ffffff; font-size: 1.5em"}
+
+[Laure Velez ([laure.velez\@umontpellier.fr](mailto:laure.velez\@umontpellier.fr))]{style="color:#ffffff; font-size: 0.8em"}
+
+[Mathieu Depetris ([mathieu.depetris\@ird.fr](mailto:mathieu.depetris\@ird.fr))]{style="color:#ffffff; font-size: 0.8em"}
+
+[Monique Simier ([monique.simier\@ird.fr](mailto:monique.simier\@ird.fr))]{style="color:#ffffff; font-size: 0.8em"}
+
+[3 et 4 avril 2025]{style="color:#ffffff; font-size: 0.8em"}
+
+[© RStudio]{style="color:#ffffff; font-size: 0.5em"}
+
+![](images/tidyverse_packages.png){.absolute top="40" right="5" width="45%"}
+
+## Plan de la formation {.smaller}
+
+-   Préambule et introduction
+
+    -   Prérequis et environnement de travail nécessaire à la formation
+    -   Objectifs de la formation
+    -   Présentation de [tidyverse](https://www.tidyverse.org/){.external target="_blank"}
+
+-   Partie 1 : Importation de données sous R avec [readr](https://readr.tidyverse.org/){.external target="_blank"}
+
+-   Partie 2 : Manipulation de données avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"}
+
+-   Partie 3 : Nettoyage des données avec [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"}
+
+-   Partie 4 : Extension à la manipulation de données, cas spécifiques
+
+    -   4.1 : Manipuler du texte avec [stringr](https://stringr.tidyverse.org/){.external target="_blank"}
+    -   4.2 : Manipuler des dates avec [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"}
+
+-   Partie 5 : Visualisation graphique avec [ggplot2](https://ggplot2.tidyverse.org/){.external target="_blank"}
+
+Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.github.io/analyse-R/){.external target="_blank"}
+
+# Préambule et introduction
+
+-   Prérequis et environnement de travail nécessaire à la formation
+-   Objectifs de la formation
+-   Présentation de [tidyverse](https://www.tidyverse.org/){.external target="_blank"}
+
+## Prérequis et environnement de travail nécessaire à la formation
+
+-   Avoir des notions de base dans l'utilisation de [R](https://www.r-project.org/){.external target="_blank"}
+-   Avoir une instance valide de R sur son poste (durant la formation utilisation de la version [4.4.3](https://pbil.univ-lyon1.fr/CRAN/){.external target="_blank"} sous Windows)
+-   Avoir installé correctement les packages R [readr](https://readr.tidyverse.org/){.external target="_blank"} (utilisation de la version 2.1.5), [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.1.4), [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.3.1), [stringr](https://stringr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.5.1), [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.9.4), et [ggplot2](https://ggplot2.tidyverse.org/){.external target="_blank"} (utilisation de la version 3.5.1).
+
+## Bonus non obligatoire
+
+-   Utilisation de l'environnement de développement [Rstudio](https://posit.co/download/rstudio-desktop/){.external target="_blank"} (utilisation de la version 2024.12.1+563 sous Windows)
+-   Pour les utilisateurs de Windows installation de [Rtools](https://cran.r-project.org/bin/windows/Rtools/){.external target="_blank"} (utilisation de la version 4.4)
+-   Installation de [Visual Studio Code](https://code.visualstudio.com/Download){.external target="_blank"} (éditeur de code source autonome).
+
+## Objectifs de la formation
+
+::::: columns
+::: {.column width="70%"}
+-   Vous présenter un panel de ce que l'on peut faire avec ces méthodes et surtout vous donner les clés pour aller plus loin
+-   Un expert n'est pas forcément quelqu'un qui connaît toutes les fonctions par cœur, mais qui sait écouter, comprendre et aller chercher les informations dont il a besoin
+    -   Pensez à jeter un coup d'œil aux [cheatsheets](https://github.com/rstudio/cheatsheets){.external target="_blank"}
+:::
+
+::: {.column width="30%"}
+![](images/loi_pareto.jpg)
+:::
+:::::
+
+## Présentation de Tidyverse {.smaller}
+
+::::: columns
+::: {.column width="65%"}
+-   Tidyverse c'est quoi ?
+    -   tidy + universe ou l'univers du «bien rangé» ou du rangement
+    -   Collection d'extensions conçues pour travailler ensemble et basées sur une philosophie commune
+    -   Le cœur du package inclut 9 packages
+        -   [ggplot2](https://ggplot2.tidyverse.org/){.external target="_blank"} : création de graphiques
+        -   [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"} : manipulation de données au sens large
+        -   [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"} : manipulation de données plus orientées variables
+        -   [readr](https://readr.tidyverse.org/){.external target="_blank"} : import de données
+        -   [purrr](https://purrr.tidyverse.org/){.external target="_blank"} : fonction de vectorisation (remplacement des boucles classiques)
+        -   [tibble](https://tibble.tidyverse.org/){.external target="_blank"} : «évolution» du data.frame
+        -   [stringr](https://stringr.tidyverse.org/){.external target="_blank"} : manipulation de caractère
+        -   [forcats](https://forcats.tidyverse.org/){.external target="_blank"} : série d'outils pour aider dans la manipulation des facteurs
+        - [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"} : fonctions permettant de travailler avec des dates et des heures
+:::
+
+::: {.column width="35%"}
+![](images/hadley_wickham.png){width="55%"} ![](images/tidyverse_packages.png){width="80%"}
+:::
+:::::
+
+## Présentation de Tidyverse
+
+-   Lancement de la librairie
+
+```{.r}
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+-   Cependant je vous déconseille de faire comme ça
+    -   En lançant cette commande, on charge dans R tous les packages associés à tidyverse (les 9 packages cités précédemment, mais aussi les dépendances associées)
+    -   Avez-vous vraiment besoin de tout cela ?
+    -   Potentiel impact sur vos futurs développements (surtout si vous commencez à développer des packages)
+    -   L'idée est d'appliquer dès maintenant les bonnes pratiques et surtout de comprendre ce que cela implique de ne pas les suivre (ce qui est aussi votre droit !)
+
+## Avant d'aller plus loin
+
+-   L'utilisation de ces packages permet de faire beaucoup de choses, mais ne rend pas tout le reste obsolète
+-   Il y a plusieurs stratégies pour réaliser une action, il faut juste trouver le bon compromis (connaissances, temps de calcul, contexte global de votre projet...)
+-   Attention aux règles et conventions de nommages
+    -   Règles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d'espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (\_), ne pas utiliser de mots réservés (comme par exemple TRUE)
+    -   Conventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des \_ et les noms choisis doivent pouvoir donner l'information du contenu associé
+    - Une formation "bonnes pratiques en programmation" est à l'étude au sein du DEN
+    
+# Partie 1 : Importation de données sous R avec readr
+
+![](images/logo_readr.png)
+
+# Partie 2 : Manipulation de données avec dplyr
+
+![](images/dplyr_logo.png)
+
+## [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"}
+
+### Pourquoi utiliser dplyr et sa syntaxe ?
+
+-   Syntaxe claire et cohérente
+    -   "lien" avec le SQL
+    -   deux "familles" de fonctions : résumé et vectorisation <br/> <br/> <br/> ![](images/summary_function.png){.absolute top="320" left="15"} ![](images/vectorized_function.png){.absolute top="320" right="15"}
+-   Utilisation de verbes
+-   Généralement plus rapides que leur équivalent sous R de base
+-   Permet d'enchainer les opérations avec des "pipes" ![](images/pipe.png){.absolute top="450" right="20" width="15%"}
+
+## Manipulation des lignes
+
+### Manipulation de type extraction
+
+Type de fonctions qui retournent un sous-ensemble de lignes
+
+-   Extraction d'une ou plusieurs lignes : fonctions de la famille slice & co
+
+```{.r}
+# sélection d'une ou plusieurs lignes par position absolue
+slice()
+# sélection au hasard d'un nombre de lignes ou d'une proportion du jeu de données
+slice_sample()
+# sélection des n dernières lignes
+slice_tail()
+# sélection des n premières lignes
+slice_head()
+# sélection des lignes avec les valeurs les plus petites ou grandes
+slice_min()
+slice_max()
+# sélection des valeurs distinctes
+distinct()
+# sélection en fonction d'opérateurs logiques et/ou booléens
+filter()
+```
+
+## Petit focus sur les opérateurs booléens et logiques {.smaller}
+
+Renvoient une valeur TRUE ou FALSE
+
+-   les communs :
+
+![](images/booleens.png)
+
+-   certains plus particuliers :
+
+![](images/booleens_particulier.png){width="25%"}
+
+-   Attention aux priorités dans les interprétations
+    -   & est plus fort que \|, il sera exécuté en premier
+    -   une solution est d'utiliser des () pour séparer vos opérateurs
+    
+## Exercice 2.1 {auto-animate="true"}
+
+-   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "global_reef_fish_biomass"
+-   En une seule fois, selectionner les données dont la variable "biomass" est différent de 0, où la famille de l'espèce est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
+
+```{.r}
+```
+
+## Exercice 2.1 corrigé {auto-animate="true"}
+
+-   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "global_reef_fish_biomass"
+-   En une seule fois, selectionner les données dont la variable "biomass" est différent de 0, où la famille de l'espèce est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
+
+```{.r}
+biomass_exercice2_1_distinct <- distinct(.data = global_reef_fish_biomass)
+biomass_exercice2_1_filter <- filter(.data = biomass_exercice2_1_distinct,
+                                     biomass != 0
+                                     & ! family %in% c("Mullidae",
+                                                       "Apogonidae")
+                                     & size_class <= 10)
+```
+
