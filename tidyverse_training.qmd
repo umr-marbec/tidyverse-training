@@ -475,7 +475,9 @@ survey_selection <- read_delim_chunked(file = "./data/survey_metadata.csv",
 dim(survey_selection)
 ```
 
-# Partie 2 : Manipulation de données avec dplyr
+# Partie 2 : Manipulation de données avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"}
+
+<div style="float: right;">[Cheatsheet link](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"}</div>
 
 ![](images/dplyr_logo.png)
 
@@ -877,6 +879,8 @@ save(biomass_survey_exercice2_4, file = "./data/biomass_survey_exercice2_4.RData
 
 # Partie 3 : Nettoyage des données avec [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"}
 
+<div style="float: right;">[Cheatsheet link](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf){.external target="_blank"}</div>
+
 ![](images/logo_tidyr.png){width="20%"}
 
 ## [Tidyr](https://tidyr.tidyverse.org/){.external target="_blank"}
@@ -1228,47 +1232,35 @@ save(biomass_survey_abundance_exercice3_6,
 
 # Partie 4 : Extension à la manipulation de données, cas spécifiques
 
+<div style="float: right;">[Cheatsheet stringr](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){.external target="_blank"}</div>
+
+<br>
+
+<div style="float: right;">[Cheatsheet lubridate](https://github.com/rstudio/cheatsheets/blob/main/lubridate.pdf){.external target="_blank"}</div>
+
 ![](images/logo_stringr.png){.absolute top="300" width="20%"} ![](images/logo_lubridate.png){.absolute top="300" left="300" width="20%"}
 
 ## 4.1 : Manipuler du texte avec [stringr](https://stringr.tidyverse.org/){.external target="_blank"}
 
-Conçu pour manipuler les chaines de caractères "facilement". <br>En plus d'être plus faciles à utiliser, le nom des fonctions dans [stringr](https://stringr.tidyverse.org/){.external target="_blank"} représentent bien ce qu'elles permettent de faire.
+- Conçu pour manipuler les chaines de caractères "facilement"
+- En plus d'être plus faciles à utiliser, les noms des fonctions représentent bien ce qu'elles permettent de faire
+  - elles commencent toutes par `str_`
+- Quelques exemples
 
-![](images/logo_stringr.png){.absolute top="40" right="20" width="15%"}
-
-. . .
-
-Le nom de toutes les fonctions dans [stringr](https://stringr.tidyverse.org/){.external target="_blank"} commence par `str_`.
-
-. . .
-
-Voici quelques exemples :
-
-::::::: columns
-:::: {.column width="50%"}
-::: incremental
--   `str_detect` : Détection de caractères
-
--   `str_extract` : Extraction de caractères
-
--   `str_replace` : Remplacement de caractères
-:::
-::::
-
-:::: {.column width="50%"}
-::: incremental
--   `str_trim` : Enlève les espaces
-
--   `str_split` : Sépare une chaine de caractères
-
--   `str_length` : Nombre de caractère
-:::
-::::
-:::::::
-
-. . .
-
-<center>Lien vers le [cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){.external target="_blank"} du package [stringr](https://stringr.tidyverse.org/){.external target="_blank"}.</center>
+```r
+# Détection de caractères
+str_detect()
+# Extraction de caractères
+str_extract()
+# Remplacement de caractères
+str_replace()
+# Enlève les espaces
+str_trim()
+# Sépare une chaine de caractères
+str_split()
+# Nombre de caractères
+str_length()
+```
 
 ## Création d'un dataframe de chaines de caractères
 
@@ -1613,7 +1605,7 @@ tac_final_modif_level2 <- tac_final %>%
   mutate(adapted_quota = as.numeric(x = adapted_quota))
 ```
 
-# 4.2 : Manipuler des dates avec lubridate
+# 4.2 : Manipuler des dates avec [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"}
 
 ## Rend la manipulation des dates et du temps presque agréable sous R
 
