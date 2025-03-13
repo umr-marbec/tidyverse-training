@@ -1,3 +1,11 @@
+# setup
+library(readr)
+# exercice 1.1
+
+
+
+
+
 # exercise 2.1 ----
 biomass_exercice2_1_distinct <- distinct(.data = global_reef_fish_biomass)
 biomass_exercice2_1_distinct_filter <- filter(.data = biomass_exercice2_1_distinct,

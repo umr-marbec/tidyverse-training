@@ -129,7 +129,7 @@ library(tidyverse)
 
 # Partie 1 : Importation de données sous R avec [readr](https://readr.tidyverse.org/){.external target="_blank"}.
 
-<div style="float: right;">[Cheatsheet link](https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf){.external target="_blank"}</div>
+<div style="float: right;">[Lien cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf){.external target="_blank"}</div>
 
 ![](images/logo_readr.png)
 
@@ -433,17 +433,18 @@ table(kyphosidae_10_30_cm_biomass$family, kyphosidae_10_30_cm_biomass$size_class
 
 ## Exercice 1.1 {auto-animate="true"}
 
--   Lire le fichier Survey_metadata.csv =\> tibble `survey_metadata`,
--   Lire le fichier Global_reef_fish_biomass.csv =\> tibble `global_reef_fish_biomass`
--   Lire le fichier Global_reef_fish_abundance.csv =\> tibble `global_reef_fish_abundance`
+-   Lire le fichier survey_metadata.csv et le stocker dans un objet R `survey_metadata`,
+-   Lire le fichier reef_fish_biomass.csv et le stocker dans un objet R `reef_fish_biomass`
+-   Lire le fichier reef_fish_abundance.csv et le stocker dans un objet R `reef_fish_abundance`
 
 ```r
 ```
 
 ## Exercice 1.1 corrigé {auto-animate="true"}
 
--   Lire le fichier Survey_metadata.csv =\> tibble `survey_metadata`,
--   Lire le fichier Global_reef_fish_biomass.csv =\> tibble `global_reef_fish_biomass`
+-   Lire le fichier survey_metadata.csv et le stocker dans un objet R `survey_metadata`,
+-   Lire le fichier reef_fish_biomass.csv et le stocker dans un objet R `reef_fish_biomass`
+-   Lire le fichier reef_fish_abundance.csv et le stocker dans un objet R `reef_fish_abundance`
 
 ```r
 # solution
@@ -477,7 +478,7 @@ dim(survey_selection)
 
 # Partie 2 : Manipulation de données avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"}
 
-<div style="float: right;">[Cheatsheet link](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"}</div>
+<div style="float: right;">[Lien cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"}</div>
 
 ![](images/dplyr_logo.png)
 
@@ -879,7 +880,7 @@ save(biomass_survey_exercice2_4, file = "./data/biomass_survey_exercice2_4.RData
 
 # Partie 3 : Nettoyage des données avec [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"}
 
-<div style="float: right;">[Cheatsheet link](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf){.external target="_blank"}</div>
+<div style="float: right;">[Lien cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf){.external target="_blank"}</div>
 
 ![](images/logo_tidyr.png){width="20%"}
 

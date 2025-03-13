@@ -3,9 +3,6 @@
 .RData
 .Ruserdata
 /.quarto/
-/_site/
-/data/
 *.html
-/tidyverse-training_files
+/tidyverse_training_files
 *.pdf
-tidyverse-training_partage.qmd
