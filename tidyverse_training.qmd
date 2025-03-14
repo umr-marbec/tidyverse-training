@@ -2588,7 +2588,7 @@ crabs_mean <- data_crabs %>%
 
 . . .
 
-```r
+``` r
 # Réalisation du diagramme en barres
 ggplot(crabs_mean) +
   geom_col(aes(x = sp, y = CL_mean)) +
@@ -2610,7 +2610,7 @@ A partir des données **data_biomass_5country**, construire un diagramme en barr
 
 A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
-```r
+``` r
 country_mean <- data_biomass_5country %>%
   # 1 - Grouper les données par pays
   group_by(country) %>%
@@ -2624,7 +2624,7 @@ country_mean <- data_biomass_5country %>%
 
 A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
-```r
+``` r
 # Figure 
 ggplot(country_mean) +
   geom_col(aes(x = reorder(country, biom_mean), y = biom_mean)) +
@@ -2709,7 +2709,7 @@ ggplot(data = biomass_abundance,
 
 Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.
 
-```r
+``` r
 ggplot(data = biomass_abundance,
        mapping = aes(x    = biom_abun, 
                      y    = value, 
