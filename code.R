@@ -1,11 +1,17 @@
 # setup
 library(readr)
-# exercice 1.1
-
-
-
-
-
+library(dplyr)
+# exercise 1.1
+survey_metadata <- read_tsv(file = "data/survey_metadata.tsv")
+reef_fish_biomass <- read_delim(file = "data/reef_fish_biomass.dude",
+                                delim = "|")
+reef_fish_abundance <- read_csv(file = "data/reef_fish_abundance.zip",
+                                guess_max = Inf)
+# exercise 1.2
+function_1_2 <- function(x, pos) subset(x, country == "Indonesia" & depth < 20 & visibility > 10)
+survey_metadata_selection_1_2 <- read_tsv_chunked(file = "data/survey_metadata.tsv",
+                                                  callback = DataFrameCallback$new(function_1_2),
+                                                  chunk_size = 1000)
 # exercise 2.1 ----
 biomass_exercice2_1_distinct <- distinct(.data = global_reef_fish_biomass)
 biomass_exercice2_1_distinct_filter <- filter(.data = biomass_exercice2_1_distinct,

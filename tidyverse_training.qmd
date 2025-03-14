@@ -129,7 +129,9 @@ library(tidyverse)
 
 # Partie 1 : Importation de données sous R avec [readr](https://readr.tidyverse.org/){.external target="_blank"}.
 
-<div style="float: right;">[Lien cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf){.external target="_blank"}</div>
+::: {style="float: right;"}
+[Lien cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf){.external target="_blank"}
+:::
 
 ![](images/logo_readr.png)
 
@@ -139,7 +141,7 @@ library(tidyverse)
 -   La librairie [readr](https://readr.tidyverse.org/){.external target="_blank"} propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects.
 -   Ces fonctions sont compatibles avec l'esprit **Tidyverse** car elles permettent de générer des [tibbles](https://tibble.tidyverse.org/){.external target="_blank"}
 
-```r
+``` r
 # install.packages("readr", dependencies = T)
 # install.packages("tibble", dependencies = T)
 library(readr)
@@ -165,7 +167,7 @@ library(tibble)
 
 Les fonctions de readr les plus utilisées sont :
 
-```r
+``` r
 # Fonction générale, pour importer un fichier avec un délimiteur quelconque
 read_delim()
 # Import fichiers csv au format anglais (point décimal et séparateur virgule)
@@ -186,14 +188,14 @@ read_xxx_chunked()
 
 -   Lecture avec `read_delim()` : preciser le delimiteur de colonnes (ici la virgule)
 
-```r
+``` r
 global_reef_fish_biomass <- read_delim(file = "./data/global_reef_fish_biomass.csv",
                                        delim = ",")
 ```
 
 -   0u bien avec `read_csv()` : delimiteur par defaut = virgule
 
-```r
+``` r
 global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv")
 ```
 
@@ -201,7 +203,7 @@ global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv
 
 On vérifie sa classe avec [class()](https://rdrr.io/r/base/class.html){.external target="_blank"}
 
-```r
+``` r
 class(x = global_reef_fish_biomass)
 ```
 
@@ -209,7 +211,7 @@ class(x = global_reef_fish_biomass)
 
 On vérifie sa structure avec [str()](https://rdrr.io/r/utils/str.html){.external target="_blank"}
 
-```r
+``` r
 str(object = global_reef_fish_biomass)
 ```
 
@@ -217,13 +219,13 @@ str(object = global_reef_fish_biomass)
 
 On vérifie son contenu avec [head()](https://rdrr.io/r/utils/head.html){.external target="_blank"}
 
-```r
+``` r
 head(x = global_reef_fish_biomass)
 ```
 
-## La fonction inverse : [write_...](https://readr.tidyverse.org/reference/write_delim.html){.external target="_blank"} pour exporter un fichier
+## La fonction inverse : [write\_...](https://readr.tidyverse.org/reference/write_delim.html){.external target="_blank"} pour exporter un fichier
 
-```r
+``` r
 # Pour exporter en csv
 write_csv()
 write_csv2()
@@ -240,7 +242,7 @@ write_tsv()
 
 -   Pour générer un autre format de fichier, on exporte biomass au format csv "francais" (séparateur décimal=",' et séparateur des colonnes=";")
 
-```r
+``` r
 write_csv2(x = global_reef_fish_biomass,
            file = "./data/global_reef_fish_biomass_out3.csv")
 ```
@@ -249,7 +251,7 @@ write_csv2(x = global_reef_fish_biomass,
 
 ## Option 1 : `read_csv2()`
 
-```r
+``` r
 global_reef_fish_biomass3 <- read_csv2(file = "./data/global_reef_fish_biomass_out3.csv")
 str(object = global_reef_fish_biomass3)
 ```
@@ -258,7 +260,7 @@ str(object = global_reef_fish_biomass3)
 
 PAS BON car les nombres décimaux (ex: biomass) sont lus comme du caractère
 
-```r
+``` r
 global_reef_fish_biomass3 <- read_delim(file = "./data/global_reef_fish_biomass_out3.csv",
                                         delim = ";")
 str(object = global_reef_fish_biomass3) 
@@ -266,7 +268,7 @@ str(object = global_reef_fish_biomass3)
 
 ## Option 3 : `read_delim()` en précisant le séparateur décimal avec l'argument locale
 
-```r
+``` r
 global_reef_fish_biomass3 <- read_delim(file = "./data/global_reef_fish_biomass_out3.csv",
                                         delim = ";",
                                         locale = locale(decimal_mark = ","))
@@ -277,13 +279,13 @@ str(object = global_reef_fish_biomass3)
 
 Afficher les specifications avec [spec()](https://readr.tidyverse.org/reference/spec.html){.external target="_blank"}
 
-```r
+``` r
 spec(x = global_reef_fish_biomass)
 ```
 
 Simplifier les specifications avec [col_condense()](https://readr.tidyverse.org/reference/spec.html){.external target="_blank"}
 
-```r
+``` r
 cols_condense(xs = spec(x = global_reef_fish_biomass))
 ```
 
@@ -291,7 +293,7 @@ cols_condense(xs = spec(x = global_reef_fish_biomass))
 
 Avec le paramètre `col_types = list(...)`, on choisit de lire survey_id comme un entier [col_integer()](https://readr.tidyverse.org/reference/cols.html){.external target="_blank"}, method et block comme des facteurs [col_factor()](https://readr.tidyverse.org/reference/cols.html){.external target="_blank"}. Pour block on définit aussi des levels avec un certain ordre :
 
-```r
+``` r
 global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv",
                   col_types = list(survey_id = col_integer(),
                                    method = col_factor(),
@@ -306,7 +308,7 @@ levels(x = global_reef_fish_biomass$block)
 
 Ce fichier contient des métadonnées caractérisant les campagnes (survey_id) Particularités : séparateur ";" et 70 lignes de commentaires au début qui ne doivent pas être lues : utilisation du paramètre `skip`
 
-```r
+``` r
 survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
                               delim = ";",
                               skip = 70)
@@ -319,7 +321,7 @@ head(x = survey_metadata,3)
 
 -   Lecture du fichier biomasse avec la fonction [read.csv()](https://rdrr.io/cran/exploratory/man/read_csv.html){.external target="_blank"} de base
 
-```r
+``` r
 debut <- Sys.time()
 fish1 <- read.csv(file ="./data/global_reef_fish_biomass.csv", 
                   sep = ",")
@@ -330,7 +332,7 @@ print(x = paste("L'import a duré : ",
 
 -   Lecture du même fichier avec [read_delim()](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"} de la librairie **readr**
 
-```r
+``` r
 debut <- Sys.time()
 fish2 <- read_csv(file = "./data/global_reef_fish_biomass.csv")
 fin <- Sys.time()
@@ -340,7 +342,7 @@ print(paste("L'import a duré : ",
 
 ## `read_csv()` permet de lire depuis une archive, ce que ne permet pas `read.csv()`
 
-```r
+``` r
 survey_metadata_zip <- read_delim(file = "./data/survey_metadata.zip",
                                   delim = ";",
                                   skip = 70)
@@ -348,7 +350,7 @@ survey_metadata_zip <- read_delim(file = "./data/survey_metadata.zip",
 
 ## `read_csv()` permet de lire depuis plusieurs fichiers et mêmes répertoires
 
-```r
+``` r
 continents <- c("africa", "americas", "asia", "europe", "oceania")
 filepaths <- vapply(
   paste0("mini-gapminder-", continents, ".csv"),
@@ -363,7 +365,7 @@ conti <- read_csv(file = filepaths,
 
 -   Par nom de colonne
 
-```r
+``` r
 survey_metadata_1 <- read_delim(file = "./data/survey_metadata.csv",
                                 delim = ";",
                                 skip = 70,
@@ -375,7 +377,7 @@ head(survey_metadata_1)
 
 -   Par numéro de colonne
 
-```r
+``` r
 survey_metadata_2 <- read_delim(file = "./data/survey_metadata.csv",
                                 delim = ";",
                                 skip = 70,
@@ -387,7 +389,7 @@ head(x = survey_metadata_2)
 
 -   Par numéro de colonne, en omettant certaines colonnes
 
-```r
+``` r
 survey_metadata_3 <- read_delim(file = "./data/survey_metadata.csv",
                                 delim = ";",
                                 skip = 70,
@@ -399,7 +401,7 @@ head(x = survey_metadata_3)
 
 NB : ne pas oublier `everything()` pour conserver à l'identique toutes les colonnes non renommées
 
-```r
+``` r
 survey_metadata_4 <- read_delim(file = "./data/survey_metadata.csv",
                                 delim = ";",
                                 skip = 70,
@@ -411,7 +413,7 @@ head(survey_metadata_4)
 
 -   Pour sélectionner sur une colonne (ici la famille)
 
-```r
+``` r
 f1 <- function(x, pos) subset(x, family %in% c("Kyphosidae", "Labridae", "Sparidae"))
 kyphosidae_labridae_sparidae_biomass <- read_csv_chunked(file = "./data/global_reef_fish_biomass.csv", 
                                                          callback = DataFrameCallback$new(f1), 
@@ -423,7 +425,7 @@ table(kyphosidae_labridae_sparidae_biomass$family)
 
 -   Pour sélectionner sur plusieurs colonnes (ici la famille et la classe de taille)
 
-```r
+``` r
 f2 <- function(x, pos) subset(x, family == "Kyphosidae" & size_class>9 & size_class < 31)
 kyphosidae_10_30_cm_biomass <- read_csv_chunked(file = "./data/global_reef_fish_biomass.csv", 
                                                 callback = DataFrameCallback$new(f2), 
@@ -433,52 +435,56 @@ table(kyphosidae_10_30_cm_biomass$family, kyphosidae_10_30_cm_biomass$size_class
 
 ## Exercice 1.1 {auto-animate="true"}
 
--   Lire le fichier survey_metadata.csv et le stocker dans un objet R `survey_metadata`,
--   Lire le fichier reef_fish_biomass.csv et le stocker dans un objet R `reef_fish_biomass`
--   Lire le fichier reef_fish_abundance.csv et le stocker dans un objet R `reef_fish_abundance`
+-   Lire le fichier survey_metadata et le stocker dans un objet R `survey_metadata`,
+-   Lire le fichier reef_fish_biomass et le stocker dans un objet R `reef_fish_biomass`
+-   Lire le fichier reef_fish_abundance et le stocker dans un objet R `reef_fish_abundance`
 
-```r
+Attention ! On ne triche pas, aucune manipulation des fichiers pré-importation
+
+``` r
 ```
 
 ## Exercice 1.1 corrigé {auto-animate="true"}
 
--   Lire le fichier survey_metadata.csv et le stocker dans un objet R `survey_metadata`,
--   Lire le fichier reef_fish_biomass.csv et le stocker dans un objet R `reef_fish_biomass`
--   Lire le fichier reef_fish_abundance.csv et le stocker dans un objet R `reef_fish_abundance`
+-   Lire le fichier survey_metadata et le stocker dans un objet R `survey_metadata`,
+-   Lire le fichier reef_fish_biomass et le stocker dans un objet R `reef_fish_biomass`
+-   Lire le fichier reef_fish_abundance et le stocker dans un objet R `reef_fish_abundance`
 
-```r
+Attention ! On ne triche pas, aucune manipulation des fichiers pré-importation
+
+``` r
 # solution
-global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv")
-survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
-                              delim = ";",
-                              skip = 70)
+survey_metadata <- read_tsv(file = "data/survey_metadata.tsv")
+reef_fish_biomass <- read_delim(file = "data/reef_fish_biomass.dude",
+                                delim = "|")
+reef_fish_abundance <- read_csv(file = "data/reef_fish_abundance.zip",
+                                guess_max = Inf)
 ```
 
 ## Exercice 1.2 {auto-animate="true"}
 
-Lire le fichier Survey_metadata.csv =\> tibble `Survey_selection` en sélectionnant le pays=Indonésie, la profondeur inférieure à 20m et la visibilité supérieure à 10m.
+Lire le fichier survey_metadata et le stocker dans un objet R `survey_metadata` en sélectionnant le pays Indonésie, une profondeur inférieure à 20m et une visibilité supérieure à 10m.
 
-```r
+``` r
 ```
 
 ## Exercice 1.2 corrigé {auto-animate="true"}
 
-Lire le fichier Survey_metadata.csv =\> tibble `Survey_selection` en sélectionnant le pays Indonésie, la profondeur inférieure à 20m et la visibilité supérieure à 10m.
+Lire le fichier survey_metadata et le stocker dans un objet R `survey_metadata` en sélectionnant le pays Indonésie, une profondeur inférieure à 20m et une visibilité supérieure à 10m.
 
-```r
+``` r
 # solution
-f3 <- function(x, pos) subset(x, country == "Indonesia" & depth<20 & visibility>10 )
-survey_selection <- read_delim_chunked(file = "./data/survey_metadata.csv", 
-                                       callback = DataFrameCallback$new(f3), 
-                                       chunk_size = 1000,
-                                       delim = ";",
-                                       skip = 70)
-dim(survey_selection)
+function_1_2 <- function(x, pos) subset(x, country == "Indonesia" & depth < 20 & visibility > 10)
+survey_metadata_selection_1_2 <- read_tsv_chunked(file = "data/survey_metadata.tsv",
+                                                  callback = DataFrameCallback$new(function_1_2),
+                                                  chunk_size = 1000)
 ```
 
 # Partie 2 : Manipulation de données avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"}
 
-<div style="float: right;">[Lien cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"}</div>
+::: {style="float: right;"}
+[Lien cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"}
+:::
 
 ![](images/dplyr_logo.png)
 
@@ -565,7 +571,7 @@ Grâce à la syntaxe de dplyr, on peut répondre à ce besoin de deux manières 
 
 La première est d'effectuer toutes les opérations en une fois en les emboîtant :
 
-```r
+``` r
 biomass_exercice2_1_distinct_filter <- filter(.data = distinct(.data = global_reef_fish_biomass),
                                               biomass != 0
                                               & ! family %in% c("Mullidae",
@@ -587,7 +593,7 @@ Cependant cela a plusieurs inconvénients. La structure est peu lisible, les op�
 
 -   Avec notre exemple précédent cela donne :
 
-```r
+``` r
 biomass_exercice2_1_distinct_filter <- distinct(.data = global_reef_fish_biomass) %>%
   filter(biomass != 0
          & ! family %in% c("Mullidae",
@@ -601,7 +607,7 @@ biomass_exercice2_1_distinct_filter <- distinct(.data = global_reef_fish_biomass
 
 -   Ordonner les lignes d'une ou plusieurs colonnes
 
-```r
+``` r
 # par défaut ordre croissant, utiliser l'argument desc pour ordre décroissant
 arrange()
 ```
@@ -623,7 +629,7 @@ add_row()
 
 Type de fonctions qui retournent un sous-ensemble de colonnes sous la forme d'un vecteur ou d'une table
 
-```r
+``` r
 # extraction des valeurs d'une colonne sous la forme d'un vecteur
 # on peut utiliser des noms ou les ids
 pull()
@@ -643,7 +649,7 @@ relocate()
 
 -   Globalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie <br/> <br/> <br/> ![](images/vectorized_function.png){.absolute top="300" left="250" width="50%"}
 
-```r
+``` r
 # créer une nouvelle variable
 mutate()
 # créer une nouvelle variable mais sans conserver les anciennes
@@ -652,7 +658,7 @@ transmute()
 
 -   Petit bonus pour renommer les variables
 
-```r
+``` r
 rename()
 ```
 
@@ -668,7 +674,7 @@ rename()
 -   Trier par ordre décroissant les données en fonction de la variable size_class_mm
 -   Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
 
-```r
+``` r
 ```
 
 ## Exercice 2.2 corrigé {.smaller auto-animate="true"}
@@ -683,7 +689,7 @@ rename()
 -   Trier par ordre décroissant les données en fonction de la variable size_class_mm
 -   Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
 
-```r
+``` r
 # solution
 biomass_exercice2_2 <- mutate(.data = biomass_exercice2_1_distinct_filter,
                               survey_id_full = paste(survey_id,
@@ -708,7 +714,7 @@ biomass_exercice2_2 <- mutate(.data = biomass_exercice2_1_distinct_filter,
 
 -   Fonction clé
 
-```r
+``` r
 summarise()
 # Beaucoup, beaucoup d'options et de possibilités
 # Compter le nombre de valeurs/lignes
@@ -734,7 +740,7 @@ max()
 
 -   Fonction de création de groupe
 
-```r
+``` r
 # on peut définir nos groupes en fonction des modalités des variables
 group_by()
 # ou alors en isolant chaque ligne
@@ -743,7 +749,7 @@ rowwise()
 
 -   Attention à ce que vous faites ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R). Pour y remédier :
 
-```r
+``` r
 # via un summarise (argument experimental, attention à la pérennité)
 .groups
 # de manière plus générale
@@ -759,7 +765,7 @@ ungroups()
 -   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvée" regarder du côté des arguments en option)
 -   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
 
-```r
+``` r
 ```
 
 ## Exercice 2.3 corrigé {.smaller auto-animate="true"}
@@ -769,7 +775,7 @@ ungroups()
 -   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvée" regarder du côté des arguments en option)
 -   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
 
-```r
+``` r
 # solution
 biomass_exercice2_3 <- biomass_exercice2_2 %>%
   dplyr::group_by(survey_id_full) %>%
@@ -791,7 +797,7 @@ biomass_exercice2_3_sample_verification <- dplyr::group_by(.data = biomass_exerc
 -   Améliore grandement la lisibilité de vos fonctions
 -   Syntaxe de base :
 
-```r
+``` r
 case_when(
   operateur(s) booléen(s) ou logique(s) ~ output1,
   operateur(s) booléen(s) ou logique(s) ~ output2,
@@ -815,7 +821,7 @@ case_when(
 -   Il doit y avoir une cohérence entre le nombre de colonnes ou de lignes
 -   Attention, aucune vérification de cohérence des jointures
 
-```r
+``` r
 # "Coller" deux jeux de données
 bind_cols()
 bind_rows()
@@ -839,7 +845,7 @@ bind_rows()
 :::
 :::::
 
-```r
+``` r
 # jointure à gauche
 left_join()
 # jointure à droite
@@ -858,7 +864,7 @@ full_join()
     -   Y-a-t-il un problème avec le jeu de données survey_metadata ?
     -   Réfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure
 
-```r
+``` r
 ```
 
 ## Exercice 2.4 corrigé {.smaller auto-animate="true"}
@@ -869,7 +875,7 @@ full_join()
     -   Y-a-t-il un problème avec le jeu de données survey_metadata ?
     -   Réfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure
 
-```r
+``` r
 # solution
 survey_metadata_distinct <- distinct(.data = survey_metadata)
 biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
@@ -880,7 +886,9 @@ save(biomass_survey_exercice2_4, file = "./data/biomass_survey_exercice2_4.RData
 
 # Partie 3 : Nettoyage des données avec [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"}
 
-<div style="float: right;">[Lien cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf){.external target="_blank"}</div>
+::: {style="float: right;"}
+[Lien cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf){.external target="_blank"}
+:::
 
 ![](images/logo_tidyr.png){width="20%"}
 
@@ -904,12 +912,12 @@ Lien vers le [cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/tidyr
 
 Pour illustrer cette partie nous utiliserons le jeu de données popEU qui décrit le nombre d'habitants par pays pour les années 2014, 2015 et 2016
 
-```r
+``` r
 popEU <- readRDS("./data/popEU.RDS")
 slice_tail(popEU)
 ```
 
-```r
+``` r
 kable(popEU[10:15, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
 ```
 
@@ -919,7 +927,7 @@ kable(popEU[10:15, ], html_font = "Computer Modern", table.attr = "style='width:
 
 `pivot_wider()`et `pivot_longer()`sont les successeurs des fonctions en base R du package `reshape` puis `reshape2`. Et se nommaient `spread()`et `gather()` dans les premières versions de `tidyr`
 
-```r
+``` r
  # Transformer un tableau long en format large
 pivot_wider(names_from, values_from)
 # Transformer un tableau large en format long
@@ -932,13 +940,13 @@ pivot_longer(cols, names_to, values_to, ...)
 
 Transformer le jeu de données en format "wide" en utilisant la fonction `pivot_wider()`. Nous voulons obtenir une colonne par année
 
-```r
+``` r
 # Créer un nouvel objet que l'on nomme popEU_wide
 popEU_wide <- pivot_wider(popEU, names_from = "year", values_from = "pop")
 popEU_wide
 ```
 
-```r
+``` r
 kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;'")
 ```
 
@@ -946,7 +954,7 @@ kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;
 
 ### Gestion des valeurs manquantes "NA"
 
-```r
+``` r
 # Remplacer des "NA" par des valeurs spécifiques
 replace_na(data, replace, …)
 # Supprimer les lignes contenant des "NA"
@@ -961,7 +969,7 @@ fill(data, …, .direction)
 
 Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
 
-```r
+``` r
 # Créer un nouvel objet que l'on nomme popEU_long
 popEU_long <-
   pivot_longer(
@@ -981,7 +989,7 @@ kable(popEU_long[10:15, ], html_font = "Computer Modern", table.attr = "style='w
 
 Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d'enchainer les opérations à l'aide du pipe %\>%
 
-```r
+``` r
 popEU_long <- popEU_wide %>%
   pivot_longer(.,
                cols = c(2:4),
@@ -998,7 +1006,7 @@ kable(popEU_long[8:13, ], html_font = "Computer Modern", table.attr = "style='wi
 
 Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d'enchainer les opérations à l'aide du pipe %\>%
 
-```r
+``` r
 # Créer un nouvel objet que l'on nomme popEU_long
 popEU_long <- popEU_wide %>%
   pivot_longer(.,
@@ -1014,7 +1022,7 @@ kable(popEU_long[10:15, ], html_font = "Computer Modern", table.attr = "style='w
 
 ### Combinaison des variables
 
-```r
+``` r
 # Séparer une colonne en plusieurs colonnes
 separate(data, col, into)
 # Créer une seule colonne à partir de plusieurs colonnes
@@ -1029,7 +1037,7 @@ expand(data, ...)
 
 A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles colonnes "millions" et "milliers"
 
-```r
+``` r
 popEU_sep <- popEU_long %>%
   mutate(pop = as.character(pop)) %>%
   separate(., col = pop, into = c("millions", "milliers"))
@@ -1043,7 +1051,7 @@ kable(popEU_sep[1:6, ], html_font = "Computer Modern", table.attr = "style='widt
 
 Recréer la colonne pop comme à l'origine en la nommant population
 
-```r
+``` r
 popEU_unite <- popEU_sep %>%
   unite(., population, c(millions, milliers), sep = ".")
 slice_head(popEU_unite)
@@ -1056,7 +1064,7 @@ kable(popEU_unite[1:6, ], html_font = "Computer Modern", table.attr = "style='wi
 
 Générer un tableau avec toutes les combinaisons possibles pays/population. Que remarquons-nous ?
 
-```r
+``` r
 popEU_expand <- popEU_unite %>%
   expand(., pays, population)
 slice_head(popEU_expand)
@@ -1075,14 +1083,14 @@ La valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniq
 
 -   Chargez les données d'abondance. Les données sont elles tidy ?
 
-```r
+``` r
 ```
 
 ## Exercice 3.1 corrigé {auto-animate="true"}
 
 -   Chargez les données d'abondance. Les données sont elles tidy ?
 
-```r
+``` r
 # solution
 abundance <- read_delim("./data/Global_reef_fish_abundance.csv")
 ```
@@ -1100,7 +1108,7 @@ Non les données ne sont pas tidy, car elles sont en format "wide"
 -   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
 -   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
 
-```r 
+``` r
 # solution
 ```
 
@@ -1109,7 +1117,7 @@ Non les données ne sont pas tidy, car elles sont en format "wide"
 -   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
 -   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
 
-```r
+``` r
 # solution
 abundance_long <- abundance %>%
   pivot_longer(
@@ -1125,7 +1133,7 @@ slice_head(abundance_long)
 
 <br>
 
-```r
+``` r
 load("./data_tmp/abundance_long.RData")
 kable(abundance_long[1:6,], html_font = "Computer Modern", table.attr = "style='width:30%;'")
 ```
@@ -1134,14 +1142,14 @@ kable(abundance_long[1:6,], html_font = "Computer Modern", table.attr = "style='
 
 -   Créez un seul tableau regroupant biomasse et abondance
 
-```r
+``` r
 ```
 
 ## Exercice 3.3 corrigé {auto-animate="true"}
 
 -   Créez un seul tableau regroupant biomasse et abondance
 
-```r 
+``` r
 # solution
 load("./data/biomass_survey_exercice2_4.RData")
 biomass_abundance <- biomass_survey_exercice2_4 %>%
@@ -1152,14 +1160,14 @@ biomass_abundance <- biomass_survey_exercice2_4 %>%
 
 -   Créez 2 nouvelles colonnes "genus" et "species" à partir de species_name
 
-```r
+``` r
 ```
 
 ## Exercice 3.4 corrigé {.smaller auto-animate="true"}
 
 -   Créez 2 nouvelles colonnes "genus" et "species" à partir de species_name
 
-```r
+``` r
 # solution
 biomass_abundance <- biomass_abundance %>%
   separate(., species_name, into = c("genus", "species"))
@@ -1168,7 +1176,7 @@ slice_head(biomass_abundance[,8:11])
 
 <br>
 
-```r
+``` r
 # solution
 biomass_abundance <- biomass_abundance %>%
   separate(., species_name, into = c("genus", "species"))
@@ -1181,14 +1189,14 @@ kable(biomass_abundance[1:6,8:11],
 
 -   Transformez le tibble en sf object avec la commande sf::st_as_sf(survey, coords = c("longitude", "latitude"), remove = FALSE)
 
-```r
+``` r
 ```
 
 ## Exercice 3.5 corrigé {auto-animate="true"}
 
 -   Transformez le tibble en sf object avec la commande sf::st_as_sf(survey, coords = c("longitude", "latitude"), remove = FALSE)
 
-```r
+``` r
 # solution
 data_sf <-
   sf::st_as_sf(biomass_abundance,
@@ -1209,14 +1217,14 @@ Nous obtenons une erreur, car il n'est pas possible de convertir un tibble en ob
 
 -   Corrigez l'erreur
 
-```r
+``` r
 ```
 
 ## Exercice 3.6 corrigé {auto-animate="true"}
 
 -   Corrigez l'erreur
 
-```r
+``` r
 # solution
 biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
   drop_na(latitude) %>% #supression des lignes contenant des NA dans la colonne latitude
@@ -1233,22 +1241,26 @@ save(biomass_survey_abundance_exercice3_6,
 
 # Partie 4 : Extension à la manipulation de données, cas spécifiques
 
-<div style="float: right;">[Cheatsheet stringr](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){.external target="_blank"}</div>
+::: {style="float: right;"}
+[Cheatsheet stringr](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){.external target="_blank"}
+:::
 
 <br>
 
-<div style="float: right;">[Cheatsheet lubridate](https://github.com/rstudio/cheatsheets/blob/main/lubridate.pdf){.external target="_blank"}</div>
+::: {style="float: right;"}
+[Cheatsheet lubridate](https://github.com/rstudio/cheatsheets/blob/main/lubridate.pdf){.external target="_blank"}
+:::
 
 ![](images/logo_stringr.png){.absolute top="300" width="20%"} ![](images/logo_lubridate.png){.absolute top="300" left="300" width="20%"}
 
 ## 4.1 : Manipuler du texte avec [stringr](https://stringr.tidyverse.org/){.external target="_blank"}
 
-- Conçu pour manipuler les chaines de caractères "facilement"
-- En plus d'être plus faciles à utiliser, les noms des fonctions représentent bien ce qu'elles permettent de faire
-  - elles commencent toutes par `str_`
-- Quelques exemples
+-   Conçu pour manipuler les chaines de caractères "facilement"
+-   En plus d'être plus faciles à utiliser, les noms des fonctions représentent bien ce qu'elles permettent de faire
+    -   elles commencent toutes par `str_`
+-   Quelques exemples
 
-```r
+``` r
 # Détection de caractères
 str_detect()
 # Extraction de caractères
@@ -1265,7 +1277,7 @@ str_length()
 
 ## Création d'un dataframe de chaines de caractères
 
-```r
+``` r
 tmp <- tibble(nom = c("Micheline Sétou", "Jean-Jacques Apeprès",  "Martine Sérien"),
               num_rue = c("12", "15 ou 16", "NA"), 
               nom_rue = c("Rue des peupliers", "Rue + un arbre", "NA"),
@@ -1292,21 +1304,21 @@ La fonction renvoie `TRUE` ou `FALSE` en fonction de la présence ou non du cara
 
 ::::: columns
 ::: {.column width="50%"}
-```r
+``` r
 tmp$nom
 ```
 
-```r
+``` r
 cat(tmp$nom, sep = "\n")
 ```
 :::
 
 ::: {.column width="50%"}
-```r
+``` r
 str_detect(string  = tmp$nom, pattern = "ine")
 ```
 
-```r
+``` r
 cat(str_detect(string  = tmp$nom, 
                pattern = "ine"), sep = "\n")
 ```
@@ -1336,7 +1348,7 @@ Contrairement à `str_detect()`, la fonction `str_subset()` renvoie les caractè
 
 ### Exemple
 
-```r
+``` r
 str_subset(string  = tmp$nom, 
            pattern = "ine")
 ```
@@ -1356,22 +1368,22 @@ On utilise la fonction `str_extract()` et ses arguments principaux :
 
 ::::: columns
 ::: {.column width="50%"}
-```r
+``` r
 tmp$ville
 ```
 
-```r
+``` r
 cat(tmp$ville, sep = "\n")
 ```
 :::
 
 ::: {.column width="50%"}
-```r
+``` r
 str_extract(string  = tmp$ville, 
             pattern = "Montpel")
 ```
 
-```r
+``` r
 cat(str_extract(string  = tmp$ville, 
                 pattern = "Montpel"), sep = "\n")
 ```
@@ -1394,24 +1406,24 @@ On utilise la fonction `str_replace()` et ces arguments principaux :
 
 ::::: columns
 ::: {.column width="50%"}
-```r
+``` r
 # Les noms avant le replacement
 tmp$nom
 ```
 
-```r
+``` r
 cat(tmp$nom, sep = "\n")
 ```
 :::
 
 ::: {.column width="50%"}
-```r
+``` r
 str_replace(string      = tmp$nom, 
             pattern     = "Jacques", 
             replacement = "Michel")
 ```
 
-```r
+``` r
 cat(str_replace(string      = tmp$nom, 
                 pattern     = "Jacques", 
                 replacement = "Michel"), sep = "\n")
@@ -1432,7 +1444,7 @@ On utilise la fonction `str_glue()` et ces deux principaux arguments :
 
 ### Exemple sur une ligne du data.frame
 
-```r
+``` r
 str_glue("{tmp$nom[1]} habite au {tmp$num_rue[1]} {tmp$nom_rue[1]}", .sep = " ")
 ```
 
@@ -1445,13 +1457,13 @@ On utilise la fonction `str_glue()` et ces deux principaux arguments :
 
 ### Exemple sur une ligne du data.frame
 
-```r
+``` r
 str_glue("{tmp$nom[1]} habite au {tmp$num_rue[1]} {tmp$nom_rue[1]}", .sep = " ")
 ```
 
 ### Exemple pour tout un data.frame
 
-```r
+``` r
 str_glue_data(tmp, "{nom}, habite au {num_rue} {nom_rue} dans la ville de {ville}")
 ```
 
@@ -1469,7 +1481,7 @@ str_glue_data(tmp, "{nom}, habite au {num_rue} {nom_rue} dans la ville de {ville
 
 **Question 1** : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location.
 
-```r
+``` r
 load("biomass_survey_abundance_exercice3_6.RData")
 survey_med <- biomass_survey_abundance_exercice3_6 %>%
   filter(str_detect(location, "Mediterranean") == TRUE)
@@ -1482,7 +1494,7 @@ dim(survey_med)
 
 . . .
 
-```r
+``` r
 global_reef_fish_biomass <- read_delim("./data/global_reef_fish_biomass.csv")
 global_reef_fish_biomass  %>%
   filter(survey_id == "2000951") %>%
@@ -1492,7 +1504,7 @@ global_reef_fish_biomass  %>%
 
 . . .
 
-```r
+``` r
 load("global_reef_fish_biomass_2000951.RData")
 kable(global_reef_fish_biomass_2000951, html_font = "Computer Modern", table.attr = "style='width:50%;'")
 ```
@@ -1503,7 +1515,7 @@ kable(global_reef_fish_biomass_2000951, html_font = "Computer Modern", table.att
 
 . . .
 
-```r
+``` r
 global_reef_fish_biomass %>%
   filter(survey_id == "2000951") %>%
   mutate(class = str_trim(class)) %>%
@@ -1513,7 +1525,7 @@ global_reef_fish_biomass %>%
 
 . . .
 
-```r
+``` r
 load("global_reef_fish_biomass_2000951OK.RData")
 kable(global_reef_fish_biomass_2000951OK, html_font = "Computer Modern", table.attr = "style='width:50%;'")
 ```
@@ -1526,7 +1538,7 @@ kable(global_reef_fish_biomass_2000951OK, html_font = "Computer Modern", table.a
 
 Solution décomposée
 
-```r
+``` r
 survey_med <- biomass_survey_abundance_exercice3_6 %>%
   filter(str_detect(location, "Mediterranean") == TRUE) %>%
   mutate(orientation = word(location, 2, -1)) %>%
@@ -1537,7 +1549,7 @@ survey_med <- biomass_survey_abundance_exercice3_6 %>%
 
 . . .
 
-```r
+``` r
 kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr = "style='width:50%;'")
 ```
 
@@ -1549,7 +1561,7 @@ kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr 
 
 Solution plus courte
 
-```r
+``` r
 survey_med <- biomass_survey_abundance_exercice3_6 %>%
   filter(str_detect(location, "Mediterranean") == TRUE) %>%
   mutate(orientation = str_replace_all(word(location, 2, -1),
@@ -1558,7 +1570,7 @@ survey_med <- biomass_survey_abundance_exercice3_6 %>%
 
 . . .
 
-```r
+``` r
 kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr = "style='width:50%;'")
 ```
 
@@ -1583,7 +1595,7 @@ kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr 
 
 ## Exemple concret
 
-```r
+``` r
 load(file = "./data/exemple_regular_expressions.RData")
 tac_final_modif_level1 <- tac_final %>%
   mutate(adapted_quota = as.numeric(x = adapted_quota_ori)) %>%
@@ -1616,7 +1628,7 @@ tac_final_modif_level2 <- tac_final %>%
 
 -   Possibilité de rajouter l'indicateur de fuseau horaire via l'argument tz
 
-```r
+``` r
 library(lubridate)
 # Identifie l'ordre de l'année (y), le mois (m), le jour (d), l'heure (h), la minute (m) et la second (s) d'un élement fournis à R
 ymd()
@@ -1630,7 +1642,7 @@ ymd_hms()
 
 ### Modification et extraction
 
-```r
+``` r
 test_date_time <- ymd_hms("2022-12-05 12:00:00", tz = "CET")
 # pour une extraction des informations
 second()
@@ -1648,7 +1660,7 @@ month()
 
 -   Deux fonctions clés
 
-```r
+``` r
 # Pour exprimer un élément dans un autre fuseau horaire
 with_tz()
 # Pour forcer le changement d'un fuseau horaire mais en conservant la même heure
@@ -1669,13 +1681,13 @@ force_tz()
 
 -   Sur certains jeux de données, les dates-temps sont stockées en nombre de secondes depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas-là :
 
-```r
+``` r
 as_datetime()
 ```
 
 -   Possibilité de faire des arrondis
 
-```r
+``` r
 # arrondi inférieur sur "l'unité" la plus proche
 floor_date()
 # arrondi inférieur sur "l'unité" la plus proche
@@ -1719,7 +1731,7 @@ ceiling_date()
 ::: column
 1.  La Structure
 
-    ```r
+    ``` r
     data <- iris
     p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
       theme(axis.text  = element_text(size = 25),
@@ -1731,7 +1743,7 @@ ceiling_date()
 ::: column
 2.  Le Type de représentation
 
-    ```r
+    ``` r
     p2 <- p1 + geom_point(size = 5)
     p2
     ```
@@ -1742,7 +1754,7 @@ ceiling_date()
 ::: column
 3.  Les Couleurs
 
-    ```r
+    ``` r
     p3 <- p1 + geom_point(mapping = aes(color = Petal.Width), size = 5) + scale_color_viridis_c()
     p3
     ```
@@ -1751,7 +1763,7 @@ ceiling_date()
 ::: column
 4.  Le Lifting final
 
-    ```r
+    ``` r
     p4 <- p3 +
       theme_bw() +
       theme(axis.text = element_text(size = 25),
@@ -1768,7 +1780,7 @@ ceiling_date()
 ::: column
 1.  La Structure
 
-    ```r
+    ``` r
     data <- iris
     p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
       theme(axis.text  = element_text(size = 25),
@@ -1780,7 +1792,7 @@ ceiling_date()
 ::: column
 2.  Le Type de représentation
 
-    ```r
+    ``` r
     p2 <- p1 + geom_point(size = 5)
     p2
     ```
@@ -1791,7 +1803,7 @@ ceiling_date()
 ::: column
 3.  Les Couleurs
 
-    ```r
+    ``` r
     p3 <- p1 + geom_point(mapping = aes(color = Petal.Width), size = 5) + scale_color_viridis_c()
     p3
     ```
@@ -1800,7 +1812,7 @@ ceiling_date()
 ::: column
 4.  Le Lifting final
 
-    ```r
+    ``` r
     p4 <- p3 +
       geom_line(size = 2) +
       theme_bw() +
@@ -1815,7 +1827,7 @@ ceiling_date()
 
 Pour la démonstration nous allons utiliser le jeu de données `crabs` de la librairie `MASS`.
 
-```r
+``` r
 library(MASS)
 data_crabs <- crabs %>% dplyr::select(sp, sex, CL, CW)
 data_crabs %>%
@@ -1826,7 +1838,7 @@ data_crabs %>%
 
 . . .
 
-```r
+``` r
 data_crabs %>%
   head(3) %>%
   kbl(digits = 4, caption = "Crabs data") %>%
@@ -1873,14 +1885,14 @@ Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` 
 </div>
 :::::
 
-```r
+``` r
 couche.1 <- ggplot(data    = data_crabs,
                    mapping = aes(x = CL, y = CW))
 ```
 
 . . .
 
-```r
+``` r
 couche.1
 ```
 
@@ -1948,7 +1960,7 @@ L'exemple ici va mener à la réalisation d'un **nuage de points**. Mais `ggplot
 ::: {.column width="50%"}
 -   `aes()` dans `ggplot()`
 
-    ```r
+    ``` r
     couche.2 <- ggplot(data    = data_crabs,
                        mapping = aes(x = CL, 
                                      y = CW)) +
@@ -1959,7 +1971,7 @@ L'exemple ici va mener à la réalisation d'un **nuage de points**. Mais `ggplot
 ::: {.column width="50%"}
 -   `aes()` dans `geom_point()`
 
-    ```r
+    ``` r
     # Autre solution
     couche.2.2 <- ggplot() +
       geom_point(data    = data_crabs,
@@ -1972,7 +1984,7 @@ L'exemple ici va mener à la réalisation d'un **nuage de points**. Mais `ggplot
 
 . . .
 
-```r
+``` r
 couche.2
 ```
 
@@ -1982,14 +1994,14 @@ Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
 
 . . .
 
-```r
+``` r
 couche.3 <- couche.2 +
   geom_smooth(color = "red", method = "lm") # le modèle linéaire 
 ```
 
 . . .
 
-```r
+``` r
 couche.3
 ```
 
@@ -1997,7 +2009,7 @@ couche.3
 
 Traçons un modéle linéaire et ajoutons la formule et le R² correspondant
 
-```r
+``` r
 couche.3 <- couche.2 +
   geom_smooth(color = "red", method = "lm") + # le modèle linéaire 
   stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) # la formule
@@ -2008,7 +2020,7 @@ couche.3
 
 Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
 
-```r
+``` r
 couche.3 <- couche.2 +
   geom_smooth(color = "red", method = "lm") + # le modèle linéaire 
   stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) + # la formule
@@ -2022,7 +2034,7 @@ Donnons une couleur par sexe. Comme c'est lié à l'esthétisme de la figure, il
 
 . . .
 
-```r
+``` r
 couche.4 <- ggplot() +
   geom_point(data    = data_crabs,
              mapping = aes(x     = CL, 
@@ -2032,7 +2044,7 @@ couche.4 <- ggplot() +
 
 . . .
 
-```r
+``` r
 couche.4
 ```
 
@@ -2042,7 +2054,7 @@ Pour cela, on peut utiliser la fonction `scale_color_manual()` et les arguments 
 
 . . .
 
-```r
+``` r
 couche.5 <- couche.4 +
   scale_color_manual(name   = "Sex :",
                      values = c("M" = "darkblue", 
@@ -2051,7 +2063,7 @@ couche.5 <- couche.4 +
 
 . . .
 
-```r
+``` r
 couche.5
 ```
 
@@ -2061,7 +2073,7 @@ couche.5
 
 ## Ggplot pas à pas : Légende v.2
 
-```r
+``` r
 couche.6 <- couche.5 +
   labs(x     = "Carapace Length (mm)",
        y     = "Carapace Width (mm)",
@@ -2070,7 +2082,7 @@ couche.6 <- couche.5 +
 
 . . .
 
-```r
+``` r
 couche.6
 ```
 
@@ -2080,13 +2092,13 @@ La fonction `facet_grid()` permet de générer X plots pour chaque valeur d'une 
 
 . . .
 
-```r
+``` r
 couche.7 <- couche.6 + facet_grid(~sp)
 ```
 
 . . .
 
-```r
+``` r
 couche.7
 ```
 
@@ -2094,7 +2106,7 @@ couche.7
 
 <br> On utilise une des fonctions `theme_*`.
 
-```r
+``` r
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 couche.7 + theme_bw()
@@ -2112,7 +2124,7 @@ La fonction `theme()` permet de lifter BEAUCOUP de choses (`?theme`). <br> Elle 
 
 . . .
 
-```r
+``` r
 couche.8 <- couche.7 +
   theme_bw() +
   theme(axis.text       = element_text(size = 11),
@@ -2124,7 +2136,7 @@ couche.8 <- couche.7 +
 
 . . .
 
-```r
+``` r
 couche.8
 ```
 
@@ -2140,7 +2152,7 @@ Pour enregistrer votre ggplot, vous pouvez utiliser la fonction `ggsave()` :
 
 . . .
 
-```r
+``` r
 ggsave(filename = "le_chemin_vers_le_bon_dossier", 
        plot     = boxplot_biomass_country_v3,
        width    = 8,
@@ -2151,7 +2163,7 @@ ggsave(filename = "le_chemin_vers_le_bon_dossier",
 
 Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
-```r
+``` r
 # 1 - Filter les données obtenues en 2011
 # 2 - Grouper les données pour obtenir la biomasse totale
 #     par transect dans chacun des pays
@@ -2161,7 +2173,7 @@ Quel est le pays dans lequel la biomasse totale par transect est la plus forte ?
 
 Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
-```r
+``` r
 data_biomass_country <- biomass_survey_abundance_exercice3_6 %>%
   st_drop_geometry() %>%
   # 1 - Filter les données obtenues en 2011
@@ -2176,7 +2188,7 @@ data_biomass_country <- biomass_survey_abundance_exercice3_6 %>%
 
 Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
-```r
+``` r
 # Réalisation les boites à moustache
 ggplot(data = data_biomass_country) +
   geom_boxplot(aes(x = country, y = biomass)) +
@@ -2193,13 +2205,13 @@ Une solution est d'utiliser la fonction `reorder()` pour ordonner l'axe des x.
 
 Utiliser cette fonction pour ordonner l'axe des x de façon décroissante selon la valeur **médiane**. Nommer le plot **boxplot_biomass_country**. <br> N'hésitez pas à regarder l'aide `?reorder` ou à chercher sur internet.
 
-```r
+``` r
 # Utilisation de reorder
 ```
 
 ## Exercice 5.2 : Correction {auto-animate="true"}
 
-```r
+``` r
 # Reorder en fonction de la valeur médiane 
 boxplot_biomass_country <- ggplot(data = data_biomass_country) +
   geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass)) +
@@ -2211,21 +2223,21 @@ boxplot_biomass_country
 
 Renommer proprement les axes de boxplot_biomass_country.
 
-```r
+``` r
 ```
 
 ## Exercice 5.3 : Correction {auto-animate="true"}
 
 Renommer proprement les axes de boxplot_biomass_country.
 
-```r
+``` r
 # Solution
 boxplot_biomass_country_v2 <- boxplot_biomass_country +
   labs(x = "Country", y = "Biomass (g)") +
   theme_bw()
 ```
 
-```r
+``` r
 boxplot_biomass_country_v2
 ```
 
@@ -2233,14 +2245,14 @@ boxplot_biomass_country_v2
 
 Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choisir votre arrière plan préféré.
 
-```r
+``` r
 ```
 
 ## Exercice 5.4 : Correction {auto-animate="true"}
 
 Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choisir votre arrière plan préféré.
 
-```r
+``` r
 # Solution
 boxplot_biomass_country_v3 <- boxplot_biomass_country_v2 +
   theme_bw() +
@@ -2249,7 +2261,7 @@ boxplot_biomass_country_v3 <- boxplot_biomass_country_v2 +
 
 . . .
 
-```r
+``` r
 boxplot_biomass_country_v3
 ```
 
@@ -2257,14 +2269,14 @@ boxplot_biomass_country_v3
 
 Enregistrer la figure **boxplot_biomass_country_v3** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
 
-```r
+``` r
 ```
 
 ## Exercice 5.5 : Correction {auto-animate="true"}
 
 Enregistrer la figure **boxplot_biomass_country_v3** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
 
-```r
+``` r
 # Solution
 ggsave(filename = "figures/boxplot_biomass_vs_country.png", 
        plot     = boxplot_biomass_country_v3,
@@ -2276,7 +2288,7 @@ ggsave(filename = "figures/boxplot_biomass_vs_country.png",
 
 **fill** vs. **color**
 
-```r
+``` r
 # Solution questions 1 & 2
 data_biomass_5country <- data_biomass_country %>%
   filter(country %in% c("Spain", "United States", "Italy", "Costa Rica", "Panama")) %>%
@@ -2290,7 +2302,7 @@ data_biomass_5country <- data_biomass_country %>%
 
 Reconstruction d'un boxplot en **remplissant** chaque boite d'une couleur pour chaque continent.
 
-```r
+``` r
 # Solution pour le plot
 ggplot() +
   geom_boxplot(data    = data_biomass_5country,
@@ -2317,7 +2329,7 @@ Pour choisir ses couleurs de contour *vs.* de remplissage, on utilise les foncti
 
 . . .
 
-```r
+``` r
 ggplot() +
   geom_boxplot(data    = data_biomass_5country,
                mapping = aes(x = reorder(country, -biomass, FUN = median), 
@@ -2336,7 +2348,7 @@ Construisons un nuage de points entre la biomasse et la profondeur
 
 . . .
 
-```r
+``` r
 data_biomass_depth <- biomass_survey_abundance_exercice3_6 %>%
   st_drop_geometry() %>%
   filter(str_detect(string = survey_date, pattern = "2011")) %>%
@@ -2345,7 +2357,7 @@ data_biomass_depth <- biomass_survey_abundance_exercice3_6 %>%
             depth   = unique(depth)) 
 ```
 
-```r
+``` r
 plot <- ggplot() +
   geom_point(data    = data_biomass_depth,
              mapping = aes(x     = depth, 
@@ -2356,7 +2368,7 @@ plot <- ggplot() +
 
 . . .
 
-```r
+``` r
 plot
 ```
 
@@ -2382,7 +2394,7 @@ Il existe 4 fonctions principales qui permettent de construire des palettes de c
 
 <center>Testons les une par une à partir de la figure suivante</center>
 
-```r
+``` r
 plot <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
   geom_raster() +
   scale_x_continuous(NULL, expand = c(0, 0)) + 
@@ -2398,7 +2410,7 @@ La plus simple, mais pas beaucoup d'options. C'est aussi la palette de couleur p
 
 . . .
 
-```r
+``` r
 #| fig-height: 7
 #| layout: "[50, 50]"
 plot
@@ -2414,7 +2426,7 @@ De belles palettes dont les nuances sont captées par les personnes daltoniennes
 . . .
 
 ::: incremental
-```r
+``` r
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 plot + scale_fill_viridis_c(option = "viridis")
@@ -2429,7 +2441,7 @@ Petite info utile, toutes les palettes peuvent passer le test ***ColorBlind Frie
 
 . . .
 
-```r
+``` r
 color_pal <- RColorBrewer::brewer.pal(10, name="Spectral")
 colorBlindness::displayAllColors(color_pal)
 ```
@@ -2450,7 +2462,7 @@ Permet de créer ses propres palettes de couleurs, à partir de 2, 3 ou n couleu
 
 . . .
 
-```r
+``` r
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 plot + scale_fill_gradient(low = "darkblue", high = "darkred")
@@ -2479,7 +2491,7 @@ Les couleurs sont par défaut une nuance de bleus. Certaines précisions peuvent
 
 . . .
 
-```r
+``` r
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 plot + scale_fill_binned(n.breaks = 4)
@@ -2503,7 +2515,7 @@ Fonction analogue à `scale_fill_gradient()`.
 
 . . .
 
-```r
+``` r
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 plot + scale_fill_steps(low = "darkblue", high = "darkred", n.breaks = 8)
@@ -2526,7 +2538,7 @@ Les principales fonctions utilisées permettant de construire des palettes de co
 ## Couleurs & variables discrètes
 
 ::: incremental
-```r
+``` r
 plot <- ggplot() +
   geom_violin(data    = data_crabs,
               mapping = aes(x = sex, y = CL, fill = sex), 
@@ -2539,7 +2551,7 @@ plot <- ggplot() +
 . . .
 
 ::: incremental
-```r
+``` r
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 plot + scale_fill_discrete()
@@ -2566,7 +2578,7 @@ L'utilisation de cette fonction nécessite le calcul préalable de l'écart-type
 
 . . .
 
-```r
+``` r
 # Formatage des données
 crabs_mean <- data_crabs %>%
   group_by(sp) %>%
@@ -2576,7 +2588,7 @@ crabs_mean <- data_crabs %>%
 
 . . .
 
-```r fig.align="center", out.width="30%"
+```r
 # Réalisation du diagramme en barres
 ggplot(crabs_mean) +
   geom_col(aes(x = sp, y = CL_mean)) +
@@ -2588,7 +2600,7 @@ ggplot(crabs_mean) +
 
 A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
-```r
+``` r
 # 1 - Grouper les données par pays
 # 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble 
 #     des transects propres à chaque pays
@@ -2598,7 +2610,7 @@ A partir des données **data_biomass_5country**, construire un diagramme en barr
 
 A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
-```r fig.align='center', out.width="40%"
+```r
 country_mean <- data_biomass_5country %>%
   # 1 - Grouper les données par pays
   group_by(country) %>%
@@ -2612,7 +2624,7 @@ country_mean <- data_biomass_5country %>%
 
 A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
-```r fig.align='center', out.width="70%"
+```r
 # Figure 
 ggplot(country_mean) +
   geom_col(aes(x = reorder(country, biom_mean), y = biom_mean)) +
@@ -2634,7 +2646,7 @@ A partir de **biomass_survey_abundance_exercice3_6**, obtenez un data.frame de t
 
 . . .
 
-```r
+``` r
  # 1. Enlever la colonne geometry.
  # 2. Filtrer les données 2011.
  # 3. Sélectionner les colonnes size_class_mm, biomass, abundance.
@@ -2651,7 +2663,7 @@ Obtient-on les mêmes résultats entre la biomasse totale et l'abondance ?
 
 A partir de **biomass_survey_abundance_exercice3_6**, obtenez un data.frame de trois colonnes **size_class_mm**, **biom_abun**, **value** pour les données prélevées en 2011.
 
-```r
+``` r
 biomass_abundance <- biomass_survey_abundance_exercice3_6 %>%
   # 1. Enlever la colonne geometry.
   st_drop_geometry() %>%
@@ -2672,7 +2684,7 @@ biomass_abundance <- biomass_survey_abundance_exercice3_6 %>%
 
 Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.
 
-```r
+``` r
 ggplot(data = biomass_abundance,
        mapping = aes(x    = biom_abun, 
                      y    = value, 
@@ -2684,7 +2696,7 @@ ggplot(data = biomass_abundance,
 
 Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.
 
-```r
+``` r
 ggplot(data = biomass_abundance,
        mapping = aes(x    = biom_abun, 
                      y    = value, 
@@ -2697,22 +2709,19 @@ ggplot(data = biomass_abundance,
 
 Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.
 
-```fig.align='center', out.width="70%"
+```r
 ggplot(data = biomass_abundance,
        mapping = aes(x    = biom_abun, 
                      y    = value, 
                      fill = size_class_mm)) +
-  geom_col(position="dodge", stat="identity") +
-  labs(x = NULL, y = "Biomass (g)", fill = "Size class (mm)") + 
-  scale_fill_viridis_d(labels = c("[0, 25[", "[25, 50[", "[50, 75[", "[75, 100[")) +
-  theme_bw()
+  geom_col()
 ```
 
 ## Gestion des facteurs & groupes {auto-animate="true"}
 
 Changeons l'ordre des facteurs de façon à ce que la classe \[75,100\[ soit en 1ère.
 
-```r
+``` r
 plot1 <- ggplot(data = biomass_abundance,
                 mapping = aes(x    = biom_abun, 
                               y    = value, 
@@ -2723,7 +2732,7 @@ plot1 <- ggplot(data = biomass_abundance,
   theme_bw()
 ```
 
-```r
+``` r
 #| fig-height: 8
 #| layout: "[45, 45]"
 plot1
@@ -2741,7 +2750,7 @@ ggplot(data = biomass_abundance,
 
 Changeons l'ordre des facteurs de façon à ce que la classe \[75,100\[ soit en 1ère.
 
-```r
+``` r
 biomass_abundance2 <- biomass_abundance %>%
   mutate(size_class_mm = factor(x      = biomass_abundance$size_class_mm, 
                                 levels = c("100", "75", "50", "25"))) 
@@ -2759,14 +2768,14 @@ ggplot(data = biomass_abundance2,
 
 Réaliser un diagramme en barres permettant d'illustrer le mieux les cas où l'abondance est supérieure à la biomasse et vice-versa.
 
-```r
+``` r
 ```
 
 ## Exercice 5.8 : Correction {auto-animate="true"}
 
 Réaliser un diagramme en barres permettant d'illustrer le mieux les cas où l'abondance est supérieure à la biomasse et vice-versa.
 
-```r
+``` r
 # Correction
 ggplot(data = biomass_abundance,
        mapping = aes(x    = size_class_mm, 
