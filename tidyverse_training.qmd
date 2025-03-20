@@ -135,33 +135,26 @@ library(tidyverse)
 
 ![](images/logo_readr.png)
 
-## La librairie [readr](https://readr.tidyverse.org/){.external target="_blank"}
+## Le package [readr](https://readr.tidyverse.org/){.external target="_blank"}
 
 -   Des fonctions de base de R sont dédiées à l'import de fichiers textes de type csv (`read.csv`, `read.csv2`) ou tabulés (`read.table`) ou avec des séparateurs quelconques (`read.delim`)
--   La librairie [readr](https://readr.tidyverse.org/){.external target="_blank"} propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects.
+-   La librairie [readr](https://readr.tidyverse.org/){.external target="_blank"} propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects
 -   Ces fonctions sont compatibles avec l'esprit **Tidyverse** car elles permettent de générer des [tibbles](https://tibble.tidyverse.org/){.external target="_blank"}
-
-``` r
-# install.packages("readr", dependencies = T)
-# install.packages("tibble", dependencies = T)
-library(readr)
-library(tibble)
-```
 
 ## Un [tibble](https://tibble.tidyverse.org/){.external target="_blank"} ... Cékoiça ???
 
--   Le *tibble* est une évolution du *data frame* du R de base
--   Ce format est géré par le package du même nom qui fait partie du coeur de tidyverse
+-   Le *tibble* est un *data frame* amélioré
+-   Ce format est géré par le package [tibble](https://tibble.tidyverse.org/index.html){.external target="_blank"} qui fait partie du coeur de tidyverse
 -   Les *tibbles* contiennent un attribut *spec* qui précise les spécifications des colonnes (nom et type)
--   Ils s'affichent plus intelligemment que les *data frames* : seules les premières lignes sont affichées, ainsi que quelques informations supplémentaires utiles
+-   Ils s'affichent plus intelligemment que les *data frames* : par défaut affichages uniquement des premières lignes, ainsi que quelques informations supplémentaires utiles
 -   Ils autorisent des noms de colonnes qui sont invalides pour les *data frames* (espaces, caractères spéciaux, nombres...)
 -   Ils affichent un avertissement si on essaie d'accéder à une colonne qui n'existe pas
--   Ils n'ont pas de noms de lignes (*rownames*).
+-   Ils n'ont pas de noms de lignes (*rownames*)
 
-## Pour passer du *tibble* au *dataframe* et vice-versa
+## On peut passer du *tibble* au *dataframe* et vice-versa
 
 -   La plupart des fonctions du tidyverse acceptent des *data frames* en entrée, mais retournent un objet de classe *tibble*
--   On peut convertir un *data frame* en *tibble* avec la fonction [as_tibble](https://tibble.tidyverse.org/reference/as_tibble.html){.external target="_blank"}, ou l'inverse avec la fonction [as.data.frame](https://rdrr.io/r/base/as.data.frame.html){.external target="_blank"}.
+-   On peut convertir un *data frame* en *tibble* avec la fonction [as_tibble](https://tibble.tidyverse.org/reference/as_tibble.html){.external target="_blank"}, ou l'inverse avec la fonction [as.data.frame](https://rdrr.io/r/base/as.data.frame.html){.external target="_blank"}
 
 ## Les principales fonctions de la librairie **readr**
 
@@ -174,54 +167,37 @@ read_delim()
 read_csv()
 # Import fichiers csv au format français (virgule décimale et séparateur point-virgule)
 read_csv2()
+# Import fichiers au format tsv ou les valeurs sont séparées par des tabulations
+read_tsv()
 # Pour lire un fichier en "chunks", c'est à dire en tranches dont on définit la taille en nombre de lignes.
 # Cette fonction permet de lire de très gros fichiers et aussi d'appliquer une fonction (CallBack) sur les données à chaque tranche. 
 # xxx est à remplacer par csv, csv2, delim
 read_xxx_chunked()
 ```
 
-## Importer en ***tibble*** le fichier Global_reef_fish_biomass.csv
+## [read_delim()](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"}, la fonction la plus générique{.smaller}
 
--   Ce fichier est au format csv anglais (séparateur décimal = point et séparateur de colonnes = virgule).
+- Import de fichier avec la possibilité d'utiliser des paramètres 
+- Fonction générale, son fonctionnement permet une approche simple des autres fonctions plus spécifiques d'import
+- Parmi toutes les possibilités, on trouve comme paramètres:
+  - file : chemin d'un fichier, d'une connexion ou même des données écrites à la main,
+  - delim : délimiteur utilisé pour séparer les champs
+  - col_names : configuration d'un entête (ou pas)
+  - col_types : spécification des types de colonnes
+  - col_select : selection des colonnes a conserver (même langage que avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"})
+  - na : interprétation des valeurs manquantes
+  - skip : échappement de lignes lors de l'import
+  - name_repair : réparation "intéligente" des nomes de colonnes
+- Beaucoup d'autres sont disponibles en lien avec vos besoins !
 
--   Chaque ligne donne une valeur de biomasse pour une campagne (survey_id), une espèce de poisson (species_name) et une classe de taille de 0.5cm (size_class).
+## On a aussi des fonctions de raccourci
 
--   Lecture avec `read_delim()` : preciser le delimiteur de colonnes (ici la virgule)
-
-``` r
-global_reef_fish_biomass <- read_delim(file = "./data/global_reef_fish_biomass.csv",
-                                       delim = ",")
-```
-
--   0u bien avec `read_csv()` : delimiteur par defaut = virgule
-
-``` r
-global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv")
-```
-
-## Le ***tibble*** global_reef_fish_biomass
-
-On vérifie sa classe avec [class()](https://rdrr.io/r/base/class.html){.external target="_blank"}
-
-``` r
-class(x = global_reef_fish_biomass)
-```
-
-## Le ***tibble*** global_reef_fish_biomass
-
-On vérifie sa structure avec [str()](https://rdrr.io/r/utils/str.html){.external target="_blank"}
-
-``` r
-str(object = global_reef_fish_biomass)
-```
-
-## Le ***tibble*** global_reef_fish_biomass
-
-On vérifie son contenu avec [head()](https://rdrr.io/r/utils/head.html){.external target="_blank"}
-
-``` r
-head(x = global_reef_fish_biomass)
-```
+- En lien avec la nature de vos imports 
+- La plupart des paramètres de la fonction `read_delim` sont utilisable
+  - `read_csv` et `read_csv2` pour les fichiers csv,
+  - `read_tsv` pour les fichiers tsv
+- On a aussi les fonctions `_chunked` pour commencer à s'amuser 
+  - `read_delim_chunked`, `read_csv_chunked`, `read_csv2_chunked` et `read_tsv_chunked`
 
 ## La fonction inverse : [write\_...](https://readr.tidyverse.org/reference/write_delim.html){.external target="_blank"} pour exporter un fichier
 
@@ -231,207 +207,55 @@ write_csv()
 write_csv2()
 # Pour exporter en choisissant le délimiteur 
 write_delim()
-# Pour exporter en csv avec un format pré-défini pour excel
-write_excel_csv()
-write_excel_csv2()
 # Pour exporter en tsv
 write_tsv()
 ```
 
-## Comment lire un fichier avec d'autres séparateurs des colonnes et des décimales ?
+## Encore une fois des paramètres
 
--   Pour générer un autre format de fichier, on exporte biomass au format csv "francais" (séparateur décimal=",' et séparateur des colonnes=";")
+- Notamment :
+  - x : nom de l'objet dans l'environnement R
+  - file : chemin du fichier que l'on veut créer (ne pas oublier l'extension)
+  - delim : délimiteur utilisé pour séparer les champs
+  - na : interprétation des valeurs manquantes
+  - append : si FALSE écrasera un fichier existant portant le même nom que l'export, TRUE rajoutera nos données exportées au fichier existant (si c'est possible)
+  - col_names : inclusion du nom des colonnes dans l'export
 
-``` r
-write_csv2(x = global_reef_fish_biomass,
-           file = "./data/global_reef_fish_biomass_out3.csv")
-```
+## Autres fonctions utiles
 
--   Puis on essaie de lire ce nouveau csv au format francais
+- Extraction complète des spécifications d'un tibble avec `spec`
+- `cols_condense` permet d'afficher une version simplifiée des spécifications en affichant le type par défaut le plus fréquent et liste les colonnes avec un type différent. Attention, l'entrée est un objet de type `spec`.
 
-## Option 1 : `read_csv2()`
+## Petit point sur les types de colonne
 
-``` r
-global_reef_fish_biomass3 <- read_csv2(file = "./data/global_reef_fish_biomass_out3.csv")
-str(object = global_reef_fish_biomass3)
-```
+- Très bien expliqué dans la documentation de la fonction [read_delim](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"} au niveau de l'argument `col_types` 
+- Renvoi à la fonction [cols](https://readr.tidyverse.org/reference/cols.html){.external target="_blank"} qui permet de définir un type de colonne
+  - Parais anodin, mais très important, notamment pour les processus de "verification"
+  - Par exemple un chiffre sans virgule (type entier) ce n'est pas pareil qu'un chiffre à virgule (type double)
+- En lien avec les fonctions d'imports, on peut utiliser des raccourcis pour définir nos types de colonnes 
+  - Par exemple `c` pour un caractère à la place de `col_character`
+  - La liste complète est disponible de la documentation de [read_delim](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"}
+- Ici il faut garder en tête l'objectif de lever les ambiguïtés
 
-## Option 2 : `read_delim()` sans préciser le séparateur décimal
+# Avantages de [readr](https://readr.tidyverse.org/){.external target="_blank"} *vs.* les fonctions de base
 
-PAS BON car les nombres décimaux (ex: biomass) sont lus comme du caractère
+## [readr](https://readr.tidyverse.org/){.external target="_blank"} est en générale plus rapide
 
-``` r
-global_reef_fish_biomass3 <- read_delim(file = "./data/global_reef_fish_biomass_out3.csv",
-                                        delim = ";")
-str(object = global_reef_fish_biomass3) 
-```
+- Du cas par cas mais globalement mieux adapté au "gros" fichiers (en lien avec des fonctions orientées objet)
+- Par exemple (tendance sans tenir compte d'autres facteurs comme l'ordinateur) pour un fichier csv de 156mo
+  - 30.84s avec read_csv contre 30.00s avec read.csv
+- Pour un fichier csv de 468mo
+  - 38.63s avec read_csv contre 47.56s avec read.csv
 
-## Option 3 : `read_delim()` en précisant le séparateur décimal avec l'argument locale
+## Le vrai avantage reside dans la polyvalence
 
-``` r
-global_reef_fish_biomass3 <- read_delim(file = "./data/global_reef_fish_biomass_out3.csv",
-                                        delim = ";",
-                                        locale = locale(decimal_mark = ","))
-str(object = global_reef_fish_biomass3) 
-```
-
-## Le type des colonnes
-
-Afficher les specifications avec [spec()](https://readr.tidyverse.org/reference/spec.html){.external target="_blank"}
-
-``` r
-spec(x = global_reef_fish_biomass)
-```
-
-Simplifier les specifications avec [col_condense()](https://readr.tidyverse.org/reference/spec.html){.external target="_blank"}
-
-``` r
-cols_condense(xs = spec(x = global_reef_fish_biomass))
-```
-
-## Forcer le type d'une colonne
-
-Avec le paramètre `col_types = list(...)`, on choisit de lire survey_id comme un entier [col_integer()](https://readr.tidyverse.org/reference/cols.html){.external target="_blank"}, method et block comme des facteurs [col_factor()](https://readr.tidyverse.org/reference/cols.html){.external target="_blank"}. Pour block on définit aussi des levels avec un certain ordre :
-
-``` r
-global_reef_fish_biomass <- read_csv(file = "./data/global_reef_fish_biomass.csv",
-                  col_types = list(survey_id = col_integer(),
-                                   method = col_factor(),
-                                   block = col_factor(levels=c("3","2","1"))))
-spec(x = global_reef_fish_biomass)
-levels(x = global_reef_fish_biomass$block)
-global_reef_fish_biomass <- droplevels(x = global_reef_fish_biomass)
-levels(x = global_reef_fish_biomass$block)
-```
-
-## Importer en ***tibble*** le fichier Survey_metadata.csv
-
-Ce fichier contient des métadonnées caractérisant les campagnes (survey_id) Particularités : séparateur ";" et 70 lignes de commentaires au début qui ne doivent pas être lues : utilisation du paramètre `skip`
-
-``` r
-survey_metadata <- read_delim(file = "./data/survey_metadata.csv",
-                              delim = ";",
-                              skip = 70)
-head(x = survey_metadata,3)
-```
-
-# Avantages de ***readr*** *vs.* les fonctions de base
-
-## Pour les gros fichiers, ***readr*** est plus rapide
-
--   Lecture du fichier biomasse avec la fonction [read.csv()](https://rdrr.io/cran/exploratory/man/read_csv.html){.external target="_blank"} de base
-
-``` r
-debut <- Sys.time()
-fish1 <- read.csv(file ="./data/global_reef_fish_biomass.csv", 
-                  sep = ",")
-fin <- Sys.time()
-print(x = paste("L'import a duré : ",
-                fin-debut, "secondes"))
-```
-
--   Lecture du même fichier avec [read_delim()](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"} de la librairie **readr**
-
-``` r
-debut <- Sys.time()
-fish2 <- read_csv(file = "./data/global_reef_fish_biomass.csv")
-fin <- Sys.time()
-print(paste("L'import a duré : ",
-            fin-debut, "secondes"))
-```
-
-## `read_csv()` permet de lire depuis une archive, ce que ne permet pas `read.csv()`
-
-``` r
-survey_metadata_zip <- read_delim(file = "./data/survey_metadata.zip",
-                                  delim = ";",
-                                  skip = 70)
-```
-
-## `read_csv()` permet de lire depuis plusieurs fichiers et mêmes répertoires
-
-``` r
-continents <- c("africa", "americas", "asia", "europe", "oceania")
-filepaths <- vapply(
-  paste0("mini-gapminder-", continents, ".csv"),
-  FUN = readr_example,
-  FUN.VALUE = character(1)
-)
-conti <- read_csv(file = filepaths,
-                  id = "file")
-```
-
-## La sélection de colonnes lors de la lecture avec `read_csv()` est facilitée
-
--   Par nom de colonne
-
-``` r
-survey_metadata_1 <- read_delim(file = "./data/survey_metadata.csv",
-                                delim = ";",
-                                skip = 70,
-                                col_select = c(survey_id,country, site_code, site_name))
-head(survey_metadata_1)
-```
-
-## La sélection de colonnes lors de la lecture avec `read_csv()` est facilitée
-
--   Par numéro de colonne
-
-``` r
-survey_metadata_2 <- read_delim(file = "./data/survey_metadata.csv",
-                                delim = ";",
-                                skip = 70,
-                                col_select = c(1,2,5:8))
-head(x = survey_metadata_2)
-```
-
-## La sélection de colonnes lors de la lecture avec `read_csv()` est facilitée
-
--   Par numéro de colonne, en omettant certaines colonnes
-
-``` r
-survey_metadata_3 <- read_delim(file = "./data/survey_metadata.csv",
-                                delim = ";",
-                                skip = 70,
-                                col_select = -c(11:22,24))
-head(x = survey_metadata_3)
-```
-
-## On peut renommer certaines colonnes
-
-NB : ne pas oublier `everything()` pour conserver à l'identique toutes les colonnes non renommées
-
-``` r
-survey_metadata_4 <- read_delim(file = "./data/survey_metadata.csv",
-                                delim = ";",
-                                skip = 70,
-                                col_select = c(projet = survey_id, pays = country, everything()))
-head(survey_metadata_4)
-```
-
-## On peut faire un filtre en entrée sur les valeurs d'une colonne avec `read_..._chunked`
-
--   Pour sélectionner sur une colonne (ici la famille)
-
-``` r
-f1 <- function(x, pos) subset(x, family %in% c("Kyphosidae", "Labridae", "Sparidae"))
-kyphosidae_labridae_sparidae_biomass <- read_csv_chunked(file = "./data/global_reef_fish_biomass.csv", 
-                                                         callback = DataFrameCallback$new(f1), 
-                                                         chunk_size = 1000)
-table(kyphosidae_labridae_sparidae_biomass$family)
-```
-
-## On peut faire un filtre en entrée sur les valeurs d'une colonne avec `read_..._chunked`
-
--   Pour sélectionner sur plusieurs colonnes (ici la famille et la classe de taille)
-
-``` r
-f2 <- function(x, pos) subset(x, family == "Kyphosidae" & size_class>9 & size_class < 31)
-kyphosidae_10_30_cm_biomass <- read_csv_chunked(file = "./data/global_reef_fish_biomass.csv", 
-                                                callback = DataFrameCallback$new(f2), 
-                                                chunk_size = 1000)
-table(kyphosidae_10_30_cm_biomass$family, kyphosidae_10_30_cm_biomass$size_class)
-```
+- Beaucoup de paramétrisation possible
+  - Toutes les spécifications citées précédemment
+  - Un gros plus sur la sélection des colonnes via l'argument `col_select` (sélection et renommage)
+  - Filtrage direct lors de l'import avec les `_chunked` ou encore l'argument `skip`
+- Possibilité de lire les fichiers depuis une archive (type zip) avec readr
+- Possibilité de lire plusieurs fichiers en une fois, même plusieurs répertoires
+- Vraie dynamique d'évolution dans le futur !
 
 ## Exercice 1.1 {auto-animate="true"}
 
