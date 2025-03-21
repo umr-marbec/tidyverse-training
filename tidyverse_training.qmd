@@ -309,6 +309,7 @@ Attention ! On ne triche pas, aucune manipulation des fichiers pré-importation
 survey_metadata <- read_tsv(file = "data/survey_metadata.tsv")
 reef_fish_biomass <- read_delim(file = "data/reef_fish_biomass.dude",
                                 delim = "|")
+Sys.setenv("VROOM_CONNECTION_SIZE" = 2000000)
 reef_fish_abundance <- read_csv(file = "data/reef_fish_abundance.zip",
                                 guess_max = Inf)
 ```
@@ -395,7 +396,7 @@ Renvoient une valeur TRUE ou FALSE
 
 ## Exercice 2.1 {auto-animate="true"}
 
--   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "global_reef_fish_biomass"
+-   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "reef_fish_biomass"
 -   En une seule fois, selectionner les données dont la variable "biomass" est différent de 0, où la famille de l'espèce est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
 
 ``` r
@@ -403,16 +404,16 @@ Renvoient une valeur TRUE ou FALSE
 
 ## Exercice 2.1 corrigé {auto-animate="true"}
 
--   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "global_reef_fish_biomass"
+-   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "reef_fish_biomass"
 -   En une seule fois, selectionner les données dont la variable "biomass" est différent de 0, où la famille de l'espèce est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
 
 ``` r
-biomass_exercice2_1_distinct <- distinct(.data = global_reef_fish_biomass)
-biomass_exercice2_1_filter <- filter(.data = biomass_exercice2_1_distinct,
-                                     biomass != 0
-                                     & ! family %in% c("Mullidae",
-                                                       "Apogonidae")
-                                     & size_class <= 10)
+biomass_exercice2_1_distinct <- distinct(.data = reef_fish_biomass)
+biomass_exercice2_1_distinct_filter <- filter(.data = biomass_exercice2_1_distinct,
+                                              biomass != 0
+                                              & ! family %in% c("Mullidae",
+                                                                "Apogonidae")
+                                              & size_class <= 10)
 ```
 
 ## Amélioration de la lisibilité du code
@@ -424,7 +425,7 @@ Grâce à la syntaxe de dplyr, on peut répondre à ce besoin de deux manières 
 La première est d'effectuer toutes les opérations en une fois en les emboîtant :
 
 ``` r
-biomass_exercice2_1_distinct_filter <- filter(.data = distinct(.data = global_reef_fish_biomass),
+biomass_exercice2_1_distinct_filter <- filter(.data = distinct(.data = reef_fish_biomass),
                                               biomass != 0
                                               & ! family %in% c("Mullidae",
                                                                 "Apogonidae")
@@ -441,12 +442,12 @@ Cependant cela a plusieurs inconvénients. La structure est peu lisible, les op�
 
 -   Son fonctionnement est le suivant : si j'exécute expr %\>% f, le résultat de l'expression expr, à gauche du pipe, sera passé comme premier argument à la fonction f, à droite du pipe, ce qui revient à exécuter f(expr)
 
--   L'intérêt est que l'on peut enchainer plusieurs pipes
+-   L'intérêt est que l'on peut enchainer plusieurs pipes et surtout on simplifie la syntaxe
 
 -   Avec notre exemple précédent cela donne :
 
 ``` r
-biomass_exercice2_1_distinct_filter <- distinct(.data = global_reef_fish_biomass) %>%
+biomass_exercice2_1_distinct_filter <- distinct(.data = reef_fish_biomass) %>%
   filter(biomass != 0
          & ! family %in% c("Mullidae",
                            "Apogonidae")
@@ -504,8 +505,6 @@ relocate()
 ``` r
 # créer une nouvelle variable
 mutate()
-# créer une nouvelle variable mais sans conserver les anciennes
-transmute()
 ```
 
 -   Petit bonus pour renommer les variables
@@ -550,11 +549,11 @@ biomass_exercice2_2 <- mutate(.data = biomass_exercice2_1_distinct_filter,
                                                      sep = "_")) %>%
   relocate(survey_id_full,
            .before = survey_id) %>%
-  dplyr::select(-4,
-                -reporting_name) %>%
+  select(-4,
+         -reporting_name) %>%
   rename(size_class_cm = size_class) %>%
   mutate(size_class_mm = size_class_cm * 10) %>%
-  dplyr::select(-size_class_cm) %>%
+  select(-size_class_cm) %>%
   arrange(desc(size_class_mm))
 ```
 
@@ -594,6 +593,7 @@ max()
 
 ``` r
 # on peut définir nos groupes en fonction des modalités des variables
+#on peut aussi utiliser des arguments des fonctions quand c'est proposé, exemple avec .by de summarise()
 group_by()
 # ou alors en isolant chaque ligne
 rowwise()
@@ -732,8 +732,9 @@ full_join()
 survey_metadata_distinct <- distinct(.data = survey_metadata)
 biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
   left_join(survey_metadata_distinct,
-             by = "survey_id")
-save(biomass_survey_exercice2_4, file = "./data/biomass_survey_exercice2_4.RData")
+            by = "survey_id")
+save(biomass_survey_exercice2_4,
+     file = "./data/biomass_survey_exercice2_4.RData")
 ```
 
 # Partie 3 : Nettoyage des données avec [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"}

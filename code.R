@@ -5,6 +5,7 @@ library(dplyr)
 survey_metadata <- read_tsv(file = "data/survey_metadata.tsv")
 reef_fish_biomass <- read_delim(file = "data/reef_fish_biomass.dude",
                                 delim = "|")
+Sys.setenv("VROOM_CONNECTION_SIZE" = 2000000)
 reef_fish_abundance <- read_csv(file = "data/reef_fish_abundance.zip",
                                 guess_max = Inf)
 # exercise 1.2
@@ -13,7 +14,7 @@ survey_metadata_selection_1_2 <- read_tsv_chunked(file = "data/survey_metadata.t
                                                   callback = DataFrameCallback$new(function_1_2),
                                                   chunk_size = 1000)
 # exercise 2.1 ----
-biomass_exercice2_1_distinct <- distinct(.data = global_reef_fish_biomass)
+biomass_exercice2_1_distinct <- distinct(.data = reef_fish_biomass)
 biomass_exercice2_1_distinct_filter <- filter(.data = biomass_exercice2_1_distinct,
                                               biomass != 0
                                               & ! family %in% c("Mullidae",
@@ -27,11 +28,11 @@ biomass_exercice2_2 <- mutate(.data = biomass_exercice2_1_distinct_filter,
                                                      sep = "_")) %>%
   relocate(survey_id_full,
            .before = survey_id) %>%
-  dplyr::select(-4,
+  select(-4,
                 -reporting_name) %>%
   rename(size_class_cm = size_class) %>%
   mutate(size_class_mm = size_class_cm * 10) %>%
-  dplyr::select(-size_class_cm) %>%
+  select(-size_class_cm) %>%
   arrange(desc(size_class_mm))
 # exercise 2.3 ----
 biomass_exercice2_3 <- biomass_exercice2_2 %>%
@@ -49,7 +50,8 @@ survey_metadata_distinct <- distinct(.data = survey_metadata)
 biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
   left_join(survey_metadata_distinct,
             by = "survey_id")
-save(biomass_survey_exercice2_4, file = "./data/biomass_survey_exercice2_4.RData")
+save(biomass_survey_exercice2_4,
+     file = "./data/biomass_survey_exercice2_4.RData")
 # exercise 3.1 ----
 abundance <- read_delim(file = "./data/Global_reef_fish_abundance.csv")
 # exercise 3.2 ----
