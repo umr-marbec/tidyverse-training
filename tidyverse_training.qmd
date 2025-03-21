@@ -226,6 +226,34 @@ write_tsv()
 - Extraction complète des spécifications d'un tibble avec `spec`
 - `cols_condense` permet d'afficher une version simplifiée des spécifications en affichant le type par défaut le plus fréquent et liste les colonnes avec un type différent. Attention, l'entrée est un objet de type `spec`.
 
+## Import de feuilles de calcul (type excel)
+
+- Utilisation du package [readxl](https://readxl.tidyverse.org/){.external target="_blank"}
+  - Developpé par l'équipe de tidyverse (extension des packages du coeur)
+
+``` r
+# Fonction générique
+read_excel()
+# Fonction pour importer spécifiquement un xls (excel avant 2007) ou xlsx (extension actuel par défaut)
+read_xls()
+read_xlsx()
+```
+
+- Globalement des arguments similaires à précédement (`col_names`, `skip`, `col_types`, ...)
+- Introduction de l'argument `sheet` et `range`
+- Nécessité de bien définir les types de colonnes
+- Pour les exports on utilisera [openxlsx](https://cran.r-project.org/web/packages/openxlsx/index.html){.external target="_blank"} ou [writexl](https://cran.r-project.org/web/packages/writexl/index.html){.external target="_blank"}
+
+## Import de feuilles de calcul (type google)
+
+- Utilisation du package [googlesheets4](https://googlesheets4.tidyverse.org/){.external target="_blank"}
+  - Développé encore une fois par l'équipe de tidyverse (extension des packages du cœur)
+- 3 familles de fonctions (liste non exhaustive) :
+  - `read_sheet` pour lire une feuille
+  - `gs4_get` ou encore `gs4_find` pour lire les métadonnées associées aux feuilles
+  - `write_sheet` ou `sheet_append` pour exporter des feuilles
+- On retrouve encore le même type d'arguments que précédemment
+
 ## Petit point sur les types de colonne
 
 - Très bien expliqué dans la documentation de la fonction [read_delim](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"} au niveau de l'argument `col_types` 
