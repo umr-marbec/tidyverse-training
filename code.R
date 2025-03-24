@@ -1,6 +1,7 @@
 # setup
 library(readr)
 library(dplyr)
+library(stringr)
 # exercise 1.1
 survey_metadata <- read_tsv(file = "data/survey_metadata.tsv")
 reef_fish_biomass <- read_delim(file = "data/reef_fish_biomass.dude",
@@ -51,7 +52,7 @@ biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
   left_join(survey_metadata_distinct,
             by = "survey_id")
 save(biomass_survey_exercice2_4,
-     file = "./data/biomass_survey_exercice2_4.RData")
+     file = "data/biomass_survey_exercice2_4.RData")
 # exercise 3.1 ----
 abundance <- read_delim(file = "./data/Global_reef_fish_abundance.csv")
 # exercise 3.2 ----

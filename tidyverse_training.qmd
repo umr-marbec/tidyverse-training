@@ -734,7 +734,7 @@ biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
   left_join(survey_metadata_distinct,
             by = "survey_id")
 save(biomass_survey_exercice2_4,
-     file = "./data/biomass_survey_exercice2_4.RData")
+     file = "data/biomass_survey_exercice2_4.RData")
 ```
 
 # Partie 3 : Nettoyage des données avec [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"}
@@ -1092,156 +1092,115 @@ save(biomass_survey_abundance_exercice3_6,
      file = "./data/biomass_survey_abundance_exercice3_6.RData")
 ```
 
-# Partie 4 : Extension à la manipulation de données, cas spécifiques
+# Partie 4 : Manipuler du texte avec [stringr](https://stringr.tidyverse.org/){.external target="_blank"}
 
 ::: {style="float: right;"}
-[Cheatsheet stringr](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){.external target="_blank"}
+[Lien cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){.external target="_blank"}
 :::
 
-<br>
+![](images/logo_stringr.png)
 
-::: {style="float: right;"}
-[Cheatsheet lubridate](https://github.com/rstudio/cheatsheets/blob/main/lubridate.pdf){.external target="_blank"}
-:::
+## Conçu pour manipuler les chaines de caractères "facilement"{.smaller}
 
-![](images/logo_stringr.png){.absolute top="300" width="20%"} ![](images/logo_lubridate.png){.absolute top="300" left="300" width="20%"}
+- En plus d'être plus faciles à utiliser, les noms des fonctions représentent bien ce qu'elles permettent de faire
+    - elles commencent toutes par `str_`
+    - les images de la cheatsheet aident beaucoup pour choisir les fonctions en rapport avec notre besoin
+- Ouvre le monde des expressions régulières
+- Peut être combiné avec du langage tidyverse (par exemple avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"})
+- Pour faire simple on 7 grandes familles de fonctions
+  - les fonctions de détection
+  - les fonctions de selection ou d'extraction
+  - les fonctions de gestion des tailles de caractères
+  - les fonctions de manipulations dites `mutate` (ça vous rappelle quelque chose ?)
+  - les fonctions de jointures et de division
+  - les fonctions d'ordre
+  - les fonctions supports
+  
+## Beaucoup d'arguments communs
 
-## 4.1 : Manipuler du texte avec [stringr](https://stringr.tidyverse.org/){.external target="_blank"}
+- De manière générale
+  - `string` : le vecteur d'entrée
+  - `pattern` : le motif que l'on va chercher à regarder
+  - `replacement` : la valeur de remplacement
+- De manière plus spécifique
+  - `start` et `end` : emplacement ou indice de position dans une chaine de caractère
+  - `negate` : si TRUE, le résultat sera l'inverse de ce que l'on demande
+  - `sep` : caractère(s) à insérer dans le vecteur d'entrée
+  - `collapse` : souvent confondu avec l'argument `sep`. Caractère(s) qui vont combiner les résultats (=vecteur d'entrée avec plusieurs éléments) entre une seule et unique chaine de caractères.
 
--   Conçu pour manipuler les chaines de caractères "facilement"
--   En plus d'être plus faciles à utiliser, les noms des fonctions représentent bien ce qu'elles permettent de faire
-    -   elles commencent toutes par `str_`
--   Quelques exemples
+## Fonctions de détection
 
-``` r
-# Détection de caractères
-str_detect()
-# Extraction de caractères
-str_extract()
-# Remplacement de caractères
-str_replace()
-# Enlève les espaces
-str_trim()
-# Sépare une chaine de caractères
-str_split()
-# Nombre de caractères
+Renvoient une réponse (pas d'extraction)
+
+```r
+# détection d'un motif dans une chaine de caractère
+str_detect() et str_like()
+# détection d'un motif au début ou à la fin d'une chaine de caractère
+str_starts() et str_ends()
+# détection des lignes contenant le motif
+str_which()
+# détection de la position du motif dans la chaine de caractère (début et fin)
+# sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé
+str_locate() et str_locate_all()
+# comptage du nombre de fois que le motif est détecté dans une chaine de caractère
+str_count()
+```
+
+## Fonctions de selection ou d'extraction
+
+Renvoient une chaine de caractère
+
+```r
+# extraction d'une chaine à un ou des endroits bien précis
+# utilisation d'indices de positioin
+str_sub() et str_sub_all()
+# extraction des chaines, completes, contenu un motif défini
+str_subset()
+# extraction d'un motif dans une chaine de caractère et retour sous forme de vecteur
+# par "défaut" la detection passe à la chaine suivante dés qu'un motif est trouvé
+str_extract() et str_extract_all()
+# extraction d'un motif dans une chaine de caractère et retour sous forme de matrix
+# sans le _all la detection passe à la chaine suivante dés qu'un motif est trouvé
+str_match() et str_match_all()
+```
+
+## Fonctions de gestion des tailles de caractères
+
+```r
+# largeur/nombre de caractère
+# attention aux espaces et caractères masqués
 str_length()
+# ajout "d'espace" à une chaine de caractère
+str_pad()
+# tronquer une chaîne de caractères à un nombre fixe de caractères
+str_trunc()
+# supprimer des espaces 
+# au début et/ou à la fin d'une chaine
+str_trim()
+# au début, à la fin et réduction des espaces à un seul
+str_squish()
 ```
 
-## Création d'un dataframe de chaines de caractères
+## Fonctions de manipulations
 
-``` r
-tmp <- tibble(nom = c("Micheline Sétou", "Jean-Jacques Apeprès",  "Martine Sérien"),
-              num_rue = c("12", "15 ou 16", "NA"), 
-              nom_rue = c("Rue des peupliers", "Rue + un arbre", "NA"),
-              ville = c("Montpellier", "Montpellier", "Montpellier"))
-kable(tmp, html_font = "Computer Modern", table.attr = "style='width:60%;'")
+En lien avec des manipulations de type vectorisation (= conservation de la structure des données d'entrée)
+
+```r
+# remplacement du motif via un assignation
+str_sub() <- value
+# remplacement d'un motif par un autre
+# sans le _all le remplacement passe à la chaine suivante dés qu'un motif est trouvé
+str_replace() et str_replace_all()
+# suppression d'un motif 
+# sans le _all la suppression passe à la chaine suivante dés qu'un motif est trouvé
+str_remove() et str_remove_all()
+# manipulation de taille de caractère (majuscule, minuscule, ...)
+# attention à la spécification de la langue et au nom, un title n'est pas forcement un title que vous cherchez
+str_to_lower()
+str_to_upper()
+str_to_title()
+str_to_sentence()
 ```
-
-## Détection de caractères
-
-On utilise la fonction `str_detect()` et les deux arguments principaux :
-
-::: incremental
--   `string` : Le/Les caractère(s) qui vont passer au détecteur.
--   `pattern` : Le caractère à détecter.
-:::
-
-. . .
-
-La fonction renvoie `TRUE` ou `FALSE` en fonction de la présence ou non du caractère.
-
-. . .
-
-### Exemple
-
-::::: columns
-::: {.column width="50%"}
-``` r
-tmp$nom
-```
-
-``` r
-cat(tmp$nom, sep = "\n")
-```
-:::
-
-::: {.column width="50%"}
-``` r
-str_detect(string  = tmp$nom, pattern = "ine")
-```
-
-``` r
-cat(str_detect(string  = tmp$nom, 
-               pattern = "ine"), sep = "\n")
-```
-:::
-:::::
-
-. . .
-
-<center>
-
-La fonction `str_detect()` peut donc être utilisée avec `filter()` pour faire une <br> sélection des lignes qui nous intéresse dans le tableau.
-
-## Sous-sélection de certains caractères
-
-On utilise la fonction `str_subset()` et les deux arguments principaux :
-
-::: incremental
--   `string` : Le/Les caractère(s) qui vont passer au détecteur.
--   `pattern` : Le caractère à détecter.
-:::
-
-. . .
-
-Contrairement à `str_detect()`, la fonction `str_subset()` renvoie les caractères qui contiennent le pattern à détecter.
-
-. . .
-
-### Exemple
-
-``` r
-str_subset(string  = tmp$nom, 
-           pattern = "ine")
-```
-
-## Extraction de caractères
-
-On utilise la fonction `str_extract()` et ses arguments principaux :
-
-::: incremental
--   `string` : Le/Les caractère(s) qui vont passer à l'extracteur.
--   `pattern` : Le caractère à extraire.
-:::
-
-. . .
-
-### Exemple
-
-::::: columns
-::: {.column width="50%"}
-``` r
-tmp$ville
-```
-
-``` r
-cat(tmp$ville, sep = "\n")
-```
-:::
-
-::: {.column width="50%"}
-``` r
-str_extract(string  = tmp$ville, 
-            pattern = "Montpel")
-```
-
-``` r
-cat(str_extract(string  = tmp$ville, 
-                pattern = "Montpel"), sep = "\n")
-```
-:::
-:::::
 
 ## Remplacer un caractère par un autre
 
@@ -1471,7 +1430,13 @@ tac_final_modif_level2 <- tac_final %>%
   mutate(adapted_quota = as.numeric(x = adapted_quota))
 ```
 
-# 4.2 : Manipuler des dates avec [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"}
+# Partie 5 : Manipuler des dates avec [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"}
+
+::: {style="float: right;"}
+[Lien cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/lubridate.pdf){.external target="_blank"}
+:::
+
+![](images/logo_lubridate.png)
 
 ## Rend la manipulation des dates et du temps presque agréable sous R
 
@@ -1549,7 +1514,11 @@ round_date()
 ceiling_date()
 ```
 
-# Partie 5 : Visualisation des données avec `ggplot2`
+# Partie 6 : Visualisation des données avec `ggplot2`
+
+::: {style="float: right;"}
+[Lien cheatsheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf){.external target="_blank"}
+:::
 
 ![](images/ggplot2_logo.png)
 
