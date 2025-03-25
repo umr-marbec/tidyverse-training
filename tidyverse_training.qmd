@@ -733,8 +733,6 @@ survey_metadata_distinct <- distinct(.data = survey_metadata)
 biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
   left_join(survey_metadata_distinct,
             by = "survey_id")
-save(biomass_survey_exercice2_4,
-     file = "data/biomass_survey_exercice2_4.RData")
 ```
 
 # Partie 3 : Nettoyage des données avec [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"}
@@ -1116,7 +1114,7 @@ save(biomass_survey_abundance_exercice3_6,
   - les fonctions d'ordre
   - les fonctions supports
   
-## Beaucoup d'arguments communs
+## Beaucoup d'arguments communs{.smaller}
 
 - De manière générale
   - `string` : le vecteur d'entrée
@@ -1126,7 +1124,8 @@ save(biomass_survey_abundance_exercice3_6,
   - `start` et `end` : emplacement ou indice de position dans une chaine de caractère
   - `negate` : si TRUE, le résultat sera l'inverse de ce que l'on demande
   - `sep` : caractère(s) à insérer dans le vecteur d'entrée
-  - `collapse` : souvent confondu avec l'argument `sep`. Caractère(s) qui vont combiner les résultats (=vecteur d'entrée avec plusieurs éléments) entre une seule et unique chaine de caractères.
+  - `collapse` : souvent confondu avec l'argument `sep`. Caractère(s) qui vont combiner les résultats (= vecteur d'entrée avec plusieurs éléments) entre une seule et unique chaine de caractères.
+  - `decreasing` : utilisé pour les fonctions d'ordre ou de tri
 
 ## Fonctions de détection
 
@@ -1152,7 +1151,7 @@ Renvoient une chaine de caractère
 
 ```r
 # extraction d'une chaine à un ou des endroits bien précis
-# utilisation d'indices de positioin
+# utilisation d'indices de position
 str_sub() et str_sub_all()
 # extraction des chaines, completes, contenu un motif défini
 str_subset()
@@ -1162,6 +1161,34 @@ str_extract() et str_extract_all()
 # extraction d'un motif dans une chaine de caractère et retour sous forme de matrix
 # sans le _all la detection passe à la chaine suivante dés qu'un motif est trouvé
 str_match() et str_match_all()
+```
+
+## Exercice 4.1 {auto-animate="true"}
+
+- À partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille `Embiotocidae` puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de [dplyr](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"})
+- compter combien nous avons de données d'occurrence d'espèces du genre `Embiotoca` dans ce nouveau jeu de données
+- en utilisant une négation, extraire toutes les localisations qui sont différentes de `British Columbia`
+
+```r
+
+```
+
+## Exercice 4.1 corrigé {auto-animate="true"}
+
+- À partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille `Embiotocidae` puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de [dplyr](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"})
+- compter combien nous avons de données d'occurrence d'espèces du genre `Embiotoca` dans ce nouveau jeu de données
+- en utilisant une négation, extraire toutes les localisations qui sont différentes de `British Columbia`
+
+```r
+# solution
+biomass_survey_exercice4_1 <- slice(.data = biomass_survey_exercice2_4,
+                                    str_which(string = biomass_survey_exercice2_4$family,
+                                              pattern = "Embiotocidae"))
+sum_data_embiotoca_exercice4_1 <- sum(str_count(string = biomass_survey_exercice4_1$species_name,
+                                                pattern = "Embiotoca."))
+location_biomass_survey_exercice4_1 <- unique(str_subset(string = biomass_survey_exercice4_1$location,
+                                                         pattern = "British Columbia",
+                                                         negate = TRUE))
 ```
 
 ## Fonctions de gestion des tailles de caractères
@@ -1202,6 +1229,32 @@ str_to_title()
 str_to_sentence()
 ```
 
+## Exercice 4.2 {auto-animate="true"}
+
+- À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractère de la variable `site_name`
+- Nettoyer la variable `site_name` en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable `site_name_clean`
+- Enlever les majuscules de notre variable `site_name_clean` sauf celles en début de chaine
+
+```r
+```
+
+## Exercice 4.2 corrigé {auto-animate="true"}
+
+- À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractère de la variable `site_name`
+- Nettoyer la variable `site_name` en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable `site_name_clean`
+- Enlever les majuscules de notre variable `site_name_clean` sauf celles en début de chaine
+
+```r
+# solution
+biomass_survey_exercice4_2 <- biomass_survey_exercice4_1 %>%
+  mutate(site_name_length_ori = str_length(site_name),
+         site_name_clean = str_squish(site_name),
+         site_name_clean = str_to_sentence(site_name_clean)) %>%
+  relocate(site_name_length_ori,
+           site_name_clean,
+           .after = site_name)
+```
+
 ## Fonctions de jointures et de division
 
 Très pratique surtout si utilisation via langage tidyverse
@@ -1209,121 +1262,63 @@ Très pratique surtout si utilisation via langage tidyverse
 ```r
 # jointure de plusieurs chaines de caractère en une seule (conservation structure en lignes)
 str_c()
-# jointure de plusieurs chaines de caractère en un seul vecteur
-# utiliser argument collapse
+# jointure de plusieurs chaines de caractère en un seul vecteur (utiliser argument collapse)
 str_flatten()
 # repetition d'une chaine de caractère 
 str_dup()
 # suppression des chaines de caractère repetées
 str_unique()
-
+# division d'une chaine de caractère en fonction d'un motif, le resultat est une liste de chaine
+str_split()
+# argument n pour spécifier le nombre possible de correspondances
+# si on veut retourner un vecteur (ne fonction que sur une chaine unique)
+str_split_1()
+# si on veut retourner une matrice (argument n obligatoire)
+str_split_fixed()
+# si on veut extraire uniquement une partie de la chaine 
+str_split_i()
+# si on veut faire des interpolations dans des chaines de caractère (similaire aux fonctions type paste())
+# utilisation de {} dans notre expression
+str_glue()
+# variante si on veut l'utiliser dans le cadre d'une pipe
+str_glue_data()
 ```
 
-## Exercice 4.1.1 {auto-animate="true"}
+## Fonctions d'ordre
 
-**Question 1** : Dans le fichier biomass_survey_abundance_exercice3_6.RData, filter les données qui mentionnent la Méditerranée dans la colonne location.
+Très simple, mais attention à la définition des arguments, notamment le `locale` qui va définir l'environnement de l'utilisateur.
 
-**Question 2** : A partir du fichier global_reef_fish_biomass.csv chargé avec `read_delim()`, enchaîner le pipe pour obtenir un data.frame résumant le nombre d'observations dans chacune des classes, pour le site n°2000951 seulement.
-
-**Question 3** : Résolvez le problème de façon à obtenir un tibble de dimension 2x2.
-
-**Question bonus** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses.
-
-## Exercice 4.1.1 - Correction Q1 {auto-animate="true"}
-
-**Question 1** : Dans le fichier survey_metadata.csv, filter les données qui mentionnent la Méditerranée dans la colonne location.
-
-``` r
-load("biomass_survey_abundance_exercice3_6.RData")
-survey_med <- biomass_survey_abundance_exercice3_6 %>%
-  filter(str_detect(location, "Mediterranean") == TRUE)
-dim(survey_med)
+```r
+# retourne un vecteur des indexes ordonnés
+str_order()
+# trier un vecteur
+str_sort()
 ```
 
-## Exercice 4.1.1 - Correction Q2
+## Fonctions supports
 
-**Question 2** : A partir du fichier global_reef_fish_biomass.csv chargé avec `read_delim()`, enchaîner le pipe pour obtenir un data.frame résumant le nombre d'observations dans chacune des classes, pour le site n°2000951 seulement.
+A voir comme un petite boite à outils
 
-. . .
-
-``` r
-global_reef_fish_biomass <- read_delim("./data/global_reef_fish_biomass.csv")
-global_reef_fish_biomass  %>%
-  filter(survey_id == "2000951") %>%
-  group_by(class) %>%
-  summarise(n_class = n())
+```r
+# pour jouer avec l'encodage
+str_conv()
+# pour jouer avec la visualisation de certains caractères (notamment sous la console de R)
+str_view()
+# pour déterminer si deux chaines de caractère sont egales 
+str_equal()
+# formatte de chaine de caractère en paragraphes
+str_wrap()
 ```
 
-. . .
+## Exercice 4.3{auto-animate="true"}
 
-``` r
-load("global_reef_fish_biomass_2000951.RData")
-kable(global_reef_fish_biomass_2000951, html_font = "Computer Modern", table.attr = "style='width:50%;'")
+```r
 ```
 
-## Exercice 4.1.1 - Correction Q3 {auto-animate="true"}
+## Exercice 4.3 corrigé {auto-animate="true"}
 
-**Question 3** : Résolvez le problème de façon à obtenir un tibble de dimension 2x2.
-
-. . .
-
-``` r
-global_reef_fish_biomass %>%
-  filter(survey_id == "2000951") %>%
-  mutate(class = str_trim(class)) %>%
-  group_by(class) %>%
-  summarise(n_class = n())
-```
-
-. . .
-
-``` r
-load("global_reef_fish_biomass_2000951OK.RData")
-kable(global_reef_fish_biomass_2000951OK, html_font = "Computer Modern", table.attr = "style='width:50%;'")
-```
-
-## Exercice 4.1.1 - Correction Q+
-
-**Question bonus** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses. Enregistrer le **survey_med** au format .RData
-
-. . .
-
-Solution décomposée
-
-``` r
-survey_med <- biomass_survey_abundance_exercice3_6 %>%
-  filter(str_detect(location, "Mediterranean") == TRUE) %>%
-  mutate(orientation = word(location, 2, -1)) %>%
-  mutate(orientation = str_replace(orientation, " ", "")) %>%
-  mutate(orientation = str_replace(orientation, "\\(", "")) %>%
-  mutate(orientation = str_replace(orientation, "\\)", ""))
-```
-
-. . .
-
-``` r
-kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr = "style='width:50%;'")
-```
-
-## Exercice 4.1.1 - Correction Q+
-
-**Question bonus** : A partir de la colonne location, créer une colonne qui extrait l'orientation. La colonne orientation doit être homogène, donc pas d'espace, ni de parenthèses. Enregistrer le **survey_med** au format .RData
-
-. . .
-
-Solution plus courte
-
-``` r
-survey_med <- biomass_survey_abundance_exercice3_6 %>%
-  filter(str_detect(location, "Mediterranean") == TRUE) %>%
-  mutate(orientation = str_replace_all(word(location, 2, -1),
-                                       c(" " = "", "\\(" = "", "\\)" = "")))
-```
-
-. . .
-
-``` r
-kable(survey_med[1:3, "orientation"], html_font = "Computer Modern", table.attr = "style='width:50%;'")
+```r
+# solution
 ```
 
 ## Les expressions régulières {.smaller}
