@@ -1,0 +1,1073 @@
+[
+  {
+    "objectID": "tidyverse-training.html#plan-de-la-formation",
+    "href": "tidyverse-training.html#plan-de-la-formation",
+    "title": "tidyverse-training",
+    "section": "Plan de la formation",
+    "text": "Plan de la formation\n\nPréambule et introduction\n\nPrérequis et environnement de travail nécessaire à la formation\nObjectifs de la formation\nPrésentation de tidyverse\n\nPartie 1 : Importation de données sous R avec readr\nPartie 2 : Manipulation de données avec dplyr\nPartie 3 : Nettoyage des données avec tidyr\nPartie 4 : Extension à la manipulation de données, cas spécifiques\n\n4.1 : Manipuler du texte avec stringr\n4.2 : Manipuler des dates avec lubridate\n\nPartie 5 : Visualisation graphique avec ggplot2\n\nFormation fortement inspirée du site de Joseph Larmarange"
+  },
+  {
+    "objectID": "tidyverse-training.html#prérequis-et-environnement-de-travail-nécessaire-à-la-formation",
+    "href": "tidyverse-training.html#prérequis-et-environnement-de-travail-nécessaire-à-la-formation",
+    "title": "tidyverse-training",
+    "section": "Prérequis et environnement de travail nécessaire à la formation",
+    "text": "Prérequis et environnement de travail nécessaire à la formation\n\nAvoir des notions de base dans l’utilisation de R\nAvoir une instance valide de R sur son poste (durant la formation utilisation de la version 4.4.3 sous Windows)\nAvoir installé correctement les packages R readr (utilisation de la version 2.1.5), dplyr (utilisation de la version 1.1.4), tidyr (utilisation de la version 1.3.1), stringr (utilisation de la version 1.5.1), lubridate (utilisation de la version 1.9.4), et ggplot2 (utilisation de la version 3.5.1)."
+  },
+  {
+    "objectID": "tidyverse-training.html#bonus-non-obligatoire",
+    "href": "tidyverse-training.html#bonus-non-obligatoire",
+    "title": "tidyverse-training",
+    "section": "Bonus non obligatoire",
+    "text": "Bonus non obligatoire\n\nUtilisation de l’environnement de développement Rstudio (utilisation de la version 2024.12.1+563 sous Windows)\nPour les utilisateurs de Windows installation de Rtools (utilisation de la version 4.4)\nInstallation de Visual Studio Code (éditeur de code source autonome)."
+  },
+  {
+    "objectID": "tidyverse-training.html#objectifs-de-la-formation",
+    "href": "tidyverse-training.html#objectifs-de-la-formation",
+    "title": "tidyverse-training",
+    "section": "Objectifs de la formation",
+    "text": "Objectifs de la formation\n\n\n\nVous présenter un panel de ce que l’on peut faire avec ces méthodes et surtout vous donner les clés pour aller plus loin\nUn expert n’est pas forcément quelqu’un qui connaît toutes les fonctions par cœur, mais qui sait écouter, comprendre et aller chercher les informations dont il a besoin\n\nPensez à jeter un coup d’œil aux cheatsheets"
+  },
+  {
+    "objectID": "tidyverse-training.html#présentation-de-tidyverse",
+    "href": "tidyverse-training.html#présentation-de-tidyverse",
+    "title": "tidyverse-training",
+    "section": "Présentation de Tidyverse",
+    "text": "Présentation de Tidyverse\n\n\n\nTidyverse c’est quoi ?\n\ntidy + universe ou l’univers du «bien rangé» ou du rangement\nCollection d’extensions conçues pour travailler ensemble et basées sur une philosophie commune\nLe cœur du package inclut 9 packages\n\nggplot2 : création de graphiques\ndplyr : manipulation de données au sens large\ntidyr : manipulation de données plus orientées variables\nreadr : import de données\npurrr : fonction de vectorisation (remplacement des boucles classiques)\ntibble : «évolution» du data.frame\nstringr : manipulation de caractère\nforcats : série d’outils pour aider dans la manipulation des facteurs\nlubridate : fonctions permettant de travailler avec des dates et des heures"
+  },
+  {
+    "objectID": "tidyverse-training.html#présentation-de-tidyverse-1",
+    "href": "tidyverse-training.html#présentation-de-tidyverse-1",
+    "title": "tidyverse-training",
+    "section": "Présentation de Tidyverse",
+    "text": "Présentation de Tidyverse\n\nLancement de la librairie\n\ninstall.packages(\"tidyverse\")\nlibrary(tidyverse)\n\nCependant je vous déconseille de faire comme ça\n\nEn lançant cette commande, on charge dans R tous les packages associés à tidyverse (les 9 packages cités précédemment, mais aussi les dépendances associées)\nAvez-vous vraiment besoin de tout cela ?\nPotentiel impact sur vos futurs développements (surtout si vous commencez à développer des packages)\nL’idée est d’appliquer dès maintenant les bonnes pratiques et surtout de comprendre ce que cela implique de ne pas les suivre (ce qui est aussi votre droit !)"
+  },
+  {
+    "objectID": "tidyverse-training.html#avant-daller-plus-loin",
+    "href": "tidyverse-training.html#avant-daller-plus-loin",
+    "title": "tidyverse-training",
+    "section": "Avant d’aller plus loin",
+    "text": "Avant d’aller plus loin\n\nL’utilisation de ces packages permet de faire beaucoup de choses, mais ne rend pas tout le reste obsolète\nIl y a plusieurs stratégies pour réaliser une action, il faut juste trouver le bon compromis (connaissances, temps de calcul, contexte global de votre projet…)\nAttention aux règles et conventions de nommages\n\nRègles pour nommer une variable (obligatoire) : ne pas commencer par un chiffre, pas d’espace, que des caractères alpha-numériques (A-z, 0-9) et le tiret du bas (_), ne pas utiliser de mots réservés (comme par exemple TRUE)\nConventions pour nommer une variable (recommandé) : uniquement des lettres minuscules, séparer les mots des _ et les noms choisis doivent pouvoir donner l’information du contenu associé\nUne formation “bonnes pratiques en programmation” est à l’étude au sein du DEN"
+  },
+  {
+    "objectID": "tidyverse-training.html#le-package-readr",
+    "href": "tidyverse-training.html#le-package-readr",
+    "title": "tidyverse-training",
+    "section": "Le package readr",
+    "text": "Le package readr\n\nDes fonctions de base de R sont dédiées à l’import de fichiers textes de type csv (read.csv, read.csv2) ou tabulés (read.table) ou avec des séparateurs quelconques (read.delim)\nLa librairie readr propose des fonctions similaires sur le principe mais qui diffèrent des fonctions de base sur certains aspects\nCes fonctions sont compatibles avec l’esprit Tidyverse car elles permettent de générer des tibbles"
+  },
+  {
+    "objectID": "tidyverse-training.html#un-tibble-cékoiça",
+    "href": "tidyverse-training.html#un-tibble-cékoiça",
+    "title": "tidyverse-training",
+    "section": "Un tibble … Cékoiça ???",
+    "text": "Un tibble … Cékoiça ???\n\nLe tibble est un data frame amélioré\nCe format est géré par le package tibble qui fait partie du coeur de tidyverse\nLes tibbles contiennent un attribut spec qui précise les spécifications des colonnes (nom et type)\nIls s’affichent plus intelligemment que les data frames : par défaut affichages uniquement des premières lignes, ainsi que quelques informations supplémentaires utiles\nIls autorisent des noms de colonnes qui sont invalides pour les data frames (espaces, caractères spéciaux, nombres…)\nIls affichent un avertissement si on essaie d’accéder à une colonne qui n’existe pas\nIls n’ont pas de noms de lignes (rownames)"
+  },
+  {
+    "objectID": "tidyverse-training.html#on-peut-passer-du-tibble-au-dataframe-et-vice-versa",
+    "href": "tidyverse-training.html#on-peut-passer-du-tibble-au-dataframe-et-vice-versa",
+    "title": "tidyverse-training",
+    "section": "On peut passer du tibble au dataframe et vice-versa",
+    "text": "On peut passer du tibble au dataframe et vice-versa\n\nLa plupart des fonctions du tidyverse acceptent des data frames en entrée, mais retournent un objet de classe tibble\nOn peut convertir un data frame en tibble avec la fonction as_tibble, ou l’inverse avec la fonction as.data.frame"
+  },
+  {
+    "objectID": "tidyverse-training.html#les-principales-fonctions-de-la-librairie-readr",
+    "href": "tidyverse-training.html#les-principales-fonctions-de-la-librairie-readr",
+    "title": "tidyverse-training",
+    "section": "Les principales fonctions de la librairie readr",
+    "text": "Les principales fonctions de la librairie readr\nLes fonctions de readr les plus utilisées sont :\n# Fonction générale, pour importer un fichier avec un délimiteur quelconque\nread_delim()\n# Import fichiers csv au format anglais (point décimal et séparateur virgule)\nread_csv()\n# Import fichiers csv au format français (virgule décimale et séparateur point-virgule)\nread_csv2()\n# Import fichiers au format tsv ou les valeurs sont séparées par des tabulations\nread_tsv()\n# Pour lire un fichier en \"chunks\", c'est à dire en tranches dont on définit la taille en nombre de lignes.\n# Cette fonction permet de lire de très gros fichiers et aussi d'appliquer une fonction (CallBack) sur les données à chaque tranche. \n# xxx est à remplacer par csv, csv2, delim\nread_xxx_chunked()"
+  },
+  {
+    "objectID": "tidyverse-training.html#read_delim-la-fonction-la-plus-générique",
+    "href": "tidyverse-training.html#read_delim-la-fonction-la-plus-générique",
+    "title": "tidyverse-training",
+    "section": "read_delim(), la fonction la plus générique",
+    "text": "read_delim(), la fonction la plus générique\n\nImport de fichier avec la possibilité d’utiliser des paramètres\nFonction générale, son fonctionnement permet une approche simple des autres fonctions plus spécifiques d’import\nParmi toutes les possibilités, on trouve comme paramètres:\n\nfile : chemin d’un fichier, d’une connexion ou même des données écrites à la main,\ndelim : délimiteur utilisé pour séparer les champs\ncol_names : configuration d’un entête (ou pas)\ncol_types : spécification des types de colonnes\ncol_select : selection des colonnes a conserver (même langage que avec dplyr)\nna : interprétation des valeurs manquantes\nskip : échappement de lignes lors de l’import\nname_repair : réparation “intéligente” des nomes de colonnes\n\nBeaucoup d’autres sont disponibles en lien avec vos besoins !"
+  },
+  {
+    "objectID": "tidyverse-training.html#on-a-aussi-des-fonctions-de-raccourci",
+    "href": "tidyverse-training.html#on-a-aussi-des-fonctions-de-raccourci",
+    "title": "tidyverse-training",
+    "section": "On a aussi des fonctions de raccourci",
+    "text": "On a aussi des fonctions de raccourci\n\nEn lien avec la nature de vos imports\nLa plupart des paramètres de la fonction read_delim sont utilisable\n\nread_csv et read_csv2 pour les fichiers csv,\nread_tsv pour les fichiers tsv\n\nOn a aussi les fonctions _chunked pour commencer à s’amuser\n\nread_delim_chunked, read_csv_chunked, read_csv2_chunked et read_tsv_chunked"
+  },
+  {
+    "objectID": "tidyverse-training.html#la-fonction-inverse-write_-pour-exporter-un-fichier",
+    "href": "tidyverse-training.html#la-fonction-inverse-write_-pour-exporter-un-fichier",
+    "title": "tidyverse-training",
+    "section": "La fonction inverse : write_… pour exporter un fichier",
+    "text": "La fonction inverse : write_… pour exporter un fichier\n# Pour exporter en csv\nwrite_csv()\nwrite_csv2()\n# Pour exporter en choisissant le délimiteur \nwrite_delim()\n# Pour exporter en tsv\nwrite_tsv()"
+  },
+  {
+    "objectID": "tidyverse-training.html#encore-une-fois-des-paramètres",
+    "href": "tidyverse-training.html#encore-une-fois-des-paramètres",
+    "title": "tidyverse-training",
+    "section": "Encore une fois des paramètres",
+    "text": "Encore une fois des paramètres\n\nNotamment :\n\nx : nom de l’objet dans l’environnement R\nfile : chemin du fichier que l’on veut créer (ne pas oublier l’extension)\ndelim : délimiteur utilisé pour séparer les champs\nna : interprétation des valeurs manquantes\nappend : si FALSE écrasera un fichier existant portant le même nom que l’export, TRUE rajoutera nos données exportées au fichier existant (si c’est possible)\ncol_names : inclusion du nom des colonnes dans l’export"
+  },
+  {
+    "objectID": "tidyverse-training.html#autres-fonctions-utiles",
+    "href": "tidyverse-training.html#autres-fonctions-utiles",
+    "title": "tidyverse-training",
+    "section": "Autres fonctions utiles",
+    "text": "Autres fonctions utiles\n\nExtraction complète des spécifications d’un tibble avec spec\ncols_condense permet d’afficher une version simplifiée des spécifications en affichant le type par défaut le plus fréquent et liste les colonnes avec un type différent. Attention, l’entrée est un objet de type spec."
+  },
+  {
+    "objectID": "tidyverse-training.html#import-de-feuilles-de-calcul-type-excel",
+    "href": "tidyverse-training.html#import-de-feuilles-de-calcul-type-excel",
+    "title": "tidyverse-training",
+    "section": "Import de feuilles de calcul (type excel)",
+    "text": "Import de feuilles de calcul (type excel)\n\nUtilisation du package readxl\n\nDeveloppé par l’équipe de tidyverse (extension des packages du coeur)\n\n\n# Fonction générique\nread_excel()\n# Fonction pour importer spécifiquement un xls (excel avant 2007) ou xlsx (extension actuel par défaut)\nread_xls()\nread_xlsx()\n\nGlobalement des arguments similaires à précédement (col_names, skip, col_types, …)\nIntroduction de l’argument sheet et range\nNécessité de bien définir les types de colonnes\nPour les exports on utilisera openxlsx ou writexl"
+  },
+  {
+    "objectID": "tidyverse-training.html#import-de-feuilles-de-calcul-type-google",
+    "href": "tidyverse-training.html#import-de-feuilles-de-calcul-type-google",
+    "title": "tidyverse-training",
+    "section": "Import de feuilles de calcul (type google)",
+    "text": "Import de feuilles de calcul (type google)\n\nUtilisation du package googlesheets4\n\nDéveloppé encore une fois par l’équipe de tidyverse (extension des packages du cœur)\n\n3 familles de fonctions (liste non exhaustive) :\n\nread_sheet pour lire une feuille\ngs4_get ou encore gs4_find pour lire les métadonnées associées aux feuilles\nwrite_sheet ou sheet_append pour exporter des feuilles\n\nOn retrouve encore le même type d’arguments que précédemment"
+  },
+  {
+    "objectID": "tidyverse-training.html#petit-point-sur-les-types-de-colonne",
+    "href": "tidyverse-training.html#petit-point-sur-les-types-de-colonne",
+    "title": "tidyverse-training",
+    "section": "Petit point sur les types de colonne",
+    "text": "Petit point sur les types de colonne\n\nTrès bien expliqué dans la documentation de la fonction read_delim au niveau de l’argument col_types\nRenvoi à la fonction cols qui permet de définir un type de colonne\n\nParais anodin, mais très important, notamment pour les processus de “verification”\nPar exemple un chiffre sans virgule (type entier) ce n’est pas pareil qu’un chiffre à virgule (type double)\n\nEn lien avec les fonctions d’imports, on peut utiliser des raccourcis pour définir nos types de colonnes\n\nPar exemple c pour un caractère à la place de col_character\nLa liste complète est disponible de la documentation de read_delim\n\nIci il faut garder en tête l’objectif de lever les ambiguïtés"
+  },
+  {
+    "objectID": "tidyverse-training.html#readr-est-en-générale-plus-rapide",
+    "href": "tidyverse-training.html#readr-est-en-générale-plus-rapide",
+    "title": "tidyverse-training",
+    "section": "readr est en générale plus rapide",
+    "text": "readr est en générale plus rapide\n\nDu cas par cas mais globalement mieux adapté au “gros” fichiers (en lien avec des fonctions orientées objet)\nPar exemple (tendance sans tenir compte d’autres facteurs comme l’ordinateur) pour un fichier csv de 156mo\n\n30.84s avec read_csv contre 30.00s avec read.csv\n\nPour un fichier csv de 468mo\n\n38.63s avec read_csv contre 47.56s avec read.csv"
+  },
+  {
+    "objectID": "tidyverse-training.html#le-vrai-avantage-reside-dans-la-polyvalence",
+    "href": "tidyverse-training.html#le-vrai-avantage-reside-dans-la-polyvalence",
+    "title": "tidyverse-training",
+    "section": "Le vrai avantage reside dans la polyvalence",
+    "text": "Le vrai avantage reside dans la polyvalence\n\nBeaucoup de paramétrisation possible\n\nToutes les spécifications citées précédemment\nUn gros plus sur la sélection des colonnes via l’argument col_select (sélection et renommage)\nFiltrage direct lors de l’import avec les _chunked ou encore l’argument skip\n\nPossibilité de lire les fichiers depuis une archive (type zip) avec readr\nPossibilité de lire plusieurs fichiers en une fois, même plusieurs répertoires\nVraie dynamique d’évolution dans le futur !"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-1.1",
+    "href": "tidyverse-training.html#exercice-1.1",
+    "title": "tidyverse-training",
+    "section": "Exercice 1.1",
+    "text": "Exercice 1.1\n\nLire le fichier survey_metadata et le stocker dans un objet R survey_metadata,\nLire le fichier reef_fish_biomass et le stocker dans un objet R reef_fish_biomass\nLire le fichier reef_fish_abundance et le stocker dans un objet R reef_fish_abundance\n\nAttention ! On ne triche pas, aucune manipulation des fichiers pré-importation"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-1.1-corrigé",
+    "href": "tidyverse-training.html#exercice-1.1-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 1.1 corrigé",
+    "text": "Exercice 1.1 corrigé\n\nLire le fichier survey_metadata et le stocker dans un objet R survey_metadata,\nLire le fichier reef_fish_biomass et le stocker dans un objet R reef_fish_biomass\nLire le fichier reef_fish_abundance et le stocker dans un objet R reef_fish_abundance\n\nAttention ! On ne triche pas, aucune manipulation des fichiers pré-importation\n# solution\nsurvey_metadata &lt;- read_tsv(file = \"data/survey_metadata.tsv\")\nreef_fish_biomass &lt;- read_delim(file = \"data/reef_fish_biomass.dude\",\n                                delim = \"|\")\nSys.setenv(\"VROOM_CONNECTION_SIZE\" = 2000000)\nreef_fish_abundance &lt;- read_csv(file = \"data/reef_fish_abundance.zip\",\n                                guess_max = Inf)"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-1.2",
+    "href": "tidyverse-training.html#exercice-1.2",
+    "title": "tidyverse-training",
+    "section": "Exercice 1.2",
+    "text": "Exercice 1.2\nLire le fichier survey_metadata et le stocker dans un objet R survey_metadata en sélectionnant le pays Indonésie, une profondeur inférieure à 20m et une visibilité supérieure à 10m."
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-1.2-corrigé",
+    "href": "tidyverse-training.html#exercice-1.2-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 1.2 corrigé",
+    "text": "Exercice 1.2 corrigé\nLire le fichier survey_metadata et le stocker dans un objet R survey_metadata en sélectionnant le pays Indonésie, une profondeur inférieure à 20m et une visibilité supérieure à 10m.\n# solution\nfunction_1_2 &lt;- function(x, pos) subset(x, country == \"Indonesia\" & depth &lt; 20 & visibility &gt; 10)\nsurvey_metadata_selection_1_2 &lt;- read_tsv_chunked(file = \"data/survey_metadata.tsv\",\n                                                  callback = DataFrameCallback$new(function_1_2),\n                                                  chunk_size = 1000)"
+  },
+  {
+    "objectID": "tidyverse-training.html#dplyr",
+    "href": "tidyverse-training.html#dplyr",
+    "title": "tidyverse-training",
+    "section": "dplyr",
+    "text": "dplyr\nPourquoi utiliser dplyr et sa syntaxe ?\n\nSyntaxe claire et cohérente\n\n“lien” avec le SQL\ndeux “familles” de fonctions : résumé et vectorisation     \n\nUtilisation de verbes\nGénéralement plus rapides que leur équivalent sous R de base\nPermet d’enchainer les opérations avec des “pipes”"
+  },
+  {
+    "objectID": "tidyverse-training.html#manipulation-des-lignes",
+    "href": "tidyverse-training.html#manipulation-des-lignes",
+    "title": "tidyverse-training",
+    "section": "Manipulation des lignes",
+    "text": "Manipulation des lignes\nManipulation de type extraction\nType de fonctions qui retournent un sous-ensemble de lignes\n\nExtraction d’une ou plusieurs lignes : fonctions de la famille slice & co\n\n# sélection d'une ou plusieurs lignes par position absolue\nslice()\n# sélection au hasard d'un nombre de lignes ou d'une proportion du jeu de données\nslice_sample()\n# sélection des n dernières lignes\nslice_tail()\n# sélection des n premières lignes\nslice_head()\n# sélection des lignes avec les valeurs les plus petites ou grandes\nslice_min()\nslice_max()\n# sélection des valeurs distinctes\ndistinct()\n# sélection en fonction d'opérateurs logiques et/ou booléens\nfilter()"
+  },
+  {
+    "objectID": "tidyverse-training.html#petit-focus-sur-les-opérateurs-booléens-et-logiques",
+    "href": "tidyverse-training.html#petit-focus-sur-les-opérateurs-booléens-et-logiques",
+    "title": "tidyverse-training",
+    "section": "Petit focus sur les opérateurs booléens et logiques",
+    "text": "Petit focus sur les opérateurs booléens et logiques\nRenvoient une valeur TRUE ou FALSE\n\nles communs :\n\n\n\ncertains plus particuliers :\n\n\n\nAttention aux priorités dans les interprétations\n\n& est plus fort que |, il sera exécuté en premier\nune solution est d’utiliser des () pour séparer vos opérateurs"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-2.1",
+    "href": "tidyverse-training.html#exercice-2.1",
+    "title": "tidyverse-training",
+    "section": "Exercice 2.1",
+    "text": "Exercice 2.1\n\nA l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”\nEn une seule fois, selectionner les données dont la variable “biomass” est différent de 0, où la famille de l’espèce est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10."
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-2.1-corrigé",
+    "href": "tidyverse-training.html#exercice-2.1-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 2.1 corrigé",
+    "text": "Exercice 2.1 corrigé\n\nA l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”\nEn une seule fois, selectionner les données dont la variable “biomass” est différent de 0, où la famille de l’espèce est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10.\n\nbiomass_exercice2_1_distinct &lt;- distinct(.data = reef_fish_biomass)\nbiomass_exercice2_1_distinct_filter &lt;- filter(.data = biomass_exercice2_1_distinct,\n                                              biomass != 0\n                                              & ! family %in% c(\"Mullidae\",\n                                                                \"Apogonidae\")\n                                              & size_class &lt;= 10)"
+  },
+  {
+    "objectID": "tidyverse-training.html#amélioration-de-la-lisibilité-du-code",
+    "href": "tidyverse-training.html#amélioration-de-la-lisibilité-du-code",
+    "title": "tidyverse-training",
+    "section": "Amélioration de la lisibilité du code",
+    "text": "Amélioration de la lisibilité du code\nIci on a effectué 2 opérations, mais on peut imaginer en faire beaucoup plus dans la réalité.\nGrâce à la syntaxe de dplyr, on peut répondre à ce besoin de deux manières différentes.\nLa première est d’effectuer toutes les opérations en une fois en les emboîtant :\nbiomass_exercice2_1_distinct_filter &lt;- filter(.data = distinct(.data = reef_fish_biomass),\n                                              biomass != 0\n                                              & ! family %in% c(\"Mullidae\",\n                                                                \"Apogonidae\")\n                                              & size_class &lt;= 10)\nCependant cela a plusieurs inconvénients. La structure est peu lisible, les opérations apparaissent dans l’ordre inverse de leur réalisation et il est difficile de voir quel paramètre se rapporte à quelle fonction."
+  },
+  {
+    "objectID": "tidyverse-training.html#aller-encore-plus-loin",
+    "href": "tidyverse-training.html#aller-encore-plus-loin",
+    "title": "tidyverse-training",
+    "section": "Aller encore plus loin",
+    "text": "Aller encore plus loin\nUtilisation d’un nouvelle opérateur baptisé pipe\n\nIl se note %&gt;%\nSon fonctionnement est le suivant : si j’exécute expr %&gt;% f, le résultat de l’expression expr, à gauche du pipe, sera passé comme premier argument à la fonction f, à droite du pipe, ce qui revient à exécuter f(expr)\nL’intérêt est que l’on peut enchainer plusieurs pipes et surtout on simplifie la syntaxe\nAvec notre exemple précédent cela donne :\n\nbiomass_exercice2_1_distinct_filter &lt;- distinct(.data = reef_fish_biomass) %&gt;%\n  filter(biomass != 0\n         & ! family %in% c(\"Mullidae\",\n                           \"Apogonidae\")\n         & size_class &lt;= 10)"
+  },
+  {
+    "objectID": "tidyverse-training.html#encore-quelques-fonctions-de-manipulation-de-lignes",
+    "href": "tidyverse-training.html#encore-quelques-fonctions-de-manipulation-de-lignes",
+    "title": "tidyverse-training",
+    "section": "Encore quelques fonctions de manipulation de lignes",
+    "text": "Encore quelques fonctions de manipulation de lignes\nManipulation de type “tri”\n\nOrdonner les lignes d’une ou plusieurs colonnes\n\n# par défaut ordre croissant, utiliser l'argument desc pour ordre décroissant\narrange()\n\nManipulation de type “ajout”\n\nAjouter une ligne dans un jeu de données\n\n\n# interet des arguments .before and .after\nadd_row()"
+  },
+  {
+    "objectID": "tidyverse-training.html#manipulation-des-variables",
+    "href": "tidyverse-training.html#manipulation-des-variables",
+    "title": "tidyverse-training",
+    "section": "Manipulation des variables",
+    "text": "Manipulation des variables\nExtraction d’une ou plusieurs colonnes\nType de fonctions qui retournent un sous-ensemble de colonnes sous la forme d’un vecteur ou d’une table\n# extraction des valeurs d'une colonne sous la forme d'un vecteur\n# on peut utiliser des noms ou les ids\npull()\n# extraction d'une colonne sous la forme d'une table\n# bien regarder les arguments de la fonction car on peut faire beaucoup\nselect()\n# Changer l'ordre ou la place d'une ou plusieurs colonnes\n# ne pas oublier les arguments .after et .before\nrelocate()"
+  },
+  {
+    "objectID": "tidyverse-training.html#fonctions-de-vectorisation",
+    "href": "tidyverse-training.html#fonctions-de-vectorisation",
+    "title": "tidyverse-training",
+    "section": "Fonctions de vectorisation",
+    "text": "Fonctions de vectorisation\nUne des deux grandes familles de fonction avec dplyr\n\nOn a commencé à l’aborder de manière instinctive avec relocate()\nGlobalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie    \n\n# créer une nouvelle variable\nmutate()\n\nPetit bonus pour renommer les variables\n\nrename()"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-2.2",
+    "href": "tidyverse-training.html#exercice-2.2",
+    "title": "tidyverse-training",
+    "section": "Exercice 2.2",
+    "text": "Exercice 2.2\n\nÀ partir du jeu de données de sortie de l’exercice 1\nCréer une variable “survey_id_full” qui est la concaténation des variables survey_id, species_name et size_class\nPlacer cette nouvelle colonne avant la colonne survey_id\nSupprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name\nRenommer la variable size_class en size_class_cm\nCréer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm\nSupprimer la variable size_class_cm\nTrier par ordre décroissant les données en fonction de la variable size_class_mm\nUtiliser des pipes à la fin pour avoir une syntaxe “propre” et souffler un bon coup :)"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-2.2-corrigé",
+    "href": "tidyverse-training.html#exercice-2.2-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 2.2 corrigé",
+    "text": "Exercice 2.2 corrigé\n\nÀ partir du jeu de données de sortie de l’exercice 1\nCréer une variable “survey_id_full” qui est la concaténation des variables survey_id, species_name et size_class\nPlacer cette nouvelle colonne avant la colonne survey_id\nSupprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name\nRenommer la variable size_class en size_class_cm\nCréer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm\nSupprimer la variable size_class_cm\nTrier par ordre décroissant les données en fonction de la variable size_class_mm\nUtiliser des pipes à la fin pour avoir une syntaxe “propre” et souffler un bon coup :)\n\n# solution\nbiomass_exercice2_2 &lt;- mutate(.data = biomass_exercice2_1_distinct_filter,\n                              survey_id_full = paste(survey_id,\n                                                     species_name,\n                                                     size_class,\n                                                     sep = \"_\")) %&gt;%\n  relocate(survey_id_full,\n           .before = survey_id) %&gt;%\n  select(-4,\n         -reporting_name) %&gt;%\n  rename(size_class_cm = size_class) %&gt;%\n  mutate(size_class_mm = size_class_cm * 10) %&gt;%\n  select(-size_class_cm) %&gt;%\n  arrange(desc(size_class_mm))"
+  },
+  {
+    "objectID": "tidyverse-training.html#fonctions-de-resumé",
+    "href": "tidyverse-training.html#fonctions-de-resumé",
+    "title": "tidyverse-training",
+    "section": "Fonctions de resumé",
+    "text": "Fonctions de resumé\nLa deuxième grande famille\n\nFonctions qui vont créer une nouvelle table avec des resumés statistiques. De manière globale, les fonctions associées vont utiliser en entrée des vecteurs et en sortie une ou plusieurs valeurs ( en nombre inférieur au nombre de vecteurs d’entrée)    \nFonction clé\n\nsummarise()\n# Beaucoup, beaucoup d'options et de possibilités\n# Compter le nombre de valeurs/lignes\nn()\n# Compter le nombre de valeurs/lignes distinctes\nn_distinct()\n# Faire une moyenne\nmean()\n# Faire une somme, option na.rm disponible\nsum()\n# Utiliser des notions de position\nfirst()\nlast()\n# Ou de rang\nquantile()\nmin()\nmax()"
+  },
+  {
+    "objectID": "tidyverse-training.html#introduction-à-la-notion-de-groupe",
+    "href": "tidyverse-training.html#introduction-à-la-notion-de-groupe",
+    "title": "tidyverse-training",
+    "section": "Introduction à la notion de groupe",
+    "text": "Introduction à la notion de groupe\n\nPour le moment on a fait des opérations sur l’ensemble du jeu de données, pas très pertinent non ?\nFonction de création de groupe\n\n# on peut définir nos groupes en fonction des modalités des variables\n#on peut aussi utiliser des arguments des fonctions quand c'est proposé, exemple avec .by de summarise()\ngroup_by()\n# ou alors en isolant chaque ligne\nrowwise()\n\nAttention à ce que vous faites ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R). Pour y remédier :\n\n# via un summarise (argument experimental, attention à la pérennité)\n.groups\n# de manière plus générale\nungroups()\n\nCette notion de groupe peut être utilisée avec d’autres fonctions (comme un mutate)"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-2.3",
+    "href": "tidyverse-training.html#exercice-2.3",
+    "title": "tidyverse-training",
+    "section": "Exercice 2.3",
+    "text": "Exercice 2.3\n\nÀ partir du jeu de données de sortie de l’exercice 2\nEffectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment\nPour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction “trouvée” regarder du côté des arguments en option)\nCréer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ."
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-2.3-corrigé",
+    "href": "tidyverse-training.html#exercice-2.3-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 2.3 corrigé",
+    "text": "Exercice 2.3 corrigé\n\nÀ partir du jeu de données de sortie de l’exercice 2\nEffectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment\nPour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction “trouvée” regarder du côté des arguments en option)\nCréer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.\n\n# solution\nbiomass_exercice2_3 &lt;- biomass_exercice2_2 %&gt;%\n  dplyr::group_by(survey_id_full) %&gt;%\n  mutate(sum_biomass = sum(x = biomass)) %&gt;%\n  ungroup() %&gt;%\n  distinct(survey_id_full,\n           .keep_all = TRUE)\nbiomass_exercice2_3_sample_verification &lt;- dplyr::group_by(.data = biomass_exercice2_2,\n                                                           family) %&gt;%\n  summarise(nb_sample_family = n()) %&gt;%\n  mutate(total = sum(nb_sample_family))"
+  },
+  {
+    "objectID": "tidyverse-training.html#fonction-bonus-très-utile",
+    "href": "tidyverse-training.html#fonction-bonus-très-utile",
+    "title": "tidyverse-training",
+    "section": "Fonction bonus très utile",
+    "text": "Fonction bonus très utile\ncase_when : généralisation vectorisée de if(s)\n\nVectorisation de multiples if_else sous R et CASE WHEN en SQL\nAméliore grandement la lisibilité de vos fonctions\nSyntaxe de base :\n\ncase_when(\n  operateur(s) booléen(s) ou logique(s) ~ output1,\n  operateur(s) booléen(s) ou logique(s) ~ output2,\n  ....\n  operateur(s) booléen(s) ou logique(s) ~ output_n,\n  TRUE ~ output si rien ne marche au dessus\n)\n\nPensez bien à toujours mettre un TRUE (=valeur par défaut)\nAttention à ne pas mélanger les types, il existe différents NA :\n\nNA_integer_\nNA_real_\nNA_complex_\nNA_character_"
+  },
+  {
+    "objectID": "tidyverse-training.html#combinaison-de-jeux-de-données-1",
+    "href": "tidyverse-training.html#combinaison-de-jeux-de-données-1",
+    "title": "tidyverse-training",
+    "section": "Combinaison de jeux de données 1",
+    "text": "Combinaison de jeux de données 1\nJointures “simples”\n\nIl doit y avoir une cohérence entre le nombre de colonnes ou de lignes\nAttention, aucune vérification de cohérence des jointures\n\n# \"Coller\" deux jeux de données\nbind_cols()\nbind_rows()"
+  },
+  {
+    "objectID": "tidyverse-training.html#combinaison-de-jeux-de-données-2",
+    "href": "tidyverse-training.html#combinaison-de-jeux-de-données-2",
+    "title": "tidyverse-training",
+    "section": "Combinaison de jeux de données 2",
+    "text": "Combinaison de jeux de données 2\nJointures de type relationnel\n\n\n\nTrès proche du SQL\nTrès puissantes et permettent de se poser les bonnes questions !\nAttention à bien spécifier l’argument by (ne pas laisser place à l’interprétation !)\n\nOn peut spécifier une seule ou plusieurs colonnes si les noms sont identiques entre les deux jeux de données\nSinon on spécifie le nom du jeu de données à “gauche” et celui qui est à “droite”\n\n\n\n\n\n# jointure à gauche\nleft_join()\n# jointure à droite\nright_join()\n# jointure commune\ninner_join()\n# jointure complete\nfull_join()"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-2.4",
+    "href": "tidyverse-training.html#exercice-2.4",
+    "title": "tidyverse-training",
+    "section": "Exercice 2.4",
+    "text": "Exercice 2.4\n\nÀ partir du jeu de données de sortie de l’exercice 2.3 (biomass_exercice2_3)\nFaire la “meilleure” jointure avec le jeu de données survey_metadata et expliquer votre choix\nPour vous aider :\n\nY-a-t-il un problème avec le jeu de données survey_metadata ?\nRéfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-2.4-corrigé",
+    "href": "tidyverse-training.html#exercice-2.4-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 2.4 corrigé",
+    "text": "Exercice 2.4 corrigé\n\nÀ partir du jeu de données de sortie de l’exercice 2.3 (biomass_exercice2_3)\nFaire la “meilleure” jointure avec le jeu de données survey_metadata et expliquer votre choix\nPour vous aider :\n\nY-a-t-il un problème avec le jeu de données survey_metadata ?\nRéfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure\n\n\n# solution\nsurvey_metadata_distinct &lt;- distinct(.data = survey_metadata)\nbiomass_survey_exercice2_4 &lt;- biomass_exercice2_3 %&gt;%\n  left_join(survey_metadata_distinct,\n            by = \"survey_id\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#tidyr",
+    "href": "tidyverse-training.html#tidyr",
+    "title": "tidyverse-training",
+    "section": "Tidyr",
+    "text": "Tidyr\nL’objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format “tidy”.\nLes différents verbes viennent s’ajouter à tous ceux que nous avons déjà vus avec readr et dplyr et ils s’intègrent parfaitement dans la série de pipe %&gt;% permettant d’enchainer les opérations.\n\nLes données “tidy”, qu’est ce que c’est?\n\n1 variable = 1 colonne\n1 observation = 1 ligne/case\n1 type d’observation par table\n\n\nLien vers le cheatsheet de tidyr."
+  },
+  {
+    "objectID": "tidyverse-training.html#tidyr-1",
+    "href": "tidyverse-training.html#tidyr-1",
+    "title": "tidyverse-training",
+    "section": "Tidyr",
+    "text": "Tidyr\nPour illustrer cette partie nous utiliserons le jeu de données popEU qui décrit le nombre d’habitants par pays pour les années 2014, 2015 et 2016\npopEU &lt;- readRDS(\"./data/popEU.RDS\")\nslice_tail(popEU)\nkable(popEU[10:15, ], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#les-principales-fonctions-de-tidyr",
+    "href": "tidyverse-training.html#les-principales-fonctions-de-tidyr",
+    "title": "tidyverse-training",
+    "section": "Les principales fonctions de tidyr",
+    "text": "Les principales fonctions de tidyr\nModelage des tableaux\npivot_wider()et pivot_longer()sont les successeurs des fonctions en base R du package reshape puis reshape2. Et se nommaient spread()et gather() dans les premières versions de tidyr\n # Transformer un tableau long en format large\npivot_wider(names_from, values_from)\n# Transformer un tableau large en format long\npivot_longer(cols, names_to, values_to, ...)"
+  },
+  {
+    "objectID": "tidyverse-training.html#section-1",
+    "href": "tidyverse-training.html#section-1",
+    "title": "tidyverse-training",
+    "section": "",
+    "text": "Applications - pivot_wider\nTransformer le jeu de données en format “wide” en utilisant la fonction pivot_wider(). Nous voulons obtenir une colonne par année\n# Créer un nouvel objet que l'on nomme popEU_wide\npopEU_wide &lt;- pivot_wider(popEU, names_from = \"year\", values_from = \"pop\")\npopEU_wide\nkable(popEU_wide, html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#section-2",
+    "href": "tidyverse-training.html#section-2",
+    "title": "tidyverse-training",
+    "section": "",
+    "text": "Gestion des valeurs manquantes “NA”\n# Remplacer des \"NA\" par des valeurs spécifiques\nreplace_na(data, replace, …)\n# Supprimer les lignes contenant des \"NA\"\ndrop_na(data, …)\n#  Remplir les \"NA\" en utilisant les valeurs précédentes ou suivantes de la même colonne\nfill(data, …, .direction)"
+  },
+  {
+    "objectID": "tidyverse-training.html#section-3",
+    "href": "tidyverse-training.html#section-3",
+    "title": "tidyverse-training",
+    "section": "",
+    "text": "Applications - pivot_longer/replace_na\nRe-transformer le jeu de données en format “long” en utilisant la fonction pivot_longer() et remplacer les valeurs de NA dans la colonne “pop”, par la population moyenne de la Belgique pour ces 2 années (11,27 M)\n# Créer un nouvel objet que l'on nomme popEU_long\npopEU_long &lt;-\n  pivot_longer(\n    popEU_wide,\n    cols = c(2:4),\n    names_to = \"year\",\n    values_to = \"pop\"\n  )\npopEU_long &lt;- mutate(popEU_long, pop = replace_na(pop, 11.27))\nslice_tail(popEU_long, 6)\nkable(popEU_long[10:15, ], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#section-4",
+    "href": "tidyverse-training.html#section-4",
+    "title": "tidyverse-training",
+    "section": "",
+    "text": "Applications - pivot_longer/drop_na\nRe-transformer le jeu de données en format “long” en utilisant la fonction `pivot_longer()` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d’enchainer les opérations à l’aide du pipe %&gt;%\npopEU_long &lt;- popEU_wide %&gt;%\n  pivot_longer(.,\n               cols = c(2:4),\n               names_to = \"year\",\n               values_to = \"pop\") %&gt;%\n  drop_na(., pop)\nslice_tail(popEU_long, 6)\nkable(popEU_long[8:13, ], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#section-5",
+    "href": "tidyverse-training.html#section-5",
+    "title": "tidyverse-training",
+    "section": "",
+    "text": "Applications - pivot_longer/fill\nRe-transformer le jeu de données en format “long” en utilisant la fonction `pivot_longer()` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d’enchainer les opérations à l’aide du pipe %&gt;%\n# Créer un nouvel objet que l'on nomme popEU_long\npopEU_long &lt;- popEU_wide %&gt;%\n  pivot_longer(.,\n               cols = c(2:4),\n               names_to = \"year\",\n               values_to = \"pop\") %&gt;%\n  fill(., pop, .direction = \"down\")\nslice_tail(popEU_long, 6)\nkable(popEU_long[10:15, ], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#section-6",
+    "href": "tidyverse-training.html#section-6",
+    "title": "tidyverse-training",
+    "section": "",
+    "text": "Combinaison des variables\n# Séparer une colonne en plusieurs colonnes\nseparate(data, col, into)\n# Créer une seule colonne à partir de plusieurs colonnes\nunite(col, ..., sep)\n# Générer toutes les combinaisons 2 à 2 possibles entre les variables définies\nexpand(data, ...)"
+  },
+  {
+    "objectID": "tidyverse-training.html#section-7",
+    "href": "tidyverse-training.html#section-7",
+    "title": "tidyverse-training",
+    "section": "",
+    "text": "Applications - separate\nA partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles colonnes “millions” et “milliers”\npopEU_sep &lt;- popEU_long %&gt;%\n  mutate(pop = as.character(pop)) %&gt;%\n  separate(., col = pop, into = c(\"millions\", \"milliers\"))\nslice_head(popEU_sep)\nkable(popEU_sep[1:6, ], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#section-8",
+    "href": "tidyverse-training.html#section-8",
+    "title": "tidyverse-training",
+    "section": "",
+    "text": "Applications - unite\nRecréer la colonne pop comme à l’origine en la nommant population\npopEU_unite &lt;- popEU_sep %&gt;%\n  unite(., population, c(millions, milliers), sep = \".\")\nslice_head(popEU_unite)\nkable(popEU_unite[1:6, ], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#section-9",
+    "href": "tidyverse-training.html#section-9",
+    "title": "tidyverse-training",
+    "section": "",
+    "text": "Applications - expand\nGénérer un tableau avec toutes les combinaisons possibles pays/population. Que remarquons-nous ?\npopEU_expand &lt;- popEU_unite %&gt;%\n  expand(., pays, population)\nslice_head(popEU_expand)\nkable(popEU_expand[1:6,], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")\n\n\nLa valeur 11.21 n’apparait qu’une seule fois, ce sont bien les combinaisons uniques."
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.1",
+    "href": "tidyverse-training.html#exercice-3.1",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.1",
+    "text": "Exercice 3.1\n\nChargez les données d’abondance. Les données sont elles tidy ?"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.1-corrigé",
+    "href": "tidyverse-training.html#exercice-3.1-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.1 corrigé",
+    "text": "Exercice 3.1 corrigé\n\nChargez les données d’abondance. Les données sont elles tidy ?\n\n# solution\nabundance &lt;- read_delim(\"./data/Global_reef_fish_abundance.csv\")\n\n\nNon les données ne sont pas tidy, car elles sont en format “wide”"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.2",
+    "href": "tidyverse-training.html#exercice-3.2",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.2",
+    "text": "Exercice 3.2\n\nTransformez les en format tidy. Les nouvelles colonnes seront “sp_size” et “abundance”\nCréez une nouvelle variable “survey_id_full” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”. Pensez à enchainer les opérations\n\n# solution"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.2-corrigé",
+    "href": "tidyverse-training.html#exercice-3.2-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.2 corrigé",
+    "text": "Exercice 3.2 corrigé\n\nTransformez les en format tidy. Les nouvelles colonnes seront “sp_size” et “abundance”\nCréez une nouvelle variable “survey_id_full” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”. Pensez à enchainer les opérations\n\n# solution\nabundance_long &lt;- abundance %&gt;%\n  pivot_longer(\n    .,\n    cols = 2:17523,\n    names_to = \"sp_size\",\n    values_to = \"abundance\",\n    values_drop_na = TRUE # Attention à l'argument values_dop_na\n  ) %&gt;%\n  unite(., col = \"survey_id_full\", c(survey_id, sp_size), sep = \"_\")\nslice_head(abundance_long)\n\nload(\"./data_tmp/abundance_long.RData\")\nkable(abundance_long[1:6,], html_font = \"Computer Modern\", table.attr = \"style='width:30%;'\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.3",
+    "href": "tidyverse-training.html#exercice-3.3",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.3",
+    "text": "Exercice 3.3\n\nCréez un seul tableau regroupant biomasse et abondance"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.3-corrigé",
+    "href": "tidyverse-training.html#exercice-3.3-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.3 corrigé",
+    "text": "Exercice 3.3 corrigé\n\nCréez un seul tableau regroupant biomasse et abondance\n\n# solution\nload(\"./data/biomass_survey_exercice2_4.RData\")\nbiomass_abundance &lt;- biomass_survey_exercice2_4 %&gt;%\n  left_join(., abundance_long, by = \"survey_id_full\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.4",
+    "href": "tidyverse-training.html#exercice-3.4",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.4",
+    "text": "Exercice 3.4\n\nCréez 2 nouvelles colonnes “genus” et “species” à partir de species_name"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.4-corrigé",
+    "href": "tidyverse-training.html#exercice-3.4-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.4 corrigé",
+    "text": "Exercice 3.4 corrigé\n\nCréez 2 nouvelles colonnes “genus” et “species” à partir de species_name\n\n# solution\nbiomass_abundance &lt;- biomass_abundance %&gt;%\n  separate(., species_name, into = c(\"genus\", \"species\"))\nslice_head(biomass_abundance[,8:11])\n\n# solution\nbiomass_abundance &lt;- biomass_abundance %&gt;%\n  separate(., species_name, into = c(\"genus\", \"species\"))\nkable(biomass_abundance[1:6,8:11],\n      html_font = \"Computer Modern\",\n      table.attr = \"style='width:30%;'\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.5",
+    "href": "tidyverse-training.html#exercice-3.5",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.5",
+    "text": "Exercice 3.5\n\nTransformez le tibble en sf object avec la commande sf::st_as_sf(survey, coords = c(“longitude”, “latitude”), remove = FALSE)"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.5-corrigé",
+    "href": "tidyverse-training.html#exercice-3.5-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.5 corrigé",
+    "text": "Exercice 3.5 corrigé\n\nTransformez le tibble en sf object avec la commande sf::st_as_sf(survey, coords = c(“longitude”, “latitude”), remove = FALSE)\n\n# solution\ndata_sf &lt;-\n  sf::st_as_sf(biomass_abundance,\n               coords = c(\"longitude\", \"latitude\") ,\n               remove = FALSE,\n               crs = \"+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0\")\n\n\nNous obtenons une erreur, car il n’est pas possible de convertir un tibble en objet sf s’il y a des valeurs manquantes dans les colonnes longitude et latitude"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.6",
+    "href": "tidyverse-training.html#exercice-3.6",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.6",
+    "text": "Exercice 3.6\n\nCorrigez l’erreur"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.6-corrigé",
+    "href": "tidyverse-training.html#exercice-3.6-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.6 corrigé",
+    "text": "Exercice 3.6 corrigé\n\nCorrigez l’erreur\n\n# solution\nbiomass_survey_abundance_exercice3_6 &lt;- biomass_abundance %&gt;%\n  drop_na(latitude) %&gt;% #supression des lignes contenant des NA dans la colonne latitude\n  drop_na(longitude) %&gt;% #supression des lignes contenant des NA dans la colonne longitude\n  sf::st_as_sf(\n    .,\n    coords = c(\"longitude\", \"latitude\"),\n    remove = FALSE,\n    crs = \"+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0\"\n  )\nsave(biomass_survey_abundance_exercice3_6,\n     file = \"./data/biomass_survey_abundance_exercice3_6.RData\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#conçu-pour-manipuler-les-chaines-de-caractères-facilement",
+    "href": "tidyverse-training.html#conçu-pour-manipuler-les-chaines-de-caractères-facilement",
+    "title": "tidyverse-training",
+    "section": "Conçu pour manipuler les chaines de caractères “facilement”",
+    "text": "Conçu pour manipuler les chaines de caractères “facilement”\n\nEn plus d’être plus faciles à utiliser, les noms des fonctions représentent bien ce qu’elles permettent de faire\n\nelles commencent toutes par str_\nles images de la cheatsheet aident beaucoup pour choisir les fonctions en rapport avec notre besoin\n\nOuvre le monde des expressions régulières\nPeut être combiné avec du langage tidyverse (par exemple avec dplyr)\nPour faire simple on 7 grandes familles de fonctions\n\nles fonctions de détection\nles fonctions de selection ou d’extraction\nles fonctions de gestion des tailles de caractères\nles fonctions de manipulations dites mutate (ça vous rappelle quelque chose ?)\nles fonctions de jointures et de division\nles fonctions d’ordre\nles fonctions supports"
+  },
+  {
+    "objectID": "tidyverse-training.html#beaucoup-darguments-communs",
+    "href": "tidyverse-training.html#beaucoup-darguments-communs",
+    "title": "tidyverse-training",
+    "section": "Beaucoup d’arguments communs",
+    "text": "Beaucoup d’arguments communs\n\nDe manière générale\n\nstring : le vecteur d’entrée\npattern : le motif que l’on va chercher à regarder\nreplacement : la valeur de remplacement\n\nDe manière plus spécifique\n\nstart et end : emplacement ou indice de position dans une chaine de caractère\nnegate : si TRUE, le résultat sera l’inverse de ce que l’on demande\nsep : caractère(s) à insérer dans le vecteur d’entrée\ncollapse : souvent confondu avec l’argument sep. Caractère(s) qui vont combiner les résultats (= vecteur d’entrée avec plusieurs éléments) entre une seule et unique chaine de caractères.\ndecreasing : utilisé pour les fonctions d’ordre ou de tri"
+  },
+  {
+    "objectID": "tidyverse-training.html#fonctions-de-détection",
+    "href": "tidyverse-training.html#fonctions-de-détection",
+    "title": "tidyverse-training",
+    "section": "Fonctions de détection",
+    "text": "Fonctions de détection\nRenvoient une réponse (pas d’extraction)\n# détection d'un motif dans une chaine de caractère\nstr_detect() et str_like()\n# détection d'un motif au début ou à la fin d'une chaine de caractère\nstr_starts() et str_ends()\n# détection des lignes contenant le motif\nstr_which()\n# détection de la position du motif dans la chaine de caractère (début et fin)\n# sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé\nstr_locate() et str_locate_all()\n# comptage du nombre de fois que le motif est détecté dans une chaine de caractère\nstr_count()"
+  },
+  {
+    "objectID": "tidyverse-training.html#fonctions-de-selection-ou-dextraction",
+    "href": "tidyverse-training.html#fonctions-de-selection-ou-dextraction",
+    "title": "tidyverse-training",
+    "section": "Fonctions de selection ou d’extraction",
+    "text": "Fonctions de selection ou d’extraction\nRenvoient une chaine de caractère\n# extraction d'une chaine à un ou des endroits bien précis\n# utilisation d'indices de position\nstr_sub() et str_sub_all()\n# extraction des chaines, completes, contenu un motif défini\nstr_subset()\n# extraction d'un motif dans une chaine de caractère et retour sous forme de vecteur\n# par \"défaut\" la detection passe à la chaine suivante dés qu'un motif est trouvé\nstr_extract() et str_extract_all()\n# extraction d'un motif dans une chaine de caractère et retour sous forme de matrix\n# sans le _all la detection passe à la chaine suivante dés qu'un motif est trouvé\nstr_match() et str_match_all()"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-4.1",
+    "href": "tidyverse-training.html#exercice-4.1",
+    "title": "tidyverse-training",
+    "section": "Exercice 4.1",
+    "text": "Exercice 4.1\n\nÀ partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille Embiotocidae puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de dplyr)\ncompter combien nous avons de données d’occurrence d’espèces du genre Embiotoca dans ce nouveau jeu de données\nen utilisant une négation, extraire toutes les localisations qui sont différentes de British Columbia"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-4.1-corrigé",
+    "href": "tidyverse-training.html#exercice-4.1-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 4.1 corrigé",
+    "text": "Exercice 4.1 corrigé\n\nÀ partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille Embiotocidae puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de dplyr)\ncompter combien nous avons de données d’occurrence d’espèces du genre Embiotoca dans ce nouveau jeu de données\nen utilisant une négation, extraire toutes les localisations qui sont différentes de British Columbia\n\n# solution\nbiomass_survey_exercice4_1 &lt;- slice(.data = biomass_survey_exercice2_4,\n                                    str_which(string = biomass_survey_exercice2_4$family,\n                                              pattern = \"Embiotocidae\"))\nsum_data_embiotoca_exercice4_1 &lt;- sum(str_count(string = biomass_survey_exercice4_1$species_name,\n                                                pattern = \"Embiotoca.\"))\nlocation_biomass_survey_exercice4_1 &lt;- unique(str_subset(string = biomass_survey_exercice4_1$location,\n                                                         pattern = \"British Columbia\",\n                                                         negate = TRUE))"
+  },
+  {
+    "objectID": "tidyverse-training.html#fonctions-de-gestion-des-tailles-de-caractères",
+    "href": "tidyverse-training.html#fonctions-de-gestion-des-tailles-de-caractères",
+    "title": "tidyverse-training",
+    "section": "Fonctions de gestion des tailles de caractères",
+    "text": "Fonctions de gestion des tailles de caractères\n# largeur/nombre de caractère\n# attention aux espaces et caractères masqués\nstr_length()\n# ajout \"d'espace\" à une chaine de caractère\nstr_pad()\n# tronquer une chaîne de caractères à un nombre fixe de caractères\nstr_trunc()\n# supprimer des espaces \n# au début et/ou à la fin d'une chaine\nstr_trim()\n# au début, à la fin et réduction des espaces à un seul\nstr_squish()"
+  },
+  {
+    "objectID": "tidyverse-training.html#fonctions-de-manipulations",
+    "href": "tidyverse-training.html#fonctions-de-manipulations",
+    "title": "tidyverse-training",
+    "section": "Fonctions de manipulations",
+    "text": "Fonctions de manipulations\nEn lien avec des manipulations de type vectorisation (= conservation de la structure des données d’entrée)\n# remplacement du motif via un assignation\nstr_sub() &lt;- value\n# remplacement d'un motif par un autre\n# sans le _all le remplacement passe à la chaine suivante dés qu'un motif est trouvé\nstr_replace() et str_replace_all()\n# suppression d'un motif \n# sans le _all la suppression passe à la chaine suivante dés qu'un motif est trouvé\nstr_remove() et str_remove_all()\n# manipulation de taille de caractère (majuscule, minuscule, ...)\n# attention à la spécification de la langue et au nom, un title n'est pas forcement un title que vous cherchez\nstr_to_lower()\nstr_to_upper()\nstr_to_title()\nstr_to_sentence()"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-4.2",
+    "href": "tidyverse-training.html#exercice-4.2",
+    "title": "tidyverse-training",
+    "section": "Exercice 4.2",
+    "text": "Exercice 4.2\n\nÀ partir du jeu de données biomass_survey_exercice4_1, créer une nouvelle variable, site_name_length_ori, contenant la taille des chaines de caractère de la variable site_name\nNettoyer la variable site_name en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable site_name_clean\nEnlever les majuscules de notre variable site_name_clean sauf celles en début de chaine"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-4.2-corrigé",
+    "href": "tidyverse-training.html#exercice-4.2-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 4.2 corrigé",
+    "text": "Exercice 4.2 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_1, créer une nouvelle variable, site_name_length_ori, contenant la taille des chaines de caractère de la variable site_name\nNettoyer la variable site_name en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable site_name_clean\nEnlever les majuscules de notre variable site_name_clean sauf celles en début de chaine\n\n# solution\nbiomass_survey_exercice4_2 &lt;- biomass_survey_exercice4_1 %&gt;%\n  mutate(site_name_length_ori = str_length(site_name),\n         site_name_clean = str_squish(site_name),\n         site_name_clean = str_to_sentence(site_name_clean)) %&gt;%\n  relocate(site_name_length_ori,\n           site_name_clean,\n           .after = site_name)"
+  },
+  {
+    "objectID": "tidyverse-training.html#fonctions-de-jointures-et-de-division",
+    "href": "tidyverse-training.html#fonctions-de-jointures-et-de-division",
+    "title": "tidyverse-training",
+    "section": "Fonctions de jointures et de division",
+    "text": "Fonctions de jointures et de division\nTrès pratique surtout si utilisation via langage tidyverse\n# jointure de plusieurs chaines de caractère en une seule (conservation structure en lignes)\nstr_c()\n# jointure de plusieurs chaines de caractère en un seul vecteur (utiliser argument collapse)\nstr_flatten()\n# repetition d'une chaine de caractère \nstr_dup()\n# suppression des chaines de caractère repetées\nstr_unique()\n# division d'une chaine de caractère en fonction d'un motif, le resultat est une liste de chaine\nstr_split()\n# argument n pour spécifier le nombre possible de correspondances\n# si on veut retourner un vecteur (ne fonction que sur une chaine unique)\nstr_split_1()\n# si on veut retourner une matrice (argument n obligatoire)\nstr_split_fixed()\n# si on veut extraire uniquement une partie de la chaine \nstr_split_i()\n# si on veut faire des interpolations dans des chaines de caractère (similaire aux fonctions type paste())\n# utilisation de {} dans notre expression\nstr_glue()\n# variante si on veut l'utiliser dans le cadre d'une pipe\nstr_glue_data()"
+  },
+  {
+    "objectID": "tidyverse-training.html#fonctions-dordre",
+    "href": "tidyverse-training.html#fonctions-dordre",
+    "title": "tidyverse-training",
+    "section": "Fonctions d’ordre",
+    "text": "Fonctions d’ordre\nTrès simple, mais attention à la définition des arguments, notamment le locale qui va définir l’environnement de l’utilisateur.\n# retourne un vecteur des indexes ordonnés\nstr_order()\n# trier un vecteur\nstr_sort()"
+  },
+  {
+    "objectID": "tidyverse-training.html#fonctions-supports",
+    "href": "tidyverse-training.html#fonctions-supports",
+    "title": "tidyverse-training",
+    "section": "Fonctions supports",
+    "text": "Fonctions supports\nA voir comme un petite boite à outils\n# pour jouer avec l'encodage\nstr_conv()\n# pour jouer avec la visualisation de certains caractères (notamment sous la console de R)\nstr_view()\n# pour déterminer si deux chaines de caractère sont egales \nstr_equal()\n# formatte de chaine de caractère en paragraphes\nstr_wrap()"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-4.3",
+    "href": "tidyverse-training.html#exercice-4.3",
+    "title": "tidyverse-training",
+    "section": "Exercice 4.3",
+    "text": "Exercice 4.3\n\nÀ partir du jeu de données biomass_survey_exercice4_2, créer deux nouvelles variables, species_name_first et species_name_second, qui contiennent une division de la variable species_name en deux mots (on utilisera la valeur [.] pour spécifier . comme séparateur, bizarre non ?)\nCréer une variable biomass_percentage qui contiendra la biomasse exprimée en % (on veut le signe % à la fin de la chaine)\nFusionner dans une nouvelle variable description les variables species_name_first, species_name_second et biomass_percentage pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable biomass_percentage en parenthèses et suivi de la chaine de caractère of total biomass)\nAyant une très mauvaise vision et un écran très petit, je souhaiterais que l’affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable description_shinny. Attention, il faut parfois regarder au-delà de ce qu’on voit dans la console de R…"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-4.3-corrigé",
+    "href": "tidyverse-training.html#exercice-4.3-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 4.3 corrigé",
+    "text": "Exercice 4.3 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_2, créer deux nouvelles variables, species_name_first et species_name_second, qui contiennent une division de la variable species_name en deux mots (on utilisera la valeur [.] pour spécifier . comme séparateur, bizarre non ?)\nCréer une variable biomass_percentage qui contiendra la biomasse exprimée en % (on veut le signe % à la fin de la chaine)\nFusionner dans une nouvelle variable description les variables species_name_first, species_name_second et biomass_percentage pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable biomass_percentage en parenthèses et suivi de la chaine de caractère of total biomass)\nAyant une très mauvaise vision et un écran très petit, je souhaiterais que l’affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable description_shinny. Attention, il faut parfois regarder au-delà de ce qu’on voit dans la console de R…\n\n# solution\nbiomass_survey_exercice4_3 &lt;- biomass_survey_exercice4_2 %&gt;%\n  mutate(species_name_first = str_split_i(string = species_name,\n                                          pattern = \"[.]\",\n                                          i = 1),\n         species_name_second = str_split_i(string = species_name,\n                                           pattern = \"[.]\",\n                                           i = 2),\n         biomass_percentage = str_glue(\"{round(x = biomass * 100 / sum_biomass)}%\"),\n         description = str_c(species_name_first ,\n                             species_name_second,\n                             str_c(\"(\",\n                                   biomass_percentage,\n                                   \" of total biomass)\"),\n                             sep = \" \"),\n         description_shinny = str_wrap(string = description,\n                                       width = 20))"
+  },
+  {
+    "objectID": "tidyverse-training.html#les-expressions-régulières",
+    "href": "tidyverse-training.html#les-expressions-régulières",
+    "title": "tidyverse-training",
+    "section": "Les expressions régulières",
+    "text": "Les expressions régulières\nOutil très très puissant !\n\n\n\nIl faut savoir que cela existe, mais demande un peu de patience et d’entrainement pour être utilisé\nRegardez le deuxième volet du cheatsheet de stringr\nDans l’exercice 4.3, on a utiliser [.] pour un motif, c’est une expression regulière\nPermet de “selectionner” de manière “dynamique” des patterns dans vos données\nLe plus difficile est de formuler de la meilleure façon ce que vous voulez\n\nIl y a souvent plusieurs façons d’arriver à ce que vous voulez\n\nParfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle\nUtiliser une IA peut vous faciliter la tâche, mais attention aux “boucles infernales” et surtout prenez du recul lors de vos échanges"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-bonus-4.4",
+    "href": "tidyverse-training.html#exercice-bonus-4.4",
+    "title": "tidyverse-training",
+    "section": "Exercice bonus 4.4",
+    "text": "Exercice bonus 4.4\n\nDans le jeu données précédent, biomass_survey_exercice4_3, je veux séparer les chiffres et les lettres de la variable site_code. Comment trouver un motif qui marche aussi bien pour la valeur USWC1 et BC3 ?\nAvec l’utilisation des expressions regulières je vais pouvoir lui dire “je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s’arrête à un chiffre” (même raisonnemement avec les chiffre)"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-bonus-4.4-corrigé",
+    "href": "tidyverse-training.html#exercice-bonus-4.4-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice bonus 4.4 corrigé",
+    "text": "Exercice bonus 4.4 corrigé\n\nDans le jeu données précédent, biomass_survey_exercice4_3, je veux séparer les chiffres et les lettres de la variable site_code. Comment trouver un motif qui marche aussi bien pour la valeur USWC1 et BC3 ?\nAvec l’utilisation des expressions regulières je vais pouvoir lui dire “je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s’arrête à un chiffre” (même raisonnemement avec les chiffre)\n\nbiomass_survey_exercice4_4 &lt;- biomass_survey_exercice4_3 %&gt;%\n  mutate(site_code_letters = str_extract(string = site_code,\n                                         pattern = \"^[:upper:]+\"),\n         site_code_numbers = str_extract(string = site_code,\n                                         pattern = \"[:digit:]+$\")) %&gt;%\n  relocate(site_code_letters,\n           site_code_numbers,\n           .after = site_code)"
+  },
+  {
+    "objectID": "tidyverse-training.html#rend-la-manipulation-des-dates-et-du-temps-presque-agréable-sous-r",
+    "href": "tidyverse-training.html#rend-la-manipulation-des-dates-et-du-temps-presque-agréable-sous-r",
+    "title": "tidyverse-training",
+    "section": "Rend la manipulation des dates et du temps presque agréable sous R",
+    "text": "Rend la manipulation des dates et du temps presque agréable sous R\n\nAnalyse semi-automatique des dates et des heures\nLes fonctions vont essayer de trouver le séparateur et le format\nPossibilité de rajouter l’indicateur de fuseau horaire via l’argument tz\n\nlibrary(lubridate)\n# Identifie l'ordre de l'année (y), le mois (m), le jour (d), l'heure (h), la minute (m) et la second (s) d'un élement fournis à R\nymd()\nmdy()\ndmy()\nymd_hms()\n# Beaucoup de possibilités, jeter un coup d'oeil sur le cheatsheet"
+  },
+  {
+    "objectID": "tidyverse-training.html#manipulation-des-élements-date-temps",
+    "href": "tidyverse-training.html#manipulation-des-élements-date-temps",
+    "title": "tidyverse-training",
+    "section": "Manipulation des élements date-temps",
+    "text": "Manipulation des élements date-temps\nModification et extraction\ntest_date_time &lt;- ymd_hms(\"2022-12-05 12:00:00\", tz = \"CET\")\n# pour une extraction des informations\nsecond()\nhour()\nday()\nwday()\nmonth()\n...\n# pour modifier les informations, utiliser les fonctions précédentes avec une assignation (&lt;-)\n# par exemple\nhour(x = test_date_time) &lt;- 6"
+  },
+  {
+    "objectID": "tidyverse-training.html#tour-dhorizon",
+    "href": "tidyverse-training.html#tour-dhorizon",
+    "title": "tidyverse-training",
+    "section": "Tour d’horizon",
+    "text": "Tour d’horizon\n\nLes fuseaux horaires, un cauchemar par le passé, maintenant ça va mieux\nDeux fonctions clés\n\n# Pour exprimer un élément dans un autre fuseau horaire\nwith_tz()\n# Pour forcer le changement d'un fuseau horaire mais en conservant la même heure\nforce_tz()\n\n3 classes pour calculer des intervalles de temps\nPeriode, durée et intervalle\nLe plus “dur” est de définir votre date-temps, après c’est une syntaxe mathématique"
+  },
+  {
+    "objectID": "tidyverse-training.html#bonus",
+    "href": "tidyverse-training.html#bonus",
+    "title": "tidyverse-training",
+    "section": "Bonus",
+    "text": "Bonus\n\nLes fonctions sont vectorisables !\nSur certains jeux de données, les dates-temps sont stockées en nombre de secondes depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas-là :\n\nas_datetime()\n\nPossibilité de faire des arrondis\n\n# arrondi inférieur sur \"l'unité\" la plus proche\nfloor_date()\n# arrondi inférieur sur \"l'unité\" la plus proche\nround_date()\n# arrondie supérieur sur \"l'unité\" la plus proche\nceiling_date()\n\nDe définir des objets pour les manipuler\n\n# en lien avec les paramètres du système\nnow()\ntoday()\n# en lien avec des paramètres\ndyears()\ndmonths()\ndweeks()\n..."
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-5.1",
+    "href": "tidyverse-training.html#exercice-5.1",
+    "title": "tidyverse-training",
+    "section": "Exercice 5.1",
+    "text": "Exercice 5.1\n\nÀ partir du jeu de données biomass_survey_exercice4_3, créer une variable survey_date_as_date qui est la conversion de la variable survey_date en date\nCréer la variable survey_year qui contient l’année de la variable survey_date_as_date\nCalculer la différence de temps entre aujourd’hui et la variable survey_date_as_date. Stocker l’information dans une nouvelle colonne duration_since_now\nCréer une variable next_survey_date qui ajoute 12 mois à la variable survey_date_as_date\nRegarder plus en détail la variable next_survey_date, qu’a-t-elle de particulier ?\nQuestion bonus en lien avec la question précédente, définir l’heure des valeurs de la variable survey_date_as_date à 12h et la stocker dans une variable next_survey_date_correct"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-5.1-corrigé",
+    "href": "tidyverse-training.html#exercice-5.1-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 5.1 corrigé",
+    "text": "Exercice 5.1 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_3, créer une variable survey_date_as_date qui est la conversion de la variable survey_date en date\nCréer la variable survey_year qui contient l’année de la variable survey_date_as_date\nCalculer la différence de temps entre aujourd’hui et la variable survey_date_as_date. Stocker l’information dans une nouvelle colonne duration_since_now\nCréer une variable next_survey_date qui ajoute 12 mois à la variable survey_date_as_date\nRegarder plus en détail la variable next_survey_date, qu’a-t-elle de particulier ?\nQuestion bonus en lien avec la question précédente, définir l’heure des valeurs de la variable survey_date_as_date à 12h et la stocker dans une variable next_survey_date_correct\n\n# solution\nbiomass_survey_exercice5_1 &lt;- biomass_survey_exercice4_3 %&gt;%\n  mutate(survey_date_as_date = dmy(survey_date),\n         survey_year = year(x = survey_date_as_date),\n         duration_since_now = today() - survey_date_as_date,\n         next_survey_date = survey_date_as_date + dmonths(x = 12),\n         next_survey_date_correct = next_survey_date %&gt;%\n           {hour(.) &lt;- 12; .}) %&gt;%\n  relocate(survey_date_as_date,\n           next_survey_date,\n           survey_year,\n           duration_since_now,\n           next_survey_date_correct,\n           .after = survey_date)\nExplication : { ... } définit un bloc qui sera exécutées dans l’ordre, ; permet de séparer les actions, hour(.) &lt;- 12 modifie l’heure de l’objet . en 12 et . retourne l’objet modifié"
+  },
+  {
+    "objectID": "tidyverse-training.html#petit-aperçu-des-possibilités",
+    "href": "tidyverse-training.html#petit-aperçu-des-possibilités",
+    "title": "tidyverse-training",
+    "section": "Petit aperçu des possibilités :",
+    "text": "Petit aperçu des possibilités :\n\nLe site From Data To Viz, une pépite"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-cest-comme-la-chirurgie-aesthétique",
+    "href": "tidyverse-training.html#ggplot-cest-comme-la-chirurgie-aesthétique",
+    "title": "tidyverse-training",
+    "section": "Ggplot c’est comme la chirurgie aesthétique :",
+    "text": "Ggplot c’est comme la chirurgie aesthétique :\n\n\n\nLes jeunes s’y mettent très tôt !\nLes moins jeunes sont réticents puis CERTAINS finissent par s’y mettre\n\n\nC’est un enchainement plus ou moins long d’opérations."
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-une-succession-de-couches",
+    "href": "tidyverse-training.html#ggplot-une-succession-de-couches",
+    "title": "tidyverse-training",
+    "section": "Ggplot, une succession de couches",
+    "text": "Ggplot, une succession de couches\n\n\n\n\nLa Structure\ndata &lt;- iris\np1 &lt;- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +\n  theme(axis.text  = element_text(size = 25),\n        axis.title = element_text(size = 25))\np1\n\n\n\nLe Type de représentation\np2 &lt;- p1 + geom_point(size = 5)\np2\n\n\n\n\n\nLes Couleurs\np3 &lt;- p1 + geom_point(mapping = aes(color = Petal.Width), size = 5) + scale_color_viridis_c()\np3\n\n\n\nLe Lifting final\np4 &lt;- p3 +\n  theme_bw() +\n  theme(axis.text = element_text(size = 25),\n                 axis.title = element_text(size = 25))\np4"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-une-succession-de-couches-1",
+    "href": "tidyverse-training.html#ggplot-une-succession-de-couches-1",
+    "title": "tidyverse-training",
+    "section": "Ggplot, une succession de couches",
+    "text": "Ggplot, une succession de couches\n\n\n\nLa Structure\ndata &lt;- iris\np1 &lt;- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +\n  theme(axis.text  = element_text(size = 25),\n        axis.title = element_text(size = 25))\np1\n\n\n\nLe Type de représentation\np2 &lt;- p1 + geom_point(size = 5)\np2\n\n\n\n\n\nLes Couleurs\np3 &lt;- p1 + geom_point(mapping = aes(color = Petal.Width), size = 5) + scale_color_viridis_c()\np3\n\n\n\nLe Lifting final\np4 &lt;- p3 +\n  geom_line(size = 2) +\n  theme_bw() +\n  theme(axis.text = element_text(size = 25),\n                 axis.title = element_text(size = 25))\np4"
+  },
+  {
+    "objectID": "tidyverse-training.html#la-structure-des-données",
+    "href": "tidyverse-training.html#la-structure-des-données",
+    "title": "tidyverse-training",
+    "section": "La structure des données",
+    "text": "La structure des données\nPour la démonstration nous allons utiliser le jeu de données crabs de la librairie MASS.\nlibrary(MASS)\ndata_crabs &lt;- crabs %&gt;% dplyr::select(sp, sex, CL, CW)\ndata_crabs %&gt;%\n  head(3) %&gt;%\n  kbl(digits = 4, caption = \"Crabs data\") %&gt;%\n  kable_classic(html_font = \"Computer Modern\", full_width = F)\n\ndata_crabs %&gt;%\n  head(3) %&gt;%\n  kbl(digits = 4, caption = \"Crabs data\") %&gt;%\n  kable_classic(html_font = \"Computer Modern\", full_width = F)"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-la-structure",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-la-structure",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : La Structure",
+    "text": "Ggplot pas à pas : La Structure\n\n\nPour la structure de la figure, la fonction à toujours utiliser est ggplot() . Les arguments principaux sont :\n\n\ndata = nom.du.dataframe\nmapping = aes(x = variable.x, y = variable.y)\n\n\nIci le aes signifie aesthetic\nOn verra que d’autres options sont disponibles dans aes comme la taille (size), la couleur (color), la forme (shape) …"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-la-structure-1",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-la-structure-1",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : La Structure",
+    "text": "Ggplot pas à pas : La Structure\n\n\nPour la structure de la figure, la fonction à toujours utiliser est ggplot() . Les arguments principaux sont :\n\n\ndata = nom.du.dataframe\nmapping = aes(x = variable.x, y = variable.y)\n\n\n\n\ncouche.1 &lt;- ggplot(data    = data_crabs,\n                   mapping = aes(x = CL, y = CW))\n\ncouche.1"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-choix-du-plot",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-choix-du-plot",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : Choix du plot",
+    "text": "Ggplot pas à pas : Choix du plot\n\n\nPlusieurs représentations existent selon le type de variables que l’on a :\n\n\n\n\nUne variable continue\n\n\ngeom_histogram()\ngeom_density()\n\n\n\n\n\nDeux variables continues\n\n\ngeom_point()\ngeom_line()\ngeom_area()\n\n\n\n\n\n\n\n\n\nUne discrète & une continue\n\n\ngeom_boxplot()\ngeom_violin()\ngeom_col()\n\n\n\n\n\nDonnées spatiales\n\n\ngeom_polygon()\ngeom_sf()"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-choix-du-plot-1",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-choix-du-plot-1",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : Choix du plot",
+    "text": "Ggplot pas à pas : Choix du plot\n\nL’exemple ici va mener à la réalisation d’un nuage de points. Mais ggplot2 fonctionne de la même façon pour construire un diagramme en barres, une boite à moustache ou autres.\n\n\n\n\naes() dans ggplot()\ncouche.2 &lt;- ggplot(data    = data_crabs,\n                   mapping = aes(x = CL, \n                                 y = CW)) +\n  geom_point()\n\n\n\naes() dans geom_point()\n# Autre solution\ncouche.2.2 &lt;- ggplot() +\n  geom_point(data    = data_crabs,\n             mapping = aes(x = CL, y = CW))\n\n\n\n\n\ncouche.2"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-modèle-linéaire",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-modèle-linéaire",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : Modèle linéaire",
+    "text": "Ggplot pas à pas : Modèle linéaire\nTraçons un modèle linéaire et ajoutons la formule et le R² correspondant\n\ncouche.3 &lt;- couche.2 +\n  geom_smooth(color = \"red\", method = \"lm\") # le modèle linéaire \n\n\ncouche.3"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-modèle-linéaire-1",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-modèle-linéaire-1",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : Modèle linéaire",
+    "text": "Ggplot pas à pas : Modèle linéaire\nTraçons un modéle linéaire et ajoutons la formule et le R² correspondant\ncouche.3 &lt;- couche.2 +\n  geom_smooth(color = \"red\", method = \"lm\") + # le modèle linéaire \n  stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) # la formule\ncouche.3"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-modèle-linéaire-2",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-modèle-linéaire-2",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : Modèle linéaire",
+    "text": "Ggplot pas à pas : Modèle linéaire\nTraçons un modèle linéaire et ajoutons la formule et le R² correspondant\ncouche.3 &lt;- couche.2 +\n  geom_smooth(color = \"red\", method = \"lm\") + # le modèle linéaire \n  stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) + # la formule\n  stat_regline_equation(label.y = 48, aes(label = ..adj.rr.label..)) # R²\ncouche.3"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-la-couleur",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-la-couleur",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : La couleur",
+    "text": "Ggplot pas à pas : La couleur\nDonnons une couleur par sexe. Comme c’est lié à l’esthétisme de la figure, il faut retourner à l’argument color dans la fonction aes().\n\ncouche.4 &lt;- ggplot() +\n  geom_point(data    = data_crabs,\n             mapping = aes(x     = CL, \n                           y     = CW, \n                           color = sex))\n\n\ncouche.4"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-couleurs-légende",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-couleurs-légende",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : Couleurs & légende",
+    "text": "Ggplot pas à pas : Couleurs & légende\nPour cela, on peut utiliser la fonction scale_color_manual() et les arguments name et values.\n\ncouche.5 &lt;- couche.4 +\n  scale_color_manual(name   = \"Sex :\",\n                     values = c(\"M\" = \"darkblue\", \n                                \"F\" = \"darkgreen\"))\n\n\ncouche.5\n\n\n\nUne autre façon de faire est d’utiliser la fonction labs qui permet de changer les diverses légendes (axes x et y + légende de couleur)"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-légende-v.2",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-légende-v.2",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : Légende v.2",
+    "text": "Ggplot pas à pas : Légende v.2\ncouche.6 &lt;- couche.5 +\n  labs(x     = \"Carapace Length (mm)\",\n       y     = \"Carapace Width (mm)\",\n       color = \"Sex :\")\n\ncouche.6"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-le-facet",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-le-facet",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : le FACET",
+    "text": "Ggplot pas à pas : le FACET\nLa fonction facet_grid() permet de générer X plots pour chaque valeur d’une variable qualitative (i.e. l’espèce).\n\ncouche.7 &lt;- couche.6 + facet_grid(~sp)\n\n\ncouche.7"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-larrière-plan",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-larrière-plan",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : l’arrière plan",
+    "text": "Ggplot pas à pas : l’arrière plan\n On utilise une des fonctions theme_*.\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\ncouche.7 + theme_bw()\ncouche.7 + theme_classic()\ncouche.7 + theme_dark()\n\n\nUn tas de theme_* existent pour obtenir différentes formats d’arrière plan (voir ici). A vous de choisir votre préféré."
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-le-lifting-final",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-le-lifting-final",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : le lifting final",
+    "text": "Ggplot pas à pas : le lifting final\nLa fonction theme() permet de lifter BEAUCOUP de choses (?theme).  Elle doit toujours apparaître en dernier de façon à ne pas être écrasée par une autre couche.\n\ncouche.8 &lt;- couche.7 +\n  theme_bw() +\n  theme(axis.text       = element_text(size = 11),\n        axis.title      = element_text(size = 13),\n        legend.position = \"right\",\n        legend.text     = element_text(size = 13),\n        legend.title    = element_text(size = 15))\n\n\ncouche.8"
+  },
+  {
+    "objectID": "tidyverse-training.html#enregistrer-ses-figures",
+    "href": "tidyverse-training.html#enregistrer-ses-figures",
+    "title": "tidyverse-training",
+    "section": "Enregistrer ses figures",
+    "text": "Enregistrer ses figures\nPour enregistrer votre ggplot, vous pouvez utiliser la fonction ggsave() :\n\n\nplot : le nom du ggplot à enregistrer.\nfilename : le_chemin_daccess/le_nom_denregistrement.EXTENSION\nwidth & height : la largeur et hauteur d’enregistrement.\n\n\n\nggsave(filename = \"le_chemin_vers_le_bon_dossier\", \n       plot     = boxplot_biomass_country_v3,\n       width    = 8,\n       height   = 5)"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.1",
+    "href": "tidyverse-training.html#exercice-6.1",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.1",
+    "text": "Exercice 6.1\nQuel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l’exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, seulement pour les données prélevées en 2011. Nommer le jeu de données data_biomass_country.\n# 1 - Filter les données obtenues en 2011\n# 2 - Grouper les données pour obtenir la biomasse totale\n#     par transect dans chacun des pays"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.1-correction",
+    "href": "tidyverse-training.html#exercice-6.1-correction",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.1 : Correction",
+    "text": "Exercice 6.1 : Correction\nQuel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l’exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, seulement pour les données prélevées en 2011. Nommer le jeu de données data_biomass_country.\ndata_biomass_country &lt;- biomass_survey_abundance_exercice3_6 %&gt;%\n  st_drop_geometry() %&gt;%\n  # 1 - Filter les données obtenues en 2011\n  filter(str_detect(string = survey_date, pattern = \"2011\")) %&gt;%\n  # 2 - Grouper les données pour obtenir la biomasse totale\n  #     par transect dans chacun des pays\n  group_by(country, survey_id) %&gt;%\n  summarise(biomass = sum(biomass))"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.1-correction-1",
+    "href": "tidyverse-training.html#exercice-6.1-correction-1",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.1 : Correction",
+    "text": "Exercice 6.1 : Correction\nQuel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l’exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, seulement pour les données prélevées en 2011. Nommer le jeu de données data_biomass_country.\n# Réalisation les boites à moustache\nggplot(data = data_biomass_country) +\n  geom_boxplot(aes(x = country, y = biomass)) +\n  theme_bw()"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.2",
+    "href": "tidyverse-training.html#exercice-6.2",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.2",
+    "text": "Exercice 6.2\nCe ggplot n’est cependant pas entièrement satisfaisant …  Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.\n\nUne solution est d’utiliser la fonction reorder() pour ordonner l’axe des x.\nUtiliser cette fonction pour ordonner l’axe des x de façon décroissante selon la valeur médiane. Nommer le plot boxplot_biomass_country.  N’hésitez pas à regarder l’aide ?reorder ou à chercher sur internet.\n# Utilisation de reorder"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.2-correction",
+    "href": "tidyverse-training.html#exercice-6.2-correction",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.2 : Correction",
+    "text": "Exercice 6.2 : Correction\n# Reorder en fonction de la valeur médiane \nboxplot_biomass_country &lt;- ggplot(data = data_biomass_country) +\n  geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass)) +\n  theme_bw()\nboxplot_biomass_country"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.3",
+    "href": "tidyverse-training.html#exercice-6.3",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.3",
+    "text": "Exercice 6.3\nRenommer proprement les axes de boxplot_biomass_country."
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.3-correction",
+    "href": "tidyverse-training.html#exercice-6.3-correction",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.3 : Correction",
+    "text": "Exercice 6.3 : Correction\nRenommer proprement les axes de boxplot_biomass_country.\n# Solution\nboxplot_biomass_country_v2 &lt;- boxplot_biomass_country +\n  labs(x = \"Country\", y = \"Biomass (g)\") +\n  theme_bw()\nboxplot_biomass_country_v2"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.4",
+    "href": "tidyverse-training.html#exercice-6.4",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.4",
+    "text": "Exercice 6.4\nDans la fonction element_text(), un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l’axe x. Choisir votre arrière plan préféré."
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.4-correction",
+    "href": "tidyverse-training.html#exercice-6.4-correction",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.4 : Correction",
+    "text": "Exercice 6.4 : Correction\nDans la fonction element_text(), un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l’axe x. Choisir votre arrière plan préféré.\n# Solution\nboxplot_biomass_country_v3 &lt;- boxplot_biomass_country_v2 +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))\n\nboxplot_biomass_country_v3"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.5",
+    "href": "tidyverse-training.html#exercice-6.5",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.5",
+    "text": "Exercice 6.5\nEnregistrer la figure boxplot_biomass_country_v3 au format .png, avec une largeur et hauteur appropriées pour lire correctement le plot."
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.5-correction",
+    "href": "tidyverse-training.html#exercice-6.5-correction",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.5 : Correction",
+    "text": "Exercice 6.5 : Correction\nEnregistrer la figure boxplot_biomass_country_v3 au format .png, avec une largeur et hauteur appropriées pour lire correctement le plot.\n# Solution\nggsave(filename = \"figures/boxplot_biomass_vs_country.png\", \n       plot     = boxplot_biomass_country_v3,\n       width    = 8,\n       height   = 5)"
+  },
+  {
+    "objectID": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs",
+    "href": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs",
+    "title": "tidyverse-training",
+    "section": "Une petite subtilité concernant les couleurs",
+    "text": "Une petite subtilité concernant les couleurs\nfill vs. color\n# Solution questions 1 & 2\ndata_biomass_5country &lt;- data_biomass_country %&gt;%\n  filter(country %in% c(\"Spain\", \"United States\", \"Italy\", \"Costa Rica\", \"Panama\")) %&gt;%\n  mutate(Continent = case_when((country == \"Spain\"| country == \"Italy\") ~ \"Europe\",\n                                country == \"United States\" ~ \"North America\",\n                                TRUE ~ \"South America\"))\n# Solution pour le plot"
+  },
+  {
+    "objectID": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs-1",
+    "href": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs-1",
+    "title": "tidyverse-training",
+    "section": "Une petite subtilité concernant les couleurs",
+    "text": "Une petite subtilité concernant les couleurs\nReconstruction d’un boxplot en remplissant chaque boite d’une couleur pour chaque continent.\n# Solution pour le plot\nggplot() +\n  geom_boxplot(data    = data_biomass_5country,\n               mapping = aes(x = reorder(country, -biomass, FUN = median), \n                             y = biomass, \n                             color = Continent)) +\n  labs(x = \"Country\", y = \"Biomass (g)\") + \n  theme_bw()"
+  },
+  {
+    "objectID": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs-2",
+    "href": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs-2",
+    "title": "tidyverse-training",
+    "section": "Une petite subtilité concernant les couleurs",
+    "text": "Une petite subtilité concernant les couleurs\n\nGgplot fait la différence entre :\n\nla couleur des contours –&gt; color = …\nla couleur de remplissage –&gt; fill = …\n\n\n\nPour choisir ses couleurs de contour vs. de remplissage, on utilise les fonctions scale_color_manual() vs. scale_fill_manual().\n\n\nggplot() +\n  geom_boxplot(data    = data_biomass_5country,\n               mapping = aes(x = reorder(country, -biomass, FUN = median), \n                             y = biomass, \n                             fill = Continent)) +\n  scale_fill_manual(values = c(\"Europe\" = \"skyblue\", \n                               \"South America\" = \"aquamarine\", \n                               \"North America\" = \"moccasin\")) +\n  labs(x = \"Country\", y = \"Biomass (g)\") + \n  theme_bw()"
+  },
+  {
+    "objectID": "tidyverse-training.html#une-autre-subtilité-concernant-les-couleurs",
+    "href": "tidyverse-training.html#une-autre-subtilité-concernant-les-couleurs",
+    "title": "tidyverse-training",
+    "section": "Une autre subtilité concernant les couleurs",
+    "text": "Une autre subtilité concernant les couleurs\nConstruisons un nuage de points entre la biomasse et la profondeur\n\ndata_biomass_depth &lt;- biomass_survey_abundance_exercice3_6 %&gt;%\n  st_drop_geometry() %&gt;%\n  filter(str_detect(string = survey_date, pattern = \"2011\")) %&gt;%\n  group_by(country, survey_id) %&gt;%\n  summarise(biomass = sum(biomass),\n            depth   = unique(depth)) \nplot &lt;- ggplot() +\n  geom_point(data    = data_biomass_depth,\n             mapping = aes(x     = depth, \n                           y     = biomass,\n                           color = biomass)) +\n  scale_color_manual(values = \"blue\")\n\n\nplot\n\n\n\nOn ne peut pas donner une seule couleur à une variable continue !"
+  },
+  {
+    "objectID": "tidyverse-training.html#couleurs-variables-continues",
+    "href": "tidyverse-training.html#couleurs-variables-continues",
+    "title": "tidyverse-training",
+    "section": "Couleurs & variables continues",
+    "text": "Couleurs & variables continues\nIl existe 4 fonctions principales qui permettent de construire des palettes de couleurs continues :\n\n\nscale_fill_continuous : avec une palette par defaut (nuances de bleus)\nscale_fill_viridis_c : Colorblind friendly.\nscale_fill_gradient : permet de créer ses propres gradients de couleurs. Des variantes existent selon le nombre de couleurs à définir. Il s’agit de scale_fill_gradient2() et scale_fill_gradientn()."
+  },
+  {
+    "objectID": "tidyverse-training.html#couleurs-variables-continues-1",
+    "href": "tidyverse-training.html#couleurs-variables-continues-1",
+    "title": "tidyverse-training",
+    "section": "Couleurs & variables continues",
+    "text": "Couleurs & variables continues\n\nTestons les une par une à partir de la figure suivante\n\nplot &lt;- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +\n  geom_raster() +\n  scale_x_continuous(NULL, expand = c(0, 0)) + \n  scale_y_continuous(NULL, expand = c(0, 0)) + \n  theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#couleurs-variables-continues-2",
+    "href": "tidyverse-training.html#couleurs-variables-continues-2",
+    "title": "tidyverse-training",
+    "section": "Couleurs & variables continues",
+    "text": "Couleurs & variables continues\nscale_color_continuous\nLa plus simple, mais pas beaucoup d’options. C’est aussi la palette de couleur par défaut.\n. . .\n#| fig-height: 7\n#| layout: \"[50, 50]\"\nplot\nplot + scale_fill_continuous()"
+  },
+  {
+    "objectID": "tidyverse-training.html#couleurs-variables-continues-3",
+    "href": "tidyverse-training.html#couleurs-variables-continues-3",
+    "title": "tidyverse-training",
+    "section": "Couleurs & variables continues",
+    "text": "Couleurs & variables continues\nscale_color_viridis_c\nDe belles palettes dont les nuances sont captées par les personnes daltoniennes.\n. . .\n\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\nplot + scale_fill_viridis_c(option = \"viridis\")\nplot + scale_fill_viridis_c(option = \"inferno\")\nplot + scale_fill_viridis_c(option = \"turbo\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#info-générale-sur-les-palettes",
+    "href": "tidyverse-training.html#info-générale-sur-les-palettes",
+    "title": "tidyverse-training",
+    "section": "Info générale sur les palettes",
+    "text": "Info générale sur les palettes\nPetite info utile, toutes les palettes peuvent passer le test ColorBlind Friendly :\n\ncolor_pal &lt;- RColorBrewer::brewer.pal(10, name=\"Spectral\")\ncolorBlindness::displayAllColors(color_pal)"
+  },
+  {
+    "objectID": "tidyverse-training.html#couleurs-variables-continues-4",
+    "href": "tidyverse-training.html#couleurs-variables-continues-4",
+    "title": "tidyverse-training",
+    "section": "Couleurs & variables continues",
+    "text": "Couleurs & variables continues\nscale_fill_gradient()\nPermet de créer ses propres palettes de couleurs, à partir de 2, 3 ou n couleurs :\n\n\nscale_fill_gradient() avec les arguments low et high.\nscale_fill_gradient2() avec les arguments low, mid et high.\nscale_fill_gradientn() avec l’argument colours.\n\n\n. . .\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\nplot + scale_fill_gradient(low = \"darkblue\", high = \"darkred\")\nplot + scale_fill_gradient2(low = \"darkblue\", mid = \"white\", high = \"darkred\", midpoint = 0.02)\nplot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))"
+  },
+  {
+    "objectID": "tidyverse-training.html#couleurs-variable-groupée-en-classes",
+    "href": "tidyverse-training.html#couleurs-variable-groupée-en-classes",
+    "title": "tidyverse-training",
+    "section": "Couleurs & variable groupée en classes",
+    "text": "Couleurs & variable groupée en classes\nIl existe 3 fonctions principales qui permettent de construire ce type de palettes de couleurs :\n\n\nscale_fill_binned : avec une palette par défaut (nuances de bleus)\nscale_fill_fermenter : utilise les BrewerPalettes (voir ici pour plus d’infos).\nPour voir les palettes =&gt; RColorBrewer::display.brewer.all()\nscale_fill_steps : permet de créer sa propre palette avec un nombre de classes précis. Des variantes existent selon le nombre de couleurs à définir. Il s’agit de scale_fill_steps2() et scale_fill_stepsn()."
+  },
+  {
+    "objectID": "tidyverse-training.html#couleurs-variable-groupée-en-classes-1",
+    "href": "tidyverse-training.html#couleurs-variable-groupée-en-classes-1",
+    "title": "tidyverse-training",
+    "section": "Couleurs & variable groupée en classes",
+    "text": "Couleurs & variable groupée en classes\nscale_fill_binned()\nLes couleurs sont par défaut une nuance de bleus. Certaines précisions peuvent cependant être apportées.\n. . .\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\nplot + scale_fill_binned(n.breaks = 4)\nplot + scale_fill_binned(n.breaks = 7)\nplot + scale_fill_binned(breaks = quantile(faithfuld$density, probs = (seq(0,1,0.3))))"
+  },
+  {
+    "objectID": "tidyverse-training.html#couleurs-variable-groupée-en-classes-2",
+    "href": "tidyverse-training.html#couleurs-variable-groupée-en-classes-2",
+    "title": "tidyverse-training",
+    "section": "Couleurs & variable groupée en classes",
+    "text": "Couleurs & variable groupée en classes\nscale_fill_steps()\nFonction analogue à scale_fill_gradient().\n\n\nscale_fill_steps() avec les arguments low et high.\nscale_fill_steps2() avec les arguments low, mid et high.\nscale_fill_stepsn() avec l’argument colours.\n\n\n. . .\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\nplot + scale_fill_steps(low = \"darkblue\", high = \"darkred\", n.breaks = 8)\nplot + scale_fill_steps2(low = \"darkblue\", mid = \"white\", high = \"darkred\", midpoint = 0.02, n.breaks = 8)\nplot + scale_fill_stepsn(colors = magma(9), n.breaks = 9)"
+  },
+  {
+    "objectID": "tidyverse-training.html#couleurs-variables-discrètes",
+    "href": "tidyverse-training.html#couleurs-variables-discrètes",
+    "title": "tidyverse-training",
+    "section": "Couleurs & variables discrètes",
+    "text": "Couleurs & variables discrètes\nLes principales fonctions utilisées permettant de construire des palettes de couleurs continues :\n\n\nscale_fill_discrete : Couleurs par défaut\nscale_fill_manual : choix de la couleur parmi toutes les couleurs existantes.\nscale_fill_brewer : utilise les BrewerPalettes (voir ici pour plus d’infos). Equivalent de scale_fill_distiller pour les variables discrètes."
+  },
+  {
+    "objectID": "tidyverse-training.html#couleurs-variables-discrètes-1",
+    "href": "tidyverse-training.html#couleurs-variables-discrètes-1",
+    "title": "tidyverse-training",
+    "section": "Couleurs & variables discrètes",
+    "text": "Couleurs & variables discrètes\n\nplot &lt;- ggplot() +\n  geom_violin(data    = data_crabs,\n              mapping = aes(x = sex, y = CL, fill = sex), \n              alpha   = 0.7) +\n  facet_wrap(~sp) +\n  theme_bw()\n\n\n\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\nplot + scale_fill_discrete()\nplot + scale_fill_manual(values = c(\"M\" = \"darkblue\", \"F\" = \"darkgreen\"))\nplot + scale_fill_brewer(palette = \"Set2\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#ressources-utilisées",
+    "href": "tidyverse-training.html#ressources-utilisées",
+    "title": "tidyverse-training",
+    "section": "Ressources utilisées",
+    "text": "Ressources utilisées\nhttps://ggplot2-book.org/scale-colour.html#colour-discrete\nhttps://stackoverflow.com/questions/70942728/understanding-color-scales-in-ggplot2\nhttps://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3"
+  },
+  {
+    "objectID": "tidyverse-training.html#diagrammes-en-barres-barres-derreurs",
+    "href": "tidyverse-training.html#diagrammes-en-barres-barres-derreurs",
+    "title": "tidyverse-training",
+    "section": "Diagrammes en barres & barres d’erreurs",
+    "text": "Diagrammes en barres & barres d’erreurs\nPour ajouter les barres d’erreurs, on utilise la fonction geom_errorbar().\n\nL’utilisation de cette fonction nécessite le calcul préalable de l’écart-type.\n\n\n# Formatage des données\ncrabs_mean &lt;- data_crabs %&gt;%\n  group_by(sp) %&gt;%\n  summarise(CL_mean = mean(CL),\n            CL_sd   = sd(CL)) \n\n\n# Réalisation du diagramme en barres\nggplot(crabs_mean) +\n  geom_col(aes(x = sp, y = CL_mean)) +\n  geom_errorbar(aes(x = sp, ymin = CL_mean-CL_sd, ymax = CL_mean+CL_sd)) +\n  theme_bw()"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.7",
+    "href": "tidyverse-training.html#exercice-6.7",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.7",
+    "text": "Exercice 6.7\nA partir des données data_biomass_5country, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre croissant. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.\n# 1 - Grouper les données par pays\n# 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble \n#     des transects propres à chaque pays"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.7-correction",
+    "href": "tidyverse-training.html#exercice-6.7-correction",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.7 : Correction",
+    "text": "Exercice 6.7 : Correction\nA partir des données data_biomass_5country, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre croissant. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.\ncountry_mean &lt;- data_biomass_5country %&gt;%\n  # 1 - Grouper les données par pays\n  group_by(country) %&gt;%\n  # 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble \n  #     des transects propres à chaque pays\n  summarise(biom_mean = mean(biomass),\n            biom_sd   = sd(biomass))"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.7-correction-1",
+    "href": "tidyverse-training.html#exercice-6.7-correction-1",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.7 : Correction",
+    "text": "Exercice 6.7 : Correction\nA partir des données data_biomass_5country, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre croissant. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.\n# Figure \nggplot(country_mean) +\n  geom_col(aes(x = reorder(country, biom_mean), y = biom_mean)) +\n  geom_errorbar(aes(x = country, ymin = biom_mean-biom_sd, ymax = biom_mean+biom_sd),\n                    width = 0.2, colour = \"red\") +\n  labs(x = \"Country\", y = \"Biomass (g)\") + \n  theme_bw()"
+  },
+  {
+    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes",
+    "href": "tidyverse-training.html#gestion-des-facteurs-groupes",
+    "title": "tidyverse-training",
+    "section": "Gestion des facteurs & groupes",
+    "text": "Gestion des facteurs & groupes\nObtient-on les mêmes résultats entre la biomasse totale et l’abondance ?\n\nExercice 6.8\nA partir de biomass_survey_abundance_exercice3_6, obtenez un data.frame de trois colonnes size_class_mm, biom_abun, value pour les données prélevées en 2011.\n. . .\n # 1. Enlever la colonne geometry.\n # 2. Filtrer les données 2011.\n # 3. Sélectionner les colonnes size_class_mm, biomass, abundance.\n # 4. Transformer la colonne size_class_mm en facteur.\n # 5. Sommer la biomass et l'abondunce par classe de taille.\n # 6. Pivoter le tableau au format long en gardant size_class_mm."
+  },
+  {
+    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes-1",
+    "href": "tidyverse-training.html#gestion-des-facteurs-groupes-1",
+    "title": "tidyverse-training",
+    "section": "Gestion des facteurs & groupes",
+    "text": "Gestion des facteurs & groupes\nObtient-on les mêmes résultats entre la biomasse totale et l’abondance ?\nExercice 6.8 : Correction\nA partir de biomass_survey_abundance_exercice3_6, obtenez un data.frame de trois colonnes size_class_mm, biom_abun, value pour les données prélevées en 2011.\nbiomass_abundance &lt;- biomass_survey_abundance_exercice3_6 %&gt;%\n  # 1. Enlever la colonne geometry.\n  st_drop_geometry() %&gt;%\n  # 2. Filtrer les données 2011.\n  filter(str_detect(string = survey_date, pattern = \"2011\")) %&gt;%\n  # 3. Sélectionner les colonnes size_class_mm, biomass, abundance.\n  dplyr::select(size_class_mm, biomass, abundance) %&gt;%\n  # 4. Transformer la colonne size_class_mm en facteur.\n  mutate(size_class_mm = as.factor(size_class_mm)) %&gt;%\n  # 5. Sommer la biomass et l'abondunce par classe de taille.\n  group_by(size_class_mm) %&gt;%\n  summarise_all(sum) %&gt;%\n  # 6. Pivoter le tableau au format long en gardant size_class_mm.\n  pivot_longer(cols = 2:3, names_to = \"biom_abun\", values_to = \"value\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes-2",
+    "href": "tidyverse-training.html#gestion-des-facteurs-groupes-2",
+    "title": "tidyverse-training",
+    "section": "Gestion des facteurs & groupes",
+    "text": "Gestion des facteurs & groupes\nConstruisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.\nggplot(data = biomass_abundance,\n       mapping = aes(x    = biom_abun, \n                     y    = value, \n                     fill = size_class_mm)) +\n  geom_col()"
+  },
+  {
+    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes-3",
+    "href": "tidyverse-training.html#gestion-des-facteurs-groupes-3",
+    "title": "tidyverse-training",
+    "section": "Gestion des facteurs & groupes",
+    "text": "Gestion des facteurs & groupes\nConstruisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.\nggplot(data = biomass_abundance,\n       mapping = aes(x    = biom_abun, \n                     y    = value, \n                     fill = size_class_mm)) +\n  geom_col(position = \"dodge\", \n           stat     = \"identity\")"
+  },
+  {
+    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes-4",
+    "href": "tidyverse-training.html#gestion-des-facteurs-groupes-4",
+    "title": "tidyverse-training",
+    "section": "Gestion des facteurs & groupes",
+    "text": "Gestion des facteurs & groupes\nConstruisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.\nggplot(data = biomass_abundance,\n       mapping = aes(x    = biom_abun, \n                     y    = value, \n                     fill = size_class_mm)) +\n  geom_col()"
+  },
+  {
+    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes-5",
+    "href": "tidyverse-training.html#gestion-des-facteurs-groupes-5",
+    "title": "tidyverse-training",
+    "section": "Gestion des facteurs & groupes",
+    "text": "Gestion des facteurs & groupes\nChangeons l’ordre des facteurs de façon à ce que la classe [75,100[ soit en 1ère.\nplot1 &lt;- ggplot(data = biomass_abundance,\n                mapping = aes(x    = biom_abun, \n                              y    = value, \n                              fill = size_class_mm)) +\n  geom_col(position=\"dodge\", stat=\"identity\") +\n  labs(x = NULL, y = \"Biomass (g)\", fill = \"Size class (mm)\") + \n  scale_fill_viridis_d(labels = c(\"[0, 25[\", \"[25, 50[\", \"[50, 75[\", \"[75, 100[\")) +\n  theme_bw()\n#| fig-height: 8\n#| layout: \"[45, 45]\"\nplot1\nggplot(data = biomass_abundance,\n       mapping = aes(x    = biom_abun, \n                     y    = value, \n                     fill = rev(size_class_mm))) +\n  geom_col(position=\"dodge\", stat=\"identity\") +\n  labs(x = NULL, y = \"Biomass (g)\", fill = \"Size class (mm)\") + \n  scale_fill_viridis_d(labels = rev(c(\"[0, 25[\", \"[25, 50[\", \"[50, 75[\", \"[75, 100[\"))) +\n  theme_bw()"
+  },
+  {
+    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes-6",
+    "href": "tidyverse-training.html#gestion-des-facteurs-groupes-6",
+    "title": "tidyverse-training",
+    "section": "Gestion des facteurs & groupes",
+    "text": "Gestion des facteurs & groupes\nChangeons l’ordre des facteurs de façon à ce que la classe [75,100[ soit en 1ère.\nbiomass_abundance2 &lt;- biomass_abundance %&gt;%\n  mutate(size_class_mm = factor(x      = biomass_abundance$size_class_mm, \n                                levels = c(\"100\", \"75\", \"50\", \"25\"))) \nggplot(data = biomass_abundance2,\n       mapping = aes(x    = biom_abun, \n                     y    = value, \n                     fill = size_class_mm)) +\n  geom_col(position=\"dodge\") +\n  labs(x = NULL, y = \"Biomass (g)\", fill = \"Size class (mm)\") + \n  scale_fill_viridis_d(labels = c(\"[75, 100[\", \"[50, 75[\", \"[25, 50[\",  \"[0, 25[\")) +\n  theme_bw()"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.8-1",
+    "href": "tidyverse-training.html#exercice-6.8-1",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.8",
+    "text": "Exercice 6.8\nRéaliser un diagramme en barres permettant d’illustrer le mieux les cas où l’abondance est supérieure à la biomasse et vice-versa."
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.8-correction-1",
+    "href": "tidyverse-training.html#exercice-6.8-correction-1",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.8 : Correction",
+    "text": "Exercice 6.8 : Correction\nRéaliser un diagramme en barres permettant d’illustrer le mieux les cas où l’abondance est supérieure à la biomasse et vice-versa.\n# Correction\nggplot(data = biomass_abundance,\n       mapping = aes(x    = size_class_mm, \n                     y    = value, \n                     fill = biom_abun)) +\n  geom_col(position=\"dodge\", stat=\"identity\") +\n  labs(x = \"Size class (mm)\", y = \"Biomass (g)\", fill = NULL) + \n  scale_fill_viridis_d(labels = c(\"Abundance\", \"Biomass\")) +\n  theme_bw()"
+  }
+]
