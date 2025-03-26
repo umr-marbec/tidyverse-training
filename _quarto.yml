@@ -1,4 +1,5 @@
 project:
   title: "tidyverse-training"
+  type: website
 
 editor: visual

@@ -4,5 +4,5 @@
 .Ruserdata
 /.quarto/
 *.html
-/tidyverse_training_files
+_site/
 *.pdf

@@ -1471,9 +1471,9 @@ round_date()
 ceiling_date()
 ```
 
-- De définir des objets pour les manipuler
+-   De définir des objets pour les manipuler
 
-```r
+``` r
 # en lien avec les paramètres du système
 now()
 today()
@@ -1486,26 +1486,26 @@ dweeks()
 
 ## Exercice 5.1 {.smaller auto-animate="true"}
 
-- À partir du jeu de données `biomass_survey_exercice4_3`, créer une variable `survey_date_as_date` qui est la conversion de la variable `survey_date` en date
-- Créer la variable `survey_year` qui contient l'année de la variable `survey_date_as_date`
-- Calculer la différence de temps entre aujourd'hui et la variable `survey_date_as_date`. Stocker l'information dans une nouvelle colonne `duration_since_now`
-- Créer une variable `next_survey_date` qui ajoute 12 mois à la variable `survey_date_as_date`
-- Regarder plus en détail la variable `next_survey_date`, qu'a-t-elle de particulier ?
-- Question bonus en lien avec la question précédente, définir l'heure des valeurs de la variable `survey_date_as_date` à 12h et la stocker dans une variable `next_survey_date_correct`
+-   À partir du jeu de données `biomass_survey_exercice4_3`, créer une variable `survey_date_as_date` qui est la conversion de la variable `survey_date` en date
+-   Créer la variable `survey_year` qui contient l'année de la variable `survey_date_as_date`
+-   Calculer la différence de temps entre aujourd'hui et la variable `survey_date_as_date`. Stocker l'information dans une nouvelle colonne `duration_since_now`
+-   Créer une variable `next_survey_date` qui ajoute 12 mois à la variable `survey_date_as_date`
+-   Regarder plus en détail la variable `next_survey_date`, qu'a-t-elle de particulier ?
+-   Question bonus en lien avec la question précédente, définir l'heure des valeurs de la variable `survey_date_as_date` à 12h et la stocker dans une variable `next_survey_date_correct`
 
-```r
+``` r
 ```
 
 ## Exercice 5.1 corrigé {.smaller auto-animate="true"}
 
-- À partir du jeu de données `biomass_survey_exercice4_3`, créer une variable `survey_date_as_date` qui est la conversion de la variable `survey_date` en date
-- Créer la variable `survey_year` qui contient l'année de la variable `survey_date_as_date`
-- Calculer la différence de temps entre aujourd'hui et la variable `survey_date_as_date`. Stocker l'information dans une nouvelle colonne `duration_since_now`
-- Créer une variable `next_survey_date` qui ajoute 12 mois à la variable `survey_date_as_date`
-- Regarder plus en détail la variable `next_survey_date`, qu'a-t-elle de particulier ?
-- Question bonus en lien avec la question précédente, définir l'heure des valeurs de la variable `survey_date_as_date` à 12h et la stocker dans une variable `next_survey_date_correct`
+-   À partir du jeu de données `biomass_survey_exercice4_3`, créer une variable `survey_date_as_date` qui est la conversion de la variable `survey_date` en date
+-   Créer la variable `survey_year` qui contient l'année de la variable `survey_date_as_date`
+-   Calculer la différence de temps entre aujourd'hui et la variable `survey_date_as_date`. Stocker l'information dans une nouvelle colonne `duration_since_now`
+-   Créer une variable `next_survey_date` qui ajoute 12 mois à la variable `survey_date_as_date`
+-   Regarder plus en détail la variable `next_survey_date`, qu'a-t-elle de particulier ?
+-   Question bonus en lien avec la question précédente, définir l'heure des valeurs de la variable `survey_date_as_date` à 12h et la stocker dans une variable `next_survey_date_correct`
 
-```r
+``` r
 # solution
 biomass_survey_exercice5_1 <- biomass_survey_exercice4_3 %>%
   mutate(survey_date_as_date = dmy(survey_date),
