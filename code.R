@@ -2,6 +2,7 @@
 library(readr)
 library(dplyr)
 library(stringr)
+library(lubridate)
 # exercise 1.1 ----
 survey_metadata <- read_tsv(file = "data/survey_metadata.tsv")
 reef_fish_biomass <- read_delim(file = "data/reef_fish_biomass.dude",
@@ -69,5 +70,42 @@ biomass_survey_exercice4_2 <- biomass_survey_exercice4_1 %>%
            site_name_clean,
            .after = site_name)
 # exercice 4.3 ----
-biomass_survey_exercice4_3 <- biomass_survey_exercice4_2
-  
+biomass_survey_exercice4_3 <- biomass_survey_exercice4_2 %>%
+  mutate(species_name_first = str_split_i(string = species_name,
+                                          pattern = "[.]",
+                                          i = 1),
+         species_name_second = str_split_i(string = species_name,
+                                           pattern = "[.]",
+                                           i = 2),
+         biomass_percentage = str_glue("{round(x = biomass * 100 / sum_biomass)}%"),
+         description = str_c(species_name_first ,
+                             species_name_second,
+                             str_c("(",
+                                   biomass_percentage,
+                                   " of total biomass)"),
+                             sep = " "),
+         description_shinny = str_wrap(string = description,
+                                       width = 20))
+# exercice 4.4 ----
+biomass_survey_exercice4_4 <- biomass_survey_exercice4_3 %>%
+  mutate(site_code_letters = str_extract(string = site_code,
+                                         pattern = "^[:upper:]+"),
+         site_code_numbers = str_extract(string = site_code,
+                                         pattern = "[:digit:]+$")) %>%
+  relocate(site_code_letters,
+           site_code_numbers,
+           .after = site_code)
+# exercice 5.1 ----
+biomass_survey_exercice5_1 <- biomass_survey_exercice4_3 %>%
+  mutate(survey_date_as_date = dmy(survey_date),
+         survey_year = year(x = survey_date_as_date),
+         duration_since_now = today() - survey_date_as_date,
+         next_survey_date = survey_date_as_date + dmonths(x = 12),
+         next_survey_date_correct = next_survey_date %>%
+           {hour(.) <- 12; .}) %>%
+  relocate(survey_date_as_date,
+           next_survey_date,
+           survey_year,
+           duration_since_now,
+           next_survey_date_correct,
+           .after = survey_date)

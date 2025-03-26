@@ -175,29 +175,29 @@ read_tsv()
 read_xxx_chunked()
 ```
 
-## [read_delim()](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"}, la fonction la plus générique{.smaller}
+## [read_delim()](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"}, la fonction la plus générique {.smaller}
 
-- Import de fichier avec la possibilité d'utiliser des paramètres 
-- Fonction générale, son fonctionnement permet une approche simple des autres fonctions plus spécifiques d'import
-- Parmi toutes les possibilités, on trouve comme paramètres:
-  - file : chemin d'un fichier, d'une connexion ou même des données écrites à la main,
-  - delim : délimiteur utilisé pour séparer les champs
-  - col_names : configuration d'un entête (ou pas)
-  - col_types : spécification des types de colonnes
-  - col_select : selection des colonnes a conserver (même langage que avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"})
-  - na : interprétation des valeurs manquantes
-  - skip : échappement de lignes lors de l'import
-  - name_repair : réparation "intéligente" des nomes de colonnes
-- Beaucoup d'autres sont disponibles en lien avec vos besoins !
+-   Import de fichier avec la possibilité d'utiliser des paramètres
+-   Fonction générale, son fonctionnement permet une approche simple des autres fonctions plus spécifiques d'import
+-   Parmi toutes les possibilités, on trouve comme paramètres:
+    -   file : chemin d'un fichier, d'une connexion ou même des données écrites à la main,
+    -   delim : délimiteur utilisé pour séparer les champs
+    -   col_names : configuration d'un entête (ou pas)
+    -   col_types : spécification des types de colonnes
+    -   col_select : selection des colonnes a conserver (même langage que avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"})
+    -   na : interprétation des valeurs manquantes
+    -   skip : échappement de lignes lors de l'import
+    -   name_repair : réparation "intéligente" des nomes de colonnes
+-   Beaucoup d'autres sont disponibles en lien avec vos besoins !
 
 ## On a aussi des fonctions de raccourci
 
-- En lien avec la nature de vos imports 
-- La plupart des paramètres de la fonction `read_delim` sont utilisable
-  - `read_csv` et `read_csv2` pour les fichiers csv,
-  - `read_tsv` pour les fichiers tsv
-- On a aussi les fonctions `_chunked` pour commencer à s'amuser 
-  - `read_delim_chunked`, `read_csv_chunked`, `read_csv2_chunked` et `read_tsv_chunked`
+-   En lien avec la nature de vos imports
+-   La plupart des paramètres de la fonction `read_delim` sont utilisable
+    -   `read_csv` et `read_csv2` pour les fichiers csv,
+    -   `read_tsv` pour les fichiers tsv
+-   On a aussi les fonctions `_chunked` pour commencer à s'amuser
+    -   `read_delim_chunked`, `read_csv_chunked`, `read_csv2_chunked` et `read_tsv_chunked`
 
 ## La fonction inverse : [write\_...](https://readr.tidyverse.org/reference/write_delim.html){.external target="_blank"} pour exporter un fichier
 
@@ -213,23 +213,23 @@ write_tsv()
 
 ## Encore une fois des paramètres
 
-- Notamment :
-  - x : nom de l'objet dans l'environnement R
-  - file : chemin du fichier que l'on veut créer (ne pas oublier l'extension)
-  - delim : délimiteur utilisé pour séparer les champs
-  - na : interprétation des valeurs manquantes
-  - append : si FALSE écrasera un fichier existant portant le même nom que l'export, TRUE rajoutera nos données exportées au fichier existant (si c'est possible)
-  - col_names : inclusion du nom des colonnes dans l'export
+-   Notamment :
+    -   x : nom de l'objet dans l'environnement R
+    -   file : chemin du fichier que l'on veut créer (ne pas oublier l'extension)
+    -   delim : délimiteur utilisé pour séparer les champs
+    -   na : interprétation des valeurs manquantes
+    -   append : si FALSE écrasera un fichier existant portant le même nom que l'export, TRUE rajoutera nos données exportées au fichier existant (si c'est possible)
+    -   col_names : inclusion du nom des colonnes dans l'export
 
 ## Autres fonctions utiles
 
-- Extraction complète des spécifications d'un tibble avec `spec`
-- `cols_condense` permet d'afficher une version simplifiée des spécifications en affichant le type par défaut le plus fréquent et liste les colonnes avec un type différent. Attention, l'entrée est un objet de type `spec`.
+-   Extraction complète des spécifications d'un tibble avec `spec`
+-   `cols_condense` permet d'afficher une version simplifiée des spécifications en affichant le type par défaut le plus fréquent et liste les colonnes avec un type différent. Attention, l'entrée est un objet de type `spec`.
 
 ## Import de feuilles de calcul (type excel)
 
-- Utilisation du package [readxl](https://readxl.tidyverse.org/){.external target="_blank"}
-  - Developpé par l'équipe de tidyverse (extension des packages du coeur)
+-   Utilisation du package [readxl](https://readxl.tidyverse.org/){.external target="_blank"}
+    -   Developpé par l'équipe de tidyverse (extension des packages du coeur)
 
 ``` r
 # Fonction générique
@@ -239,51 +239,51 @@ read_xls()
 read_xlsx()
 ```
 
-- Globalement des arguments similaires à précédement (`col_names`, `skip`, `col_types`, ...)
-- Introduction de l'argument `sheet` et `range`
-- Nécessité de bien définir les types de colonnes
-- Pour les exports on utilisera [openxlsx](https://cran.r-project.org/web/packages/openxlsx/index.html){.external target="_blank"} ou [writexl](https://cran.r-project.org/web/packages/writexl/index.html){.external target="_blank"}
+-   Globalement des arguments similaires à précédement (`col_names`, `skip`, `col_types`, ...)
+-   Introduction de l'argument `sheet` et `range`
+-   Nécessité de bien définir les types de colonnes
+-   Pour les exports on utilisera [openxlsx](https://cran.r-project.org/web/packages/openxlsx/index.html){.external target="_blank"} ou [writexl](https://cran.r-project.org/web/packages/writexl/index.html){.external target="_blank"}
 
 ## Import de feuilles de calcul (type google)
 
-- Utilisation du package [googlesheets4](https://googlesheets4.tidyverse.org/){.external target="_blank"}
-  - Développé encore une fois par l'équipe de tidyverse (extension des packages du cœur)
-- 3 familles de fonctions (liste non exhaustive) :
-  - `read_sheet` pour lire une feuille
-  - `gs4_get` ou encore `gs4_find` pour lire les métadonnées associées aux feuilles
-  - `write_sheet` ou `sheet_append` pour exporter des feuilles
-- On retrouve encore le même type d'arguments que précédemment
+-   Utilisation du package [googlesheets4](https://googlesheets4.tidyverse.org/){.external target="_blank"}
+    -   Développé encore une fois par l'équipe de tidyverse (extension des packages du cœur)
+-   3 familles de fonctions (liste non exhaustive) :
+    -   `read_sheet` pour lire une feuille
+    -   `gs4_get` ou encore `gs4_find` pour lire les métadonnées associées aux feuilles
+    -   `write_sheet` ou `sheet_append` pour exporter des feuilles
+-   On retrouve encore le même type d'arguments que précédemment
 
 ## Petit point sur les types de colonne
 
-- Très bien expliqué dans la documentation de la fonction [read_delim](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"} au niveau de l'argument `col_types` 
-- Renvoi à la fonction [cols](https://readr.tidyverse.org/reference/cols.html){.external target="_blank"} qui permet de définir un type de colonne
-  - Parais anodin, mais très important, notamment pour les processus de "verification"
-  - Par exemple un chiffre sans virgule (type entier) ce n'est pas pareil qu'un chiffre à virgule (type double)
-- En lien avec les fonctions d'imports, on peut utiliser des raccourcis pour définir nos types de colonnes 
-  - Par exemple `c` pour un caractère à la place de `col_character`
-  - La liste complète est disponible de la documentation de [read_delim](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"}
-- Ici il faut garder en tête l'objectif de lever les ambiguïtés
+-   Très bien expliqué dans la documentation de la fonction [read_delim](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"} au niveau de l'argument `col_types`
+-   Renvoi à la fonction [cols](https://readr.tidyverse.org/reference/cols.html){.external target="_blank"} qui permet de définir un type de colonne
+    -   Parais anodin, mais très important, notamment pour les processus de "verification"
+    -   Par exemple un chiffre sans virgule (type entier) ce n'est pas pareil qu'un chiffre à virgule (type double)
+-   En lien avec les fonctions d'imports, on peut utiliser des raccourcis pour définir nos types de colonnes
+    -   Par exemple `c` pour un caractère à la place de `col_character`
+    -   La liste complète est disponible de la documentation de [read_delim](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"}
+-   Ici il faut garder en tête l'objectif de lever les ambiguïtés
 
 # Avantages de [readr](https://readr.tidyverse.org/){.external target="_blank"} *vs.* les fonctions de base
 
 ## [readr](https://readr.tidyverse.org/){.external target="_blank"} est en générale plus rapide
 
-- Du cas par cas mais globalement mieux adapté au "gros" fichiers (en lien avec des fonctions orientées objet)
-- Par exemple (tendance sans tenir compte d'autres facteurs comme l'ordinateur) pour un fichier csv de 156mo
-  - 30.84s avec read_csv contre 30.00s avec read.csv
-- Pour un fichier csv de 468mo
-  - 38.63s avec read_csv contre 47.56s avec read.csv
+-   Du cas par cas mais globalement mieux adapté au "gros" fichiers (en lien avec des fonctions orientées objet)
+-   Par exemple (tendance sans tenir compte d'autres facteurs comme l'ordinateur) pour un fichier csv de 156mo
+    -   30.84s avec read_csv contre 30.00s avec read.csv
+-   Pour un fichier csv de 468mo
+    -   38.63s avec read_csv contre 47.56s avec read.csv
 
 ## Le vrai avantage reside dans la polyvalence
 
-- Beaucoup de paramétrisation possible
-  - Toutes les spécifications citées précédemment
-  - Un gros plus sur la sélection des colonnes via l'argument `col_select` (sélection et renommage)
-  - Filtrage direct lors de l'import avec les `_chunked` ou encore l'argument `skip`
-- Possibilité de lire les fichiers depuis une archive (type zip) avec readr
-- Possibilité de lire plusieurs fichiers en une fois, même plusieurs répertoires
-- Vraie dynamique d'évolution dans le futur !
+-   Beaucoup de paramétrisation possible
+    -   Toutes les spécifications citées précédemment
+    -   Un gros plus sur la sélection des colonnes via l'argument `col_select` (sélection et renommage)
+    -   Filtrage direct lors de l'import avec les `_chunked` ou encore l'argument `skip`
+-   Possibilité de lire les fichiers depuis une archive (type zip) avec readr
+-   Possibilité de lire plusieurs fichiers en une fois, même plusieurs répertoires
+-   Vraie dynamique d'évolution dans le futur !
 
 ## Exercice 1.1 {auto-animate="true"}
 
@@ -1098,40 +1098,40 @@ save(biomass_survey_abundance_exercice3_6,
 
 ![](images/logo_stringr.png)
 
-## Conçu pour manipuler les chaines de caractères "facilement"{.smaller}
+## Conçu pour manipuler les chaines de caractères "facilement" {.smaller}
 
-- En plus d'être plus faciles à utiliser, les noms des fonctions représentent bien ce qu'elles permettent de faire
-    - elles commencent toutes par `str_`
-    - les images de la cheatsheet aident beaucoup pour choisir les fonctions en rapport avec notre besoin
-- Ouvre le monde des expressions régulières
-- Peut être combiné avec du langage tidyverse (par exemple avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"})
-- Pour faire simple on 7 grandes familles de fonctions
-  - les fonctions de détection
-  - les fonctions de selection ou d'extraction
-  - les fonctions de gestion des tailles de caractères
-  - les fonctions de manipulations dites `mutate` (ça vous rappelle quelque chose ?)
-  - les fonctions de jointures et de division
-  - les fonctions d'ordre
-  - les fonctions supports
-  
-## Beaucoup d'arguments communs{.smaller}
+-   En plus d'être plus faciles à utiliser, les noms des fonctions représentent bien ce qu'elles permettent de faire
+    -   elles commencent toutes par `str_`
+    -   les images de la cheatsheet aident beaucoup pour choisir les fonctions en rapport avec notre besoin
+-   Ouvre le monde des expressions régulières
+-   Peut être combiné avec du langage tidyverse (par exemple avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"})
+-   Pour faire simple on 7 grandes familles de fonctions
+    -   les fonctions de détection
+    -   les fonctions de selection ou d'extraction
+    -   les fonctions de gestion des tailles de caractères
+    -   les fonctions de manipulations dites `mutate` (ça vous rappelle quelque chose ?)
+    -   les fonctions de jointures et de division
+    -   les fonctions d'ordre
+    -   les fonctions supports
 
-- De manière générale
-  - `string` : le vecteur d'entrée
-  - `pattern` : le motif que l'on va chercher à regarder
-  - `replacement` : la valeur de remplacement
-- De manière plus spécifique
-  - `start` et `end` : emplacement ou indice de position dans une chaine de caractère
-  - `negate` : si TRUE, le résultat sera l'inverse de ce que l'on demande
-  - `sep` : caractère(s) à insérer dans le vecteur d'entrée
-  - `collapse` : souvent confondu avec l'argument `sep`. Caractère(s) qui vont combiner les résultats (= vecteur d'entrée avec plusieurs éléments) entre une seule et unique chaine de caractères.
-  - `decreasing` : utilisé pour les fonctions d'ordre ou de tri
+## Beaucoup d'arguments communs {.smaller}
+
+-   De manière générale
+    -   `string` : le vecteur d'entrée
+    -   `pattern` : le motif que l'on va chercher à regarder
+    -   `replacement` : la valeur de remplacement
+-   De manière plus spécifique
+    -   `start` et `end` : emplacement ou indice de position dans une chaine de caractère
+    -   `negate` : si TRUE, le résultat sera l'inverse de ce que l'on demande
+    -   `sep` : caractère(s) à insérer dans le vecteur d'entrée
+    -   `collapse` : souvent confondu avec l'argument `sep`. Caractère(s) qui vont combiner les résultats (= vecteur d'entrée avec plusieurs éléments) entre une seule et unique chaine de caractères.
+    -   `decreasing` : utilisé pour les fonctions d'ordre ou de tri
 
 ## Fonctions de détection
 
 Renvoient une réponse (pas d'extraction)
 
-```r
+``` r
 # détection d'un motif dans une chaine de caractère
 str_detect() et str_like()
 # détection d'un motif au début ou à la fin d'une chaine de caractère
@@ -1149,7 +1149,7 @@ str_count()
 
 Renvoient une chaine de caractère
 
-```r
+``` r
 # extraction d'une chaine à un ou des endroits bien précis
 # utilisation d'indices de position
 str_sub() et str_sub_all()
@@ -1165,21 +1165,20 @@ str_match() et str_match_all()
 
 ## Exercice 4.1 {auto-animate="true"}
 
-- À partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille `Embiotocidae` puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de [dplyr](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"})
-- compter combien nous avons de données d'occurrence d'espèces du genre `Embiotoca` dans ce nouveau jeu de données
-- en utilisant une négation, extraire toutes les localisations qui sont différentes de `British Columbia`
+-   À partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille `Embiotocidae` puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de [dplyr](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"})
+-   compter combien nous avons de données d'occurrence d'espèces du genre `Embiotoca` dans ce nouveau jeu de données
+-   en utilisant une négation, extraire toutes les localisations qui sont différentes de `British Columbia`
 
-```r
-
+``` r
 ```
 
 ## Exercice 4.1 corrigé {auto-animate="true"}
 
-- À partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille `Embiotocidae` puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de [dplyr](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"})
-- compter combien nous avons de données d'occurrence d'espèces du genre `Embiotoca` dans ce nouveau jeu de données
-- en utilisant une négation, extraire toutes les localisations qui sont différentes de `British Columbia`
+-   À partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille `Embiotocidae` puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de [dplyr](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"})
+-   compter combien nous avons de données d'occurrence d'espèces du genre `Embiotoca` dans ce nouveau jeu de données
+-   en utilisant une négation, extraire toutes les localisations qui sont différentes de `British Columbia`
 
-```r
+``` r
 # solution
 biomass_survey_exercice4_1 <- slice(.data = biomass_survey_exercice2_4,
                                     str_which(string = biomass_survey_exercice2_4$family,
@@ -1193,7 +1192,7 @@ location_biomass_survey_exercice4_1 <- unique(str_subset(string = biomass_survey
 
 ## Fonctions de gestion des tailles de caractères
 
-```r
+``` r
 # largeur/nombre de caractère
 # attention aux espaces et caractères masqués
 str_length()
@@ -1212,7 +1211,7 @@ str_squish()
 
 En lien avec des manipulations de type vectorisation (= conservation de la structure des données d'entrée)
 
-```r
+``` r
 # remplacement du motif via un assignation
 str_sub() <- value
 # remplacement d'un motif par un autre
@@ -1231,20 +1230,20 @@ str_to_sentence()
 
 ## Exercice 4.2 {auto-animate="true"}
 
-- À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractère de la variable `site_name`
-- Nettoyer la variable `site_name` en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable `site_name_clean`
-- Enlever les majuscules de notre variable `site_name_clean` sauf celles en début de chaine
+-   À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractère de la variable `site_name`
+-   Nettoyer la variable `site_name` en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable `site_name_clean`
+-   Enlever les majuscules de notre variable `site_name_clean` sauf celles en début de chaine
 
-```r
+``` r
 ```
 
 ## Exercice 4.2 corrigé {auto-animate="true"}
 
-- À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractère de la variable `site_name`
-- Nettoyer la variable `site_name` en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable `site_name_clean`
-- Enlever les majuscules de notre variable `site_name_clean` sauf celles en début de chaine
+-   À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractère de la variable `site_name`
+-   Nettoyer la variable `site_name` en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable `site_name_clean`
+-   Enlever les majuscules de notre variable `site_name_clean` sauf celles en début de chaine
 
-```r
+``` r
 # solution
 biomass_survey_exercice4_2 <- biomass_survey_exercice4_1 %>%
   mutate(site_name_length_ori = str_length(site_name),
@@ -1259,7 +1258,7 @@ biomass_survey_exercice4_2 <- biomass_survey_exercice4_1 %>%
 
 Très pratique surtout si utilisation via langage tidyverse
 
-```r
+``` r
 # jointure de plusieurs chaines de caractère en une seule (conservation structure en lignes)
 str_c()
 # jointure de plusieurs chaines de caractère en un seul vecteur (utiliser argument collapse)
@@ -1288,7 +1287,7 @@ str_glue_data()
 
 Très simple, mais attention à la définition des arguments, notamment le `locale` qui va définir l'environnement de l'utilisateur.
 
-```r
+``` r
 # retourne un vecteur des indexes ordonnés
 str_order()
 # trier un vecteur
@@ -1299,7 +1298,7 @@ str_sort()
 
 A voir comme un petite boite à outils
 
-```r
+``` r
 # pour jouer avec l'encodage
 str_conv()
 # pour jouer avec la visualisation de certains caractères (notamment sous la console de R)
@@ -1310,15 +1309,41 @@ str_equal()
 str_wrap()
 ```
 
-## Exercice 4.3{auto-animate="true"}
+## Exercice 4.3 {.smaller auto-animate="true"}
 
-```r
+-   À partir du jeu de données `biomass_survey_exercice4_2`, créer deux nouvelles variables, `species_name_first` et `species_name_second`, qui contiennent une division de la variable `species_name` en deux mots (on utilisera la valeur `[.]` pour spécifier `.` comme séparateur, bizarre non ?)
+-   Créer une variable `biomass_percentage` qui contiendra la biomasse exprimée en `%` (on veut le signe `%` à la fin de la chaine)
+-   Fusionner dans une nouvelle variable `description` les variables `species_name_first`, `species_name_second` et `biomass_percentage` pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable `biomass_percentage` en parenthèses et suivi de la chaine de caractère `of total biomass`)
+-   Ayant une très mauvaise vision et un écran très petit, je souhaiterais que l'affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable `description_shinny`. Attention, il faut parfois regarder au-delà de ce qu'on voit dans la console de R...
+
+``` r
 ```
 
-## Exercice 4.3 corrigé {auto-animate="true"}
+## Exercice 4.3 corrigé {.smaller auto-animate="true"}
 
-```r
+-   À partir du jeu de données `biomass_survey_exercice4_2`, créer deux nouvelles variables, `species_name_first` et `species_name_second`, qui contiennent une division de la variable `species_name` en deux mots (on utilisera la valeur `[.]` pour spécifier `.` comme séparateur, bizarre non ?)
+-   Créer une variable `biomass_percentage` qui contiendra la biomasse exprimée en `%` (on veut le signe `%` à la fin de la chaine)
+-   Fusionner dans une nouvelle variable `description` les variables `species_name_first`, `species_name_second` et `biomass_percentage` pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable `biomass_percentage` en parenthèses et suivi de la chaine de caractère `of total biomass`)
+-   Ayant une très mauvaise vision et un écran très petit, je souhaiterais que l'affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable `description_shinny`. Attention, il faut parfois regarder au-delà de ce qu'on voit dans la console de R...
+
+``` r
 # solution
+biomass_survey_exercice4_3 <- biomass_survey_exercice4_2 %>%
+  mutate(species_name_first = str_split_i(string = species_name,
+                                          pattern = "[.]",
+                                          i = 1),
+         species_name_second = str_split_i(string = species_name,
+                                           pattern = "[.]",
+                                           i = 2),
+         biomass_percentage = str_glue("{round(x = biomass * 100 / sum_biomass)}%"),
+         description = str_c(species_name_first ,
+                             species_name_second,
+                             str_c("(",
+                                   biomass_percentage,
+                                   " of total biomass)"),
+                             sep = " "),
+         description_shinny = str_wrap(string = description,
+                                       width = 20))
 ```
 
 ## Les expressions régulières {.smaller}
@@ -1329,10 +1354,12 @@ str_wrap()
 ::: {.column width="60%"}
 -   Il faut savoir que cela existe, mais demande un peu de patience et d'entrainement pour être utilisé
 -   Regardez le [deuxième volet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){target="_blank"} du cheatsheet de stringr
+-   Dans l'exercice 4.3, on a utiliser `[.]` pour un motif, c'est une expression regulière
 -   Permet de "selectionner" de manière "dynamique" des patterns dans vos données
 -   Le plus difficile est de formuler de la meilleure façon ce que vous voulez
     -   Il y a souvent plusieurs façons d'arriver à ce que vous voulez
 -   Parfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle
+-   Utiliser une IA peut vous faciliter la tâche, mais attention aux "boucles infernales" et surtout prenez du recul lors de vos échanges
 :::
 
 ::: {.column width="40%"}
@@ -1340,29 +1367,28 @@ str_wrap()
 :::
 :::::
 
-## Exemple concret
+## Exercice bonus 4.4 {auto-animate="true"}
+
+-   Dans le jeu données précédent, `biomass_survey_exercice4_3`, je veux séparer les chiffres et les lettres de la variable `site_code`. Comment trouver un motif qui marche aussi bien pour la valeur `USWC1` et `BC3` ?
+-   Avec l'utilisation des expressions regulières je vais pouvoir lui dire "je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s'arrête à un chiffre" (même raisonnemement avec les chiffre)
 
 ``` r
-load(file = "./data/exemple_regular_expressions.RData")
-tac_final_modif_level1 <- tac_final %>%
-  mutate(adapted_quota = as.numeric(x = adapted_quota_ori)) %>%
-  relocate(adapted_quota,
-           .after = adapted_quota_ori)
-tac_final_modif_level1_check <- filter(.data = tac_final_modif_level1,
-                                       is.na(x = adapted_quota)) %>%
-  dplyr::select(adapted_quota_ori,
-                adapted_quota)
-tac_final_modif_level2 <- tac_final %>%
-  rowwise() %>%
-  mutate(adapted_quota = case_when(
-    str_detect(string = adapted_quota_ori,
-               pattern = "^[:digit:]+[:punct:][:digit:]+$") ~ str_replace(string = adapted_quota_ori,
-                                                                          pattern = "[:punct:]", 
-                                                                          replacement = "."),
-    TRUE ~ adapted_quota_ori)) %>%
-  relocate(adapted_quota,
-           .after = adapted_quota_ori) %>%
-  mutate(adapted_quota = as.numeric(x = adapted_quota))
+```
+
+## Exercice bonus 4.4 corrigé {auto-animate="true"}
+
+-   Dans le jeu données précédent, `biomass_survey_exercice4_3`, je veux séparer les chiffres et les lettres de la variable `site_code`. Comment trouver un motif qui marche aussi bien pour la valeur `USWC1` et `BC3` ?
+-   Avec l'utilisation des expressions regulières je vais pouvoir lui dire "je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s'arrête à un chiffre" (même raisonnemement avec les chiffre)
+
+``` r
+biomass_survey_exercice4_4 <- biomass_survey_exercice4_3 %>%
+  mutate(site_code_letters = str_extract(string = site_code,
+                                         pattern = "^[:upper:]+"),
+         site_code_numbers = str_extract(string = site_code,
+                                         pattern = "[:digit:]+$")) %>%
+  relocate(site_code_letters,
+           site_code_numbers,
+           .after = site_code)
 ```
 
 # Partie 5 : Manipuler des dates avec [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"}
@@ -1405,12 +1431,13 @@ wday()
 month()
 ...
 # pour modifier les informations, utiliser les fonctions précédentes avec une assignation (<-)
+# par exemple
+hour(x = test_date_time) <- 6
 ```
 
 ## Tour d'horizon
 
 -   Les fuseaux horaires, un cauchemar par le passé, maintenant ça va mieux
-
 -   Deux fonctions clés
 
 ``` r
@@ -1420,18 +1447,13 @@ with_tz()
 force_tz()
 ```
 
-<br/>
-
 -   3 classes pour calculer des intervalles de temps
-
 -   Periode, durée et intervalle
-
 -   Le plus "dur" est de définir votre date-temps, après c'est une syntaxe mathématique
 
-## Bonus
+## Bonus {.smaller}
 
 -   Les fonctions sont vectorisables !
-
 -   Sur certains jeux de données, les dates-temps sont stockées en nombre de secondes depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas-là :
 
 ``` r
@@ -1448,6 +1470,59 @@ round_date()
 # arrondie supérieur sur "l'unité" la plus proche
 ceiling_date()
 ```
+
+- De définir des objets pour les manipuler
+
+```r
+# en lien avec les paramètres du système
+now()
+today()
+# en lien avec des paramètres
+dyears()
+dmonths()
+dweeks()
+...
+```
+
+## Exercice 5.1 {.smaller auto-animate="true"}
+
+- À partir du jeu de données `biomass_survey_exercice4_3`, créer une variable `survey_date_as_date` qui est la conversion de la variable `survey_date` en date
+- Créer la variable `survey_year` qui contient l'année de la variable `survey_date_as_date`
+- Calculer la différence de temps entre aujourd'hui et la variable `survey_date_as_date`. Stocker l'information dans une nouvelle colonne `duration_since_now`
+- Créer une variable `next_survey_date` qui ajoute 12 mois à la variable `survey_date_as_date`
+- Regarder plus en détail la variable `next_survey_date`, qu'a-t-elle de particulier ?
+- Question bonus en lien avec la question précédente, définir l'heure des valeurs de la variable `survey_date_as_date` à 12h et la stocker dans une variable `next_survey_date_correct`
+
+```r
+```
+
+## Exercice 5.1 corrigé {.smaller auto-animate="true"}
+
+- À partir du jeu de données `biomass_survey_exercice4_3`, créer une variable `survey_date_as_date` qui est la conversion de la variable `survey_date` en date
+- Créer la variable `survey_year` qui contient l'année de la variable `survey_date_as_date`
+- Calculer la différence de temps entre aujourd'hui et la variable `survey_date_as_date`. Stocker l'information dans une nouvelle colonne `duration_since_now`
+- Créer une variable `next_survey_date` qui ajoute 12 mois à la variable `survey_date_as_date`
+- Regarder plus en détail la variable `next_survey_date`, qu'a-t-elle de particulier ?
+- Question bonus en lien avec la question précédente, définir l'heure des valeurs de la variable `survey_date_as_date` à 12h et la stocker dans une variable `next_survey_date_correct`
+
+```r
+# solution
+biomass_survey_exercice5_1 <- biomass_survey_exercice4_3 %>%
+  mutate(survey_date_as_date = dmy(survey_date),
+         survey_year = year(x = survey_date_as_date),
+         duration_since_now = today() - survey_date_as_date,
+         next_survey_date = survey_date_as_date + dmonths(x = 12),
+         next_survey_date_correct = next_survey_date %>%
+           {hour(.) <- 12; .}) %>%
+  relocate(survey_date_as_date,
+           next_survey_date,
+           survey_year,
+           duration_since_now,
+           next_survey_date_correct,
+           .after = survey_date)
+```
+
+Explication : `{ ... }` définit un bloc qui sera exécutées dans l'ordre, `;` permet de séparer les actions, `hour(.) <- 12` modifie l'heure de l'objet `.` en `12` et `.` retourne l'objet modifié
 
 # Partie 6 : Visualisation des données avec `ggplot2`
 
@@ -1916,7 +1991,7 @@ ggsave(filename = "le_chemin_vers_le_bon_dossier",
        height   = 5)
 ```
 
-## Exercice 5.1 {auto-animate="true"}
+## Exercice 6.1 {auto-animate="true"}
 
 Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
@@ -1926,7 +2001,7 @@ Quel est le pays dans lequel la biomasse totale par transect est la plus forte ?
 #     par transect dans chacun des pays
 ```
 
-## Exercice 5.1 : Correction {auto-animate="true"}
+## Exercice 6.1 : Correction {auto-animate="true"}
 
 Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
@@ -1941,7 +2016,7 @@ data_biomass_country <- biomass_survey_abundance_exercice3_6 %>%
   summarise(biomass = sum(biomass)) 
 ```
 
-## Exercice 5.1 : Correction {auto-animate="true"}
+## Exercice 6.1 : Correction {auto-animate="true"}
 
 Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
@@ -1952,7 +2027,7 @@ ggplot(data = data_biomass_country) +
   theme_bw() 
 ```
 
-## Exercice 5.2 {auto-animate="true"}
+## Exercice 6.2 {auto-animate="true"}
 
 Ce ggplot n'est cependant pas entièrement satisfaisant ... <br> Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.
 
@@ -1966,7 +2041,7 @@ Utiliser cette fonction pour ordonner l'axe des x de façon décroissante selon 
 # Utilisation de reorder
 ```
 
-## Exercice 5.2 : Correction {auto-animate="true"}
+## Exercice 6.2 : Correction {auto-animate="true"}
 
 ``` r
 # Reorder en fonction de la valeur médiane 
@@ -1976,14 +2051,14 @@ boxplot_biomass_country <- ggplot(data = data_biomass_country) +
 boxplot_biomass_country
 ```
 
-## Exercice 5.3 {auto-animate="true"}
+## Exercice 6.3 {auto-animate="true"}
 
 Renommer proprement les axes de boxplot_biomass_country.
 
 ``` r
 ```
 
-## Exercice 5.3 : Correction {auto-animate="true"}
+## Exercice 6.3 : Correction {auto-animate="true"}
 
 Renommer proprement les axes de boxplot_biomass_country.
 
@@ -1998,14 +2073,14 @@ boxplot_biomass_country_v2 <- boxplot_biomass_country +
 boxplot_biomass_country_v2
 ```
 
-## Exercice 5.4 {auto-animate="true"}
+## Exercice 6.4 {auto-animate="true"}
 
 Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choisir votre arrière plan préféré.
 
 ``` r
 ```
 
-## Exercice 5.4 : Correction {auto-animate="true"}
+## Exercice 6.4 : Correction {auto-animate="true"}
 
 Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choisir votre arrière plan préféré.
 
@@ -2022,14 +2097,14 @@ boxplot_biomass_country_v3 <- boxplot_biomass_country_v2 +
 boxplot_biomass_country_v3
 ```
 
-## Exercice 5.5 {auto-animate="true"}
+## Exercice 6.5 {auto-animate="true"}
 
 Enregistrer la figure **boxplot_biomass_country_v3** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
 
 ``` r
 ```
 
-## Exercice 5.5 : Correction {auto-animate="true"}
+## Exercice 6.5 : Correction {auto-animate="true"}
 
 Enregistrer la figure **boxplot_biomass_country_v3** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
 
@@ -2353,7 +2428,7 @@ ggplot(crabs_mean) +
   theme_bw()
 ```
 
-## Exercice 5.7 {auto-animate="true"}
+## Exercice 6.7 {auto-animate="true"}
 
 A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
@@ -2363,7 +2438,7 @@ A partir des données **data_biomass_5country**, construire un diagramme en barr
 #     des transects propres à chaque pays
 ```
 
-## Exercice 5.7 : Correction {auto-animate="true"}
+## Exercice 6.7 : Correction {auto-animate="true"}
 
 A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
@@ -2377,7 +2452,7 @@ country_mean <- data_biomass_5country %>%
             biom_sd   = sd(biomass)) 
 ```
 
-## Exercice 5.7 : Correction {auto-animate="true"}
+## Exercice 6.7 : Correction {auto-animate="true"}
 
 A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
@@ -2397,7 +2472,7 @@ Obtient-on les mêmes résultats entre la biomasse totale et l'abondance ?
 
 . . .
 
-### Exercice 5.8
+### Exercice 6.8
 
 A partir de **biomass_survey_abundance_exercice3_6**, obtenez un data.frame de trois colonnes **size_class_mm**, **biom_abun**, **value** pour les données prélevées en 2011.
 
@@ -2416,7 +2491,7 @@ A partir de **biomass_survey_abundance_exercice3_6**, obtenez un data.frame de t
 
 Obtient-on les mêmes résultats entre la biomasse totale et l'abondance ?
 
-### Exercice 5.8 : Correction
+### Exercice 6.8 : Correction
 
 A partir de **biomass_survey_abundance_exercice3_6**, obtenez un data.frame de trois colonnes **size_class_mm**, **biom_abun**, **value** pour les données prélevées en 2011.
 
@@ -2521,14 +2596,14 @@ ggplot(data = biomass_abundance2,
   theme_bw()
 ```
 
-## Exercice 5.8 {auto-animate="true"}
+## Exercice 6.8 {auto-animate="true"}
 
 Réaliser un diagramme en barres permettant d'illustrer le mieux les cas où l'abondance est supérieure à la biomasse et vice-versa.
 
 ``` r
 ```
 
-## Exercice 5.8 : Correction {auto-animate="true"}
+## Exercice 6.8 : Correction {auto-animate="true"}
 
 Réaliser un diagramme en barres permettant d'illustrer le mieux les cas où l'abondance est supérieure à la biomasse et vice-versa.
 
