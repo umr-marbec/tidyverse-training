@@ -329,13 +329,6 @@
     "text": "Tidyr\nL’objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format “tidy”.\nLes différents verbes viennent s’ajouter à tous ceux que nous avons déjà vus avec readr et dplyr et ils s’intègrent parfaitement dans la série de pipe %&gt;% permettant d’enchainer les opérations.\n\nLes données “tidy”, qu’est ce que c’est?\n\n1 variable = 1 colonne\n1 observation = 1 ligne/case\n1 type d’observation par table\n\n\nLien vers le cheatsheet de tidyr."
   },
   {
-    "objectID": "tidyverse-training.html#tidyr-1",
-    "href": "tidyverse-training.html#tidyr-1",
-    "title": "tidyverse-training",
-    "section": "Tidyr",
-    "text": "Tidyr\nPour illustrer cette partie nous utiliserons le jeu de données popEU qui décrit le nombre d’habitants par pays pour les années 2014, 2015 et 2016\npopEU &lt;- readRDS(\"./data/popEU.RDS\")\nslice_tail(popEU)\nkable(popEU[10:15, ], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
-  },
-  {
     "objectID": "tidyverse-training.html#les-principales-fonctions-de-tidyr",
     "href": "tidyverse-training.html#les-principales-fonctions-de-tidyr",
     "title": "tidyverse-training",
@@ -343,11 +336,32 @@
     "text": "Les principales fonctions de tidyr\nModelage des tableaux\npivot_wider()et pivot_longer()sont les successeurs des fonctions en base R du package reshape puis reshape2. Et se nommaient spread()et gather() dans les premières versions de tidyr\n # Transformer un tableau long en format large\npivot_wider(names_from, values_from)\n# Transformer un tableau large en format long\npivot_longer(cols, names_to, values_to, ...)"
   },
   {
-    "objectID": "tidyverse-training.html#section-1",
-    "href": "tidyverse-training.html#section-1",
+    "objectID": "tidyverse-training.html#exercice-3.1",
+    "href": "tidyverse-training.html#exercice-3.1",
     "title": "tidyverse-training",
-    "section": "",
-    "text": "Applications - pivot_wider\nTransformer le jeu de données en format “wide” en utilisant la fonction pivot_wider(). Nous voulons obtenir une colonne par année\n# Créer un nouvel objet que l'on nomme popEU_wide\npopEU_wide &lt;- pivot_wider(popEU, names_from = \"year\", values_from = \"pop\")\npopEU_wide\nkable(popEU_wide, html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
+    "section": "Exercice 3.1",
+    "text": "Exercice 3.1\n\nObservez les données de biomasse (biomass_survey_exercice2_4) et d’abondance. Les données sont elles tidy ? Si non, pourquoi ?"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.1-corrigé",
+    "href": "tidyverse-training.html#exercice-3.1-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.1 corrigé",
+    "text": "Exercice 3.1 corrigé\n\nObservez les données de biomasse (biomass_survey_exercice2_4) et d’abondance. Les données sont elles tidy ? Si non, pourquoi ?\n\n\n\n\nOui les données de biomasse sont tidy, nous avons bien une observation par ligne Non les données d’abondance ne sont pas tidy, car elles sont en format “wide”"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.2",
+    "href": "tidyverse-training.html#exercice-3.2",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.2",
+    "text": "Exercice 3.2\n\nTransformez les données d’abondance en format tidy. Les nouvelles colonnes créées seront “sp_size” et “abundance”\nPensez à bien regarder tous les arguments des fonctions\n\n# solution"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-3.2-corrigé",
+    "href": "tidyverse-training.html#exercice-3.2-corrigé",
+    "title": "tidyverse-training",
+    "section": "Exercice 3.2 corrigé",
+    "text": "Exercice 3.2 corrigé\n\nTransformez les données d’abondance en format tidy. Les nouvelles colonnes créées seront “sp_size” et “abundance”\nPensez à bien regarder tous les arguments des fonctions\n\n# solution\nabundance_exercice3_2 &lt;- reef_fish_abundance %&gt;%\n  pivot_longer(\n    .,\n    cols = 2:ncol(.),\n    names_to = \"sp_size\",\n    values_to = \"abundance\"\n  )"
   },
   {
     "objectID": "tidyverse-training.html#section-2",
@@ -357,137 +371,53 @@
     "text": "Gestion des valeurs manquantes “NA”\n# Remplacer des \"NA\" par des valeurs spécifiques\nreplace_na(data, replace, …)\n# Supprimer les lignes contenant des \"NA\"\ndrop_na(data, …)\n#  Remplir les \"NA\" en utilisant les valeurs précédentes ou suivantes de la même colonne\nfill(data, …, .direction)"
   },
   {
-    "objectID": "tidyverse-training.html#section-3",
-    "href": "tidyverse-training.html#section-3",
-    "title": "tidyverse-training",
-    "section": "",
-    "text": "Applications - pivot_longer/replace_na\nRe-transformer le jeu de données en format “long” en utilisant la fonction pivot_longer() et remplacer les valeurs de NA dans la colonne “pop”, par la population moyenne de la Belgique pour ces 2 années (11,27 M)\n# Créer un nouvel objet que l'on nomme popEU_long\npopEU_long &lt;-\n  pivot_longer(\n    popEU_wide,\n    cols = c(2:4),\n    names_to = \"year\",\n    values_to = \"pop\"\n  )\npopEU_long &lt;- mutate(popEU_long, pop = replace_na(pop, 11.27))\nslice_tail(popEU_long, 6)\nkable(popEU_long[10:15, ], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
-  },
-  {
-    "objectID": "tidyverse-training.html#section-4",
-    "href": "tidyverse-training.html#section-4",
-    "title": "tidyverse-training",
-    "section": "",
-    "text": "Applications - pivot_longer/drop_na\nRe-transformer le jeu de données en format “long” en utilisant la fonction `pivot_longer()` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d’enchainer les opérations à l’aide du pipe %&gt;%\npopEU_long &lt;- popEU_wide %&gt;%\n  pivot_longer(.,\n               cols = c(2:4),\n               names_to = \"year\",\n               values_to = \"pop\") %&gt;%\n  drop_na(., pop)\nslice_tail(popEU_long, 6)\nkable(popEU_long[8:13, ], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
-  },
-  {
-    "objectID": "tidyverse-training.html#section-5",
-    "href": "tidyverse-training.html#section-5",
-    "title": "tidyverse-training",
-    "section": "",
-    "text": "Applications - pivot_longer/fill\nRe-transformer le jeu de données en format “long” en utilisant la fonction `pivot_longer()` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d’enchainer les opérations à l’aide du pipe %&gt;%\n# Créer un nouvel objet que l'on nomme popEU_long\npopEU_long &lt;- popEU_wide %&gt;%\n  pivot_longer(.,\n               cols = c(2:4),\n               names_to = \"year\",\n               values_to = \"pop\") %&gt;%\n  fill(., pop, .direction = \"down\")\nslice_tail(popEU_long, 6)\nkable(popEU_long[10:15, ], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
-  },
-  {
-    "objectID": "tidyverse-training.html#section-6",
-    "href": "tidyverse-training.html#section-6",
-    "title": "tidyverse-training",
-    "section": "",
-    "text": "Combinaison des variables\n# Séparer une colonne en plusieurs colonnes\nseparate(data, col, into)\n# Créer une seule colonne à partir de plusieurs colonnes\nunite(col, ..., sep)\n# Générer toutes les combinaisons 2 à 2 possibles entre les variables définies\nexpand(data, ...)"
-  },
-  {
-    "objectID": "tidyverse-training.html#section-7",
-    "href": "tidyverse-training.html#section-7",
-    "title": "tidyverse-training",
-    "section": "",
-    "text": "Applications - separate\nA partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles colonnes “millions” et “milliers”\npopEU_sep &lt;- popEU_long %&gt;%\n  mutate(pop = as.character(pop)) %&gt;%\n  separate(., col = pop, into = c(\"millions\", \"milliers\"))\nslice_head(popEU_sep)\nkable(popEU_sep[1:6, ], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
-  },
-  {
-    "objectID": "tidyverse-training.html#section-8",
-    "href": "tidyverse-training.html#section-8",
-    "title": "tidyverse-training",
-    "section": "",
-    "text": "Applications - unite\nRecréer la colonne pop comme à l’origine en la nommant population\npopEU_unite &lt;- popEU_sep %&gt;%\n  unite(., population, c(millions, milliers), sep = \".\")\nslice_head(popEU_unite)\nkable(popEU_unite[1:6, ], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")"
-  },
-  {
-    "objectID": "tidyverse-training.html#section-9",
-    "href": "tidyverse-training.html#section-9",
-    "title": "tidyverse-training",
-    "section": "",
-    "text": "Applications - expand\nGénérer un tableau avec toutes les combinaisons possibles pays/population. Que remarquons-nous ?\npopEU_expand &lt;- popEU_unite %&gt;%\n  expand(., pays, population)\nslice_head(popEU_expand)\nkable(popEU_expand[1:6,], html_font = \"Computer Modern\", table.attr = \"style='width:60%;'\")\n\n\nLa valeur 11.21 n’apparait qu’une seule fois, ce sont bien les combinaisons uniques."
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-3.1",
-    "href": "tidyverse-training.html#exercice-3.1",
-    "title": "tidyverse-training",
-    "section": "Exercice 3.1",
-    "text": "Exercice 3.1\n\nChargez les données d’abondance. Les données sont elles tidy ?"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-3.1-corrigé",
-    "href": "tidyverse-training.html#exercice-3.1-corrigé",
-    "title": "tidyverse-training",
-    "section": "Exercice 3.1 corrigé",
-    "text": "Exercice 3.1 corrigé\n\nChargez les données d’abondance. Les données sont elles tidy ?\n\n# solution\nabundance &lt;- read_delim(\"./data/Global_reef_fish_abundance.csv\")\n\n\nNon les données ne sont pas tidy, car elles sont en format “wide”"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-3.2",
-    "href": "tidyverse-training.html#exercice-3.2",
-    "title": "tidyverse-training",
-    "section": "Exercice 3.2",
-    "text": "Exercice 3.2\n\nTransformez les en format tidy. Les nouvelles colonnes seront “sp_size” et “abundance”\nCréez une nouvelle variable “survey_id_full” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”. Pensez à enchainer les opérations\n\n# solution"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-3.2-corrigé",
-    "href": "tidyverse-training.html#exercice-3.2-corrigé",
-    "title": "tidyverse-training",
-    "section": "Exercice 3.2 corrigé",
-    "text": "Exercice 3.2 corrigé\n\nTransformez les en format tidy. Les nouvelles colonnes seront “sp_size” et “abundance”\nCréez une nouvelle variable “survey_id_full” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”. Pensez à enchainer les opérations\n\n# solution\nabundance_long &lt;- abundance %&gt;%\n  pivot_longer(\n    .,\n    cols = 2:17523,\n    names_to = \"sp_size\",\n    values_to = \"abundance\",\n    values_drop_na = TRUE # Attention à l'argument values_dop_na\n  ) %&gt;%\n  unite(., col = \"survey_id_full\", c(survey_id, sp_size), sep = \"_\")\nslice_head(abundance_long)\n\nload(\"./data_tmp/abundance_long.RData\")\nkable(abundance_long[1:6,], html_font = \"Computer Modern\", table.attr = \"style='width:30%;'\")"
-  },
-  {
     "objectID": "tidyverse-training.html#exercice-3.3",
     "href": "tidyverse-training.html#exercice-3.3",
     "title": "tidyverse-training",
     "section": "Exercice 3.3",
-    "text": "Exercice 3.3\n\nCréez un seul tableau regroupant biomasse et abondance"
+    "text": "Exercice 3.3\n\nA partir du jeu de données issu de l’exercice 3.2 supprimez les lignes ayant des valeurs d’abondance égale à NA\n\n# solution"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.3-corrigé",
     "href": "tidyverse-training.html#exercice-3.3-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 3.3 corrigé",
-    "text": "Exercice 3.3 corrigé\n\nCréez un seul tableau regroupant biomasse et abondance\n\n# solution\nload(\"./data/biomass_survey_exercice2_4.RData\")\nbiomass_abundance &lt;- biomass_survey_exercice2_4 %&gt;%\n  left_join(., abundance_long, by = \"survey_id_full\")"
+    "text": "Exercice 3.3 corrigé\n\nA partir du jeu de données issu de l’exercice 3.2 supprimez les lignes ayant des valeurs d’abondance égales à NA\n\n# solution\nabundance_exercice3_3 &lt;- abundance_exercice3_2 %&gt;%\n  drop_na(., abundance)"
+  },
+  {
+    "objectID": "tidyverse-training.html#section-3",
+    "href": "tidyverse-training.html#section-3",
+    "title": "tidyverse-training",
+    "section": "",
+    "text": "Combinaison des variables\n# Séparer une colonne en plusieurs colonnes\nseparate(data, col, into)\n# Créer une seule colonne à partir de plusieurs colonnes\nunite(col, ..., sep)\n# Générer toutes les combinaisons 2 à 2 possibles entre les variables définies\nexpand(data, ...)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.4",
     "href": "tidyverse-training.html#exercice-3.4",
     "title": "tidyverse-training",
     "section": "Exercice 3.4",
-    "text": "Exercice 3.4\n\nCréez 2 nouvelles colonnes “genus” et “species” à partir de species_name"
+    "text": "Exercice 3.4\n\nVérifiez s’il y a des données dupliquées dans le jeu de données issu de l’exercice 3.3\nCréez une nouvelle variable “survey_id_full” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”.\nEn vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations\n\n# solution"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.4-corrigé",
     "href": "tidyverse-training.html#exercice-3.4-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 3.4 corrigé",
-    "text": "Exercice 3.4 corrigé\n\nCréez 2 nouvelles colonnes “genus” et “species” à partir de species_name\n\n# solution\nbiomass_abundance &lt;- biomass_abundance %&gt;%\n  separate(., species_name, into = c(\"genus\", \"species\"))\nslice_head(biomass_abundance[,8:11])\n\n# solution\nbiomass_abundance &lt;- biomass_abundance %&gt;%\n  separate(., species_name, into = c(\"genus\", \"species\"))\nkable(biomass_abundance[1:6,8:11],\n      html_font = \"Computer Modern\",\n      table.attr = \"style='width:30%;'\")"
+    "text": "Exercice 3.4 corrigé\n\nVérifiez s’il y a des données dupliquées dans le jeu de données issu de l’exercice 3.3\nCréez une nouvelle variable “survey_id_full” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”.\nEn vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse (biomass_survey_exercice2_4) et abondance . Pensez à enchainer les opérations\nPositionnez la colonne “abundance” après la colonne “biomass”\n\n# solution\nabundance_biomass_survey_exercice3_4 &lt;- abundance_exercice3_3 %&gt;%\n  distinct() %&gt;%\n  unite(., col = \"survey_id_full\", c(survey_id, sp_size), sep = \"_\")  %&gt;%\n  right_join(., biomass_survey_exercice2_4, by = \"survey_id_full\") %&gt;%\n  relocate(abundance, .after = biomass)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.5",
     "href": "tidyverse-training.html#exercice-3.5",
     "title": "tidyverse-training",
     "section": "Exercice 3.5",
-    "text": "Exercice 3.5\n\nTransformez le tibble en sf object avec la commande sf::st_as_sf(survey, coords = c(“longitude”, “latitude”), remove = FALSE)"
+    "text": "Exercice 3.5\n\nCréez 2 nouvelles colonnes genus et species à partir de species_name\nSupprimez les colonnes de has_pq_scores_in_db jusqu’à methods\nhas_pq_scores_in_db est en position 23"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.5-corrigé",
     "href": "tidyverse-training.html#exercice-3.5-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 3.5 corrigé",
-    "text": "Exercice 3.5 corrigé\n\nTransformez le tibble en sf object avec la commande sf::st_as_sf(survey, coords = c(“longitude”, “latitude”), remove = FALSE)\n\n# solution\ndata_sf &lt;-\n  sf::st_as_sf(biomass_abundance,\n               coords = c(\"longitude\", \"latitude\") ,\n               remove = FALSE,\n               crs = \"+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0\")\n\n\nNous obtenons une erreur, car il n’est pas possible de convertir un tibble en objet sf s’il y a des valeurs manquantes dans les colonnes longitude et latitude"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-3.6",
-    "href": "tidyverse-training.html#exercice-3.6",
-    "title": "tidyverse-training",
-    "section": "Exercice 3.6",
-    "text": "Exercice 3.6\n\nCorrigez l’erreur"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-3.6-corrigé",
-    "href": "tidyverse-training.html#exercice-3.6-corrigé",
-    "title": "tidyverse-training",
-    "section": "Exercice 3.6 corrigé",
-    "text": "Exercice 3.6 corrigé\n\nCorrigez l’erreur\n\n# solution\nbiomass_survey_abundance_exercice3_6 &lt;- biomass_abundance %&gt;%\n  drop_na(latitude) %&gt;% #supression des lignes contenant des NA dans la colonne latitude\n  drop_na(longitude) %&gt;% #supression des lignes contenant des NA dans la colonne longitude\n  sf::st_as_sf(\n    .,\n    coords = c(\"longitude\", \"latitude\"),\n    remove = FALSE,\n    crs = \"+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0\"\n  )\nsave(biomass_survey_abundance_exercice3_6,\n     file = \"./data/biomass_survey_abundance_exercice3_6.RData\")"
+    "text": "Exercice 3.5 corrigé\n\nCréez 2 nouvelles colonnes genus et species à partir de species_name\nSupprimez les colonnes de has_pq_scores_in_db jusqu’à methods\nhas_pq_scores_in_db est en position 23\n\n# solution\nabundance_biomass_survey_exercice3_5 &lt;- abundance_biomass_survey_exercice3_4 %&gt;%\n  separate(., species_name, into = c(\"genus\", \"species\")) %&gt;%\n  select( -c(23:ncol(.)))"
   },
   {
     "objectID": "tidyverse-training.html#conçu-pour-manipuler-les-chaines-de-caractères-facilement",
