@@ -759,7 +759,6 @@ Les différents verbes viennent s'ajouter à tous ceux que nous avons déjà vus
 
 Lien vers le [cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf){.external target="_blank"} de [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"}.
 
-
 ## Les principales fonctions de tidyr
 
 ### Modelage des tableaux
@@ -793,8 +792,7 @@ pivot_longer(cols, names_to, values_to, ...)
 
 <center>
 
-Oui les données de biomasse sont tidy, nous avons bien une observation par ligne
-Non les données d'abondance ne sont pas tidy, car elles sont en format "wide"
+Oui les données de biomasse sont tidy, nous avons bien une observation par ligne Non les données d'abondance ne sont pas tidy, car elles sont en format "wide"
 
 <center>
 
@@ -854,7 +852,6 @@ abundance_exercice3_3 <- abundance_exercice3_2 %>%
   drop_na(., abundance)
 ```
 
-
 ## 
 
 ### Combinaison des variables
@@ -870,13 +867,11 @@ expand(data, ...)
 
 ##  {.smaller}
 
-
-
 ## Exercice 3.4 {.smaller auto-animate="true"}
 
 -   Vérifiez s'il y a des données dupliquées dans le jeu de données issu de l'exercice 3.3
--   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". 
- - En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations
+-   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_".
+-   En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations
 
 ``` r
 # solution
@@ -885,9 +880,9 @@ expand(data, ...)
 ## Exercice 3.4 corrigé {.smaller auto-animate="true"}
 
 -   Vérifiez s'il y a des données dupliquées dans le jeu de données issu de l'exercice 3.3
--   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". 
- - En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse (biomass_survey_exercice2_4) et abondance . Pensez à enchainer les opérations
- - Positionnez la colonne "abundance" après la colonne "biomass"
+-   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_".
+-   En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse (biomass_survey_exercice2_4) et abondance . Pensez à enchainer les opérations
+-   Positionnez la colonne "abundance" après la colonne "biomass"
 
 ``` r
 # solution
@@ -897,8 +892,6 @@ abundance_biomass_survey_exercice3_4 <- abundance_exercice3_3 %>%
   right_join(., biomass_survey_exercice2_4, by = "survey_id_full") %>%
   relocate(abundance, .after = biomass)
 ```
-
-
 
 ## Exercice 3.5 {.smaller auto-animate="true"}
 
@@ -921,8 +914,6 @@ abundance_biomass_survey_exercice3_5 <- abundance_biomass_survey_exercice3_4 %>%
   separate(., species_name, into = c("genus", "species")) %>%
   select( -c(23:ncol(.)))
 ```
-
-
 
 # Partie 4 : Manipuler du texte avec [stringr](https://stringr.tidyverse.org/){.external target="_blank"}
 
@@ -1374,30 +1365,22 @@ Explication : `{ ... }` définit un bloc qui sera exécutées dans l'ordre, `;` 
 
 ![](images/R_graph_gallery.PNG){.absolute top="150" left="200" width="65%"}
 
-## Ggplot c'est comme la chirurgie *`aes`*thétique :
+## Ggplot c'est comme la chirurgie *`aes`*thétique : une succession de couches {auto-animate="true"}
 
-:::: incremental
-::: columns
-1)  Les jeunes s'y mettent très tôt !
-
-2)  Les moins jeunes sont réticents puis CERTAINS finissent par s'y mettre\
-    ![](images/nancy_pelosi.jpg){.absolute top="260" left="370" width="22%"}
-
-<br><br><br>
-
-3)  C'est un enchainement plus ou moins long d'opérations. ![](images/bogdanoff1.jpg){.absolute top="521" left="50" width="22%"}\
-    ![](images/bogdanoff1.5.jpg){.absolute top="500" left="360" width="25%"} ![](images/bogdanoff2.jpg){.absolute top="500" left="700" width="25%"}
+ ``` r
+ library(ggplot2)
+```
+    
+::: box
+Haha, c'est une comparaison intéressante ! En fait, ggplot2 et la fonction aes() dans ce contexte peuvent être comparés à de la chirurgie esthétique car tout comme un chirurgien modèle et ajuste pour révéler la beauté, ggplot2 et aes() permettent de "modeler" et d'ajuster les données pour créer des visualisations esthétiquement agréables et informatives. *(chatGPT)*
 :::
-::::
-
-## Ggplot, une succession de couches {auto-animate="true"}
 
 ::::::::: incremental
 ::::: columns
 ::: column
 1.  La Structure
 
-    ``` r
+    ```{r echo=FALSE, out.width="75%"}
     data <- iris
     p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
       theme(axis.text  = element_text(size = 25),
@@ -1409,7 +1392,7 @@ Explication : `{ ... }` définit un bloc qui sera exécutées dans l'ordre, `;` 
 ::: column
 2.  Le Type de représentation
 
-    ``` r
+    ```{r echo=FALSE, out.width="75%"}
     p2 <- p1 + geom_point(size = 5)
     p2
     ```
@@ -1420,7 +1403,7 @@ Explication : `{ ... }` définit un bloc qui sera exécutées dans l'ordre, `;` 
 ::: column
 3.  Les Couleurs
 
-    ``` r
+    ```{r echo=FALSE, out.width="75%"}
     p3 <- p1 + geom_point(mapping = aes(color = Petal.Width), size = 5) + scale_color_viridis_c()
     p3
     ```
@@ -1429,87 +1412,19 @@ Explication : `{ ... }` définit un bloc qui sera exécutées dans l'ordre, `;` 
 ::: column
 4.  Le Lifting final
 
-    ``` r
+    ```{r echo=FALSE, out.width="75%"}
     p4 <- p3 +
       theme_bw() +
       theme(axis.text = element_text(size = 25),
-                     axis.title = element_text(size = 25))
+                     axis.title = element_text(size = 25)) +
+      labs(x = "sepal length", y = "sepal width") + 
+      geom_line(linewidth = 1.5)
     p4
     ```
 :::
 :::::
 :::::::::
 
-## Ggplot, une succession de couches {auto-animate="true"}
-
-::::: columns
-::: column
-1.  La Structure
-
-    ``` r
-    data <- iris
-    p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
-      theme(axis.text  = element_text(size = 25),
-            axis.title = element_text(size = 25))
-    p1
-    ```
-:::
-
-::: column
-2.  Le Type de représentation
-
-    ``` r
-    p2 <- p1 + geom_point(size = 5)
-    p2
-    ```
-:::
-:::::
-
-::::: columns
-::: column
-3.  Les Couleurs
-
-    ``` r
-    p3 <- p1 + geom_point(mapping = aes(color = Petal.Width), size = 5) + scale_color_viridis_c()
-    p3
-    ```
-:::
-
-::: column
-4.  Le Lifting final
-
-    ``` r
-    p4 <- p3 +
-      geom_line(size = 2) +
-      theme_bw() +
-      theme(axis.text = element_text(size = 25),
-                     axis.title = element_text(size = 25))
-    p4
-    ```
-:::
-:::::
-
-## La structure des données
-
-Pour la démonstration nous allons utiliser le jeu de données `crabs` de la librairie `MASS`.
-
-``` r
-library(MASS)
-data_crabs <- crabs %>% dplyr::select(sp, sex, CL, CW)
-data_crabs %>%
-  head(3) %>%
-  kbl(digits = 4, caption = "Crabs data") %>%
-  kable_classic(html_font = "Computer Modern", full_width = F)
-```
-
-. . .
-
-``` r
-data_crabs %>%
-  head(3) %>%
-  kbl(digits = 4, caption = "Crabs data") %>%
-  kable_classic(html_font = "Computer Modern", full_width = F)
-```
 
 ## Ggplot pas à pas : La Structure
 
