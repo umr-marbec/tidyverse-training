@@ -759,18 +759,6 @@ Les différents verbes viennent s'ajouter à tous ceux que nous avons déjà vus
 
 Lien vers le [cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf){.external target="_blank"} de [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"}.
 
-## Tidyr
-
-Pour illustrer cette partie nous utiliserons le jeu de données popEU qui décrit le nombre d'habitants par pays pour les années 2014, 2015 et 2016
-
-``` r
-popEU <- readRDS("./data/popEU.RDS")
-slice_tail(popEU)
-```
-
-``` r
-kable(popEU[10:15, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
-```
 
 ## Les principales fonctions de tidyr
 
@@ -787,18 +775,52 @@ pivot_longer(cols, names_to, values_to, ...)
 
 ##  {.smaller}
 
-### Applications - pivot_wider
+## Exercice 3.1 {auto-animate="true"}
 
-Transformer le jeu de données en format "wide" en utilisant la fonction `pivot_wider()`. Nous voulons obtenir une colonne par année
+-   Observez les données de biomasse (biomass_survey_exercice2_4) et d'abondance. Les données sont elles tidy ? Si non, pourquoi ?
 
 ``` r
-# Créer un nouvel objet que l'on nomme popEU_wide
-popEU_wide <- pivot_wider(popEU, names_from = "year", values_from = "pop")
-popEU_wide
 ```
 
+## Exercice 3.1 corrigé {auto-animate="true"}
+
+-   Observez les données de biomasse (biomass_survey_exercice2_4) et d'abondance. Les données sont elles tidy ? Si non, pourquoi ?
+
 ``` r
-kable(popEU_wide, html_font = "Computer Modern", table.attr = "style='width:60%;'")
+```
+
+<br>
+
+<center>
+
+Oui les données de biomasse sont tidy, nous avons bien une observation par ligne
+Non les données d'abondance ne sont pas tidy, car elles sont en format "wide"
+
+<center>
+
+## Exercice 3.2 {.smaller auto-animate="true"}
+
+-   Transformez les données d'abondance en format tidy. Les nouvelles colonnes créées seront "sp_size" et "abundance"
+-   Pensez à bien regarder tous les arguments des fonctions
+
+``` r
+# solution
+```
+
+## Exercice 3.2 corrigé {.smaller auto-animate="true"}
+
+-   Transformez les données d'abondance en format tidy. Les nouvelles colonnes créées seront "sp_size" et "abundance"
+-   Pensez à bien regarder tous les arguments des fonctions
+
+``` r
+# solution
+abundance_exercice3_2 <- reef_fish_abundance %>%
+  pivot_longer(
+    .,
+    cols = 2:ncol(.),
+    names_to = "sp_size",
+    values_to = "abundance"
+  ) 
 ```
 
 ## 
@@ -814,60 +836,24 @@ drop_na(data, …)
 fill(data, …, .direction)
 ```
 
-##  {.smaller}
+## Exercice 3.3 {.smaller auto-animate="true"}
 
-### Applications - pivot_longer/replace_na
-
-Re-transformer le jeu de données en format "long" en utilisant la fonction `pivot_longer()` et remplacer les valeurs de NA dans la colonne "pop", par la population moyenne de la Belgique pour ces 2 années (11,27 M)
+-   A partir du jeu de données issu de l'exercice 3.2 supprimez les lignes ayant des valeurs d'abondance égale à NA
 
 ``` r
-# Créer un nouvel objet que l'on nomme popEU_long
-popEU_long <-
-  pivot_longer(
-    popEU_wide,
-    cols = c(2:4),
-    names_to = "year",
-    values_to = "pop"
-  )
-popEU_long <- mutate(popEU_long, pop = replace_na(pop, 11.27))
-slice_tail(popEU_long, 6)
-kable(popEU_long[10:15, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+# solution
 ```
 
-##  {.smaller}
+## Exercice 3.3 corrigé {.smaller auto-animate="true"}
 
-### Applications - pivot_longer/drop_na
-
-Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et supprimer les lignes contenant des NA dans la colonne pop. Essayer d'enchainer les opérations à l'aide du pipe %\>%
+-   A partir du jeu de données issu de l'exercice 3.2 supprimez les lignes ayant des valeurs d'abondance égales à NA
 
 ``` r
-popEU_long <- popEU_wide %>%
-  pivot_longer(.,
-               cols = c(2:4),
-               names_to = "year",
-               values_to = "pop") %>%
-  drop_na(., pop)
-slice_tail(popEU_long, 6)
-kable(popEU_long[8:13, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
+# solution
+abundance_exercice3_3 <- abundance_exercice3_2 %>%
+  drop_na(., abundance)
 ```
 
-##  {.smaller}
-
-### Applications - pivot_longer/fill
-
-Re-transformer le jeu de données en format "long" en utilisant la fonction \`pivot_longer()\` et compléter les valeurs manquantes par la valeur du pays correspondant. Essayer d'enchainer les opérations à l'aide du pipe %\>%
-
-``` r
-# Créer un nouvel objet que l'on nomme popEU_long
-popEU_long <- popEU_wide %>%
-  pivot_longer(.,
-               cols = c(2:4),
-               names_to = "year",
-               values_to = "pop") %>%
-  fill(., pop, .direction = "down")
-slice_tail(popEU_long, 6)
-kable(popEU_long[10:15, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
-```
 
 ## 
 
@@ -884,211 +870,59 @@ expand(data, ...)
 
 ##  {.smaller}
 
-### Applications - separate
 
-A partir du dernier popEU_long généré, transformer la colonne pop en caractères et créer deux nouvelles colonnes "millions" et "milliers"
-
-``` r
-popEU_sep <- popEU_long %>%
-  mutate(pop = as.character(pop)) %>%
-  separate(., col = pop, into = c("millions", "milliers"))
-slice_head(popEU_sep)
-kable(popEU_sep[1:6, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
-```
-
-##  {.smaller}
-
-### Applications - unite
-
-Recréer la colonne pop comme à l'origine en la nommant population
-
-``` r
-popEU_unite <- popEU_sep %>%
-  unite(., population, c(millions, milliers), sep = ".")
-slice_head(popEU_unite)
-kable(popEU_unite[1:6, ], html_font = "Computer Modern", table.attr = "style='width:60%;'")
-```
-
-##  {.smaller}
-
-### Applications - expand
-
-Générer un tableau avec toutes les combinaisons possibles pays/population. Que remarquons-nous ?
-
-``` r
-popEU_expand <- popEU_unite %>%
-  expand(., pays, population)
-slice_head(popEU_expand)
-kable(popEU_expand[1:6,], html_font = "Computer Modern", table.attr = "style='width:60%;'")
-```
-
-<br>
-
-<center>
-
-La valeur 11.21 n'apparait qu'une seule fois, ce sont bien les combinaisons uniques.
-
-<center>
-
-## Exercice 3.1 {auto-animate="true"}
-
--   Chargez les données d'abondance. Les données sont elles tidy ?
-
-``` r
-```
-
-## Exercice 3.1 corrigé {auto-animate="true"}
-
--   Chargez les données d'abondance. Les données sont elles tidy ?
-
-``` r
-# solution
-abundance <- read_delim("./data/Global_reef_fish_abundance.csv")
-```
-
-<br>
-
-<center>
-
-Non les données ne sont pas tidy, car elles sont en format "wide"
-
-<center>
-
-## Exercice 3.2 {.smaller auto-animate="true"}
-
--   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
--   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
-
-``` r
-# solution
-```
-
-## Exercice 3.2 corrigé {.smaller auto-animate="true"}
-
--   Transformez les en format tidy. Les nouvelles colonnes seront "sp_size" et "abundance"
--   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". Pensez à enchainer les opérations
-
-``` r
-# solution
-abundance_long <- abundance %>%
-  pivot_longer(
-    .,
-    cols = 2:17523,
-    names_to = "sp_size",
-    values_to = "abundance",
-    values_drop_na = TRUE # Attention à l'argument values_dop_na
-  ) %>%
-  unite(., col = "survey_id_full", c(survey_id, sp_size), sep = "_")
-slice_head(abundance_long)
-```
-
-<br>
-
-``` r
-load("./data_tmp/abundance_long.RData")
-kable(abundance_long[1:6,], html_font = "Computer Modern", table.attr = "style='width:30%;'")
-```
-
-## Exercice 3.3 {auto-animate="true"}
-
--   Créez un seul tableau regroupant biomasse et abondance
-
-``` r
-```
-
-## Exercice 3.3 corrigé {auto-animate="true"}
-
--   Créez un seul tableau regroupant biomasse et abondance
-
-``` r
-# solution
-load("./data/biomass_survey_exercice2_4.RData")
-biomass_abundance <- biomass_survey_exercice2_4 %>%
-  left_join(., abundance_long, by = "survey_id_full")
-```
 
 ## Exercice 3.4 {.smaller auto-animate="true"}
 
--   Créez 2 nouvelles colonnes "genus" et "species" à partir de species_name
+-   Vérifiez s'il y a des données dupliquées dans le jeu de données issu de l'exercice 3.3
+-   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". 
+ - En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations
 
 ``` r
+# solution
 ```
 
 ## Exercice 3.4 corrigé {.smaller auto-animate="true"}
 
--   Créez 2 nouvelles colonnes "genus" et "species" à partir de species_name
+-   Vérifiez s'il y a des données dupliquées dans le jeu de données issu de l'exercice 3.3
+-   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_". 
+ - En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse (biomass_survey_exercice2_4) et abondance . Pensez à enchainer les opérations
+ - Positionnez la colonne "abundance" après la colonne "biomass"
 
 ``` r
 # solution
-biomass_abundance <- biomass_abundance %>%
-  separate(., species_name, into = c("genus", "species"))
-slice_head(biomass_abundance[,8:11])
+abundance_biomass_survey_exercice3_4 <- abundance_exercice3_3 %>%
+  distinct() %>%
+  unite(., col = "survey_id_full", c(survey_id, sp_size), sep = "_")  %>%
+  right_join(., biomass_survey_exercice2_4, by = "survey_id_full") %>%
+  relocate(abundance, .after = biomass)
 ```
 
-<br>
+
+
+## Exercice 3.5 {.smaller auto-animate="true"}
+
+-   Créez 2 nouvelles colonnes `genus` et `species` à partir de species_name
+-   Supprimez les colonnes de `has_pq_scores_in_db` jusqu'à `methods`
+-   `has_pq_scores_in_db` est en position 23
+
+``` r
+```
+
+## Exercice 3.5 corrigé {.smaller auto-animate="true"}
+
+-   Créez 2 nouvelles colonnes `genus` et `species` à partir de species_name
+-   Supprimez les colonnes de `has_pq_scores_in_db` jusqu'à `methods`
+-   `has_pq_scores_in_db` est en position 23
 
 ``` r
 # solution
-biomass_abundance <- biomass_abundance %>%
-  separate(., species_name, into = c("genus", "species"))
-kable(biomass_abundance[1:6,8:11],
-      html_font = "Computer Modern",
-      table.attr = "style='width:30%;'")
+abundance_biomass_survey_exercice3_5 <- abundance_biomass_survey_exercice3_4 %>%
+  separate(., species_name, into = c("genus", "species")) %>%
+  select( -c(23:ncol(.)))
 ```
 
-## Exercice 3.5 {auto-animate="true"}
 
--   Transformez le tibble en sf object avec la commande sf::st_as_sf(survey, coords = c("longitude", "latitude"), remove = FALSE)
-
-``` r
-```
-
-## Exercice 3.5 corrigé {auto-animate="true"}
-
--   Transformez le tibble en sf object avec la commande sf::st_as_sf(survey, coords = c("longitude", "latitude"), remove = FALSE)
-
-``` r
-# solution
-data_sf <-
-  sf::st_as_sf(biomass_abundance,
-               coords = c("longitude", "latitude") ,
-               remove = FALSE,
-               crs = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0")
-```
-
-<br>
-
-<center>
-
-Nous obtenons une erreur, car il n'est pas possible de convertir un tibble en objet sf s'il y a des valeurs manquantes dans les colonnes longitude et latitude
-
-<center>
-
-## Exercice 3.6 {auto-animate="true"}
-
--   Corrigez l'erreur
-
-``` r
-```
-
-## Exercice 3.6 corrigé {auto-animate="true"}
-
--   Corrigez l'erreur
-
-``` r
-# solution
-biomass_survey_abundance_exercice3_6 <- biomass_abundance %>%
-  drop_na(latitude) %>% #supression des lignes contenant des NA dans la colonne latitude
-  drop_na(longitude) %>% #supression des lignes contenant des NA dans la colonne longitude
-  sf::st_as_sf(
-    .,
-    coords = c("longitude", "latitude"),
-    remove = FALSE,
-    crs = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-  )
-save(biomass_survey_abundance_exercice3_6,
-     file = "./data/biomass_survey_abundance_exercice3_6.RData")
-```
 
 # Partie 4 : Manipuler du texte avec [stringr](https://stringr.tidyverse.org/){.external target="_blank"}
 
