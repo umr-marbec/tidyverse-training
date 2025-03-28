@@ -599,7 +599,7 @@
     "href": "tidyverse-training.html#ggplot-cest-comme-la-chirurgie-aesthétique-une-succession-de-couches",
     "title": "tidyverse-training",
     "section": "Ggplot c’est comme la chirurgie aesthétique : une succession de couches",
-    "text": "Ggplot c’est comme la chirurgie aesthétique : une succession de couches\n\nHaha, c’est une comparaison intéressante ! En fait, ggplot2 et la fonction aes() dans ce contexte peuvent être comparés à de la chirurgie esthétique car tout comme un chirurgien modèle et ajuste pour révéler la beauté, ggplot2 et aes() permettent de “modeler” et d’ajuster les données pour créer des visualisations esthétiquement agréables et informatives. (chatGPT)\n\n\n\n\n\nLa Structure\n\n\n\n\n\n\n\n\n\n\n\n\nLe Type de représentation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLes Couleurs\n\n\n\n\n\n\n\n\n\n\n\n\nLe Lifting final"
+    "text": "Ggplot c’est comme la chirurgie aesthétique : une succession de couches\n\n\n\n\nLa Structure\n\n\n\n\n\n\n\n\n\n\n\n\nLe Type de représentation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLes Couleurs\n\n\n\n\n\n\n\n\n\n\n\n\nLe Lifting final"
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-la-structure",
