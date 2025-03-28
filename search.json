@@ -595,32 +595,11 @@
     "text": "Petit aperçu des possibilités :\n\nLe site From Data To Viz, une pépite"
   },
   {
-    "objectID": "tidyverse-training.html#ggplot-cest-comme-la-chirurgie-aesthétique",
-    "href": "tidyverse-training.html#ggplot-cest-comme-la-chirurgie-aesthétique",
+    "objectID": "tidyverse-training.html#ggplot-cest-comme-la-chirurgie-aesthétique-une-succession-de-couches",
+    "href": "tidyverse-training.html#ggplot-cest-comme-la-chirurgie-aesthétique-une-succession-de-couches",
     "title": "tidyverse-training",
-    "section": "Ggplot c’est comme la chirurgie aesthétique :",
-    "text": "Ggplot c’est comme la chirurgie aesthétique :\n\n\n\nLes jeunes s’y mettent très tôt !\nLes moins jeunes sont réticents puis CERTAINS finissent par s’y mettre\n\n\nC’est un enchainement plus ou moins long d’opérations."
-  },
-  {
-    "objectID": "tidyverse-training.html#ggplot-une-succession-de-couches",
-    "href": "tidyverse-training.html#ggplot-une-succession-de-couches",
-    "title": "tidyverse-training",
-    "section": "Ggplot, une succession de couches",
-    "text": "Ggplot, une succession de couches\n\n\n\n\nLa Structure\ndata &lt;- iris\np1 &lt;- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +\n  theme(axis.text  = element_text(size = 25),\n        axis.title = element_text(size = 25))\np1\n\n\n\nLe Type de représentation\np2 &lt;- p1 + geom_point(size = 5)\np2\n\n\n\n\n\nLes Couleurs\np3 &lt;- p1 + geom_point(mapping = aes(color = Petal.Width), size = 5) + scale_color_viridis_c()\np3\n\n\n\nLe Lifting final\np4 &lt;- p3 +\n  theme_bw() +\n  theme(axis.text = element_text(size = 25),\n                 axis.title = element_text(size = 25))\np4"
-  },
-  {
-    "objectID": "tidyverse-training.html#ggplot-une-succession-de-couches-1",
-    "href": "tidyverse-training.html#ggplot-une-succession-de-couches-1",
-    "title": "tidyverse-training",
-    "section": "Ggplot, une succession de couches",
-    "text": "Ggplot, une succession de couches\n\n\n\nLa Structure\ndata &lt;- iris\np1 &lt;- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +\n  theme(axis.text  = element_text(size = 25),\n        axis.title = element_text(size = 25))\np1\n\n\n\nLe Type de représentation\np2 &lt;- p1 + geom_point(size = 5)\np2\n\n\n\n\n\nLes Couleurs\np3 &lt;- p1 + geom_point(mapping = aes(color = Petal.Width), size = 5) + scale_color_viridis_c()\np3\n\n\n\nLe Lifting final\np4 &lt;- p3 +\n  geom_line(size = 2) +\n  theme_bw() +\n  theme(axis.text = element_text(size = 25),\n                 axis.title = element_text(size = 25))\np4"
-  },
-  {
-    "objectID": "tidyverse-training.html#la-structure-des-données",
-    "href": "tidyverse-training.html#la-structure-des-données",
-    "title": "tidyverse-training",
-    "section": "La structure des données",
-    "text": "La structure des données\nPour la démonstration nous allons utiliser le jeu de données crabs de la librairie MASS.\nlibrary(MASS)\ndata_crabs &lt;- crabs %&gt;% dplyr::select(sp, sex, CL, CW)\ndata_crabs %&gt;%\n  head(3) %&gt;%\n  kbl(digits = 4, caption = \"Crabs data\") %&gt;%\n  kable_classic(html_font = \"Computer Modern\", full_width = F)\n\ndata_crabs %&gt;%\n  head(3) %&gt;%\n  kbl(digits = 4, caption = \"Crabs data\") %&gt;%\n  kable_classic(html_font = \"Computer Modern\", full_width = F)"
+    "section": "Ggplot c’est comme la chirurgie aesthétique : une succession de couches",
+    "text": "Ggplot c’est comme la chirurgie aesthétique : une succession de couches\n\nHaha, c’est une comparaison intéressante ! En fait, ggplot2 et la fonction aes() dans ce contexte peuvent être comparés à de la chirurgie esthétique car tout comme un chirurgien modèle et ajuste pour révéler la beauté, ggplot2 et aes() permettent de “modeler” et d’ajuster les données pour créer des visualisations esthétiquement agréables et informatives. (chatGPT)\n\n\n\n\n\nLa Structure\n\n\n\n\n\n\n\n\n\n\n\n\nLe Type de représentation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLes Couleurs\n\n\n\n\n\n\n\n\n\n\n\n\nLe Lifting final"
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-la-structure",
