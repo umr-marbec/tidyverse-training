@@ -798,7 +798,7 @@ Oui les données de biomasse sont tidy, nous avons bien une observation par lign
 
 ## Exercice 3.2 {.smaller auto-animate="true"}
 
--   Transformez les données d'abondance en format tidy. Les nouvelles colonnes créées seront "sp_size" et "abundance"
+-   Transformez les données d'abondance en format tidy. Les nouvelles colonnes créées seront `sp_size` et `abundance`
 -   Pensez à bien regarder tous les arguments des fonctions
 
 ``` r
@@ -807,7 +807,7 @@ Oui les données de biomasse sont tidy, nous avons bien une observation par lign
 
 ## Exercice 3.2 corrigé {.smaller auto-animate="true"}
 
--   Transformez les données d'abondance en format tidy. Les nouvelles colonnes créées seront "sp_size" et "abundance"
+-   Transformez les données d'abondance en format tidy. Les nouvelles colonnes créées seront `sp_size` et `abundance`
 -   Pensez à bien regarder tous les arguments des fonctions
 
 ``` r
@@ -880,9 +880,9 @@ expand(data, ...)
 ## Exercice 3.4 corrigé {.smaller auto-animate="true"}
 
 -   Vérifiez s'il y a des données dupliquées dans le jeu de données issu de l'exercice 3.3
--   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_".
+-   Créez une nouvelle variable `survey_id_full` qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_".
 -   En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse (biomass_survey_exercice2_4) et abondance . Pensez à enchainer les opérations
--   Positionnez la colonne "abundance" après la colonne "biomass"
+-   Positionnez la colonne `abundance` après la colonne `biomass`
 
 ``` r
 # solution
