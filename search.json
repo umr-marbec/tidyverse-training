@@ -354,14 +354,14 @@
     "href": "tidyverse-training.html#exercice-3.2",
     "title": "tidyverse-training",
     "section": "Exercice 3.2",
-    "text": "Exercice 3.2\n\nTransformez les données d’abondance en format tidy. Les nouvelles colonnes créées seront “sp_size” et “abundance”\nPensez à bien regarder tous les arguments des fonctions\n\n# solution"
+    "text": "Exercice 3.2\n\nTransformez les données d’abondance en format tidy. Les nouvelles colonnes créées seront sp_size et abundance\nPensez à bien regarder tous les arguments des fonctions\n\n# solution"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.2-corrigé",
     "href": "tidyverse-training.html#exercice-3.2-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 3.2 corrigé",
-    "text": "Exercice 3.2 corrigé\n\nTransformez les données d’abondance en format tidy. Les nouvelles colonnes créées seront “sp_size” et “abundance”\nPensez à bien regarder tous les arguments des fonctions\n\n# solution\nabundance_exercice3_2 &lt;- reef_fish_abundance %&gt;%\n  pivot_longer(\n    .,\n    cols = 2:ncol(.),\n    names_to = \"sp_size\",\n    values_to = \"abundance\"\n  )"
+    "text": "Exercice 3.2 corrigé\n\nTransformez les données d’abondance en format tidy. Les nouvelles colonnes créées seront sp_size et abundance\nPensez à bien regarder tous les arguments des fonctions\n\n# solution\nabundance_exercice3_2 &lt;- reef_fish_abundance %&gt;%\n  pivot_longer(\n    .,\n    cols = 2:ncol(.),\n    names_to = \"sp_size\",\n    values_to = \"abundance\"\n  )"
   },
   {
     "objectID": "tidyverse-training.html#section-2",
@@ -403,7 +403,7 @@
     "href": "tidyverse-training.html#exercice-3.4-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 3.4 corrigé",
-    "text": "Exercice 3.4 corrigé\n\nVérifiez s’il y a des données dupliquées dans le jeu de données issu de l’exercice 3.3\nCréez une nouvelle variable “survey_id_full” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”.\nEn vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse (biomass_survey_exercice2_4) et abondance . Pensez à enchainer les opérations\nPositionnez la colonne “abundance” après la colonne “biomass”\n\n# solution\nabundance_biomass_survey_exercice3_4 &lt;- abundance_exercice3_3 %&gt;%\n  distinct() %&gt;%\n  unite(., col = \"survey_id_full\", c(survey_id, sp_size), sep = \"_\")  %&gt;%\n  right_join(., biomass_survey_exercice2_4, by = \"survey_id_full\") %&gt;%\n  relocate(abundance, .after = biomass)"
+    "text": "Exercice 3.4 corrigé\n\nVérifiez s’il y a des données dupliquées dans le jeu de données issu de l’exercice 3.3\nCréez une nouvelle variable survey_id_full qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”.\nEn vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse (biomass_survey_exercice2_4) et abondance . Pensez à enchainer les opérations\nPositionnez la colonne abundance après la colonne biomass\n\n# solution\nabundance_biomass_survey_exercice3_4 &lt;- abundance_exercice3_3 %&gt;%\n  distinct() %&gt;%\n  unite(., col = \"survey_id_full\", c(survey_id, sp_size), sep = \"_\")  %&gt;%\n  right_join(., biomass_survey_exercice2_4, by = \"survey_id_full\") %&gt;%\n  relocate(abundance, .after = biomass)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.5",
