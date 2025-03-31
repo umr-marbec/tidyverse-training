@@ -1461,17 +1461,56 @@ Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` 
 
 </div>
 :::::
+ ``` r 
+    data <- iris
+    p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
+    p1
+ ```
+
+
+ ```{r echo=FALSE, out.width="75%"}
+    data <- iris
+    p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
+    p1
+ ```
+## Exercice 6.1 {auto-animate="true"}
+
+En utilisant les fonctions vues précédemment 
+  - Quel est le pays où la biomasse totale par transect est la plus élevée ?
+  - Formattez le jeu de données issues de l'**exercice 5.1** et représentez visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
 ``` r
-couche.1 <- ggplot(data    = data_crabs,
-                   mapping = aes(x = CL, y = CW))
+# 1 - Filter les données obtenues en 2011
+# 2 - Grouper les données pour obtenir la biomasse totale
+#     par transect dans chacun des pays
 ```
 
-. . .
+## Exercice 6.1 : Correction {auto-animate="true"}
+
+Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
 ``` r
-couche.1
+data_biomass_country <- biomass_survey_abundance_exercice3_6 %>%
+  st_drop_geometry() %>%
+  # 1 - Filter les données obtenues en 2011
+  filter(str_detect(string = survey_date, pattern = "2011")) %>%
+  # 2 - Grouper les données pour obtenir la biomasse totale
+  #     par transect dans chacun des pays
+  group_by(country, survey_id) %>%
+  summarise(biomass = sum(biomass)) 
 ```
+
+## Exercice 6.1 : Correction {auto-animate="true"}
+
+Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
+
+``` r
+# Réalisation les boites à moustache
+ggplot(data = data_biomass_country) +
+  geom_boxplot(aes(x = country, y = biomass)) +
+  theme_bw() 
+```
+
 
 ## Ggplot pas à pas : Choix du plot
 
@@ -1736,41 +1775,7 @@ ggsave(filename = "le_chemin_vers_le_bon_dossier",
        height   = 5)
 ```
 
-## Exercice 6.1 {auto-animate="true"}
 
-Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
-
-``` r
-# 1 - Filter les données obtenues en 2011
-# 2 - Grouper les données pour obtenir la biomasse totale
-#     par transect dans chacun des pays
-```
-
-## Exercice 6.1 : Correction {auto-animate="true"}
-
-Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
-
-``` r
-data_biomass_country <- biomass_survey_abundance_exercice3_6 %>%
-  st_drop_geometry() %>%
-  # 1 - Filter les données obtenues en 2011
-  filter(str_detect(string = survey_date, pattern = "2011")) %>%
-  # 2 - Grouper les données pour obtenir la biomasse totale
-  #     par transect dans chacun des pays
-  group_by(country, survey_id) %>%
-  summarise(biomass = sum(biomass)) 
-```
-
-## Exercice 6.1 : Correction {auto-animate="true"}
-
-Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
-
-``` r
-# Réalisation les boites à moustache
-ggplot(data = data_biomass_country) +
-  geom_boxplot(aes(x = country, y = biomass)) +
-  theme_bw() 
-```
 
 ## Exercice 6.2 {auto-animate="true"}
 
