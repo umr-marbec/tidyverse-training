@@ -613,7 +613,28 @@
     "href": "tidyverse-training.html#ggplot-pas-à-pas-la-structure-1",
     "title": "tidyverse-training",
     "section": "Ggplot pas à pas : La Structure",
-    "text": "Ggplot pas à pas : La Structure\n\n\nPour la structure de la figure, la fonction à toujours utiliser est ggplot() . Les arguments principaux sont :\n\n\ndata = nom.du.dataframe\nmapping = aes(x = variable.x, y = variable.y)\n\n\n\n\ncouche.1 &lt;- ggplot(data    = data_crabs,\n                   mapping = aes(x = CL, y = CW))\n\ncouche.1"
+    "text": "Ggplot pas à pas : La Structure\n\n\nPour la structure de la figure, la fonction à toujours utiliser est ggplot() . Les arguments principaux sont :\n\n\ndata = nom.du.dataframe\nmapping = aes(x = variable.x, y = variable.y)\n\n\n\n\n   data &lt;- iris\n   p1 &lt;- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) \n   p1\n::: {.cell} ::: {.cell-output-display}  ::: :::"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.1",
+    "href": "tidyverse-training.html#exercice-6.1",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.1",
+    "text": "Exercice 6.1\nEn utilisant les fonctions vues précédemment - Quel est le pays où la biomasse totale par transect est la plus élevée ? - Formattez le jeu de données issues de l’exercice 5.1 et représentez visuellement les données sous forme de boites à moustache, seulement pour les données prélevées en 2011. Nommer le jeu de données data_biomass_country.\n# 1 - Filter les données obtenues en 2011\n# 2 - Grouper les données pour obtenir la biomasse totale\n#     par transect dans chacun des pays"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.1-correction",
+    "href": "tidyverse-training.html#exercice-6.1-correction",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.1 : Correction",
+    "text": "Exercice 6.1 : Correction\nQuel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l’exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, seulement pour les données prélevées en 2011. Nommer le jeu de données data_biomass_country.\ndata_biomass_country &lt;- biomass_survey_abundance_exercice3_6 %&gt;%\n  st_drop_geometry() %&gt;%\n  # 1 - Filter les données obtenues en 2011\n  filter(str_detect(string = survey_date, pattern = \"2011\")) %&gt;%\n  # 2 - Grouper les données pour obtenir la biomasse totale\n  #     par transect dans chacun des pays\n  group_by(country, survey_id) %&gt;%\n  summarise(biomass = sum(biomass))"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.1-correction-1",
+    "href": "tidyverse-training.html#exercice-6.1-correction-1",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.1 : Correction",
+    "text": "Exercice 6.1 : Correction\nQuel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l’exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, seulement pour les données prélevées en 2011. Nommer le jeu de données data_biomass_country.\n# Réalisation les boites à moustache\nggplot(data = data_biomass_country) +\n  geom_boxplot(aes(x = country, y = biomass)) +\n  theme_bw()"
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-choix-du-plot",
@@ -698,27 +719,6 @@
     "title": "tidyverse-training",
     "section": "Enregistrer ses figures",
     "text": "Enregistrer ses figures\nPour enregistrer votre ggplot, vous pouvez utiliser la fonction ggsave() :\n\n\nplot : le nom du ggplot à enregistrer.\nfilename : le_chemin_daccess/le_nom_denregistrement.EXTENSION\nwidth & height : la largeur et hauteur d’enregistrement.\n\n\n\nggsave(filename = \"le_chemin_vers_le_bon_dossier\", \n       plot     = boxplot_biomass_country_v3,\n       width    = 8,\n       height   = 5)"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-6.1",
-    "href": "tidyverse-training.html#exercice-6.1",
-    "title": "tidyverse-training",
-    "section": "Exercice 6.1",
-    "text": "Exercice 6.1\nQuel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l’exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, seulement pour les données prélevées en 2011. Nommer le jeu de données data_biomass_country.\n# 1 - Filter les données obtenues en 2011\n# 2 - Grouper les données pour obtenir la biomasse totale\n#     par transect dans chacun des pays"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-6.1-correction",
-    "href": "tidyverse-training.html#exercice-6.1-correction",
-    "title": "tidyverse-training",
-    "section": "Exercice 6.1 : Correction",
-    "text": "Exercice 6.1 : Correction\nQuel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l’exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, seulement pour les données prélevées en 2011. Nommer le jeu de données data_biomass_country.\ndata_biomass_country &lt;- biomass_survey_abundance_exercice3_6 %&gt;%\n  st_drop_geometry() %&gt;%\n  # 1 - Filter les données obtenues en 2011\n  filter(str_detect(string = survey_date, pattern = \"2011\")) %&gt;%\n  # 2 - Grouper les données pour obtenir la biomasse totale\n  #     par transect dans chacun des pays\n  group_by(country, survey_id) %&gt;%\n  summarise(biomass = sum(biomass))"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-6.1-correction-1",
-    "href": "tidyverse-training.html#exercice-6.1-correction-1",
-    "title": "tidyverse-training",
-    "section": "Exercice 6.1 : Correction",
-    "text": "Exercice 6.1 : Correction\nQuel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l’exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, seulement pour les données prélevées en 2011. Nommer le jeu de données data_biomass_country.\n# Réalisation les boites à moustache\nggplot(data = data_biomass_country) +\n  geom_boxplot(aes(x = country, y = biomass)) +\n  theme_bw()"
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.2",
