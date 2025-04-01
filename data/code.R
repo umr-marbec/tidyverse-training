@@ -5,6 +5,7 @@ library(tibble)
 library(tidyr)
 library(stringr)
 library(lubridate)
+library(ggplot2)
 # exercise 1.1 ----
 survey_metadata <- read_tsv(file = "data/survey_metadata.tsv")
 reef_fish_biomass <- read_delim(file = "data/reef_fish_biomass.dude",
@@ -144,3 +145,5 @@ biomass_survey_exercice5_1 <- biomass_survey_exercice4_3 %>%
            duration_since_now,
            next_survey_date_correct,
            .after = survey_date)
+
+

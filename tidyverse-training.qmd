@@ -57,12 +57,12 @@ Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.
 -   Avoir des notions de base dans l'utilisation de [R](https://www.r-project.org/){.external target="_blank"}
 -   Avoir une instance valide de R sur son poste (durant la formation utilisation de la version [4.4.3](https://pbil.univ-lyon1.fr/CRAN/){.external target="_blank"} sous Windows)
 -   Pour information, nous allons utiliser les packages-version et dépendances R suivants :
-    - [readr](https://readr.tidyverse.org/){.external target="_blank"} (utilisation de la version 2.1.5),
-    - [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.1.4),
-    - [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.3.1),
-    - [stringr](https://stringr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.5.1),
-    - [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.9.4),
-    - [ggplot2](https://ggplot2.tidyverse.org/){.external target="_blank"} (utilisation de la version 3.5.1).
+    -   [readr](https://readr.tidyverse.org/){.external target="_blank"} (utilisation de la version 2.1.5),
+    -   [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.1.4),
+    -   [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.3.1),
+    -   [stringr](https://stringr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.5.1),
+    -   [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.9.4),
+    -   [ggplot2](https://ggplot2.tidyverse.org/){.external target="_blank"} (utilisation de la version 3.5.1).
 
 ## Bonus non obligatoire
 
@@ -477,7 +477,7 @@ arrange(.data, ...)
 
 -   Ajouter une ligne dans un jeu de données
 
-```r 
+``` r
 # utilisation du package tibble (dépendance)
 # interet des arguments .before and .after
 add_row(.data, ...)
@@ -623,7 +623,7 @@ ungroups()
 -   Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment
 -   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvée" regarder du côté des arguments en option)
 -   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ
-- Stocker tout ça dans un objet nommé `biomass_exercice2_3`
+-   Stocker tout ça dans un objet nommé `biomass_exercice2_3`
 
 ``` r
 ```
@@ -634,7 +634,7 @@ ungroups()
 -   Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment
 -   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvée" regarder du côté des arguments en option)
 -   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ
-- Stocker tout ça dans un objet nommé `biomass_exercice2_3`
+-   Stocker tout ça dans un objet nommé `biomass_exercice2_3`
 
 ``` r
 # solution
@@ -724,7 +724,7 @@ full_join(x, y, by, ...)
 -   Pour vous aider :
     -   Y-a-t-il un problème avec le jeu de données `survey_metadata` ?
     -   Réfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure
-- Stocker le résultat dans un objet nommé `biomass_survey_exercice2_4`
+-   Stocker le résultat dans un objet nommé `biomass_survey_exercice2_4`
 
 ``` r
 ```
@@ -736,7 +736,7 @@ full_join(x, y, by, ...)
 -   Pour vous aider :
     -   Y-a-t-il un problème avec le jeu de données `survey_metadata` ?
     -   Réfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure
-- Stocker le résultat dans un objet nommé `biomass_survey_exercice2_4`
+-   Stocker le résultat dans un objet nommé `biomass_survey_exercice2_4`
 
 ``` r
 # solution
@@ -781,14 +781,14 @@ pivot_wider(names_from, values_from)
 pivot_longer(cols, names_to, values_to, ...)
 ```
 
-## Exercice 3.1 {auto-animate="true"}
+## Exercice 3.1 {.smaller auto-animate="true"}
 
 -   Observez les données de biomasse (`biomass_survey_exercice2_4`) et d'abondance. Les données sont elles tidy ? Si non, pourquoi ?
 
 ``` r
 ```
 
-## Exercice 3.1 corrigé {auto-animate="true"}
+## Exercice 3.1 corrigé {.smaller auto-animate="true"}
 
 -   Observez les données de biomasse (`biomass_survey_exercice2_4`) et d'abondance. Les données sont elles tidy ? Si non, pourquoi ?
 
@@ -810,7 +810,7 @@ Non les données d'abondance ne sont pas tidy, car elles sont en format "wide"
 
 -   Transformez les données d'abondance en format tidy. Les nouvelles colonnes créées seront `sp_size` et `abundance`
 -   Pensez à bien regarder tous les arguments des fonctions
-- Stocker le résultat dans un objet nommé `abundance_exercice3_2`
+-   Stocker le résultat dans un objet nommé `abundance_exercice3_2`
 
 ``` r
 ```
@@ -819,7 +819,7 @@ Non les données d'abondance ne sont pas tidy, car elles sont en format "wide"
 
 -   Transformez les données d'abondance en format tidy. Les nouvelles colonnes créées seront `sp_size` et `abundance`
 -   Pensez à bien regarder tous les arguments des fonctions
-- Stocker le résultat dans un objet nommé `abundance_exercice3_2`
+-   Stocker le résultat dans un objet nommé `abundance_exercice3_2`
 
 ``` r
 # solution
@@ -846,7 +846,7 @@ fill(data, …, .direction)
 ## Exercice 3.3 {.smaller auto-animate="true"}
 
 -   A partir du jeu de données issu de l'exercice 3.2 (`abundance_exercice3_2`) supprimez les lignes ayant des valeurs d'abondance égales à NA
-- Stocker le résultat dans un objet nommé `abundance_exercice3_3`
+-   Stocker le résultat dans un objet nommé `abundance_exercice3_3`
 
 ``` r
 ```
@@ -854,7 +854,7 @@ fill(data, …, .direction)
 ## Exercice 3.3 corrigé {.smaller auto-animate="true"}
 
 -   A partir du jeu de données issu de l'exercice 3.2 (`abundance_exercice3_2`) supprimez les lignes ayant des valeurs d'abondance égales à NA
-- Stocker le résultat dans un objet nommé `abundance_exercice3_3`
+-   Stocker le résultat dans un objet nommé `abundance_exercice3_3`
 
 ``` r
 # solution
@@ -863,7 +863,7 @@ abundance_exercice3_3 <- abundance_exercice3_2 %>%
           abundance)
 ```
 
-### Combinaison des variables
+## Combinaison des variables
 
 ``` r
 # Séparer une colonne en plusieurs colonnes
@@ -879,7 +879,7 @@ expand(data, ...)
 -   Vérifiez s'il y a des données dupliquées dans le jeu de données issu de l'exercice 3.3 (`abundance_exercice3_3`)
 -   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_".
 -   En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations
-- Stocker le résultat dans un objet nommé `abundance_biomass_survey_exercice3_4`
+-   Stocker le résultat dans un objet nommé `abundance_biomass_survey_exercice3_4`
 
 ``` r
 ```
@@ -889,7 +889,7 @@ expand(data, ...)
 -   Vérifiez s'il y a des données dupliquées dans le jeu de données issu de l'exercice 3.3 (`abundance_exercice3_3`)
 -   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_".
 -   En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations
-- Stocker le résultat dans un objet nommé `abundance_biomass_survey_exercice3_4`
+-   Stocker le résultat dans un objet nommé `abundance_biomass_survey_exercice3_4`
 
 ``` r
 # solution
@@ -909,22 +909,22 @@ abundance_biomass_survey_exercice3_4 <- abundance_exercice3_3 %>%
 
 ## Exercice 3.5 {.smaller auto-animate="true"}
 
-- A partir du jeu de données précédent (`abundance_biomass_survey_exercice3_4`)
+-   A partir du jeu de données précédent (`abundance_biomass_survey_exercice3_4`)
 -   Créez 2 nouvelles colonnes `genus` et `species` à partir de species_name
 -   Supprimez les colonnes de `has_pq_scores_in_db` jusqu'à `methods`
 -   `has_pq_scores_in_db` est en position 23
-- Stocker le résulat dans un objet nommé `abundance_biomass_survey_exercice3_5`
+-   Stocker le résulat dans un objet nommé `abundance_biomass_survey_exercice3_5`
 
 ``` r
 ```
 
 ## Exercice 3.5 corrigé {.smaller auto-animate="true"}
 
-- A partir du jeu de données précédent (`abundance_biomass_survey_exercice3_4`)
+-   A partir du jeu de données précédent (`abundance_biomass_survey_exercice3_4`)
 -   Créez 2 nouvelles colonnes `genus` et `species` à partir de species_name
 -   Supprimez les colonnes de `has_pq_scores_in_db` jusqu'à `methods`
 -   `has_pq_scores_in_db` est en position 23
-- Stocker le résulat dans un objet nommé `abundance_biomass_survey_exercice3_5`
+-   Stocker le résulat dans un objet nommé `abundance_biomass_survey_exercice3_5`
 
 ``` r
 # solution
@@ -1092,7 +1092,7 @@ str_to_sentence(string, ...)
 -   À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractères de la variable `site_name`
 -   Nettoyer la variable `site_name` en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable `site_name_clean`
 -   Enlever les majuscules de notre variable `site_name_clean` sauf celles en début de chaine
-- Stocker le résultat dans un objet `biomass_survey_exercice4_2`
+-   Stocker le résultat dans un objet `biomass_survey_exercice4_2`
 
 ``` r
 ```
@@ -1102,7 +1102,7 @@ str_to_sentence(string, ...)
 -   À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractères de la variable `site_name`
 -   Nettoyer la variable `site_name` en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable `site_name_clean`
 -   Enlever les majuscules de notre variable `site_name_clean` sauf celles en début de chaine
-- Stocker le résultat dans un objet `biomass_survey_exercice4_2`
+-   Stocker le résultat dans un objet `biomass_survey_exercice4_2`
 
 ``` r
 # solution
@@ -1180,7 +1180,8 @@ str_wrap(string, ...)
 -   Créer une variable `biomass_percentage` qui contiendra la biomasse exprimée en `%` (avec `%` à la fin)
 -   Fusionner dans une nouvelle variable `description` les variables `species_name_first`, `species_name_second` et `biomass_percentage` pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable `biomass_percentage` en parenthèses et suivi de la chaine de caractère `of total biomass`)
 -   Ayant une très mauvaise vision et un écran très petit, je souhaiterais que l'affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable `description_shinny`. Attention, il faut parfois regarder au-delà de ce que l'on voit dans la console de R...
-- Stocker le résultat dans un objet `biomass_survey_exercice4_3`
+-   Stocker le résultat dans un objet `biomass_survey_exercice4_3`
+
 ``` r
 ```
 
@@ -1190,7 +1191,7 @@ str_wrap(string, ...)
 -   Créer une variable `biomass_percentage` qui contiendra la biomasse exprimée en `%` (avec `%` à la fin)
 -   Fusionner dans une nouvelle variable `description` les variables `species_name_first`, `species_name_second` et `biomass_percentage` pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable `biomass_percentage` en parenthèses et suivi de la chaine de caractère `of total biomass`)
 -   Ayant une très mauvaise vision et un écran très petit, je souhaiterais que l'affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable `description_shinny`. Attention, il faut parfois regarder au-delà de ce que l'on voit dans la console de R...
-- Stocker le résultat dans un objet `biomass_survey_exercice4_3`
+-   Stocker le résultat dans un objet `biomass_survey_exercice4_3`
 
 ``` r
 # solution
@@ -1237,7 +1238,7 @@ biomass_survey_exercice4_3 <- biomass_survey_exercice4_2 %>%
 
 -   Dans le jeu données précédent, `biomass_survey_exercice4_3`, je veux séparer les chiffres et les lettres de la variable `site_code`. Comment trouver un motif qui marche aussi bien pour la valeur `USWC1` et `BC3` ?
 -   Avec l'utilisation des expressions regulières je vais pouvoir lui dire "je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s'arrête à un chiffre" (même raisonnement avec les chiffres)
-- Stocker le résultat dans un objet `biomass_survey_exercice4_4`
+-   Stocker le résultat dans un objet `biomass_survey_exercice4_4`
 
 ``` r
 ```
@@ -1246,7 +1247,7 @@ biomass_survey_exercice4_3 <- biomass_survey_exercice4_2 %>%
 
 -   Dans le jeu données précédent, `biomass_survey_exercice4_3`, je veux séparer les chiffres et les lettres de la variable `site_code`. Comment trouver un motif qui marche aussi bien pour la valeur `USWC1` et `BC3` ?
 -   Avec l'utilisation des expressions regulières je vais pouvoir lui dire "je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s'arrête à un chiffre" (même raisonnement avec les chiffres)
-- Stocker le résultat dans un objet `biomass_survey_exercice4_4`
+-   Stocker le résultat dans un objet `biomass_survey_exercice4_4`
 
 ``` r
 biomass_survey_exercice4_4 <- biomass_survey_exercice4_3 %>%
@@ -1363,7 +1364,7 @@ dweeks(x)
 -   Créer une variable `next_survey_date` qui ajoute 12 mois à la variable `survey_date_as_date`
 -   Regarder plus en détail la variable `next_survey_date`, qu'a-t-elle de particulier ?
 -   Question bonus en lien avec la question précédente, définir l'heure des valeurs de la variable `survey_date_as_date` à 12h et la stocker dans une variable `next_survey_date_correct`
-- Stocker le résultat dans une variable `biomass_survey_exercice5_1`
+-   Stocker le résultat dans une variable `biomass_survey_exercice5_1`
 
 ``` r
 ```
@@ -1376,7 +1377,7 @@ dweeks(x)
 -   Créer une variable `next_survey_date` qui ajoute 12 mois à la variable `survey_date_as_date`
 -   Regarder plus en détail la variable `next_survey_date`, qu'a-t-elle de particulier ?
 -   Question bonus en lien avec la question précédente, définir l'heure des valeurs de la variable `survey_date_as_date` à 12h et la stocker dans une variable `next_survey_date_correct`
-- Stocker le résultat dans une variable `biomass_survey_exercice5_1`
+-   Stocker le résultat dans une variable `biomass_survey_exercice5_1`
 
 ``` r
 # solution
@@ -1418,6 +1419,10 @@ Explication : `{ ... }` définit un bloc qui sera exécuté dans l'ordre, `;` pe
 ```{r include=FALSE}
 library(ggplot2)
 ```
+
+Au sein de ggplot pour enchainer les opérations on utilise l'opérateur `+`
+
+## 
 
 ::::::::: incremental
 ::::: columns
@@ -1469,10 +1474,12 @@ library(ggplot2)
 :::::
 :::::::::
 
+
+
 ## Ggplot pas à pas : La Structure
 
 ::::: incremental
-<div>
+
 
 Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
 
@@ -1484,78 +1491,32 @@ Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` 
     ::: incremental
     -   Ici le `aes` signifie **aesthetic**
 
-    -   On verra que d'autres options sont disponibles dans `aes` comme la taille (`size`), la couleur (`color`), la forme (`shape`) ...
+    -   On verra que d'autres options sont disponibles dans `aes` comme la taille (`size`), la couleur (`color`), la forme (`shape`) 
+    
     :::
 :::
 
-</div>
 :::::
 
-## Ggplot pas à pas : La Structure
 
-::::: nonincremental
-<div>
 
-Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
 
-<div>
+##
 
--   `data = nom.du.dataframe`
+ ``` r 
+    data <- iris
+    p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
+    p1
+ ```
 
--   `mapping = aes(x = variable.x, y = variable.y)`
 
-</div>
+ ```{r echo=FALSE, out.width="75%"}
+    data <- iris
+    p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
+    p1
+ ```
 
-</div>
-:::::
 
-``` r
-   data <- iris
-   p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
-   p1
-```
-
-```{r echo=FALSE, out.width="75%"}
-   data <- iris
-   p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
-   p1
-```
-
-## Exercice 6.1 {auto-animate="true"}
-
-En utilisant les fonctions vues précédemment - Quel est le pays où la biomasse totale par transect est la plus élevée ? - Formattez le jeu de données issues de l'**exercice 5.1** et représentez visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
-
-``` r
-# 1 - Filter les données obtenues en 2011
-# 2 - Grouper les données pour obtenir la biomasse totale
-#     par transect dans chacun des pays
-```
-
-## Exercice 6.1 : Correction {auto-animate="true"}
-
-Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
-
-``` r
-data_biomass_country <- biomass_survey_abundance_exercice3_6 %>%
-  st_drop_geometry() %>%
-  # 1 - Filter les données obtenues en 2011
-  filter(str_detect(string = survey_date, pattern = "2011")) %>%
-  # 2 - Grouper les données pour obtenir la biomasse totale
-  #     par transect dans chacun des pays
-  group_by(country, survey_id) %>%
-  summarise(biomass = sum(biomass)) 
-```
-
-## Exercice 6.1 : Correction {auto-animate="true"}
-
-Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l'**exercice 3.6** et représenter visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
-
-``` r
-# Réalisation les boites à moustache
-ggplot(data = data_biomass_country) +
-  geom_boxplot(aes(x = country, y = biomass)) +
-  theme_bw() 
-```
 
 ## Ggplot pas à pas : Choix du plot
 
@@ -1617,95 +1578,75 @@ Plusieurs représentations existent selon le type de variables que l'on a :
 L'exemple ici va mener à la réalisation d'un **nuage de points**. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou autres.
 
 :::::: incremental
-::::: columns
-::: {.column width="50%"}
+::::: 
+::: 
 -   `aes()` dans `ggplot()`
 
-    ``` r
-    couche.2 <- ggplot(data    = data_crabs,
-                       mapping = aes(x = CL, 
-                                     y = CW)) +
+    ```{r echo=TRUE, out.width="50%"}
+    
+    couche.2 <- ggplot(data    = data,
+                       mapping = aes(x = Sepal.Length, 
+                                     y = Petal.Length)) +
       geom_point()
     ```
-:::
 
-::: {.column width="50%"}
 -   `aes()` dans `geom_point()`
 
     ``` r
     # Autre solution
     couche.2.2 <- ggplot() +
       geom_point(data    = data_crabs,
-                 mapping = aes(x = CL, y = CW))
+                 mapping = aes(x = Sepal.Length, 
+                                     y = Petal.Length))
     ```
-:::
-:::::
-::::::
-:::::::
 
 . . .
 
-``` r
+## Ggplot pas à pas : Choix du plot
+
+```{r echo=FALSE, out.width="75%"}
+
 couche.2
+
 ```
 
 ## Ggplot pas à pas : Modèle linéaire {auto-animate="true"}
 
-Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
+Traçons un modèle linéaire 
 
 . . .
 
-``` r
+```{r echo=TRUE, out.width="50%"}
 couche.3 <- couche.2 +
   geom_smooth(color = "red", method = "lm") # le modèle linéaire 
 ```
 
 . . .
 
-``` r
+```{r echo=FALSE, out.width="50%"}
 couche.3
 ```
 
-## Ggplot pas à pas : Modèle linéaire {auto-animate="true"}
 
-Traçons un modéle linéaire et ajoutons la formule et le R² correspondant
 
-``` r
-couche.3 <- couche.2 +
-  geom_smooth(color = "red", method = "lm") + # le modèle linéaire 
-  stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) # la formule
-couche.3
-```
-
-## Ggplot pas à pas : Modèle linéaire {auto-animate="true"}
-
-Traçons un modèle linéaire et ajoutons la formule et le R² correspondant
-
-``` r
-couche.3 <- couche.2 +
-  geom_smooth(color = "red", method = "lm") + # le modèle linéaire 
-  stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) + # la formule
-  stat_regline_equation(label.y = 48, aes(label = ..adj.rr.label..)) # R²
-couche.3
-```
 
 ## Ggplot pas à pas : La couleur
 
-Donnons une couleur par sexe. Comme c'est lié à l'esthétisme de la figure, il faut retourner à l'argument `color` dans la fonction `aes()`.
+Donnons une couleur par espèce. Comme c'est lié à l'esthétisme de la figure, il faut retourner à l'argument `color` dans la fonction `aes()`.
 
 . . .
 
-``` r
+```{r echo=TRUE, out.width="50%"}
 couche.4 <- ggplot() +
-  geom_point(data    = data_crabs,
-             mapping = aes(x     = CL, 
-                           y     = CW, 
-                           color = sex))
+  geom_point(data    = data,
+             mapping = aes(x     = Sepal.Length, 
+                           y     = Petal.Length, 
+                           color = Species))
 ```
 
 . . .
 
-``` r
+```{r echo=FALSE, out.width="50%"}
 couche.4
 ```
 
@@ -1715,16 +1656,17 @@ Pour cela, on peut utiliser la fonction `scale_color_manual()` et les arguments 
 
 . . .
 
-``` r
+```{r echo=TRUE, out.width="50%"}
 couche.5 <- couche.4 +
-  scale_color_manual(name   = "Sex :",
-                     values = c("M" = "darkblue", 
-                                "F" = "darkgreen"))
+  scale_color_manual(name   = "Espèces :",
+                     values = c("setosa" = "darkblue", 
+                                "versicolor" = "darkgreen",
+                                "virginica" = "darkgrey"))
 ```
 
 . . .
 
-``` r
+```{r echo=FALSE, out.width="50%"}
 couche.5
 ```
 
@@ -1734,16 +1676,16 @@ couche.5
 
 ## Ggplot pas à pas : Légende v.2
 
-``` r
+```{r echo=TRUE, out.width="50%"}
 couche.6 <- couche.5 +
-  labs(x     = "Carapace Length (mm)",
-       y     = "Carapace Width (mm)",
-       color = "Sex :")
+  labs(x     = "Longueur des sépales (mm)",
+       y     = "Longueur des pétales (mm)",
+       color = "Espèces :")
 ```
 
 . . .
 
-``` r
+```{r echo=FALSE, out.width="50%"}
 couche.6
 ```
 
@@ -1753,13 +1695,13 @@ La fonction `facet_grid()` permet de générer X plots pour chaque valeur d'une 
 
 . . .
 
-``` r
-couche.7 <- couche.6 + facet_grid(~sp)
+```{r echo=TRUE, out.width="50%"}
+couche.7 <- couche.6 + facet_grid(~Species)
 ```
 
 . . .
 
-``` r
+```{r echo=FALSE, out.width="50%"}
 couche.7
 ```
 
@@ -1767,7 +1709,7 @@ couche.7
 
 <br> On utilise une des fonctions `theme_*`.
 
-``` r
+```{r echo=TRUE, out.width="50%"}
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 couche.7 + theme_bw()
@@ -1785,19 +1727,19 @@ La fonction `theme()` permet de lifter BEAUCOUP de choses (`?theme`). <br> Elle 
 
 . . .
 
-``` r
+```{r echo=TRUE, out.width="50%"}
 couche.8 <- couche.7 +
   theme_bw() +
   theme(axis.text       = element_text(size = 11),
         axis.title      = element_text(size = 13),
-        legend.position = "right",
+        legend.position = "left",
         legend.text     = element_text(size = 13),
         legend.title    = element_text(size = 15))
 ```
 
 . . .
 
-``` r
+```{r echo=FALSE, out.width="50%"}
 couche.8
 ```
 
@@ -1815,12 +1757,67 @@ Pour enregistrer votre ggplot, vous pouvez utiliser la fonction `ggsave()` :
 
 ``` r
 ggsave(filename = "le_chemin_vers_le_bon_dossier", 
-       plot     = boxplot_biomass_country_v3,
+       plot     = couche.8,
        width    = 8,
        height   = 5)
 ```
 
+## Exercice 6.1 {auto-animate="true"}
+
+En utilisant les fonctions vues précédemment 
+  - Quel est le pays où la biomasse totale par transect est la plus élevée en **2011** ?
+  - Formattez le jeu de données issues de l'**exercice 3.5** 
+  - représentez la structure du plot
+
+``` r
+```
+
+## Exercice 6.1 : Correction {auto-animate="true"}
+
+En utilisant les fonctions vues précédemment 
+  - Quel est le pays où la biomasse totale par transect est la plus élevée en **2011** ? 
+  - Formattez le jeu de données issues de l'**exercice 3.5** 
+  - représentez la structure du plot
+
+``` r
+biomass_exercice6_1 <- abundance_biomass_survey_exercice3_5 %>%
+  mutate(survey_date_as_date = dmy(survey_date),
+         survey_year = year(survey_date_as_date)) %>%
+  # 1 - Filter les données obtenues en 2011
+  filter(survey_year == 2011) %>%
+  # 2 - Grouper les données pour obtenir la biomasse totale
+  #     par transect dans chacun des pays
+  group_by(country, survey_id) %>%
+  summarise(biomass = sum(biomass)) 
+```
+
+
+``` r
+# Représentation de la structure du plot
+
+p6_1 <- ggplot(data = biomass_exercice6_1, aes(x = country, y = biomass)) 
+
+  ```
+
+
 ## Exercice 6.2 {auto-animate="true"}
+
+ - Représentez les données sous forme de boite à moustache
+
+``` r
+```
+
+## Exercice 6.2 {auto-animate="true"}
+
+ - Représentez les données sous forme de boite à moustache
+
+``` r
+p6_2 <- p6_1 +
+        geom_boxplot()
+```
+
+
+## Exercice 6.3 {auto-animate="true"}
 
 Ce ggplot n'est cependant pas entièrement satisfaisant ... <br> Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.
 
@@ -1828,83 +1825,66 @@ Ce ggplot n'est cependant pas entièrement satisfaisant ... <br> Nous avons du m
 
 Une solution est d'utiliser la fonction `reorder()` pour ordonner l'axe des x.
 
-Utiliser cette fonction pour ordonner l'axe des x de façon décroissante selon la valeur **médiane**. Nommer le plot **boxplot_biomass_country**. <br> N'hésitez pas à regarder l'aide `?reorder` ou à chercher sur internet.
+- Utilisez cette fonction pour ordonner l'axe des x de façon décroissante selon la valeur **médiane**. 
+ - <br> N'hésitez pas à regarder l'aide `?reorder` ou à chercher sur internet.
 
 ``` r
 # Utilisation de reorder
 ```
 
-## Exercice 6.2 : Correction {auto-animate="true"}
-
-``` r
-# Reorder en fonction de la valeur médiane 
-boxplot_biomass_country <- ggplot(data = data_biomass_country) +
-  geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass)) +
-  theme_bw()
-boxplot_biomass_country
-```
-
-## Exercice 6.3 {auto-animate="true"}
-
-Renommer proprement les axes de boxplot_biomass_country.
-
-``` r
-```
-
 ## Exercice 6.3 : Correction {auto-animate="true"}
 
-Renommer proprement les axes de boxplot_biomass_country.
+Ce ggplot n'est cependant pas entièrement satisfaisant ... <br> Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.
 
+. . .
+
+Une solution est d'utiliser la fonction `reorder()` pour ordonner l'axe des x.
+
+- Utilisez cette fonction pour ordonner l'axe des x de façon décroissante selon la valeur **médiane**. 
+ - <br> N'hésitez pas à regarder l'aide `?reorder` ou à chercher sur internet.
 ``` r
-# Solution
-boxplot_biomass_country_v2 <- boxplot_biomass_country +
-  labs(x = "Country", y = "Biomass (g)") +
-  theme_bw()
+# Reorder en fonction de la valeur médiane 
+p6_3 <- ggplot(data = biomass_exercice6_1) +
+  geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass)) 
+p6_3
 ```
 
-``` r
-boxplot_biomass_country_v2
-```
 
 ## Exercice 6.4 {auto-animate="true"}
 
-Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choisir votre arrière plan préféré.
+Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouvez cet argument et appliquez une rotation de 45° à la légende de l'axe x. Choisissez votre arrière plan préféré.
 
 ``` r
 ```
 
 ## Exercice 6.4 : Correction {auto-animate="true"}
 
-Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l'axe x. Choisir votre arrière plan préféré.
+Dans la fonction `element_text()`, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouvez cet argument et appliquez une rotation de 45° à la légende de l'axe x. Choisissez votre arrière plan préféré.
 
 ``` r
 # Solution
-boxplot_biomass_country_v3 <- boxplot_biomass_country_v2 +
+p6_4 <- p6_3 +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+p6_4  
 ```
 
-. . .
-
-``` r
-boxplot_biomass_country_v3
-```
 
 ## Exercice 6.5 {auto-animate="true"}
 
-Enregistrer la figure **boxplot_biomass_country_v3** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
+Enregistrez la figure **p6_4** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
 
 ``` r
 ```
 
 ## Exercice 6.5 : Correction {auto-animate="true"}
 
-Enregistrer la figure **boxplot_biomass_country_v3** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
+Enregistrez la figure **p6_4** au format **.png**, avec une largeur et hauteur appropriées pour lire correctement le plot.
 
 ``` r
 # Solution
 ggsave(filename = "figures/boxplot_biomass_vs_country.png", 
-       plot     = boxplot_biomass_country_v3,
+       plot     = p6_4,
        width    = 8,
        height   = 5)
 ```
@@ -1913,53 +1893,129 @@ ggsave(filename = "figures/boxplot_biomass_vs_country.png",
 
 **fill** vs. **color**
 
-``` r
-# Solution questions 1 & 2
-data_biomass_5country <- data_biomass_country %>%
-  filter(country %in% c("Spain", "United States", "Italy", "Costa Rica", "Panama")) %>%
-  mutate(Continent = case_when((country == "Spain"| country == "Italy") ~ "Europe",
-                                country == "United States" ~ "North America",
-                                TRUE ~ "South America"))
-# Solution pour le plot
-```
 
-## Une petite subtilité concernant les couleurs {auto-animate="true"}
-
-Reconstruction d'un boxplot en **remplissant** chaque boite d'une couleur pour chaque continent.
-
-``` r
-# Solution pour le plot
-ggplot() +
-  geom_boxplot(data    = data_biomass_5country,
-               mapping = aes(x = reorder(country, -biomass, FUN = median), 
-                             y = biomass, 
-                             color = Continent)) +
-  labs(x = "Country", y = "Biomass (g)") + 
-  theme_bw()
-```
-
-## Une petite subtilité concernant les couleurs {auto-animate="true"}
-
-::: incremental
 Ggplot fait la différence entre :
 
 -   la couleur des contours --\> `color = …`
 
 -   la couleur de remplissage --\> `fill = …`
-:::
 
+
+```{r echo=TRUE, out.width="50%"}
+couche.9 <- ggplot() +
+  geom_violin(data    = data,
+               mapping = aes(x = Species, 
+                             y = Petal.Length, 
+                             color = Species)) +
+ theme_bw()
+```
+
+```{r echo=TRUE, out.width="50%"}
+couche.9_2 <- ggplot() +
+  geom_violin(data    = data,
+               mapping = aes(x = Species, 
+                             y = Petal.Length, 
+                             fill = Species)) +
+ theme_bw()
+```
+
+## Une petite subtilité concernant les couleurs {auto-animate="true"}
+
+**fill** vs. **color**
+
+```{r echo=FALSE, out.width="50%"}
+couche.9
+```
+
+## Une petite subtilité concernant les couleurs {auto-animate="true"}
+
+**fill** vs. **color**
+
+```{r echo=FALSE, out.width="50%"}
+couche.9_2 
+```
+
+## Une petite subtilité concernant les couleurs {auto-animate="true"}
 . . .
 
 Pour choisir ses couleurs de contour *vs.* de remplissage, on utilise les fonctions `scale_color_manual()` *vs.* `scale_fill_manual()`.
 
 . . .
+```{r echo=TRUE, out.width="50%"}
+couche.10 <- couche.9_2 +
+  scale_fill_manual(values = c("setosa" = "skyblue", 
+                               "versicolor" = "aquamarine", 
+                               "virginica" = "moccasin"))
+```
+
+## Une petite subtilité concernant les couleurs {auto-animate="true"}
+. . .
+
+Pour choisir ses couleurs de contour *vs.* de remplissage, on utilise les fonctions `scale_color_manual()` *vs.* `scale_fill_manual()`.
+
+. . .
+```{r echo=FALSE, out.width="50%"}
+couche.10 <- couche.9_2 +
+  scale_fill_manual(values = c("setosa" = "skyblue", 
+                               "versicolor" = "aquamarine", 
+                               "virginica" = "moccasin"))
+```
+
+## Exercice 6.6 {auto-animate="true"}
+
+  - Reconstruisez la figure p6_4 en **remplissant** chaque boite d'une couleur pour chaque continent.
+  - Ne garder que les pays suivants  : Espagne, Etats-Unis, Italie, Costa Rica et Panama
+  - Nommez la colonne `continent`
 
 ``` r
-ggplot() +
-  geom_boxplot(data    = data_biomass_5country,
+```
+
+## Exercice 6.6 : Correction {auto-animate="true"}
+
+  - Reconstruisez la figure p6_4 en **remplissant** chaque boite d'une couleur pour chaque continent.
+  - Ne garder que les pays suivants  : Espagne, Etats-Unis, Italie, Costa Rica et Panama
+  - Nommez la colonne `continent`
+  - Renommez les axes `Country` et `Biomass (g)`
+
+``` r
+# Solution 
+biomass_exercice6_6 <- biomass_exercice6_1 %>%
+  filter(country %in% c("Spain", "United States", "Italy", "Costa Rica", "Panama")) %>%
+  mutate(continent = case_when((country == "Spain"| country == "Italy") ~ "Europe",
+                                country == "United States" ~ "North America",
+                                TRUE ~ "South America"))
+
+```
+## Exercice 6.6 : Correction {auto-animate="true"}
+
+  - Reconstruisez la figure p6_4 en **remplissant** chaque boite d'une couleur pour chaque continent.
+  - Ne garder que les pays suivants  : Espagne, Etats-Unis, Italie, Costa Rica et Panama
+  - Nommez la colonne `continent`
+  - Renommez les axes `Country` et `Biomass (g)`
+
+``` r
+# Solution 
+biomass_exercice6_6 <- biomass_exercice6_1 %>%
+  filter(country %in% c("Spain", "United States", "Italy", "Costa Rica", "Panama")) %>%
+  mutate(continent = case_when((country == "Spain"| country == "Italy") ~ "Europe",
+                                country == "United States" ~ "North America",
+                                TRUE ~ "South America"))
+
+```
+
+## Exercice 6.6 : Correction {auto-animate="true"}
+
+  - Reconstruisez la figure p6_4 en **remplissant** chaque boite d'une couleur pour chaque continent.
+  - Ne garder que les pays suivants  : Espagne, Etats-Unis, Italie, Costa Rica et Panama
+  - Nommez la colonne `continent`
+  - Renommez les axes `Country` et `Biomass (g)`
+``` r
+# Solution pour le plot
+p6_6 <- ggplot() +
+  geom_boxplot(data    = biomass_exercice6_6,
                mapping = aes(x = reorder(country, -biomass, FUN = median), 
                              y = biomass, 
-                             fill = Continent)) +
+                             fill = continent)) +
   scale_fill_manual(values = c("Europe" = "skyblue", 
                                "South America" = "aquamarine", 
                                "North America" = "moccasin")) +
@@ -1967,35 +2023,26 @@ ggplot() +
   theme_bw()
 ```
 
-## Une autre subtilité concernant les couleurs
 
-Construisons un nuage de points entre la biomasse et la profondeur
 
-. . .
 
-``` r
-data_biomass_depth <- biomass_survey_abundance_exercice3_6 %>%
-  st_drop_geometry() %>%
-  filter(str_detect(string = survey_date, pattern = "2011")) %>%
-  group_by(country, survey_id) %>%
-  summarise(biomass = sum(biomass),
-            depth   = unique(depth)) 
+## Une autre subtilité concernant les couleurs {auto-animate="true"}
+
+
+
+``` {r echo=TRUE, out.width="50%"}
+couche.4_2 <- ggplot() +
+  geom_point(data    = data,
+             mapping = aes(x     = Sepal.Length, 
+                           y     = Petal.Length, 
+                           color = Species)) +
+                           scale_color_manual(values = "blue")
 ```
 
-``` r
-plot <- ggplot() +
-  geom_point(data    = data_biomass_depth,
-             mapping = aes(x     = depth, 
-                           y     = biomass,
-                           color = biomass)) +
-  scale_color_manual(values = "blue")
-```
 
-. . .
-
-``` r
-plot
-```
+Error in `palette()`:
+! Insufficient values in manual scale. 3 needed but only 1 provided.
+Run `rlang::last_trace()` to see where the error occurred.
 
 . . .
 
@@ -2019,7 +2066,7 @@ Il existe 4 fonctions principales qui permettent de construire des palettes de c
 
 <center>Testons les une par une à partir de la figure suivante</center>
 
-``` r
+``` {r echo=TRUE, out.width="50%"}
 plot <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
   geom_raster() +
   scale_x_continuous(NULL, expand = c(0, 0)) + 
@@ -2035,7 +2082,7 @@ La plus simple, mais pas beaucoup d'options. C'est aussi la palette de couleur p
 
 . . .
 
-``` r
+``` {r echo=TRUE, out.width="50%"}
 #| fig-height: 7
 #| layout: "[50, 50]"
 plot
@@ -2051,7 +2098,7 @@ De belles palettes dont les nuances sont captées par les personnes daltoniennes
 . . .
 
 ::: incremental
-``` r
+``` {r echo=TRUE, out.width="50%"}
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 plot + scale_fill_viridis_c(option = "viridis")
@@ -2087,7 +2134,7 @@ Permet de créer ses propres palettes de couleurs, à partir de 2, 3 ou n couleu
 
 . . .
 
-``` r
+``` {r echo=TRUE, out.width="50%"}
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 plot + scale_fill_gradient(low = "darkblue", high = "darkred")
@@ -2116,7 +2163,7 @@ Les couleurs sont par défaut une nuance de bleus. Certaines précisions peuvent
 
 . . .
 
-``` r
+``` {r echo=TRUE, out.width="50%"}
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 plot + scale_fill_binned(n.breaks = 4)
@@ -2124,29 +2171,6 @@ plot + scale_fill_binned(n.breaks = 7)
 plot + scale_fill_binned(breaks = quantile(faithfuld$density, probs = (seq(0,1,0.3))))
 ```
 
-## Couleurs & variable groupée en classes {.smaller}
-
-### `scale_fill_steps()`
-
-Fonction analogue à `scale_fill_gradient()`.
-
-::: incremental
--   `scale_fill_steps()` avec les arguments `low` et `high`.
-
--   `scale_fill_steps2()` avec les arguments `low`, `mid` et `high`.
-
--   `scale_fill_stepsn()` avec l'argument `colours`.
-:::
-
-. . .
-
-``` r
-#| fig-height: 8
-#| layout: "[30, 30, 30]"
-plot + scale_fill_steps(low = "darkblue", high = "darkred", n.breaks = 8)
-plot + scale_fill_steps2(low = "darkblue", mid = "white", high = "darkred", midpoint = 0.02, n.breaks = 8)
-plot + scale_fill_stepsn(colors = magma(9), n.breaks = 9)
-```
 
 ## Couleurs & variables discrètes
 
@@ -2162,18 +2186,6 @@ Les principales fonctions utilisées permettant de construire des palettes de co
 
 ## Couleurs & variables discrètes
 
-::: incremental
-``` r
-plot <- ggplot() +
-  geom_violin(data    = data_crabs,
-              mapping = aes(x = sex, y = CL, fill = sex), 
-              alpha   = 0.7) +
-  facet_wrap(~sp) +
-  theme_bw()
-```
-:::
-
-. . .
 
 ::: incremental
 ``` r
