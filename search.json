@@ -382,7 +382,14 @@
     "href": "tidyverse-training.html#exercice-3.3-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 3.3 corrigé",
-    "text": "Exercice 3.3 corrigé\n\nA partir du jeu de données issu de l’exercice 3.2 (abundance_exercice3_2) supprimez les lignes ayant des valeurs d’abondance égales à NA\nStocker le résultat dans un objet nommé abundance_exercice3_3\n\n# solution\nabundance_exercice3_3 &lt;- abundance_exercice3_2 %&gt;%\n  drop_na(., \n          abundance)\nCombinaison des variables\n# Séparer une colonne en plusieurs colonnes\nseparate(data, col, into)\n# Créer une seule colonne à partir de plusieurs colonnes\nunite(col, ..., sep)\n# Générer toutes les combinaisons 2 à 2 possibles entre les variables définies\nexpand(data, ...)"
+    "text": "Exercice 3.3 corrigé\n\nA partir du jeu de données issu de l’exercice 3.2 (abundance_exercice3_2) supprimez les lignes ayant des valeurs d’abondance égales à NA\nStocker le résultat dans un objet nommé abundance_exercice3_3\n\n# solution\nabundance_exercice3_3 &lt;- abundance_exercice3_2 %&gt;%\n  drop_na(., \n          abundance)"
+  },
+  {
+    "objectID": "tidyverse-training.html#combinaison-des-variables",
+    "href": "tidyverse-training.html#combinaison-des-variables",
+    "title": "tidyverse-training",
+    "section": "Combinaison des variables",
+    "text": "Combinaison des variables\n# Séparer une colonne en plusieurs colonnes\nseparate(data, col, into)\n# Créer une seule colonne à partir de plusieurs colonnes\nunite(col, ..., sep)\n# Générer toutes les combinaisons 2 à 2 possibles entre les variables définies\nexpand(data, ...)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.4",
@@ -592,42 +599,28 @@
     "href": "tidyverse-training.html#ggplot-cest-comme-la-chirurgie-aesthétique-une-succession-de-couches",
     "title": "tidyverse-training",
     "section": "Ggplot c’est comme la chirurgie aesthétique : une succession de couches",
-    "text": "Ggplot c’est comme la chirurgie aesthétique : une succession de couches\n\n\n\n\nLa Structure\n\n\n\n\n\n\n\n\n\n\n\n\nLe Type de représentation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLes Couleurs\n\n\n\n\n\n\n\n\n\n\n\n\nLe Lifting final"
+    "text": "Ggplot c’est comme la chirurgie aesthétique : une succession de couches\nAu sein de ggplot pour enchainer les opérations on utilise l’opérateur +"
+  },
+  {
+    "objectID": "tidyverse-training.html#section-2",
+    "href": "tidyverse-training.html#section-2",
+    "title": "tidyverse-training",
+    "section": "",
+    "text": "La Structure\n\n\n\n\n\n\n\n\n\n\n\n\nLe Type de représentation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLes Couleurs\n\n\n\n\n\n\n\n\n\n\n\n\nLe Lifting final"
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-la-structure",
     "href": "tidyverse-training.html#ggplot-pas-à-pas-la-structure",
     "title": "tidyverse-training",
     "section": "Ggplot pas à pas : La Structure",
-    "text": "Ggplot pas à pas : La Structure\n\n\nPour la structure de la figure, la fonction à toujours utiliser est ggplot() . Les arguments principaux sont :\n\n\ndata = nom.du.dataframe\nmapping = aes(x = variable.x, y = variable.y)\n\n\nIci le aes signifie aesthetic\nOn verra que d’autres options sont disponibles dans aes comme la taille (size), la couleur (color), la forme (shape) …"
+    "text": "Ggplot pas à pas : La Structure\n\nPour la structure de la figure, la fonction à toujours utiliser est ggplot() . Les arguments principaux sont :\n\n\ndata = nom.du.dataframe\nmapping = aes(x = variable.x, y = variable.y)\n\n\nIci le aes signifie aesthetic\nOn verra que d’autres options sont disponibles dans aes comme la taille (size), la couleur (color), la forme (shape)"
   },
   {
-    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-la-structure-1",
-    "href": "tidyverse-training.html#ggplot-pas-à-pas-la-structure-1",
+    "objectID": "tidyverse-training.html#section-3",
+    "href": "tidyverse-training.html#section-3",
     "title": "tidyverse-training",
-    "section": "Ggplot pas à pas : La Structure",
-    "text": "Ggplot pas à pas : La Structure\n\n\nPour la structure de la figure, la fonction à toujours utiliser est ggplot() . Les arguments principaux sont :\n\n\ndata = nom.du.dataframe\nmapping = aes(x = variable.x, y = variable.y)\n\n\n\n\n   data &lt;- iris\n   p1 &lt;- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) \n   p1"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-6.1",
-    "href": "tidyverse-training.html#exercice-6.1",
-    "title": "tidyverse-training",
-    "section": "Exercice 6.1",
-    "text": "Exercice 6.1\nEn utilisant les fonctions vues précédemment - Quel est le pays où la biomasse totale par transect est la plus élevée ? - Formattez le jeu de données issues de l’exercice 5.1 et représentez visuellement les données sous forme de boites à moustache, seulement pour les données prélevées en 2011. Nommer le jeu de données data_biomass_country.\n# 1 - Filter les données obtenues en 2011\n# 2 - Grouper les données pour obtenir la biomasse totale\n#     par transect dans chacun des pays"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-6.1-correction",
-    "href": "tidyverse-training.html#exercice-6.1-correction",
-    "title": "tidyverse-training",
-    "section": "Exercice 6.1 : Correction",
-    "text": "Exercice 6.1 : Correction\nQuel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l’exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, seulement pour les données prélevées en 2011. Nommer le jeu de données data_biomass_country.\ndata_biomass_country &lt;- biomass_survey_abundance_exercice3_6 %&gt;%\n  st_drop_geometry() %&gt;%\n  # 1 - Filter les données obtenues en 2011\n  filter(str_detect(string = survey_date, pattern = \"2011\")) %&gt;%\n  # 2 - Grouper les données pour obtenir la biomasse totale\n  #     par transect dans chacun des pays\n  group_by(country, survey_id) %&gt;%\n  summarise(biomass = sum(biomass))"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-6.1-correction-1",
-    "href": "tidyverse-training.html#exercice-6.1-correction-1",
-    "title": "tidyverse-training",
-    "section": "Exercice 6.1 : Correction",
-    "text": "Exercice 6.1 : Correction\nQuel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l’exercice 3.6 et représenter visuellement les données sous forme de boites à moustache, seulement pour les données prélevées en 2011. Nommer le jeu de données data_biomass_country.\n# Réalisation les boites à moustache\nggplot(data = data_biomass_country) +\n  geom_boxplot(aes(x = country, y = biomass)) +\n  theme_bw()"
+    "section": "",
+    "text": "data &lt;- iris\n   p1 &lt;- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) \n   p1\n::: {.cell} ::: {.cell-output-display}  ::: :::"
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-choix-du-plot",
@@ -641,161 +634,210 @@
     "href": "tidyverse-training.html#ggplot-pas-à-pas-choix-du-plot-1",
     "title": "tidyverse-training",
     "section": "Ggplot pas à pas : Choix du plot",
-    "text": "Ggplot pas à pas : Choix du plot\n\nL’exemple ici va mener à la réalisation d’un nuage de points. Mais ggplot2 fonctionne de la même façon pour construire un diagramme en barres, une boite à moustache ou autres.\n\n\n\n\naes() dans ggplot()\ncouche.2 &lt;- ggplot(data    = data_crabs,\n                   mapping = aes(x = CL, \n                                 y = CW)) +\n  geom_point()\n\n\n\naes() dans geom_point()\n# Autre solution\ncouche.2.2 &lt;- ggplot() +\n  geom_point(data    = data_crabs,\n             mapping = aes(x = CL, y = CW))\n\n\n\n\n\ncouche.2"
+    "text": "Ggplot pas à pas : Choix du plot\n\nL’exemple ici va mener à la réalisation d’un nuage de points. Mais ggplot2 fonctionne de la même façon pour construire un diagramme en barres, une boite à moustache ou autres.\n\n\n\n\n\naes() dans ggplot()\n\ncouche.2 &lt;- ggplot(data    = data,\n                   mapping = aes(x = Sepal.Length, \n                                 y = Petal.Length)) +\n  geom_point()\n\naes() dans geom_point()\n# Autre solution\ncouche.2.2 &lt;- ggplot() +\n  geom_point(data    = data_crabs,\n             mapping = aes(x = Sepal.Length, \n                                 y = Petal.Length))"
+  },
+  {
+    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-choix-du-plot-2",
+    "href": "tidyverse-training.html#ggplot-pas-à-pas-choix-du-plot-2",
+    "title": "tidyverse-training",
+    "section": "Ggplot pas à pas : Choix du plot",
+    "text": "Ggplot pas à pas : Choix du plot"
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-modèle-linéaire",
     "href": "tidyverse-training.html#ggplot-pas-à-pas-modèle-linéaire",
     "title": "tidyverse-training",
     "section": "Ggplot pas à pas : Modèle linéaire",
-    "text": "Ggplot pas à pas : Modèle linéaire\nTraçons un modèle linéaire et ajoutons la formule et le R² correspondant\n\ncouche.3 &lt;- couche.2 +\n  geom_smooth(color = \"red\", method = \"lm\") # le modèle linéaire \n\n\ncouche.3"
-  },
-  {
-    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-modèle-linéaire-1",
-    "href": "tidyverse-training.html#ggplot-pas-à-pas-modèle-linéaire-1",
-    "title": "tidyverse-training",
-    "section": "Ggplot pas à pas : Modèle linéaire",
-    "text": "Ggplot pas à pas : Modèle linéaire\nTraçons un modéle linéaire et ajoutons la formule et le R² correspondant\ncouche.3 &lt;- couche.2 +\n  geom_smooth(color = \"red\", method = \"lm\") + # le modèle linéaire \n  stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) # la formule\ncouche.3"
-  },
-  {
-    "objectID": "tidyverse-training.html#ggplot-pas-à-pas-modèle-linéaire-2",
-    "href": "tidyverse-training.html#ggplot-pas-à-pas-modèle-linéaire-2",
-    "title": "tidyverse-training",
-    "section": "Ggplot pas à pas : Modèle linéaire",
-    "text": "Ggplot pas à pas : Modèle linéaire\nTraçons un modèle linéaire et ajoutons la formule et le R² correspondant\ncouche.3 &lt;- couche.2 +\n  geom_smooth(color = \"red\", method = \"lm\") + # le modèle linéaire \n  stat_regline_equation(label.y = 52, aes(label = ..eq.label..)) + # la formule\n  stat_regline_equation(label.y = 48, aes(label = ..adj.rr.label..)) # R²\ncouche.3"
+    "text": "Ggplot pas à pas : Modèle linéaire\nTraçons un modèle linéaire\n\n\ncouche.3 &lt;- couche.2 +\n  geom_smooth(color = \"red\", method = \"lm\") # le modèle linéaire"
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-la-couleur",
     "href": "tidyverse-training.html#ggplot-pas-à-pas-la-couleur",
     "title": "tidyverse-training",
     "section": "Ggplot pas à pas : La couleur",
-    "text": "Ggplot pas à pas : La couleur\nDonnons une couleur par sexe. Comme c’est lié à l’esthétisme de la figure, il faut retourner à l’argument color dans la fonction aes().\n\ncouche.4 &lt;- ggplot() +\n  geom_point(data    = data_crabs,\n             mapping = aes(x     = CL, \n                           y     = CW, \n                           color = sex))\n\n\ncouche.4"
+    "text": "Ggplot pas à pas : La couleur\nDonnons une couleur par espèce. Comme c’est lié à l’esthétisme de la figure, il faut retourner à l’argument color dans la fonction aes().\n\n\ncouche.4 &lt;- ggplot() +\n  geom_point(data    = data,\n             mapping = aes(x     = Sepal.Length, \n                           y     = Petal.Length, \n                           color = Species))"
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-couleurs-légende",
     "href": "tidyverse-training.html#ggplot-pas-à-pas-couleurs-légende",
     "title": "tidyverse-training",
     "section": "Ggplot pas à pas : Couleurs & légende",
-    "text": "Ggplot pas à pas : Couleurs & légende\nPour cela, on peut utiliser la fonction scale_color_manual() et les arguments name et values.\n\ncouche.5 &lt;- couche.4 +\n  scale_color_manual(name   = \"Sex :\",\n                     values = c(\"M\" = \"darkblue\", \n                                \"F\" = \"darkgreen\"))\n\n\ncouche.5\n\n\n\nUne autre façon de faire est d’utiliser la fonction labs qui permet de changer les diverses légendes (axes x et y + légende de couleur)"
+    "text": "Ggplot pas à pas : Couleurs & légende\nPour cela, on peut utiliser la fonction scale_color_manual() et les arguments name et values.\n\n\ncouche.5 &lt;- couche.4 +\n  scale_color_manual(name   = \"Espèces :\",\n                     values = c(\"setosa\" = \"darkblue\", \n                                \"versicolor\" = \"darkgreen\",\n                                \"virginica\" = \"darkgrey\"))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUne autre façon de faire est d’utiliser la fonction labs qui permet de changer les diverses légendes (axes x et y + légende de couleur)"
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-légende-v.2",
     "href": "tidyverse-training.html#ggplot-pas-à-pas-légende-v.2",
     "title": "tidyverse-training",
     "section": "Ggplot pas à pas : Légende v.2",
-    "text": "Ggplot pas à pas : Légende v.2\ncouche.6 &lt;- couche.5 +\n  labs(x     = \"Carapace Length (mm)\",\n       y     = \"Carapace Width (mm)\",\n       color = \"Sex :\")\n\ncouche.6"
+    "text": "Ggplot pas à pas : Légende v.2\n\ncouche.6 &lt;- couche.5 +\n  labs(x     = \"Longueur des sépales (mm)\",\n       y     = \"Longueur des pétales (mm)\",\n       color = \"Espèces :\")"
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-le-facet",
     "href": "tidyverse-training.html#ggplot-pas-à-pas-le-facet",
     "title": "tidyverse-training",
     "section": "Ggplot pas à pas : le FACET",
-    "text": "Ggplot pas à pas : le FACET\nLa fonction facet_grid() permet de générer X plots pour chaque valeur d’une variable qualitative (i.e. l’espèce).\n\ncouche.7 &lt;- couche.6 + facet_grid(~sp)\n\n\ncouche.7"
+    "text": "Ggplot pas à pas : le FACET\nLa fonction facet_grid() permet de générer X plots pour chaque valeur d’une variable qualitative (i.e. l’espèce).\n\n\ncouche.7 &lt;- couche.6 + facet_grid(~Species)"
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-larrière-plan",
     "href": "tidyverse-training.html#ggplot-pas-à-pas-larrière-plan",
     "title": "tidyverse-training",
     "section": "Ggplot pas à pas : l’arrière plan",
-    "text": "Ggplot pas à pas : l’arrière plan\n On utilise une des fonctions theme_*.\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\ncouche.7 + theme_bw()\ncouche.7 + theme_classic()\ncouche.7 + theme_dark()\n\n\nUn tas de theme_* existent pour obtenir différentes formats d’arrière plan (voir ici). A vous de choisir votre préféré."
+    "text": "Ggplot pas à pas : l’arrière plan\n On utilise une des fonctions theme_*.\ncouche.7 + theme_bw()\ncouche.7 + theme_classic()\ncouche.7 + theme_dark()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUn tas de theme_* existent pour obtenir différentes formats d’arrière plan (voir ici). A vous de choisir votre préféré."
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-le-lifting-final",
     "href": "tidyverse-training.html#ggplot-pas-à-pas-le-lifting-final",
     "title": "tidyverse-training",
     "section": "Ggplot pas à pas : le lifting final",
-    "text": "Ggplot pas à pas : le lifting final\nLa fonction theme() permet de lifter BEAUCOUP de choses (?theme).  Elle doit toujours apparaître en dernier de façon à ne pas être écrasée par une autre couche.\n\ncouche.8 &lt;- couche.7 +\n  theme_bw() +\n  theme(axis.text       = element_text(size = 11),\n        axis.title      = element_text(size = 13),\n        legend.position = \"right\",\n        legend.text     = element_text(size = 13),\n        legend.title    = element_text(size = 15))\n\n\ncouche.8"
+    "text": "Ggplot pas à pas : le lifting final\nLa fonction theme() permet de lifter BEAUCOUP de choses (?theme).  Elle doit toujours apparaître en dernier de façon à ne pas être écrasée par une autre couche.\n\n\ncouche.8 &lt;- couche.7 +\n  theme_bw() +\n  theme(axis.text       = element_text(size = 11),\n        axis.title      = element_text(size = 13),\n        legend.position = \"left\",\n        legend.text     = element_text(size = 13),\n        legend.title    = element_text(size = 15))"
   },
   {
     "objectID": "tidyverse-training.html#enregistrer-ses-figures",
     "href": "tidyverse-training.html#enregistrer-ses-figures",
     "title": "tidyverse-training",
     "section": "Enregistrer ses figures",
-    "text": "Enregistrer ses figures\nPour enregistrer votre ggplot, vous pouvez utiliser la fonction ggsave() :\n\n\nplot : le nom du ggplot à enregistrer.\nfilename : le_chemin_daccess/le_nom_denregistrement.EXTENSION\nwidth & height : la largeur et hauteur d’enregistrement.\n\n\n\nggsave(filename = \"le_chemin_vers_le_bon_dossier\", \n       plot     = boxplot_biomass_country_v3,\n       width    = 8,\n       height   = 5)"
+    "text": "Enregistrer ses figures\nPour enregistrer votre ggplot, vous pouvez utiliser la fonction ggsave() :\n\n\nplot : le nom du ggplot à enregistrer.\nfilename : le_chemin_daccess/le_nom_denregistrement.EXTENSION\nwidth & height : la largeur et hauteur d’enregistrement.\n\n\n\nggsave(filename = \"le_chemin_vers_le_bon_dossier\", \n       plot     = couche.8,\n       width    = 8,\n       height   = 5)"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.1",
+    "href": "tidyverse-training.html#exercice-6.1",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.1",
+    "text": "Exercice 6.1\nEn utilisant les fonctions vues précédemment - Quel est le pays où la biomasse totale par transect est la plus élevée en 2011 ? - Formattez le jeu de données issues de l’exercice 3.5 - représentez la structure du plot"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.1-correction",
+    "href": "tidyverse-training.html#exercice-6.1-correction",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.1 : Correction",
+    "text": "Exercice 6.1 : Correction\nEn utilisant les fonctions vues précédemment - Quel est le pays où la biomasse totale par transect est la plus élevée en 2011 ? - Formattez le jeu de données issues de l’exercice 3.5 - représentez la structure du plot\nbiomass_exercice6_1 &lt;- abundance_biomass_survey_exercice3_5 %&gt;%\n  mutate(survey_date_as_date = dmy(survey_date),\n         survey_year = year(survey_date_as_date)) %&gt;%\n  # 1 - Filter les données obtenues en 2011\n  filter(survey_year == 2011) %&gt;%\n  # 2 - Grouper les données pour obtenir la biomasse totale\n  #     par transect dans chacun des pays\n  group_by(country, survey_id) %&gt;%\n  summarise(biomass = sum(biomass)) \n# Représentation de la structure du plot\n\np6_1 &lt;- ggplot(data = biomass_exercice6_1, aes(x = country, y = biomass))"
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.2",
     "href": "tidyverse-training.html#exercice-6.2",
     "title": "tidyverse-training",
     "section": "Exercice 6.2",
-    "text": "Exercice 6.2\nCe ggplot n’est cependant pas entièrement satisfaisant …  Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.\n\nUne solution est d’utiliser la fonction reorder() pour ordonner l’axe des x.\nUtiliser cette fonction pour ordonner l’axe des x de façon décroissante selon la valeur médiane. Nommer le plot boxplot_biomass_country.  N’hésitez pas à regarder l’aide ?reorder ou à chercher sur internet.\n# Utilisation de reorder"
+    "text": "Exercice 6.2\n\nReprésentez les données sous forme de boite à moustache"
   },
   {
-    "objectID": "tidyverse-training.html#exercice-6.2-correction",
-    "href": "tidyverse-training.html#exercice-6.2-correction",
+    "objectID": "tidyverse-training.html#exercice-6.2-1",
+    "href": "tidyverse-training.html#exercice-6.2-1",
     "title": "tidyverse-training",
-    "section": "Exercice 6.2 : Correction",
-    "text": "Exercice 6.2 : Correction\n# Reorder en fonction de la valeur médiane \nboxplot_biomass_country &lt;- ggplot(data = data_biomass_country) +\n  geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass)) +\n  theme_bw()\nboxplot_biomass_country"
+    "section": "Exercice 6.2",
+    "text": "Exercice 6.2\n\nReprésentez les données sous forme de boite à moustache\n\np6_2 &lt;- p6_1 +\n        geom_boxplot()"
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.3",
     "href": "tidyverse-training.html#exercice-6.3",
     "title": "tidyverse-training",
     "section": "Exercice 6.3",
-    "text": "Exercice 6.3\nRenommer proprement les axes de boxplot_biomass_country."
+    "text": "Exercice 6.3\nCe ggplot n’est cependant pas entièrement satisfaisant …  Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.\n\nUne solution est d’utiliser la fonction reorder() pour ordonner l’axe des x.\n\nUtilisez cette fonction pour ordonner l’axe des x de façon décroissante selon la valeur médiane.\n N’hésitez pas à regarder l’aide ?reorder ou à chercher sur internet.\n\n# Utilisation de reorder"
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.3-correction",
     "href": "tidyverse-training.html#exercice-6.3-correction",
     "title": "tidyverse-training",
     "section": "Exercice 6.3 : Correction",
-    "text": "Exercice 6.3 : Correction\nRenommer proprement les axes de boxplot_biomass_country.\n# Solution\nboxplot_biomass_country_v2 &lt;- boxplot_biomass_country +\n  labs(x = \"Country\", y = \"Biomass (g)\") +\n  theme_bw()\nboxplot_biomass_country_v2"
+    "text": "Exercice 6.3 : Correction\nCe ggplot n’est cependant pas entièrement satisfaisant …  Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.\n\nUne solution est d’utiliser la fonction reorder() pour ordonner l’axe des x.\n\nUtilisez cette fonction pour ordonner l’axe des x de façon décroissante selon la valeur médiane.\n N’hésitez pas à regarder l’aide ?reorder ou à chercher sur internet.\n\n# Reorder en fonction de la valeur médiane \np6_3 &lt;- ggplot(data = biomass_exercice6_1) +\n  geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass)) \np6_3"
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.4",
     "href": "tidyverse-training.html#exercice-6.4",
     "title": "tidyverse-training",
     "section": "Exercice 6.4",
-    "text": "Exercice 6.4\nDans la fonction element_text(), un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l’axe x. Choisir votre arrière plan préféré."
+    "text": "Exercice 6.4\nDans la fonction element_text(), un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouvez cet argument et appliquez une rotation de 45° à la légende de l’axe x. Choisissez votre arrière plan préféré."
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.4-correction",
     "href": "tidyverse-training.html#exercice-6.4-correction",
     "title": "tidyverse-training",
     "section": "Exercice 6.4 : Correction",
-    "text": "Exercice 6.4 : Correction\nDans la fonction element_text(), un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l’axe x. Choisir votre arrière plan préféré.\n# Solution\nboxplot_biomass_country_v3 &lt;- boxplot_biomass_country_v2 +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))\n\nboxplot_biomass_country_v3"
+    "text": "Exercice 6.4 : Correction\nDans la fonction element_text(), un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouvez cet argument et appliquez une rotation de 45° à la légende de l’axe x. Choisissez votre arrière plan préféré.\n# Solution\np6_4 &lt;- p6_3 +\n  theme_bw() +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))\np6_4"
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.5",
     "href": "tidyverse-training.html#exercice-6.5",
     "title": "tidyverse-training",
     "section": "Exercice 6.5",
-    "text": "Exercice 6.5\nEnregistrer la figure boxplot_biomass_country_v3 au format .png, avec une largeur et hauteur appropriées pour lire correctement le plot."
+    "text": "Exercice 6.5\nEnregistrez la figure p6_4 au format .png, avec une largeur et hauteur appropriées pour lire correctement le plot."
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.5-correction",
     "href": "tidyverse-training.html#exercice-6.5-correction",
     "title": "tidyverse-training",
     "section": "Exercice 6.5 : Correction",
-    "text": "Exercice 6.5 : Correction\nEnregistrer la figure boxplot_biomass_country_v3 au format .png, avec une largeur et hauteur appropriées pour lire correctement le plot.\n# Solution\nggsave(filename = \"figures/boxplot_biomass_vs_country.png\", \n       plot     = boxplot_biomass_country_v3,\n       width    = 8,\n       height   = 5)"
+    "text": "Exercice 6.5 : Correction\nEnregistrez la figure p6_4 au format .png, avec une largeur et hauteur appropriées pour lire correctement le plot.\n# Solution\nggsave(filename = \"figures/boxplot_biomass_vs_country.png\", \n       plot     = p6_4,\n       width    = 8,\n       height   = 5)"
   },
   {
     "objectID": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs",
     "href": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs",
     "title": "tidyverse-training",
     "section": "Une petite subtilité concernant les couleurs",
-    "text": "Une petite subtilité concernant les couleurs\nfill vs. color\n# Solution questions 1 & 2\ndata_biomass_5country &lt;- data_biomass_country %&gt;%\n  filter(country %in% c(\"Spain\", \"United States\", \"Italy\", \"Costa Rica\", \"Panama\")) %&gt;%\n  mutate(Continent = case_when((country == \"Spain\"| country == \"Italy\") ~ \"Europe\",\n                                country == \"United States\" ~ \"North America\",\n                                TRUE ~ \"South America\"))\n# Solution pour le plot"
+    "text": "Une petite subtilité concernant les couleurs\nfill vs. color\nGgplot fait la différence entre :\n\nla couleur des contours –&gt; color = …\nla couleur de remplissage –&gt; fill = …\n\n\ncouche.9 &lt;- ggplot() +\n  geom_violin(data    = data,\n               mapping = aes(x = Species, \n                             y = Petal.Length, \n                             color = Species)) +\n theme_bw()\n\n\ncouche.9_2 &lt;- ggplot() +\n  geom_violin(data    = data,\n               mapping = aes(x = Species, \n                             y = Petal.Length, \n                             fill = Species)) +\n theme_bw()"
   },
   {
     "objectID": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs-1",
     "href": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs-1",
     "title": "tidyverse-training",
     "section": "Une petite subtilité concernant les couleurs",
-    "text": "Une petite subtilité concernant les couleurs\nReconstruction d’un boxplot en remplissant chaque boite d’une couleur pour chaque continent.\n# Solution pour le plot\nggplot() +\n  geom_boxplot(data    = data_biomass_5country,\n               mapping = aes(x = reorder(country, -biomass, FUN = median), \n                             y = biomass, \n                             color = Continent)) +\n  labs(x = \"Country\", y = \"Biomass (g)\") + \n  theme_bw()"
+    "text": "Une petite subtilité concernant les couleurs\nfill vs. color"
   },
   {
     "objectID": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs-2",
     "href": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs-2",
     "title": "tidyverse-training",
     "section": "Une petite subtilité concernant les couleurs",
-    "text": "Une petite subtilité concernant les couleurs\n\nGgplot fait la différence entre :\n\nla couleur des contours –&gt; color = …\nla couleur de remplissage –&gt; fill = …\n\n\n\nPour choisir ses couleurs de contour vs. de remplissage, on utilise les fonctions scale_color_manual() vs. scale_fill_manual().\n\n\nggplot() +\n  geom_boxplot(data    = data_biomass_5country,\n               mapping = aes(x = reorder(country, -biomass, FUN = median), \n                             y = biomass, \n                             fill = Continent)) +\n  scale_fill_manual(values = c(\"Europe\" = \"skyblue\", \n                               \"South America\" = \"aquamarine\", \n                               \"North America\" = \"moccasin\")) +\n  labs(x = \"Country\", y = \"Biomass (g)\") + \n  theme_bw()"
+    "text": "Une petite subtilité concernant les couleurs\nfill vs. color"
+  },
+  {
+    "objectID": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs-3",
+    "href": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs-3",
+    "title": "tidyverse-training",
+    "section": "Une petite subtilité concernant les couleurs",
+    "text": "Une petite subtilité concernant les couleurs\n\nPour choisir ses couleurs de contour vs. de remplissage, on utilise les fonctions scale_color_manual() vs. scale_fill_manual().\n\n\n\ncouche.10 &lt;- couche.9_2 +\n  scale_fill_manual(values = c(\"setosa\" = \"skyblue\", \n                               \"versicolor\" = \"aquamarine\", \n                               \"virginica\" = \"moccasin\"))"
+  },
+  {
+    "objectID": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs-4",
+    "href": "tidyverse-training.html#une-petite-subtilité-concernant-les-couleurs-4",
+    "title": "tidyverse-training",
+    "section": "Une petite subtilité concernant les couleurs",
+    "text": "Une petite subtilité concernant les couleurs\n\nPour choisir ses couleurs de contour vs. de remplissage, on utilise les fonctions scale_color_manual() vs. scale_fill_manual()."
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.6",
+    "href": "tidyverse-training.html#exercice-6.6",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.6",
+    "text": "Exercice 6.6\n\nReconstruisez la figure p6_4 en remplissant chaque boite d’une couleur pour chaque continent.\nNe garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama\nNommez la colonne continent"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.6-correction",
+    "href": "tidyverse-training.html#exercice-6.6-correction",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.6 : Correction",
+    "text": "Exercice 6.6 : Correction\n\nReconstruisez la figure p6_4 en remplissant chaque boite d’une couleur pour chaque continent.\nNe garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama\nNommez la colonne continent\nRenommez les axes Country et Biomass (g)\n\n# Solution \nbiomass_exercice6_6 &lt;- biomass_exercice6_1 %&gt;%\n  filter(country %in% c(\"Spain\", \"United States\", \"Italy\", \"Costa Rica\", \"Panama\")) %&gt;%\n  mutate(continent = case_when((country == \"Spain\"| country == \"Italy\") ~ \"Europe\",\n                                country == \"United States\" ~ \"North America\",\n                                TRUE ~ \"South America\"))"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.6-correction-1",
+    "href": "tidyverse-training.html#exercice-6.6-correction-1",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.6 : Correction",
+    "text": "Exercice 6.6 : Correction\n\nReconstruisez la figure p6_4 en remplissant chaque boite d’une couleur pour chaque continent.\nNe garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama\nNommez la colonne continent\nRenommez les axes Country et Biomass (g)\n\n# Solution \nbiomass_exercice6_6 &lt;- biomass_exercice6_1 %&gt;%\n  filter(country %in% c(\"Spain\", \"United States\", \"Italy\", \"Costa Rica\", \"Panama\")) %&gt;%\n  mutate(continent = case_when((country == \"Spain\"| country == \"Italy\") ~ \"Europe\",\n                                country == \"United States\" ~ \"North America\",\n                                TRUE ~ \"South America\"))"
+  },
+  {
+    "objectID": "tidyverse-training.html#exercice-6.6-correction-2",
+    "href": "tidyverse-training.html#exercice-6.6-correction-2",
+    "title": "tidyverse-training",
+    "section": "Exercice 6.6 : Correction",
+    "text": "Exercice 6.6 : Correction\n\nReconstruisez la figure p6_4 en remplissant chaque boite d’une couleur pour chaque continent.\nNe garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama\nNommez la colonne continent\nRenommez les axes Country et Biomass (g)\n\n# Solution pour le plot\np6_6 &lt;- ggplot() +\n  geom_boxplot(data    = biomass_exercice6_6,\n               mapping = aes(x = reorder(country, -biomass, FUN = median), \n                             y = biomass, \n                             fill = continent)) +\n  scale_fill_manual(values = c(\"Europe\" = \"skyblue\", \n                               \"South America\" = \"aquamarine\", \n                               \"North America\" = \"moccasin\")) +\n  labs(x = \"Country\", y = \"Biomass (g)\") + \n  theme_bw()"
   },
   {
     "objectID": "tidyverse-training.html#une-autre-subtilité-concernant-les-couleurs",
     "href": "tidyverse-training.html#une-autre-subtilité-concernant-les-couleurs",
     "title": "tidyverse-training",
     "section": "Une autre subtilité concernant les couleurs",
-    "text": "Une autre subtilité concernant les couleurs\nConstruisons un nuage de points entre la biomasse et la profondeur\n\ndata_biomass_depth &lt;- biomass_survey_abundance_exercice3_6 %&gt;%\n  st_drop_geometry() %&gt;%\n  filter(str_detect(string = survey_date, pattern = \"2011\")) %&gt;%\n  group_by(country, survey_id) %&gt;%\n  summarise(biomass = sum(biomass),\n            depth   = unique(depth)) \nplot &lt;- ggplot() +\n  geom_point(data    = data_biomass_depth,\n             mapping = aes(x     = depth, \n                           y     = biomass,\n                           color = biomass)) +\n  scale_color_manual(values = \"blue\")\n\n\nplot\n\n\n\nOn ne peut pas donner une seule couleur à une variable continue !"
+    "text": "Une autre subtilité concernant les couleurs\n\ncouche.4_2 &lt;- ggplot() +\n  geom_point(data    = data,\n             mapping = aes(x     = Sepal.Length, \n                           y     = Petal.Length, \n                           color = Species)) +\n                           scale_color_manual(values = \"blue\")\n\nError in palette(): ! Insufficient values in manual scale. 3 needed but only 1 provided. Run rlang::last_trace() to see where the error occurred.\n\n\nOn ne peut pas donner une seule couleur à une variable continue !"
   },
   {
     "objectID": "tidyverse-training.html#couleurs-variables-continues",
@@ -809,21 +851,21 @@
     "href": "tidyverse-training.html#couleurs-variables-continues-1",
     "title": "tidyverse-training",
     "section": "Couleurs & variables continues",
-    "text": "Couleurs & variables continues\n\nTestons les une par une à partir de la figure suivante\n\nplot &lt;- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +\n  geom_raster() +\n  scale_x_continuous(NULL, expand = c(0, 0)) + \n  scale_y_continuous(NULL, expand = c(0, 0)) + \n  theme(legend.position = \"none\")"
+    "text": "Couleurs & variables continues\n\nTestons les une par une à partir de la figure suivante\n\n\nplot &lt;- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +\n  geom_raster() +\n  scale_x_continuous(NULL, expand = c(0, 0)) + \n  scale_y_continuous(NULL, expand = c(0, 0)) + \n  theme(legend.position = \"none\")"
   },
   {
     "objectID": "tidyverse-training.html#couleurs-variables-continues-2",
     "href": "tidyverse-training.html#couleurs-variables-continues-2",
     "title": "tidyverse-training",
     "section": "Couleurs & variables continues",
-    "text": "Couleurs & variables continues\nscale_color_continuous\nLa plus simple, mais pas beaucoup d’options. C’est aussi la palette de couleur par défaut.\n. . .\n#| fig-height: 7\n#| layout: \"[50, 50]\"\nplot\nplot + scale_fill_continuous()"
+    "text": "Couleurs & variables continues\nscale_color_continuous\nLa plus simple, mais pas beaucoup d’options. C’est aussi la palette de couleur par défaut.\n. . .\nplot\nplot + scale_fill_continuous()"
   },
   {
     "objectID": "tidyverse-training.html#couleurs-variables-continues-3",
     "href": "tidyverse-training.html#couleurs-variables-continues-3",
     "title": "tidyverse-training",
     "section": "Couleurs & variables continues",
-    "text": "Couleurs & variables continues\nscale_color_viridis_c\nDe belles palettes dont les nuances sont captées par les personnes daltoniennes.\n. . .\n\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\nplot + scale_fill_viridis_c(option = \"viridis\")\nplot + scale_fill_viridis_c(option = \"inferno\")\nplot + scale_fill_viridis_c(option = \"turbo\")"
+    "text": "Couleurs & variables continues\nscale_color_viridis_c\nDe belles palettes dont les nuances sont captées par les personnes daltoniennes.\n. . .\n\nplot + scale_fill_viridis_c(option = \"viridis\")\nplot + scale_fill_viridis_c(option = \"inferno\")\nplot + scale_fill_viridis_c(option = \"turbo\")"
   },
   {
     "objectID": "tidyverse-training.html#info-générale-sur-les-palettes",
@@ -837,7 +879,7 @@
     "href": "tidyverse-training.html#couleurs-variables-continues-4",
     "title": "tidyverse-training",
     "section": "Couleurs & variables continues",
-    "text": "Couleurs & variables continues\nscale_fill_gradient()\nPermet de créer ses propres palettes de couleurs, à partir de 2, 3 ou n couleurs :\n\n\nscale_fill_gradient() avec les arguments low et high.\nscale_fill_gradient2() avec les arguments low, mid et high.\nscale_fill_gradientn() avec l’argument colours.\n\n\n. . .\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\nplot + scale_fill_gradient(low = \"darkblue\", high = \"darkred\")\nplot + scale_fill_gradient2(low = \"darkblue\", mid = \"white\", high = \"darkred\", midpoint = 0.02)\nplot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))"
+    "text": "Couleurs & variables continues\nscale_fill_gradient()\nPermet de créer ses propres palettes de couleurs, à partir de 2, 3 ou n couleurs :\n\n\nscale_fill_gradient() avec les arguments low et high.\nscale_fill_gradient2() avec les arguments low, mid et high.\nscale_fill_gradientn() avec l’argument colours.\n\n\n. . .\nplot + scale_fill_gradient(low = \"darkblue\", high = \"darkred\")\nplot + scale_fill_gradient2(low = \"darkblue\", mid = \"white\", high = \"darkred\", midpoint = 0.02)\nplot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))"
   },
   {
     "objectID": "tidyverse-training.html#couleurs-variable-groupée-en-classes",
@@ -851,14 +893,7 @@
     "href": "tidyverse-training.html#couleurs-variable-groupée-en-classes-1",
     "title": "tidyverse-training",
     "section": "Couleurs & variable groupée en classes",
-    "text": "Couleurs & variable groupée en classes\nscale_fill_binned()\nLes couleurs sont par défaut une nuance de bleus. Certaines précisions peuvent cependant être apportées.\n. . .\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\nplot + scale_fill_binned(n.breaks = 4)\nplot + scale_fill_binned(n.breaks = 7)\nplot + scale_fill_binned(breaks = quantile(faithfuld$density, probs = (seq(0,1,0.3))))"
-  },
-  {
-    "objectID": "tidyverse-training.html#couleurs-variable-groupée-en-classes-2",
-    "href": "tidyverse-training.html#couleurs-variable-groupée-en-classes-2",
-    "title": "tidyverse-training",
-    "section": "Couleurs & variable groupée en classes",
-    "text": "Couleurs & variable groupée en classes\nscale_fill_steps()\nFonction analogue à scale_fill_gradient().\n\n\nscale_fill_steps() avec les arguments low et high.\nscale_fill_steps2() avec les arguments low, mid et high.\nscale_fill_stepsn() avec l’argument colours.\n\n\n. . .\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\nplot + scale_fill_steps(low = \"darkblue\", high = \"darkred\", n.breaks = 8)\nplot + scale_fill_steps2(low = \"darkblue\", mid = \"white\", high = \"darkred\", midpoint = 0.02, n.breaks = 8)\nplot + scale_fill_stepsn(colors = magma(9), n.breaks = 9)"
+    "text": "Couleurs & variable groupée en classes\nscale_fill_binned()\nLes couleurs sont par défaut une nuance de bleus. Certaines précisions peuvent cependant être apportées.\n. . .\nplot + scale_fill_binned(n.breaks = 4)\nplot + scale_fill_binned(n.breaks = 7)\nplot + scale_fill_binned(breaks = quantile(faithfuld$density, probs = (seq(0,1,0.3))))"
   },
   {
     "objectID": "tidyverse-training.html#couleurs-variables-discrètes",
@@ -872,7 +907,7 @@
     "href": "tidyverse-training.html#couleurs-variables-discrètes-1",
     "title": "tidyverse-training",
     "section": "Couleurs & variables discrètes",
-    "text": "Couleurs & variables discrètes\n\nplot &lt;- ggplot() +\n  geom_violin(data    = data_crabs,\n              mapping = aes(x = sex, y = CL, fill = sex), \n              alpha   = 0.7) +\n  facet_wrap(~sp) +\n  theme_bw()\n\n\n\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\nplot + scale_fill_discrete()\nplot + scale_fill_manual(values = c(\"M\" = \"darkblue\", \"F\" = \"darkgreen\"))\nplot + scale_fill_brewer(palette = \"Set2\")"
+    "text": "Couleurs & variables discrètes\n\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\nplot + scale_fill_discrete()\nplot + scale_fill_manual(values = c(\"M\" = \"darkblue\", \"F\" = \"darkgreen\"))\nplot + scale_fill_brewer(palette = \"Set2\")"
   },
   {
     "objectID": "tidyverse-training.html#ressources-utilisées",

@@ -973,14 +973,14 @@
 <span id="cb31-3"><a></a><span class="co"># Transformer un tableau large en format long</span></span>
 <span id="cb31-4"><a></a><span class="fu">pivot_longer</span>(cols, names_to, values_to, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="exercice-3.1" class="slide level2" data-auto-animate="true">
+<section id="exercice-3.1" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 3.1</h2>
 <ul>
 <li>Observez les données de biomasse (<code>biomass_survey_exercice2_4</code>) et d’abondance. Les données sont elles tidy ? Si non, pourquoi ?</li>
 </ul>
 <div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="exercice-3.1-corrigé" class="slide level2" data-auto-animate="true">
+<section id="exercice-3.1-corrigé" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 3.1 corrigé</h2>
 <ul>
 <li>Observez les données de biomasse (<code>biomass_survey_exercice2_4</code>) et d’abondance. Les données sont elles tidy ? Si non, pourquoi ?</li>
@@ -1040,11 +1040,13 @@
 <li>A partir du jeu de données issu de l’exercice 3.2 (<code>abundance_exercice3_2</code>) supprimez les lignes ayant des valeurs d’abondance égales à NA</li>
 <li>Stocker le résultat dans un objet nommé <code>abundance_exercice3_3</code></li>
 </ul>
-<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="co"># solution</span></span>
-<span id="cb38-2"><a></a>abundance_exercice3_3 <span class="ot">&lt;-</span> abundance_exercice3_2 <span class="sc">%&gt;%</span></span>
-<span id="cb38-3"><a></a>  <span class="fu">drop_na</span>(., </span>
-<span id="cb38-4"><a></a>          abundance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<h3 id="combinaison-des-variables">Combinaison des variables</h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb38-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
+<span id="cb38-2" class="hljs-ln-code"><a></a>abundance_exercice3_3 <span class="ot">&lt;-</span> abundance_exercice3_2 <span class="sc">%&gt;%</span></span>
+<span id="cb38-3" class="hljs-ln-code"><a></a>  <span class="fu">drop_na</span>(., </span>
+<span id="cb38-4" class="hljs-ln-code"><a></a>          abundance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="combinaison-des-variables" class="slide level2">
+<h2>Combinaison des variables</h2>
 <div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="co"># Séparer une colonne en plusieurs colonnes</span></span>
 <span id="cb39-2"><a></a><span class="fu">separate</span>(data, col, into)</span>
 <span id="cb39-3"><a></a><span class="co"># Créer une seule colonne à partir de plusieurs colonnes</span></span>
@@ -1565,6 +1567,10 @@
 </center></section>
 <section id="ggplot-cest-comme-la-chirurgie-aesthétique-une-succession-de-couches" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Ggplot c’est comme la chirurgie <em><code>aes</code></em>thétique : une succession de couches</h2>
+<p>Au sein de ggplot pour enchainer les opérations on utilise l’opérateur <code>+</code></p>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
 <div>
 <div class="columns">
 <div class="column">
@@ -1627,7 +1633,6 @@
 <section id="ggplot-pas-à-pas-la-structure" class="slide level2">
 <h2>Ggplot pas à pas : La Structure</h2>
 <div>
-<div>
 <p>Pour la structure de la figure, la fonction à toujours utiliser est <code>ggplot()</code> . Les arguments principaux sont :</p>
 <div>
 <ul>
@@ -1636,58 +1641,19 @@
 <div>
 <ul>
 <li class="fragment"><p>Ici le <code>aes</code> signifie <strong>aesthetic</strong></p></li>
-<li class="fragment"><p>On verra que d’autres options sont disponibles dans <code>aes</code> comme la taille (<code>size</code>), la couleur (<code>color</code>), la forme (<code>shape</code>) …</p></li>
+<li class="fragment"><p>On verra que d’autres options sont disponibles dans <code>aes</code> comme la taille (<code>size</code>), la couleur (<code>color</code>), la forme (<code>shape</code>)</p></li>
 </ul>
 </div></li>
 </ul>
 </div>
 </div>
-</div>
 </section>
-<section id="ggplot-pas-à-pas-la-structure-1" class="slide level2">
-<h2>Ggplot pas à pas : La Structure</h2>
-<div>
-<div>
-<p>Pour la structure de la figure, la fonction à toujours utiliser est <code>ggplot()</code> . Les arguments principaux sont :</p>
-<div>
-<ul>
-<li><p><code>data = nom.du.dataframe</code></p></li>
-<li><p><code>mapping = aes(x = variable.x, y = variable.y)</code></p></li>
-</ul>
-</div>
-</div>
-</div>
+<section id="section-3" class="slide level2">
+<h2></h2>
 <div class="sourceCode" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a></a>   data <span class="ot">&lt;-</span> iris</span>
 <span id="cb67-2"><a></a>   p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width)) </span>
 <span id="cb67-3"><a></a>   p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:75.0%" class="r-stretch"></section>
-<section id="exercice-6.1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 6.1</h2>
-<p>En utilisant les fonctions vues précédemment - Quel est le pays où la biomasse totale par transect est la plus élevée ? - Formattez le jeu de données issues de l’<strong>exercice 5.1</strong> et représentez visuellement les données sous forme de boites à moustache, <strong>seulement pour les données prélevées en 2011</strong>. Nommer le jeu de données <strong>data_biomass_country</strong>.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb68-1" class="hljs-ln-code"><a></a><span class="co"># 1 - Filter les données obtenues en 2011</span></span>
-<span id="cb68-2" class="hljs-ln-code"><a></a><span class="co"># 2 - Grouper les données pour obtenir la biomasse totale</span></span>
-<span id="cb68-3" class="hljs-ln-code"><a></a><span class="co">#     par transect dans chacun des pays</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="exercice-6.1-correction" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 6.1 : Correction</h2>
-<p>Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l’<strong>exercice 3.6</strong> et représenter visuellement les données sous forme de boites à moustache, <strong>seulement pour les données prélevées en 2011</strong>. Nommer le jeu de données <strong>data_biomass_country</strong>.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb69-1" class="hljs-ln-code"><a></a>data_biomass_country <span class="ot">&lt;-</span> biomass_survey_abundance_exercice3_6 <span class="sc">%&gt;%</span></span>
-<span id="cb69-2" class="hljs-ln-code"><a></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb69-3" class="hljs-ln-code"><a></a>  <span class="co"># 1 - Filter les données obtenues en 2011</span></span>
-<span id="cb69-4" class="hljs-ln-code"><a></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="at">string =</span> survey_date, <span class="at">pattern =</span> <span class="st">"2011"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb69-5" class="hljs-ln-code"><a></a>  <span class="co"># 2 - Grouper les données pour obtenir la biomasse totale</span></span>
-<span id="cb69-6" class="hljs-ln-code"><a></a>  <span class="co">#     par transect dans chacun des pays</span></span>
-<span id="cb69-7" class="hljs-ln-code"><a></a>  <span class="fu">group_by</span>(country, survey_id) <span class="sc">%&gt;%</span></span>
-<span id="cb69-8" class="hljs-ln-code"><a></a>  <span class="fu">summarise</span>(<span class="at">biomass =</span> <span class="fu">sum</span>(biomass)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="exercice-6.1-correction-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 6.1 : Correction</h2>
-<p>Quel est le pays dans lequel la biomasse totale par transect est la plus forte ? Formatter le jeu de données issues de l’<strong>exercice 3.6</strong> et représenter visuellement les données sous forme de boites à moustache, <strong>seulement pour les données prélevées en 2011</strong>. Nommer le jeu de données <strong>data_biomass_country</strong>.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb70-1" class="hljs-ln-code"><a></a><span class="co"># Réalisation les boites à moustache</span></span>
-<span id="cb70-2" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_biomass_country) <span class="sc">+</span></span>
-<span id="cb70-3" class="hljs-ln-code"><a></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
-<span id="cb70-4" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::: {.cell} ::: {.cell-output-display} <img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:75.0%"> ::: :::</p>
 </section>
 <section id="ggplot-pas-à-pas-choix-du-plot" class="slide level2">
 <h2>Ggplot pas à pas : Choix du plot</h2>
@@ -1750,83 +1716,96 @@
 <div>
 <p>L’exemple ici va mener à la réalisation d’un <strong>nuage de points</strong>. Mais <code>ggplot2</code> fonctionne de la même façon pour construire un <strong>diagramme en barres</strong>, <strong>une boite à moustache</strong> ou autres.</p>
 <div>
-<div class="columns">
-<div class="column" style="width:50%;">
+
+</div>
+</div>
 <ul>
-<li class="fragment"><p><code>aes()</code> dans <code>ggplot()</code></p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a>couche<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data    =</span> data_crabs,</span>
-<span id="cb71-2"><a></a>                   <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CL, </span>
-<span id="cb71-3"><a></a>                                 <span class="at">y =</span> CW)) <span class="sc">+</span></span>
-<span id="cb71-4"><a></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><code>aes()</code> dans <code>ggplot()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a>couche<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data    =</span> data,</span>
+<span id="cb68-2"><a></a>                   <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, </span>
+<span id="cb68-3"><a></a>                                 <span class="at">y =</span> Petal.Length)) <span class="sc">+</span></span>
+<span id="cb68-4"><a></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p><code>aes()</code> dans <code>geom_point()</code></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a><span class="co"># Autre solution</span></span>
+<span id="cb69-2"><a></a>couche.<span class="fl">2.2</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb69-3"><a></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data_crabs,</span>
+<span id="cb69-4"><a></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, </span>
+<span id="cb69-5"><a></a>                                 <span class="at">y =</span> Petal.Length))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-</div><div class="column" style="width:50%;">
-<ul>
-<li class="fragment"><p><code>aes()</code> dans <code>geom_point()</code></p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a><span class="co"># Autre solution</span></span>
-<span id="cb72-2"><a></a>couche.<span class="fl">2.2</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb72-3"><a></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data_crabs,</span>
-<span id="cb72-4"><a></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> CL, <span class="at">y =</span> CW))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul>
-</div></div>
-</div>
-</div>
-<div class="fragment">
-<div class="sourceCode" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a>couche<span class="fl">.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
+<section id="ggplot-pas-à-pas-choix-du-plot-2" class="slide level2">
+<h2>Ggplot pas à pas : Choix du plot</h2>
+
+<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:75.0%" class="r-stretch"></section>
 <section id="ggplot-pas-à-pas-modèle-linéaire" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Ggplot pas à pas : Modèle linéaire</h2>
-<p>Traçons un modèle linéaire et ajoutons la formule et le R² correspondant</p>
+<p>Traçons un modèle linéaire</p>
 <div class="fragment">
-<div class="sourceCode" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a></a>couche<span class="fl">.3</span> <span class="ot">&lt;-</span> couche<span class="fl">.2</span> <span class="sc">+</span></span>
-<span id="cb74-2"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">method =</span> <span class="st">"lm"</span>) <span class="co"># le modèle linéaire </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb70-1" class="hljs-ln-code"><a></a>couche<span class="fl">.3</span> <span class="ot">&lt;-</span> couche<span class="fl">.2</span> <span class="sc">+</span></span>
+<span id="cb70-2" class="hljs-ln-code"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">method =</span> <span class="st">"lm"</span>) <span class="co"># le modèle linéaire </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a>couche<span class="fl">.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:50.0%"></p>
+</figure>
 </div>
-</section>
-<section id="ggplot-pas-à-pas-modèle-linéaire-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Ggplot pas à pas : Modèle linéaire</h2>
-<p>Traçons un modéle linéaire et ajoutons la formule et le R² correspondant</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb76-1" class="hljs-ln-code"><a></a>couche<span class="fl">.3</span> <span class="ot">&lt;-</span> couche<span class="fl">.2</span> <span class="sc">+</span></span>
-<span id="cb76-2" class="hljs-ln-code"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> <span class="co"># le modèle linéaire </span></span>
-<span id="cb76-3" class="hljs-ln-code"><a></a>  <span class="fu">stat_regline_equation</span>(<span class="at">label.y =</span> <span class="dv">52</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..eq.label..)) <span class="co"># la formule</span></span>
-<span id="cb76-4" class="hljs-ln-code"><a></a>couche<span class="fl">.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="ggplot-pas-à-pas-modèle-linéaire-2" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Ggplot pas à pas : Modèle linéaire</h2>
-<p>Traçons un modèle linéaire et ajoutons la formule et le R² correspondant</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb77-1" class="hljs-ln-code"><a></a>couche<span class="fl">.3</span> <span class="ot">&lt;-</span> couche<span class="fl">.2</span> <span class="sc">+</span></span>
-<span id="cb77-2" class="hljs-ln-code"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> <span class="co"># le modèle linéaire </span></span>
-<span id="cb77-3" class="hljs-ln-code"><a></a>  <span class="fu">stat_regline_equation</span>(<span class="at">label.y =</span> <span class="dv">52</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..eq.label..)) <span class="sc">+</span> <span class="co"># la formule</span></span>
-<span id="cb77-4" class="hljs-ln-code"><a></a>  <span class="fu">stat_regline_equation</span>(<span class="at">label.y =</span> <span class="dv">48</span>, <span class="fu">aes</span>(<span class="at">label =</span> ..adj.rr.label..)) <span class="co"># R²</span></span>
-<span id="cb77-5" class="hljs-ln-code"><a></a>couche<span class="fl">.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="ggplot-pas-à-pas-la-couleur" class="slide level2">
 <h2>Ggplot pas à pas : La couleur</h2>
-<p>Donnons une couleur par sexe. Comme c’est lié à l’esthétisme de la figure, il faut retourner à l’argument <code>color</code> dans la fonction <code>aes()</code>.</p>
+<p>Donnons une couleur par espèce. Comme c’est lié à l’esthétisme de la figure, il faut retourner à l’argument <code>color</code> dans la fonction <code>aes()</code>.</p>
 <div class="fragment">
-<div class="sourceCode" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a></a>couche<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb78-2"><a></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data_crabs,</span>
-<span id="cb78-3"><a></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x     =</span> CL, </span>
-<span id="cb78-4"><a></a>                           <span class="at">y     =</span> CW, </span>
-<span id="cb78-5"><a></a>                           <span class="at">color =</span> sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a>couche<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb71-2"><a></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data,</span>
+<span id="cb71-3"><a></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x     =</span> Sepal.Length, </span>
+<span id="cb71-4"><a></a>                           <span class="at">y     =</span> Petal.Length, </span>
+<span id="cb71-5"><a></a>                           <span class="at">color =</span> Species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a></a>couche<span class="fl">.4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-12-1.png" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="ggplot-pas-à-pas-couleurs-légende" class="slide level2 smaller">
 <h2>Ggplot pas à pas : Couleurs &amp; légende</h2>
 <p>Pour cela, on peut utiliser la fonction <code>scale_color_manual()</code> et les arguments <code>name</code> et <code>values</code>.</p>
 <div class="fragment">
-<div class="sourceCode" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a></a>couche<span class="fl">.5</span> <span class="ot">&lt;-</span> couche<span class="fl">.4</span> <span class="sc">+</span></span>
-<span id="cb80-2"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">name   =</span> <span class="st">"Sex :"</span>,</span>
-<span id="cb80-3"><a></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, </span>
-<span id="cb80-4"><a></a>                                <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a>couche<span class="fl">.5</span> <span class="ot">&lt;-</span> couche<span class="fl">.4</span> <span class="sc">+</span></span>
+<span id="cb72-2"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">name   =</span> <span class="st">"Espèces :"</span>,</span>
+<span id="cb72-3"><a></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"setosa"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, </span>
+<span id="cb72-4"><a></a>                                <span class="st">"versicolor"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb72-5"><a></a>                                <span class="st">"virginica"</span> <span class="ot">=</span> <span class="st">"darkgrey"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a></a>couche<span class="fl">.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-14-1.png" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 </div>
 <div class="fragment">
 <center>
@@ -1836,32 +1815,63 @@ Une autre façon de faire est d’utiliser la fonction <code>labs</code> qui per
 </section>
 <section id="ggplot-pas-à-pas-légende-v.2" class="slide level2">
 <h2>Ggplot pas à pas : Légende v.2</h2>
-<div class="sourceCode" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a></a>couche<span class="fl">.6</span> <span class="ot">&lt;-</span> couche<span class="fl">.5</span> <span class="sc">+</span></span>
-<span id="cb82-2"><a></a>  <span class="fu">labs</span>(<span class="at">x     =</span> <span class="st">"Carapace Length (mm)"</span>,</span>
-<span id="cb82-3"><a></a>       <span class="at">y     =</span> <span class="st">"Carapace Width (mm)"</span>,</span>
-<span id="cb82-4"><a></a>       <span class="at">color =</span> <span class="st">"Sex :"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a>couche<span class="fl">.6</span> <span class="ot">&lt;-</span> couche<span class="fl">.5</span> <span class="sc">+</span></span>
+<span id="cb73-2"><a></a>  <span class="fu">labs</span>(<span class="at">x     =</span> <span class="st">"Longueur des sépales (mm)"</span>,</span>
+<span id="cb73-3"><a></a>       <span class="at">y     =</span> <span class="st">"Longueur des pétales (mm)"</span>,</span>
+<span id="cb73-4"><a></a>       <span class="at">color =</span> <span class="st">"Espèces :"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="fragment">
-<div class="sourceCode" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a></a>couche<span class="fl">.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-16-1.png" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="ggplot-pas-à-pas-le-facet" class="slide level2">
 <h2>Ggplot pas à pas : le FACET</h2>
 <p>La fonction <code>facet_grid()</code> permet de générer X plots pour chaque valeur d’une variable qualitative (i.e.&nbsp;l’espèce).</p>
 <div class="fragment">
-<div class="sourceCode" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a></a>couche<span class="fl">.7</span> <span class="ot">&lt;-</span> couche<span class="fl">.6</span> <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>sp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a></a>couche<span class="fl">.7</span> <span class="ot">&lt;-</span> couche<span class="fl">.6</span> <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a></a>couche<span class="fl">.7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-18-1.png" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="ggplot-pas-à-pas-larrière-plan" class="slide level2">
 <h2>Ggplot pas à pas : l’arrière plan</h2>
 <p><br> On utilise une des fonctions <code>theme_*</code>.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a></a><span class="co">#| fig-height: 8</span></span>
-<span id="cb86-2"><a></a><span class="co">#| layout: "[30, 30, 30]"</span></span>
-<span id="cb86-3"><a></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
-<span id="cb86-4"><a></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
-<span id="cb86-5"><a></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_dark</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb75-2"><a></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
+<span id="cb75-3"><a></a>couche<span class="fl">.7</span> <span class="sc">+</span> <span class="fu">theme_dark</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout="[30, 30, 30]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-19-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-19-2.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-19-3.png"></p>
+</div>
+</div>
+</div>
 <div class="fragment">
 <center>
 Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’arrière plan (voir <a href="http://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements">ici</a>). A vous de choisir votre préféré.
@@ -1872,16 +1882,26 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 <h2>Ggplot pas à pas : le lifting final</h2>
 <p>La fonction <code>theme()</code> permet de lifter BEAUCOUP de choses (<code>?theme</code>). <br> Elle doit toujours apparaître en dernier de façon à ne pas être écrasée par une autre couche.</p>
 <div class="fragment">
-<div class="sourceCode" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a></a>couche<span class="fl">.8</span> <span class="ot">&lt;-</span> couche<span class="fl">.7</span> <span class="sc">+</span></span>
-<span id="cb87-2"><a></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb87-3"><a></a>  <span class="fu">theme</span>(<span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
-<span id="cb87-4"><a></a>        <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
-<span id="cb87-5"><a></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
-<span id="cb87-6"><a></a>        <span class="at">legend.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
-<span id="cb87-7"><a></a>        <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a></a>couche<span class="fl">.8</span> <span class="ot">&lt;-</span> couche<span class="fl">.7</span> <span class="sc">+</span></span>
+<span id="cb76-2"><a></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb76-3"><a></a>  <span class="fu">theme</span>(<span class="at">axis.text       =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb76-4"><a></a>        <span class="at">axis.title      =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb76-5"><a></a>        <span class="at">legend.position =</span> <span class="st">"left"</span>,</span>
+<span id="cb76-6"><a></a>        <span class="at">legend.text     =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb76-7"><a></a>        <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a></a>couche<span class="fl">.8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="enregistrer-ses-figures" class="slide level2">
@@ -1895,141 +1915,228 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 </ul>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"le_chemin_vers_le_bon_dossier"</span>, </span>
-<span id="cb89-2"><a></a>       <span class="at">plot     =</span> boxplot_biomass_country_v3,</span>
-<span id="cb89-3"><a></a>       <span class="at">width    =</span> <span class="dv">8</span>,</span>
-<span id="cb89-4"><a></a>       <span class="at">height   =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"le_chemin_vers_le_bon_dossier"</span>, </span>
+<span id="cb77-2"><a></a>       <span class="at">plot     =</span> couche<span class="fl">.8</span>,</span>
+<span id="cb77-3"><a></a>       <span class="at">width    =</span> <span class="dv">8</span>,</span>
+<span id="cb77-4"><a></a>       <span class="at">height   =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="exercice-6.1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.1</h2>
+<p>En utilisant les fonctions vues précédemment - Quel est le pays où la biomasse totale par transect est la plus élevée en <strong>2011</strong> ? - Formattez le jeu de données issues de l’<strong>exercice 3.5</strong> - représentez la structure du plot</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exercice-6.1-correction" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.1 : Correction</h2>
+<p>En utilisant les fonctions vues précédemment - Quel est le pays où la biomasse totale par transect est la plus élevée en <strong>2011</strong> ? - Formattez le jeu de données issues de l’<strong>exercice 3.5</strong> - représentez la structure du plot</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a></a>biomass_exercice6_1 <span class="ot">&lt;-</span> abundance_biomass_survey_exercice3_5 <span class="sc">%&gt;%</span></span>
+<span id="cb79-2"><a></a>  <span class="fu">mutate</span>(<span class="at">survey_date_as_date =</span> <span class="fu">dmy</span>(survey_date),</span>
+<span id="cb79-3"><a></a>         <span class="at">survey_year =</span> <span class="fu">year</span>(survey_date_as_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb79-4"><a></a>  <span class="co"># 1 - Filter les données obtenues en 2011</span></span>
+<span id="cb79-5"><a></a>  <span class="fu">filter</span>(survey_year <span class="sc">==</span> <span class="dv">2011</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb79-6"><a></a>  <span class="co"># 2 - Grouper les données pour obtenir la biomasse totale</span></span>
+<span id="cb79-7"><a></a>  <span class="co">#     par transect dans chacun des pays</span></span>
+<span id="cb79-8"><a></a>  <span class="fu">group_by</span>(country, survey_id) <span class="sc">%&gt;%</span></span>
+<span id="cb79-9"><a></a>  <span class="fu">summarise</span>(<span class="at">biomass =</span> <span class="fu">sum</span>(biomass)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a></a><span class="co"># Représentation de la structure du plot</span></span>
+<span id="cb80-2"><a></a></span>
+<span id="cb80-3"><a></a>p6_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> biomass_exercice6_1, <span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> biomass)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-6.2" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.2</h2>
-<p>Ce ggplot n’est cependant pas entièrement satisfaisant … <br> Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.</p>
-<div class="fragment">
-<p>Une solution est d’utiliser la fonction <code>reorder()</code> pour ordonner l’axe des x.</p>
-<p>Utiliser cette fonction pour ordonner l’axe des x de façon décroissante selon la valeur <strong>médiane</strong>. Nommer le plot <strong>boxplot_biomass_country</strong>. <br> N’hésitez pas à regarder l’aide <code>?reorder</code> ou à chercher sur internet.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb90-1" class="hljs-ln-code"><a></a><span class="co"># Utilisation de reorder</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<ul>
+<li>Représentez les données sous forme de boite à moustache</li>
+</ul>
+<div class="sourceCode" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="exercice-6.2-correction" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Exercice 6.2 : Correction</h2>
-<div class="sourceCode" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb91-1" class="hljs-ln-code"><a></a><span class="co"># Reorder en fonction de la valeur médiane </span></span>
-<span id="cb91-2" class="hljs-ln-code"><a></a>boxplot_biomass_country <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> data_biomass_country) <span class="sc">+</span></span>
-<span id="cb91-3" class="hljs-ln-code"><a></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(country, <span class="sc">-</span>biomass, <span class="at">FUN =</span> median), <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
-<span id="cb91-4" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb91-5" class="hljs-ln-code"><a></a>boxplot_biomass_country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="exercice-6.2-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.2</h2>
+<ul>
+<li>Représentez les données sous forme de boite à moustache</li>
+</ul>
+<div class="sourceCode" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb82-1" class="hljs-ln-code"><a></a>p6_2 <span class="ot">&lt;-</span> p6_1 <span class="sc">+</span></span>
+<span id="cb82-2" class="hljs-ln-code"><a></a>        <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-6.3" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.3</h2>
-<p>Renommer proprement les axes de boxplot_biomass_country.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ce ggplot n’est cependant pas entièrement satisfaisant … <br> Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.</p>
+<div class="fragment">
+<p>Une solution est d’utiliser la fonction <code>reorder()</code> pour ordonner l’axe des x.</p>
+<ul>
+<li>Utilisez cette fonction pour ordonner l’axe des x de façon décroissante selon la valeur <strong>médiane</strong>.</li>
+<li><br> N’hésitez pas à regarder l’aide <code>?reorder</code> ou à chercher sur internet.</li>
+</ul>
+<div class="sourceCode" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb83-1" class="hljs-ln-code"><a></a><span class="co"># Utilisation de reorder</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="exercice-6.3-correction" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.3 : Correction</h2>
-<p>Renommer proprement les axes de boxplot_biomass_country.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a></a><span class="co"># Solution</span></span>
-<span id="cb93-2"><a></a>boxplot_biomass_country_v2 <span class="ot">&lt;-</span> boxplot_biomass_country <span class="sc">+</span></span>
-<span id="cb93-3"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>) <span class="sc">+</span></span>
-<span id="cb93-4"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a></a>boxplot_biomass_country_v2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ce ggplot n’est cependant pas entièrement satisfaisant … <br> Nous avons du mal à savoir visuellement quelle est la 2nd ou la 3ème nation avec le plus de biomasse.</p>
+<div class="fragment">
+<p>Une solution est d’utiliser la fonction <code>reorder()</code> pour ordonner l’axe des x.</p>
+<ul>
+<li>Utilisez cette fonction pour ordonner l’axe des x de façon décroissante selon la valeur <strong>médiane</strong>.</li>
+<li><br> N’hésitez pas à regarder l’aide <code>?reorder</code> ou à chercher sur internet.</li>
+</ul>
+<div class="sourceCode" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb84-1" class="hljs-ln-code"><a></a><span class="co"># Reorder en fonction de la valeur médiane </span></span>
+<span id="cb84-2" class="hljs-ln-code"><a></a>p6_3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> biomass_exercice6_1) <span class="sc">+</span></span>
+<span id="cb84-3" class="hljs-ln-code"><a></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(country, <span class="sc">-</span>biomass, <span class="at">FUN =</span> median), <span class="at">y =</span> biomass)) </span>
+<span id="cb84-4" class="hljs-ln-code"><a></a>p6_3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="exercice-6.4" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.4</h2>
-<p>Dans la fonction <code>element_text()</code>, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l’axe x. Choisir votre arrière plan préféré.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Dans la fonction <code>element_text()</code>, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouvez cet argument et appliquez une rotation de 45° à la légende de l’axe x. Choisissez votre arrière plan préféré.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-6.4-correction" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.4 : Correction</h2>
-<p>Dans la fonction <code>element_text()</code>, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouver cet argument et appliquer une rotation de 45° à la légende de l’axe x. Choisir votre arrière plan préféré.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a></a><span class="co"># Solution</span></span>
-<span id="cb96-2"><a></a>boxplot_biomass_country_v3 <span class="ot">&lt;-</span> boxplot_biomass_country_v2 <span class="sc">+</span></span>
-<span id="cb96-3"><a></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb96-4"><a></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="fragment">
-<div class="sourceCode" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a></a>boxplot_biomass_country_v3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>Dans la fonction <code>element_text()</code>, un argument permet de tourner les légendes des axes pour que les pays soient plus lisibles. Trouvez cet argument et appliquez une rotation de 45° à la légende de l’axe x. Choisissez votre arrière plan préféré.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb86-1" class="hljs-ln-code"><a></a><span class="co"># Solution</span></span>
+<span id="cb86-2" class="hljs-ln-code"><a></a>p6_4 <span class="ot">&lt;-</span> p6_3 <span class="sc">+</span></span>
+<span id="cb86-3" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb86-4" class="hljs-ln-code"><a></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb86-5" class="hljs-ln-code"><a></a>p6_4  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-6.5" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.5</h2>
-<p>Enregistrer la figure <strong>boxplot_biomass_country_v3</strong> au format <strong>.png</strong>, avec une largeur et hauteur appropriées pour lire correctement le plot.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Enregistrez la figure <strong>p6_4</strong> au format <strong>.png</strong>, avec une largeur et hauteur appropriées pour lire correctement le plot.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-6.5-correction" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.5 : Correction</h2>
-<p>Enregistrer la figure <strong>boxplot_biomass_country_v3</strong> au format <strong>.png</strong>, avec une largeur et hauteur appropriées pour lire correctement le plot.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb99-1" class="hljs-ln-code"><a></a><span class="co"># Solution</span></span>
-<span id="cb99-2" class="hljs-ln-code"><a></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"figures/boxplot_biomass_vs_country.png"</span>, </span>
-<span id="cb99-3" class="hljs-ln-code"><a></a>       <span class="at">plot     =</span> boxplot_biomass_country_v3,</span>
-<span id="cb99-4" class="hljs-ln-code"><a></a>       <span class="at">width    =</span> <span class="dv">8</span>,</span>
-<span id="cb99-5" class="hljs-ln-code"><a></a>       <span class="at">height   =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Enregistrez la figure <strong>p6_4</strong> au format <strong>.png</strong>, avec une largeur et hauteur appropriées pour lire correctement le plot.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb88-1" class="hljs-ln-code"><a></a><span class="co"># Solution</span></span>
+<span id="cb88-2" class="hljs-ln-code"><a></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"figures/boxplot_biomass_vs_country.png"</span>, </span>
+<span id="cb88-3" class="hljs-ln-code"><a></a>       <span class="at">plot     =</span> p6_4,</span>
+<span id="cb88-4" class="hljs-ln-code"><a></a>       <span class="at">width    =</span> <span class="dv">8</span>,</span>
+<span id="cb88-5" class="hljs-ln-code"><a></a>       <span class="at">height   =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="une-petite-subtilité-concernant-les-couleurs" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Une petite subtilité concernant les couleurs</h2>
 <p><strong>fill</strong> vs.&nbsp;<strong>color</strong></p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb100-1" class="hljs-ln-code"><a></a><span class="co"># Solution questions 1 &amp; 2</span></span>
-<span id="cb100-2" class="hljs-ln-code"><a></a>data_biomass_5country <span class="ot">&lt;-</span> data_biomass_country <span class="sc">%&gt;%</span></span>
-<span id="cb100-3" class="hljs-ln-code"><a></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Spain"</span>, <span class="st">"United States"</span>, <span class="st">"Italy"</span>, <span class="st">"Costa Rica"</span>, <span class="st">"Panama"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb100-4" class="hljs-ln-code"><a></a>  <span class="fu">mutate</span>(<span class="at">Continent =</span> <span class="fu">case_when</span>((country <span class="sc">==</span> <span class="st">"Spain"</span><span class="sc">|</span> country <span class="sc">==</span> <span class="st">"Italy"</span>) <span class="sc">~</span> <span class="st">"Europe"</span>,</span>
-<span id="cb100-5" class="hljs-ln-code"><a></a>                                country <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">~</span> <span class="st">"North America"</span>,</span>
-<span id="cb100-6" class="hljs-ln-code"><a></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"South America"</span>))</span>
-<span id="cb100-7" class="hljs-ln-code"><a></a><span class="co"># Solution pour le plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ggplot fait la différence entre :</p>
+<ul>
+<li><p>la couleur des contours –&gt; <code>color = …</code></p></li>
+<li><p>la couleur de remplissage –&gt; <code>fill = …</code></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a></a>couche<span class="fl">.9</span> <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb89-2"><a></a>  <span class="fu">geom_violin</span>(<span class="at">data    =</span> data,</span>
+<span id="cb89-3"><a></a>               <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Species, </span>
+<span id="cb89-4"><a></a>                             <span class="at">y =</span> Petal.Length, </span>
+<span id="cb89-5"><a></a>                             <span class="at">color =</span> Species)) <span class="sc">+</span></span>
+<span id="cb89-6"><a></a> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a></a>couche<span class="fl">.9</span>_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb90-2"><a></a>  <span class="fu">geom_violin</span>(<span class="at">data    =</span> data,</span>
+<span id="cb90-3"><a></a>               <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Species, </span>
+<span id="cb90-4"><a></a>                             <span class="at">y =</span> Petal.Length, </span>
+<span id="cb90-5"><a></a>                             <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb90-6"><a></a> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="une-petite-subtilité-concernant-les-couleurs-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Une petite subtilité concernant les couleurs</h2>
-<p>Reconstruction d’un boxplot en <strong>remplissant</strong> chaque boite d’une couleur pour chaque continent.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb101-1" class="hljs-ln-code"><a></a><span class="co"># Solution pour le plot</span></span>
-<span id="cb101-2" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb101-3" class="hljs-ln-code"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">data    =</span> data_biomass_5country,</span>
-<span id="cb101-4" class="hljs-ln-code"><a></a>               <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(country, <span class="sc">-</span>biomass, <span class="at">FUN =</span> median), </span>
-<span id="cb101-5" class="hljs-ln-code"><a></a>                             <span class="at">y =</span> biomass, </span>
-<span id="cb101-6" class="hljs-ln-code"><a></a>                             <span class="at">color =</span> Continent)) <span class="sc">+</span></span>
-<span id="cb101-7" class="hljs-ln-code"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>) <span class="sc">+</span> </span>
-<span id="cb101-8" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
+<p><strong>fill</strong> vs.&nbsp;<strong>color</strong></p>
+
+<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-24-1.png" style="width:50.0%" class="r-stretch"></section>
 <section id="une-petite-subtilité-concernant-les-couleurs-2" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Une petite subtilité concernant les couleurs</h2>
-<div>
-<p>Ggplot fait la différence entre :</p>
-<ul>
-<li class="fragment"><p>la couleur des contours –&gt; <code>color = …</code></p></li>
-<li class="fragment"><p>la couleur de remplissage –&gt; <code>fill = …</code></p></li>
-</ul>
-</div>
+<p><strong>fill</strong> vs.&nbsp;<strong>color</strong></p>
+
+<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-25-1.png" style="width:50.0%" class="r-stretch"></section>
+<section id="une-petite-subtilité-concernant-les-couleurs-3" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Une petite subtilité concernant les couleurs</h2>
 <div class="fragment">
 <p>Pour choisir ses couleurs de contour <em>vs.</em> de remplissage, on utilise les fonctions <code>scale_color_manual()</code> <em>vs.</em> <code>scale_fill_manual()</code>.</p>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb102-1" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb102-2" class="hljs-ln-code"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">data    =</span> data_biomass_5country,</span>
-<span id="cb102-3" class="hljs-ln-code"><a></a>               <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(country, <span class="sc">-</span>biomass, <span class="at">FUN =</span> median), </span>
-<span id="cb102-4" class="hljs-ln-code"><a></a>                             <span class="at">y =</span> biomass, </span>
-<span id="cb102-5" class="hljs-ln-code"><a></a>                             <span class="at">fill =</span> Continent)) <span class="sc">+</span></span>
-<span id="cb102-6" class="hljs-ln-code"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Europe"</span> <span class="ot">=</span> <span class="st">"skyblue"</span>, </span>
-<span id="cb102-7" class="hljs-ln-code"><a></a>                               <span class="st">"South America"</span> <span class="ot">=</span> <span class="st">"aquamarine"</span>, </span>
-<span id="cb102-8" class="hljs-ln-code"><a></a>                               <span class="st">"North America"</span> <span class="ot">=</span> <span class="st">"moccasin"</span>)) <span class="sc">+</span></span>
-<span id="cb102-9" class="hljs-ln-code"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>) <span class="sc">+</span> </span>
-<span id="cb102-10" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb91-1" class="hljs-ln-code"><a></a>couche<span class="fl">.10</span> <span class="ot">&lt;-</span> couche<span class="fl">.9</span>_2 <span class="sc">+</span></span>
+<span id="cb91-2" class="hljs-ln-code"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"setosa"</span> <span class="ot">=</span> <span class="st">"skyblue"</span>, </span>
+<span id="cb91-3" class="hljs-ln-code"><a></a>                               <span class="st">"versicolor"</span> <span class="ot">=</span> <span class="st">"aquamarine"</span>, </span>
+<span id="cb91-4" class="hljs-ln-code"><a></a>                               <span class="st">"virginica"</span> <span class="ot">=</span> <span class="st">"moccasin"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </section>
-<section id="une-autre-subtilité-concernant-les-couleurs" class="slide level2">
-<h2>Une autre subtilité concernant les couleurs</h2>
-<p>Construisons un nuage de points entre la biomasse et la profondeur</p>
+<section id="une-petite-subtilité-concernant-les-couleurs-4" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Une petite subtilité concernant les couleurs</h2>
 <div class="fragment">
-<div class="sourceCode" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a></a>data_biomass_depth <span class="ot">&lt;-</span> biomass_survey_abundance_exercice3_6 <span class="sc">%&gt;%</span></span>
-<span id="cb103-2"><a></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb103-3"><a></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="at">string =</span> survey_date, <span class="at">pattern =</span> <span class="st">"2011"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb103-4"><a></a>  <span class="fu">group_by</span>(country, survey_id) <span class="sc">%&gt;%</span></span>
-<span id="cb103-5"><a></a>  <span class="fu">summarise</span>(<span class="at">biomass =</span> <span class="fu">sum</span>(biomass),</span>
-<span id="cb103-6"><a></a>            <span class="at">depth   =</span> <span class="fu">unique</span>(depth)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb104-2"><a></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data_biomass_depth,</span>
-<span id="cb104-3"><a></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x     =</span> depth, </span>
-<span id="cb104-4"><a></a>                           <span class="at">y     =</span> biomass,</span>
-<span id="cb104-5"><a></a>                           <span class="at">color =</span> biomass)) <span class="sc">+</span></span>
-<span id="cb104-6"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pour choisir ses couleurs de contour <em>vs.</em> de remplissage, on utilise les fonctions <code>scale_color_manual()</code> <em>vs.</em> <code>scale_fill_manual()</code>.</p>
 </div>
-<div class="fragment">
-<div class="sourceCode" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a></a>plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exercice-6.6" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.6</h2>
+<ul>
+<li>Reconstruisez la figure p6_4 en <strong>remplissant</strong> chaque boite d’une couleur pour chaque continent.</li>
+<li>Ne garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama</li>
+<li>Nommez la colonne <code>continent</code></li>
+</ul>
+<div class="sourceCode" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exercice-6.6-correction" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.6 : Correction</h2>
+<ul>
+<li>Reconstruisez la figure p6_4 en <strong>remplissant</strong> chaque boite d’une couleur pour chaque continent.</li>
+<li>Ne garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama</li>
+<li>Nommez la colonne <code>continent</code></li>
+<li>Renommez les axes <code>Country</code> et <code>Biomass (g)</code></li>
+</ul>
+<div class="sourceCode" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb93-1" class="hljs-ln-code"><a></a><span class="co"># Solution </span></span>
+<span id="cb93-2" class="hljs-ln-code"><a></a>biomass_exercice6_6 <span class="ot">&lt;-</span> biomass_exercice6_1 <span class="sc">%&gt;%</span></span>
+<span id="cb93-3" class="hljs-ln-code"><a></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Spain"</span>, <span class="st">"United States"</span>, <span class="st">"Italy"</span>, <span class="st">"Costa Rica"</span>, <span class="st">"Panama"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb93-4" class="hljs-ln-code"><a></a>  <span class="fu">mutate</span>(<span class="at">continent =</span> <span class="fu">case_when</span>((country <span class="sc">==</span> <span class="st">"Spain"</span><span class="sc">|</span> country <span class="sc">==</span> <span class="st">"Italy"</span>) <span class="sc">~</span> <span class="st">"Europe"</span>,</span>
+<span id="cb93-5" class="hljs-ln-code"><a></a>                                country <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">~</span> <span class="st">"North America"</span>,</span>
+<span id="cb93-6" class="hljs-ln-code"><a></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"South America"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exercice-6.6-correction-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.6 : Correction</h2>
+<ul>
+<li>Reconstruisez la figure p6_4 en <strong>remplissant</strong> chaque boite d’une couleur pour chaque continent.</li>
+<li>Ne garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama</li>
+<li>Nommez la colonne <code>continent</code></li>
+<li>Renommez les axes <code>Country</code> et <code>Biomass (g)</code></li>
+</ul>
+<div class="sourceCode" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb94-1" class="hljs-ln-code"><a></a><span class="co"># Solution </span></span>
+<span id="cb94-2" class="hljs-ln-code"><a></a>biomass_exercice6_6 <span class="ot">&lt;-</span> biomass_exercice6_1 <span class="sc">%&gt;%</span></span>
+<span id="cb94-3" class="hljs-ln-code"><a></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Spain"</span>, <span class="st">"United States"</span>, <span class="st">"Italy"</span>, <span class="st">"Costa Rica"</span>, <span class="st">"Panama"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb94-4" class="hljs-ln-code"><a></a>  <span class="fu">mutate</span>(<span class="at">continent =</span> <span class="fu">case_when</span>((country <span class="sc">==</span> <span class="st">"Spain"</span><span class="sc">|</span> country <span class="sc">==</span> <span class="st">"Italy"</span>) <span class="sc">~</span> <span class="st">"Europe"</span>,</span>
+<span id="cb94-5" class="hljs-ln-code"><a></a>                                country <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">~</span> <span class="st">"North America"</span>,</span>
+<span id="cb94-6" class="hljs-ln-code"><a></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"South America"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exercice-6.6-correction-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.6 : Correction</h2>
+<ul>
+<li>Reconstruisez la figure p6_4 en <strong>remplissant</strong> chaque boite d’une couleur pour chaque continent.</li>
+<li>Ne garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama</li>
+<li>Nommez la colonne <code>continent</code></li>
+<li>Renommez les axes <code>Country</code> et <code>Biomass (g)</code></li>
+</ul>
+<div class="sourceCode" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb95-1" class="hljs-ln-code"><a></a><span class="co"># Solution pour le plot</span></span>
+<span id="cb95-2" class="hljs-ln-code"><a></a>p6_6 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb95-3" class="hljs-ln-code"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">data    =</span> biomass_exercice6_6,</span>
+<span id="cb95-4" class="hljs-ln-code"><a></a>               <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(country, <span class="sc">-</span>biomass, <span class="at">FUN =</span> median), </span>
+<span id="cb95-5" class="hljs-ln-code"><a></a>                             <span class="at">y =</span> biomass, </span>
+<span id="cb95-6" class="hljs-ln-code"><a></a>                             <span class="at">fill =</span> continent)) <span class="sc">+</span></span>
+<span id="cb95-7" class="hljs-ln-code"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Europe"</span> <span class="ot">=</span> <span class="st">"skyblue"</span>, </span>
+<span id="cb95-8" class="hljs-ln-code"><a></a>                               <span class="st">"South America"</span> <span class="ot">=</span> <span class="st">"aquamarine"</span>, </span>
+<span id="cb95-9" class="hljs-ln-code"><a></a>                               <span class="st">"North America"</span> <span class="ot">=</span> <span class="st">"moccasin"</span>)) <span class="sc">+</span></span>
+<span id="cb95-10" class="hljs-ln-code"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>) <span class="sc">+</span> </span>
+<span id="cb95-11" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="une-autre-subtilité-concernant-les-couleurs" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Une autre subtilité concernant les couleurs</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb96-1" class="hljs-ln-code"><a></a>couche<span class="fl">.4</span>_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb96-2" class="hljs-ln-code"><a></a>  <span class="fu">geom_point</span>(<span class="at">data    =</span> data,</span>
+<span id="cb96-3" class="hljs-ln-code"><a></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x     =</span> Sepal.Length, </span>
+<span id="cb96-4" class="hljs-ln-code"><a></a>                           <span class="at">y     =</span> Petal.Length, </span>
+<span id="cb96-5" class="hljs-ln-code"><a></a>                           <span class="at">color =</span> Species)) <span class="sc">+</span></span>
+<span id="cb96-6" class="hljs-ln-code"><a></a>                           <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Error in <code>palette()</code>: ! Insufficient values in manual scale. 3 needed but only 1 provided. Run <code>rlang::last_trace()</code> to see where the error occurred.</p>
 <div class="fragment">
 <center>
 <p>On ne peut pas donner une seule couleur à une variable continue !</p>
@@ -2051,21 +2158,31 @@ Un tas de <code>theme_*</code> existent pour obtenir différentes formats d’ar
 <center>
 Testons les une par une à partir de la figure suivante
 </center>
-<div class="sourceCode" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(faithfuld, <span class="fu">aes</span>(waiting, eruptions, <span class="at">fill =</span> density)) <span class="sc">+</span></span>
-<span id="cb106-2"><a></a>  <span class="fu">geom_raster</span>() <span class="sc">+</span></span>
-<span id="cb106-3"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
-<span id="cb106-4"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
-<span id="cb106-5"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(faithfuld, <span class="fu">aes</span>(waiting, eruptions, <span class="at">fill =</span> density)) <span class="sc">+</span></span>
+<span id="cb97-2"><a></a>  <span class="fu">geom_raster</span>() <span class="sc">+</span></span>
+<span id="cb97-3"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb97-4"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb97-5"><a></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="couleurs-variables-continues-2" class="slide level2">
 <h2>Couleurs &amp; variables continues</h2>
 <h3 id="scale_color_continuous"><code>scale_color_continuous</code></h3>
 <p>La plus simple, mais pas beaucoup d’options. C’est aussi la palette de couleur par défaut.</p>
 <p>. . .</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a></a><span class="co">#| fig-height: 7</span></span>
-<span id="cb107-2"><a></a><span class="co">#| layout: "[50, 50]"</span></span>
-<span id="cb107-3"><a></a>plot</span>
-<span id="cb107-4"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_continuous</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a></a>plot</span>
+<span id="cb98-2"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_continuous</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout="[50, 50]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-30-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-30-2.png"></p>
+</div>
+</div>
+</div>
 </section>
 <section id="couleurs-variables-continues-3" class="slide level2">
 <h2>Couleurs &amp; variables continues</h2>
@@ -2073,19 +2190,30 @@ Testons les une par une à partir de la figure suivante
 <p>De belles palettes dont les nuances sont captées par les personnes daltoniennes.</p>
 <p>. . .</p>
 <div>
-<div class="sourceCode" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a></a><span class="co">#| fig-height: 8</span></span>
-<span id="cb108-2"><a></a><span class="co">#| layout: "[30, 30, 30]"</span></span>
-<span id="cb108-3"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>)</span>
-<span id="cb108-4"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>)</span>
-<span id="cb108-5"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>)</span>
+<span id="cb99-2"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>)</span>
+<span id="cb99-3"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"turbo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout="[30, 30, 30]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-31-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-31-2.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-31-3.png"></p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="info-générale-sur-les-palettes" class="slide level2">
 <h2>Info générale sur les palettes</h2>
 <p>Petite info utile, toutes les palettes peuvent passer le test <strong><em>ColorBlind Friendly</em></strong> :</p>
 <div class="fragment">
-<div class="sourceCode" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a></a>color_pal <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">10</span>, <span class="at">name=</span><span class="st">"Spectral"</span>)</span>
-<span id="cb109-2"><a></a>colorBlindness<span class="sc">::</span><span class="fu">displayAllColors</span>(color_pal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a></a>color_pal <span class="ot">&lt;-</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">10</span>, <span class="at">name=</span><span class="st">"Spectral"</span>)</span>
+<span id="cb100-2"><a></a>colorBlindness<span class="sc">::</span><span class="fu">displayAllColors</span>(color_pal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="couleurs-variables-continues-4" class="slide level2 smaller">
@@ -2100,11 +2228,22 @@ Testons les une par une à partir de la figure suivante
 </ul>
 </div>
 <p>. . .</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a></a><span class="co">#| fig-height: 8</span></span>
-<span id="cb110-2"><a></a><span class="co">#| layout: "[30, 30, 30]"</span></span>
-<span id="cb110-3"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>)</span>
-<span id="cb110-4"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">midpoint =</span> <span class="fl">0.02</span>)</span>
-<span id="cb110-5"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> colorspace<span class="sc">::</span><span class="fu">diverge_hcl</span>(<span class="dv">7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>)</span>
+<span id="cb101-2"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">midpoint =</span> <span class="fl">0.02</span>)</span>
+<span id="cb101-3"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> colorspace<span class="sc">::</span><span class="fu">diverge_hcl</span>(<span class="dv">7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout="[30, 30, 30]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-32-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-32-2.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-32-3.png"></p>
+</div>
+</div>
+</div>
 </section>
 <section id="couleurs-variable-groupée-en-classes" class="slide level2">
 <h2>Couleurs &amp; variable groupée en classes</h2>
@@ -2123,29 +2262,22 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <h3 id="scale_fill_binned"><code>scale_fill_binned()</code></h3>
 <p>Les couleurs sont par défaut une nuance de bleus. Certaines précisions peuvent cependant être apportées.</p>
 <p>. . .</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a></a><span class="co">#| fig-height: 8</span></span>
-<span id="cb111-2"><a></a><span class="co">#| layout: "[30, 30, 30]"</span></span>
-<span id="cb111-3"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">n.breaks =</span> <span class="dv">4</span>)</span>
-<span id="cb111-4"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">n.breaks =</span> <span class="dv">7</span>)</span>
-<span id="cb111-5"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">breaks =</span> <span class="fu">quantile</span>(faithfuld<span class="sc">$</span>density, <span class="at">probs =</span> (<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.3</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="couleurs-variable-groupée-en-classes-2" class="slide level2 smaller">
-<h2>Couleurs &amp; variable groupée en classes</h2>
-<h3 id="scale_fill_steps"><code>scale_fill_steps()</code></h3>
-<p>Fonction analogue à <code>scale_fill_gradient()</code>.</p>
-<div>
-<ul>
-<li class="fragment"><p><code>scale_fill_steps()</code> avec les arguments <code>low</code> et <code>high</code>.</p></li>
-<li class="fragment"><p><code>scale_fill_steps2()</code> avec les arguments <code>low</code>, <code>mid</code> et <code>high</code>.</p></li>
-<li class="fragment"><p><code>scale_fill_stepsn()</code> avec l’argument <code>colours</code>.</p></li>
-</ul>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">n.breaks =</span> <span class="dv">4</span>)</span>
+<span id="cb102-2"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">n.breaks =</span> <span class="dv">7</span>)</span>
+<span id="cb102-3"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_binned</span>(<span class="at">breaks =</span> <span class="fu">quantile</span>(faithfuld<span class="sc">$</span>density, <span class="at">probs =</span> (<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.3</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout="[30, 30, 30]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-33-1.png"></p>
 </div>
-<p>. . .</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a></a><span class="co">#| fig-height: 8</span></span>
-<span id="cb112-2"><a></a><span class="co">#| layout: "[30, 30, 30]"</span></span>
-<span id="cb112-3"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_steps</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">n.breaks =</span> <span class="dv">8</span>)</span>
-<span id="cb112-4"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_steps2</span>(<span class="at">low =</span> <span class="st">"darkblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>, <span class="at">midpoint =</span> <span class="fl">0.02</span>, <span class="at">n.breaks =</span> <span class="dv">8</span>)</span>
-<span id="cb112-5"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_stepsn</span>(<span class="at">colors =</span> <span class="fu">magma</span>(<span class="dv">9</span>), <span class="at">n.breaks =</span> <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-33-2.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-33-3.png"></p>
+</div>
+</div>
+</div>
 </section>
 <section id="couleurs-variables-discrètes" class="slide level2">
 <h2>Couleurs &amp; variables discrètes</h2>
@@ -2161,21 +2293,11 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <section id="couleurs-variables-discrètes-1" class="slide level2">
 <h2>Couleurs &amp; variables discrètes</h2>
 <div>
-<div class="sourceCode" id="cb113"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb113-2"><a></a>  <span class="fu">geom_violin</span>(<span class="at">data    =</span> data_crabs,</span>
-<span id="cb113-3"><a></a>              <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> CL, <span class="at">fill =</span> sex), </span>
-<span id="cb113-4"><a></a>              <span class="at">alpha   =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb113-5"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sp) <span class="sc">+</span></span>
-<span id="cb113-6"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="fragment">
-<div>
-<div class="sourceCode" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a></a><span class="co">#| fig-height: 8</span></span>
-<span id="cb114-2"><a></a><span class="co">#| layout: "[30, 30, 30]"</span></span>
-<span id="cb114-3"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_discrete</span>()</span>
-<span id="cb114-4"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span>
-<span id="cb114-5"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a></a><span class="co">#| fig-height: 8</span></span>
+<span id="cb103-2"><a></a><span class="co">#| layout: "[30, 30, 30]"</span></span>
+<span id="cb103-3"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_discrete</span>()</span>
+<span id="cb103-4"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"M"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>))</span>
+<span id="cb103-5"><a></a>plot <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="ressources-utilisées" class="slide level2">
@@ -2191,48 +2313,48 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <p>L’utilisation de cette fonction nécessite le calcul préalable de l’écart-type.</p>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb115"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a></a><span class="co"># Formatage des données</span></span>
-<span id="cb115-2"><a></a>crabs_mean <span class="ot">&lt;-</span> data_crabs <span class="sc">%&gt;%</span></span>
-<span id="cb115-3"><a></a>  <span class="fu">group_by</span>(sp) <span class="sc">%&gt;%</span></span>
-<span id="cb115-4"><a></a>  <span class="fu">summarise</span>(<span class="at">CL_mean =</span> <span class="fu">mean</span>(CL),</span>
-<span id="cb115-5"><a></a>            <span class="at">CL_sd   =</span> <span class="fu">sd</span>(CL)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a></a><span class="co"># Formatage des données</span></span>
+<span id="cb104-2"><a></a>crabs_mean <span class="ot">&lt;-</span> data_crabs <span class="sc">%&gt;%</span></span>
+<span id="cb104-3"><a></a>  <span class="fu">group_by</span>(sp) <span class="sc">%&gt;%</span></span>
+<span id="cb104-4"><a></a>  <span class="fu">summarise</span>(<span class="at">CL_mean =</span> <span class="fu">mean</span>(CL),</span>
+<span id="cb104-5"><a></a>            <span class="at">CL_sd   =</span> <span class="fu">sd</span>(CL)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<div class="sourceCode" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a></a><span class="co"># Réalisation du diagramme en barres</span></span>
-<span id="cb116-2"><a></a><span class="fu">ggplot</span>(crabs_mean) <span class="sc">+</span></span>
-<span id="cb116-3"><a></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> sp, <span class="at">y =</span> CL_mean)) <span class="sc">+</span></span>
-<span id="cb116-4"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">x =</span> sp, <span class="at">ymin =</span> CL_mean<span class="sc">-</span>CL_sd, <span class="at">ymax =</span> CL_mean<span class="sc">+</span>CL_sd)) <span class="sc">+</span></span>
-<span id="cb116-5"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a></a><span class="co"># Réalisation du diagramme en barres</span></span>
+<span id="cb105-2"><a></a><span class="fu">ggplot</span>(crabs_mean) <span class="sc">+</span></span>
+<span id="cb105-3"><a></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> sp, <span class="at">y =</span> CL_mean)) <span class="sc">+</span></span>
+<span id="cb105-4"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">x =</span> sp, <span class="at">ymin =</span> CL_mean<span class="sc">-</span>CL_sd, <span class="at">ymax =</span> CL_mean<span class="sc">+</span>CL_sd)) <span class="sc">+</span></span>
+<span id="cb105-5"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exercice-6.7" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.7</h2>
 <p>A partir des données <strong>data_biomass_5country</strong>, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre <strong>croissant</strong>. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb117-1" class="hljs-ln-code"><a></a><span class="co"># 1 - Grouper les données par pays</span></span>
-<span id="cb117-2" class="hljs-ln-code"><a></a><span class="co"># 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble </span></span>
-<span id="cb117-3" class="hljs-ln-code"><a></a><span class="co">#     des transects propres à chaque pays</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb106-1" class="hljs-ln-code"><a></a><span class="co"># 1 - Grouper les données par pays</span></span>
+<span id="cb106-2" class="hljs-ln-code"><a></a><span class="co"># 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble </span></span>
+<span id="cb106-3" class="hljs-ln-code"><a></a><span class="co">#     des transects propres à chaque pays</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-6.7-correction" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.7 : Correction</h2>
 <p>A partir des données <strong>data_biomass_5country</strong>, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre <strong>croissant</strong>. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb118-1" class="hljs-ln-code"><a></a>country_mean <span class="ot">&lt;-</span> data_biomass_5country <span class="sc">%&gt;%</span></span>
-<span id="cb118-2" class="hljs-ln-code"><a></a>  <span class="co"># 1 - Grouper les données par pays</span></span>
-<span id="cb118-3" class="hljs-ln-code"><a></a>  <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
-<span id="cb118-4" class="hljs-ln-code"><a></a>  <span class="co"># 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble </span></span>
-<span id="cb118-5" class="hljs-ln-code"><a></a>  <span class="co">#     des transects propres à chaque pays</span></span>
-<span id="cb118-6" class="hljs-ln-code"><a></a>  <span class="fu">summarise</span>(<span class="at">biom_mean =</span> <span class="fu">mean</span>(biomass),</span>
-<span id="cb118-7" class="hljs-ln-code"><a></a>            <span class="at">biom_sd   =</span> <span class="fu">sd</span>(biomass)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb107-1" class="hljs-ln-code"><a></a>country_mean <span class="ot">&lt;-</span> data_biomass_5country <span class="sc">%&gt;%</span></span>
+<span id="cb107-2" class="hljs-ln-code"><a></a>  <span class="co"># 1 - Grouper les données par pays</span></span>
+<span id="cb107-3" class="hljs-ln-code"><a></a>  <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
+<span id="cb107-4" class="hljs-ln-code"><a></a>  <span class="co"># 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble </span></span>
+<span id="cb107-5" class="hljs-ln-code"><a></a>  <span class="co">#     des transects propres à chaque pays</span></span>
+<span id="cb107-6" class="hljs-ln-code"><a></a>  <span class="fu">summarise</span>(<span class="at">biom_mean =</span> <span class="fu">mean</span>(biomass),</span>
+<span id="cb107-7" class="hljs-ln-code"><a></a>            <span class="at">biom_sd   =</span> <span class="fu">sd</span>(biomass)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-6.7-correction-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.7 : Correction</h2>
 <p>A partir des données <strong>data_biomass_5country</strong>, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre <strong>croissant</strong>. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb119-1" class="hljs-ln-code"><a></a><span class="co"># Figure </span></span>
-<span id="cb119-2" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(country_mean) <span class="sc">+</span></span>
-<span id="cb119-3" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(country, biom_mean), <span class="at">y =</span> biom_mean)) <span class="sc">+</span></span>
-<span id="cb119-4" class="hljs-ln-code"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">ymin =</span> biom_mean<span class="sc">-</span>biom_sd, <span class="at">ymax =</span> biom_mean<span class="sc">+</span>biom_sd),</span>
-<span id="cb119-5" class="hljs-ln-code"><a></a>                    <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb119-6" class="hljs-ln-code"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>) <span class="sc">+</span> </span>
-<span id="cb119-7" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb108-1" class="hljs-ln-code"><a></a><span class="co"># Figure </span></span>
+<span id="cb108-2" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(country_mean) <span class="sc">+</span></span>
+<span id="cb108-3" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(country, biom_mean), <span class="at">y =</span> biom_mean)) <span class="sc">+</span></span>
+<span id="cb108-4" class="hljs-ln-code"><a></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">ymin =</span> biom_mean<span class="sc">-</span>biom_sd, <span class="at">ymax =</span> biom_mean<span class="sc">+</span>biom_sd),</span>
+<span id="cb108-5" class="hljs-ln-code"><a></a>                    <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb108-6" class="hljs-ln-code"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>) <span class="sc">+</span> </span>
+<span id="cb108-7" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="gestion-des-facteurs-groupes" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Gestion des facteurs &amp; groupes</h2>
@@ -2241,12 +2363,12 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <h3 id="exercice-6.8">Exercice 6.8</h3>
 <p>A partir de <strong>biomass_survey_abundance_exercice3_6</strong>, obtenez un data.frame de trois colonnes <strong>size_class_mm</strong>, <strong>biom_abun</strong>, <strong>value</strong> pour les données prélevées en 2011.</p>
 <p>. . .</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb120-1" class="hljs-ln-code"><a></a> <span class="co"># 1. Enlever la colonne geometry.</span></span>
-<span id="cb120-2" class="hljs-ln-code"><a></a> <span class="co"># 2. Filtrer les données 2011.</span></span>
-<span id="cb120-3" class="hljs-ln-code"><a></a> <span class="co"># 3. Sélectionner les colonnes size_class_mm, biomass, abundance.</span></span>
-<span id="cb120-4" class="hljs-ln-code"><a></a> <span class="co"># 4. Transformer la colonne size_class_mm en facteur.</span></span>
-<span id="cb120-5" class="hljs-ln-code"><a></a> <span class="co"># 5. Sommer la biomass et l'abondunce par classe de taille.</span></span>
-<span id="cb120-6" class="hljs-ln-code"><a></a> <span class="co"># 6. Pivoter le tableau au format long en gardant size_class_mm.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb109-1" class="hljs-ln-code"><a></a> <span class="co"># 1. Enlever la colonne geometry.</span></span>
+<span id="cb109-2" class="hljs-ln-code"><a></a> <span class="co"># 2. Filtrer les données 2011.</span></span>
+<span id="cb109-3" class="hljs-ln-code"><a></a> <span class="co"># 3. Sélectionner les colonnes size_class_mm, biomass, abundance.</span></span>
+<span id="cb109-4" class="hljs-ln-code"><a></a> <span class="co"># 4. Transformer la colonne size_class_mm en facteur.</span></span>
+<span id="cb109-5" class="hljs-ln-code"><a></a> <span class="co"># 5. Sommer la biomass et l'abondunce par classe de taille.</span></span>
+<span id="cb109-6" class="hljs-ln-code"><a></a> <span class="co"># 6. Pivoter le tableau au format long en gardant size_class_mm.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="gestion-des-facteurs-groupes-1" class="slide level2" data-auto-animate="true">
@@ -2254,104 +2376,104 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <p>Obtient-on les mêmes résultats entre la biomasse totale et l’abondance ?</p>
 <h3 id="exercice-6.8-correction">Exercice 6.8 : Correction</h3>
 <p>A partir de <strong>biomass_survey_abundance_exercice3_6</strong>, obtenez un data.frame de trois colonnes <strong>size_class_mm</strong>, <strong>biom_abun</strong>, <strong>value</strong> pour les données prélevées en 2011.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb121-1" class="hljs-ln-code"><a></a>biomass_abundance <span class="ot">&lt;-</span> biomass_survey_abundance_exercice3_6 <span class="sc">%&gt;%</span></span>
-<span id="cb121-2" class="hljs-ln-code"><a></a>  <span class="co"># 1. Enlever la colonne geometry.</span></span>
-<span id="cb121-3" class="hljs-ln-code"><a></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb121-4" class="hljs-ln-code"><a></a>  <span class="co"># 2. Filtrer les données 2011.</span></span>
-<span id="cb121-5" class="hljs-ln-code"><a></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="at">string =</span> survey_date, <span class="at">pattern =</span> <span class="st">"2011"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb121-6" class="hljs-ln-code"><a></a>  <span class="co"># 3. Sélectionner les colonnes size_class_mm, biomass, abundance.</span></span>
-<span id="cb121-7" class="hljs-ln-code"><a></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(size_class_mm, biomass, abundance) <span class="sc">%&gt;%</span></span>
-<span id="cb121-8" class="hljs-ln-code"><a></a>  <span class="co"># 4. Transformer la colonne size_class_mm en facteur.</span></span>
-<span id="cb121-9" class="hljs-ln-code"><a></a>  <span class="fu">mutate</span>(<span class="at">size_class_mm =</span> <span class="fu">as.factor</span>(size_class_mm)) <span class="sc">%&gt;%</span></span>
-<span id="cb121-10" class="hljs-ln-code"><a></a>  <span class="co"># 5. Sommer la biomass et l'abondunce par classe de taille.</span></span>
-<span id="cb121-11" class="hljs-ln-code"><a></a>  <span class="fu">group_by</span>(size_class_mm) <span class="sc">%&gt;%</span></span>
-<span id="cb121-12" class="hljs-ln-code"><a></a>  <span class="fu">summarise_all</span>(sum) <span class="sc">%&gt;%</span></span>
-<span id="cb121-13" class="hljs-ln-code"><a></a>  <span class="co"># 6. Pivoter le tableau au format long en gardant size_class_mm.</span></span>
-<span id="cb121-14" class="hljs-ln-code"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">names_to =</span> <span class="st">"biom_abun"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb110-1" class="hljs-ln-code"><a></a>biomass_abundance <span class="ot">&lt;-</span> biomass_survey_abundance_exercice3_6 <span class="sc">%&gt;%</span></span>
+<span id="cb110-2" class="hljs-ln-code"><a></a>  <span class="co"># 1. Enlever la colonne geometry.</span></span>
+<span id="cb110-3" class="hljs-ln-code"><a></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb110-4" class="hljs-ln-code"><a></a>  <span class="co"># 2. Filtrer les données 2011.</span></span>
+<span id="cb110-5" class="hljs-ln-code"><a></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="at">string =</span> survey_date, <span class="at">pattern =</span> <span class="st">"2011"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb110-6" class="hljs-ln-code"><a></a>  <span class="co"># 3. Sélectionner les colonnes size_class_mm, biomass, abundance.</span></span>
+<span id="cb110-7" class="hljs-ln-code"><a></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(size_class_mm, biomass, abundance) <span class="sc">%&gt;%</span></span>
+<span id="cb110-8" class="hljs-ln-code"><a></a>  <span class="co"># 4. Transformer la colonne size_class_mm en facteur.</span></span>
+<span id="cb110-9" class="hljs-ln-code"><a></a>  <span class="fu">mutate</span>(<span class="at">size_class_mm =</span> <span class="fu">as.factor</span>(size_class_mm)) <span class="sc">%&gt;%</span></span>
+<span id="cb110-10" class="hljs-ln-code"><a></a>  <span class="co"># 5. Sommer la biomass et l'abondunce par classe de taille.</span></span>
+<span id="cb110-11" class="hljs-ln-code"><a></a>  <span class="fu">group_by</span>(size_class_mm) <span class="sc">%&gt;%</span></span>
+<span id="cb110-12" class="hljs-ln-code"><a></a>  <span class="fu">summarise_all</span>(sum) <span class="sc">%&gt;%</span></span>
+<span id="cb110-13" class="hljs-ln-code"><a></a>  <span class="co"># 6. Pivoter le tableau au format long en gardant size_class_mm.</span></span>
+<span id="cb110-14" class="hljs-ln-code"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">names_to =</span> <span class="st">"biom_abun"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="gestion-des-facteurs-groupes-2" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Gestion des facteurs &amp; groupes</h2>
 <p>Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb122-1" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance,</span>
-<span id="cb122-2" class="hljs-ln-code"><a></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> biom_abun, </span>
-<span id="cb122-3" class="hljs-ln-code"><a></a>                     <span class="at">y    =</span> value, </span>
-<span id="cb122-4" class="hljs-ln-code"><a></a>                     <span class="at">fill =</span> size_class_mm)) <span class="sc">+</span></span>
-<span id="cb122-5" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb111-1" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance,</span>
+<span id="cb111-2" class="hljs-ln-code"><a></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> biom_abun, </span>
+<span id="cb111-3" class="hljs-ln-code"><a></a>                     <span class="at">y    =</span> value, </span>
+<span id="cb111-4" class="hljs-ln-code"><a></a>                     <span class="at">fill =</span> size_class_mm)) <span class="sc">+</span></span>
+<span id="cb111-5" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="gestion-des-facteurs-groupes-3" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Gestion des facteurs &amp; groupes</h2>
 <p>Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb123-1" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance,</span>
-<span id="cb123-2" class="hljs-ln-code"><a></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> biom_abun, </span>
-<span id="cb123-3" class="hljs-ln-code"><a></a>                     <span class="at">y    =</span> value, </span>
-<span id="cb123-4" class="hljs-ln-code"><a></a>                     <span class="at">fill =</span> size_class_mm)) <span class="sc">+</span></span>
-<span id="cb123-5" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, </span>
-<span id="cb123-6" class="hljs-ln-code"><a></a>           <span class="at">stat     =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb112-1" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance,</span>
+<span id="cb112-2" class="hljs-ln-code"><a></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> biom_abun, </span>
+<span id="cb112-3" class="hljs-ln-code"><a></a>                     <span class="at">y    =</span> value, </span>
+<span id="cb112-4" class="hljs-ln-code"><a></a>                     <span class="at">fill =</span> size_class_mm)) <span class="sc">+</span></span>
+<span id="cb112-5" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, </span>
+<span id="cb112-6" class="hljs-ln-code"><a></a>           <span class="at">stat     =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="gestion-des-facteurs-groupes-4" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Gestion des facteurs &amp; groupes</h2>
 <p>Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb124-1" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance,</span>
-<span id="cb124-2" class="hljs-ln-code"><a></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> biom_abun, </span>
-<span id="cb124-3" class="hljs-ln-code"><a></a>                     <span class="at">y    =</span> value, </span>
-<span id="cb124-4" class="hljs-ln-code"><a></a>                     <span class="at">fill =</span> size_class_mm)) <span class="sc">+</span></span>
-<span id="cb124-5" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb113-1" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance,</span>
+<span id="cb113-2" class="hljs-ln-code"><a></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> biom_abun, </span>
+<span id="cb113-3" class="hljs-ln-code"><a></a>                     <span class="at">y    =</span> value, </span>
+<span id="cb113-4" class="hljs-ln-code"><a></a>                     <span class="at">fill =</span> size_class_mm)) <span class="sc">+</span></span>
+<span id="cb113-5" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="gestion-des-facteurs-groupes-5" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Gestion des facteurs &amp; groupes</h2>
 <p>Changeons l’ordre des facteurs de façon à ce que la classe [75,100[ soit en 1ère.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance,</span>
-<span id="cb125-2"><a></a>                <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> biom_abun, </span>
-<span id="cb125-3"><a></a>                              <span class="at">y    =</span> value, </span>
-<span id="cb125-4"><a></a>                              <span class="at">fill =</span> size_class_mm)) <span class="sc">+</span></span>
-<span id="cb125-5"><a></a>  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb125-6"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>, <span class="at">fill =</span> <span class="st">"Size class (mm)"</span>) <span class="sc">+</span> </span>
-<span id="cb125-7"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"[0, 25["</span>, <span class="st">"[25, 50["</span>, <span class="st">"[50, 75["</span>, <span class="st">"[75, 100["</span>)) <span class="sc">+</span></span>
-<span id="cb125-8"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb126"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a></a><span class="co">#| fig-height: 8</span></span>
-<span id="cb126-2"><a></a><span class="co">#| layout: "[45, 45]"</span></span>
-<span id="cb126-3"><a></a>plot1</span>
-<span id="cb126-4"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance,</span>
-<span id="cb126-5"><a></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> biom_abun, </span>
-<span id="cb126-6"><a></a>                     <span class="at">y    =</span> value, </span>
-<span id="cb126-7"><a></a>                     <span class="at">fill =</span> <span class="fu">rev</span>(size_class_mm))) <span class="sc">+</span></span>
-<span id="cb126-8"><a></a>  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb126-9"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>, <span class="at">fill =</span> <span class="st">"Size class (mm)"</span>) <span class="sc">+</span> </span>
-<span id="cb126-10"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">labels =</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="st">"[0, 25["</span>, <span class="st">"[25, 50["</span>, <span class="st">"[50, 75["</span>, <span class="st">"[75, 100["</span>))) <span class="sc">+</span></span>
-<span id="cb126-11"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance,</span>
+<span id="cb114-2"><a></a>                <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> biom_abun, </span>
+<span id="cb114-3"><a></a>                              <span class="at">y    =</span> value, </span>
+<span id="cb114-4"><a></a>                              <span class="at">fill =</span> size_class_mm)) <span class="sc">+</span></span>
+<span id="cb114-5"><a></a>  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb114-6"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>, <span class="at">fill =</span> <span class="st">"Size class (mm)"</span>) <span class="sc">+</span> </span>
+<span id="cb114-7"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"[0, 25["</span>, <span class="st">"[25, 50["</span>, <span class="st">"[50, 75["</span>, <span class="st">"[75, 100["</span>)) <span class="sc">+</span></span>
+<span id="cb114-8"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a></a><span class="co">#| fig-height: 8</span></span>
+<span id="cb115-2"><a></a><span class="co">#| layout: "[45, 45]"</span></span>
+<span id="cb115-3"><a></a>plot1</span>
+<span id="cb115-4"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance,</span>
+<span id="cb115-5"><a></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> biom_abun, </span>
+<span id="cb115-6"><a></a>                     <span class="at">y    =</span> value, </span>
+<span id="cb115-7"><a></a>                     <span class="at">fill =</span> <span class="fu">rev</span>(size_class_mm))) <span class="sc">+</span></span>
+<span id="cb115-8"><a></a>  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb115-9"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>, <span class="at">fill =</span> <span class="st">"Size class (mm)"</span>) <span class="sc">+</span> </span>
+<span id="cb115-10"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">labels =</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="st">"[0, 25["</span>, <span class="st">"[25, 50["</span>, <span class="st">"[50, 75["</span>, <span class="st">"[75, 100["</span>))) <span class="sc">+</span></span>
+<span id="cb115-11"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="gestion-des-facteurs-groupes-6" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Gestion des facteurs &amp; groupes</h2>
 <p>Changeons l’ordre des facteurs de façon à ce que la classe [75,100[ soit en 1ère.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb127-1" class="hljs-ln-code"><a></a>biomass_abundance2 <span class="ot">&lt;-</span> biomass_abundance <span class="sc">%&gt;%</span></span>
-<span id="cb127-2" class="hljs-ln-code"><a></a>  <span class="fu">mutate</span>(<span class="at">size_class_mm =</span> <span class="fu">factor</span>(<span class="at">x      =</span> biomass_abundance<span class="sc">$</span>size_class_mm, </span>
-<span id="cb127-3" class="hljs-ln-code"><a></a>                                <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"100"</span>, <span class="st">"75"</span>, <span class="st">"50"</span>, <span class="st">"25"</span>))) </span>
-<span id="cb127-4" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance2,</span>
-<span id="cb127-5" class="hljs-ln-code"><a></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> biom_abun, </span>
-<span id="cb127-6" class="hljs-ln-code"><a></a>                     <span class="at">y    =</span> value, </span>
-<span id="cb127-7" class="hljs-ln-code"><a></a>                     <span class="at">fill =</span> size_class_mm)) <span class="sc">+</span></span>
-<span id="cb127-8" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb127-9" class="hljs-ln-code"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>, <span class="at">fill =</span> <span class="st">"Size class (mm)"</span>) <span class="sc">+</span> </span>
-<span id="cb127-10" class="hljs-ln-code"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"[75, 100["</span>, <span class="st">"[50, 75["</span>, <span class="st">"[25, 50["</span>,  <span class="st">"[0, 25["</span>)) <span class="sc">+</span></span>
-<span id="cb127-11" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb116-1" class="hljs-ln-code"><a></a>biomass_abundance2 <span class="ot">&lt;-</span> biomass_abundance <span class="sc">%&gt;%</span></span>
+<span id="cb116-2" class="hljs-ln-code"><a></a>  <span class="fu">mutate</span>(<span class="at">size_class_mm =</span> <span class="fu">factor</span>(<span class="at">x      =</span> biomass_abundance<span class="sc">$</span>size_class_mm, </span>
+<span id="cb116-3" class="hljs-ln-code"><a></a>                                <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"100"</span>, <span class="st">"75"</span>, <span class="st">"50"</span>, <span class="st">"25"</span>))) </span>
+<span id="cb116-4" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance2,</span>
+<span id="cb116-5" class="hljs-ln-code"><a></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> biom_abun, </span>
+<span id="cb116-6" class="hljs-ln-code"><a></a>                     <span class="at">y    =</span> value, </span>
+<span id="cb116-7" class="hljs-ln-code"><a></a>                     <span class="at">fill =</span> size_class_mm)) <span class="sc">+</span></span>
+<span id="cb116-8" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb116-9" class="hljs-ln-code"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>, <span class="at">fill =</span> <span class="st">"Size class (mm)"</span>) <span class="sc">+</span> </span>
+<span id="cb116-10" class="hljs-ln-code"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"[75, 100["</span>, <span class="st">"[50, 75["</span>, <span class="st">"[25, 50["</span>,  <span class="st">"[0, 25["</span>)) <span class="sc">+</span></span>
+<span id="cb116-11" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-6.8-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.8</h2>
 <p>Réaliser un diagramme en barres permettant d’illustrer le mieux les cas où l’abondance est supérieure à la biomasse et vice-versa.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-6.8-correction-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.8 : Correction</h2>
 <p>Réaliser un diagramme en barres permettant d’illustrer le mieux les cas où l’abondance est supérieure à la biomasse et vice-versa.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb129-1" class="hljs-ln-code"><a></a><span class="co"># Correction</span></span>
-<span id="cb129-2" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance,</span>
-<span id="cb129-3" class="hljs-ln-code"><a></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> size_class_mm, </span>
-<span id="cb129-4" class="hljs-ln-code"><a></a>                     <span class="at">y    =</span> value, </span>
-<span id="cb129-5" class="hljs-ln-code"><a></a>                     <span class="at">fill =</span> biom_abun)) <span class="sc">+</span></span>
-<span id="cb129-6" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb129-7" class="hljs-ln-code"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Size class (mm)"</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span> </span>
-<span id="cb129-8" class="hljs-ln-code"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Abundance"</span>, <span class="st">"Biomass"</span>)) <span class="sc">+</span></span>
-<span id="cb129-9" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb118-1" class="hljs-ln-code"><a></a><span class="co"># Correction</span></span>
+<span id="cb118-2" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> biomass_abundance,</span>
+<span id="cb118-3" class="hljs-ln-code"><a></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x    =</span> size_class_mm, </span>
+<span id="cb118-4" class="hljs-ln-code"><a></a>                     <span class="at">y    =</span> value, </span>
+<span id="cb118-5" class="hljs-ln-code"><a></a>                     <span class="at">fill =</span> biom_abun)) <span class="sc">+</span></span>
+<span id="cb118-6" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb118-7" class="hljs-ln-code"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Size class (mm)"</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span> </span>
+<span id="cb118-8" class="hljs-ln-code"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Abundance"</span>, <span class="st">"Biomass"</span>)) <span class="sc">+</span></span>
+<span id="cb118-9" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section></section>
