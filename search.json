@@ -74,21 +74,21 @@
     "href": "tidyverse-training.html#les-principales-fonctions-de-la-librairie-readr",
     "title": "tidyverse-training",
     "section": "Les principales fonctions de la librairie readr",
-    "text": "Les principales fonctions de la librairie readr\nLes fonctions de readr les plus utilisées sont :\n# Fonction générale, pour importer un fichier avec un délimiteur quelconque\nread_delim()\n# Import fichiers csv au format anglais (point décimal et séparateur virgule)\nread_csv()\n# Import fichiers csv au format français (virgule décimale et séparateur point-virgule)\nread_csv2()\n# Import fichiers au format tsv ou les valeurs sont séparées par des tabulations\nread_tsv()\n# Pour lire un fichier en \"chunks\", c'est à dire en tranches dont on définit la taille en nombre de lignes.\n# Cette fonction permet de lire de très gros fichiers et aussi d'appliquer une fonction (CallBack) sur les données à chaque tranche. \n# xxx est à remplacer par csv, csv2, delim\nread_xxx_chunked()"
+    "text": "Les principales fonctions de la librairie readr\nLes fonctions de readr les plus utilisées sont :\n# Fonction générale, pour importer un fichier avec un délimiteur quelconque\nread_delim()\n# Import fichiers csv au format anglais (point décimal et séparateur virgule)\nread_csv()\n# Import fichiers csv au format français (virgule décimale et séparateur point-virgule)\nread_csv2()\n# Import fichiers au format tsv ou les valeurs sont séparées par des tabulations\nread_tsv()\n# Pour lire un fichier en \"chunks\", c'est à dire en tranches dont on définit la taille en nombre de lignes.\n# Cette fonction permet de lire de très gros fichiers  \n# et aussi d'appliquer une fonction (CallBack) sur les données à chaque tranche. \n# xxx est à remplacer par csv, csv2, delim\nread_xxx_chunked()"
   },
   {
     "objectID": "tidyverse-training.html#read_delim-la-fonction-la-plus-générique",
     "href": "tidyverse-training.html#read_delim-la-fonction-la-plus-générique",
     "title": "tidyverse-training",
     "section": "read_delim(), la fonction la plus générique",
-    "text": "read_delim(), la fonction la plus générique\n\nImport de fichier avec la possibilité d’utiliser des paramètres\nFonction générale, son fonctionnement permet une approche simple des autres fonctions plus spécifiques d’import\nParmi toutes les possibilités, on trouve comme paramètres:\n\nfile : chemin d’un fichier, d’une connexion ou même des données écrites à la main,\ndelim : délimiteur utilisé pour séparer les champs\ncol_names : configuration d’un entête (ou pas)\ncol_types : spécification des types de colonnes\ncol_select : selection des colonnes a conserver (même langage que avec dplyr)\nna : interprétation des valeurs manquantes\nskip : échappement de lignes lors de l’import\nname_repair : réparation “intéligente” des nomes de colonnes\n\nBeaucoup d’autres sont disponibles en lien avec vos besoins !"
+    "text": "read_delim(), la fonction la plus générique\n\nImport de fichier avec la possibilité d’utiliser des paramètres\nFonction générale, son fonctionnement permet une approche simple des autres fonctions plus spécifiques d’import\nParmi toutes les possibilités, on trouve comme paramètres:\n\nfile : chemin d’un fichier, d’une connexion ou même des données écrites à la main,\ndelim : délimiteur utilisé pour séparer les champs\ncol_names : configuration d’une en-tête (ou pas)\ncol_types : spécification des types de colonnes\ncol_select : selection des colonnes à conserver (même langage que avec dplyr)\nna : interprétation des valeurs manquantes\nskip : échappement de lignes lors de l’import\nname_repair : réparation “intelligente” des noms de colonnes\n\nBeaucoup d’autres sont disponibles en lien avec vos besoins !"
   },
   {
     "objectID": "tidyverse-training.html#on-a-aussi-des-fonctions-de-raccourci",
     "href": "tidyverse-training.html#on-a-aussi-des-fonctions-de-raccourci",
     "title": "tidyverse-training",
     "section": "On a aussi des fonctions de raccourci",
-    "text": "On a aussi des fonctions de raccourci\n\nEn lien avec la nature de vos imports\nLa plupart des paramètres de la fonction read_delim sont utilisable\n\nread_csv et read_csv2 pour les fichiers csv,\nread_tsv pour les fichiers tsv\n\nOn a aussi les fonctions _chunked pour commencer à s’amuser\n\nread_delim_chunked, read_csv_chunked, read_csv2_chunked et read_tsv_chunked"
+    "text": "On a aussi des fonctions de raccourci\n\nEn lien avec la nature de vos imports\nLa plupart des paramètres de la fonction read_delim sont utilisables\n\nread_csv et read_csv2 pour les fichiers csv,\nread_tsv pour les fichiers tsv\n\nOn a aussi les fonctions _chunked pour commencer à s’amuser\n\nread_delim_chunked, read_csv_chunked, read_csv2_chunked et read_tsv_chunked"
   },
   {
     "objectID": "tidyverse-training.html#la-fonction-inverse-write_-pour-exporter-un-fichier",
@@ -116,7 +116,7 @@
     "href": "tidyverse-training.html#import-de-feuilles-de-calcul-type-excel",
     "title": "tidyverse-training",
     "section": "Import de feuilles de calcul (type excel)",
-    "text": "Import de feuilles de calcul (type excel)\n\nUtilisation du package readxl\n\nDeveloppé par l’équipe de tidyverse (extension des packages du coeur)\n\n\n# Fonction générique\nread_excel()\n# Fonction pour importer spécifiquement un xls (excel avant 2007) ou xlsx (extension actuel par défaut)\nread_xls()\nread_xlsx()\n\nGlobalement des arguments similaires à précédement (col_names, skip, col_types, …)\nIntroduction de l’argument sheet et range\nNécessité de bien définir les types de colonnes\nPour les exports on utilisera openxlsx ou writexl"
+    "text": "Import de feuilles de calcul (type excel)\n\nUtilisation du package readxl\n\nDeveloppé par l’équipe de tidyverse (extension des packages du cœur)\n\n\n# Fonction générique\nread_excel()\n# Fonction pour importer spécifiquement un xls (excel avant 2007) ou xlsx (extension actuelle par défaut)\nread_xls()\nread_xlsx()\n\nGlobalement des arguments similaires à précédement (col_names, skip, col_types, …)\nIntroduction de l’argument sheet et range\nNécessité de bien définir les types de colonnes\nPour les exports on utilisera openxlsx ou writexl"
   },
   {
     "objectID": "tidyverse-training.html#import-de-feuilles-de-calcul-type-google",
@@ -130,21 +130,21 @@
     "href": "tidyverse-training.html#petit-point-sur-les-types-de-colonne",
     "title": "tidyverse-training",
     "section": "Petit point sur les types de colonne",
-    "text": "Petit point sur les types de colonne\n\nTrès bien expliqué dans la documentation de la fonction read_delim au niveau de l’argument col_types\nRenvoi à la fonction cols qui permet de définir un type de colonne\n\nParais anodin, mais très important, notamment pour les processus de “verification”\nPar exemple un chiffre sans virgule (type entier) ce n’est pas pareil qu’un chiffre à virgule (type double)\n\nEn lien avec les fonctions d’imports, on peut utiliser des raccourcis pour définir nos types de colonnes\n\nPar exemple c pour un caractère à la place de col_character\nLa liste complète est disponible de la documentation de read_delim\n\nIci il faut garder en tête l’objectif de lever les ambiguïtés"
+    "text": "Petit point sur les types de colonne\n\nTrès bien expliqué dans la documentation de la fonction read_delim au niveau de l’argument col_types\nRenvoi à la fonction cols qui permet de définir un type de colonne\n\nParait anodin, mais très important, notamment pour les processus de “verification”\nPar exemple un chiffre sans virgule (type entier) ce n’est pas pareil qu’un chiffre à virgule (type double)\n\nEn lien avec les fonctions d’import, on peut utiliser des raccourcis pour définir nos types de colonnes\n\nPar exemple c pour un caractère à la place de col_character\nLa liste complète est disponible dans la documentation de read_delim\n\nIci il faut garder en tête l’objectif de lever les ambigüités"
   },
   {
-    "objectID": "tidyverse-training.html#readr-est-en-générale-plus-rapide",
-    "href": "tidyverse-training.html#readr-est-en-générale-plus-rapide",
+    "objectID": "tidyverse-training.html#readr-est-en-général-plus-rapide",
+    "href": "tidyverse-training.html#readr-est-en-général-plus-rapide",
     "title": "tidyverse-training",
-    "section": "readr est en générale plus rapide",
-    "text": "readr est en générale plus rapide\n\nDu cas par cas mais globalement mieux adapté au “gros” fichiers (en lien avec des fonctions orientées objet)\nPar exemple (tendance sans tenir compte d’autres facteurs comme l’ordinateur) pour un fichier csv de 156mo\n\n30.84s avec read_csv contre 30.00s avec read.csv\n\nPour un fichier csv de 468mo\n\n38.63s avec read_csv contre 47.56s avec read.csv"
+    "section": "readr est en général plus rapide",
+    "text": "readr est en général plus rapide\n\nDu cas par cas mais globalement mieux adapté aux “gros” fichiers (en lien avec des fonctions orientées objet)\nPar exemple (tendance sans tenir compte d’autres facteurs comme l’ordinateur) pour un fichier csv de 156Mo\n\n30.84s avec read_csv contre 30.00s avec read.csv\n\nPour un fichier csv de 468Mo\n\n38.63s avec read_csv contre 47.56s avec read.csv"
   },
   {
-    "objectID": "tidyverse-training.html#le-vrai-avantage-reside-dans-la-polyvalence",
-    "href": "tidyverse-training.html#le-vrai-avantage-reside-dans-la-polyvalence",
+    "objectID": "tidyverse-training.html#le-vrai-avantage-réside-dans-la-polyvalence",
+    "href": "tidyverse-training.html#le-vrai-avantage-réside-dans-la-polyvalence",
     "title": "tidyverse-training",
-    "section": "Le vrai avantage reside dans la polyvalence",
-    "text": "Le vrai avantage reside dans la polyvalence\n\nBeaucoup de paramétrisation possible\n\nToutes les spécifications citées précédemment\nUn gros plus sur la sélection des colonnes via l’argument col_select (sélection et renommage)\nFiltrage direct lors de l’import avec les _chunked ou encore l’argument skip\n\nPossibilité de lire les fichiers depuis une archive (type zip) avec readr\nPossibilité de lire plusieurs fichiers en une fois, même plusieurs répertoires\nVraie dynamique d’évolution dans le futur !"
+    "section": "Le vrai avantage réside dans la polyvalence",
+    "text": "Le vrai avantage réside dans la polyvalence\n\nBeaucoup de paramétrisation possible\n\nToutes les spécifications citées précédemment\nUn gros plus sur la sélection des colonnes via l’argument col_select (sélection et renommage)\nFiltrage direct lors de l’import avec les _chunked ou encore l’argument skip\n\nPossibilité de lire les fichiers depuis une archive (type zip) avec readr\nPossibilité de lire plusieurs fichiers en une fois, même plusieurs répertoires\nVraie dynamique d’évolution dans le futur !"
   },
   {
     "objectID": "tidyverse-training.html#exercice-1.1",
@@ -172,7 +172,7 @@
     "href": "tidyverse-training.html#exercice-1.2-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 1.2 corrigé",
-    "text": "Exercice 1.2 corrigé\nLire le fichier survey_metadata et le stocker dans un objet R survey_metadata en sélectionnant le pays Indonésie, une profondeur inférieure à 20m et une visibilité supérieure à 10m.\n# solution\nfunction_1_2 &lt;- function(x, pos) subset(x, country == \"Indonesia\" & depth &lt; 20 & visibility &gt; 10)\nsurvey_metadata_selection_1_2 &lt;- read_tsv_chunked(file = \"data/survey_metadata.tsv\",\n                                                  callback = DataFrameCallback$new(function_1_2),\n                                                  chunk_size = 1000)"
+    "text": "Exercice 1.2 corrigé\nLire le fichier survey_metadata et le stocker dans un objet R survey_metadata en sélectionnant le pays Indonesia, une profondeur inférieure à 20m et une visibilité supérieure à 10m.\n# solution\nfunction_1_2 &lt;- function(x, pos) subset(x, country == \"Indonesia\" & depth &lt; 20 & visibility &gt; 10)\nsurvey_metadata_selection_1_2 &lt;- read_tsv_chunked(file = \"data/survey_metadata.tsv\",\n                                                  callback = DataFrameCallback$new(function_1_2),\n                                                  chunk_size = 1000)"
   },
   {
     "objectID": "tidyverse-training.html#dplyr",
@@ -200,14 +200,14 @@
     "href": "tidyverse-training.html#exercice-2.1",
     "title": "tidyverse-training",
     "section": "Exercice 2.1",
-    "text": "Exercice 2.1\n\nA l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”\nEn une seule fois, selectionner les données dont la variable “biomass” est différent de 0, où la famille de l’espèce est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10."
+    "text": "Exercice 2.1\n\nA l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”\nEn une seule fois, sélectionner les données dont la variable “biomass” est différente de 0, où la famille est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10."
   },
   {
     "objectID": "tidyverse-training.html#exercice-2.1-corrigé",
     "href": "tidyverse-training.html#exercice-2.1-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 2.1 corrigé",
-    "text": "Exercice 2.1 corrigé\n\nA l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”\nEn une seule fois, selectionner les données dont la variable “biomass” est différent de 0, où la famille de l’espèce est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10.\n\nbiomass_exercice2_1_distinct &lt;- distinct(.data = reef_fish_biomass)\nbiomass_exercice2_1_distinct_filter &lt;- filter(.data = biomass_exercice2_1_distinct,\n                                              biomass != 0\n                                              & ! family %in% c(\"Mullidae\",\n                                                                \"Apogonidae\")\n                                              & size_class &lt;= 10)"
+    "text": "Exercice 2.1 corrigé\n\nA l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”\nEn une seule fois, sélectionner les données dont la variable “biomass” est différente de 0, où la famille est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10.\n\nbiomass_exercice2_1_distinct &lt;- distinct(.data = reef_fish_biomass)\nbiomass_exercice2_1_distinct_filter &lt;- filter(.data = biomass_exercice2_1_distinct,\n                                              biomass != 0\n                                              & ! family %in% c(\"Mullidae\",\n                                                                \"Apogonidae\")\n                                              & size_class &lt;= 10)"
   },
   {
     "objectID": "tidyverse-training.html#amélioration-de-la-lisibilité-du-code",
@@ -221,7 +221,7 @@
     "href": "tidyverse-training.html#aller-encore-plus-loin",
     "title": "tidyverse-training",
     "section": "Aller encore plus loin",
-    "text": "Aller encore plus loin\nUtilisation d’un nouvelle opérateur baptisé pipe\n\nIl se note %&gt;%\nSon fonctionnement est le suivant : si j’exécute expr %&gt;% f, le résultat de l’expression expr, à gauche du pipe, sera passé comme premier argument à la fonction f, à droite du pipe, ce qui revient à exécuter f(expr)\nL’intérêt est que l’on peut enchainer plusieurs pipes et surtout on simplifie la syntaxe\nAvec notre exemple précédent cela donne :\n\nbiomass_exercice2_1_distinct_filter &lt;- distinct(.data = reef_fish_biomass) %&gt;%\n  filter(biomass != 0\n         & ! family %in% c(\"Mullidae\",\n                           \"Apogonidae\")\n         & size_class &lt;= 10)"
+    "text": "Aller encore plus loin\nUtilisation d’un nouvel opérateur baptisé pipe\n\nIl se note %&gt;%\nSon fonctionnement est le suivant : si j’exécute expr %&gt;% f, le résultat de l’expression expr, à gauche du pipe, sera passé comme premier argument à la fonction f, à droite du pipe, ce qui revient à exécuter f(expr)\nL’intérêt est que l’on peut enchainer plusieurs pipes et surtout on simplifie la syntaxe\nAvec notre exemple précédent cela donne :\n\nbiomass_exercice2_1_distinct_filter &lt;- distinct(.data = reef_fish_biomass) %&gt;%\n  filter(biomass != 0\n         & ! family %in% c(\"Mullidae\",\n                           \"Apogonidae\")\n         & size_class &lt;= 10)"
   },
   {
     "objectID": "tidyverse-training.html#encore-quelques-fonctions-de-manipulation-de-lignes",
@@ -242,7 +242,7 @@
     "href": "tidyverse-training.html#fonctions-de-vectorisation",
     "title": "tidyverse-training",
     "section": "Fonctions de vectorisation",
-    "text": "Fonctions de vectorisation\nUne des deux grandes familles de fonction avec dplyr\n\nOn a commencé à l’aborder de manière instinctive avec relocate()\nGlobalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie    \n\n# créer une nouvelle variable\nmutate()\n\nPetit bonus pour renommer les variables\n\nrename()"
+    "text": "Fonctions de vectorisation\nUne des deux grandes familles de fonctions avec dplyr\n\nOn a commencé à l’aborder de manière instinctive avec relocate()\nGlobalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie    \n\n# créer une nouvelle variable\nmutate()\n\nPetit bonus pour renommer les variables\n\nrename()"
   },
   {
     "objectID": "tidyverse-training.html#exercice-2.2",
@@ -270,21 +270,21 @@
     "href": "tidyverse-training.html#introduction-à-la-notion-de-groupe",
     "title": "tidyverse-training",
     "section": "Introduction à la notion de groupe",
-    "text": "Introduction à la notion de groupe\n\nPour le moment on a fait des opérations sur l’ensemble du jeu de données, pas très pertinent non ?\nFonction de création de groupe\n\n# on peut définir nos groupes en fonction des modalités des variables\n#on peut aussi utiliser des arguments des fonctions quand c'est proposé, exemple avec .by de summarise()\ngroup_by()\n# ou alors en isolant chaque ligne\nrowwise()\n\nAttention à ce que vous faites ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R). Pour y remédier :\n\n# via un summarise (argument experimental, attention à la pérennité)\n.groups\n# de manière plus générale\nungroups()\n\nCette notion de groupe peut être utilisée avec d’autres fonctions (comme un mutate)"
+    "text": "Introduction à la notion de groupe\n\nPour le moment on a fait des opérations sur l’ensemble du jeu de données, pas très pertinent non ?\nFonction de création de groupe\n\n# on peut définir nos groupes en fonction des modalités des variables\n# on peut aussi utiliser des arguments des fonctions quand c'est proposé, exemple avec .by de summarise()\ngroup_by()\n# ou alors en isolant chaque ligne\nrowwise()\n\nAttention à ce que vous faites ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R). Pour y remédier :\n\n# via un summarise (argument experimental, attention à la pérennité)\n.groups\n# de manière plus générale\nungroups()\n\nCette notion de groupe peut être utilisée avec d’autres fonctions (comme un mutate)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-2.3",
     "href": "tidyverse-training.html#exercice-2.3",
     "title": "tidyverse-training",
     "section": "Exercice 2.3",
-    "text": "Exercice 2.3\n\nÀ partir du jeu de données de sortie de l’exercice 2\nEffectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment\nPour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction “trouvée” regarder du côté des arguments en option)\nCréer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ."
+    "text": "Exercice 2.3\n\nÀ partir du jeu de données de sortie de l’exercice 2.2\nEffectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment\nPour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction “trouvée” regarder du côté des arguments en option)\nCréer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ."
   },
   {
     "objectID": "tidyverse-training.html#exercice-2.3-corrigé",
     "href": "tidyverse-training.html#exercice-2.3-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 2.3 corrigé",
-    "text": "Exercice 2.3 corrigé\n\nÀ partir du jeu de données de sortie de l’exercice 2\nEffectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment\nPour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction “trouvée” regarder du côté des arguments en option)\nCréer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.\n\n# solution\nbiomass_exercice2_3 &lt;- biomass_exercice2_2 %&gt;%\n  dplyr::group_by(survey_id_full) %&gt;%\n  mutate(sum_biomass = sum(x = biomass)) %&gt;%\n  ungroup() %&gt;%\n  distinct(survey_id_full,\n           .keep_all = TRUE)\nbiomass_exercice2_3_sample_verification &lt;- dplyr::group_by(.data = biomass_exercice2_2,\n                                                           family) %&gt;%\n  summarise(nb_sample_family = n()) %&gt;%\n  mutate(total = sum(nb_sample_family))"
+    "text": "Exercice 2.3 corrigé\n\nÀ partir du jeu de données de sortie de l’exercice 2.2\nEffectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment\nPour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction “trouvée” regarder du côté des arguments en option)\nCréer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.\n\n# solution\nbiomass_exercice2_3 &lt;- biomass_exercice2_2 %&gt;%\n  dplyr::group_by(survey_id_full) %&gt;%\n  mutate(sum_biomass = sum(x = biomass)) %&gt;%\n  ungroup() %&gt;%\n  distinct(survey_id_full,\n           .keep_all = TRUE)\nbiomass_exercice2_3_sample_verification &lt;- dplyr::group_by(.data = biomass_exercice2_2,\n                                                           family) %&gt;%\n  summarise(nb_sample_family = n()) %&gt;%\n  mutate(total = sum(nb_sample_family))"
   },
   {
     "objectID": "tidyverse-training.html#fonction-bonus-très-utile",
@@ -424,28 +424,28 @@
     "href": "tidyverse-training.html#conçu-pour-manipuler-les-chaines-de-caractères-facilement",
     "title": "tidyverse-training",
     "section": "Conçu pour manipuler les chaines de caractères “facilement”",
-    "text": "Conçu pour manipuler les chaines de caractères “facilement”\n\nEn plus d’être plus faciles à utiliser, les noms des fonctions représentent bien ce qu’elles permettent de faire\n\nelles commencent toutes par str_\nles images de la cheatsheet aident beaucoup pour choisir les fonctions en rapport avec notre besoin\n\nOuvre le monde des expressions régulières\nPeut être combiné avec du langage tidyverse (par exemple avec dplyr)\nPour faire simple on 7 grandes familles de fonctions\n\nles fonctions de détection\nles fonctions de selection ou d’extraction\nles fonctions de gestion des tailles de caractères\nles fonctions de manipulations dites mutate (ça vous rappelle quelque chose ?)\nles fonctions de jointures et de division\nles fonctions d’ordre\nles fonctions supports"
+    "text": "Conçu pour manipuler les chaines de caractères “facilement”\n\nEn plus d’être plus faciles à utiliser, les noms des fonctions représentent bien ce qu’elles permettent de faire\n\nelles commencent toutes par str_\nles images de la cheatsheet aident beaucoup pour choisir les fonctions en rapport avec notre besoin\n\nOuvre le monde des expressions régulières\nPeut être combiné avec du langage tidyverse (par exemple avec dplyr)\nPour faire simple on a 7 grandes familles de fonctions\n\nles fonctions de détection\nles fonctions de sélection ou d’extraction\nles fonctions de gestion des tailles de caractères\nles fonctions de manipulation dites mutate (ça vous rappelle quelque chose ?)\nles fonctions de jointures et de division\nles fonctions d’ordre\nles fonctions supports"
   },
   {
     "objectID": "tidyverse-training.html#beaucoup-darguments-communs",
     "href": "tidyverse-training.html#beaucoup-darguments-communs",
     "title": "tidyverse-training",
     "section": "Beaucoup d’arguments communs",
-    "text": "Beaucoup d’arguments communs\n\nDe manière générale\n\nstring : le vecteur d’entrée\npattern : le motif que l’on va chercher à regarder\nreplacement : la valeur de remplacement\n\nDe manière plus spécifique\n\nstart et end : emplacement ou indice de position dans une chaine de caractère\nnegate : si TRUE, le résultat sera l’inverse de ce que l’on demande\nsep : caractère(s) à insérer dans le vecteur d’entrée\ncollapse : souvent confondu avec l’argument sep. Caractère(s) qui vont combiner les résultats (= vecteur d’entrée avec plusieurs éléments) entre une seule et unique chaine de caractères.\ndecreasing : utilisé pour les fonctions d’ordre ou de tri"
+    "text": "Beaucoup d’arguments communs\n\nDe manière générale\n\nstring : le vecteur d’entrée\npattern : le motif que l’on va chercher à regarder\nreplacement : la valeur de remplacement\n\nDe manière plus spécifique\n\nstart et end : emplacement ou indice de position dans une chaine de caractères\nnegate : si TRUE, le résultat sera l’inverse de ce que l’on demande\nsep : caractère(s) à insérer dans le vecteur d’entrée\ncollapse : souvent confondu avec l’argument sep. Caractère(s) qui vont combiner les résultats (= vecteur d’entrée avec plusieurs éléments) en une seule et unique chaine de caractères.\ndecreasing : utilisé pour les fonctions d’ordre ou de tri"
   },
   {
     "objectID": "tidyverse-training.html#fonctions-de-détection",
     "href": "tidyverse-training.html#fonctions-de-détection",
     "title": "tidyverse-training",
     "section": "Fonctions de détection",
-    "text": "Fonctions de détection\nRenvoient une réponse (pas d’extraction)\n# détection d'un motif dans une chaine de caractère\nstr_detect() et str_like()\n# détection d'un motif au début ou à la fin d'une chaine de caractère\nstr_starts() et str_ends()\n# détection des lignes contenant le motif\nstr_which()\n# détection de la position du motif dans la chaine de caractère (début et fin)\n# sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé\nstr_locate() et str_locate_all()\n# comptage du nombre de fois que le motif est détecté dans une chaine de caractère\nstr_count()"
+    "text": "Fonctions de détection\nRenvoient une réponse (pas d’extraction)\n# détection d'un motif dans une chaine de caractères\nstr_detect() et str_like()\n\n# détection d'un motif au début ou à la fin d'une chaine de caractères\nstr_starts() et str_ends()\n\n# détection des lignes contenant le motif\nstr_which()\n\n# détection de la position du motif dans la chaine de caractères (début et fin)\n# sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé\nstr_locate() et str_locate_all()\n\n# comptage du nombre de fois que le motif est détecté dans une chaine de caractères\nstr_count()"
   },
   {
-    "objectID": "tidyverse-training.html#fonctions-de-selection-ou-dextraction",
-    "href": "tidyverse-training.html#fonctions-de-selection-ou-dextraction",
+    "objectID": "tidyverse-training.html#fonctions-de-sélection-ou-dextraction",
+    "href": "tidyverse-training.html#fonctions-de-sélection-ou-dextraction",
     "title": "tidyverse-training",
-    "section": "Fonctions de selection ou d’extraction",
-    "text": "Fonctions de selection ou d’extraction\nRenvoient une chaine de caractère\n# extraction d'une chaine à un ou des endroits bien précis\n# utilisation d'indices de position\nstr_sub() et str_sub_all()\n# extraction des chaines, completes, contenu un motif défini\nstr_subset()\n# extraction d'un motif dans une chaine de caractère et retour sous forme de vecteur\n# par \"défaut\" la detection passe à la chaine suivante dés qu'un motif est trouvé\nstr_extract() et str_extract_all()\n# extraction d'un motif dans une chaine de caractère et retour sous forme de matrix\n# sans le _all la detection passe à la chaine suivante dés qu'un motif est trouvé\nstr_match() et str_match_all()"
+    "section": "Fonctions de sélection ou d’extraction",
+    "text": "Fonctions de sélection ou d’extraction\nRenvoient une chaine de caractères\n# extraction d'une chaine à un ou des endroits bien précis\n# utilisation d'indices de position\nstr_sub() et str_sub_all()\n\n# extraction des chaines, complètes, contenant un motif défini\nstr_subset()\n\n# extraction d'un motif dans une chaine de caractères et retour sous forme de vecteur\n# par défaut la détection passe à la chaine suivante dès qu'un motif est trouvé\nstr_extract() et str_extract_all()\n\n# extraction d'un motif dans une chaine de caractères et retour sous forme de matrix\n# sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé\nstr_match() et str_match_all()"
   },
   {
     "objectID": "tidyverse-training.html#exercice-4.1",
@@ -466,49 +466,49 @@
     "href": "tidyverse-training.html#fonctions-de-gestion-des-tailles-de-caractères",
     "title": "tidyverse-training",
     "section": "Fonctions de gestion des tailles de caractères",
-    "text": "Fonctions de gestion des tailles de caractères\n# largeur/nombre de caractère\n# attention aux espaces et caractères masqués\nstr_length()\n# ajout \"d'espace\" à une chaine de caractère\nstr_pad()\n# tronquer une chaîne de caractères à un nombre fixe de caractères\nstr_trunc()\n# supprimer des espaces \n# au début et/ou à la fin d'une chaine\nstr_trim()\n# au début, à la fin et réduction des espaces à un seul\nstr_squish()"
+    "text": "Fonctions de gestion des tailles de caractères\n# largeur/nombre de caractères\n# attention aux espaces et caractères masqués\nstr_length()\n\n# ajout \"d'espace\" à une chaine de caractères\nstr_pad()\n\n# tronquer une chaîne de caractères à un nombre fixe de caractères\nstr_trunc()\n\n# supprimer des espaces \n# au début et/ou à la fin d'une chaine de caractères\nstr_trim()\n# au début, à la fin et réduction des espaces à un seul\nstr_squish()"
   },
   {
-    "objectID": "tidyverse-training.html#fonctions-de-manipulations",
-    "href": "tidyverse-training.html#fonctions-de-manipulations",
+    "objectID": "tidyverse-training.html#fonctions-de-manipulation",
+    "href": "tidyverse-training.html#fonctions-de-manipulation",
     "title": "tidyverse-training",
-    "section": "Fonctions de manipulations",
-    "text": "Fonctions de manipulations\nEn lien avec des manipulations de type vectorisation (= conservation de la structure des données d’entrée)\n# remplacement du motif via un assignation\nstr_sub() &lt;- value\n# remplacement d'un motif par un autre\n# sans le _all le remplacement passe à la chaine suivante dés qu'un motif est trouvé\nstr_replace() et str_replace_all()\n# suppression d'un motif \n# sans le _all la suppression passe à la chaine suivante dés qu'un motif est trouvé\nstr_remove() et str_remove_all()\n# manipulation de taille de caractère (majuscule, minuscule, ...)\n# attention à la spécification de la langue et au nom, un title n'est pas forcement un title que vous cherchez\nstr_to_lower()\nstr_to_upper()\nstr_to_title()\nstr_to_sentence()"
+    "section": "Fonctions de manipulation",
+    "text": "Fonctions de manipulation\nEn lien avec des manipulations de type vectorisation (= conservation de la structure des données d’entrée)\n# remplacement du motif via un assignation\nstr_sub() &lt;- value\n\n# remplacement d'un motif par un autre\n# sans le _all le remplacement passe à la chaine suivante dès qu'un motif est trouvé\nstr_replace() et str_replace_all()\n\n# suppression d'un motif \n# sans le _all la suppression passe à la chaine suivante dès qu'un motif est trouvé\nstr_remove() et str_remove_all()\n\n# manipulation de taille de caractère (majuscule, minuscule, ...)\n# attention à la spécification de la langue et au nom, un title n'est pas forcement un title que vous cherchez\nstr_to_lower()\nstr_to_upper()\nstr_to_title()\nstr_to_sentence()"
   },
   {
     "objectID": "tidyverse-training.html#exercice-4.2",
     "href": "tidyverse-training.html#exercice-4.2",
     "title": "tidyverse-training",
     "section": "Exercice 4.2",
-    "text": "Exercice 4.2\n\nÀ partir du jeu de données biomass_survey_exercice4_1, créer une nouvelle variable, site_name_length_ori, contenant la taille des chaines de caractère de la variable site_name\nNettoyer la variable site_name en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable site_name_clean\nEnlever les majuscules de notre variable site_name_clean sauf celles en début de chaine"
+    "text": "Exercice 4.2\n\nÀ partir du jeu de données biomass_survey_exercice4_1, créer une nouvelle variable, site_name_length_ori, contenant la taille des chaines de caractères de la variable site_name\nNettoyer la variable site_name en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable site_name_clean\nEnlever les majuscules de notre variable site_name_clean sauf celles en début de chaine"
   },
   {
     "objectID": "tidyverse-training.html#exercice-4.2-corrigé",
     "href": "tidyverse-training.html#exercice-4.2-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 4.2 corrigé",
-    "text": "Exercice 4.2 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_1, créer une nouvelle variable, site_name_length_ori, contenant la taille des chaines de caractère de la variable site_name\nNettoyer la variable site_name en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable site_name_clean\nEnlever les majuscules de notre variable site_name_clean sauf celles en début de chaine\n\n# solution\nbiomass_survey_exercice4_2 &lt;- biomass_survey_exercice4_1 %&gt;%\n  mutate(site_name_length_ori = str_length(site_name),\n         site_name_clean = str_squish(site_name),\n         site_name_clean = str_to_sentence(site_name_clean)) %&gt;%\n  relocate(site_name_length_ori,\n           site_name_clean,\n           .after = site_name)"
+    "text": "Exercice 4.2 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_1, créer une nouvelle variable, site_name_length_ori, contenant la taille des chaines de caractères de la variable site_name\nNettoyer la variable site_name en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable site_name_clean\nEnlever les majuscules de notre variable site_name_clean sauf celles en début de chaine\n\n# solution\nbiomass_survey_exercice4_2 &lt;- biomass_survey_exercice4_1 %&gt;%\n  mutate(site_name_length_ori = str_length(site_name),\n         site_name_clean = str_squish(site_name),\n         site_name_clean = str_to_sentence(site_name_clean)) %&gt;%\n  relocate(site_name_length_ori,\n           site_name_clean,\n           .after = site_name)"
   },
   {
     "objectID": "tidyverse-training.html#fonctions-de-jointures-et-de-division",
     "href": "tidyverse-training.html#fonctions-de-jointures-et-de-division",
     "title": "tidyverse-training",
     "section": "Fonctions de jointures et de division",
-    "text": "Fonctions de jointures et de division\nTrès pratique surtout si utilisation via langage tidyverse\n# jointure de plusieurs chaines de caractère en une seule (conservation structure en lignes)\nstr_c()\n# jointure de plusieurs chaines de caractère en un seul vecteur (utiliser argument collapse)\nstr_flatten()\n# repetition d'une chaine de caractère \nstr_dup()\n# suppression des chaines de caractère repetées\nstr_unique()\n# division d'une chaine de caractère en fonction d'un motif, le resultat est une liste de chaine\nstr_split()\n# argument n pour spécifier le nombre possible de correspondances\n# si on veut retourner un vecteur (ne fonction que sur une chaine unique)\nstr_split_1()\n# si on veut retourner une matrice (argument n obligatoire)\nstr_split_fixed()\n# si on veut extraire uniquement une partie de la chaine \nstr_split_i()\n# si on veut faire des interpolations dans des chaines de caractère (similaire aux fonctions type paste())\n# utilisation de {} dans notre expression\nstr_glue()\n# variante si on veut l'utiliser dans le cadre d'une pipe\nstr_glue_data()"
+    "text": "Fonctions de jointures et de division\nTrès pratique surtout si utilisation via langage tidyverse\n# jointure de plusieurs chaines de caractères en une seule (conservation structure en lignes)\nstr_c()\n# jointure de plusieurs chaines de caractères en un seul vecteur (utiliser argument collapse)\nstr_flatten()\n# repetition d'une chaine de caractères \nstr_dup()\n# suppression des chaines de caractères repetées\nstr_unique()\n# division d'une chaine de caractères en fonction d'un motif, le résultat est une liste de chaines\nstr_split()\n# argument n pour spécifier le nombre possible de correspondances\n# si on veut retourner un vecteur (ne fonctionne que sur une chaine unique)\nstr_split_1()\n# si on veut retourner une matrice (argument n obligatoire)\nstr_split_fixed()\n# si on veut extraire uniquement une partie de la chaine \nstr_split_i()\n# si on veut faire des interpolations dans des chaines de caractères (similaire aux fonctions type paste())\n# utilisation de {} dans notre expression\nstr_glue()\n# variante si on veut l'utiliser dans le cadre d'une pipe\nstr_glue_data()"
   },
   {
     "objectID": "tidyverse-training.html#fonctions-dordre",
     "href": "tidyverse-training.html#fonctions-dordre",
     "title": "tidyverse-training",
     "section": "Fonctions d’ordre",
-    "text": "Fonctions d’ordre\nTrès simple, mais attention à la définition des arguments, notamment le locale qui va définir l’environnement de l’utilisateur.\n# retourne un vecteur des indexes ordonnés\nstr_order()\n# trier un vecteur\nstr_sort()"
+    "text": "Fonctions d’ordre\nTrès simple, mais attention à la définition des arguments, notamment le locale qui va définir l’environnement de l’utilisateur.\n# retourne un vecteur des indices ordonnés\nstr_order()\n\n# trier un vecteur\nstr_sort()"
   },
   {
     "objectID": "tidyverse-training.html#fonctions-supports",
     "href": "tidyverse-training.html#fonctions-supports",
     "title": "tidyverse-training",
     "section": "Fonctions supports",
-    "text": "Fonctions supports\nA voir comme un petite boite à outils\n# pour jouer avec l'encodage\nstr_conv()\n# pour jouer avec la visualisation de certains caractères (notamment sous la console de R)\nstr_view()\n# pour déterminer si deux chaines de caractère sont egales \nstr_equal()\n# formatte de chaine de caractère en paragraphes\nstr_wrap()"
+    "text": "Fonctions supports\nA voir comme un petite boite à outils\n# pour jouer avec l'encodage\nstr_conv()\n\n# pour jouer avec la visualisation de certains caractères (notamment sous la console de R)\nstr_view()\n\n# pour déterminer si deux chaines de caractères sont égales \nstr_equal()\n\n# formate une chaine de caractères en paragraphes\nstr_wrap()"
   },
   {
     "objectID": "tidyverse-training.html#exercice-4.3",
@@ -529,28 +529,28 @@
     "href": "tidyverse-training.html#les-expressions-régulières",
     "title": "tidyverse-training",
     "section": "Les expressions régulières",
-    "text": "Les expressions régulières\nOutil très très puissant !\n\n\n\nIl faut savoir que cela existe, mais demande un peu de patience et d’entrainement pour être utilisé\nRegardez le deuxième volet du cheatsheet de stringr\nDans l’exercice 4.3, on a utiliser [.] pour un motif, c’est une expression regulière\nPermet de “selectionner” de manière “dynamique” des patterns dans vos données\nLe plus difficile est de formuler de la meilleure façon ce que vous voulez\n\nIl y a souvent plusieurs façons d’arriver à ce que vous voulez\n\nParfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle\nUtiliser une IA peut vous faciliter la tâche, mais attention aux “boucles infernales” et surtout prenez du recul lors de vos échanges"
+    "text": "Les expressions régulières\nOutil très très puissant !\n\n\n\nIl faut savoir que cela existe, mais demande un peu de patience et d’entrainement pour être utilisé\nRegardez le deuxième volet du cheatsheet de stringr\nDans l’exercice 4.3, on a utilisé [.] pour un motif, c’est une expression regulière\nPermet de “sélectionner” de manière “dynamique” des patterns dans vos données\nLe plus difficile est de formuler de la meilleure façon ce que vous voulez\n\nIl y a souvent plusieurs façons d’arriver à ce que vous voulez\n\nParfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle\nUtiliser une IA peut vous faciliter la tâche, mais attention aux “boucles infernales” et surtout prenez du recul lors de vos échanges"
   },
   {
     "objectID": "tidyverse-training.html#exercice-bonus-4.4",
     "href": "tidyverse-training.html#exercice-bonus-4.4",
     "title": "tidyverse-training",
     "section": "Exercice bonus 4.4",
-    "text": "Exercice bonus 4.4\n\nDans le jeu données précédent, biomass_survey_exercice4_3, je veux séparer les chiffres et les lettres de la variable site_code. Comment trouver un motif qui marche aussi bien pour la valeur USWC1 et BC3 ?\nAvec l’utilisation des expressions regulières je vais pouvoir lui dire “je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s’arrête à un chiffre” (même raisonnemement avec les chiffre)"
+    "text": "Exercice bonus 4.4\n\nDans le jeu données précédent, biomass_survey_exercice4_3, je veux séparer les chiffres et les lettres de la variable site_code. Comment trouver un motif qui marche aussi bien pour la valeur USWC1 et BC3 ?\nAvec l’utilisation des expressions regulières je vais pouvoir lui dire “je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s’arrête à un chiffre” (même raisonnement avec les chiffres)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-bonus-4.4-corrigé",
     "href": "tidyverse-training.html#exercice-bonus-4.4-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice bonus 4.4 corrigé",
-    "text": "Exercice bonus 4.4 corrigé\n\nDans le jeu données précédent, biomass_survey_exercice4_3, je veux séparer les chiffres et les lettres de la variable site_code. Comment trouver un motif qui marche aussi bien pour la valeur USWC1 et BC3 ?\nAvec l’utilisation des expressions regulières je vais pouvoir lui dire “je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s’arrête à un chiffre” (même raisonnemement avec les chiffre)\n\nbiomass_survey_exercice4_4 &lt;- biomass_survey_exercice4_3 %&gt;%\n  mutate(site_code_letters = str_extract(string = site_code,\n                                         pattern = \"^[:upper:]+\"),\n         site_code_numbers = str_extract(string = site_code,\n                                         pattern = \"[:digit:]+$\")) %&gt;%\n  relocate(site_code_letters,\n           site_code_numbers,\n           .after = site_code)"
+    "text": "Exercice bonus 4.4 corrigé\n\nDans le jeu données précédent, biomass_survey_exercice4_3, je veux séparer les chiffres et les lettres de la variable site_code. Comment trouver un motif qui marche aussi bien pour la valeur USWC1 et BC3 ?\nAvec l’utilisation des expressions regulières je vais pouvoir lui dire “je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s’arrête à un chiffre” (même raisonnement avec les chiffres)\n\nbiomass_survey_exercice4_4 &lt;- biomass_survey_exercice4_3 %&gt;%\n  mutate(site_code_letters = str_extract(string = site_code,\n                                         pattern = \"^[:upper:]+\"),\n         site_code_numbers = str_extract(string = site_code,\n                                         pattern = \"[:digit:]+$\")) %&gt;%\n  relocate(site_code_letters,\n           site_code_numbers,\n           .after = site_code)"
   },
   {
     "objectID": "tidyverse-training.html#rend-la-manipulation-des-dates-et-du-temps-presque-agréable-sous-r",
     "href": "tidyverse-training.html#rend-la-manipulation-des-dates-et-du-temps-presque-agréable-sous-r",
     "title": "tidyverse-training",
     "section": "Rend la manipulation des dates et du temps presque agréable sous R",
-    "text": "Rend la manipulation des dates et du temps presque agréable sous R\n\nAnalyse semi-automatique des dates et des heures\nLes fonctions vont essayer de trouver le séparateur et le format\nPossibilité de rajouter l’indicateur de fuseau horaire via l’argument tz\n\nlibrary(lubridate)\n# Identifie l'ordre de l'année (y), le mois (m), le jour (d), l'heure (h), la minute (m) et la second (s) d'un élement fournis à R\nymd()\nmdy()\ndmy()\nymd_hms()\n# Beaucoup de possibilités, jeter un coup d'oeil sur le cheatsheet"
+    "text": "Rend la manipulation des dates et du temps presque agréable sous R\n\nAnalyse semi-automatique des dates et des heures\nLes fonctions vont essayer de trouver le séparateur et le format\nPossibilité de rajouter l’indicateur de fuseau horaire via l’argument tz\n\nlibrary(lubridate)\n# Identifie l'ordre de l'année (y), le mois (m), le jour (d), l'heure (h), la minute (m) et la seconde (s) d'un élement fourni à R\nymd()\nmdy()\ndmy()\nymd_hms()\n# Beaucoup de possibilités, jeter un coup d'oeil sur le cheatsheet"
   },
   {
     "objectID": "tidyverse-training.html#manipulation-des-élements-date-temps",
@@ -571,7 +571,7 @@
     "href": "tidyverse-training.html#bonus",
     "title": "tidyverse-training",
     "section": "Bonus",
-    "text": "Bonus\n\nLes fonctions sont vectorisables !\nSur certains jeux de données, les dates-temps sont stockées en nombre de secondes depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas-là :\n\nas_datetime()\n\nPossibilité de faire des arrondis\n\n# arrondi inférieur sur \"l'unité\" la plus proche\nfloor_date()\n# arrondi inférieur sur \"l'unité\" la plus proche\nround_date()\n# arrondie supérieur sur \"l'unité\" la plus proche\nceiling_date()\n\nDe définir des objets pour les manipuler\n\n# en lien avec les paramètres du système\nnow()\ntoday()\n# en lien avec des paramètres\ndyears()\ndmonths()\ndweeks()\n..."
+    "text": "Bonus\n\nLes fonctions sont vectorisables !\nSur certains jeux de données, les dates-temps sont stockées en nombre de secondes depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas-là :\n\nas_datetime()\n\nPossibilité de faire des arrondis\n\n# arrondi inférieur sur \"l'unité\" la plus proche\nfloor_date()\n\n# arrondi inférieur sur \"l'unité\" la plus proche\nround_date()\n\n# arrondi supérieur sur \"l'unité\" la plus proche\nceiling_date()\n\nDe définir des objets pour les manipuler\n\n# en lien avec les paramètres du système\nnow()\ntoday()\n\n# en lien avec des paramètres\ndyears()\ndmonths()\ndweeks()\n..."
   },
   {
     "objectID": "tidyverse-training.html#exercice-5.1",
@@ -585,7 +585,7 @@
     "href": "tidyverse-training.html#exercice-5.1-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 5.1 corrigé",
-    "text": "Exercice 5.1 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_3, créer une variable survey_date_as_date qui est la conversion de la variable survey_date en date\nCréer la variable survey_year qui contient l’année de la variable survey_date_as_date\nCalculer la différence de temps entre aujourd’hui et la variable survey_date_as_date. Stocker l’information dans une nouvelle colonne duration_since_now\nCréer une variable next_survey_date qui ajoute 12 mois à la variable survey_date_as_date\nRegarder plus en détail la variable next_survey_date, qu’a-t-elle de particulier ?\nQuestion bonus en lien avec la question précédente, définir l’heure des valeurs de la variable survey_date_as_date à 12h et la stocker dans une variable next_survey_date_correct\n\n# solution\nbiomass_survey_exercice5_1 &lt;- biomass_survey_exercice4_3 %&gt;%\n  mutate(survey_date_as_date = dmy(survey_date),\n         survey_year = year(x = survey_date_as_date),\n         duration_since_now = today() - survey_date_as_date,\n         next_survey_date = survey_date_as_date + dmonths(x = 12),\n         next_survey_date_correct = next_survey_date %&gt;%\n           {hour(.) &lt;- 12; .}) %&gt;%\n  relocate(survey_date_as_date,\n           next_survey_date,\n           survey_year,\n           duration_since_now,\n           next_survey_date_correct,\n           .after = survey_date)\nExplication : { ... } définit un bloc qui sera exécutées dans l’ordre, ; permet de séparer les actions, hour(.) &lt;- 12 modifie l’heure de l’objet . en 12 et . retourne l’objet modifié"
+    "text": "Exercice 5.1 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_3, créer une variable survey_date_as_date qui est la conversion de la variable survey_date en date\nCréer la variable survey_year qui contient l’année de la variable survey_date_as_date\nCalculer la différence de temps entre aujourd’hui et la variable survey_date_as_date. Stocker l’information dans une nouvelle colonne duration_since_now\nCréer une variable next_survey_date qui ajoute 12 mois à la variable survey_date_as_date\nRegarder plus en détail la variable next_survey_date, qu’a-t-elle de particulier ?\nQuestion bonus en lien avec la question précédente, définir l’heure des valeurs de la variable survey_date_as_date à 12h et la stocker dans une variable next_survey_date_correct\n\n# solution\nbiomass_survey_exercice5_1 &lt;- biomass_survey_exercice4_3 %&gt;%\n  mutate(survey_date_as_date = dmy(survey_date),\n         survey_year = year(x = survey_date_as_date),\n         duration_since_now = today() - survey_date_as_date,\n         next_survey_date = survey_date_as_date + dmonths(x = 12),\n         next_survey_date_correct = next_survey_date %&gt;%\n           {hour(.) &lt;- 12; .}) %&gt;%\n  relocate(survey_date_as_date,\n           next_survey_date,\n           survey_year,\n           duration_since_now,\n           next_survey_date_correct,\n           .after = survey_date)\nExplication : { ... } définit un bloc qui sera exécuté dans l’ordre, ; permet de séparer les actions, hour(.) &lt;- 12 modifie l’heure de l’objet . en 12 et . retourne l’objet modifié"
   },
   {
     "objectID": "tidyverse-training.html#petit-aperçu-des-possibilités",
@@ -613,7 +613,7 @@
     "href": "tidyverse-training.html#ggplot-pas-à-pas-la-structure-1",
     "title": "tidyverse-training",
     "section": "Ggplot pas à pas : La Structure",
-    "text": "Ggplot pas à pas : La Structure\n\n\nPour la structure de la figure, la fonction à toujours utiliser est ggplot() . Les arguments principaux sont :\n\n\ndata = nom.du.dataframe\nmapping = aes(x = variable.x, y = variable.y)\n\n\n\n\n   data &lt;- iris\n   p1 &lt;- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) \n   p1\n::: {.cell} ::: {.cell-output-display}  ::: :::"
+    "text": "Ggplot pas à pas : La Structure\n\n\nPour la structure de la figure, la fonction à toujours utiliser est ggplot() . Les arguments principaux sont :\n\n\ndata = nom.du.dataframe\nmapping = aes(x = variable.x, y = variable.y)\n\n\n\n\n   data &lt;- iris\n   p1 &lt;- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) \n   p1"
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.1",
