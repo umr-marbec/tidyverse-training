@@ -315,9 +315,9 @@ Attention ! On ne triche pas, aucune manipulation des fichiers pré-importation
 survey_metadata <- read_tsv(file = "data/survey_metadata.tsv")
 reef_fish_biomass <- read_delim(file = "data/reef_fish_biomass.dude",
                                 delim = "|")
-Sys.setenv("VROOM_CONNECTION_SIZE" = 2000000)
+Sys.setenv("VROOM_CONNECTION_SIZE" = 500000)
 reef_fish_abundance <- read_csv(file = "data/reef_fish_abundance.zip",
-                                guess_max = Inf)
+                                col_types = list(.default = col_integer()))
 ```
 
 ## Exercice 1.2 {auto-animate="true"}
