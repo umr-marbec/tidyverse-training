@@ -4,14 +4,14 @@
     "href": "tidyverse-training.html#plan-de-la-formation",
     "title": "tidyverse-training",
     "section": "Plan de la formation",
-    "text": "Plan de la formation\n\nPréambule et introduction\n\nPrérequis et environnement de travail nécessaire à la formation\nObjectifs de la formation\nPrésentation de tidyverse\n\nPartie 1 : Importation de données sous R avec readr\nPartie 2 : Manipulation de données avec dplyr\nPartie 3 : Nettoyage des données avec tidyr\nPartie 4 : Extension à la manipulation de données, cas spécifiques\n\n4.1 : Manipuler du texte avec stringr\n4.2 : Manipuler des dates avec lubridate\n\nPartie 5 : Visualisation graphique avec ggplot2\n\nFormation fortement inspirée du site de Joseph Larmarange"
+    "text": "Plan de la formation\n\nPréambule et introduction\n\nPrérequis et environnement de travail nécessaire à la formation\nObjectifs de la formation\nPrésentation de tidyverse\n\nPartie 1 : Importation de données sous R avec readr\nPartie 2 : Manipulation de données avec dplyr\nPartie 3 : Nettoyage des données avec tidyr\nPartie 4 : Manipuler du texte avec stringr\nPartie 5 : Manipuler des dates avec lubridate\nPartie 6 : Visualisation graphique avec ggplot2\n\nFormation fortement inspirée du site de Joseph Larmarange"
   },
   {
     "objectID": "tidyverse-training.html#prérequis-et-environnement-de-travail-nécessaire-à-la-formation",
     "href": "tidyverse-training.html#prérequis-et-environnement-de-travail-nécessaire-à-la-formation",
     "title": "tidyverse-training",
     "section": "Prérequis et environnement de travail nécessaire à la formation",
-    "text": "Prérequis et environnement de travail nécessaire à la formation\n\nAvoir des notions de base dans l’utilisation de R\nAvoir une instance valide de R sur son poste (durant la formation utilisation de la version 4.4.3 sous Windows)\nAvoir installé correctement les packages R readr (utilisation de la version 2.1.5), dplyr (utilisation de la version 1.1.4), tidyr (utilisation de la version 1.3.1), stringr (utilisation de la version 1.5.1), lubridate (utilisation de la version 1.9.4), et ggplot2 (utilisation de la version 3.5.1)."
+    "text": "Prérequis et environnement de travail nécessaire à la formation\n\nAvoir des notions de base dans l’utilisation de R\nAvoir une instance valide de R sur son poste (durant la formation utilisation de la version 4.4.3 sous Windows)\nPour information, nous allons utiliser les packages-version et dépendances R suivants :\n\nreadr (utilisation de la version 2.1.5),\ndplyr (utilisation de la version 1.1.4),\ntidyr (utilisation de la version 1.3.1),\nstringr (utilisation de la version 1.5.1),\nlubridate (utilisation de la version 1.9.4),\nggplot2 (utilisation de la version 3.5.1)."
   },
   {
     "objectID": "tidyverse-training.html#bonus-non-obligatoire",
@@ -74,7 +74,7 @@
     "href": "tidyverse-training.html#les-principales-fonctions-de-la-librairie-readr",
     "title": "tidyverse-training",
     "section": "Les principales fonctions de la librairie readr",
-    "text": "Les principales fonctions de la librairie readr\nLes fonctions de readr les plus utilisées sont :\n# Fonction générale, pour importer un fichier avec un délimiteur quelconque\nread_delim()\n# Import fichiers csv au format anglais (point décimal et séparateur virgule)\nread_csv()\n# Import fichiers csv au format français (virgule décimale et séparateur point-virgule)\nread_csv2()\n# Import fichiers au format tsv ou les valeurs sont séparées par des tabulations\nread_tsv()\n# Pour lire un fichier en \"chunks\", c'est à dire en tranches dont on définit la taille en nombre de lignes.\n# Cette fonction permet de lire de très gros fichiers  \n# et aussi d'appliquer une fonction (CallBack) sur les données à chaque tranche. \n# xxx est à remplacer par csv, csv2, delim\nread_xxx_chunked()"
+    "text": "Les principales fonctions de la librairie readr\nLes fonctions de readr les plus utilisées sont :\n# Fonction générale, pour importer un fichier avec un délimiteur quelconque\nread_delim(file, delim, ...)\n# Import fichiers csv au format anglais (point décimal et séparateur virgule)\nread_csv(file, ...)\n# Import fichiers csv au format français (virgule décimale et séparateur point-virgule)\nread_csv2(file, ...)\n# Import fichiers au format tsv ou les valeurs sont séparées par des tabulations\nread_tsv(file, ...)\n# Pour lire un fichier en \"chunks\", c'est à dire en tranches dont on définit la taille en nombre de lignes.\n# Cette fonction permet de lire de très gros fichiers  \n# et aussi d'appliquer une fonction (CallBack) sur les données à chaque tranche. \n# xxx est à remplacer par csv, csv2, delim\nread_xxx_chunked(file, callback, ...)"
   },
   {
     "objectID": "tidyverse-training.html#read_delim-la-fonction-la-plus-générique",
@@ -95,7 +95,7 @@
     "href": "tidyverse-training.html#la-fonction-inverse-write_-pour-exporter-un-fichier",
     "title": "tidyverse-training",
     "section": "La fonction inverse : write_… pour exporter un fichier",
-    "text": "La fonction inverse : write_… pour exporter un fichier\n# Pour exporter en csv\nwrite_csv()\nwrite_csv2()\n# Pour exporter en choisissant le délimiteur \nwrite_delim()\n# Pour exporter en tsv\nwrite_tsv()"
+    "text": "La fonction inverse : write_… pour exporter un fichier\n# Pour exporter en csv\nwrite_csv(x, file, ...)\nwrite_csv2(x, file, ...)\n# Pour exporter en choisissant le délimiteur \nwrite_delim(x, file, delim, ...)\n# Pour exporter en tsv\nwrite_tsv(x, file, ...)"
   },
   {
     "objectID": "tidyverse-training.html#encore-une-fois-des-paramètres",
@@ -116,7 +116,7 @@
     "href": "tidyverse-training.html#import-de-feuilles-de-calcul-type-excel",
     "title": "tidyverse-training",
     "section": "Import de feuilles de calcul (type excel)",
-    "text": "Import de feuilles de calcul (type excel)\n\nUtilisation du package readxl\n\nDeveloppé par l’équipe de tidyverse (extension des packages du cœur)\n\n\n# Fonction générique\nread_excel()\n# Fonction pour importer spécifiquement un xls (excel avant 2007) ou xlsx (extension actuelle par défaut)\nread_xls()\nread_xlsx()\n\nGlobalement des arguments similaires à précédement (col_names, skip, col_types, …)\nIntroduction de l’argument sheet et range\nNécessité de bien définir les types de colonnes\nPour les exports on utilisera openxlsx ou writexl"
+    "text": "Import de feuilles de calcul (type excel)\n\nUtilisation du package readxl\n\nDeveloppé par l’équipe de tidyverse (extension des packages du cœur)\n\n\n# Fonction générique\nread_excel(path, ...)\n# Fonction pour importer spécifiquement un xls (excel avant 2007) ou xlsx (extension actuelle par défaut)\nread_xls(path, ...)\nread_xlsx(path, ...)\n\nGlobalement des arguments similaires à précédement (col_names, skip, col_types, …)\nIntroduction de l’argument sheet et range\nNécessité de bien définir les types de colonnes\nPour les exports on utilisera openxlsx ou writexl"
   },
   {
     "objectID": "tidyverse-training.html#import-de-feuilles-de-calcul-type-google",
@@ -172,7 +172,7 @@
     "href": "tidyverse-training.html#exercice-1.2-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 1.2 corrigé",
-    "text": "Exercice 1.2 corrigé\nLire le fichier survey_metadata et le stocker dans un objet R survey_metadata en sélectionnant le pays Indonesia, une profondeur inférieure à 20m et une visibilité supérieure à 10m.\n# solution\nfunction_1_2 &lt;- function(x, pos) subset(x, country == \"Indonesia\" & depth &lt; 20 & visibility &gt; 10)\nsurvey_metadata_selection_1_2 &lt;- read_tsv_chunked(file = \"data/survey_metadata.tsv\",\n                                                  callback = DataFrameCallback$new(function_1_2),\n                                                  chunk_size = 1000)"
+    "text": "Exercice 1.2 corrigé\nLire le fichier survey_metadata et le stocker dans un objet R survey_metadata en sélectionnant le pays Indonésie, une profondeur inférieure à 20m et une visibilité supérieure à 10m.\n# solution\nfunction_1_2 &lt;- function(x, pos) subset(x, country == \"Indonesia\" & depth &lt; 20 & visibility &gt; 10)\nsurvey_metadata_selection_1_2 &lt;- read_tsv_chunked(file = \"data/survey_metadata.tsv\",\n                                                  callback = DataFrameCallback$new(function_1_2),\n                                                  chunk_size = 1000)"
   },
   {
     "objectID": "tidyverse-training.html#dplyr",
@@ -186,7 +186,7 @@
     "href": "tidyverse-training.html#manipulation-des-lignes",
     "title": "tidyverse-training",
     "section": "Manipulation des lignes",
-    "text": "Manipulation des lignes\nManipulation de type extraction\nType de fonctions qui retournent un sous-ensemble de lignes\n\nExtraction d’une ou plusieurs lignes : fonctions de la famille slice & co\n\n# sélection d'une ou plusieurs lignes par position absolue\nslice()\n# sélection au hasard d'un nombre de lignes ou d'une proportion du jeu de données\nslice_sample()\n# sélection des n dernières lignes\nslice_tail()\n# sélection des n premières lignes\nslice_head()\n# sélection des lignes avec les valeurs les plus petites ou grandes\nslice_min()\nslice_max()\n# sélection des valeurs distinctes\ndistinct()\n# sélection en fonction d'opérateurs logiques et/ou booléens\nfilter()"
+    "text": "Manipulation des lignes\nManipulation de type extraction\nType de fonctions qui retournent un sous-ensemble de lignes\n\nExtraction d’une ou plusieurs lignes : fonctions de la famille slice & co\n\n# sélection d'une ou plusieurs lignes par position absolue (l'argument x est l'indice de la ou des lignes)\nslice(.data, x, ...)\n# sélection au hasard d'un nombre de lignes ou d'une proportion du jeu de données\nslice_sample(.data, n/prop, ...)\n# sélection des n dernières lignes\nslice_tail(.data, n/prop, ...)\n# sélection des n premières lignes\nslice_head(.data, n/prop, ...)\n# sélection des lignes avec les valeurs les plus petites ou grandes\nslice_min(.data, n/prop, ...)\nslice_max(.data, n/prop, ...)\n# sélection des valeurs distinctes\ndistinct(.data, ...)\n# sélection en fonction d'opérateurs logiques et/ou booléens\nfilter(.data, ...)"
   },
   {
     "objectID": "tidyverse-training.html#petit-focus-sur-les-opérateurs-booléens-et-logiques",
@@ -200,14 +200,14 @@
     "href": "tidyverse-training.html#exercice-2.1",
     "title": "tidyverse-training",
     "section": "Exercice 2.1",
-    "text": "Exercice 2.1\n\nA l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”\nEn une seule fois, sélectionner les données dont la variable “biomass” est différente de 0, où la famille est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10."
+    "text": "Exercice 2.1\n\nÀ l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”\nEn plus et en une seule fois, sélectionner les données dont la variable “biomass” est différente de 0, où la famille est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10. Stocker le résultat dans un objet nommé biomass_exercice2_1_distinct_filter."
   },
   {
     "objectID": "tidyverse-training.html#exercice-2.1-corrigé",
     "href": "tidyverse-training.html#exercice-2.1-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 2.1 corrigé",
-    "text": "Exercice 2.1 corrigé\n\nA l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”\nEn une seule fois, sélectionner les données dont la variable “biomass” est différente de 0, où la famille est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10.\n\nbiomass_exercice2_1_distinct &lt;- distinct(.data = reef_fish_biomass)\nbiomass_exercice2_1_distinct_filter &lt;- filter(.data = biomass_exercice2_1_distinct,\n                                              biomass != 0\n                                              & ! family %in% c(\"Mullidae\",\n                                                                \"Apogonidae\")\n                                              & size_class &lt;= 10)"
+    "text": "Exercice 2.1 corrigé\n\nÀ l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”\nEn plus et en une seule fois, sélectionner les données dont la variable “biomass” est différente de 0, où la famille est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10. Stocker le résultat dans un objet nommé biomass_exercice2_1_distinct_filter.\n\nbiomass_exercice2_1_distinct &lt;- distinct(.data = reef_fish_biomass)\nbiomass_exercice2_1_distinct_filter &lt;- filter(.data = biomass_exercice2_1_distinct,\n                                              biomass != 0\n                                              & ! family %in% c(\"Mullidae\",\n                                                                \"Apogonidae\")\n                                              & size_class &lt;= 10)"
   },
   {
     "objectID": "tidyverse-training.html#amélioration-de-la-lisibilité-du-code",
@@ -228,63 +228,63 @@
     "href": "tidyverse-training.html#encore-quelques-fonctions-de-manipulation-de-lignes",
     "title": "tidyverse-training",
     "section": "Encore quelques fonctions de manipulation de lignes",
-    "text": "Encore quelques fonctions de manipulation de lignes\nManipulation de type “tri”\n\nOrdonner les lignes d’une ou plusieurs colonnes\n\n# par défaut ordre croissant, utiliser l'argument desc pour ordre décroissant\narrange()\n\nManipulation de type “ajout”\n\nAjouter une ligne dans un jeu de données\n\n\n# interet des arguments .before and .after\nadd_row()"
+    "text": "Encore quelques fonctions de manipulation de lignes\nManipulation de type “tri”\n\nOrdonner les lignes d’une ou plusieurs colonnes\n\n# par défaut ordre croissant, utiliser l'argument desc pour ordre décroissant\narrange(.data, ...)\n\nManipulation de type “ajout”\n\nAjouter une ligne dans un jeu de données\n\n# utilisation du package tibble (dépendance)\n# interet des arguments .before and .after\nadd_row(.data, ...)"
   },
   {
     "objectID": "tidyverse-training.html#manipulation-des-variables",
     "href": "tidyverse-training.html#manipulation-des-variables",
     "title": "tidyverse-training",
     "section": "Manipulation des variables",
-    "text": "Manipulation des variables\nExtraction d’une ou plusieurs colonnes\nType de fonctions qui retournent un sous-ensemble de colonnes sous la forme d’un vecteur ou d’une table\n# extraction des valeurs d'une colonne sous la forme d'un vecteur\n# on peut utiliser des noms ou les ids\npull()\n# extraction d'une colonne sous la forme d'une table\n# bien regarder les arguments de la fonction car on peut faire beaucoup\nselect()\n# Changer l'ordre ou la place d'une ou plusieurs colonnes\n# ne pas oublier les arguments .after et .before\nrelocate()"
+    "text": "Manipulation des variables\nExtraction d’une ou plusieurs colonnes\nType de fonctions qui retournent un sous-ensemble de colonnes sous la forme d’un vecteur ou d’une table\n# extraction des valeurs d'une colonne sous la forme d'un vecteur\n# on peut utiliser des noms ou les ids\npull(.data, var, ...)\n# extraction d'une colonne sous la forme d'une table\n# bien regarder les arguments de la fonction car on peut faire beaucoup\nselect(.data, ...)\n# Changer l'ordre ou la place d'une ou plusieurs colonnes\n# ne pas oublier les arguments .after et .before\nrelocate(.data, ...)"
   },
   {
     "objectID": "tidyverse-training.html#fonctions-de-vectorisation",
     "href": "tidyverse-training.html#fonctions-de-vectorisation",
     "title": "tidyverse-training",
     "section": "Fonctions de vectorisation",
-    "text": "Fonctions de vectorisation\nUne des deux grandes familles de fonctions avec dplyr\n\nOn a commencé à l’aborder de manière instinctive avec relocate()\nGlobalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie    \n\n# créer une nouvelle variable\nmutate()\n\nPetit bonus pour renommer les variables\n\nrename()"
+    "text": "Fonctions de vectorisation\nUne des deux grandes familles de fonctions avec dplyr\n\nOn a commencé à l’aborder de manière instinctive avec relocate()\nGlobalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie    \n\n# créer une nouvelle variable\nmutate(.data, ...)\n\nPetit bonus pour renommer les variables\n\nrename(.data, ...)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-2.2",
     "href": "tidyverse-training.html#exercice-2.2",
     "title": "tidyverse-training",
     "section": "Exercice 2.2",
-    "text": "Exercice 2.2\n\nÀ partir du jeu de données de sortie de l’exercice 1\nCréer une variable “survey_id_full” qui est la concaténation des variables survey_id, species_name et size_class\nPlacer cette nouvelle colonne avant la colonne survey_id\nSupprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name\nRenommer la variable size_class en size_class_cm\nCréer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm\nSupprimer la variable size_class_cm\nTrier par ordre décroissant les données en fonction de la variable size_class_mm\nUtiliser des pipes à la fin pour avoir une syntaxe “propre” et souffler un bon coup :)"
+    "text": "Exercice 2.2\n\nÀ partir du jeu de données de sortie de l’exercice 1 (biomass_exercice2_1_distinct_filter)\nCréer une variable “survey_id_full” qui est la concaténation des variables survey_id, species_name et size_class\nPlacer cette nouvelle colonne avant la colonne survey_id\nSupprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name\nRenommer la variable size_class en size_class_cm\nCréer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm\nSupprimer la variable size_class_cm\nTrier par ordre décroissant les données en fonction de la variable size_class_mm\nUtiliser des pipes à la fin pour avoir une syntaxe “propre”, stocker le resultat dans un objet nommé biomass_exercice2_2 et souffler un bon coup :)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-2.2-corrigé",
     "href": "tidyverse-training.html#exercice-2.2-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 2.2 corrigé",
-    "text": "Exercice 2.2 corrigé\n\nÀ partir du jeu de données de sortie de l’exercice 1\nCréer une variable “survey_id_full” qui est la concaténation des variables survey_id, species_name et size_class\nPlacer cette nouvelle colonne avant la colonne survey_id\nSupprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name\nRenommer la variable size_class en size_class_cm\nCréer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm\nSupprimer la variable size_class_cm\nTrier par ordre décroissant les données en fonction de la variable size_class_mm\nUtiliser des pipes à la fin pour avoir une syntaxe “propre” et souffler un bon coup :)\n\n# solution\nbiomass_exercice2_2 &lt;- mutate(.data = biomass_exercice2_1_distinct_filter,\n                              survey_id_full = paste(survey_id,\n                                                     species_name,\n                                                     size_class,\n                                                     sep = \"_\")) %&gt;%\n  relocate(survey_id_full,\n           .before = survey_id) %&gt;%\n  select(-4,\n         -reporting_name) %&gt;%\n  rename(size_class_cm = size_class) %&gt;%\n  mutate(size_class_mm = size_class_cm * 10) %&gt;%\n  select(-size_class_cm) %&gt;%\n  arrange(desc(size_class_mm))"
+    "text": "Exercice 2.2 corrigé\n\nÀ partir du jeu de données de sortie de l’exercice 1 (biomass_exercice2_1_distinct_filter)\nCréer une variable “survey_id_full” qui est la concaténation des variables survey_id, species_name et size_class\nPlacer cette nouvelle colonne avant la colonne survey_id\nSupprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name\nRenommer la variable size_class en size_class_cm\nCréer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm\nSupprimer la variable size_class_cm\nTrier par ordre décroissant les données en fonction de la variable size_class_mm\nUtiliser des pipes à la fin pour avoir une syntaxe “propre”, stocker le resultat dans un objet nommé biomass_exercice2_2 et souffler un bon coup :)\n\n# solution\nbiomass_exercice2_2 &lt;- mutate(.data = biomass_exercice2_1_distinct_filter,\n                              survey_id_full = paste(survey_id,\n                                                     species_name,\n                                                     size_class,\n                                                     sep = \"_\")) %&gt;%\n  relocate(survey_id_full,\n           .before = survey_id) %&gt;%\n  select(-4,\n         -reporting_name) %&gt;%\n  rename(size_class_cm = size_class) %&gt;%\n  mutate(size_class_mm = size_class_cm * 10) %&gt;%\n  select(-size_class_cm) %&gt;%\n  arrange(desc(size_class_mm))"
   },
   {
     "objectID": "tidyverse-training.html#fonctions-de-resumé",
     "href": "tidyverse-training.html#fonctions-de-resumé",
     "title": "tidyverse-training",
     "section": "Fonctions de resumé",
-    "text": "Fonctions de resumé\nLa deuxième grande famille\n\nFonctions qui vont créer une nouvelle table avec des resumés statistiques. De manière globale, les fonctions associées vont utiliser en entrée des vecteurs et en sortie une ou plusieurs valeurs ( en nombre inférieur au nombre de vecteurs d’entrée)    \nFonction clé\n\nsummarise()\n# Beaucoup, beaucoup d'options et de possibilités\n# Compter le nombre de valeurs/lignes\nn()\n# Compter le nombre de valeurs/lignes distinctes\nn_distinct()\n# Faire une moyenne\nmean()\n# Faire une somme, option na.rm disponible\nsum()\n# Utiliser des notions de position\nfirst()\nlast()\n# Ou de rang\nquantile()\nmin()\nmax()"
+    "text": "Fonctions de resumé\nLa deuxième grande famille\n\nFonctions qui vont créer une nouvelle table avec des resumés statistiques. De manière globale, les fonctions associées vont utiliser en entrée des vecteurs et en sortie une ou plusieurs valeurs ( en nombre inférieur au nombre de vecteurs d’entrée)    \nFonction clé\n\nsummarise(.data, ...)\n# Beaucoup, beaucoup d'options et de possibilités\n# Compter le nombre de valeurs/lignes\nn()\n# Compter le nombre de valeurs/lignes distinctes\nn_distinct()\n# Faire une moyenne\nmean()\n# Faire une somme, option na.rm disponible\nsum()\n# Utiliser des notions de position\nfirst()\nlast()\n# Ou de rang\nquantile()\nmin()\nmax()"
   },
   {
     "objectID": "tidyverse-training.html#introduction-à-la-notion-de-groupe",
     "href": "tidyverse-training.html#introduction-à-la-notion-de-groupe",
     "title": "tidyverse-training",
     "section": "Introduction à la notion de groupe",
-    "text": "Introduction à la notion de groupe\n\nPour le moment on a fait des opérations sur l’ensemble du jeu de données, pas très pertinent non ?\nFonction de création de groupe\n\n# on peut définir nos groupes en fonction des modalités des variables\n# on peut aussi utiliser des arguments des fonctions quand c'est proposé, exemple avec .by de summarise()\ngroup_by()\n# ou alors en isolant chaque ligne\nrowwise()\n\nAttention à ce que vous faites ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R). Pour y remédier :\n\n# via un summarise (argument experimental, attention à la pérennité)\n.groups\n# de manière plus générale\nungroups()\n\nCette notion de groupe peut être utilisée avec d’autres fonctions (comme un mutate)"
+    "text": "Introduction à la notion de groupe\n\nPour le moment on a fait des opérations sur l’ensemble du jeu de données, pas très pertinent non ?\nFonction de création de groupe\n\n# on peut définir nos groupes en fonction des modalités des variables\n# on peut aussi utiliser des arguments des fonctions quand c'est proposé, exemple avec .by de summarise()\ngroup_by(.data, ...)\n# ou alors en isolant chaque ligne (utile surtout pour les fonctions qui ne vectorise pas)\nrowwise()\n\nAttention à ce que vous faites ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R). Pour y remédier :\n\n# via un summarise (argument experimental, attention à la pérennité)\n.groups\n# de manière plus générale\nungroups()\n\nCette notion de groupe peut être utilisée avec d’autres fonctions (comme un mutate)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-2.3",
     "href": "tidyverse-training.html#exercice-2.3",
     "title": "tidyverse-training",
     "section": "Exercice 2.3",
-    "text": "Exercice 2.3\n\nÀ partir du jeu de données de sortie de l’exercice 2.2\nEffectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment\nPour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction “trouvée” regarder du côté des arguments en option)\nCréer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ."
+    "text": "Exercice 2.3\n\nÀ partir du jeu de données de sortie de l’exercice 2.2 (biomass_exercice2_2)\nEffectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment\nPour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction “trouvée” regarder du côté des arguments en option)\nCréer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ\nStocker tout ça dans un objet nommé biomass_exercice2_3"
   },
   {
     "objectID": "tidyverse-training.html#exercice-2.3-corrigé",
     "href": "tidyverse-training.html#exercice-2.3-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 2.3 corrigé",
-    "text": "Exercice 2.3 corrigé\n\nÀ partir du jeu de données de sortie de l’exercice 2.2\nEffectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment\nPour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction “trouvée” regarder du côté des arguments en option)\nCréer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.\n\n# solution\nbiomass_exercice2_3 &lt;- biomass_exercice2_2 %&gt;%\n  dplyr::group_by(survey_id_full) %&gt;%\n  mutate(sum_biomass = sum(x = biomass)) %&gt;%\n  ungroup() %&gt;%\n  distinct(survey_id_full,\n           .keep_all = TRUE)\nbiomass_exercice2_3_sample_verification &lt;- dplyr::group_by(.data = biomass_exercice2_2,\n                                                           family) %&gt;%\n  summarise(nb_sample_family = n()) %&gt;%\n  mutate(total = sum(nb_sample_family))"
+    "text": "Exercice 2.3 corrigé\n\nÀ partir du jeu de données de sortie de l’exercice 2.2 (biomass_exercice2_2)\nEffectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment\nPour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction “trouvée” regarder du côté des arguments en option)\nCréer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ\nStocker tout ça dans un objet nommé biomass_exercice2_3\n\n# solution\nbiomass_exercice2_3 &lt;- biomass_exercice2_2 %&gt;%\n  dplyr::group_by(survey_id_full) %&gt;%\n  mutate(sum_biomass = sum(x = biomass)) %&gt;%\n  ungroup() %&gt;%\n  distinct(survey_id_full,\n           .keep_all = TRUE)\nbiomass_exercice2_3_sample_verification &lt;- dplyr::group_by(.data = biomass_exercice2_2,\n                                                           family) %&gt;%\n  summarise(nb_sample_family = n()) %&gt;%\n  mutate(total = sum(nb_sample_family))"
   },
   {
     "objectID": "tidyverse-training.html#fonction-bonus-très-utile",
@@ -305,28 +305,28 @@
     "href": "tidyverse-training.html#combinaison-de-jeux-de-données-2",
     "title": "tidyverse-training",
     "section": "Combinaison de jeux de données 2",
-    "text": "Combinaison de jeux de données 2\nJointures de type relationnel\n\n\n\nTrès proche du SQL\nTrès puissantes et permettent de se poser les bonnes questions !\nAttention à bien spécifier l’argument by (ne pas laisser place à l’interprétation !)\n\nOn peut spécifier une seule ou plusieurs colonnes si les noms sont identiques entre les deux jeux de données\nSinon on spécifie le nom du jeu de données à “gauche” et celui qui est à “droite”\n\n\n\n\n\n# jointure à gauche\nleft_join()\n# jointure à droite\nright_join()\n# jointure commune\ninner_join()\n# jointure complete\nfull_join()"
+    "text": "Combinaison de jeux de données 2\nJointures de type relationnel\n\n\n\nTrès proche du SQL\nTrès puissantes et permettent de se poser les bonnes questions !\nAttention à bien spécifier l’argument by (ne pas laisser place à l’interprétation !)\n\nOn peut spécifier une seule ou plusieurs colonnes si les noms sont identiques entre les deux jeux de données\nSinon on spécifie le nom du jeu de données à “gauche” et celui qui est à “droite”\n\n\n\n\n\n# jointure à gauche\nleft_join(x, y, by, ...)\n# jointure à droite\nright_join(x, y, by, ...)\n# jointure commune\ninner_join(x, y, by, ...)\n# jointure complete\nfull_join(x, y, by, ...)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-2.4",
     "href": "tidyverse-training.html#exercice-2.4",
     "title": "tidyverse-training",
     "section": "Exercice 2.4",
-    "text": "Exercice 2.4\n\nÀ partir du jeu de données de sortie de l’exercice 2.3 (biomass_exercice2_3)\nFaire la “meilleure” jointure avec le jeu de données survey_metadata et expliquer votre choix\nPour vous aider :\n\nY-a-t-il un problème avec le jeu de données survey_metadata ?\nRéfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure"
+    "text": "Exercice 2.4\n\nÀ partir du jeu de données de sortie de l’exercice 2.3 (biomass_exercice2_3)\nFaire la “meilleure” jointure avec le jeu de données survey_metadata et expliquer votre choix\nPour vous aider :\n\nY-a-t-il un problème avec le jeu de données survey_metadata ?\nRéfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure\n\nStocker le résultat dans un objet nommé biomass_survey_exercice2_4"
   },
   {
     "objectID": "tidyverse-training.html#exercice-2.4-corrigé",
     "href": "tidyverse-training.html#exercice-2.4-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 2.4 corrigé",
-    "text": "Exercice 2.4 corrigé\n\nÀ partir du jeu de données de sortie de l’exercice 2.3 (biomass_exercice2_3)\nFaire la “meilleure” jointure avec le jeu de données survey_metadata et expliquer votre choix\nPour vous aider :\n\nY-a-t-il un problème avec le jeu de données survey_metadata ?\nRéfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure\n\n\n# solution\nsurvey_metadata_distinct &lt;- distinct(.data = survey_metadata)\nbiomass_survey_exercice2_4 &lt;- biomass_exercice2_3 %&gt;%\n  left_join(survey_metadata_distinct,\n            by = \"survey_id\")"
+    "text": "Exercice 2.4 corrigé\n\nÀ partir du jeu de données de sortie de l’exercice 2.3 (biomass_exercice2_3)\nFaire la “meilleure” jointure avec le jeu de données survey_metadata et expliquer votre choix\nPour vous aider :\n\nY-a-t-il un problème avec le jeu de données survey_metadata ?\nRéfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure\n\nStocker le résultat dans un objet nommé biomass_survey_exercice2_4\n\n# solution\nsurvey_metadata_distinct &lt;- distinct(.data = survey_metadata)\nbiomass_survey_exercice2_4 &lt;- biomass_exercice2_3 %&gt;%\n  left_join(survey_metadata_distinct,\n            by = \"survey_id\")"
   },
   {
     "objectID": "tidyverse-training.html#tidyr",
     "href": "tidyverse-training.html#tidyr",
     "title": "tidyverse-training",
     "section": "Tidyr",
-    "text": "Tidyr\nL’objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format “tidy”.\nLes différents verbes viennent s’ajouter à tous ceux que nous avons déjà vus avec readr et dplyr et ils s’intègrent parfaitement dans la série de pipe %&gt;% permettant d’enchainer les opérations.\n\nLes données “tidy”, qu’est ce que c’est?\n\n1 variable = 1 colonne\n1 observation = 1 ligne/case\n1 type d’observation par table\n\n\nLien vers le cheatsheet de tidyr."
+    "text": "Tidyr\nL’objectif du package tidyr est de fournir des fonctions pour arranger et nettoyer ses données dans le but de les convertir dans un format “tidy”.\nLes différents verbes viennent s’ajouter à tous ceux que nous avons déjà vus avec readr et dplyr et ils s’intègrent parfaitement dans la série de pipe %&gt;% permettant d’enchainer les opérations.\n\nLes données “tidy”, qu’est ce que c’est?\n\n1 variable = 1 colonne\n1 observation = 1 ligne/case\n1 type d’observation par table"
   },
   {
     "objectID": "tidyverse-training.html#les-principales-fonctions-de-tidyr",
@@ -347,25 +347,25 @@
     "href": "tidyverse-training.html#exercice-3.1-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 3.1 corrigé",
-    "text": "Exercice 3.1 corrigé\n\nObservez les données de biomasse (biomass_survey_exercice2_4) et d’abondance. Les données sont elles tidy ? Si non, pourquoi ?\n\n\n\n\nOui les données de biomasse sont tidy, nous avons bien une observation par ligne Non les données d’abondance ne sont pas tidy, car elles sont en format “wide”"
+    "text": "Exercice 3.1 corrigé\n\nObservez les données de biomasse (biomass_survey_exercice2_4) et d’abondance. Les données sont elles tidy ? Si non, pourquoi ?\n\n# solution\nhead(x = biomass_survey_exercice2_4)\nView(x = biomass_survey_exercice2_4)\n\n\nNon les données d’abondance ne sont pas tidy, car elles sont en format “wide”"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.2",
     "href": "tidyverse-training.html#exercice-3.2",
     "title": "tidyverse-training",
     "section": "Exercice 3.2",
-    "text": "Exercice 3.2\n\nTransformez les données d’abondance en format tidy. Les nouvelles colonnes créées seront sp_size et abundance\nPensez à bien regarder tous les arguments des fonctions\n\n# solution"
+    "text": "Exercice 3.2\n\nTransformez les données d’abondance en format tidy. Les nouvelles colonnes créées seront sp_size et abundance\nPensez à bien regarder tous les arguments des fonctions\nStocker le résultat dans un objet nommé abundance_exercice3_2"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.2-corrigé",
     "href": "tidyverse-training.html#exercice-3.2-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 3.2 corrigé",
-    "text": "Exercice 3.2 corrigé\n\nTransformez les données d’abondance en format tidy. Les nouvelles colonnes créées seront sp_size et abundance\nPensez à bien regarder tous les arguments des fonctions\n\n# solution\nabundance_exercice3_2 &lt;- reef_fish_abundance %&gt;%\n  pivot_longer(\n    .,\n    cols = 2:ncol(.),\n    names_to = \"sp_size\",\n    values_to = \"abundance\"\n  )"
+    "text": "Exercice 3.2 corrigé\n\nTransformez les données d’abondance en format tidy. Les nouvelles colonnes créées seront sp_size et abundance\nPensez à bien regarder tous les arguments des fonctions\nStocker le résultat dans un objet nommé abundance_exercice3_2\n\n# solution\nabundance_exercice3_2 &lt;- reef_fish_abundance %&gt;%\n  pivot_longer(.,\n               cols = 2:ncol(.),\n               names_to = \"sp_size\",\n               values_to = \"abundance\")"
   },
   {
-    "objectID": "tidyverse-training.html#section-2",
-    "href": "tidyverse-training.html#section-2",
+    "objectID": "tidyverse-training.html#section-1",
+    "href": "tidyverse-training.html#section-1",
     "title": "tidyverse-training",
     "section": "",
     "text": "Gestion des valeurs manquantes “NA”\n# Remplacer des \"NA\" par des valeurs spécifiques\nreplace_na(data, replace, …)\n# Supprimer les lignes contenant des \"NA\"\ndrop_na(data, …)\n#  Remplir les \"NA\" en utilisant les valeurs précédentes ou suivantes de la même colonne\nfill(data, …, .direction)"
@@ -375,49 +375,42 @@
     "href": "tidyverse-training.html#exercice-3.3",
     "title": "tidyverse-training",
     "section": "Exercice 3.3",
-    "text": "Exercice 3.3\n\nA partir du jeu de données issu de l’exercice 3.2 supprimez les lignes ayant des valeurs d’abondance égale à NA\n\n# solution"
+    "text": "Exercice 3.3\n\nA partir du jeu de données issu de l’exercice 3.2 (abundance_exercice3_2) supprimez les lignes ayant des valeurs d’abondance égales à NA\nStocker le résultat dans un objet nommé abundance_exercice3_3"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.3-corrigé",
     "href": "tidyverse-training.html#exercice-3.3-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 3.3 corrigé",
-    "text": "Exercice 3.3 corrigé\n\nA partir du jeu de données issu de l’exercice 3.2 supprimez les lignes ayant des valeurs d’abondance égales à NA\n\n# solution\nabundance_exercice3_3 &lt;- abundance_exercice3_2 %&gt;%\n  drop_na(., abundance)"
-  },
-  {
-    "objectID": "tidyverse-training.html#section-3",
-    "href": "tidyverse-training.html#section-3",
-    "title": "tidyverse-training",
-    "section": "",
-    "text": "Combinaison des variables\n# Séparer une colonne en plusieurs colonnes\nseparate(data, col, into)\n# Créer une seule colonne à partir de plusieurs colonnes\nunite(col, ..., sep)\n# Générer toutes les combinaisons 2 à 2 possibles entre les variables définies\nexpand(data, ...)"
+    "text": "Exercice 3.3 corrigé\n\nA partir du jeu de données issu de l’exercice 3.2 (abundance_exercice3_2) supprimez les lignes ayant des valeurs d’abondance égales à NA\nStocker le résultat dans un objet nommé abundance_exercice3_3\n\n# solution\nabundance_exercice3_3 &lt;- abundance_exercice3_2 %&gt;%\n  drop_na(., \n          abundance)\nCombinaison des variables\n# Séparer une colonne en plusieurs colonnes\nseparate(data, col, into)\n# Créer une seule colonne à partir de plusieurs colonnes\nunite(col, ..., sep)\n# Générer toutes les combinaisons 2 à 2 possibles entre les variables définies\nexpand(data, ...)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.4",
     "href": "tidyverse-training.html#exercice-3.4",
     "title": "tidyverse-training",
     "section": "Exercice 3.4",
-    "text": "Exercice 3.4\n\nVérifiez s’il y a des données dupliquées dans le jeu de données issu de l’exercice 3.3\nCréez une nouvelle variable “survey_id_full” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”.\nEn vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations\n\n# solution"
+    "text": "Exercice 3.4\n\nVérifiez s’il y a des données dupliquées dans le jeu de données issu de l’exercice 3.3 (abundance_exercice3_3)\nCréez une nouvelle variable “survey_id_full” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”.\nEn vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations\nStocker le résultat dans un objet nommé abundance_biomass_survey_exercice3_4"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.4-corrigé",
     "href": "tidyverse-training.html#exercice-3.4-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 3.4 corrigé",
-    "text": "Exercice 3.4 corrigé\n\nVérifiez s’il y a des données dupliquées dans le jeu de données issu de l’exercice 3.3\nCréez une nouvelle variable survey_id_full qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”.\nEn vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse (biomass_survey_exercice2_4) et abondance . Pensez à enchainer les opérations\nPositionnez la colonne abundance après la colonne biomass\n\n# solution\nabundance_biomass_survey_exercice3_4 &lt;- abundance_exercice3_3 %&gt;%\n  distinct() %&gt;%\n  unite(., col = \"survey_id_full\", c(survey_id, sp_size), sep = \"_\")  %&gt;%\n  right_join(., biomass_survey_exercice2_4, by = \"survey_id_full\") %&gt;%\n  relocate(abundance, .after = biomass)"
+    "text": "Exercice 3.4 corrigé\n\nVérifiez s’il y a des données dupliquées dans le jeu de données issu de l’exercice 3.3 (abundance_exercice3_3)\nCréez une nouvelle variable “survey_id_full” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”.\nEn vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations\nStocker le résultat dans un objet nommé abundance_biomass_survey_exercice3_4\n\n# solution\nabundance_biomass_survey_exercice3_4 &lt;- abundance_exercice3_3 %&gt;%\n  distinct() %&gt;%\n  unite(.,\n        col = \"survey_id_full\",\n        c(survey_id,\n          sp_size),\n        sep = \"_\")  %&gt;%\n  right_join(.,\n             biomass_survey_exercice2_4,\n             by = \"survey_id_full\") %&gt;%\n  relocate(abundance,\n           .after = biomass)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.5",
     "href": "tidyverse-training.html#exercice-3.5",
     "title": "tidyverse-training",
     "section": "Exercice 3.5",
-    "text": "Exercice 3.5\n\nCréez 2 nouvelles colonnes genus et species à partir de species_name\nSupprimez les colonnes de has_pq_scores_in_db jusqu’à methods\nhas_pq_scores_in_db est en position 23"
+    "text": "Exercice 3.5\n\nA partir du jeu de données précédent (abundance_biomass_survey_exercice3_4)\nCréez 2 nouvelles colonnes genus et species à partir de species_name\nSupprimez les colonnes de has_pq_scores_in_db jusqu’à methods\nhas_pq_scores_in_db est en position 23\nStocker le résulat dans un objet nommé abundance_biomass_survey_exercice3_5"
   },
   {
     "objectID": "tidyverse-training.html#exercice-3.5-corrigé",
     "href": "tidyverse-training.html#exercice-3.5-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 3.5 corrigé",
-    "text": "Exercice 3.5 corrigé\n\nCréez 2 nouvelles colonnes genus et species à partir de species_name\nSupprimez les colonnes de has_pq_scores_in_db jusqu’à methods\nhas_pq_scores_in_db est en position 23\n\n# solution\nabundance_biomass_survey_exercice3_5 &lt;- abundance_biomass_survey_exercice3_4 %&gt;%\n  separate(., species_name, into = c(\"genus\", \"species\")) %&gt;%\n  select( -c(23:ncol(.)))"
+    "text": "Exercice 3.5 corrigé\n\nA partir du jeu de données précédent (abundance_biomass_survey_exercice3_4)\nCréez 2 nouvelles colonnes genus et species à partir de species_name\nSupprimez les colonnes de has_pq_scores_in_db jusqu’à methods\nhas_pq_scores_in_db est en position 23\nStocker le résulat dans un objet nommé abundance_biomass_survey_exercice3_5\n\n# solution\nabundance_biomass_survey_exercice3_5 &lt;- abundance_biomass_survey_exercice3_4 %&gt;%\n  separate(.,\n           species_name,\n           into = c(\"genus\",\n                    \"species\")) %&gt;%\n  select(-c(23:ncol(.)))"
   },
   {
     "objectID": "tidyverse-training.html#conçu-pour-manipuler-les-chaines-de-caractères-facilement",
@@ -438,91 +431,91 @@
     "href": "tidyverse-training.html#fonctions-de-détection",
     "title": "tidyverse-training",
     "section": "Fonctions de détection",
-    "text": "Fonctions de détection\nRenvoient une réponse (pas d’extraction)\n# détection d'un motif dans une chaine de caractères\nstr_detect() et str_like()\n\n# détection d'un motif au début ou à la fin d'une chaine de caractères\nstr_starts() et str_ends()\n\n# détection des lignes contenant le motif\nstr_which()\n\n# détection de la position du motif dans la chaine de caractères (début et fin)\n# sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé\nstr_locate() et str_locate_all()\n\n# comptage du nombre de fois que le motif est détecté dans une chaine de caractères\nstr_count()"
+    "text": "Fonctions de détection\nRenvoient une réponse (pas d’extraction)\n# détection d'un motif dans une chaine de caractères\nstr_detect(string, pattern, negate) et str_like(string, pattern, ...)\n\n# détection d'un motif au début ou à la fin d'une chaine de caractères\nstr_starts(string, pattern, negate) et str_ends(string, pattern, negate)\n\n# détection des lignes contenant le motif\nstr_which(string, pattern, negate)\n\n# détection de la position du motif dans la chaine de caractères (début et fin)\n# sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé\nstr_locate(string, pattern) et str_locate_all(string, pattern)\n\n# comptage du nombre de fois que le motif est détecté dans une chaine de caractères\nstr_count(string, pattern)"
   },
   {
     "objectID": "tidyverse-training.html#fonctions-de-sélection-ou-dextraction",
     "href": "tidyverse-training.html#fonctions-de-sélection-ou-dextraction",
     "title": "tidyverse-training",
     "section": "Fonctions de sélection ou d’extraction",
-    "text": "Fonctions de sélection ou d’extraction\nRenvoient une chaine de caractères\n# extraction d'une chaine à un ou des endroits bien précis\n# utilisation d'indices de position\nstr_sub() et str_sub_all()\n\n# extraction des chaines, complètes, contenant un motif défini\nstr_subset()\n\n# extraction d'un motif dans une chaine de caractères et retour sous forme de vecteur\n# par défaut la détection passe à la chaine suivante dès qu'un motif est trouvé\nstr_extract() et str_extract_all()\n\n# extraction d'un motif dans une chaine de caractères et retour sous forme de matrix\n# sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé\nstr_match() et str_match_all()"
+    "text": "Fonctions de sélection ou d’extraction\nRenvoient une chaine de caractères\n# extraction d'une chaine à un ou des endroits bien précis\n# utilisation d'indices de position\nstr_sub(string, start, end) et str_sub_all(string, start, end)\n\n# extraction des chaines, complètes, contenant un motif défini\nstr_subset(string, pattern, negate)\n\n# extraction d'un motif dans une chaine de caractères et retour sous forme de vecteur\n# par défaut la détection passe à la chaine suivante dès qu'un motif est trouvé\nstr_extract(string, pattern, ...) et str_extract_all(string, pattern, ...)\n\n# extraction d'un motif dans une chaine de caractères et retour sous forme de matrix\n# sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé\nstr_match(string, pattern) et str_match_all(string, pattern)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-4.1",
     "href": "tidyverse-training.html#exercice-4.1",
     "title": "tidyverse-training",
     "section": "Exercice 4.1",
-    "text": "Exercice 4.1\n\nÀ partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille Embiotocidae puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de dplyr)\ncompter combien nous avons de données d’occurrence d’espèces du genre Embiotoca dans ce nouveau jeu de données\nen utilisant une négation, extraire toutes les localisations qui sont différentes de British Columbia"
+    "text": "Exercice 4.1\n\nÀ partir du jeu de données biomass_survey_exercice2_4, extraire les numéros de lignes correspondant aux données des échantillons de la famille Embiotocidae puis utiliser ces indices pour sélectionner ces lignes et les variables associées (utiliser la fonction slice de dplyr). Stocker le résulat dans un objet biomass_survey_exercice4_1.\ncompter combien nous avons de données d’occurrence d’espèces du genre Embiotoca dans ce nouveau jeu de données\nen utilisant une négation, extraire toutes les localisations qui sont différentes de British Columbia"
   },
   {
     "objectID": "tidyverse-training.html#exercice-4.1-corrigé",
     "href": "tidyverse-training.html#exercice-4.1-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 4.1 corrigé",
-    "text": "Exercice 4.1 corrigé\n\nÀ partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille Embiotocidae puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de dplyr)\ncompter combien nous avons de données d’occurrence d’espèces du genre Embiotoca dans ce nouveau jeu de données\nen utilisant une négation, extraire toutes les localisations qui sont différentes de British Columbia\n\n# solution\nbiomass_survey_exercice4_1 &lt;- slice(.data = biomass_survey_exercice2_4,\n                                    str_which(string = biomass_survey_exercice2_4$family,\n                                              pattern = \"Embiotocidae\"))\nsum_data_embiotoca_exercice4_1 &lt;- sum(str_count(string = biomass_survey_exercice4_1$species_name,\n                                                pattern = \"Embiotoca.\"))\nlocation_biomass_survey_exercice4_1 &lt;- unique(str_subset(string = biomass_survey_exercice4_1$location,\n                                                         pattern = \"British Columbia\",\n                                                         negate = TRUE))"
+    "text": "Exercice 4.1 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice2_4, extraire les numéros de lignes correspondant aux données des échantillons de la famille Embiotocidae puis utiliser ces indices pour sélectionner ces lignes et les variables associées (utiliser la fonction slice de dplyr). Stocker le résulat dans un objet biomass_survey_exercice4_1.\ncompter combien nous avons de données d’occurrence d’espèces du genre Embiotoca dans ce nouveau jeu de données\nen utilisant une négation, extraire toutes les localisations qui sont différentes de British Columbia\n\n# solution\nbiomass_survey_exercice4_1 &lt;- slice(.data = biomass_survey_exercice2_4,\n                                    str_which(string = biomass_survey_exercice2_4$family,\n                                              pattern = \"Embiotocidae\"))\nsum_data_embiotoca_exercice4_1 &lt;- sum(str_count(string = biomass_survey_exercice4_1$species_name,\n                                                pattern = \"Embiotoca.\"))\nlocation_biomass_survey_exercice4_1 &lt;- unique(str_subset(string = biomass_survey_exercice4_1$location,\n                                                         pattern = \"British Columbia\",\n                                                         negate = TRUE))"
   },
   {
     "objectID": "tidyverse-training.html#fonctions-de-gestion-des-tailles-de-caractères",
     "href": "tidyverse-training.html#fonctions-de-gestion-des-tailles-de-caractères",
     "title": "tidyverse-training",
     "section": "Fonctions de gestion des tailles de caractères",
-    "text": "Fonctions de gestion des tailles de caractères\n# largeur/nombre de caractères\n# attention aux espaces et caractères masqués\nstr_length()\n\n# ajout \"d'espace\" à une chaine de caractères\nstr_pad()\n\n# tronquer une chaîne de caractères à un nombre fixe de caractères\nstr_trunc()\n\n# supprimer des espaces \n# au début et/ou à la fin d'une chaine de caractères\nstr_trim()\n# au début, à la fin et réduction des espaces à un seul\nstr_squish()"
+    "text": "Fonctions de gestion des tailles de caractères\n# largeur/nombre de caractères\n# attention aux espaces et caractères masqués\nstr_length(string)\n\n# ajout \"d'espace\" à une chaine de caractères\nstr_pad(string, width, side, ...)\n\n# tronquer une chaîne de caractères à un nombre fixe de caractères\nstr_trunc(string, width, side, ...)\n\n# supprimer des espaces \n# au début et/ou à la fin d'une chaine de caractères\nstr_trim(string, side)\n# au début, à la fin et réduction des espaces à un seul\nstr_squish(string)"
   },
   {
     "objectID": "tidyverse-training.html#fonctions-de-manipulation",
     "href": "tidyverse-training.html#fonctions-de-manipulation",
     "title": "tidyverse-training",
     "section": "Fonctions de manipulation",
-    "text": "Fonctions de manipulation\nEn lien avec des manipulations de type vectorisation (= conservation de la structure des données d’entrée)\n# remplacement du motif via un assignation\nstr_sub() &lt;- value\n\n# remplacement d'un motif par un autre\n# sans le _all le remplacement passe à la chaine suivante dès qu'un motif est trouvé\nstr_replace() et str_replace_all()\n\n# suppression d'un motif \n# sans le _all la suppression passe à la chaine suivante dès qu'un motif est trouvé\nstr_remove() et str_remove_all()\n\n# manipulation de taille de caractère (majuscule, minuscule, ...)\n# attention à la spécification de la langue et au nom, un title n'est pas forcement un title que vous cherchez\nstr_to_lower()\nstr_to_upper()\nstr_to_title()\nstr_to_sentence()"
+    "text": "Fonctions de manipulation\nEn lien avec des manipulations de type vectorisation (= conservation de la structure des données d’entrée)\n# remplacement du motif via un assignation\nstr_sub(string, start, end) &lt;- value\n\n# remplacement d'un motif par un autre\n# sans le _all le remplacement passe à la chaine suivante dès qu'un motif est trouvé\nstr_replace(string, pattern, replacement) et str_replace_all(string, pattern, replacement)\n\n# suppression d'un motif \n# sans le _all la suppression passe à la chaine suivante dès qu'un motif est trouvé\nstr_remove(string, pattern) et str_remove_all(string, pattern)\n\n# manipulation de taille de caractère (majuscule, minuscule, ...)\n# attention à la spécification de la langue et au nom, un title n'est pas forcement un title que vous cherchez\nstr_to_lower(string, ...)\nstr_to_upper(string, ...)\nstr_to_title(string, ...)\nstr_to_sentence(string, ...)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-4.2",
     "href": "tidyverse-training.html#exercice-4.2",
     "title": "tidyverse-training",
     "section": "Exercice 4.2",
-    "text": "Exercice 4.2\n\nÀ partir du jeu de données biomass_survey_exercice4_1, créer une nouvelle variable, site_name_length_ori, contenant la taille des chaines de caractères de la variable site_name\nNettoyer la variable site_name en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable site_name_clean\nEnlever les majuscules de notre variable site_name_clean sauf celles en début de chaine"
+    "text": "Exercice 4.2\n\nÀ partir du jeu de données biomass_survey_exercice4_1, créer une nouvelle variable, site_name_length_ori, contenant la taille des chaines de caractères de la variable site_name\nNettoyer la variable site_name en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable site_name_clean\nEnlever les majuscules de notre variable site_name_clean sauf celles en début de chaine\nStocker le résultat dans un objet biomass_survey_exercice4_2"
   },
   {
     "objectID": "tidyverse-training.html#exercice-4.2-corrigé",
     "href": "tidyverse-training.html#exercice-4.2-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 4.2 corrigé",
-    "text": "Exercice 4.2 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_1, créer une nouvelle variable, site_name_length_ori, contenant la taille des chaines de caractères de la variable site_name\nNettoyer la variable site_name en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable site_name_clean\nEnlever les majuscules de notre variable site_name_clean sauf celles en début de chaine\n\n# solution\nbiomass_survey_exercice4_2 &lt;- biomass_survey_exercice4_1 %&gt;%\n  mutate(site_name_length_ori = str_length(site_name),\n         site_name_clean = str_squish(site_name),\n         site_name_clean = str_to_sentence(site_name_clean)) %&gt;%\n  relocate(site_name_length_ori,\n           site_name_clean,\n           .after = site_name)"
+    "text": "Exercice 4.2 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_1, créer une nouvelle variable, site_name_length_ori, contenant la taille des chaines de caractères de la variable site_name\nNettoyer la variable site_name en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable site_name_clean\nEnlever les majuscules de notre variable site_name_clean sauf celles en début de chaine\nStocker le résultat dans un objet biomass_survey_exercice4_2\n\n# solution\nbiomass_survey_exercice4_2 &lt;- biomass_survey_exercice4_1 %&gt;%\n  mutate(site_name_length_ori = str_length(site_name),\n         site_name_clean = str_squish(site_name),\n         site_name_clean = str_to_sentence(site_name_clean)) %&gt;%\n  relocate(site_name_length_ori,\n           site_name_clean,\n           .after = site_name)"
   },
   {
     "objectID": "tidyverse-training.html#fonctions-de-jointures-et-de-division",
     "href": "tidyverse-training.html#fonctions-de-jointures-et-de-division",
     "title": "tidyverse-training",
     "section": "Fonctions de jointures et de division",
-    "text": "Fonctions de jointures et de division\nTrès pratique surtout si utilisation via langage tidyverse\n# jointure de plusieurs chaines de caractères en une seule (conservation structure en lignes)\nstr_c()\n# jointure de plusieurs chaines de caractères en un seul vecteur (utiliser argument collapse)\nstr_flatten()\n# repetition d'une chaine de caractères \nstr_dup()\n# suppression des chaines de caractères repetées\nstr_unique()\n# division d'une chaine de caractères en fonction d'un motif, le résultat est une liste de chaines\nstr_split()\n# argument n pour spécifier le nombre possible de correspondances\n# si on veut retourner un vecteur (ne fonctionne que sur une chaine unique)\nstr_split_1()\n# si on veut retourner une matrice (argument n obligatoire)\nstr_split_fixed()\n# si on veut extraire uniquement une partie de la chaine \nstr_split_i()\n# si on veut faire des interpolations dans des chaines de caractères (similaire aux fonctions type paste())\n# utilisation de {} dans notre expression\nstr_glue()\n# variante si on veut l'utiliser dans le cadre d'une pipe\nstr_glue_data()"
+    "text": "Fonctions de jointures et de division\nTrès pratique surtout si utilisation via langage tidyverse\n# jointure de plusieurs chaines de caractères en une seule (conservation structure en lignes)\nstr_c()\n# jointure de plusieurs chaines de caractères en un seul vecteur (utiliser argument collapse)\nstr_flatten(string, collapse)\n# repetition d'une chaine de caractères \nstr_dup(string, times)\n# suppression des chaines de caractères repetées\nstr_unique(string, ...)\n# division d'une chaine de caractères en fonction d'un motif, le résultat est une liste de chaines\nstr_split(string, pattern, ...)\n# argument n pour spécifier le nombre possible de correspondances\n# si on veut retourner un vecteur (ne fonctionne que sur une chaine unique)\nstr_split_1(string, pattern)\n# si on veut retourner une matrice\nstr_split_fixed(string, pattern, n)\n# si on veut extraire uniquement une partie de la chaine \nstr_split_i(string, pattern, i)\n# si on veut faire des interpolations dans des chaines de caractères (similaire aux fonctions type paste())\n# utilisation de {} dans notre expression\nstr_glue()\n# variante si on veut l'utiliser dans le cadre d'une pipe\nstr_glue_data()"
   },
   {
     "objectID": "tidyverse-training.html#fonctions-dordre",
     "href": "tidyverse-training.html#fonctions-dordre",
     "title": "tidyverse-training",
     "section": "Fonctions d’ordre",
-    "text": "Fonctions d’ordre\nTrès simple, mais attention à la définition des arguments, notamment le locale qui va définir l’environnement de l’utilisateur.\n# retourne un vecteur des indices ordonnés\nstr_order()\n\n# trier un vecteur\nstr_sort()"
+    "text": "Fonctions d’ordre\nTrès simple, mais attention à la définition des arguments, notamment le locale qui va définir l’environnement de l’utilisateur.\n# retourne un vecteur des indices ordonnés\nstr_order(x)\n\n# trier un vecteur\nstr_sort(x)"
   },
   {
     "objectID": "tidyverse-training.html#fonctions-supports",
     "href": "tidyverse-training.html#fonctions-supports",
     "title": "tidyverse-training",
     "section": "Fonctions supports",
-    "text": "Fonctions supports\nA voir comme un petite boite à outils\n# pour jouer avec l'encodage\nstr_conv()\n\n# pour jouer avec la visualisation de certains caractères (notamment sous la console de R)\nstr_view()\n\n# pour déterminer si deux chaines de caractères sont égales \nstr_equal()\n\n# formate une chaine de caractères en paragraphes\nstr_wrap()"
+    "text": "Fonctions supports\nA voir comme un petite boite à outils\n# pour jouer avec l'encodage\nstr_conv(string, encoding)\n\n# pour jouer avec la visualisation de certains caractères (notamment sous la console de R)\nstr_view(string, ...)\n\n# pour déterminer si deux chaines de caractères sont égales \nstr_equal(x, y, ...)\n\n# formate une chaine de caractères en paragraphes\nstr_wrap(string, ...)"
   },
   {
     "objectID": "tidyverse-training.html#exercice-4.3",
     "href": "tidyverse-training.html#exercice-4.3",
     "title": "tidyverse-training",
     "section": "Exercice 4.3",
-    "text": "Exercice 4.3\n\nÀ partir du jeu de données biomass_survey_exercice4_2, créer deux nouvelles variables, species_name_first et species_name_second, qui contiennent une division de la variable species_name en deux mots (on utilisera la valeur [.] pour spécifier . comme séparateur, bizarre non ?)\nCréer une variable biomass_percentage qui contiendra la biomasse exprimée en % (on veut le signe % à la fin de la chaine)\nFusionner dans une nouvelle variable description les variables species_name_first, species_name_second et biomass_percentage pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable biomass_percentage en parenthèses et suivi de la chaine de caractère of total biomass)\nAyant une très mauvaise vision et un écran très petit, je souhaiterais que l’affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable description_shinny. Attention, il faut parfois regarder au-delà de ce qu’on voit dans la console de R…"
+    "text": "Exercice 4.3\n\nÀ partir du jeu de données biomass_survey_exercice4_2, créer deux nouvelles variables, species_name_first et species_name_second, qui contiennent une division de la variable species_name en deux mots (on utilisera la valeur [.] pour spécifier . comme séparateur, bizarre non ?)\nCréer une variable biomass_percentage qui contiendra la biomasse exprimée en % (avec % à la fin)\nFusionner dans une nouvelle variable description les variables species_name_first, species_name_second et biomass_percentage pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable biomass_percentage en parenthèses et suivi de la chaine de caractère of total biomass)\nAyant une très mauvaise vision et un écran très petit, je souhaiterais que l’affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable description_shinny. Attention, il faut parfois regarder au-delà de ce que l’on voit dans la console de R…\nStocker le résultat dans un objet biomass_survey_exercice4_3"
   },
   {
     "objectID": "tidyverse-training.html#exercice-4.3-corrigé",
     "href": "tidyverse-training.html#exercice-4.3-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 4.3 corrigé",
-    "text": "Exercice 4.3 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_2, créer deux nouvelles variables, species_name_first et species_name_second, qui contiennent une division de la variable species_name en deux mots (on utilisera la valeur [.] pour spécifier . comme séparateur, bizarre non ?)\nCréer une variable biomass_percentage qui contiendra la biomasse exprimée en % (on veut le signe % à la fin de la chaine)\nFusionner dans une nouvelle variable description les variables species_name_first, species_name_second et biomass_percentage pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable biomass_percentage en parenthèses et suivi de la chaine de caractère of total biomass)\nAyant une très mauvaise vision et un écran très petit, je souhaiterais que l’affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable description_shinny. Attention, il faut parfois regarder au-delà de ce qu’on voit dans la console de R…\n\n# solution\nbiomass_survey_exercice4_3 &lt;- biomass_survey_exercice4_2 %&gt;%\n  mutate(species_name_first = str_split_i(string = species_name,\n                                          pattern = \"[.]\",\n                                          i = 1),\n         species_name_second = str_split_i(string = species_name,\n                                           pattern = \"[.]\",\n                                           i = 2),\n         biomass_percentage = str_glue(\"{round(x = biomass * 100 / sum_biomass)}%\"),\n         description = str_c(species_name_first ,\n                             species_name_second,\n                             str_c(\"(\",\n                                   biomass_percentage,\n                                   \" of total biomass)\"),\n                             sep = \" \"),\n         description_shinny = str_wrap(string = description,\n                                       width = 20))"
+    "text": "Exercice 4.3 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_2, créer deux nouvelles variables, species_name_first et species_name_second, qui contiennent une division de la variable species_name en deux mots (on utilisera la valeur [.] pour spécifier . comme séparateur, bizarre non ?)\nCréer une variable biomass_percentage qui contiendra la biomasse exprimée en % (avec % à la fin)\nFusionner dans une nouvelle variable description les variables species_name_first, species_name_second et biomass_percentage pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable biomass_percentage en parenthèses et suivi de la chaine de caractère of total biomass)\nAyant une très mauvaise vision et un écran très petit, je souhaiterais que l’affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable description_shinny. Attention, il faut parfois regarder au-delà de ce que l’on voit dans la console de R…\nStocker le résultat dans un objet biomass_survey_exercice4_3\n\n# solution\nbiomass_survey_exercice4_3 &lt;- biomass_survey_exercice4_2 %&gt;%\n  mutate(species_name_first = str_split_i(string = species_name,\n                                          pattern = \"[.]\",\n                                          i = 1),\n         species_name_second = str_split_i(string = species_name,\n                                           pattern = \"[.]\",\n                                           i = 2),\n         biomass_percentage = str_glue(\"{round(x = biomass * 100 / sum_biomass)}%\"),\n         description = str_c(species_name_first ,\n                             species_name_second,\n                             str_c(\"(\",\n                                   biomass_percentage,\n                                   \" of total biomass)\"),\n                             sep = \" \"),\n         description_shinny = str_wrap(string = description,\n                                       width = 20))"
   },
   {
     "objectID": "tidyverse-training.html#les-expressions-régulières",
@@ -536,14 +529,14 @@
     "href": "tidyverse-training.html#exercice-bonus-4.4",
     "title": "tidyverse-training",
     "section": "Exercice bonus 4.4",
-    "text": "Exercice bonus 4.4\n\nDans le jeu données précédent, biomass_survey_exercice4_3, je veux séparer les chiffres et les lettres de la variable site_code. Comment trouver un motif qui marche aussi bien pour la valeur USWC1 et BC3 ?\nAvec l’utilisation des expressions regulières je vais pouvoir lui dire “je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s’arrête à un chiffre” (même raisonnement avec les chiffres)"
+    "text": "Exercice bonus 4.4\n\nDans le jeu données précédent, biomass_survey_exercice4_3, je veux séparer les chiffres et les lettres de la variable site_code. Comment trouver un motif qui marche aussi bien pour la valeur USWC1 et BC3 ?\nAvec l’utilisation des expressions regulières je vais pouvoir lui dire “je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s’arrête à un chiffre” (même raisonnement avec les chiffres)\nStocker le résultat dans un objet biomass_survey_exercice4_4"
   },
   {
     "objectID": "tidyverse-training.html#exercice-bonus-4.4-corrigé",
     "href": "tidyverse-training.html#exercice-bonus-4.4-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice bonus 4.4 corrigé",
-    "text": "Exercice bonus 4.4 corrigé\n\nDans le jeu données précédent, biomass_survey_exercice4_3, je veux séparer les chiffres et les lettres de la variable site_code. Comment trouver un motif qui marche aussi bien pour la valeur USWC1 et BC3 ?\nAvec l’utilisation des expressions regulières je vais pouvoir lui dire “je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s’arrête à un chiffre” (même raisonnement avec les chiffres)\n\nbiomass_survey_exercice4_4 &lt;- biomass_survey_exercice4_3 %&gt;%\n  mutate(site_code_letters = str_extract(string = site_code,\n                                         pattern = \"^[:upper:]+\"),\n         site_code_numbers = str_extract(string = site_code,\n                                         pattern = \"[:digit:]+$\")) %&gt;%\n  relocate(site_code_letters,\n           site_code_numbers,\n           .after = site_code)"
+    "text": "Exercice bonus 4.4 corrigé\n\nDans le jeu données précédent, biomass_survey_exercice4_3, je veux séparer les chiffres et les lettres de la variable site_code. Comment trouver un motif qui marche aussi bien pour la valeur USWC1 et BC3 ?\nAvec l’utilisation des expressions regulières je vais pouvoir lui dire “je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s’arrête à un chiffre” (même raisonnement avec les chiffres)\nStocker le résultat dans un objet biomass_survey_exercice4_4\n\nbiomass_survey_exercice4_4 &lt;- biomass_survey_exercice4_3 %&gt;%\n  mutate(site_code_letters = str_extract(string = site_code,\n                                         pattern = \"^[:upper:]+\"),\n         site_code_numbers = str_extract(string = site_code,\n                                         pattern = \"[:digit:]+$\")) %&gt;%\n  relocate(site_code_letters,\n           site_code_numbers,\n           .after = site_code)"
   },
   {
     "objectID": "tidyverse-training.html#rend-la-manipulation-des-dates-et-du-temps-presque-agréable-sous-r",
@@ -557,35 +550,35 @@
     "href": "tidyverse-training.html#manipulation-des-élements-date-temps",
     "title": "tidyverse-training",
     "section": "Manipulation des élements date-temps",
-    "text": "Manipulation des élements date-temps\nModification et extraction\ntest_date_time &lt;- ymd_hms(\"2022-12-05 12:00:00\", tz = \"CET\")\n# pour une extraction des informations\nsecond()\nhour()\nday()\nwday()\nmonth()\n...\n# pour modifier les informations, utiliser les fonctions précédentes avec une assignation (&lt;-)\n# par exemple\nhour(x = test_date_time) &lt;- 6"
+    "text": "Manipulation des élements date-temps\nModification et extraction\ntest_date_time &lt;- ymd_hms(\"2022-12-05 12:00:00\", tz = \"CET\")\n# pour une extraction des informations\nsecond(x)\nhour(x)\nday(x)\nwday(x)\nmonth(x)\n...\n# pour modifier les informations, utiliser les fonctions précédentes avec une assignation (&lt;-)\n# par exemple\nhour(x = test_date_time) &lt;- 6"
   },
   {
     "objectID": "tidyverse-training.html#tour-dhorizon",
     "href": "tidyverse-training.html#tour-dhorizon",
     "title": "tidyverse-training",
     "section": "Tour d’horizon",
-    "text": "Tour d’horizon\n\nLes fuseaux horaires, un cauchemar par le passé, maintenant ça va mieux\nDeux fonctions clés\n\n# Pour exprimer un élément dans un autre fuseau horaire\nwith_tz()\n# Pour forcer le changement d'un fuseau horaire mais en conservant la même heure\nforce_tz()\n\n3 classes pour calculer des intervalles de temps\nPeriode, durée et intervalle\nLe plus “dur” est de définir votre date-temps, après c’est une syntaxe mathématique"
+    "text": "Tour d’horizon\n\nLes fuseaux horaires, un cauchemar par le passé, maintenant ça va mieux\nDeux fonctions clés\n\n# Pour exprimer un élément dans un autre fuseau horaire\nwith_tz(time, tzone, ...)\n# Pour forcer le changement d'un fuseau horaire mais en conservant la même heure\nforce_tz(time, tzone, ...)\n\n3 classes pour calculer des intervalles de temps\nPeriode, durée et intervalle\nLe plus “dur” est de définir votre date-temps, après c’est une syntaxe mathématique"
   },
   {
     "objectID": "tidyverse-training.html#bonus",
     "href": "tidyverse-training.html#bonus",
     "title": "tidyverse-training",
     "section": "Bonus",
-    "text": "Bonus\n\nLes fonctions sont vectorisables !\nSur certains jeux de données, les dates-temps sont stockées en nombre de secondes depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas-là :\n\nas_datetime()\n\nPossibilité de faire des arrondis\n\n# arrondi inférieur sur \"l'unité\" la plus proche\nfloor_date()\n\n# arrondi inférieur sur \"l'unité\" la plus proche\nround_date()\n\n# arrondi supérieur sur \"l'unité\" la plus proche\nceiling_date()\n\nDe définir des objets pour les manipuler\n\n# en lien avec les paramètres du système\nnow()\ntoday()\n\n# en lien avec des paramètres\ndyears()\ndmonths()\ndweeks()\n..."
+    "text": "Bonus\n\nLes fonctions sont vectorisables !\nSur certains jeux de données, les dates-temps sont stockées en nombre de secondes depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas-là :\n\nas_datetime(x, ...)\n\nPossibilité de faire des arrondis\n\n# arrondi inférieur sur \"l'unité\" la plus proche\nfloor_date(x, ...)\n\n# arrondi inférieur sur \"l'unité\" la plus proche\nround_date(x, ...)\n\n# arrondi supérieur sur \"l'unité\" la plus proche\nceiling_date(x, ...)\n\nDe définir des objets pour les manipuler\n\n# en lien avec les paramètres du système\nnow()\ntoday()\n\n# en lien avec des paramètres\ndyears(x)\ndmonths(x)\ndweeks(x)\n..."
   },
   {
     "objectID": "tidyverse-training.html#exercice-5.1",
     "href": "tidyverse-training.html#exercice-5.1",
     "title": "tidyverse-training",
     "section": "Exercice 5.1",
-    "text": "Exercice 5.1\n\nÀ partir du jeu de données biomass_survey_exercice4_3, créer une variable survey_date_as_date qui est la conversion de la variable survey_date en date\nCréer la variable survey_year qui contient l’année de la variable survey_date_as_date\nCalculer la différence de temps entre aujourd’hui et la variable survey_date_as_date. Stocker l’information dans une nouvelle colonne duration_since_now\nCréer une variable next_survey_date qui ajoute 12 mois à la variable survey_date_as_date\nRegarder plus en détail la variable next_survey_date, qu’a-t-elle de particulier ?\nQuestion bonus en lien avec la question précédente, définir l’heure des valeurs de la variable survey_date_as_date à 12h et la stocker dans une variable next_survey_date_correct"
+    "text": "Exercice 5.1\n\nÀ partir du jeu de données biomass_survey_exercice4_3, créer une variable survey_date_as_date qui est la conversion de la variable survey_date en date\nCréer la variable survey_year qui contient l’année de la variable survey_date_as_date\nCalculer la différence de temps entre aujourd’hui et la variable survey_date_as_date. Stocker l’information dans une nouvelle colonne duration_since_now\nCréer une variable next_survey_date qui ajoute 12 mois à la variable survey_date_as_date\nRegarder plus en détail la variable next_survey_date, qu’a-t-elle de particulier ?\nQuestion bonus en lien avec la question précédente, définir l’heure des valeurs de la variable survey_date_as_date à 12h et la stocker dans une variable next_survey_date_correct\nStocker le résultat dans une variable biomass_survey_exercice5_1"
   },
   {
     "objectID": "tidyverse-training.html#exercice-5.1-corrigé",
     "href": "tidyverse-training.html#exercice-5.1-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 5.1 corrigé",
-    "text": "Exercice 5.1 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_3, créer une variable survey_date_as_date qui est la conversion de la variable survey_date en date\nCréer la variable survey_year qui contient l’année de la variable survey_date_as_date\nCalculer la différence de temps entre aujourd’hui et la variable survey_date_as_date. Stocker l’information dans une nouvelle colonne duration_since_now\nCréer une variable next_survey_date qui ajoute 12 mois à la variable survey_date_as_date\nRegarder plus en détail la variable next_survey_date, qu’a-t-elle de particulier ?\nQuestion bonus en lien avec la question précédente, définir l’heure des valeurs de la variable survey_date_as_date à 12h et la stocker dans une variable next_survey_date_correct\n\n# solution\nbiomass_survey_exercice5_1 &lt;- biomass_survey_exercice4_3 %&gt;%\n  mutate(survey_date_as_date = dmy(survey_date),\n         survey_year = year(x = survey_date_as_date),\n         duration_since_now = today() - survey_date_as_date,\n         next_survey_date = survey_date_as_date + dmonths(x = 12),\n         next_survey_date_correct = next_survey_date %&gt;%\n           {hour(.) &lt;- 12; .}) %&gt;%\n  relocate(survey_date_as_date,\n           next_survey_date,\n           survey_year,\n           duration_since_now,\n           next_survey_date_correct,\n           .after = survey_date)\nExplication : { ... } définit un bloc qui sera exécuté dans l’ordre, ; permet de séparer les actions, hour(.) &lt;- 12 modifie l’heure de l’objet . en 12 et . retourne l’objet modifié"
+    "text": "Exercice 5.1 corrigé\n\nÀ partir du jeu de données biomass_survey_exercice4_3, créer une variable survey_date_as_date qui est la conversion de la variable survey_date en date\nCréer la variable survey_year qui contient l’année de la variable survey_date_as_date\nCalculer la différence de temps entre aujourd’hui et la variable survey_date_as_date. Stocker l’information dans une nouvelle colonne duration_since_now\nCréer une variable next_survey_date qui ajoute 12 mois à la variable survey_date_as_date\nRegarder plus en détail la variable next_survey_date, qu’a-t-elle de particulier ?\nQuestion bonus en lien avec la question précédente, définir l’heure des valeurs de la variable survey_date_as_date à 12h et la stocker dans une variable next_survey_date_correct\nStocker le résultat dans une variable biomass_survey_exercice5_1\n\n# solution\nbiomass_survey_exercice5_1 &lt;- biomass_survey_exercice4_3 %&gt;%\n  mutate(survey_date_as_date = dmy(survey_date),\n         survey_year = year(x = survey_date_as_date),\n         duration_since_now = today() - survey_date_as_date,\n         next_survey_date = survey_date_as_date + dmonths(x = 12),\n         next_survey_date_correct = next_survey_date %&gt;%\n           {hour(.) &lt;- 12; .}) %&gt;%\n  relocate(survey_date_as_date,\n           next_survey_date,\n           survey_year,\n           duration_since_now,\n           next_survey_date_correct,\n           .after = survey_date)\nExplication : { ... } définit un bloc qui sera exécuté dans l’ordre, ; permet de séparer les actions, hour(.) &lt;- 12 modifie l’heure de l’objet . en 12 et . retourne l’objet modifié"
   },
   {
     "objectID": "tidyverse-training.html#petit-aperçu-des-possibilités",

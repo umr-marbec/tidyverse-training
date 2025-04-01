@@ -197,7 +197,7 @@
 <p><span style="color:#ffffff; font-size: 2em">Formation R</span></p>
 <p><span style="color:#ffffff; font-size: 1.5em">Collection de packages tidyverse</span></p>
 <p><span style="color:#ffffff; font-size: 0.8em">Laure Velez (<a href="mailto:laure.velez@umontpellier.fr">laure.velez@umontpellier.fr</a>)</span></p>
-<p><span style="color:#ffffff; font-size: 0.8em">Mathieu Depetris (<a href="mailto:mathieu.depetris@ird.fr">mathieu.depetris@ird.fr</a>)</span></p>
+<p><span style="color:#ffffff; font-size: 0.8em">Mathieu Depetris (<a href="mailto:mathieu.depetris@cnrs.fr">mathieu.depetris@cnrs.fr</a>)</span></p>
 <p><span style="color:#ffffff; font-size: 0.8em">Monique Simier (<a href="mailto:monique.simier@ird.fr">monique.simier@ird.fr</a>)</span></p>
 <p><span style="color:#ffffff; font-size: 0.8em">3 et 4 avril 2025</span></p>
 <p><span style="color:#ffffff; font-size: 0.5em">© RStudio</span></p>
@@ -215,12 +215,9 @@
 <li><p>Partie 1 : Importation de données sous R avec <a href="https://readr.tidyverse.org/" class="external" target="_blank">readr</a></p></li>
 <li><p>Partie 2 : Manipulation de données avec <a href="https://dplyr.tidyverse.org/" class="external" target="_blank">dplyr</a></p></li>
 <li><p>Partie 3 : Nettoyage des données avec <a href="https://tidyr.tidyverse.org/" class="external" target="_blank">tidyr</a></p></li>
-<li><p>Partie 4 : Extension à la manipulation de données, cas spécifiques</p>
-<ul>
-<li>4.1 : Manipuler du texte avec <a href="https://stringr.tidyverse.org/" class="external" target="_blank">stringr</a></li>
-<li>4.2 : Manipuler des dates avec <a href="https://lubridate.tidyverse.org/" class="external" target="_blank">lubridate</a></li>
-</ul></li>
-<li><p>Partie 5 : Visualisation graphique avec <a href="https://ggplot2.tidyverse.org/" class="external" target="_blank">ggplot2</a></p></li>
+<li><p>Partie 4 : Manipuler du texte avec <a href="https://stringr.tidyverse.org/" class="external" target="_blank">stringr</a></p></li>
+<li><p>Partie 5 : Manipuler des dates avec <a href="https://lubridate.tidyverse.org/" class="external" target="_blank">lubridate</a></p></li>
+<li><p>Partie 6 : Visualisation graphique avec <a href="https://ggplot2.tidyverse.org/" class="external" target="_blank">ggplot2</a></p></li>
 </ul>
 <p>Formation fortement inspirée du site de <a href="https://larmarange.github.io/analyse-R/" class="external" target="_blank">Joseph Larmarange</a></p>
 </section></section>
@@ -238,7 +235,15 @@
 <ul>
 <li>Avoir des notions de base dans l’utilisation de <a href="https://www.r-project.org/" class="external" target="_blank">R</a></li>
 <li>Avoir une instance valide de R sur son poste (durant la formation utilisation de la version <a href="https://pbil.univ-lyon1.fr/CRAN/" class="external" target="_blank">4.4.3</a> sous Windows)</li>
-<li>Avoir installé correctement les packages R <a href="https://readr.tidyverse.org/" class="external" target="_blank">readr</a> (utilisation de la version 2.1.5), <a href="https://dplyr.tidyverse.org/" class="external" target="_blank">dplyr</a> (utilisation de la version 1.1.4), <a href="https://tidyr.tidyverse.org/" class="external" target="_blank">tidyr</a> (utilisation de la version 1.3.1), <a href="https://stringr.tidyverse.org/" class="external" target="_blank">stringr</a> (utilisation de la version 1.5.1), <a href="https://lubridate.tidyverse.org/" class="external" target="_blank">lubridate</a> (utilisation de la version 1.9.4), et <a href="https://ggplot2.tidyverse.org/" class="external" target="_blank">ggplot2</a> (utilisation de la version 3.5.1).</li>
+<li>Pour information, nous allons utiliser les packages-version et dépendances R suivants :
+<ul>
+<li><a href="https://readr.tidyverse.org/" class="external" target="_blank">readr</a> (utilisation de la version 2.1.5),</li>
+<li><a href="https://dplyr.tidyverse.org/" class="external" target="_blank">dplyr</a> (utilisation de la version 1.1.4),</li>
+<li><a href="https://tidyr.tidyverse.org/" class="external" target="_blank">tidyr</a> (utilisation de la version 1.3.1),</li>
+<li><a href="https://stringr.tidyverse.org/" class="external" target="_blank">stringr</a> (utilisation de la version 1.5.1),</li>
+<li><a href="https://lubridate.tidyverse.org/" class="external" target="_blank">lubridate</a> (utilisation de la version 1.9.4),</li>
+<li><a href="https://ggplot2.tidyverse.org/" class="external" target="_blank">ggplot2</a> (utilisation de la version 3.5.1).</li>
+</ul></li>
 </ul>
 </section>
 <section id="bonus-non-obligatoire" class="slide level2">
@@ -360,18 +365,18 @@
 <h2>Les principales fonctions de la librairie <strong>readr</strong></h2>
 <p>Les fonctions de readr les plus utilisées sont :</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># Fonction générale, pour importer un fichier avec un délimiteur quelconque</span></span>
-<span id="cb2-2"><a></a><span class="fu">read_delim</span>()</span>
+<span id="cb2-2"><a></a><span class="fu">read_delim</span>(file, delim, ...)</span>
 <span id="cb2-3"><a></a><span class="co"># Import fichiers csv au format anglais (point décimal et séparateur virgule)</span></span>
-<span id="cb2-4"><a></a><span class="fu">read_csv</span>()</span>
+<span id="cb2-4"><a></a><span class="fu">read_csv</span>(file, ...)</span>
 <span id="cb2-5"><a></a><span class="co"># Import fichiers csv au format français (virgule décimale et séparateur point-virgule)</span></span>
-<span id="cb2-6"><a></a><span class="fu">read_csv2</span>()</span>
+<span id="cb2-6"><a></a><span class="fu">read_csv2</span>(file, ...)</span>
 <span id="cb2-7"><a></a><span class="co"># Import fichiers au format tsv ou les valeurs sont séparées par des tabulations</span></span>
-<span id="cb2-8"><a></a><span class="fu">read_tsv</span>()</span>
+<span id="cb2-8"><a></a><span class="fu">read_tsv</span>(file, ...)</span>
 <span id="cb2-9"><a></a><span class="co"># Pour lire un fichier en "chunks", c'est à dire en tranches dont on définit la taille en nombre de lignes.</span></span>
 <span id="cb2-10"><a></a><span class="co"># Cette fonction permet de lire de très gros fichiers  </span></span>
 <span id="cb2-11"><a></a><span class="co"># et aussi d'appliquer une fonction (CallBack) sur les données à chaque tranche. </span></span>
 <span id="cb2-12"><a></a><span class="co"># xxx est à remplacer par csv, csv2, delim</span></span>
-<span id="cb2-13"><a></a><span class="fu">read_xxx_chunked</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-13"><a></a><span class="fu">read_xxx_chunked</span>(file, callback, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="read_delim-la-fonction-la-plus-générique" class="slide level2 smaller">
 <h2><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external" target="_blank">read_delim()</a>, la fonction la plus générique</h2>
@@ -410,12 +415,12 @@
 <section id="la-fonction-inverse-write_-pour-exporter-un-fichier" class="slide level2">
 <h2>La fonction inverse : <a href="https://readr.tidyverse.org/reference/write_delim.html" class="external" target="_blank">write_…</a> pour exporter un fichier</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># Pour exporter en csv</span></span>
-<span id="cb3-2"><a></a><span class="fu">write_csv</span>()</span>
-<span id="cb3-3"><a></a><span class="fu">write_csv2</span>()</span>
+<span id="cb3-2"><a></a><span class="fu">write_csv</span>(x, file, ...)</span>
+<span id="cb3-3"><a></a><span class="fu">write_csv2</span>(x, file, ...)</span>
 <span id="cb3-4"><a></a><span class="co"># Pour exporter en choisissant le délimiteur </span></span>
-<span id="cb3-5"><a></a><span class="fu">write_delim</span>()</span>
+<span id="cb3-5"><a></a><span class="fu">write_delim</span>(x, file, delim, ...)</span>
 <span id="cb3-6"><a></a><span class="co"># Pour exporter en tsv</span></span>
-<span id="cb3-7"><a></a><span class="fu">write_tsv</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a></a><span class="fu">write_tsv</span>(x, file, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="encore-une-fois-des-paramètres" class="slide level2">
 <h2>Encore une fois des paramètres</h2>
@@ -447,10 +452,10 @@
 </ul></li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co"># Fonction générique</span></span>
-<span id="cb4-2"><a></a><span class="fu">read_excel</span>()</span>
+<span id="cb4-2"><a></a><span class="fu">read_excel</span>(path, ...)</span>
 <span id="cb4-3"><a></a><span class="co"># Fonction pour importer spécifiquement un xls (excel avant 2007) ou xlsx (extension actuelle par défaut)</span></span>
-<span id="cb4-4"><a></a><span class="fu">read_xls</span>()</span>
-<span id="cb4-5"><a></a><span class="fu">read_xlsx</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a></a><span class="fu">read_xls</span>(path, ...)</span>
+<span id="cb4-5"><a></a><span class="fu">read_xlsx</span>(path, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Globalement des arguments similaires à précédement (<code>col_names</code>, <code>skip</code>, <code>col_types</code>, …)</li>
 <li>Introduction de l’argument <code>sheet</code> et <code>range</code></li>
@@ -557,7 +562,7 @@
 </section>
 <section id="exercice-1.2-corrigé" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 1.2 corrigé</h2>
-<p>Lire le fichier survey_metadata et le stocker dans un objet R <code>survey_metadata</code> en sélectionnant le pays Indonesia, une profondeur inférieure à 20m et une visibilité supérieure à 10m.</p>
+<p>Lire le fichier survey_metadata et le stocker dans un objet R <code>survey_metadata</code> en sélectionnant le pays Indonésie, une profondeur inférieure à 20m et une visibilité supérieure à 10m.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb8-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
 <span id="cb8-2" class="hljs-ln-code"><a></a>function_1_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, pos) <span class="fu">subset</span>(x, country <span class="sc">==</span> <span class="st">"Indonesia"</span> <span class="sc">&amp;</span> depth <span class="sc">&lt;</span> <span class="dv">20</span> <span class="sc">&amp;</span> visibility <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
 <span id="cb8-3" class="hljs-ln-code"><a></a>survey_metadata_selection_1_2 <span class="ot">&lt;-</span> <span class="fu">read_tsv_chunked</span>(<span class="at">file =</span> <span class="st">"data/survey_metadata.tsv"</span>,</span>
@@ -593,21 +598,21 @@
 <ul>
 <li>Extraction d’une ou plusieurs lignes : fonctions de la famille slice &amp; co</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># sélection d'une ou plusieurs lignes par position absolue</span></span>
-<span id="cb9-2"><a></a><span class="fu">slice</span>()</span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># sélection d'une ou plusieurs lignes par position absolue (l'argument x est l'indice de la ou des lignes)</span></span>
+<span id="cb9-2"><a></a><span class="fu">slice</span>(.data, x, ...)</span>
 <span id="cb9-3"><a></a><span class="co"># sélection au hasard d'un nombre de lignes ou d'une proportion du jeu de données</span></span>
-<span id="cb9-4"><a></a><span class="fu">slice_sample</span>()</span>
+<span id="cb9-4"><a></a><span class="fu">slice_sample</span>(.data, n<span class="sc">/</span>prop, ...)</span>
 <span id="cb9-5"><a></a><span class="co"># sélection des n dernières lignes</span></span>
-<span id="cb9-6"><a></a><span class="fu">slice_tail</span>()</span>
+<span id="cb9-6"><a></a><span class="fu">slice_tail</span>(.data, n<span class="sc">/</span>prop, ...)</span>
 <span id="cb9-7"><a></a><span class="co"># sélection des n premières lignes</span></span>
-<span id="cb9-8"><a></a><span class="fu">slice_head</span>()</span>
+<span id="cb9-8"><a></a><span class="fu">slice_head</span>(.data, n<span class="sc">/</span>prop, ...)</span>
 <span id="cb9-9"><a></a><span class="co"># sélection des lignes avec les valeurs les plus petites ou grandes</span></span>
-<span id="cb9-10"><a></a><span class="fu">slice_min</span>()</span>
-<span id="cb9-11"><a></a><span class="fu">slice_max</span>()</span>
+<span id="cb9-10"><a></a><span class="fu">slice_min</span>(.data, n<span class="sc">/</span>prop, ...)</span>
+<span id="cb9-11"><a></a><span class="fu">slice_max</span>(.data, n<span class="sc">/</span>prop, ...)</span>
 <span id="cb9-12"><a></a><span class="co"># sélection des valeurs distinctes</span></span>
-<span id="cb9-13"><a></a><span class="fu">distinct</span>()</span>
+<span id="cb9-13"><a></a><span class="fu">distinct</span>(.data, ...)</span>
 <span id="cb9-14"><a></a><span class="co"># sélection en fonction d'opérateurs logiques et/ou booléens</span></span>
-<span id="cb9-15"><a></a><span class="fu">filter</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-15"><a></a><span class="fu">filter</span>(.data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="petit-focus-sur-les-opérateurs-booléens-et-logiques" class="slide level2 smaller">
 <h2>Petit focus sur les opérateurs booléens et logiques</h2>
@@ -631,16 +636,16 @@
 <section id="exercice-2.1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 2.1</h2>
 <ul>
-<li>A l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”</li>
-<li>En une seule fois, sélectionner les données dont la variable “biomass” est différente de 0, où la famille est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10.</li>
+<li>À l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”</li>
+<li>En plus et en une seule fois, sélectionner les données dont la variable “biomass” est différente de 0, où la famille est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10. Stocker le résultat dans un objet nommé <code>biomass_exercice2_1_distinct_filter</code>.</li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-2.1-corrigé" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 2.1 corrigé</h2>
 <ul>
-<li>A l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”</li>
-<li>En une seule fois, sélectionner les données dont la variable “biomass” est différente de 0, où la famille est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10.</li>
+<li>À l’aide d’une fonction dplyr, vérifier s’il y a des données dupliquées dans le jeu de données “reef_fish_biomass”</li>
+<li>En plus et en une seule fois, sélectionner les données dont la variable “biomass” est différente de 0, où la famille est différente de “Mullidae” et “Apogonidae” et pour finir où la classe de taille associée est &lt;= 10. Stocker le résultat dans un objet nommé <code>biomass_exercice2_1_distinct_filter</code>.</li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb11-1" class="hljs-ln-code"><a></a>biomass_exercice2_1_distinct <span class="ot">&lt;-</span> <span class="fu">distinct</span>(<span class="at">.data =</span> reef_fish_biomass)</span>
 <span id="cb11-2" class="hljs-ln-code"><a></a>biomass_exercice2_1_distinct_filter <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="at">.data =</span> biomass_exercice2_1_distinct,</span>
@@ -683,16 +688,15 @@
 <li>Ordonner les lignes d’une ou plusieurs colonnes</li>
 </ul>
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># par défaut ordre croissant, utiliser l'argument desc pour ordre décroissant</span></span>
-<span id="cb14-2"><a></a><span class="fu">arrange</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-2"><a></a><span class="fu">arrange</span>(.data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <h3 id="manipulation-de-type-ajout">Manipulation de type “ajout”</h3>
 <ul>
 <li>Ajouter une ligne dans un jeu de données</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># interet des arguments .before and .after</span></span>
-<span id="cb15-2"><a></a><span class="fu">add_row</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># utilisation du package tibble (dépendance)</span></span>
+<span id="cb15-2"><a></a><span class="co"># interet des arguments .before and .after</span></span>
+<span id="cb15-3"><a></a><span class="fu">add_row</span>(.data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="manipulation-des-variables" class="slide level2">
 <h2>Manipulation des variables</h2>
@@ -700,13 +704,13 @@
 <p>Type de fonctions qui retournent un sous-ensemble de colonnes sous la forme d’un vecteur ou d’une table</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># extraction des valeurs d'une colonne sous la forme d'un vecteur</span></span>
 <span id="cb16-2"><a></a><span class="co"># on peut utiliser des noms ou les ids</span></span>
-<span id="cb16-3"><a></a><span class="fu">pull</span>()</span>
+<span id="cb16-3"><a></a><span class="fu">pull</span>(.data, var, ...)</span>
 <span id="cb16-4"><a></a><span class="co"># extraction d'une colonne sous la forme d'une table</span></span>
 <span id="cb16-5"><a></a><span class="co"># bien regarder les arguments de la fonction car on peut faire beaucoup</span></span>
-<span id="cb16-6"><a></a><span class="fu">select</span>()</span>
+<span id="cb16-6"><a></a><span class="fu">select</span>(.data, ...)</span>
 <span id="cb16-7"><a></a><span class="co"># Changer l'ordre ou la place d'une ou plusieurs colonnes</span></span>
 <span id="cb16-8"><a></a><span class="co"># ne pas oublier les arguments .after et .before</span></span>
-<span id="cb16-9"><a></a><span class="fu">relocate</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-9"><a></a><span class="fu">relocate</span>(.data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="fonctions-de-vectorisation" class="slide level2">
 <h2>Fonctions de vectorisation</h2>
@@ -716,16 +720,16 @@
 <li><p>Globalement, ce sont des fonctions qui ont un vecteur en entrée et retournent un vecteur de la même taille en sortie <br> <br> <br> <img data-src="images/vectorized_function.png" class="absolute" style="top: 300px; left: 250px; width: 50%; "></p></li>
 </ul>
 <div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># créer une nouvelle variable</span></span>
-<span id="cb17-2"><a></a><span class="fu">mutate</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-2"><a></a><span class="fu">mutate</span>(.data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Petit bonus pour renommer les variables</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">rename</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">rename</span>(.data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-2.2" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 2.2</h2>
 <ul>
-<li>À partir du jeu de données de sortie de l’exercice 1</li>
+<li>À partir du jeu de données de sortie de l’exercice 1 (<code>biomass_exercice2_1_distinct_filter</code>)</li>
 <li>Créer une variable “survey_id_full” qui est la concaténation des variables survey_id, species_name et size_class</li>
 <li>Placer cette nouvelle colonne avant la colonne survey_id</li>
 <li>Supprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name</li>
@@ -733,14 +737,14 @@
 <li>Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm</li>
 <li>Supprimer la variable size_class_cm</li>
 <li>Trier par ordre décroissant les données en fonction de la variable size_class_mm</li>
-<li>Utiliser des pipes à la fin pour avoir une syntaxe “propre” et souffler un bon coup :)</li>
+<li>Utiliser des pipes à la fin pour avoir une syntaxe “propre”, stocker le resultat dans un objet nommé <code>biomass_exercice2_2</code> et souffler un bon coup :)</li>
 </ul>
 <div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-2.2-corrigé" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 2.2 corrigé</h2>
 <ul>
-<li>À partir du jeu de données de sortie de l’exercice 1</li>
+<li>À partir du jeu de données de sortie de l’exercice 1 (<code>biomass_exercice2_1_distinct_filter</code>)</li>
 <li>Créer une variable “survey_id_full” qui est la concaténation des variables survey_id, species_name et size_class</li>
 <li>Placer cette nouvelle colonne avant la colonne survey_id</li>
 <li>Supprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name</li>
@@ -748,7 +752,7 @@
 <li>Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm</li>
 <li>Supprimer la variable size_class_cm</li>
 <li>Trier par ordre décroissant les données en fonction de la variable size_class_mm</li>
-<li>Utiliser des pipes à la fin pour avoir une syntaxe “propre” et souffler un bon coup :)</li>
+<li>Utiliser des pipes à la fin pour avoir une syntaxe “propre”, stocker le resultat dans un objet nommé <code>biomass_exercice2_2</code> et souffler un bon coup :)</li>
 </ul>
 <div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb20-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
 <span id="cb20-2" class="hljs-ln-code"><a></a>biomass_exercice2_2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(<span class="at">.data =</span> biomass_exercice2_1_distinct_filter,</span>
@@ -772,7 +776,7 @@
 <li><p>Fonctions qui vont créer une nouvelle table avec des resumés statistiques. De manière globale, les fonctions associées vont utiliser en entrée des vecteurs et en sortie une ou plusieurs valeurs ( en nombre inférieur au nombre de vecteurs d’entrée) <br> <br> <br> <img data-src="images/summary_function.png" class="absolute" style="top: 200px; left: 250px; width: 50%; "></p></li>
 <li><p>Fonction clé</p></li>
 </ul>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">summarise</span>()</span>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">summarise</span>(.data, ...)</span>
 <span id="cb21-2"><a></a><span class="co"># Beaucoup, beaucoup d'options et de possibilités</span></span>
 <span id="cb21-3"><a></a><span class="co"># Compter le nombre de valeurs/lignes</span></span>
 <span id="cb21-4"><a></a><span class="fu">n</span>()</span>
@@ -798,8 +802,8 @@
 </ul>
 <div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># on peut définir nos groupes en fonction des modalités des variables</span></span>
 <span id="cb22-2"><a></a><span class="co"># on peut aussi utiliser des arguments des fonctions quand c'est proposé, exemple avec .by de summarise()</span></span>
-<span id="cb22-3"><a></a><span class="fu">group_by</span>()</span>
-<span id="cb22-4"><a></a><span class="co"># ou alors en isolant chaque ligne</span></span>
+<span id="cb22-3"><a></a><span class="fu">group_by</span>(.data, ...)</span>
+<span id="cb22-4"><a></a><span class="co"># ou alors en isolant chaque ligne (utile surtout pour les fonctions qui ne vectorise pas)</span></span>
 <span id="cb22-5"><a></a><span class="fu">rowwise</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Attention à ce que vous faites ! Par défaut, les groupes sont gardés en mémoire dans votre jeu de données de sortie (lisez les messages de R). Pour y remédier :</li>
@@ -815,20 +819,22 @@
 <section id="exercice-2.3" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 2.3</h2>
 <ul>
-<li>À partir du jeu de données de sortie de l’exercice 2.2</li>
+<li>À partir du jeu de données de sortie de l’exercice 2.2 (<code>biomass_exercice2_2</code>)</li>
 <li>Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment</li>
 <li>Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction “trouvée” regarder du côté des arguments en option)</li>
-<li>Créer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.</li>
+<li>Créer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ</li>
+<li>Stocker tout ça dans un objet nommé <code>biomass_exercice2_3</code></li>
 </ul>
 <div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-2.3-corrigé" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 2.3 corrigé</h2>
 <ul>
-<li>À partir du jeu de données de sortie de l’exercice 2.2</li>
+<li>À partir du jeu de données de sortie de l’exercice 2.2 (<code>biomass_exercice2_2</code>)</li>
 <li>Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment</li>
 <li>Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction “trouvée” regarder du côté des arguments en option)</li>
-<li>Créer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.</li>
+<li>Créer un nouveau jeu de données qui exprime le nombre d’échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ</li>
+<li>Stocker tout ça dans un objet nommé <code>biomass_exercice2_3</code></li>
 </ul>
 <div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb25-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
 <span id="cb25-2" class="hljs-ln-code"><a></a>biomass_exercice2_3 <span class="ot">&lt;-</span> biomass_exercice2_2 <span class="sc">%&gt;%</span></span>
@@ -897,37 +903,39 @@
 <p><img data-src="images/jointure.png"></p>
 </div></div>
 <div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="co"># jointure à gauche</span></span>
-<span id="cb28-2"><a></a><span class="fu">left_join</span>()</span>
+<span id="cb28-2"><a></a><span class="fu">left_join</span>(x, y, by, ...)</span>
 <span id="cb28-3"><a></a><span class="co"># jointure à droite</span></span>
-<span id="cb28-4"><a></a><span class="fu">right_join</span>()</span>
+<span id="cb28-4"><a></a><span class="fu">right_join</span>(x, y, by, ...)</span>
 <span id="cb28-5"><a></a><span class="co"># jointure commune</span></span>
-<span id="cb28-6"><a></a><span class="fu">inner_join</span>()</span>
+<span id="cb28-6"><a></a><span class="fu">inner_join</span>(x, y, by, ...)</span>
 <span id="cb28-7"><a></a><span class="co"># jointure complete</span></span>
-<span id="cb28-8"><a></a><span class="fu">full_join</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-8"><a></a><span class="fu">full_join</span>(x, y, by, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-2.4" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 2.4</h2>
 <ul>
-<li>À partir du jeu de données de sortie de l’exercice 2.3 (biomass_exercice2_3)</li>
-<li>Faire la “meilleure” jointure avec le jeu de données survey_metadata et expliquer votre choix</li>
+<li>À partir du jeu de données de sortie de l’exercice 2.3 (<code>biomass_exercice2_3</code>)</li>
+<li>Faire la “meilleure” jointure avec le jeu de données <code>survey_metadata</code> et expliquer votre choix</li>
 <li>Pour vous aider :
 <ul>
-<li>Y-a-t-il un problème avec le jeu de données survey_metadata ?</li>
+<li>Y-a-t-il un problème avec le jeu de données <code>survey_metadata</code> ?</li>
 <li>Réfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure</li>
 </ul></li>
+<li>Stocker le résultat dans un objet nommé <code>biomass_survey_exercice2_4</code></li>
 </ul>
 <div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-2.4-corrigé" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 2.4 corrigé</h2>
 <ul>
-<li>À partir du jeu de données de sortie de l’exercice 2.3 (biomass_exercice2_3)</li>
-<li>Faire la “meilleure” jointure avec le jeu de données survey_metadata et expliquer votre choix</li>
+<li>À partir du jeu de données de sortie de l’exercice 2.3 (<code>biomass_exercice2_3</code>)</li>
+<li>Faire la “meilleure” jointure avec le jeu de données <code>survey_metadata</code> et expliquer votre choix</li>
 <li>Pour vous aider :
 <ul>
-<li>Y-a-t-il un problème avec le jeu de données survey_metadata ?</li>
+<li>Y-a-t-il un problème avec le jeu de données <code>survey_metadata</code> ?</li>
 <li>Réfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure</li>
 </ul></li>
+<li>Stocker le résultat dans un objet nommé <code>biomass_survey_exercice2_4</code></li>
 </ul>
 <div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb30-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
 <span id="cb30-2" class="hljs-ln-code"><a></a>survey_metadata_distinct <span class="ot">&lt;-</span> <span class="fu">distinct</span>(<span class="at">.data =</span> survey_metadata)</span>
@@ -955,7 +963,6 @@
 <li><p>1 type d’observation par table</p></li>
 </ul></li>
 </ul>
-<p>Lien vers le <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf" class="external" target="_blank">cheatsheet</a> de <a href="https://tidyr.tidyverse.org/" class="external" target="_blank">tidyr</a>.</p>
 </section>
 <section id="les-principales-fonctions-de-tidyr" class="slide level2">
 <h2>Les principales fonctions de tidyr</h2>
@@ -966,25 +973,24 @@
 <span id="cb31-3"><a></a><span class="co"># Transformer un tableau large en format long</span></span>
 <span id="cb31-4"><a></a><span class="fu">pivot_longer</span>(cols, names_to, values_to, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="section-1" class="slide level2 smaller">
-<h2></h2>
-</section>
 <section id="exercice-3.1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 3.1</h2>
 <ul>
-<li>Observez les données de biomasse (biomass_survey_exercice2_4) et d’abondance. Les données sont elles tidy ? Si non, pourquoi ?</li>
+<li>Observez les données de biomasse (<code>biomass_survey_exercice2_4</code>) et d’abondance. Les données sont elles tidy ? Si non, pourquoi ?</li>
 </ul>
 <div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-3.1-corrigé" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 3.1 corrigé</h2>
 <ul>
-<li>Observez les données de biomasse (biomass_survey_exercice2_4) et d’abondance. Les données sont elles tidy ? Si non, pourquoi ?</li>
+<li>Observez les données de biomasse (<code>biomass_survey_exercice2_4</code>) et d’abondance. Les données sont elles tidy ? Si non, pourquoi ?</li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb33-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
+<span id="cb33-2" class="hljs-ln-code"><a></a><span class="fu">head</span>(<span class="at">x =</span> biomass_survey_exercice2_4)</span>
+<span id="cb33-3" class="hljs-ln-code"><a></a><span class="fu">View</span>(<span class="at">x =</span> biomass_survey_exercice2_4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <center>
-<p>Oui les données de biomasse sont tidy, nous avons bien une observation par ligne Non les données d’abondance ne sont pas tidy, car elles sont en format “wide”</p>
+<p>Non les données d’abondance ne sont pas tidy, car elles sont en format “wide”</p>
 <center>
 </center></center></section>
 <section id="exercice-3.2" class="slide level2 smaller" data-auto-animate="true">
@@ -992,25 +998,25 @@
 <ul>
 <li>Transformez les données d’abondance en format tidy. Les nouvelles colonnes créées seront <code>sp_size</code> et <code>abundance</code></li>
 <li>Pensez à bien regarder tous les arguments des fonctions</li>
+<li>Stocker le résultat dans un objet nommé <code>abundance_exercice3_2</code></li>
 </ul>
-<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb34-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-3.2-corrigé" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 3.2 corrigé</h2>
 <ul>
 <li>Transformez les données d’abondance en format tidy. Les nouvelles colonnes créées seront <code>sp_size</code> et <code>abundance</code></li>
 <li>Pensez à bien regarder tous les arguments des fonctions</li>
+<li>Stocker le résultat dans un objet nommé <code>abundance_exercice3_2</code></li>
 </ul>
 <div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb35-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
 <span id="cb35-2" class="hljs-ln-code"><a></a>abundance_exercice3_2 <span class="ot">&lt;-</span> reef_fish_abundance <span class="sc">%&gt;%</span></span>
-<span id="cb35-3" class="hljs-ln-code"><a></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb35-4" class="hljs-ln-code"><a></a>    .,</span>
-<span id="cb35-5" class="hljs-ln-code"><a></a>    <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(.),</span>
-<span id="cb35-6" class="hljs-ln-code"><a></a>    <span class="at">names_to =</span> <span class="st">"sp_size"</span>,</span>
-<span id="cb35-7" class="hljs-ln-code"><a></a>    <span class="at">values_to =</span> <span class="st">"abundance"</span></span>
-<span id="cb35-8" class="hljs-ln-code"><a></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-3" class="hljs-ln-code"><a></a>  <span class="fu">pivot_longer</span>(.,</span>
+<span id="cb35-4" class="hljs-ln-code"><a></a>               <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(.),</span>
+<span id="cb35-5" class="hljs-ln-code"><a></a>               <span class="at">names_to =</span> <span class="st">"sp_size"</span>,</span>
+<span id="cb35-6" class="hljs-ln-code"><a></a>               <span class="at">values_to =</span> <span class="st">"abundance"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="section-2" class="slide level2">
+<section id="section-1" class="slide level2">
 <h2></h2>
 <h3 id="gestion-des-valeurs-manquantes-na">Gestion des valeurs manquantes “NA”</h3>
 <div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="co"># Remplacer des "NA" par des valeurs spécifiques</span></span>
@@ -1023,21 +1029,21 @@
 <section id="exercice-3.3" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 3.3</h2>
 <ul>
-<li>A partir du jeu de données issu de l’exercice 3.2 supprimez les lignes ayant des valeurs d’abondance égale à NA</li>
+<li>A partir du jeu de données issu de l’exercice 3.2 (<code>abundance_exercice3_2</code>) supprimez les lignes ayant des valeurs d’abondance égales à NA</li>
+<li>Stocker le résultat dans un objet nommé <code>abundance_exercice3_3</code></li>
 </ul>
-<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb37-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-3.3-corrigé" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 3.3 corrigé</h2>
 <ul>
-<li>A partir du jeu de données issu de l’exercice 3.2 supprimez les lignes ayant des valeurs d’abondance égales à NA</li>
+<li>A partir du jeu de données issu de l’exercice 3.2 (<code>abundance_exercice3_2</code>) supprimez les lignes ayant des valeurs d’abondance égales à NA</li>
+<li>Stocker le résultat dans un objet nommé <code>abundance_exercice3_3</code></li>
 </ul>
-<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb38-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
-<span id="cb38-2" class="hljs-ln-code"><a></a>abundance_exercice3_3 <span class="ot">&lt;-</span> abundance_exercice3_2 <span class="sc">%&gt;%</span></span>
-<span id="cb38-3" class="hljs-ln-code"><a></a>  <span class="fu">drop_na</span>(., abundance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="section-3" class="slide level2">
-<h2></h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="co"># solution</span></span>
+<span id="cb38-2"><a></a>abundance_exercice3_3 <span class="ot">&lt;-</span> abundance_exercice3_2 <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a></a>  <span class="fu">drop_na</span>(., </span>
+<span id="cb38-4"><a></a>          abundance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <h3 id="combinaison-des-variables">Combinaison des variables</h3>
 <div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="co"># Séparer une colonne en plusieurs colonnes</span></span>
 <span id="cb39-2"><a></a><span class="fu">separate</span>(data, col, into)</span>
@@ -1046,53 +1052,65 @@
 <span id="cb39-5"><a></a><span class="co"># Générer toutes les combinaisons 2 à 2 possibles entre les variables définies</span></span>
 <span id="cb39-6"><a></a><span class="fu">expand</span>(data, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="section-4" class="slide level2 smaller">
-<h2></h2>
-</section>
 <section id="exercice-3.4" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 3.4</h2>
 <ul>
-<li>Vérifiez s’il y a des données dupliquées dans le jeu de données issu de l’exercice 3.3</li>
+<li>Vérifiez s’il y a des données dupliquées dans le jeu de données issu de l’exercice 3.3 (<code>abundance_exercice3_3</code>)</li>
 <li>Créez une nouvelle variable “survey_id_full” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”.</li>
 <li>En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations</li>
+<li>Stocker le résultat dans un objet nommé <code>abundance_biomass_survey_exercice3_4</code></li>
 </ul>
-<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb40-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-3.4-corrigé" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 3.4 corrigé</h2>
 <ul>
-<li>Vérifiez s’il y a des données dupliquées dans le jeu de données issu de l’exercice 3.3</li>
-<li>Créez une nouvelle variable <code>survey_id_full</code> qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”.</li>
-<li>En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse (biomass_survey_exercice2_4) et abondance . Pensez à enchainer les opérations</li>
-<li>Positionnez la colonne <code>abundance</code> après la colonne <code>biomass</code></li>
+<li>Vérifiez s’il y a des données dupliquées dans le jeu de données issu de l’exercice 3.3 (<code>abundance_exercice3_3</code>)</li>
+<li>Créez une nouvelle variable “survey_id_full” qui est l’union entre le survey_id et sp_size avec comme séparateur un “_”.</li>
+<li>En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations</li>
+<li>Stocker le résultat dans un objet nommé <code>abundance_biomass_survey_exercice3_4</code></li>
 </ul>
 <div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb41-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
 <span id="cb41-2" class="hljs-ln-code"><a></a>abundance_biomass_survey_exercice3_4 <span class="ot">&lt;-</span> abundance_exercice3_3 <span class="sc">%&gt;%</span></span>
 <span id="cb41-3" class="hljs-ln-code"><a></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb41-4" class="hljs-ln-code"><a></a>  <span class="fu">unite</span>(., <span class="at">col =</span> <span class="st">"survey_id_full"</span>, <span class="fu">c</span>(survey_id, sp_size), <span class="at">sep =</span> <span class="st">"_"</span>)  <span class="sc">%&gt;%</span></span>
-<span id="cb41-5" class="hljs-ln-code"><a></a>  <span class="fu">right_join</span>(., biomass_survey_exercice2_4, <span class="at">by =</span> <span class="st">"survey_id_full"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb41-6" class="hljs-ln-code"><a></a>  <span class="fu">relocate</span>(abundance, <span class="at">.after =</span> biomass)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-4" class="hljs-ln-code"><a></a>  <span class="fu">unite</span>(.,</span>
+<span id="cb41-5" class="hljs-ln-code"><a></a>        <span class="at">col =</span> <span class="st">"survey_id_full"</span>,</span>
+<span id="cb41-6" class="hljs-ln-code"><a></a>        <span class="fu">c</span>(survey_id,</span>
+<span id="cb41-7" class="hljs-ln-code"><a></a>          sp_size),</span>
+<span id="cb41-8" class="hljs-ln-code"><a></a>        <span class="at">sep =</span> <span class="st">"_"</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb41-9" class="hljs-ln-code"><a></a>  <span class="fu">right_join</span>(.,</span>
+<span id="cb41-10" class="hljs-ln-code"><a></a>             biomass_survey_exercice2_4,</span>
+<span id="cb41-11" class="hljs-ln-code"><a></a>             <span class="at">by =</span> <span class="st">"survey_id_full"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-12" class="hljs-ln-code"><a></a>  <span class="fu">relocate</span>(abundance,</span>
+<span id="cb41-13" class="hljs-ln-code"><a></a>           <span class="at">.after =</span> biomass)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-3.5" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 3.5</h2>
 <ul>
+<li>A partir du jeu de données précédent (<code>abundance_biomass_survey_exercice3_4</code>)</li>
 <li>Créez 2 nouvelles colonnes <code>genus</code> et <code>species</code> à partir de species_name</li>
 <li>Supprimez les colonnes de <code>has_pq_scores_in_db</code> jusqu’à <code>methods</code></li>
 <li><code>has_pq_scores_in_db</code> est en position 23</li>
+<li>Stocker le résulat dans un objet nommé <code>abundance_biomass_survey_exercice3_5</code></li>
 </ul>
 <div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-3.5-corrigé" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 3.5 corrigé</h2>
 <ul>
+<li>A partir du jeu de données précédent (<code>abundance_biomass_survey_exercice3_4</code>)</li>
 <li>Créez 2 nouvelles colonnes <code>genus</code> et <code>species</code> à partir de species_name</li>
 <li>Supprimez les colonnes de <code>has_pq_scores_in_db</code> jusqu’à <code>methods</code></li>
 <li><code>has_pq_scores_in_db</code> est en position 23</li>
+<li>Stocker le résulat dans un objet nommé <code>abundance_biomass_survey_exercice3_5</code></li>
 </ul>
 <div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb43-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
 <span id="cb43-2" class="hljs-ln-code"><a></a>abundance_biomass_survey_exercice3_5 <span class="ot">&lt;-</span> abundance_biomass_survey_exercice3_4 <span class="sc">%&gt;%</span></span>
-<span id="cb43-3" class="hljs-ln-code"><a></a>  <span class="fu">separate</span>(., species_name, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"genus"</span>, <span class="st">"species"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb43-4" class="hljs-ln-code"><a></a>  <span class="fu">select</span>( <span class="sc">-</span><span class="fu">c</span>(<span class="dv">23</span><span class="sc">:</span><span class="fu">ncol</span>(.)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb43-3" class="hljs-ln-code"><a></a>  <span class="fu">separate</span>(.,</span>
+<span id="cb43-4" class="hljs-ln-code"><a></a>           species_name,</span>
+<span id="cb43-5" class="hljs-ln-code"><a></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"genus"</span>,</span>
+<span id="cb43-6" class="hljs-ln-code"><a></a>                    <span class="st">"species"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-7" class="hljs-ln-code"><a></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="dv">23</span><span class="sc">:</span><span class="fu">ncol</span>(.)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="partie-4-manipuler-du-texte-avec-stringr" class="title-slide slide level1 center">
@@ -1147,43 +1165,43 @@
 <h2>Fonctions de détection</h2>
 <p>Renvoient une réponse (pas d’extraction)</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="co"># détection d'un motif dans une chaine de caractères</span></span>
-<span id="cb44-2"><a></a><span class="fu">str_detect</span>() et <span class="fu">str_like</span>()</span>
+<span id="cb44-2"><a></a><span class="fu">str_detect</span>(string, pattern, negate) et <span class="fu">str_like</span>(string, pattern, ...)</span>
 <span id="cb44-3"><a></a></span>
 <span id="cb44-4"><a></a><span class="co"># détection d'un motif au début ou à la fin d'une chaine de caractères</span></span>
-<span id="cb44-5"><a></a><span class="fu">str_starts</span>() et <span class="fu">str_ends</span>()</span>
+<span id="cb44-5"><a></a><span class="fu">str_starts</span>(string, pattern, negate) et <span class="fu">str_ends</span>(string, pattern, negate)</span>
 <span id="cb44-6"><a></a></span>
 <span id="cb44-7"><a></a><span class="co"># détection des lignes contenant le motif</span></span>
-<span id="cb44-8"><a></a><span class="fu">str_which</span>()</span>
+<span id="cb44-8"><a></a><span class="fu">str_which</span>(string, pattern, negate)</span>
 <span id="cb44-9"><a></a></span>
 <span id="cb44-10"><a></a><span class="co"># détection de la position du motif dans la chaine de caractères (début et fin)</span></span>
 <span id="cb44-11"><a></a><span class="co"># sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé</span></span>
-<span id="cb44-12"><a></a><span class="fu">str_locate</span>() et <span class="fu">str_locate_all</span>()</span>
+<span id="cb44-12"><a></a><span class="fu">str_locate</span>(string, pattern) et <span class="fu">str_locate_all</span>(string, pattern)</span>
 <span id="cb44-13"><a></a></span>
 <span id="cb44-14"><a></a><span class="co"># comptage du nombre de fois que le motif est détecté dans une chaine de caractères</span></span>
-<span id="cb44-15"><a></a><span class="fu">str_count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb44-15"><a></a><span class="fu">str_count</span>(string, pattern)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="fonctions-de-sélection-ou-dextraction" class="slide level2">
 <h2>Fonctions de sélection ou d’extraction</h2>
 <p>Renvoient une chaine de caractères</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a><span class="co"># extraction d'une chaine à un ou des endroits bien précis</span></span>
 <span id="cb45-2"><a></a><span class="co"># utilisation d'indices de position</span></span>
-<span id="cb45-3"><a></a><span class="fu">str_sub</span>() et <span class="fu">str_sub_all</span>()</span>
+<span id="cb45-3"><a></a><span class="fu">str_sub</span>(string, start, end) et <span class="fu">str_sub_all</span>(string, start, end)</span>
 <span id="cb45-4"><a></a></span>
 <span id="cb45-5"><a></a><span class="co"># extraction des chaines, complètes, contenant un motif défini</span></span>
-<span id="cb45-6"><a></a><span class="fu">str_subset</span>()</span>
+<span id="cb45-6"><a></a><span class="fu">str_subset</span>(string, pattern, negate)</span>
 <span id="cb45-7"><a></a></span>
 <span id="cb45-8"><a></a><span class="co"># extraction d'un motif dans une chaine de caractères et retour sous forme de vecteur</span></span>
 <span id="cb45-9"><a></a><span class="co"># par défaut la détection passe à la chaine suivante dès qu'un motif est trouvé</span></span>
-<span id="cb45-10"><a></a><span class="fu">str_extract</span>() et <span class="fu">str_extract_all</span>()</span>
+<span id="cb45-10"><a></a><span class="fu">str_extract</span>(string, pattern, ...) et <span class="fu">str_extract_all</span>(string, pattern, ...)</span>
 <span id="cb45-11"><a></a></span>
 <span id="cb45-12"><a></a><span class="co"># extraction d'un motif dans une chaine de caractères et retour sous forme de matrix</span></span>
 <span id="cb45-13"><a></a><span class="co"># sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé</span></span>
-<span id="cb45-14"><a></a><span class="fu">str_match</span>() et <span class="fu">str_match_all</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb45-14"><a></a><span class="fu">str_match</span>(string, pattern) et <span class="fu">str_match_all</span>(string, pattern)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-4.1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 4.1</h2>
 <ul>
-<li>À partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille <code>Embiotocidae</code> puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf" class="external" target="_blank">dplyr</a>)</li>
+<li>À partir du jeu de données <code>biomass_survey_exercice2_4</code>, extraire les numéros de lignes correspondant aux données des échantillons de la famille <code>Embiotocidae</code> puis utiliser ces indices pour sélectionner ces lignes et les variables associées (utiliser la fonction <code>slice</code> de <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf" class="external" target="_blank">dplyr</a>). Stocker le résulat dans un objet <code>biomass_survey_exercice4_1</code>.</li>
 <li>compter combien nous avons de données d’occurrence d’espèces du genre <code>Embiotoca</code> dans ce nouveau jeu de données</li>
 <li>en utilisant une négation, extraire toutes les localisations qui sont différentes de <code>British Columbia</code></li>
 </ul>
@@ -1192,7 +1210,7 @@
 <section id="exercice-4.1-corrigé" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 4.1 corrigé</h2>
 <ul>
-<li>À partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille <code>Embiotocidae</code> puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf" class="external" target="_blank">dplyr</a>)</li>
+<li>À partir du jeu de données <code>biomass_survey_exercice2_4</code>, extraire les numéros de lignes correspondant aux données des échantillons de la famille <code>Embiotocidae</code> puis utiliser ces indices pour sélectionner ces lignes et les variables associées (utiliser la fonction <code>slice</code> de <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf" class="external" target="_blank">dplyr</a>). Stocker le résulat dans un objet <code>biomass_survey_exercice4_1</code>.</li>
 <li>compter combien nous avons de données d’occurrence d’espèces du genre <code>Embiotoca</code> dans ce nouveau jeu de données</li>
 <li>en utilisant une négation, extraire toutes les localisations qui sont différentes de <code>British Columbia</code></li>
 </ul>
@@ -1210,40 +1228,40 @@
 <h2>Fonctions de gestion des tailles de caractères</h2>
 <div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="co"># largeur/nombre de caractères</span></span>
 <span id="cb48-2"><a></a><span class="co"># attention aux espaces et caractères masqués</span></span>
-<span id="cb48-3"><a></a><span class="fu">str_length</span>()</span>
+<span id="cb48-3"><a></a><span class="fu">str_length</span>(string)</span>
 <span id="cb48-4"><a></a></span>
 <span id="cb48-5"><a></a><span class="co"># ajout "d'espace" à une chaine de caractères</span></span>
-<span id="cb48-6"><a></a><span class="fu">str_pad</span>()</span>
+<span id="cb48-6"><a></a><span class="fu">str_pad</span>(string, width, side, ...)</span>
 <span id="cb48-7"><a></a></span>
 <span id="cb48-8"><a></a><span class="co"># tronquer une chaîne de caractères à un nombre fixe de caractères</span></span>
-<span id="cb48-9"><a></a><span class="fu">str_trunc</span>()</span>
+<span id="cb48-9"><a></a><span class="fu">str_trunc</span>(string, width, side, ...)</span>
 <span id="cb48-10"><a></a></span>
 <span id="cb48-11"><a></a><span class="co"># supprimer des espaces </span></span>
 <span id="cb48-12"><a></a><span class="co"># au début et/ou à la fin d'une chaine de caractères</span></span>
-<span id="cb48-13"><a></a><span class="fu">str_trim</span>()</span>
+<span id="cb48-13"><a></a><span class="fu">str_trim</span>(string, side)</span>
 <span id="cb48-14"><a></a><span class="co"># au début, à la fin et réduction des espaces à un seul</span></span>
-<span id="cb48-15"><a></a><span class="fu">str_squish</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb48-15"><a></a><span class="fu">str_squish</span>(string)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="fonctions-de-manipulation" class="slide level2">
 <h2>Fonctions de manipulation</h2>
 <p>En lien avec des manipulations de type vectorisation (= conservation de la structure des données d’entrée)</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a><span class="co"># remplacement du motif via un assignation</span></span>
-<span id="cb49-2"><a></a><span class="fu">str_sub</span>() <span class="ot">&lt;-</span> value</span>
+<span id="cb49-2"><a></a><span class="fu">str_sub</span>(string, start, end) <span class="ot">&lt;-</span> value</span>
 <span id="cb49-3"><a></a></span>
 <span id="cb49-4"><a></a><span class="co"># remplacement d'un motif par un autre</span></span>
 <span id="cb49-5"><a></a><span class="co"># sans le _all le remplacement passe à la chaine suivante dès qu'un motif est trouvé</span></span>
-<span id="cb49-6"><a></a><span class="fu">str_replace</span>() et <span class="fu">str_replace_all</span>()</span>
+<span id="cb49-6"><a></a><span class="fu">str_replace</span>(string, pattern, replacement) et <span class="fu">str_replace_all</span>(string, pattern, replacement)</span>
 <span id="cb49-7"><a></a></span>
 <span id="cb49-8"><a></a><span class="co"># suppression d'un motif </span></span>
 <span id="cb49-9"><a></a><span class="co"># sans le _all la suppression passe à la chaine suivante dès qu'un motif est trouvé</span></span>
-<span id="cb49-10"><a></a><span class="fu">str_remove</span>() et <span class="fu">str_remove_all</span>()</span>
+<span id="cb49-10"><a></a><span class="fu">str_remove</span>(string, pattern) et <span class="fu">str_remove_all</span>(string, pattern)</span>
 <span id="cb49-11"><a></a></span>
 <span id="cb49-12"><a></a><span class="co"># manipulation de taille de caractère (majuscule, minuscule, ...)</span></span>
 <span id="cb49-13"><a></a><span class="co"># attention à la spécification de la langue et au nom, un title n'est pas forcement un title que vous cherchez</span></span>
-<span id="cb49-14"><a></a><span class="fu">str_to_lower</span>()</span>
-<span id="cb49-15"><a></a><span class="fu">str_to_upper</span>()</span>
-<span id="cb49-16"><a></a><span class="fu">str_to_title</span>()</span>
-<span id="cb49-17"><a></a><span class="fu">str_to_sentence</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb49-14"><a></a><span class="fu">str_to_lower</span>(string, ...)</span>
+<span id="cb49-15"><a></a><span class="fu">str_to_upper</span>(string, ...)</span>
+<span id="cb49-16"><a></a><span class="fu">str_to_title</span>(string, ...)</span>
+<span id="cb49-17"><a></a><span class="fu">str_to_sentence</span>(string, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-4.2" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 4.2</h2>
@@ -1251,6 +1269,7 @@
 <li>À partir du jeu de données <code>biomass_survey_exercice4_1</code>, créer une nouvelle variable, <code>site_name_length_ori</code>, contenant la taille des chaines de caractères de la variable <code>site_name</code></li>
 <li>Nettoyer la variable <code>site_name</code> en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable <code>site_name_clean</code></li>
 <li>Enlever les majuscules de notre variable <code>site_name_clean</code> sauf celles en début de chaine</li>
+<li>Stocker le résultat dans un objet <code>biomass_survey_exercice4_2</code></li>
 </ul>
 <div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -1260,6 +1279,7 @@
 <li>À partir du jeu de données <code>biomass_survey_exercice4_1</code>, créer une nouvelle variable, <code>site_name_length_ori</code>, contenant la taille des chaines de caractères de la variable <code>site_name</code></li>
 <li>Nettoyer la variable <code>site_name</code> en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable <code>site_name_clean</code></li>
 <li>Enlever les majuscules de notre variable <code>site_name_clean</code> sauf celles en début de chaine</li>
+<li>Stocker le résultat dans un objet <code>biomass_survey_exercice4_2</code></li>
 </ul>
 <div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb51-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
 <span id="cb51-2" class="hljs-ln-code"><a></a>biomass_survey_exercice4_2 <span class="ot">&lt;-</span> biomass_survey_exercice4_1 <span class="sc">%&gt;%</span></span>
@@ -1276,20 +1296,20 @@
 <div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="co"># jointure de plusieurs chaines de caractères en une seule (conservation structure en lignes)</span></span>
 <span id="cb52-2"><a></a><span class="fu">str_c</span>()</span>
 <span id="cb52-3"><a></a><span class="co"># jointure de plusieurs chaines de caractères en un seul vecteur (utiliser argument collapse)</span></span>
-<span id="cb52-4"><a></a><span class="fu">str_flatten</span>()</span>
+<span id="cb52-4"><a></a><span class="fu">str_flatten</span>(string, collapse)</span>
 <span id="cb52-5"><a></a><span class="co"># repetition d'une chaine de caractères </span></span>
-<span id="cb52-6"><a></a><span class="fu">str_dup</span>()</span>
+<span id="cb52-6"><a></a><span class="fu">str_dup</span>(string, times)</span>
 <span id="cb52-7"><a></a><span class="co"># suppression des chaines de caractères repetées</span></span>
-<span id="cb52-8"><a></a><span class="fu">str_unique</span>()</span>
+<span id="cb52-8"><a></a><span class="fu">str_unique</span>(string, ...)</span>
 <span id="cb52-9"><a></a><span class="co"># division d'une chaine de caractères en fonction d'un motif, le résultat est une liste de chaines</span></span>
-<span id="cb52-10"><a></a><span class="fu">str_split</span>()</span>
+<span id="cb52-10"><a></a><span class="fu">str_split</span>(string, pattern, ...)</span>
 <span id="cb52-11"><a></a><span class="co"># argument n pour spécifier le nombre possible de correspondances</span></span>
 <span id="cb52-12"><a></a><span class="co"># si on veut retourner un vecteur (ne fonctionne que sur une chaine unique)</span></span>
-<span id="cb52-13"><a></a><span class="fu">str_split_1</span>()</span>
-<span id="cb52-14"><a></a><span class="co"># si on veut retourner une matrice (argument n obligatoire)</span></span>
-<span id="cb52-15"><a></a><span class="fu">str_split_fixed</span>()</span>
+<span id="cb52-13"><a></a><span class="fu">str_split_1</span>(string, pattern)</span>
+<span id="cb52-14"><a></a><span class="co"># si on veut retourner une matrice</span></span>
+<span id="cb52-15"><a></a><span class="fu">str_split_fixed</span>(string, pattern, n)</span>
 <span id="cb52-16"><a></a><span class="co"># si on veut extraire uniquement une partie de la chaine </span></span>
-<span id="cb52-17"><a></a><span class="fu">str_split_i</span>()</span>
+<span id="cb52-17"><a></a><span class="fu">str_split_i</span>(string, pattern, i)</span>
 <span id="cb52-18"><a></a><span class="co"># si on veut faire des interpolations dans des chaines de caractères (similaire aux fonctions type paste())</span></span>
 <span id="cb52-19"><a></a><span class="co"># utilisation de {} dans notre expression</span></span>
 <span id="cb52-20"><a></a><span class="fu">str_glue</span>()</span>
@@ -1300,33 +1320,34 @@
 <h2>Fonctions d’ordre</h2>
 <p>Très simple, mais attention à la définition des arguments, notamment le <code>locale</code> qui va définir l’environnement de l’utilisateur.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="co"># retourne un vecteur des indices ordonnés</span></span>
-<span id="cb53-2"><a></a><span class="fu">str_order</span>()</span>
+<span id="cb53-2"><a></a><span class="fu">str_order</span>(x)</span>
 <span id="cb53-3"><a></a></span>
 <span id="cb53-4"><a></a><span class="co"># trier un vecteur</span></span>
-<span id="cb53-5"><a></a><span class="fu">str_sort</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb53-5"><a></a><span class="fu">str_sort</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="fonctions-supports" class="slide level2">
 <h2>Fonctions supports</h2>
 <p>A voir comme un petite boite à outils</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a><span class="co"># pour jouer avec l'encodage</span></span>
-<span id="cb54-2"><a></a><span class="fu">str_conv</span>()</span>
+<span id="cb54-2"><a></a><span class="fu">str_conv</span>(string, encoding)</span>
 <span id="cb54-3"><a></a></span>
 <span id="cb54-4"><a></a><span class="co"># pour jouer avec la visualisation de certains caractères (notamment sous la console de R)</span></span>
-<span id="cb54-5"><a></a><span class="fu">str_view</span>()</span>
+<span id="cb54-5"><a></a><span class="fu">str_view</span>(string, ...)</span>
 <span id="cb54-6"><a></a></span>
 <span id="cb54-7"><a></a><span class="co"># pour déterminer si deux chaines de caractères sont égales </span></span>
-<span id="cb54-8"><a></a><span class="fu">str_equal</span>()</span>
+<span id="cb54-8"><a></a><span class="fu">str_equal</span>(x, y, ...)</span>
 <span id="cb54-9"><a></a></span>
 <span id="cb54-10"><a></a><span class="co"># formate une chaine de caractères en paragraphes</span></span>
-<span id="cb54-11"><a></a><span class="fu">str_wrap</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb54-11"><a></a><span class="fu">str_wrap</span>(string, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-4.3" class="slide level2 smaller" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 4.3</h2>
 <ul>
 <li>À partir du jeu de données <code>biomass_survey_exercice4_2</code>, créer deux nouvelles variables, <code>species_name_first</code> et <code>species_name_second</code>, qui contiennent une division de la variable <code>species_name</code> en deux mots (on utilisera la valeur <code>[.]</code> pour spécifier <code>.</code> comme séparateur, bizarre non ?)</li>
-<li>Créer une variable <code>biomass_percentage</code> qui contiendra la biomasse exprimée en <code>%</code> (on veut le signe <code>%</code> à la fin de la chaine)</li>
+<li>Créer une variable <code>biomass_percentage</code> qui contiendra la biomasse exprimée en <code>%</code> (avec <code>%</code> à la fin)</li>
 <li>Fusionner dans une nouvelle variable <code>description</code> les variables <code>species_name_first</code>, <code>species_name_second</code> et <code>biomass_percentage</code> pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable <code>biomass_percentage</code> en parenthèses et suivi de la chaine de caractère <code>of total biomass</code>)</li>
-<li>Ayant une très mauvaise vision et un écran très petit, je souhaiterais que l’affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable <code>description_shinny</code>. Attention, il faut parfois regarder au-delà de ce qu’on voit dans la console de R…</li>
+<li>Ayant une très mauvaise vision et un écran très petit, je souhaiterais que l’affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable <code>description_shinny</code>. Attention, il faut parfois regarder au-delà de ce que l’on voit dans la console de R…</li>
+<li>Stocker le résultat dans un objet <code>biomass_survey_exercice4_3</code></li>
 </ul>
 <div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -1334,9 +1355,10 @@
 <h2 data-id="quarto-animate-title">Exercice 4.3 corrigé</h2>
 <ul>
 <li>À partir du jeu de données <code>biomass_survey_exercice4_2</code>, créer deux nouvelles variables, <code>species_name_first</code> et <code>species_name_second</code>, qui contiennent une division de la variable <code>species_name</code> en deux mots (on utilisera la valeur <code>[.]</code> pour spécifier <code>.</code> comme séparateur, bizarre non ?)</li>
-<li>Créer une variable <code>biomass_percentage</code> qui contiendra la biomasse exprimée en <code>%</code> (on veut le signe <code>%</code> à la fin de la chaine)</li>
+<li>Créer une variable <code>biomass_percentage</code> qui contiendra la biomasse exprimée en <code>%</code> (avec <code>%</code> à la fin)</li>
 <li>Fusionner dans une nouvelle variable <code>description</code> les variables <code>species_name_first</code>, <code>species_name_second</code> et <code>biomass_percentage</code> pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable <code>biomass_percentage</code> en parenthèses et suivi de la chaine de caractère <code>of total biomass</code>)</li>
-<li>Ayant une très mauvaise vision et un écran très petit, je souhaiterais que l’affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable <code>description_shinny</code>. Attention, il faut parfois regarder au-delà de ce qu’on voit dans la console de R…</li>
+<li>Ayant une très mauvaise vision et un écran très petit, je souhaiterais que l’affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable <code>description_shinny</code>. Attention, il faut parfois regarder au-delà de ce que l’on voit dans la console de R…</li>
+<li>Stocker le résultat dans un objet <code>biomass_survey_exercice4_3</code></li>
 </ul>
 <div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb56-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
 <span id="cb56-2" class="hljs-ln-code"><a></a>biomass_survey_exercice4_3 <span class="ot">&lt;-</span> biomass_survey_exercice4_2 <span class="sc">%&gt;%</span></span>
@@ -1382,6 +1404,7 @@
 <ul>
 <li>Dans le jeu données précédent, <code>biomass_survey_exercice4_3</code>, je veux séparer les chiffres et les lettres de la variable <code>site_code</code>. Comment trouver un motif qui marche aussi bien pour la valeur <code>USWC1</code> et <code>BC3</code> ?</li>
 <li>Avec l’utilisation des expressions regulières je vais pouvoir lui dire “je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s’arrête à un chiffre” (même raisonnement avec les chiffres)</li>
+<li>Stocker le résultat dans un objet <code>biomass_survey_exercice4_4</code></li>
 </ul>
 <div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -1390,6 +1413,7 @@
 <ul>
 <li>Dans le jeu données précédent, <code>biomass_survey_exercice4_3</code>, je veux séparer les chiffres et les lettres de la variable <code>site_code</code>. Comment trouver un motif qui marche aussi bien pour la valeur <code>USWC1</code> et <code>BC3</code> ?</li>
 <li>Avec l’utilisation des expressions regulières je vais pouvoir lui dire “je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s’arrête à un chiffre” (même raisonnement avec les chiffres)</li>
+<li>Stocker le résultat dans un objet <code>biomass_survey_exercice4_4</code></li>
 </ul>
 <div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb58-1" class="hljs-ln-code"><a></a>biomass_survey_exercice4_4 <span class="ot">&lt;-</span> biomass_survey_exercice4_3 <span class="sc">%&gt;%</span></span>
 <span id="cb58-2" class="hljs-ln-code"><a></a>  <span class="fu">mutate</span>(<span class="at">site_code_letters =</span> <span class="fu">str_extract</span>(<span class="at">string =</span> site_code,</span>
@@ -1428,11 +1452,11 @@
 <h3 id="modification-et-extraction">Modification et extraction</h3>
 <div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a>test_date_time <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(<span class="st">"2022-12-05 12:00:00"</span>, <span class="at">tz =</span> <span class="st">"CET"</span>)</span>
 <span id="cb60-2"><a></a><span class="co"># pour une extraction des informations</span></span>
-<span id="cb60-3"><a></a><span class="fu">second</span>()</span>
-<span id="cb60-4"><a></a><span class="fu">hour</span>()</span>
-<span id="cb60-5"><a></a><span class="fu">day</span>()</span>
-<span id="cb60-6"><a></a><span class="fu">wday</span>()</span>
-<span id="cb60-7"><a></a><span class="fu">month</span>()</span>
+<span id="cb60-3"><a></a><span class="fu">second</span>(x)</span>
+<span id="cb60-4"><a></a><span class="fu">hour</span>(x)</span>
+<span id="cb60-5"><a></a><span class="fu">day</span>(x)</span>
+<span id="cb60-6"><a></a><span class="fu">wday</span>(x)</span>
+<span id="cb60-7"><a></a><span class="fu">month</span>(x)</span>
 <span id="cb60-8"><a></a>...</span>
 <span id="cb60-9"><a></a><span class="co"># pour modifier les informations, utiliser les fonctions précédentes avec une assignation (&lt;-)</span></span>
 <span id="cb60-10"><a></a><span class="co"># par exemple</span></span>
@@ -1445,9 +1469,9 @@
 <li>Deux fonctions clés</li>
 </ul>
 <div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a><span class="co"># Pour exprimer un élément dans un autre fuseau horaire</span></span>
-<span id="cb61-2"><a></a><span class="fu">with_tz</span>()</span>
+<span id="cb61-2"><a></a><span class="fu">with_tz</span>(time, tzone, ...)</span>
 <span id="cb61-3"><a></a><span class="co"># Pour forcer le changement d'un fuseau horaire mais en conservant la même heure</span></span>
-<span id="cb61-4"><a></a><span class="fu">force_tz</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb61-4"><a></a><span class="fu">force_tz</span>(time, tzone, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>3 classes pour calculer des intervalles de temps</li>
 <li>Periode, durée et intervalle</li>
@@ -1460,18 +1484,18 @@
 <li>Les fonctions sont vectorisables !</li>
 <li>Sur certains jeux de données, les dates-temps sont stockées en nombre de secondes depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas-là :</li>
 </ul>
-<div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="fu">as_datetime</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="fu">as_datetime</span>(x, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Possibilité de faire des arrondis</li>
 </ul>
 <div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a><span class="co"># arrondi inférieur sur "l'unité" la plus proche</span></span>
-<span id="cb63-2"><a></a><span class="fu">floor_date</span>()</span>
+<span id="cb63-2"><a></a><span class="fu">floor_date</span>(x, ...)</span>
 <span id="cb63-3"><a></a></span>
 <span id="cb63-4"><a></a><span class="co"># arrondi inférieur sur "l'unité" la plus proche</span></span>
-<span id="cb63-5"><a></a><span class="fu">round_date</span>()</span>
+<span id="cb63-5"><a></a><span class="fu">round_date</span>(x, ...)</span>
 <span id="cb63-6"><a></a></span>
 <span id="cb63-7"><a></a><span class="co"># arrondi supérieur sur "l'unité" la plus proche</span></span>
-<span id="cb63-8"><a></a><span class="fu">ceiling_date</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb63-8"><a></a><span class="fu">ceiling_date</span>(x, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>De définir des objets pour les manipuler</li>
 </ul>
@@ -1480,9 +1504,9 @@
 <span id="cb64-3"><a></a><span class="fu">today</span>()</span>
 <span id="cb64-4"><a></a></span>
 <span id="cb64-5"><a></a><span class="co"># en lien avec des paramètres</span></span>
-<span id="cb64-6"><a></a><span class="fu">dyears</span>()</span>
-<span id="cb64-7"><a></a><span class="fu">dmonths</span>()</span>
-<span id="cb64-8"><a></a><span class="fu">dweeks</span>()</span>
+<span id="cb64-6"><a></a><span class="fu">dyears</span>(x)</span>
+<span id="cb64-7"><a></a><span class="fu">dmonths</span>(x)</span>
+<span id="cb64-8"><a></a><span class="fu">dweeks</span>(x)</span>
 <span id="cb64-9"><a></a>...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exercice-5.1" class="slide level2 smaller" data-auto-animate="true">
@@ -1494,6 +1518,7 @@
 <li>Créer une variable <code>next_survey_date</code> qui ajoute 12 mois à la variable <code>survey_date_as_date</code></li>
 <li>Regarder plus en détail la variable <code>next_survey_date</code>, qu’a-t-elle de particulier ?</li>
 <li>Question bonus en lien avec la question précédente, définir l’heure des valeurs de la variable <code>survey_date_as_date</code> à 12h et la stocker dans une variable <code>next_survey_date_correct</code></li>
+<li>Stocker le résultat dans une variable <code>biomass_survey_exercice5_1</code></li>
 </ul>
 <div class="sourceCode" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -1506,6 +1531,7 @@
 <li>Créer une variable <code>next_survey_date</code> qui ajoute 12 mois à la variable <code>survey_date_as_date</code></li>
 <li>Regarder plus en détail la variable <code>next_survey_date</code>, qu’a-t-elle de particulier ?</li>
 <li>Question bonus en lien avec la question précédente, définir l’heure des valeurs de la variable <code>survey_date_as_date</code> à 12h et la stocker dans une variable <code>next_survey_date_correct</code></li>
+<li>Stocker le résultat dans une variable <code>biomass_survey_exercice5_1</code></li>
 </ul>
 <div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb66-1" class="hljs-ln-code"><a></a><span class="co"># solution</span></span>
 <span id="cb66-2" class="hljs-ln-code"><a></a>biomass_survey_exercice5_1 <span class="ot">&lt;-</span> biomass_survey_exercice4_3 <span class="sc">%&gt;%</span></span>
@@ -1548,7 +1574,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-3-1.png" style="width:75.0%"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:75.0%"></p>
 </figure>
 </div>
 </div>
@@ -1561,7 +1587,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:75.0%"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-3-1.png" style="width:75.0%"></p>
 </figure>
 </div>
 </div>
@@ -1576,7 +1602,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:75.0%"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:75.0%"></p>
 </figure>
 </div>
 </div>
@@ -1589,7 +1615,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:75.0%"></p>
+<p><img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:75.0%"></p>
 </figure>
 </div>
 </div>
@@ -1635,7 +1661,7 @@
 <span id="cb67-2"><a></a>   p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width)) </span>
 <span id="cb67-3"><a></a>   p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-7-1.png" style="width:75.0%" class="r-stretch"></section>
+<img data-src="tidyverse-training_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:75.0%" class="r-stretch"></section>
 <section id="exercice-6.1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Exercice 6.1</h2>
 <p>En utilisant les fonctions vues précédemment - Quel est le pays où la biomasse totale par transect est la plus élevée ? - Formattez le jeu de données issues de l’<strong>exercice 5.1</strong> et représentez visuellement les données sous forme de boites à moustache, <strong>seulement pour les données prélevées en 2011</strong>. Nommer le jeu de données <strong>data_biomass_country</strong>.</p>
