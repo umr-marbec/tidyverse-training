@@ -158,7 +158,7 @@
     "href": "tidyverse-training.html#exercice-1.1-corrigé",
     "title": "tidyverse-training",
     "section": "Exercice 1.1 corrigé",
-    "text": "Exercice 1.1 corrigé\n\nLire le fichier survey_metadata et le stocker dans un objet R survey_metadata,\nLire le fichier reef_fish_biomass et le stocker dans un objet R reef_fish_biomass\nLire le fichier reef_fish_abundance et le stocker dans un objet R reef_fish_abundance\n\nAttention ! On ne triche pas, aucune manipulation des fichiers pré-importation\n# solution\nsurvey_metadata &lt;- read_tsv(file = \"data/survey_metadata.tsv\")\nreef_fish_biomass &lt;- read_delim(file = \"data/reef_fish_biomass.dude\",\n                                delim = \"|\")\nSys.setenv(\"VROOM_CONNECTION_SIZE\" = 2000000)\nreef_fish_abundance &lt;- read_csv(file = \"data/reef_fish_abundance.zip\",\n                                guess_max = Inf)"
+    "text": "Exercice 1.1 corrigé\n\nLire le fichier survey_metadata et le stocker dans un objet R survey_metadata,\nLire le fichier reef_fish_biomass et le stocker dans un objet R reef_fish_biomass\nLire le fichier reef_fish_abundance et le stocker dans un objet R reef_fish_abundance\n\nAttention ! On ne triche pas, aucune manipulation des fichiers pré-importation\n# solution\nsurvey_metadata &lt;- read_tsv(file = \"data/survey_metadata.tsv\")\nreef_fish_biomass &lt;- read_delim(file = \"data/reef_fish_biomass.dude\",\n                                delim = \"|\")\nSys.setenv(\"VROOM_CONNECTION_SIZE\" = 500000)\nreef_fish_abundance &lt;- read_csv(file = \"data/reef_fish_abundance.zip\",\n                                col_types = list(.default = col_integer()))"
   },
   {
     "objectID": "tidyverse-training.html#exercice-1.2",
