@@ -1,6 +1,8 @@
 # setup ----
 library(readr)
 library(dplyr)
+library(tibble)
+library(tidyr)
 library(stringr)
 library(lubridate)
 # exercise 1.1 ----
@@ -52,6 +54,39 @@ survey_metadata_distinct <- distinct(.data = survey_metadata)
 biomass_survey_exercice2_4 <- biomass_exercice2_3 %>%
   left_join(survey_metadata_distinct,
             by = "survey_id")
+# exercice 3.1 ----
+head(x = biomass_survey_exercice2_4)
+View(x = biomass_survey_exercice2_4)
+# exercice 3.2 ----
+abundance_exercice3_2 <- reef_fish_abundance %>%
+  pivot_longer(.,
+               cols = 2:ncol(.),
+               names_to = "sp_size",
+               values_to = "abundance")
+# exercice 3.3 ----
+abundance_exercice3_3 <- abundance_exercice3_2 %>%
+  drop_na(., 
+          abundance)
+# exercice 3.4 ----
+abundance_biomass_survey_exercice3_4 <- abundance_exercice3_3 %>%
+  distinct() %>%
+  unite(.,
+        col = "survey_id_full",
+        c(survey_id,
+          sp_size),
+        sep = "_")  %>%
+  right_join(.,
+             biomass_survey_exercice2_4,
+             by = "survey_id_full") %>%
+  relocate(abundance,
+           .after = biomass)
+# exercice 3.5 ----
+abundance_biomass_survey_exercice3_5 <- abundance_biomass_survey_exercice3_4 %>%
+  separate(.,
+           species_name,
+           into = c("genus",
+                    "species")) %>%
+  select(-c(23:ncol(.)))
 # exercice 4.1 ----
 biomass_survey_exercice4_1 <- slice(.data = biomass_survey_exercice2_4,
                                     str_which(string = biomass_survey_exercice2_4$family,

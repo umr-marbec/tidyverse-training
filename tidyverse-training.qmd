@@ -14,7 +14,7 @@ format:
 
 [Laure Velez ([laure.velez\@umontpellier.fr](mailto:laure.velez@umontpellier.fr))]{style="color:#ffffff; font-size: 0.8em"}
 
-[Mathieu Depetris ([mathieu.depetris\@ird.fr](mailto:mathieu.depetris@ird.fr))]{style="color:#ffffff; font-size: 0.8em"}
+[Mathieu Depetris ([mathieu.depetris\@cnrs.fr](mailto:mathieu.depetris@cnrs.fr))]{style="color:#ffffff; font-size: 0.8em"}
 
 [Monique Simier ([monique.simier\@ird.fr](mailto:monique.simier@ird.fr))]{style="color:#ffffff; font-size: 0.8em"}
 
@@ -38,12 +38,11 @@ format:
 
 -   Partie 3 : Nettoyage des données avec [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"}
 
--   Partie 4 : Extension à la manipulation de données, cas spécifiques
+-   Partie 4 : Manipuler du texte avec [stringr](https://stringr.tidyverse.org/){.external target="_blank"}
 
-    -   4.1 : Manipuler du texte avec [stringr](https://stringr.tidyverse.org/){.external target="_blank"}
-    -   4.2 : Manipuler des dates avec [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"}
+-   Partie 5 : Manipuler des dates avec [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"}
 
--   Partie 5 : Visualisation graphique avec [ggplot2](https://ggplot2.tidyverse.org/){.external target="_blank"}
+-   Partie 6 : Visualisation graphique avec [ggplot2](https://ggplot2.tidyverse.org/){.external target="_blank"}
 
 Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.github.io/analyse-R/){.external target="_blank"}
 
@@ -57,7 +56,13 @@ Formation fortement inspirée du site de [Joseph Larmarange](https://larmarange.
 
 -   Avoir des notions de base dans l'utilisation de [R](https://www.r-project.org/){.external target="_blank"}
 -   Avoir une instance valide de R sur son poste (durant la formation utilisation de la version [4.4.3](https://pbil.univ-lyon1.fr/CRAN/){.external target="_blank"} sous Windows)
--   Avoir installé correctement les packages R [readr](https://readr.tidyverse.org/){.external target="_blank"} (utilisation de la version 2.1.5), [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.1.4), [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.3.1), [stringr](https://stringr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.5.1), [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.9.4), et [ggplot2](https://ggplot2.tidyverse.org/){.external target="_blank"} (utilisation de la version 3.5.1).
+-   Pour information, nous allons utiliser les packages-version et dépendances R suivants :
+    - [readr](https://readr.tidyverse.org/){.external target="_blank"} (utilisation de la version 2.1.5),
+    - [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.1.4),
+    - [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.3.1),
+    - [stringr](https://stringr.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.5.1),
+    - [lubridate](https://lubridate.tidyverse.org/){.external target="_blank"} (utilisation de la version 1.9.4),
+    - [ggplot2](https://ggplot2.tidyverse.org/){.external target="_blank"} (utilisation de la version 3.5.1).
 
 ## Bonus non obligatoire
 
@@ -162,18 +167,18 @@ Les fonctions de readr les plus utilisées sont :
 
 ``` r
 # Fonction générale, pour importer un fichier avec un délimiteur quelconque
-read_delim()
+read_delim(file, delim, ...)
 # Import fichiers csv au format anglais (point décimal et séparateur virgule)
-read_csv()
+read_csv(file, ...)
 # Import fichiers csv au format français (virgule décimale et séparateur point-virgule)
-read_csv2()
+read_csv2(file, ...)
 # Import fichiers au format tsv ou les valeurs sont séparées par des tabulations
-read_tsv()
+read_tsv(file, ...)
 # Pour lire un fichier en "chunks", c'est à dire en tranches dont on définit la taille en nombre de lignes.
 # Cette fonction permet de lire de très gros fichiers  
 # et aussi d'appliquer une fonction (CallBack) sur les données à chaque tranche. 
 # xxx est à remplacer par csv, csv2, delim
-read_xxx_chunked()
+read_xxx_chunked(file, callback, ...)
 ```
 
 ## [read_delim()](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"}, la fonction la plus générique {.smaller}
@@ -204,12 +209,12 @@ read_xxx_chunked()
 
 ``` r
 # Pour exporter en csv
-write_csv()
-write_csv2()
+write_csv(x, file, ...)
+write_csv2(x, file, ...)
 # Pour exporter en choisissant le délimiteur 
-write_delim()
+write_delim(x, file, delim, ...)
 # Pour exporter en tsv
-write_tsv()
+write_tsv(x, file, ...)
 ```
 
 ## Encore une fois des paramètres
@@ -234,10 +239,10 @@ write_tsv()
 
 ``` r
 # Fonction générique
-read_excel()
+read_excel(path, ...)
 # Fonction pour importer spécifiquement un xls (excel avant 2007) ou xlsx (extension actuelle par défaut)
-read_xls()
-read_xlsx()
+read_xls(path, ...)
+read_xlsx(path, ...)
 ```
 
 -   Globalement des arguments similaires à précédement (`col_names`, `skip`, `col_types`, ...)
@@ -324,7 +329,7 @@ Lire le fichier survey_metadata et le stocker dans un objet R `survey_metadata` 
 
 ## Exercice 1.2 corrigé {auto-animate="true"}
 
-Lire le fichier survey_metadata et le stocker dans un objet R `survey_metadata` en sélectionnant le pays Indonesia, une profondeur inférieure à 20m et une visibilité supérieure à 10m.
+Lire le fichier survey_metadata et le stocker dans un objet R `survey_metadata` en sélectionnant le pays Indonésie, une profondeur inférieure à 20m et une visibilité supérieure à 10m.
 
 ``` r
 # solution
@@ -362,21 +367,21 @@ Type de fonctions qui retournent un sous-ensemble de lignes
 -   Extraction d'une ou plusieurs lignes : fonctions de la famille slice & co
 
 ``` r
-# sélection d'une ou plusieurs lignes par position absolue
-slice()
+# sélection d'une ou plusieurs lignes par position absolue (l'argument x est l'indice de la ou des lignes)
+slice(.data, x, ...)
 # sélection au hasard d'un nombre de lignes ou d'une proportion du jeu de données
-slice_sample()
+slice_sample(.data, n/prop, ...)
 # sélection des n dernières lignes
-slice_tail()
+slice_tail(.data, n/prop, ...)
 # sélection des n premières lignes
-slice_head()
+slice_head(.data, n/prop, ...)
 # sélection des lignes avec les valeurs les plus petites ou grandes
-slice_min()
-slice_max()
+slice_min(.data, n/prop, ...)
+slice_max(.data, n/prop, ...)
 # sélection des valeurs distinctes
-distinct()
+distinct(.data, ...)
 # sélection en fonction d'opérateurs logiques et/ou booléens
-filter()
+filter(.data, ...)
 ```
 
 ## Petit focus sur les opérateurs booléens et logiques {.smaller}
@@ -397,16 +402,16 @@ Renvoient une valeur TRUE ou FALSE
 
 ## Exercice 2.1 {auto-animate="true"}
 
--   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "reef_fish_biomass"
--   En une seule fois, sélectionner les données dont la variable "biomass" est différente de 0, où la famille est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
+-   À l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "reef_fish_biomass"
+-   En plus et en une seule fois, sélectionner les données dont la variable "biomass" est différente de 0, où la famille est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10. Stocker le résultat dans un objet nommé `biomass_exercice2_1_distinct_filter`.
 
 ``` r
 ```
 
 ## Exercice 2.1 corrigé {auto-animate="true"}
 
--   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "reef_fish_biomass"
--   En une seule fois, sélectionner les données dont la variable "biomass" est différente de 0, où la famille est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
+-   À l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "reef_fish_biomass"
+-   En plus et en une seule fois, sélectionner les données dont la variable "biomass" est différente de 0, où la famille est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10. Stocker le résultat dans un objet nommé `biomass_exercice2_1_distinct_filter`.
 
 ``` r
 biomass_exercice2_1_distinct <- distinct(.data = reef_fish_biomass)
@@ -463,7 +468,7 @@ biomass_exercice2_1_distinct_filter <- distinct(.data = reef_fish_biomass) %>%
 
 ``` r
 # par défaut ordre croissant, utiliser l'argument desc pour ordre décroissant
-arrange()
+arrange(.data, ...)
 ```
 
 <br/>
@@ -472,9 +477,10 @@ arrange()
 
 -   Ajouter une ligne dans un jeu de données
 
-```{r echo=TRUE, eval=FALSE}
+```r 
+# utilisation du package tibble (dépendance)
 # interet des arguments .before and .after
-add_row()
+add_row(.data, ...)
 ```
 
 ## Manipulation des variables
@@ -486,13 +492,13 @@ Type de fonctions qui retournent un sous-ensemble de colonnes sous la forme d'un
 ``` r
 # extraction des valeurs d'une colonne sous la forme d'un vecteur
 # on peut utiliser des noms ou les ids
-pull()
+pull(.data, var, ...)
 # extraction d'une colonne sous la forme d'une table
 # bien regarder les arguments de la fonction car on peut faire beaucoup
-select()
+select(.data, ...)
 # Changer l'ordre ou la place d'une ou plusieurs colonnes
 # ne pas oublier les arguments .after et .before
-relocate()
+relocate(.data, ...)
 ```
 
 ## Fonctions de vectorisation
@@ -505,18 +511,18 @@ relocate()
 
 ``` r
 # créer une nouvelle variable
-mutate()
+mutate(.data, ...)
 ```
 
 -   Petit bonus pour renommer les variables
 
 ``` r
-rename()
+rename(.data, ...)
 ```
 
 ## Exercice 2.2 {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice 1
+-   À partir du jeu de données de sortie de l'exercice 1 (`biomass_exercice2_1_distinct_filter`)
 -   Créer une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
 -   Placer cette nouvelle colonne avant la colonne survey_id
 -   Supprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name
@@ -524,14 +530,14 @@ rename()
 -   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm
 -   Supprimer la variable size_class_cm
 -   Trier par ordre décroissant les données en fonction de la variable size_class_mm
--   Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
+-   Utiliser des pipes à la fin pour avoir une syntaxe "propre", stocker le resultat dans un objet nommé `biomass_exercice2_2` et souffler un bon coup :)
 
 ``` r
 ```
 
 ## Exercice 2.2 corrigé {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice 1
+-   À partir du jeu de données de sortie de l'exercice 1 (`biomass_exercice2_1_distinct_filter`)
 -   Créer une variable "survey_id_full" qui est la concaténation des variables survey_id, species_name et size_class
 -   Placer cette nouvelle colonne avant la colonne survey_id
 -   Supprimer la quatrième colonne du jeu de données (utiliser son indice) ainsi que la colonne reporting_name
@@ -539,7 +545,7 @@ rename()
 -   Créer une nouvelle variable size_class_mm qui convertit la variable size_class_cm en mm
 -   Supprimer la variable size_class_cm
 -   Trier par ordre décroissant les données en fonction de la variable size_class_mm
--   Utiliser des pipes à la fin pour avoir une syntaxe "propre" et souffler un bon coup :)
+-   Utiliser des pipes à la fin pour avoir une syntaxe "propre", stocker le resultat dans un objet nommé `biomass_exercice2_2` et souffler un bon coup :)
 
 ``` r
 # solution
@@ -567,7 +573,7 @@ biomass_exercice2_2 <- mutate(.data = biomass_exercice2_1_distinct_filter,
 -   Fonction clé
 
 ``` r
-summarise()
+summarise(.data, ...)
 # Beaucoup, beaucoup d'options et de possibilités
 # Compter le nombre de valeurs/lignes
 n()
@@ -595,8 +601,8 @@ max()
 ``` r
 # on peut définir nos groupes en fonction des modalités des variables
 # on peut aussi utiliser des arguments des fonctions quand c'est proposé, exemple avec .by de summarise()
-group_by()
-# ou alors en isolant chaque ligne
+group_by(.data, ...)
+# ou alors en isolant chaque ligne (utile surtout pour les fonctions qui ne vectorise pas)
 rowwise()
 ```
 
@@ -613,20 +619,22 @@ ungroups()
 
 ## Exercice 2.3 {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice 2.2
+-   À partir du jeu de données de sortie de l'exercice 2.2 (`biomass_exercice2_2`)
 -   Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment
 -   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvée" regarder du côté des arguments en option)
--   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+-   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ
+- Stocker tout ça dans un objet nommé `biomass_exercice2_3`
 
 ``` r
 ```
 
 ## Exercice 2.3 corrigé {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice 2.2
+-   À partir du jeu de données de sortie de l'exercice 2.2 (`biomass_exercice2_2`)
 -   Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment
 -   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvée" regarder du côté des arguments en option)
--   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
+-   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ
+- Stocker tout ça dans un objet nommé `biomass_exercice2_3`
 
 ``` r
 # solution
@@ -700,33 +708,35 @@ bind_rows()
 
 ``` r
 # jointure à gauche
-left_join()
+left_join(x, y, by, ...)
 # jointure à droite
-right_join()
+right_join(x, y, by, ...)
 # jointure commune
-inner_join()
+inner_join(x, y, by, ...)
 # jointure complete
-full_join()
+full_join(x, y, by, ...)
 ```
 
 ## Exercice 2.4 {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice 2.3 (biomass_exercice2_3)
--   Faire la "meilleure" jointure avec le jeu de données survey_metadata et expliquer votre choix
+-   À partir du jeu de données de sortie de l'exercice 2.3 (`biomass_exercice2_3`)
+-   Faire la "meilleure" jointure avec le jeu de données `survey_metadata` et expliquer votre choix
 -   Pour vous aider :
-    -   Y-a-t-il un problème avec le jeu de données survey_metadata ?
+    -   Y-a-t-il un problème avec le jeu de données `survey_metadata` ?
     -   Réfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure
+- Stocker le résultat dans un objet nommé `biomass_survey_exercice2_4`
 
 ``` r
 ```
 
 ## Exercice 2.4 corrigé {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice 2.3 (biomass_exercice2_3)
--   Faire la "meilleure" jointure avec le jeu de données survey_metadata et expliquer votre choix
+-   À partir du jeu de données de sortie de l'exercice 2.3 (`biomass_exercice2_3`)
+-   Faire la "meilleure" jointure avec le jeu de données `survey_metadata` et expliquer votre choix
 -   Pour vous aider :
-    -   Y-a-t-il un problème avec le jeu de données survey_metadata ?
+    -   Y-a-t-il un problème avec le jeu de données `survey_metadata` ?
     -   Réfléchissez en termes du nombre de lignes obtenues pour chaque fonction de jointure
+- Stocker le résultat dans un objet nommé `biomass_survey_exercice2_4`
 
 ``` r
 # solution
@@ -758,8 +768,6 @@ Les différents verbes viennent s'ajouter à tous ceux que nous avons déjà vus
 
     -   1 type d'observation par table
 
-Lien vers le [cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf){.external target="_blank"} de [tidyr](https://tidyr.tidyverse.org/){.external target="_blank"}.
-
 ## Les principales fonctions de tidyr
 
 ### Modelage des tableaux
@@ -773,27 +781,28 @@ pivot_wider(names_from, values_from)
 pivot_longer(cols, names_to, values_to, ...)
 ```
 
-##  {.smaller}
-
 ## Exercice 3.1 {auto-animate="true"}
 
--   Observez les données de biomasse (biomass_survey_exercice2_4) et d'abondance. Les données sont elles tidy ? Si non, pourquoi ?
+-   Observez les données de biomasse (`biomass_survey_exercice2_4`) et d'abondance. Les données sont elles tidy ? Si non, pourquoi ?
 
 ``` r
 ```
 
 ## Exercice 3.1 corrigé {auto-animate="true"}
 
--   Observez les données de biomasse (biomass_survey_exercice2_4) et d'abondance. Les données sont elles tidy ? Si non, pourquoi ?
+-   Observez les données de biomasse (`biomass_survey_exercice2_4`) et d'abondance. Les données sont elles tidy ? Si non, pourquoi ?
 
 ``` r
+# solution
+head(x = biomass_survey_exercice2_4)
+View(x = biomass_survey_exercice2_4)
 ```
 
 <br>
 
 <center>
 
-Oui les données de biomasse sont tidy, nous avons bien une observation par ligne Non les données d'abondance ne sont pas tidy, car elles sont en format "wide"
+Non les données d'abondance ne sont pas tidy, car elles sont en format "wide"
 
 <center>
 
@@ -801,25 +810,24 @@ Oui les données de biomasse sont tidy, nous avons bien une observation par lign
 
 -   Transformez les données d'abondance en format tidy. Les nouvelles colonnes créées seront `sp_size` et `abundance`
 -   Pensez à bien regarder tous les arguments des fonctions
+- Stocker le résultat dans un objet nommé `abundance_exercice3_2`
 
 ``` r
-# solution
 ```
 
 ## Exercice 3.2 corrigé {.smaller auto-animate="true"}
 
 -   Transformez les données d'abondance en format tidy. Les nouvelles colonnes créées seront `sp_size` et `abundance`
 -   Pensez à bien regarder tous les arguments des fonctions
+- Stocker le résultat dans un objet nommé `abundance_exercice3_2`
 
 ``` r
 # solution
 abundance_exercice3_2 <- reef_fish_abundance %>%
-  pivot_longer(
-    .,
-    cols = 2:ncol(.),
-    names_to = "sp_size",
-    values_to = "abundance"
-  ) 
+  pivot_longer(.,
+               cols = 2:ncol(.),
+               names_to = "sp_size",
+               values_to = "abundance") 
 ```
 
 ## 
@@ -837,23 +845,23 @@ fill(data, …, .direction)
 
 ## Exercice 3.3 {.smaller auto-animate="true"}
 
--   A partir du jeu de données issu de l'exercice 3.2 supprimez les lignes ayant des valeurs d'abondance égale à NA
+-   A partir du jeu de données issu de l'exercice 3.2 (`abundance_exercice3_2`) supprimez les lignes ayant des valeurs d'abondance égales à NA
+- Stocker le résultat dans un objet nommé `abundance_exercice3_3`
 
 ``` r
-# solution
 ```
 
 ## Exercice 3.3 corrigé {.smaller auto-animate="true"}
 
--   A partir du jeu de données issu de l'exercice 3.2 supprimez les lignes ayant des valeurs d'abondance égales à NA
+-   A partir du jeu de données issu de l'exercice 3.2 (`abundance_exercice3_2`) supprimez les lignes ayant des valeurs d'abondance égales à NA
+- Stocker le résultat dans un objet nommé `abundance_exercice3_3`
 
 ``` r
 # solution
 abundance_exercice3_3 <- abundance_exercice3_2 %>%
-  drop_na(., abundance)
+  drop_na(., 
+          abundance)
 ```
-
-## 
 
 ### Combinaison des variables
 
@@ -866,54 +874,66 @@ unite(col, ..., sep)
 expand(data, ...)
 ```
 
-##  {.smaller}
-
 ## Exercice 3.4 {.smaller auto-animate="true"}
 
--   Vérifiez s'il y a des données dupliquées dans le jeu de données issu de l'exercice 3.3
+-   Vérifiez s'il y a des données dupliquées dans le jeu de données issu de l'exercice 3.3 (`abundance_exercice3_3`)
 -   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_".
 -   En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations
+- Stocker le résultat dans un objet nommé `abundance_biomass_survey_exercice3_4`
 
 ``` r
-# solution
 ```
 
 ## Exercice 3.4 corrigé {.smaller auto-animate="true"}
 
--   Vérifiez s'il y a des données dupliquées dans le jeu de données issu de l'exercice 3.3
--   Créez une nouvelle variable `survey_id_full` qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_".
--   En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse (biomass_survey_exercice2_4) et abondance . Pensez à enchainer les opérations
--   Positionnez la colonne `abundance` après la colonne `biomass`
+-   Vérifiez s'il y a des données dupliquées dans le jeu de données issu de l'exercice 3.3 (`abundance_exercice3_3`)
+-   Créez une nouvelle variable "survey_id_full" qui est l'union entre le survey_id et sp_size avec comme séparateur un "\_".
+-   En vous servant des fonctions vues depuis le début de la formation créez un seul tableau regroupant biomasse et abondance . Pensez à enchainer les opérations
+- Stocker le résultat dans un objet nommé `abundance_biomass_survey_exercice3_4`
 
 ``` r
 # solution
 abundance_biomass_survey_exercice3_4 <- abundance_exercice3_3 %>%
   distinct() %>%
-  unite(., col = "survey_id_full", c(survey_id, sp_size), sep = "_")  %>%
-  right_join(., biomass_survey_exercice2_4, by = "survey_id_full") %>%
-  relocate(abundance, .after = biomass)
+  unite(.,
+        col = "survey_id_full",
+        c(survey_id,
+          sp_size),
+        sep = "_")  %>%
+  right_join(.,
+             biomass_survey_exercice2_4,
+             by = "survey_id_full") %>%
+  relocate(abundance,
+           .after = biomass)
 ```
 
 ## Exercice 3.5 {.smaller auto-animate="true"}
 
+- A partir du jeu de données précédent (`abundance_biomass_survey_exercice3_4`)
 -   Créez 2 nouvelles colonnes `genus` et `species` à partir de species_name
 -   Supprimez les colonnes de `has_pq_scores_in_db` jusqu'à `methods`
 -   `has_pq_scores_in_db` est en position 23
+- Stocker le résulat dans un objet nommé `abundance_biomass_survey_exercice3_5`
 
 ``` r
 ```
 
 ## Exercice 3.5 corrigé {.smaller auto-animate="true"}
 
+- A partir du jeu de données précédent (`abundance_biomass_survey_exercice3_4`)
 -   Créez 2 nouvelles colonnes `genus` et `species` à partir de species_name
 -   Supprimez les colonnes de `has_pq_scores_in_db` jusqu'à `methods`
 -   `has_pq_scores_in_db` est en position 23
+- Stocker le résulat dans un objet nommé `abundance_biomass_survey_exercice3_5`
 
 ``` r
 # solution
 abundance_biomass_survey_exercice3_5 <- abundance_biomass_survey_exercice3_4 %>%
-  separate(., species_name, into = c("genus", "species")) %>%
-  select( -c(23:ncol(.)))
+  separate(.,
+           species_name,
+           into = c("genus",
+                    "species")) %>%
+  select(-c(23:ncol(.)))
 ```
 
 # Partie 4 : Manipuler du texte avec [stringr](https://stringr.tidyverse.org/){.external target="_blank"}
@@ -959,20 +979,20 @@ Renvoient une réponse (pas d'extraction)
 
 ``` r
 # détection d'un motif dans une chaine de caractères
-str_detect() et str_like()
+str_detect(string, pattern, negate) et str_like(string, pattern, ...)
 
 # détection d'un motif au début ou à la fin d'une chaine de caractères
-str_starts() et str_ends()
+str_starts(string, pattern, negate) et str_ends(string, pattern, negate)
 
 # détection des lignes contenant le motif
-str_which()
+str_which(string, pattern, negate)
 
 # détection de la position du motif dans la chaine de caractères (début et fin)
 # sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé
-str_locate() et str_locate_all()
+str_locate(string, pattern) et str_locate_all(string, pattern)
 
 # comptage du nombre de fois que le motif est détecté dans une chaine de caractères
-str_count()
+str_count(string, pattern)
 ```
 
 ## Fonctions de sélection ou d'extraction
@@ -982,23 +1002,23 @@ Renvoient une chaine de caractères
 ``` r
 # extraction d'une chaine à un ou des endroits bien précis
 # utilisation d'indices de position
-str_sub() et str_sub_all()
+str_sub(string, start, end) et str_sub_all(string, start, end)
 
 # extraction des chaines, complètes, contenant un motif défini
-str_subset()
+str_subset(string, pattern, negate)
 
 # extraction d'un motif dans une chaine de caractères et retour sous forme de vecteur
 # par défaut la détection passe à la chaine suivante dès qu'un motif est trouvé
-str_extract() et str_extract_all()
+str_extract(string, pattern, ...) et str_extract_all(string, pattern, ...)
 
 # extraction d'un motif dans une chaine de caractères et retour sous forme de matrix
 # sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé
-str_match() et str_match_all()
+str_match(string, pattern) et str_match_all(string, pattern)
 ```
 
 ## Exercice 4.1 {auto-animate="true"}
 
--   À partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille `Embiotocidae` puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de [dplyr](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"})
+-   À partir du jeu de données `biomass_survey_exercice2_4`, extraire les numéros de lignes correspondant aux données des échantillons de la famille `Embiotocidae` puis utiliser ces indices pour sélectionner ces lignes et les variables associées (utiliser la fonction `slice` de [dplyr](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"}). Stocker le résulat dans un objet `biomass_survey_exercice4_1`.
 -   compter combien nous avons de données d'occurrence d'espèces du genre `Embiotoca` dans ce nouveau jeu de données
 -   en utilisant une négation, extraire toutes les localisations qui sont différentes de `British Columbia`
 
@@ -1007,7 +1027,7 @@ str_match() et str_match_all()
 
 ## Exercice 4.1 corrigé {auto-animate="true"}
 
--   À partir du jeu de données précédent (biomass_survey_exercice2_4), extraire les numéros de lignes correspondant aux données des échantillons de la famille `Embiotocidae` puis utiliser ces indices pour sélectionner ces lignes et les variables associées (on peut utiliser une fonction de manipulation de [dplyr](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"})
+-   À partir du jeu de données `biomass_survey_exercice2_4`, extraire les numéros de lignes correspondant aux données des échantillons de la famille `Embiotocidae` puis utiliser ces indices pour sélectionner ces lignes et les variables associées (utiliser la fonction `slice` de [dplyr](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){.external target="_blank"}). Stocker le résulat dans un objet `biomass_survey_exercice4_1`.
 -   compter combien nous avons de données d'occurrence d'espèces du genre `Embiotoca` dans ce nouveau jeu de données
 -   en utilisant une négation, extraire toutes les localisations qui sont différentes de `British Columbia`
 
@@ -1028,19 +1048,19 @@ location_biomass_survey_exercice4_1 <- unique(str_subset(string = biomass_survey
 ``` r
 # largeur/nombre de caractères
 # attention aux espaces et caractères masqués
-str_length()
+str_length(string)
 
 # ajout "d'espace" à une chaine de caractères
-str_pad()
+str_pad(string, width, side, ...)
 
 # tronquer une chaîne de caractères à un nombre fixe de caractères
-str_trunc()
+str_trunc(string, width, side, ...)
 
 # supprimer des espaces 
 # au début et/ou à la fin d'une chaine de caractères
-str_trim()
+str_trim(string, side)
 # au début, à la fin et réduction des espaces à un seul
-str_squish()
+str_squish(string)
 ```
 
 ## Fonctions de manipulation
@@ -1049,22 +1069,22 @@ En lien avec des manipulations de type vectorisation (= conservation de la struc
 
 ``` r
 # remplacement du motif via un assignation
-str_sub() <- value
+str_sub(string, start, end) <- value
 
 # remplacement d'un motif par un autre
 # sans le _all le remplacement passe à la chaine suivante dès qu'un motif est trouvé
-str_replace() et str_replace_all()
+str_replace(string, pattern, replacement) et str_replace_all(string, pattern, replacement)
 
 # suppression d'un motif 
 # sans le _all la suppression passe à la chaine suivante dès qu'un motif est trouvé
-str_remove() et str_remove_all()
+str_remove(string, pattern) et str_remove_all(string, pattern)
 
 # manipulation de taille de caractère (majuscule, minuscule, ...)
 # attention à la spécification de la langue et au nom, un title n'est pas forcement un title que vous cherchez
-str_to_lower()
-str_to_upper()
-str_to_title()
-str_to_sentence()
+str_to_lower(string, ...)
+str_to_upper(string, ...)
+str_to_title(string, ...)
+str_to_sentence(string, ...)
 ```
 
 ## Exercice 4.2 {auto-animate="true"}
@@ -1072,6 +1092,7 @@ str_to_sentence()
 -   À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractères de la variable `site_name`
 -   Nettoyer la variable `site_name` en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable `site_name_clean`
 -   Enlever les majuscules de notre variable `site_name_clean` sauf celles en début de chaine
+- Stocker le résultat dans un objet `biomass_survey_exercice4_2`
 
 ``` r
 ```
@@ -1081,6 +1102,7 @@ str_to_sentence()
 -   À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractères de la variable `site_name`
 -   Nettoyer la variable `site_name` en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable `site_name_clean`
 -   Enlever les majuscules de notre variable `site_name_clean` sauf celles en début de chaine
+- Stocker le résultat dans un objet `biomass_survey_exercice4_2`
 
 ``` r
 # solution
@@ -1101,20 +1123,20 @@ Très pratique surtout si utilisation via langage tidyverse
 # jointure de plusieurs chaines de caractères en une seule (conservation structure en lignes)
 str_c()
 # jointure de plusieurs chaines de caractères en un seul vecteur (utiliser argument collapse)
-str_flatten()
+str_flatten(string, collapse)
 # repetition d'une chaine de caractères 
-str_dup()
+str_dup(string, times)
 # suppression des chaines de caractères repetées
-str_unique()
+str_unique(string, ...)
 # division d'une chaine de caractères en fonction d'un motif, le résultat est une liste de chaines
-str_split()
+str_split(string, pattern, ...)
 # argument n pour spécifier le nombre possible de correspondances
 # si on veut retourner un vecteur (ne fonctionne que sur une chaine unique)
-str_split_1()
-# si on veut retourner une matrice (argument n obligatoire)
-str_split_fixed()
+str_split_1(string, pattern)
+# si on veut retourner une matrice
+str_split_fixed(string, pattern, n)
 # si on veut extraire uniquement une partie de la chaine 
-str_split_i()
+str_split_i(string, pattern, i)
 # si on veut faire des interpolations dans des chaines de caractères (similaire aux fonctions type paste())
 # utilisation de {} dans notre expression
 str_glue()
@@ -1128,10 +1150,10 @@ Très simple, mais attention à la définition des arguments, notamment le `loca
 
 ``` r
 # retourne un vecteur des indices ordonnés
-str_order()
+str_order(x)
 
 # trier un vecteur
-str_sort()
+str_sort(x)
 ```
 
 ## Fonctions supports
@@ -1140,34 +1162,35 @@ A voir comme un petite boite à outils
 
 ``` r
 # pour jouer avec l'encodage
-str_conv()
+str_conv(string, encoding)
 
 # pour jouer avec la visualisation de certains caractères (notamment sous la console de R)
-str_view()
+str_view(string, ...)
 
 # pour déterminer si deux chaines de caractères sont égales 
-str_equal()
+str_equal(x, y, ...)
 
 # formate une chaine de caractères en paragraphes
-str_wrap()
+str_wrap(string, ...)
 ```
 
 ## Exercice 4.3 {.smaller auto-animate="true"}
 
 -   À partir du jeu de données `biomass_survey_exercice4_2`, créer deux nouvelles variables, `species_name_first` et `species_name_second`, qui contiennent une division de la variable `species_name` en deux mots (on utilisera la valeur `[.]` pour spécifier `.` comme séparateur, bizarre non ?)
--   Créer une variable `biomass_percentage` qui contiendra la biomasse exprimée en `%` (on veut le signe `%` à la fin de la chaine)
+-   Créer une variable `biomass_percentage` qui contiendra la biomasse exprimée en `%` (avec `%` à la fin)
 -   Fusionner dans une nouvelle variable `description` les variables `species_name_first`, `species_name_second` et `biomass_percentage` pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable `biomass_percentage` en parenthèses et suivi de la chaine de caractère `of total biomass`)
--   Ayant une très mauvaise vision et un écran très petit, je souhaiterais que l'affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable `description_shinny`. Attention, il faut parfois regarder au-delà de ce qu'on voit dans la console de R...
-
+-   Ayant une très mauvaise vision et un écran très petit, je souhaiterais que l'affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable `description_shinny`. Attention, il faut parfois regarder au-delà de ce que l'on voit dans la console de R...
+- Stocker le résultat dans un objet `biomass_survey_exercice4_3`
 ``` r
 ```
 
 ## Exercice 4.3 corrigé {.smaller auto-animate="true"}
 
 -   À partir du jeu de données `biomass_survey_exercice4_2`, créer deux nouvelles variables, `species_name_first` et `species_name_second`, qui contiennent une division de la variable `species_name` en deux mots (on utilisera la valeur `[.]` pour spécifier `.` comme séparateur, bizarre non ?)
--   Créer une variable `biomass_percentage` qui contiendra la biomasse exprimée en `%` (on veut le signe `%` à la fin de la chaine)
+-   Créer une variable `biomass_percentage` qui contiendra la biomasse exprimée en `%` (avec `%` à la fin)
 -   Fusionner dans une nouvelle variable `description` les variables `species_name_first`, `species_name_second` et `biomass_percentage` pour obtenir une phrase correcte (avec les bons espaces aux bons endroits, la variable `biomass_percentage` en parenthèses et suivi de la chaine de caractère `of total biomass`)
--   Ayant une très mauvaise vision et un écran très petit, je souhaiterais que l'affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable `description_shinny`. Attention, il faut parfois regarder au-delà de ce qu'on voit dans la console de R...
+-   Ayant une très mauvaise vision et un écran très petit, je souhaiterais que l'affichage de la variable description ne dépasse pas 20 caractères par ligne. Trouver un moyen de faire ça et stocker le résultat dans une nouvelle variable `description_shinny`. Attention, il faut parfois regarder au-delà de ce que l'on voit dans la console de R...
+- Stocker le résultat dans un objet `biomass_survey_exercice4_3`
 
 ``` r
 # solution
@@ -1214,6 +1237,7 @@ biomass_survey_exercice4_3 <- biomass_survey_exercice4_2 %>%
 
 -   Dans le jeu données précédent, `biomass_survey_exercice4_3`, je veux séparer les chiffres et les lettres de la variable `site_code`. Comment trouver un motif qui marche aussi bien pour la valeur `USWC1` et `BC3` ?
 -   Avec l'utilisation des expressions regulières je vais pouvoir lui dire "je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s'arrête à un chiffre" (même raisonnement avec les chiffres)
+- Stocker le résultat dans un objet `biomass_survey_exercice4_4`
 
 ``` r
 ```
@@ -1222,6 +1246,7 @@ biomass_survey_exercice4_3 <- biomass_survey_exercice4_2 %>%
 
 -   Dans le jeu données précédent, `biomass_survey_exercice4_3`, je veux séparer les chiffres et les lettres de la variable `site_code`. Comment trouver un motif qui marche aussi bien pour la valeur `USWC1` et `BC3` ?
 -   Avec l'utilisation des expressions regulières je vais pouvoir lui dire "je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s'arrête à un chiffre" (même raisonnement avec les chiffres)
+- Stocker le résultat dans un objet `biomass_survey_exercice4_4`
 
 ``` r
 biomass_survey_exercice4_4 <- biomass_survey_exercice4_3 %>%
@@ -1267,11 +1292,11 @@ ymd_hms()
 ``` r
 test_date_time <- ymd_hms("2022-12-05 12:00:00", tz = "CET")
 # pour une extraction des informations
-second()
-hour()
-day()
-wday()
-month()
+second(x)
+hour(x)
+day(x)
+wday(x)
+month(x)
 ...
 # pour modifier les informations, utiliser les fonctions précédentes avec une assignation (<-)
 # par exemple
@@ -1285,9 +1310,9 @@ hour(x = test_date_time) <- 6
 
 ``` r
 # Pour exprimer un élément dans un autre fuseau horaire
-with_tz()
+with_tz(time, tzone, ...)
 # Pour forcer le changement d'un fuseau horaire mais en conservant la même heure
-force_tz()
+force_tz(time, tzone, ...)
 ```
 
 -   3 classes pour calculer des intervalles de temps
@@ -1300,20 +1325,20 @@ force_tz()
 -   Sur certains jeux de données, les dates-temps sont stockées en nombre de secondes depuis 1970-01-01 00:00:00 UTC. Utiliser cette fonction dans ce cas-là :
 
 ``` r
-as_datetime()
+as_datetime(x, ...)
 ```
 
 -   Possibilité de faire des arrondis
 
 ``` r
 # arrondi inférieur sur "l'unité" la plus proche
-floor_date()
+floor_date(x, ...)
 
 # arrondi inférieur sur "l'unité" la plus proche
-round_date()
+round_date(x, ...)
 
 # arrondi supérieur sur "l'unité" la plus proche
-ceiling_date()
+ceiling_date(x, ...)
 ```
 
 -   De définir des objets pour les manipuler
@@ -1324,9 +1349,9 @@ now()
 today()
 
 # en lien avec des paramètres
-dyears()
-dmonths()
-dweeks()
+dyears(x)
+dmonths(x)
+dweeks(x)
 ...
 ```
 
@@ -1338,6 +1363,7 @@ dweeks()
 -   Créer une variable `next_survey_date` qui ajoute 12 mois à la variable `survey_date_as_date`
 -   Regarder plus en détail la variable `next_survey_date`, qu'a-t-elle de particulier ?
 -   Question bonus en lien avec la question précédente, définir l'heure des valeurs de la variable `survey_date_as_date` à 12h et la stocker dans une variable `next_survey_date_correct`
+- Stocker le résultat dans une variable `biomass_survey_exercice5_1`
 
 ``` r
 ```
@@ -1350,6 +1376,7 @@ dweeks()
 -   Créer une variable `next_survey_date` qui ajoute 12 mois à la variable `survey_date_as_date`
 -   Regarder plus en détail la variable `next_survey_date`, qu'a-t-elle de particulier ?
 -   Question bonus en lien avec la question précédente, définir l'heure des valeurs de la variable `survey_date_as_date` à 12h et la stocker dans une variable `next_survey_date_correct`
+- Stocker le résultat dans une variable `biomass_survey_exercice5_1`
 
 ``` r
 # solution
