@@ -170,7 +170,8 @@ read_csv2()
 # Import fichiers au format tsv ou les valeurs sont séparées par des tabulations
 read_tsv()
 # Pour lire un fichier en "chunks", c'est à dire en tranches dont on définit la taille en nombre de lignes.
-# Cette fonction permet de lire de très gros fichiers et aussi d'appliquer une fonction (CallBack) sur les données à chaque tranche. 
+# Cette fonction permet de lire de très gros fichiers  
+# et aussi d'appliquer une fonction (CallBack) sur les données à chaque tranche. 
 # xxx est à remplacer par csv, csv2, delim
 read_xxx_chunked()
 ```
@@ -182,18 +183,18 @@ read_xxx_chunked()
 -   Parmi toutes les possibilités, on trouve comme paramètres:
     -   file : chemin d'un fichier, d'une connexion ou même des données écrites à la main,
     -   delim : délimiteur utilisé pour séparer les champs
-    -   col_names : configuration d'un entête (ou pas)
+    -   col_names : configuration d'une en-tête (ou pas)
     -   col_types : spécification des types de colonnes
-    -   col_select : selection des colonnes a conserver (même langage que avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"})
+    -   col_select : selection des colonnes à conserver (même langage que avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"})
     -   na : interprétation des valeurs manquantes
     -   skip : échappement de lignes lors de l'import
-    -   name_repair : réparation "intéligente" des nomes de colonnes
+    -   name_repair : réparation "intelligente" des noms de colonnes
 -   Beaucoup d'autres sont disponibles en lien avec vos besoins !
 
 ## On a aussi des fonctions de raccourci
 
 -   En lien avec la nature de vos imports
--   La plupart des paramètres de la fonction `read_delim` sont utilisable
+-   La plupart des paramètres de la fonction `read_delim` sont utilisables
     -   `read_csv` et `read_csv2` pour les fichiers csv,
     -   `read_tsv` pour les fichiers tsv
 -   On a aussi les fonctions `_chunked` pour commencer à s'amuser
@@ -229,12 +230,12 @@ write_tsv()
 ## Import de feuilles de calcul (type excel)
 
 -   Utilisation du package [readxl](https://readxl.tidyverse.org/){.external target="_blank"}
-    -   Developpé par l'équipe de tidyverse (extension des packages du coeur)
+    -   Developpé par l'équipe de tidyverse (extension des packages du cœur)
 
 ``` r
 # Fonction générique
 read_excel()
-# Fonction pour importer spécifiquement un xls (excel avant 2007) ou xlsx (extension actuel par défaut)
+# Fonction pour importer spécifiquement un xls (excel avant 2007) ou xlsx (extension actuelle par défaut)
 read_xls()
 read_xlsx()
 ```
@@ -258,24 +259,24 @@ read_xlsx()
 
 -   Très bien expliqué dans la documentation de la fonction [read_delim](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"} au niveau de l'argument `col_types`
 -   Renvoi à la fonction [cols](https://readr.tidyverse.org/reference/cols.html){.external target="_blank"} qui permet de définir un type de colonne
-    -   Parais anodin, mais très important, notamment pour les processus de "verification"
+    -   Parait anodin, mais très important, notamment pour les processus de "verification"
     -   Par exemple un chiffre sans virgule (type entier) ce n'est pas pareil qu'un chiffre à virgule (type double)
--   En lien avec les fonctions d'imports, on peut utiliser des raccourcis pour définir nos types de colonnes
+-   En lien avec les fonctions d'import, on peut utiliser des raccourcis pour définir nos types de colonnes
     -   Par exemple `c` pour un caractère à la place de `col_character`
-    -   La liste complète est disponible de la documentation de [read_delim](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"}
--   Ici il faut garder en tête l'objectif de lever les ambiguïtés
+    -   La liste complète est disponible dans la documentation de [read_delim](https://readr.tidyverse.org/reference/read_delim.html){.external target="_blank"}
+-   Ici il faut garder en tête l'objectif de lever les ambigüités
 
 # Avantages de [readr](https://readr.tidyverse.org/){.external target="_blank"} *vs.* les fonctions de base
 
-## [readr](https://readr.tidyverse.org/){.external target="_blank"} est en générale plus rapide
+## [readr](https://readr.tidyverse.org/){.external target="_blank"} est en général plus rapide
 
--   Du cas par cas mais globalement mieux adapté au "gros" fichiers (en lien avec des fonctions orientées objet)
--   Par exemple (tendance sans tenir compte d'autres facteurs comme l'ordinateur) pour un fichier csv de 156mo
+-   Du cas par cas mais globalement mieux adapté aux "gros" fichiers (en lien avec des fonctions orientées objet)
+-   Par exemple (tendance sans tenir compte d'autres facteurs comme l'ordinateur) pour un fichier csv de 156Mo
     -   30.84s avec read_csv contre 30.00s avec read.csv
--   Pour un fichier csv de 468mo
+-   Pour un fichier csv de 468Mo
     -   38.63s avec read_csv contre 47.56s avec read.csv
 
-## Le vrai avantage reside dans la polyvalence
+## Le vrai avantage réside dans la polyvalence
 
 -   Beaucoup de paramétrisation possible
     -   Toutes les spécifications citées précédemment
@@ -323,7 +324,7 @@ Lire le fichier survey_metadata et le stocker dans un objet R `survey_metadata` 
 
 ## Exercice 1.2 corrigé {auto-animate="true"}
 
-Lire le fichier survey_metadata et le stocker dans un objet R `survey_metadata` en sélectionnant le pays Indonésie, une profondeur inférieure à 20m et une visibilité supérieure à 10m.
+Lire le fichier survey_metadata et le stocker dans un objet R `survey_metadata` en sélectionnant le pays Indonesia, une profondeur inférieure à 20m et une visibilité supérieure à 10m.
 
 ``` r
 # solution
@@ -397,7 +398,7 @@ Renvoient une valeur TRUE ou FALSE
 ## Exercice 2.1 {auto-animate="true"}
 
 -   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "reef_fish_biomass"
--   En une seule fois, selectionner les données dont la variable "biomass" est différent de 0, où la famille de l'espèce est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
+-   En une seule fois, sélectionner les données dont la variable "biomass" est différente de 0, où la famille est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
 
 ``` r
 ```
@@ -405,7 +406,7 @@ Renvoient une valeur TRUE ou FALSE
 ## Exercice 2.1 corrigé {auto-animate="true"}
 
 -   A l'aide d'une fonction dplyr, vérifier s'il y a des données dupliquées dans le jeu de données "reef_fish_biomass"
--   En une seule fois, selectionner les données dont la variable "biomass" est différent de 0, où la famille de l'espèce est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
+-   En une seule fois, sélectionner les données dont la variable "biomass" est différente de 0, où la famille est différente de "Mullidae" et "Apogonidae" et pour finir où la classe de taille associée est \<= 10.
 
 ``` r
 biomass_exercice2_1_distinct <- distinct(.data = reef_fish_biomass)
@@ -436,7 +437,7 @@ Cependant cela a plusieurs inconvénients. La structure est peu lisible, les op�
 
 ## Aller encore plus loin
 
-### Utilisation d'un nouvelle opérateur baptisé [pipe](https://magrittr.tidyverse.org/){target="_blank"}
+### Utilisation d'un nouvel opérateur baptisé [pipe](https://magrittr.tidyverse.org/){target="_blank"}
 
 -   Il se note %\>%
 
@@ -496,7 +497,7 @@ relocate()
 
 ## Fonctions de vectorisation
 
-### Une des deux grandes familles de fonction avec dplyr
+### Une des deux grandes familles de fonctions avec dplyr
 
 -   On a commencé à l'aborder de manière instinctive avec relocate()
 
@@ -593,7 +594,7 @@ max()
 
 ``` r
 # on peut définir nos groupes en fonction des modalités des variables
-#on peut aussi utiliser des arguments des fonctions quand c'est proposé, exemple avec .by de summarise()
+# on peut aussi utiliser des arguments des fonctions quand c'est proposé, exemple avec .by de summarise()
 group_by()
 # ou alors en isolant chaque ligne
 rowwise()
@@ -612,7 +613,7 @@ ungroups()
 
 ## Exercice 2.3 {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice 2
+-   À partir du jeu de données de sortie de l'exercice 2.2
 -   Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment
 -   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvée" regarder du côté des arguments en option)
 -   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
@@ -622,7 +623,7 @@ ungroups()
 
 ## Exercice 2.3 corrigé {.smaller auto-animate="true"}
 
--   À partir du jeu de données de sortie de l'exercice 2
+-   À partir du jeu de données de sortie de l'exercice 2.2
 -   Effectuer la somme de la biomasse (variable biomass) en fonction de la variable survey_id_full créée précédemment
 -   Pour survey_id_full répétés, ne garder que la première ligne de chaque répétition. Attention à bien conserver toutes les colonnes associées (une fois la fonction "trouvée" regarder du côté des arguments en option)
 -   Créer un nouveau jeu de données qui exprime le nombre d'échantillons disponibles par famille et vérifier la cohérence du nombre total obtenu avec le jeu de données de départ.
@@ -930,11 +931,11 @@ abundance_biomass_survey_exercice3_5 <- abundance_biomass_survey_exercice3_4 %>%
     -   les images de la cheatsheet aident beaucoup pour choisir les fonctions en rapport avec notre besoin
 -   Ouvre le monde des expressions régulières
 -   Peut être combiné avec du langage tidyverse (par exemple avec [dplyr](https://dplyr.tidyverse.org/){.external target="_blank"})
--   Pour faire simple on 7 grandes familles de fonctions
+-   Pour faire simple on a 7 grandes familles de fonctions
     -   les fonctions de détection
-    -   les fonctions de selection ou d'extraction
+    -   les fonctions de sélection ou d'extraction
     -   les fonctions de gestion des tailles de caractères
-    -   les fonctions de manipulations dites `mutate` (ça vous rappelle quelque chose ?)
+    -   les fonctions de manipulation dites `mutate` (ça vous rappelle quelque chose ?)
     -   les fonctions de jointures et de division
     -   les fonctions d'ordre
     -   les fonctions supports
@@ -946,10 +947,10 @@ abundance_biomass_survey_exercice3_5 <- abundance_biomass_survey_exercice3_4 %>%
     -   `pattern` : le motif que l'on va chercher à regarder
     -   `replacement` : la valeur de remplacement
 -   De manière plus spécifique
-    -   `start` et `end` : emplacement ou indice de position dans une chaine de caractère
+    -   `start` et `end` : emplacement ou indice de position dans une chaine de caractères
     -   `negate` : si TRUE, le résultat sera l'inverse de ce que l'on demande
     -   `sep` : caractère(s) à insérer dans le vecteur d'entrée
-    -   `collapse` : souvent confondu avec l'argument `sep`. Caractère(s) qui vont combiner les résultats (= vecteur d'entrée avec plusieurs éléments) entre une seule et unique chaine de caractères.
+    -   `collapse` : souvent confondu avec l'argument `sep`. Caractère(s) qui vont combiner les résultats (= vecteur d'entrée avec plusieurs éléments) en une seule et unique chaine de caractères.
     -   `decreasing` : utilisé pour les fonctions d'ordre ou de tri
 
 ## Fonctions de détection
@@ -957,34 +958,41 @@ abundance_biomass_survey_exercice3_5 <- abundance_biomass_survey_exercice3_4 %>%
 Renvoient une réponse (pas d'extraction)
 
 ``` r
-# détection d'un motif dans une chaine de caractère
+# détection d'un motif dans une chaine de caractères
 str_detect() et str_like()
-# détection d'un motif au début ou à la fin d'une chaine de caractère
+
+# détection d'un motif au début ou à la fin d'une chaine de caractères
 str_starts() et str_ends()
+
 # détection des lignes contenant le motif
 str_which()
-# détection de la position du motif dans la chaine de caractère (début et fin)
+
+# détection de la position du motif dans la chaine de caractères (début et fin)
 # sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé
 str_locate() et str_locate_all()
-# comptage du nombre de fois que le motif est détecté dans une chaine de caractère
+
+# comptage du nombre de fois que le motif est détecté dans une chaine de caractères
 str_count()
 ```
 
-## Fonctions de selection ou d'extraction
+## Fonctions de sélection ou d'extraction
 
-Renvoient une chaine de caractère
+Renvoient une chaine de caractères
 
 ``` r
 # extraction d'une chaine à un ou des endroits bien précis
 # utilisation d'indices de position
 str_sub() et str_sub_all()
-# extraction des chaines, completes, contenu un motif défini
+
+# extraction des chaines, complètes, contenant un motif défini
 str_subset()
-# extraction d'un motif dans une chaine de caractère et retour sous forme de vecteur
-# par "défaut" la detection passe à la chaine suivante dés qu'un motif est trouvé
+
+# extraction d'un motif dans une chaine de caractères et retour sous forme de vecteur
+# par défaut la détection passe à la chaine suivante dès qu'un motif est trouvé
 str_extract() et str_extract_all()
-# extraction d'un motif dans une chaine de caractère et retour sous forme de matrix
-# sans le _all la detection passe à la chaine suivante dés qu'un motif est trouvé
+
+# extraction d'un motif dans une chaine de caractères et retour sous forme de matrix
+# sans le _all la détection passe à la chaine suivante dès qu'un motif est trouvé
 str_match() et str_match_all()
 ```
 
@@ -1018,33 +1026,39 @@ location_biomass_survey_exercice4_1 <- unique(str_subset(string = biomass_survey
 ## Fonctions de gestion des tailles de caractères
 
 ``` r
-# largeur/nombre de caractère
+# largeur/nombre de caractères
 # attention aux espaces et caractères masqués
 str_length()
-# ajout "d'espace" à une chaine de caractère
+
+# ajout "d'espace" à une chaine de caractères
 str_pad()
+
 # tronquer une chaîne de caractères à un nombre fixe de caractères
 str_trunc()
+
 # supprimer des espaces 
-# au début et/ou à la fin d'une chaine
+# au début et/ou à la fin d'une chaine de caractères
 str_trim()
 # au début, à la fin et réduction des espaces à un seul
 str_squish()
 ```
 
-## Fonctions de manipulations
+## Fonctions de manipulation
 
 En lien avec des manipulations de type vectorisation (= conservation de la structure des données d'entrée)
 
 ``` r
 # remplacement du motif via un assignation
 str_sub() <- value
+
 # remplacement d'un motif par un autre
-# sans le _all le remplacement passe à la chaine suivante dés qu'un motif est trouvé
+# sans le _all le remplacement passe à la chaine suivante dès qu'un motif est trouvé
 str_replace() et str_replace_all()
+
 # suppression d'un motif 
-# sans le _all la suppression passe à la chaine suivante dés qu'un motif est trouvé
+# sans le _all la suppression passe à la chaine suivante dès qu'un motif est trouvé
 str_remove() et str_remove_all()
+
 # manipulation de taille de caractère (majuscule, minuscule, ...)
 # attention à la spécification de la langue et au nom, un title n'est pas forcement un title que vous cherchez
 str_to_lower()
@@ -1055,7 +1069,7 @@ str_to_sentence()
 
 ## Exercice 4.2 {auto-animate="true"}
 
--   À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractère de la variable `site_name`
+-   À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractères de la variable `site_name`
 -   Nettoyer la variable `site_name` en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable `site_name_clean`
 -   Enlever les majuscules de notre variable `site_name_clean` sauf celles en début de chaine
 
@@ -1064,7 +1078,7 @@ str_to_sentence()
 
 ## Exercice 4.2 corrigé {auto-animate="true"}
 
--   À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractère de la variable `site_name`
+-   À partir du jeu de données `biomass_survey_exercice4_1`, créer une nouvelle variable, `site_name_length_ori`, contenant la taille des chaines de caractères de la variable `site_name`
 -   Nettoyer la variable `site_name` en enlevant les espaces en trop (avant, après et au milieu) et la stocker dans une variable `site_name_clean`
 -   Enlever les majuscules de notre variable `site_name_clean` sauf celles en début de chaine
 
@@ -1084,24 +1098,24 @@ biomass_survey_exercice4_2 <- biomass_survey_exercice4_1 %>%
 Très pratique surtout si utilisation via langage tidyverse
 
 ``` r
-# jointure de plusieurs chaines de caractère en une seule (conservation structure en lignes)
+# jointure de plusieurs chaines de caractères en une seule (conservation structure en lignes)
 str_c()
-# jointure de plusieurs chaines de caractère en un seul vecteur (utiliser argument collapse)
+# jointure de plusieurs chaines de caractères en un seul vecteur (utiliser argument collapse)
 str_flatten()
-# repetition d'une chaine de caractère 
+# repetition d'une chaine de caractères 
 str_dup()
-# suppression des chaines de caractère repetées
+# suppression des chaines de caractères repetées
 str_unique()
-# division d'une chaine de caractère en fonction d'un motif, le resultat est une liste de chaine
+# division d'une chaine de caractères en fonction d'un motif, le résultat est une liste de chaines
 str_split()
 # argument n pour spécifier le nombre possible de correspondances
-# si on veut retourner un vecteur (ne fonction que sur une chaine unique)
+# si on veut retourner un vecteur (ne fonctionne que sur une chaine unique)
 str_split_1()
 # si on veut retourner une matrice (argument n obligatoire)
 str_split_fixed()
 # si on veut extraire uniquement une partie de la chaine 
 str_split_i()
-# si on veut faire des interpolations dans des chaines de caractère (similaire aux fonctions type paste())
+# si on veut faire des interpolations dans des chaines de caractères (similaire aux fonctions type paste())
 # utilisation de {} dans notre expression
 str_glue()
 # variante si on veut l'utiliser dans le cadre d'une pipe
@@ -1113,8 +1127,9 @@ str_glue_data()
 Très simple, mais attention à la définition des arguments, notamment le `locale` qui va définir l'environnement de l'utilisateur.
 
 ``` r
-# retourne un vecteur des indexes ordonnés
+# retourne un vecteur des indices ordonnés
 str_order()
+
 # trier un vecteur
 str_sort()
 ```
@@ -1126,11 +1141,14 @@ A voir comme un petite boite à outils
 ``` r
 # pour jouer avec l'encodage
 str_conv()
+
 # pour jouer avec la visualisation de certains caractères (notamment sous la console de R)
 str_view()
-# pour déterminer si deux chaines de caractère sont egales 
+
+# pour déterminer si deux chaines de caractères sont égales 
 str_equal()
-# formatte de chaine de caractère en paragraphes
+
+# formate une chaine de caractères en paragraphes
 str_wrap()
 ```
 
@@ -1179,8 +1197,8 @@ biomass_survey_exercice4_3 <- biomass_survey_exercice4_2 %>%
 ::: {.column width="60%"}
 -   Il faut savoir que cela existe, mais demande un peu de patience et d'entrainement pour être utilisé
 -   Regardez le [deuxième volet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){target="_blank"} du cheatsheet de stringr
--   Dans l'exercice 4.3, on a utiliser `[.]` pour un motif, c'est une expression regulière
--   Permet de "selectionner" de manière "dynamique" des patterns dans vos données
+-   Dans l'exercice 4.3, on a utilisé `[.]` pour un motif, c'est une expression regulière
+-   Permet de "sélectionner" de manière "dynamique" des patterns dans vos données
 -   Le plus difficile est de formuler de la meilleure façon ce que vous voulez
     -   Il y a souvent plusieurs façons d'arriver à ce que vous voulez
 -   Parfois le plus simple est de reformuler ce que vous voulez faire, ou de le faire de manière séquentielle
@@ -1195,7 +1213,7 @@ biomass_survey_exercice4_3 <- biomass_survey_exercice4_2 %>%
 ## Exercice bonus 4.4 {auto-animate="true"}
 
 -   Dans le jeu données précédent, `biomass_survey_exercice4_3`, je veux séparer les chiffres et les lettres de la variable `site_code`. Comment trouver un motif qui marche aussi bien pour la valeur `USWC1` et `BC3` ?
--   Avec l'utilisation des expressions regulières je vais pouvoir lui dire "je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s'arrête à un chiffre" (même raisonnemement avec les chiffre)
+-   Avec l'utilisation des expressions regulières je vais pouvoir lui dire "je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s'arrête à un chiffre" (même raisonnement avec les chiffres)
 
 ``` r
 ```
@@ -1203,7 +1221,7 @@ biomass_survey_exercice4_3 <- biomass_survey_exercice4_2 %>%
 ## Exercice bonus 4.4 corrigé {auto-animate="true"}
 
 -   Dans le jeu données précédent, `biomass_survey_exercice4_3`, je veux séparer les chiffres et les lettres de la variable `site_code`. Comment trouver un motif qui marche aussi bien pour la valeur `USWC1` et `BC3` ?
--   Avec l'utilisation des expressions regulières je vais pouvoir lui dire "je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s'arrête à un chiffre" (même raisonnemement avec les chiffre)
+-   Avec l'utilisation des expressions regulières je vais pouvoir lui dire "je veux que tu cherche un motif qui commence par lettre, une ou plusieurs, mais qui s'arrête à un chiffre" (même raisonnement avec les chiffres)
 
 ``` r
 biomass_survey_exercice4_4 <- biomass_survey_exercice4_3 %>%
@@ -1234,7 +1252,7 @@ biomass_survey_exercice4_4 <- biomass_survey_exercice4_3 %>%
 
 ``` r
 library(lubridate)
-# Identifie l'ordre de l'année (y), le mois (m), le jour (d), l'heure (h), la minute (m) et la second (s) d'un élement fournis à R
+# Identifie l'ordre de l'année (y), le mois (m), le jour (d), l'heure (h), la minute (m) et la seconde (s) d'un élement fourni à R
 ymd()
 mdy()
 dmy()
@@ -1290,9 +1308,11 @@ as_datetime()
 ``` r
 # arrondi inférieur sur "l'unité" la plus proche
 floor_date()
+
 # arrondi inférieur sur "l'unité" la plus proche
 round_date()
-# arrondie supérieur sur "l'unité" la plus proche
+
+# arrondi supérieur sur "l'unité" la plus proche
 ceiling_date()
 ```
 
@@ -1302,6 +1322,7 @@ ceiling_date()
 # en lien avec les paramètres du système
 now()
 today()
+
 # en lien avec des paramètres
 dyears()
 dmonths()
@@ -1347,7 +1368,7 @@ biomass_survey_exercice5_1 <- biomass_survey_exercice4_3 %>%
            .after = survey_date)
 ```
 
-Explication : `{ ... }` définit un bloc qui sera exécutées dans l'ordre, `;` permet de séparer les actions, `hour(.) <- 12` modifie l'heure de l'objet `.` en `12` et `.` retourne l'objet modifié
+Explication : `{ ... }` définit un bloc qui sera exécuté dans l'ordre, `;` permet de séparer les actions, `hour(.) <- 12` modifie l'heure de l'objet `.` en `12` et `.` retourne l'objet modifié
 
 # Partie 6 : Visualisation des données avec `ggplot2`
 
@@ -1421,7 +1442,6 @@ library(ggplot2)
 :::::
 :::::::::
 
-
 ## Ggplot pas à pas : La Structure
 
 ::::: incremental
@@ -1461,23 +1481,22 @@ Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` 
 
 </div>
 :::::
- ``` r 
-    data <- iris
-    p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
-    p1
- ```
 
+``` r
+   data <- iris
+   p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
+   p1
+```
 
- ```{r echo=FALSE, out.width="75%"}
-    data <- iris
-    p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
-    p1
- ```
+```{r echo=FALSE, out.width="75%"}
+   data <- iris
+   p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
+   p1
+```
+
 ## Exercice 6.1 {auto-animate="true"}
 
-En utilisant les fonctions vues précédemment 
-  - Quel est le pays où la biomasse totale par transect est la plus élevée ?
-  - Formattez le jeu de données issues de l'**exercice 5.1** et représentez visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
+En utilisant les fonctions vues précédemment - Quel est le pays où la biomasse totale par transect est la plus élevée ? - Formattez le jeu de données issues de l'**exercice 5.1** et représentez visuellement les données sous forme de boites à moustache, **seulement pour les données prélevées en 2011**. Nommer le jeu de données **data_biomass_country**.
 
 ``` r
 # 1 - Filter les données obtenues en 2011
@@ -1510,7 +1529,6 @@ ggplot(data = data_biomass_country) +
   geom_boxplot(aes(x = country, y = biomass)) +
   theme_bw() 
 ```
-
 
 ## Ggplot pas à pas : Choix du plot
 
@@ -1774,8 +1792,6 @@ ggsave(filename = "le_chemin_vers_le_bon_dossier",
        width    = 8,
        height   = 5)
 ```
-
-
 
 ## Exercice 6.2 {auto-animate="true"}
 
