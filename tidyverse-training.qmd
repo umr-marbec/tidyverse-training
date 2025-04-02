@@ -1624,7 +1624,7 @@ couche.3 <- couche.2 +
 
 . . .
 
-```{r echo=FALSE, out.width="50%"}
+```{r echo=FALSE, out.width="75%"}
 couche.3
 ```
 
@@ -1647,7 +1647,7 @@ couche.4 <- ggplot() +
 
 . . .
 
-```{r echo=FALSE, out.width="50%"}
+```{r echo=FALSE, out.width="75%"}
 couche.4
 ```
 
@@ -1667,7 +1667,7 @@ couche.5 <- couche.4 +
 
 . . .
 
-```{r echo=FALSE, out.width="50%"}
+```{r echo=FALSE, out.width="75%"}
 couche.5
 ```
 
@@ -1686,7 +1686,7 @@ couche.6 <- couche.5 +
 
 . . .
 
-```{r echo=FALSE, out.width="50%"}
+```{r echo=FALSE, out.width="75%"}
 couche.6
 ```
 
@@ -1956,10 +1956,7 @@ Pour choisir ses couleurs de contour *vs.* de remplissage, on utilise les foncti
 
 . . .
 ```{r echo=FALSE, out.width="50%"}
-couche.10 <- couche.9_2 +
-  scale_fill_manual(values = c("setosa" = "skyblue", 
-                               "versicolor" = "aquamarine", 
-                               "virginica" = "moccasin"))
+couche.10
 ```
 
 ## Exercice 6.6 {auto-animate="true"}
