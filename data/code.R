@@ -12,7 +12,7 @@ reef_fish_biomass <- read_delim(file = "data/reef_fish_biomass.dude",
                                 delim = "|")
 Sys.setenv("VROOM_CONNECTION_SIZE" = 2000000)
 reef_fish_abundance <- read_csv(file = "data/reef_fish_abundance.zip",
-                                guess_max = Inf)
+                                col_types = list(.default = col_integer()))
 # exercise 1.2 ----
 function_1_2 <- function(x, pos) subset(x, country == "Indonesia" & depth < 20 & visibility > 10)
 survey_metadata_selection_1_2 <- read_tsv_chunked(file = "data/survey_metadata.tsv",
