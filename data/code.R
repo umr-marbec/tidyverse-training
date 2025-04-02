@@ -146,4 +146,57 @@ biomass_survey_exercice5_1 <- biomass_survey_exercice4_3 %>%
            next_survey_date_correct,
            .after = survey_date)
 
+# Exercice 6.1 ----
+biomass_exercice6_1 <- abundance_biomass_survey_exercice3_5 %>%
+  mutate(survey_date_as_date = dmy(survey_date),
+         survey_year = year(survey_date_as_date)) %>%
+  filter(survey_year == 2011) %>%
+  group_by(country, survey_id) %>%
+  summarise(biomass = sum(biomass)) 
+## Exercice 6.2 ----
+p6_2 <- p6_1 +
+  geom_boxplot()
+# Exercice 6.3 ----
+p6_3 <- ggplot(data = biomass_exercice6_1) +
+  geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass)) 
+p6_3
+# Exercice 6.4 ----
+p6_4 <- p6_3 +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+p6_4  
+# Exercice 6.5 ----
+ggsave(filename = "figures/boxplot_biomass_vs_country.png", 
+       plot     = p6_4,
+       width    = 8,
+       height   = 5)
+# Exercice 6.6 ----
+biomass_exercice6_6 <- biomass_exercice6_1 %>%
+  filter(country %in% c("Spain", "United States", "Italy", "Costa Rica", "Panama")) %>%
+  mutate(continent = case_when((country == "Spain"| country == "Italy") ~ "Europe",
+                                country == "United States" ~ "North America",
+                                TRUE ~ "South America"))
+p6_6 <- ggplot() +
+  geom_boxplot(data    = biomass_exercice6_6,
+               mapping = aes(x = reorder(country, -biomass, FUN = median), 
+                             y = biomass, 
+                             fill = continent)) +
+  scale_fill_manual(values = c("Europe" = "skyblue", 
+                               "South America" = "aquamarine", 
+                               "North America" = "moccasin")) +
+  labs(x = "Country", y = "Biomass (g)") + 
+  theme_bw()
+p6_6
+# Exercice 6.7 ----
+biomass_exercice6_7 <- biomass_exercice6_6 %>%
+  group_by(country) %>%
+  summarise(biom_mean = mean(biomass),
+            biom_sd   = sd(biomass)) 
+p6_7 <- ggplot(biomass_exercice6_7) +
+  geom_col(aes(x = reorder(country, biom_mean), y = biom_mean)) +
+  geom_errorbar(aes(x = country, ymin = biom_mean-biom_sd, ymax = biom_mean+biom_sd),
+                    width = 0.2, colour = "red") +
+  labs(x = "Country", y = "Biomass (g)") + 
+  theme_bw()
+p6_7
 

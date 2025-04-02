@@ -2186,14 +2186,23 @@ Les principales fonctions utilisées permettant de construire des palettes de co
 
 ## Couleurs & variables discrètes
 
+``` {r echo=TRUE, out.width="50%"}
+plot <- ggplot() +
+  geom_point(data    = data,
+             mapping = aes(x     = Sepal.Length, 
+                           y     = Petal.Length, 
+                          color = Species))
+`````
 
+## Couleurs & variables discrètes
 ::: incremental
-``` r
+``` {r echo=TRUE, out.width="50%"}
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
-plot + scale_fill_discrete()
-plot + scale_fill_manual(values = c("M" = "darkblue", "F" = "darkgreen"))
+plot + scale_color_discrete()
+plot + scale_color_manual(values = c("setosa" = "darkblue", "versicolor" = "darkgreen", "virginica" = "darkgray"))
 plot + scale_fill_brewer(palette = "Set2")
+
 ```
 :::
 
@@ -2215,40 +2224,37 @@ L'utilisation de cette fonction nécessite le calcul préalable de l'écart-type
 
 . . .
 
-``` r
+``` {r echo=TRUE, out.width="50%"}
 # Formatage des données
-crabs_mean <- data_crabs %>%
-  group_by(sp) %>%
-  summarise(CL_mean = mean(CL),
-            CL_sd   = sd(CL)) 
+data_mean <- data %>%
+  group_by(Species) %>%
+  summarise(sepal_mean = mean(Sepal.Length),
+            sepal_sd   = sd(Sepal.Length)) 
 ```
 
 . . .
 
-``` r
+``` {r echo=TRUE, out.width="50%"}
 # Réalisation du diagramme en barres
-ggplot(crabs_mean) +
-  geom_col(aes(x = sp, y = CL_mean)) +
-  geom_errorbar(aes(x = sp, ymin = CL_mean-CL_sd, ymax = CL_mean+CL_sd)) +
+ggplot(data_mean) +
+  geom_col(aes(x = Species, y = sepal_mean)) +
+  geom_errorbar(aes(x = Species, ymin = sepal_mean-sepal_sd, ymax = sepal_mean+sepal_sd)) +
   theme_bw()
 ```
 
 ## Exercice 6.7 {auto-animate="true"}
 
-A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
+A partir des données **biomass_exercice6_6**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
 ``` r
-# 1 - Grouper les données par pays
-# 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble 
-#     des transects propres à chaque pays
 ```
 
 ## Exercice 6.7 : Correction {auto-animate="true"}
 
-A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
+A partir des données de l'**exercice 6_6**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
 ``` r
-country_mean <- data_biomass_5country %>%
+biomass_exercic6_7 <- biomass_exercice6_6 %>%
   # 1 - Grouper les données par pays
   group_by(country) %>%
   # 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble 
@@ -2259,16 +2265,17 @@ country_mean <- data_biomass_5country %>%
 
 ## Exercice 6.7 : Correction {auto-animate="true"}
 
-A partir des données **data_biomass_5country**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
+A partir des données de l'**exercice 6_6**, construire un diagramme en barres de la biomasse moyenne par transect. Classer l'axe des x dans l'ordre **croissant**. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.
 
 ``` r
 # Figure 
-ggplot(country_mean) +
+p6_7 <- ggplot(biomass_exercic6_7) +
   geom_col(aes(x = reorder(country, biom_mean), y = biom_mean)) +
   geom_errorbar(aes(x = country, ymin = biom_mean-biom_sd, ymax = biom_mean+biom_sd),
                     width = 0.2, colour = "red") +
   labs(x = "Country", y = "Biomass (g)") + 
   theme_bw()
+p6_7
 ```
 
 ## Gestion des facteurs & groupes {auto-animate="true"}
