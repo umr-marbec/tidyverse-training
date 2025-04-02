@@ -858,28 +858,28 @@
     "href": "tidyverse-training.html#couleurs-variables-continues-2",
     "title": "tidyverse-training",
     "section": "Couleurs & variables continues",
-    "text": "Couleurs & variables continues\nscale_color_continuous\nLa plus simple, mais pas beaucoup d’options. C’est aussi la palette de couleur par défaut.\n. . .\nplot\nplot + scale_fill_continuous()"
+    "text": "Couleurs & variables continues\nscale_color_continuous\nLa plus simple, mais pas beaucoup d’options. C’est aussi la palette de couleur par défaut.\nplot\nplot + scale_fill_continuous()"
   },
   {
     "objectID": "tidyverse-training.html#couleurs-variables-continues-3",
     "href": "tidyverse-training.html#couleurs-variables-continues-3",
     "title": "tidyverse-training",
     "section": "Couleurs & variables continues",
-    "text": "Couleurs & variables continues\nscale_color_viridis_c\nDe belles palettes dont les nuances sont captées par les personnes daltoniennes.\n. . .\n\nplot + scale_fill_viridis_c(option = \"viridis\")\nplot + scale_fill_viridis_c(option = \"inferno\")\nplot + scale_fill_viridis_c(option = \"turbo\")"
+    "text": "Couleurs & variables continues\nscale_color_viridis_c\nDe belles palettes dont les nuances sont captées par les personnes daltoniennes.\n\nplot + scale_fill_viridis_c(option = \"viridis\")\nplot + scale_fill_viridis_c(option = \"inferno\")\nplot + scale_fill_viridis_c(option = \"turbo\")"
   },
   {
     "objectID": "tidyverse-training.html#info-générale-sur-les-palettes",
     "href": "tidyverse-training.html#info-générale-sur-les-palettes",
     "title": "tidyverse-training",
     "section": "Info générale sur les palettes",
-    "text": "Info générale sur les palettes\nPetite info utile, toutes les palettes peuvent passer le test ColorBlind Friendly :\n\ncolor_pal &lt;- RColorBrewer::brewer.pal(10, name=\"Spectral\")\ncolorBlindness::displayAllColors(color_pal)"
+    "text": "Info générale sur les palettes\nPetite info utile, toutes les palettes peuvent passer le test ColorBlind Friendly :\ncolor_pal &lt;- RColorBrewer::brewer.pal(10, name=\"Spectral\")\ncolorBlindness::displayAllColors(color_pal)"
   },
   {
     "objectID": "tidyverse-training.html#couleurs-variables-continues-4",
     "href": "tidyverse-training.html#couleurs-variables-continues-4",
     "title": "tidyverse-training",
     "section": "Couleurs & variables continues",
-    "text": "Couleurs & variables continues\nscale_fill_gradient()\nPermet de créer ses propres palettes de couleurs, à partir de 2, 3 ou n couleurs :\n\n\nscale_fill_gradient() avec les arguments low et high.\nscale_fill_gradient2() avec les arguments low, mid et high.\nscale_fill_gradientn() avec l’argument colours.\n\n\n. . .\nplot + scale_fill_gradient(low = \"darkblue\", high = \"darkred\")\nplot + scale_fill_gradient2(low = \"darkblue\", mid = \"white\", high = \"darkred\", midpoint = 0.02)\nplot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))"
+    "text": "Couleurs & variables continues\nscale_fill_gradient()\nPermet de créer ses propres palettes de couleurs, à partir de 2, 3 ou n couleurs :\n\n\nscale_fill_gradient() avec les arguments low et high.\nscale_fill_gradient2() avec les arguments low, mid et high.\nscale_fill_gradientn() avec l’argument colours.\n\n\nplot + scale_fill_gradient(low = \"darkblue\", high = \"darkred\")\nplot + scale_fill_gradient2(low = \"darkblue\", mid = \"white\", high = \"darkred\", midpoint = 0.02)\nplot + scale_fill_gradientn(colours = colorspace::diverge_hcl(7))"
   },
   {
     "objectID": "tidyverse-training.html#couleurs-variable-groupée-en-classes",
@@ -893,7 +893,7 @@
     "href": "tidyverse-training.html#couleurs-variable-groupée-en-classes-1",
     "title": "tidyverse-training",
     "section": "Couleurs & variable groupée en classes",
-    "text": "Couleurs & variable groupée en classes\nscale_fill_binned()\nLes couleurs sont par défaut une nuance de bleus. Certaines précisions peuvent cependant être apportées.\n. . .\nplot + scale_fill_binned(n.breaks = 4)\nplot + scale_fill_binned(n.breaks = 7)\nplot + scale_fill_binned(breaks = quantile(faithfuld$density, probs = (seq(0,1,0.3))))"
+    "text": "Couleurs & variable groupée en classes\nscale_fill_binned()\nLes couleurs sont par défaut une nuance de bleus. Certaines précisions peuvent cependant être apportées.\nplot + scale_fill_binned(n.breaks = 4)\nplot + scale_fill_binned(n.breaks = 7)\nplot + scale_fill_binned(breaks = quantile(faithfuld$density, probs = (seq(0,1,0.3))))"
   },
   {
     "objectID": "tidyverse-training.html#couleurs-variables-discrètes",
@@ -907,7 +907,14 @@
     "href": "tidyverse-training.html#couleurs-variables-discrètes-1",
     "title": "tidyverse-training",
     "section": "Couleurs & variables discrètes",
-    "text": "Couleurs & variables discrètes\n\n#| fig-height: 8\n#| layout: \"[30, 30, 30]\"\nplot + scale_fill_discrete()\nplot + scale_fill_manual(values = c(\"M\" = \"darkblue\", \"F\" = \"darkgreen\"))\nplot + scale_fill_brewer(palette = \"Set2\")"
+    "text": "Couleurs & variables discrètes\n\nplot &lt;- ggplot() +\n  geom_point(data    = data,\n             mapping = aes(x     = Sepal.Length, \n                           y     = Petal.Length, \n                          color = Species))"
+  },
+  {
+    "objectID": "tidyverse-training.html#couleurs-variables-discrètes-2",
+    "href": "tidyverse-training.html#couleurs-variables-discrètes-2",
+    "title": "tidyverse-training",
+    "section": "Couleurs & variables discrètes",
+    "text": "Couleurs & variables discrètes\n\nplot + scale_color_discrete()\nplot + scale_color_manual(values = c(\"setosa\" = \"darkblue\", \"versicolor\" = \"darkgreen\", \"virginica\" = \"darkgray\"))\nplot + scale_fill_brewer(palette = \"Set2\")"
   },
   {
     "objectID": "tidyverse-training.html#ressources-utilisées",
@@ -921,28 +928,28 @@
     "href": "tidyverse-training.html#diagrammes-en-barres-barres-derreurs",
     "title": "tidyverse-training",
     "section": "Diagrammes en barres & barres d’erreurs",
-    "text": "Diagrammes en barres & barres d’erreurs\nPour ajouter les barres d’erreurs, on utilise la fonction geom_errorbar().\n\nL’utilisation de cette fonction nécessite le calcul préalable de l’écart-type.\n\n\n# Formatage des données\ncrabs_mean &lt;- data_crabs %&gt;%\n  group_by(sp) %&gt;%\n  summarise(CL_mean = mean(CL),\n            CL_sd   = sd(CL)) \n\n\n# Réalisation du diagramme en barres\nggplot(crabs_mean) +\n  geom_col(aes(x = sp, y = CL_mean)) +\n  geom_errorbar(aes(x = sp, ymin = CL_mean-CL_sd, ymax = CL_mean+CL_sd)) +\n  theme_bw()"
+    "text": "Diagrammes en barres & barres d’erreurs\nPour ajouter les barres d’erreurs, on utilise la fonction geom_errorbar().\n\nL’utilisation de cette fonction nécessite le calcul préalable de l’écart-type.\n\n\n\n# Formatage des données\ndata_mean &lt;- data %&gt;%\n  group_by(Species) %&gt;%\n  summarise(sepal_mean = mean(Sepal.Length),\n            sepal_sd   = sd(Sepal.Length)) \n\n\n\n\n# Réalisation du diagramme en barres\nggplot(data_mean) +\n  geom_col(aes(x = Species, y = sepal_mean)) +\n  geom_errorbar(aes(x = Species, ymin = sepal_mean-sepal_sd, ymax = sepal_mean+sepal_sd)) +\n  theme_bw()"
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.7",
     "href": "tidyverse-training.html#exercice-6.7",
     "title": "tidyverse-training",
     "section": "Exercice 6.7",
-    "text": "Exercice 6.7\nA partir des données data_biomass_5country, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre croissant. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.\n# 1 - Grouper les données par pays\n# 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble \n#     des transects propres à chaque pays"
+    "text": "Exercice 6.7\nA partir des données biomass_exercice6_6, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre croissant. Trouvez la façon de rendre les barres moins larges et de changer leur couleur."
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.7-correction",
     "href": "tidyverse-training.html#exercice-6.7-correction",
     "title": "tidyverse-training",
     "section": "Exercice 6.7 : Correction",
-    "text": "Exercice 6.7 : Correction\nA partir des données data_biomass_5country, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre croissant. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.\ncountry_mean &lt;- data_biomass_5country %&gt;%\n  # 1 - Grouper les données par pays\n  group_by(country) %&gt;%\n  # 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble \n  #     des transects propres à chaque pays\n  summarise(biom_mean = mean(biomass),\n            biom_sd   = sd(biomass))"
+    "text": "Exercice 6.7 : Correction\nA partir des données de l’exercice 6_6, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre croissant. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.\nbiomass_exercic6_7 &lt;- biomass_exercice6_6 %&gt;%\n  # 1 - Grouper les données par pays\n  group_by(country) %&gt;%\n  # 2 - Prendre la valeur de biomasse moyenne et l'écart-type de l'ensemble \n  #     des transects propres à chaque pays\n  summarise(biom_mean = mean(biomass),\n            biom_sd   = sd(biomass))"
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.7-correction-1",
     "href": "tidyverse-training.html#exercice-6.7-correction-1",
     "title": "tidyverse-training",
     "section": "Exercice 6.7 : Correction",
-    "text": "Exercice 6.7 : Correction\nA partir des données data_biomass_5country, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre croissant. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.\n# Figure \nggplot(country_mean) +\n  geom_col(aes(x = reorder(country, biom_mean), y = biom_mean)) +\n  geom_errorbar(aes(x = country, ymin = biom_mean-biom_sd, ymax = biom_mean+biom_sd),\n                    width = 0.2, colour = \"red\") +\n  labs(x = \"Country\", y = \"Biomass (g)\") + \n  theme_bw()"
+    "text": "Exercice 6.7 : Correction\nA partir des données de l’exercice 6_6, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre croissant. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.\n# Figure \np6_7 &lt;- ggplot(biomass_exercic6_7) +\n  geom_col(aes(x = reorder(country, biom_mean), y = biom_mean)) +\n  geom_errorbar(aes(x = country, ymin = biom_mean-biom_sd, ymax = biom_mean+biom_sd),\n                    width = 0.2, colour = \"red\") +\n  labs(x = \"Country\", y = \"Biomass (g)\") + \n  theme_bw()\np6_7"
   },
   {
     "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes",
