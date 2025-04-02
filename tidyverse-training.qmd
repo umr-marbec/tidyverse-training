@@ -1418,6 +1418,7 @@ Explication : `{ ... }` définit un bloc qui sera exécuté dans l'ordre, `;` pe
 
 ```{r include=FALSE}
 library(ggplot2)
+library(dplyr)
 ```
 
 Au sein de ggplot pour enchainer les opérations on utilise l'opérateur `+`
@@ -2080,7 +2081,6 @@ plot <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
 
 La plus simple, mais pas beaucoup d'options. C'est aussi la palette de couleur par défaut.
 
-. . .
 
 ``` {r echo=TRUE, out.width="50%"}
 #| fig-height: 7
@@ -2094,8 +2094,6 @@ plot + scale_fill_continuous()
 ### `scale_color_viridis_c`
 
 De belles palettes dont les nuances sont captées par les personnes daltoniennes.
-
-. . .
 
 ::: incremental
 ``` {r echo=TRUE, out.width="50%"}
@@ -2111,7 +2109,6 @@ plot + scale_fill_viridis_c(option = "turbo")
 
 Petite info utile, toutes les palettes peuvent passer le test ***ColorBlind Friendly*** :
 
-. . .
 
 ``` r
 color_pal <- RColorBrewer::brewer.pal(10, name="Spectral")
@@ -2132,7 +2129,6 @@ Permet de créer ses propres palettes de couleurs, à partir de 2, 3 ou n couleu
 -   `scale_fill_gradientn()` avec l'argument `colours`.
 :::
 
-. . .
 
 ``` {r echo=TRUE, out.width="50%"}
 #| fig-height: 8
@@ -2160,8 +2156,6 @@ Il existe 3 fonctions principales qui permettent de construire ce type de palett
 ### `scale_fill_binned()`
 
 Les couleurs sont par défaut une nuance de bleus. Certaines précisions peuvent cependant être apportées.
-
-. . .
 
 ``` {r echo=TRUE, out.width="50%"}
 #| fig-height: 8
@@ -2192,7 +2186,7 @@ plot <- ggplot() +
              mapping = aes(x     = Sepal.Length, 
                            y     = Petal.Length, 
                           color = Species))
-`````
+```
 
 ## Couleurs & variables discrètes
 ::: incremental
