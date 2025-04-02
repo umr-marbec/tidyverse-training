@@ -1984,22 +1984,6 @@ biomass_exercice6_6 <- biomass_exercice6_1 %>%
                                 TRUE ~ "South America"))
 
 ```
-## Exercice 6.6 : Correction {auto-animate="true"}
-
-  - Reconstruisez la figure p6_4 en **remplissant** chaque boite d'une couleur pour chaque continent.
-  - Ne garder que les pays suivants  : Espagne, Etats-Unis, Italie, Costa Rica et Panama
-  - Nommez la colonne `continent`
-  - Renommez les axes `Country` et `Biomass (g)`
-
-``` r
-# Solution 
-biomass_exercice6_6 <- biomass_exercice6_1 %>%
-  filter(country %in% c("Spain", "United States", "Italy", "Costa Rica", "Panama")) %>%
-  mutate(continent = case_when((country == "Spain"| country == "Italy") ~ "Europe",
-                                country == "United States" ~ "North America",
-                                TRUE ~ "South America"))
-
-```
 
 ## Exercice 6.6 : Correction {auto-animate="true"}
 
@@ -2227,10 +2211,16 @@ data_mean <- data %>%
 
 ``` {r echo=TRUE, out.width="50%"}
 # Réalisation du diagramme en barres
-ggplot(data_mean) +
+pbar <- ggplot(data_mean) +
   geom_col(aes(x = Species, y = sepal_mean)) +
   geom_errorbar(aes(x = Species, ymin = sepal_mean-sepal_sd, ymax = sepal_mean+sepal_sd)) +
   theme_bw()
+```
+
+## Diagrammes en barres & barres d'erreurs
+``` {r echo=FALSE, out.width="75%"}
+# Réalisation du diagramme en barres
+pbar 
 ```
 
 ## Exercice 6.7 {auto-animate="true"}
@@ -2269,155 +2259,3 @@ p6_7 <- ggplot(biomass_exercic6_7) +
 p6_7
 ```
 
-## Gestion des facteurs & groupes {auto-animate="true"}
-
-Obtient-on les mêmes résultats entre la biomasse totale et l'abondance ?
-
-. . .
-
-### Exercice 6.8
-
-A partir de **biomass_survey_abundance_exercice3_6**, obtenez un data.frame de trois colonnes **size_class_mm**, **biom_abun**, **value** pour les données prélevées en 2011.
-
-. . .
-
-``` r
- # 1. Enlever la colonne geometry.
- # 2. Filtrer les données 2011.
- # 3. Sélectionner les colonnes size_class_mm, biomass, abundance.
- # 4. Transformer la colonne size_class_mm en facteur.
- # 5. Sommer la biomass et l'abondunce par classe de taille.
- # 6. Pivoter le tableau au format long en gardant size_class_mm.
-```
-
-## Gestion des facteurs & groupes {auto-animate="true"}
-
-Obtient-on les mêmes résultats entre la biomasse totale et l'abondance ?
-
-### Exercice 6.8 : Correction
-
-A partir de **biomass_survey_abundance_exercice3_6**, obtenez un data.frame de trois colonnes **size_class_mm**, **biom_abun**, **value** pour les données prélevées en 2011.
-
-``` r
-biomass_abundance <- biomass_survey_abundance_exercice3_6 %>%
-  # 1. Enlever la colonne geometry.
-  st_drop_geometry() %>%
-  # 2. Filtrer les données 2011.
-  filter(str_detect(string = survey_date, pattern = "2011")) %>%
-  # 3. Sélectionner les colonnes size_class_mm, biomass, abundance.
-  dplyr::select(size_class_mm, biomass, abundance) %>%
-  # 4. Transformer la colonne size_class_mm en facteur.
-  mutate(size_class_mm = as.factor(size_class_mm)) %>%
-  # 5. Sommer la biomass et l'abondunce par classe de taille.
-  group_by(size_class_mm) %>%
-  summarise_all(sum) %>%
-  # 6. Pivoter le tableau au format long en gardant size_class_mm.
-  pivot_longer(cols = 2:3, names_to = "biom_abun", values_to = "value")
-```
-
-## Gestion des facteurs & groupes {auto-animate="true"}
-
-Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.
-
-``` r
-ggplot(data = biomass_abundance,
-       mapping = aes(x    = biom_abun, 
-                     y    = value, 
-                     fill = size_class_mm)) +
-  geom_col()
-```
-
-## Gestion des facteurs & groupes {auto-animate="true"}
-
-Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.
-
-``` r
-ggplot(data = biomass_abundance,
-       mapping = aes(x    = biom_abun, 
-                     y    = value, 
-                     fill = size_class_mm)) +
-  geom_col(position = "dodge", 
-           stat     = "identity")
-```
-
-## Gestion des facteurs & groupes {auto-animate="true"}
-
-Construisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.
-
-``` r
-ggplot(data = biomass_abundance,
-       mapping = aes(x    = biom_abun, 
-                     y    = value, 
-                     fill = size_class_mm)) +
-  geom_col()
-```
-
-## Gestion des facteurs & groupes {auto-animate="true"}
-
-Changeons l'ordre des facteurs de façon à ce que la classe \[75,100\[ soit en 1ère.
-
-``` r
-plot1 <- ggplot(data = biomass_abundance,
-                mapping = aes(x    = biom_abun, 
-                              y    = value, 
-                              fill = size_class_mm)) +
-  geom_col(position="dodge", stat="identity") +
-  labs(x = NULL, y = "Biomass (g)", fill = "Size class (mm)") + 
-  scale_fill_viridis_d(labels = c("[0, 25[", "[25, 50[", "[50, 75[", "[75, 100[")) +
-  theme_bw()
-```
-
-``` r
-#| fig-height: 8
-#| layout: "[45, 45]"
-plot1
-ggplot(data = biomass_abundance,
-       mapping = aes(x    = biom_abun, 
-                     y    = value, 
-                     fill = rev(size_class_mm))) +
-  geom_col(position="dodge", stat="identity") +
-  labs(x = NULL, y = "Biomass (g)", fill = "Size class (mm)") + 
-  scale_fill_viridis_d(labels = rev(c("[0, 25[", "[25, 50[", "[50, 75[", "[75, 100["))) +
-  theme_bw()
-```
-
-## Gestion des facteurs & groupes {auto-animate="true"}
-
-Changeons l'ordre des facteurs de façon à ce que la classe \[75,100\[ soit en 1ère.
-
-``` r
-biomass_abundance2 <- biomass_abundance %>%
-  mutate(size_class_mm = factor(x      = biomass_abundance$size_class_mm, 
-                                levels = c("100", "75", "50", "25"))) 
-ggplot(data = biomass_abundance2,
-       mapping = aes(x    = biom_abun, 
-                     y    = value, 
-                     fill = size_class_mm)) +
-  geom_col(position="dodge") +
-  labs(x = NULL, y = "Biomass (g)", fill = "Size class (mm)") + 
-  scale_fill_viridis_d(labels = c("[75, 100[", "[50, 75[", "[25, 50[",  "[0, 25[")) +
-  theme_bw()
-```
-
-## Exercice 6.8 {auto-animate="true"}
-
-Réaliser un diagramme en barres permettant d'illustrer le mieux les cas où l'abondance est supérieure à la biomasse et vice-versa.
-
-``` r
-```
-
-## Exercice 6.8 : Correction {auto-animate="true"}
-
-Réaliser un diagramme en barres permettant d'illustrer le mieux les cas où l'abondance est supérieure à la biomasse et vice-versa.
-
-``` r
-# Correction
-ggplot(data = biomass_abundance,
-       mapping = aes(x    = size_class_mm, 
-                     y    = value, 
-                     fill = biom_abun)) +
-  geom_col(position="dodge", stat="identity") +
-  labs(x = "Size class (mm)", y = "Biomass (g)", fill = NULL) + 
-  scale_fill_viridis_d(labels = c("Abundance", "Biomass")) +
-  theme_bw()
-```
