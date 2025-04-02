@@ -823,13 +823,6 @@
     "href": "tidyverse-training.html#exercice-6.6-correction-1",
     "title": "tidyverse-training",
     "section": "Exercice 6.6 : Correction",
-    "text": "Exercice 6.6 : Correction\n\nReconstruisez la figure p6_4 en remplissant chaque boite d’une couleur pour chaque continent.\nNe garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama\nNommez la colonne continent\nRenommez les axes Country et Biomass (g)\n\n# Solution \nbiomass_exercice6_6 &lt;- biomass_exercice6_1 %&gt;%\n  filter(country %in% c(\"Spain\", \"United States\", \"Italy\", \"Costa Rica\", \"Panama\")) %&gt;%\n  mutate(continent = case_when((country == \"Spain\"| country == \"Italy\") ~ \"Europe\",\n                                country == \"United States\" ~ \"North America\",\n                                TRUE ~ \"South America\"))"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-6.6-correction-2",
-    "href": "tidyverse-training.html#exercice-6.6-correction-2",
-    "title": "tidyverse-training",
-    "section": "Exercice 6.6 : Correction",
     "text": "Exercice 6.6 : Correction\n\nReconstruisez la figure p6_4 en remplissant chaque boite d’une couleur pour chaque continent.\nNe garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama\nNommez la colonne continent\nRenommez les axes Country et Biomass (g)\n\n# Solution pour le plot\np6_6 &lt;- ggplot() +\n  geom_boxplot(data    = biomass_exercice6_6,\n               mapping = aes(x = reorder(country, -biomass, FUN = median), \n                             y = biomass, \n                             fill = continent)) +\n  scale_fill_manual(values = c(\"Europe\" = \"skyblue\", \n                               \"South America\" = \"aquamarine\", \n                               \"North America\" = \"moccasin\")) +\n  labs(x = \"Country\", y = \"Biomass (g)\") + \n  theme_bw()"
   },
   {
@@ -928,7 +921,14 @@
     "href": "tidyverse-training.html#diagrammes-en-barres-barres-derreurs",
     "title": "tidyverse-training",
     "section": "Diagrammes en barres & barres d’erreurs",
-    "text": "Diagrammes en barres & barres d’erreurs\nPour ajouter les barres d’erreurs, on utilise la fonction geom_errorbar().\n\nL’utilisation de cette fonction nécessite le calcul préalable de l’écart-type.\n\n\n\n# Formatage des données\ndata_mean &lt;- data %&gt;%\n  group_by(Species) %&gt;%\n  summarise(sepal_mean = mean(Sepal.Length),\n            sepal_sd   = sd(Sepal.Length)) \n\n\n\n\n# Réalisation du diagramme en barres\nggplot(data_mean) +\n  geom_col(aes(x = Species, y = sepal_mean)) +\n  geom_errorbar(aes(x = Species, ymin = sepal_mean-sepal_sd, ymax = sepal_mean+sepal_sd)) +\n  theme_bw()"
+    "text": "Diagrammes en barres & barres d’erreurs\nPour ajouter les barres d’erreurs, on utilise la fonction geom_errorbar().\n\nL’utilisation de cette fonction nécessite le calcul préalable de l’écart-type.\n\n\n\n# Formatage des données\ndata_mean &lt;- data %&gt;%\n  group_by(Species) %&gt;%\n  summarise(sepal_mean = mean(Sepal.Length),\n            sepal_sd   = sd(Sepal.Length)) \n\n\n\n\n# Réalisation du diagramme en barres\npbar &lt;- ggplot(data_mean) +\n  geom_col(aes(x = Species, y = sepal_mean)) +\n  geom_errorbar(aes(x = Species, ymin = sepal_mean-sepal_sd, ymax = sepal_mean+sepal_sd)) +\n  theme_bw()"
+  },
+  {
+    "objectID": "tidyverse-training.html#diagrammes-en-barres-barres-derreurs-1",
+    "href": "tidyverse-training.html#diagrammes-en-barres-barres-derreurs-1",
+    "title": "tidyverse-training",
+    "section": "Diagrammes en barres & barres d’erreurs",
+    "text": "Diagrammes en barres & barres d’erreurs"
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.7",
@@ -950,68 +950,5 @@
     "title": "tidyverse-training",
     "section": "Exercice 6.7 : Correction",
     "text": "Exercice 6.7 : Correction\nA partir des données de l’exercice 6_6, construire un diagramme en barres de la biomasse moyenne par transect. Classer l’axe des x dans l’ordre croissant. Trouvez la façon de rendre les barres moins larges et de changer leur couleur.\n# Figure \np6_7 &lt;- ggplot(biomass_exercic6_7) +\n  geom_col(aes(x = reorder(country, biom_mean), y = biom_mean)) +\n  geom_errorbar(aes(x = country, ymin = biom_mean-biom_sd, ymax = biom_mean+biom_sd),\n                    width = 0.2, colour = \"red\") +\n  labs(x = \"Country\", y = \"Biomass (g)\") + \n  theme_bw()\np6_7"
-  },
-  {
-    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes",
-    "href": "tidyverse-training.html#gestion-des-facteurs-groupes",
-    "title": "tidyverse-training",
-    "section": "Gestion des facteurs & groupes",
-    "text": "Gestion des facteurs & groupes\nObtient-on les mêmes résultats entre la biomasse totale et l’abondance ?\n\nExercice 6.8\nA partir de biomass_survey_abundance_exercice3_6, obtenez un data.frame de trois colonnes size_class_mm, biom_abun, value pour les données prélevées en 2011.\n. . .\n # 1. Enlever la colonne geometry.\n # 2. Filtrer les données 2011.\n # 3. Sélectionner les colonnes size_class_mm, biomass, abundance.\n # 4. Transformer la colonne size_class_mm en facteur.\n # 5. Sommer la biomass et l'abondunce par classe de taille.\n # 6. Pivoter le tableau au format long en gardant size_class_mm."
-  },
-  {
-    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes-1",
-    "href": "tidyverse-training.html#gestion-des-facteurs-groupes-1",
-    "title": "tidyverse-training",
-    "section": "Gestion des facteurs & groupes",
-    "text": "Gestion des facteurs & groupes\nObtient-on les mêmes résultats entre la biomasse totale et l’abondance ?\nExercice 6.8 : Correction\nA partir de biomass_survey_abundance_exercice3_6, obtenez un data.frame de trois colonnes size_class_mm, biom_abun, value pour les données prélevées en 2011.\nbiomass_abundance &lt;- biomass_survey_abundance_exercice3_6 %&gt;%\n  # 1. Enlever la colonne geometry.\n  st_drop_geometry() %&gt;%\n  # 2. Filtrer les données 2011.\n  filter(str_detect(string = survey_date, pattern = \"2011\")) %&gt;%\n  # 3. Sélectionner les colonnes size_class_mm, biomass, abundance.\n  dplyr::select(size_class_mm, biomass, abundance) %&gt;%\n  # 4. Transformer la colonne size_class_mm en facteur.\n  mutate(size_class_mm = as.factor(size_class_mm)) %&gt;%\n  # 5. Sommer la biomass et l'abondunce par classe de taille.\n  group_by(size_class_mm) %&gt;%\n  summarise_all(sum) %&gt;%\n  # 6. Pivoter le tableau au format long en gardant size_class_mm.\n  pivot_longer(cols = 2:3, names_to = \"biom_abun\", values_to = \"value\")"
-  },
-  {
-    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes-2",
-    "href": "tidyverse-training.html#gestion-des-facteurs-groupes-2",
-    "title": "tidyverse-training",
-    "section": "Gestion des facteurs & groupes",
-    "text": "Gestion des facteurs & groupes\nConstruisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.\nggplot(data = biomass_abundance,\n       mapping = aes(x    = biom_abun, \n                     y    = value, \n                     fill = size_class_mm)) +\n  geom_col()"
-  },
-  {
-    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes-3",
-    "href": "tidyverse-training.html#gestion-des-facteurs-groupes-3",
-    "title": "tidyverse-training",
-    "section": "Gestion des facteurs & groupes",
-    "text": "Gestion des facteurs & groupes\nConstruisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.\nggplot(data = biomass_abundance,\n       mapping = aes(x    = biom_abun, \n                     y    = value, \n                     fill = size_class_mm)) +\n  geom_col(position = \"dodge\", \n           stat     = \"identity\")"
-  },
-  {
-    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes-4",
-    "href": "tidyverse-training.html#gestion-des-facteurs-groupes-4",
-    "title": "tidyverse-training",
-    "section": "Gestion des facteurs & groupes",
-    "text": "Gestion des facteurs & groupes\nConstruisons un diagramme en barres de la biomasse/abondance avec une couleur par classe de taille.\nggplot(data = biomass_abundance,\n       mapping = aes(x    = biom_abun, \n                     y    = value, \n                     fill = size_class_mm)) +\n  geom_col()"
-  },
-  {
-    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes-5",
-    "href": "tidyverse-training.html#gestion-des-facteurs-groupes-5",
-    "title": "tidyverse-training",
-    "section": "Gestion des facteurs & groupes",
-    "text": "Gestion des facteurs & groupes\nChangeons l’ordre des facteurs de façon à ce que la classe [75,100[ soit en 1ère.\nplot1 &lt;- ggplot(data = biomass_abundance,\n                mapping = aes(x    = biom_abun, \n                              y    = value, \n                              fill = size_class_mm)) +\n  geom_col(position=\"dodge\", stat=\"identity\") +\n  labs(x = NULL, y = \"Biomass (g)\", fill = \"Size class (mm)\") + \n  scale_fill_viridis_d(labels = c(\"[0, 25[\", \"[25, 50[\", \"[50, 75[\", \"[75, 100[\")) +\n  theme_bw()\n#| fig-height: 8\n#| layout: \"[45, 45]\"\nplot1\nggplot(data = biomass_abundance,\n       mapping = aes(x    = biom_abun, \n                     y    = value, \n                     fill = rev(size_class_mm))) +\n  geom_col(position=\"dodge\", stat=\"identity\") +\n  labs(x = NULL, y = \"Biomass (g)\", fill = \"Size class (mm)\") + \n  scale_fill_viridis_d(labels = rev(c(\"[0, 25[\", \"[25, 50[\", \"[50, 75[\", \"[75, 100[\"))) +\n  theme_bw()"
-  },
-  {
-    "objectID": "tidyverse-training.html#gestion-des-facteurs-groupes-6",
-    "href": "tidyverse-training.html#gestion-des-facteurs-groupes-6",
-    "title": "tidyverse-training",
-    "section": "Gestion des facteurs & groupes",
-    "text": "Gestion des facteurs & groupes\nChangeons l’ordre des facteurs de façon à ce que la classe [75,100[ soit en 1ère.\nbiomass_abundance2 &lt;- biomass_abundance %&gt;%\n  mutate(size_class_mm = factor(x      = biomass_abundance$size_class_mm, \n                                levels = c(\"100\", \"75\", \"50\", \"25\"))) \nggplot(data = biomass_abundance2,\n       mapping = aes(x    = biom_abun, \n                     y    = value, \n                     fill = size_class_mm)) +\n  geom_col(position=\"dodge\") +\n  labs(x = NULL, y = \"Biomass (g)\", fill = \"Size class (mm)\") + \n  scale_fill_viridis_d(labels = c(\"[75, 100[\", \"[50, 75[\", \"[25, 50[\",  \"[0, 25[\")) +\n  theme_bw()"
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-6.8-1",
-    "href": "tidyverse-training.html#exercice-6.8-1",
-    "title": "tidyverse-training",
-    "section": "Exercice 6.8",
-    "text": "Exercice 6.8\nRéaliser un diagramme en barres permettant d’illustrer le mieux les cas où l’abondance est supérieure à la biomasse et vice-versa."
-  },
-  {
-    "objectID": "tidyverse-training.html#exercice-6.8-correction-1",
-    "href": "tidyverse-training.html#exercice-6.8-correction-1",
-    "title": "tidyverse-training",
-    "section": "Exercice 6.8 : Correction",
-    "text": "Exercice 6.8 : Correction\nRéaliser un diagramme en barres permettant d’illustrer le mieux les cas où l’abondance est supérieure à la biomasse et vice-versa.\n# Correction\nggplot(data = biomass_abundance,\n       mapping = aes(x    = size_class_mm, \n                     y    = value, \n                     fill = biom_abun)) +\n  geom_col(position=\"dodge\", stat=\"identity\") +\n  labs(x = \"Size class (mm)\", y = \"Biomass (g)\", fill = NULL) + \n  scale_fill_viridis_d(labels = c(\"Abundance\", \"Biomass\")) +\n  theme_bw()"
   }
 ]
