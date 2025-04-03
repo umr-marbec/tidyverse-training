@@ -2258,4 +2258,64 @@ p6_7 <- ggplot(biomass_exercic6_7) +
   theme_bw()
 p6_7
 ```
+## Exercice 6.8 {auto-animate="true"}
 
+A partir des données de l'**exercice 3_5**, representez le nombre de transect par pays. Améliorez le visuel du plot et donnez lui un titre
+
+``` r
+```
+
+## Exercice 6.8 correction {auto-animate="true"}
+
+A partir des données de l'**exercice 3_5**, representez le nombre de transect par pays. Améliorez le visuel du plot et donnez lui un titre
+
+``` r
+tr_country6_8 <- abundance_biomass_survey_exercice3_5 %>%
+group_by(country) %>%
+distinct(survey_id) %>%
+summarise(nb_transect = n())
+tr_country6_7
+```
+
+## Exercice 6.8 correction {auto-animate="true"}
+
+A partir des données de l'**exercice 3_5**, representez le nombre de transect par pays. Améliorez le visuel du plot et donnez lui un titre
+
+``` r
+p6_8 <- ggplot() +
+  geom_col(data = tr_country6_7 , aes(x = country , y = nb_transect)) +
+  labs(x = "pays" , y = "nombre de transects", title = "Reef Life Survey") +
+  theme_bw()  +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Exercice 6.8 {auto-animate="true"}
+
+A partir des données de l'**exercice 3_5**, choisissez 3 pays. Représentez la biomasse en fonction de l'abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l'abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux **shape**. Choisissez le **shape 3** pour le pays 1, le **shape 4** pour le pays 2 et le **shape 8** pour le pays 3 
+``` r
+```
+
+## Exercice 6.9 correction {auto-animate="true"}
+
+A partir des données de l'**exercice 3_5**, choisissez 3 pays. Représentez la biomasse en fonction de l'abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l'abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux **shape**. Choisissez le **shape 3** pour le pays 1, le **shape 4** pour le pays 2 et le **shape 8** pour le pays 3 
+
+``` r
+tr_country6_9 <- abundance_biomass_survey_exercice3_5 %>%
+filter(country %in% c("Costa Rica", "Ecuador", "Mexico")) 
+```
+
+## Exercice 6.9 correction {auto-animate="true"}
+
+A partir des données de l'**exercice 3_5**, choisissez 3 pays. Représentez la biomasse en fonction de l'abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l'abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux **shape**. Choisissez le **shape 3** pour le pays 1, le **shape 4** pour le pays 2 et le **shape 8** pour le pays 3 
+
+``` r
+p6_9 <- ggplot(data = tr_country6_9, aes( x = abundance, y = biomass, color = family, shape = country)) +
+geom_point() +
+xlim(0, 300) +
+ylim(0, 500) +
+scale_shape_manual(values = c("Costa Rica" = 3, "Ecuador" = 4, "Mexico" = 8)) +
+guides(color = "none") +
+theme_bw() +
+theme(legend.position = "bottom") 
+
+```
