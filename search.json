@@ -973,11 +973,11 @@
     "text": "Exercice 6.8 correction\nA partir des données de l’exercice 3_5, representez le nombre de transect par pays. Améliorez le visuel du plot et donnez lui un titre\np6_8 &lt;- ggplot() +\n  geom_col(data = tr_country6_7 , aes(x = country , y = nb_transect)) +\n  labs(x = \"pays\" , y = \"nombre de transects\", title = \"Reef Life Survey\") +\n  theme_bw()  +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))"
   },
   {
-    "objectID": "tidyverse-training.html#exercice-6.8-1",
-    "href": "tidyverse-training.html#exercice-6.8-1",
+    "objectID": "tidyverse-training.html#exercice-6.9",
+    "href": "tidyverse-training.html#exercice-6.9",
     "title": "tidyverse-training",
-    "section": "Exercice 6.8",
-    "text": "Exercice 6.8\nA partir des données de l’exercice 3_5, choisissez 3 pays. Représentez la biomasse en fonction de l’abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l’abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux shape. Choisissez le shape 3 pour le pays 1, le shape 4 pour le pays 2 et le shape 8 pour le pays 3"
+    "section": "Exercice 6.9",
+    "text": "Exercice 6.9\nA partir des données de l’exercice 3_5, choisissez 3 pays. Représentez la biomasse en fonction de l’abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l’abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux shape. Choisissez le shape 3 pour le pays 1, le shape 4 pour le pays 2 et le shape 8 pour le pays 3"
   },
   {
     "objectID": "tidyverse-training.html#exercice-6.9-correction",
