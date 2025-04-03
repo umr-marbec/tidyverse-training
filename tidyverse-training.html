@@ -2373,6 +2373,52 @@ Pour voir les palettes =&gt; <code>RColorBrewer::display.brewer.all()</code></p>
 <span id="cb108-6" class="hljs-ln-code"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Country"</span>, <span class="at">y =</span> <span class="st">"Biomass (g)"</span>) <span class="sc">+</span> </span>
 <span id="cb108-7" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()</span>
 <span id="cb108-8" class="hljs-ln-code"><a></a>p6_7</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exercice-6.8" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.8</h2>
+<p>A partir des données de l’<strong>exercice 3_5</strong>, representez le nombre de transect par pays. Améliorez le visuel du plot et donnez lui un titre</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exercice-6.8-correction" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.8 correction</h2>
+<p>A partir des données de l’<strong>exercice 3_5</strong>, representez le nombre de transect par pays. Améliorez le visuel du plot et donnez lui un titre</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb110-1" class="hljs-ln-code"><a></a>tr_country6_8 <span class="ot">&lt;-</span> abundance_biomass_survey_exercice3_5 <span class="sc">%&gt;%</span></span>
+<span id="cb110-2" class="hljs-ln-code"><a></a><span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
+<span id="cb110-3" class="hljs-ln-code"><a></a><span class="fu">distinct</span>(survey_id) <span class="sc">%&gt;%</span></span>
+<span id="cb110-4" class="hljs-ln-code"><a></a><span class="fu">summarise</span>(<span class="at">nb_transect =</span> <span class="fu">n</span>())</span>
+<span id="cb110-5" class="hljs-ln-code"><a></a>tr_country6_7</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exercice-6.8-correction-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.8 correction</h2>
+<p>A partir des données de l’<strong>exercice 3_5</strong>, representez le nombre de transect par pays. Améliorez le visuel du plot et donnez lui un titre</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb111-1" class="hljs-ln-code"><a></a>p6_8 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb111-2" class="hljs-ln-code"><a></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> tr_country6_7 , <span class="fu">aes</span>(<span class="at">x =</span> country , <span class="at">y =</span> nb_transect)) <span class="sc">+</span></span>
+<span id="cb111-3" class="hljs-ln-code"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"pays"</span> , <span class="at">y =</span> <span class="st">"nombre de transects"</span>, <span class="at">title =</span> <span class="st">"Reef Life Survey"</span>) <span class="sc">+</span></span>
+<span id="cb111-4" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()  <span class="sc">+</span></span>
+<span id="cb111-5" class="hljs-ln-code"><a></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exercice-6.8-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.8</h2>
+<p>A partir des données de l’<strong>exercice 3_5</strong>, choisissez 3 pays. Représentez la biomasse en fonction de l’abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l’abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux <strong>shape</strong>. Choisissez le <strong>shape 3</strong> pour le pays 1, le <strong>shape 4</strong> pour le pays 2 et le <strong>shape 8</strong> pour le pays 3</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exercice-6.9-correction" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.9 correction</h2>
+<p>A partir des données de l’<strong>exercice 3_5</strong>, choisissez 3 pays. Représentez la biomasse en fonction de l’abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l’abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux <strong>shape</strong>. Choisissez le <strong>shape 3</strong> pour le pays 1, le <strong>shape 4</strong> pour le pays 2 et le <strong>shape 8</strong> pour le pays 3</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb113-1" class="hljs-ln-code"><a></a>tr_country6_9 <span class="ot">&lt;-</span> abundance_biomass_survey_exercice3_5 <span class="sc">%&gt;%</span></span>
+<span id="cb113-2" class="hljs-ln-code"><a></a><span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Costa Rica"</span>, <span class="st">"Ecuador"</span>, <span class="st">"Mexico"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exercice-6.9-correction-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Exercice 6.9 correction</h2>
+<p>A partir des données de l’<strong>exercice 3_5</strong>, choisissez 3 pays. Représentez la biomasse en fonction de l’abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l’abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux <strong>shape</strong>. Choisissez le <strong>shape 3</strong> pour le pays 1, le <strong>shape 4</strong> pour le pays 2 et le <strong>shape 8</strong> pour le pays 3</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb114-1" class="hljs-ln-code"><a></a>p6_9 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> tr_country6_9, <span class="fu">aes</span>( <span class="at">x =</span> abundance, <span class="at">y =</span> biomass, <span class="at">color =</span> family, <span class="at">shape =</span> country)) <span class="sc">+</span></span>
+<span id="cb114-2" class="hljs-ln-code"><a></a><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb114-3" class="hljs-ln-code"><a></a><span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">300</span>) <span class="sc">+</span></span>
+<span id="cb114-4" class="hljs-ln-code"><a></a><span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">500</span>) <span class="sc">+</span></span>
+<span id="cb114-5" class="hljs-ln-code"><a></a><span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Costa Rica"</span> <span class="ot">=</span> <span class="dv">3</span>, <span class="st">"Ecuador"</span> <span class="ot">=</span> <span class="dv">4</span>, <span class="st">"Mexico"</span> <span class="ot">=</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb114-6" class="hljs-ln-code"><a></a><span class="fu">guides</span>(<span class="at">color =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb114-7" class="hljs-ln-code"><a></a><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb114-8" class="hljs-ln-code"><a></a><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section></section>
