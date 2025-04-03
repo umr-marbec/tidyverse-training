@@ -2289,7 +2289,7 @@ p6_8 <- ggplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-## Exercice 6.8 {auto-animate="true"}
+## Exercice 6.9 {auto-animate="true"}
 
 A partir des données de l'**exercice 3_5**, choisissez 3 pays. Représentez la biomasse en fonction de l'abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l'abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux **shape**. Choisissez le **shape 3** pour le pays 1, le **shape 4** pour le pays 2 et le **shape 8** pour le pays 3 
 ``` r
