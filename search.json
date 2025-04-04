@@ -620,7 +620,7 @@
     "href": "tidyverse-training.html#section-3",
     "title": "tidyverse-training",
     "section": "",
-    "text": "data &lt;- iris\n   p1 &lt;- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) \n   p1\n::: {.cell} ::: {.cell-output-display}  ::: :::"
+    "text": "data &lt;- iris\n   p1 &lt;- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) \n   p1"
   },
   {
     "objectID": "tidyverse-training.html#ggplot-pas-à-pas-choix-du-plot",
