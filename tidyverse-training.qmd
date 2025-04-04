@@ -1475,13 +1475,9 @@ Au sein de ggplot pour enchainer les opérations on utilise l'opérateur `+`
 :::::
 :::::::::
 
-
-
 ## Ggplot pas à pas : La Structure
 
-::::: incremental
-
-
+:::: incremental
 Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` . Les arguments principaux sont :
 
 ::: incremental
@@ -1492,32 +1488,24 @@ Pour la structure de la figure, la fonction à toujours utiliser est `ggplot()` 
     ::: incremental
     -   Ici le `aes` signifie **aesthetic**
 
-    -   On verra que d'autres options sont disponibles dans `aes` comme la taille (`size`), la couleur (`color`), la forme (`shape`) 
-    
+    -   On verra que d'autres options sont disponibles dans `aes` comme la taille (`size`), la couleur (`color`), la forme (`shape`)
     :::
 :::
+::::
 
-:::::
+## 
 
+``` r
+   data <- iris
+   p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
+   p1
+```
 
-
-
-##
-
- ``` r 
-    data <- iris
-    p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
-    p1
- ```
-
-
- ```{r echo=FALSE, out.width="75%"}
-    data <- iris
-    p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
-    p1
- ```
-
-
+```{r echo=FALSE, out.width="75%"}
+   data <- iris
+   p1 <- ggplot(data, mapping = aes(x = Sepal.Length, y = Sepal.Width)) 
+   p1
+```
 
 ## Ggplot pas à pas : Choix du plot
 
@@ -1575,16 +1563,17 @@ Plusieurs représentations existent selon le type de variables que l'on a :
 
 ## Ggplot pas à pas : Choix du plot
 
-::::::: incremental
+:::: incremental
 L'exemple ici va mener à la réalisation d'un **nuage de points**. Mais `ggplot2` fonctionne de la même façon pour construire un **diagramme en barres**, **une boite à moustache** ou autres.
 
-:::::: incremental
-::::: 
-::: 
+::: incremental
+:::
+::::
+
 -   `aes()` dans `ggplot()`
 
     ```{r echo=TRUE, out.width="50%"}
-    
+
     couche.2 <- ggplot(data    = data,
                        mapping = aes(x = Sepal.Length, 
                                      y = Petal.Length)) +
@@ -1613,7 +1602,7 @@ couche.2
 
 ## Ggplot pas à pas : Modèle linéaire {auto-animate="true"}
 
-Traçons un modèle linéaire 
+Traçons un modèle linéaire
 
 . . .
 
@@ -1627,9 +1616,6 @@ couche.3 <- couche.2 +
 ```{r echo=FALSE, out.width="75%"}
 couche.3
 ```
-
-
-
 
 ## Ggplot pas à pas : La couleur
 
@@ -1765,20 +1751,14 @@ ggsave(filename = "le_chemin_vers_le_bon_dossier",
 
 ## Exercice 6.1 {auto-animate="true"}
 
-En utilisant les fonctions vues précédemment 
-  - Quel est le pays où la biomasse totale par transect est la plus élevée en **2011** ?
-  - Formattez le jeu de données issues de l'**exercice 3.5** 
-  - représentez la structure du plot
+En utilisant les fonctions vues précédemment - Quel est le pays où la biomasse totale par transect est la plus élevée en **2011** ? - Formattez le jeu de données issues de l'**exercice 3.5** - représentez la structure du plot
 
 ``` r
 ```
 
 ## Exercice 6.1 : Correction {auto-animate="true"}
 
-En utilisant les fonctions vues précédemment 
-  - Quel est le pays où la biomasse totale par transect est la plus élevée en **2011** ? 
-  - Formattez le jeu de données issues de l'**exercice 3.5** 
-  - représentez la structure du plot
+En utilisant les fonctions vues précédemment - Quel est le pays où la biomasse totale par transect est la plus élevée en **2011** ? - Formattez le jeu de données issues de l'**exercice 3.5** - représentez la structure du plot
 
 ``` r
 biomass_exercice6_1 <- abundance_biomass_survey_exercice3_5 %>%
@@ -1792,31 +1772,27 @@ biomass_exercice6_1 <- abundance_biomass_survey_exercice3_5 %>%
   summarise(biomass = sum(biomass)) 
 ```
 
-
 ``` r
 # Représentation de la structure du plot
 
 p6_1 <- ggplot(data = biomass_exercice6_1, aes(x = country, y = biomass)) 
-
-  ```
-
+```
 
 ## Exercice 6.2 {auto-animate="true"}
 
- - Représentez les données sous forme de boite à moustache
+-   Représentez les données sous forme de boite à moustache
 
 ``` r
 ```
 
 ## Exercice 6.2 {auto-animate="true"}
 
- - Représentez les données sous forme de boite à moustache
+-   Représentez les données sous forme de boite à moustache
 
 ``` r
 p6_2 <- p6_1 +
         geom_boxplot()
 ```
-
 
 ## Exercice 6.3 {auto-animate="true"}
 
@@ -1826,8 +1802,8 @@ Ce ggplot n'est cependant pas entièrement satisfaisant ... <br> Nous avons du m
 
 Une solution est d'utiliser la fonction `reorder()` pour ordonner l'axe des x.
 
-- Utilisez cette fonction pour ordonner l'axe des x de façon décroissante selon la valeur **médiane**. 
- - <br> N'hésitez pas à regarder l'aide `?reorder` ou à chercher sur internet.
+-   Utilisez cette fonction pour ordonner l'axe des x de façon décroissante selon la valeur **médiane**.
+-   <br> N'hésitez pas à regarder l'aide `?reorder` ou à chercher sur internet.
 
 ``` r
 # Utilisation de reorder
@@ -1841,15 +1817,15 @@ Ce ggplot n'est cependant pas entièrement satisfaisant ... <br> Nous avons du m
 
 Une solution est d'utiliser la fonction `reorder()` pour ordonner l'axe des x.
 
-- Utilisez cette fonction pour ordonner l'axe des x de façon décroissante selon la valeur **médiane**. 
- - <br> N'hésitez pas à regarder l'aide `?reorder` ou à chercher sur internet.
+-   Utilisez cette fonction pour ordonner l'axe des x de façon décroissante selon la valeur **médiane**.
+-   <br> N'hésitez pas à regarder l'aide `?reorder` ou à chercher sur internet.
+
 ``` r
 # Reorder en fonction de la valeur médiane 
 p6_3 <- ggplot(data = biomass_exercice6_1) +
   geom_boxplot(aes(x = reorder(country, -biomass, FUN = median), y = biomass)) 
 p6_3
 ```
-
 
 ## Exercice 6.4 {auto-animate="true"}
 
@@ -1869,7 +1845,6 @@ p6_4 <- p6_3 +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 p6_4  
 ```
-
 
 ## Exercice 6.5 {auto-animate="true"}
 
@@ -1894,13 +1869,11 @@ ggsave(filename = "figures/boxplot_biomass_vs_country.png",
 
 **fill** vs. **color**
 
-
 Ggplot fait la différence entre :
 
 -   la couleur des contours --\> `color = …`
 
 -   la couleur de remplissage --\> `fill = …`
-
 
 ```{r echo=TRUE, out.width="50%"}
 couche.9 <- ggplot() +
@@ -1937,11 +1910,13 @@ couche.9_2
 ```
 
 ## Une petite subtilité concernant les couleurs {auto-animate="true"}
+
 . . .
 
 Pour choisir ses couleurs de contour *vs.* de remplissage, on utilise les fonctions `scale_color_manual()` *vs.* `scale_fill_manual()`.
 
 . . .
+
 ```{r echo=TRUE, out.width="50%"}
 couche.10 <- couche.9_2 +
   scale_fill_manual(values = c("setosa" = "skyblue", 
@@ -1950,30 +1925,32 @@ couche.10 <- couche.9_2 +
 ```
 
 ## Une petite subtilité concernant les couleurs {auto-animate="true"}
+
 . . .
 
 Pour choisir ses couleurs de contour *vs.* de remplissage, on utilise les fonctions `scale_color_manual()` *vs.* `scale_fill_manual()`.
 
 . . .
+
 ```{r echo=FALSE, out.width="50%"}
 couche.10
 ```
 
 ## Exercice 6.6 {auto-animate="true"}
 
-  - Reconstruisez la figure p6_4 en **remplissant** chaque boite d'une couleur pour chaque continent.
-  - Ne garder que les pays suivants  : Espagne, Etats-Unis, Italie, Costa Rica et Panama
-  - Nommez la colonne `continent`
+-   Reconstruisez la figure p6_4 en **remplissant** chaque boite d'une couleur pour chaque continent.
+-   Ne garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama
+-   Nommez la colonne `continent`
 
 ``` r
 ```
 
 ## Exercice 6.6 : Correction {auto-animate="true"}
 
-  - Reconstruisez la figure p6_4 en **remplissant** chaque boite d'une couleur pour chaque continent.
-  - Ne garder que les pays suivants  : Espagne, Etats-Unis, Italie, Costa Rica et Panama
-  - Nommez la colonne `continent`
-  - Renommez les axes `Country` et `Biomass (g)`
+-   Reconstruisez la figure p6_4 en **remplissant** chaque boite d'une couleur pour chaque continent.
+-   Ne garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama
+-   Nommez la colonne `continent`
+-   Renommez les axes `Country` et `Biomass (g)`
 
 ``` r
 # Solution 
@@ -1982,15 +1959,15 @@ biomass_exercice6_6 <- biomass_exercice6_1 %>%
   mutate(continent = case_when((country == "Spain"| country == "Italy") ~ "Europe",
                                 country == "United States" ~ "North America",
                                 TRUE ~ "South America"))
-
 ```
 
 ## Exercice 6.6 : Correction {auto-animate="true"}
 
-  - Reconstruisez la figure p6_4 en **remplissant** chaque boite d'une couleur pour chaque continent.
-  - Ne garder que les pays suivants  : Espagne, Etats-Unis, Italie, Costa Rica et Panama
-  - Nommez la colonne `continent`
-  - Renommez les axes `Country` et `Biomass (g)`
+-   Reconstruisez la figure p6_4 en **remplissant** chaque boite d'une couleur pour chaque continent.
+-   Ne garder que les pays suivants : Espagne, Etats-Unis, Italie, Costa Rica et Panama
+-   Nommez la colonne `continent`
+-   Renommez les axes `Country` et `Biomass (g)`
+
 ``` r
 # Solution pour le plot
 p6_6 <- ggplot() +
@@ -2005,14 +1982,9 @@ p6_6 <- ggplot() +
   theme_bw()
 ```
 
-
-
-
 ## Une autre subtilité concernant les couleurs {auto-animate="true"}
 
-
-
-``` {r echo=TRUE, out.width="50%"}
+```{r echo=TRUE, out.width="50%"}
 couche.4_2 <- ggplot() +
   geom_point(data    = data,
              mapping = aes(x     = Sepal.Length, 
@@ -2021,10 +1993,7 @@ couche.4_2 <- ggplot() +
                            scale_color_manual(values = "blue")
 ```
 
-
-Error in `palette()`:
-! Insufficient values in manual scale. 3 needed but only 1 provided.
-Run `rlang::last_trace()` to see where the error occurred.
+Error in `palette()`: ! Insufficient values in manual scale. 3 needed but only 1 provided. Run `rlang::last_trace()` to see where the error occurred.
 
 . . .
 
@@ -2048,7 +2017,7 @@ Il existe 4 fonctions principales qui permettent de construire des palettes de c
 
 <center>Testons les une par une à partir de la figure suivante</center>
 
-``` {r echo=TRUE, out.width="50%"}
+```{r echo=TRUE, out.width="50%"}
 plot <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
   geom_raster() +
   scale_x_continuous(NULL, expand = c(0, 0)) + 
@@ -2062,8 +2031,7 @@ plot <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
 
 La plus simple, mais pas beaucoup d'options. C'est aussi la palette de couleur par défaut.
 
-
-``` {r echo=TRUE, out.width="50%"}
+```{r echo=TRUE, out.width="50%"}
 #| fig-height: 7
 #| layout: "[50, 50]"
 plot
@@ -2077,7 +2045,7 @@ plot + scale_fill_continuous()
 De belles palettes dont les nuances sont captées par les personnes daltoniennes.
 
 ::: incremental
-``` {r echo=TRUE, out.width="50%"}
+```{r echo=TRUE, out.width="50%"}
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 plot + scale_fill_viridis_c(option = "viridis")
@@ -2089,7 +2057,6 @@ plot + scale_fill_viridis_c(option = "turbo")
 ## Info générale sur les palettes
 
 Petite info utile, toutes les palettes peuvent passer le test ***ColorBlind Friendly*** :
-
 
 ``` r
 color_pal <- RColorBrewer::brewer.pal(10, name="Spectral")
@@ -2110,8 +2077,7 @@ Permet de créer ses propres palettes de couleurs, à partir de 2, 3 ou n couleu
 -   `scale_fill_gradientn()` avec l'argument `colours`.
 :::
 
-
-``` {r echo=TRUE, out.width="50%"}
+```{r echo=TRUE, out.width="50%"}
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 plot + scale_fill_gradient(low = "darkblue", high = "darkred")
@@ -2138,14 +2104,13 @@ Il existe 3 fonctions principales qui permettent de construire ce type de palett
 
 Les couleurs sont par défaut une nuance de bleus. Certaines précisions peuvent cependant être apportées.
 
-``` {r echo=TRUE, out.width="50%"}
+```{r echo=TRUE, out.width="50%"}
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 plot + scale_fill_binned(n.breaks = 4)
 plot + scale_fill_binned(n.breaks = 7)
 plot + scale_fill_binned(breaks = quantile(faithfuld$density, probs = (seq(0,1,0.3))))
 ```
-
 
 ## Couleurs & variables discrètes
 
@@ -2161,7 +2126,7 @@ Les principales fonctions utilisées permettant de construire des palettes de co
 
 ## Couleurs & variables discrètes
 
-``` {r echo=TRUE, out.width="50%"}
+```{r echo=TRUE, out.width="50%"}
 plot <- ggplot() +
   geom_point(data    = data,
              mapping = aes(x     = Sepal.Length, 
@@ -2170,8 +2135,9 @@ plot <- ggplot() +
 ```
 
 ## Couleurs & variables discrètes
+
 ::: incremental
-``` {r echo=TRUE, out.width="50%"}
+```{r echo=TRUE, out.width="50%"}
 #| fig-height: 8
 #| layout: "[30, 30, 30]"
 plot + scale_color_discrete()
@@ -2199,7 +2165,7 @@ L'utilisation de cette fonction nécessite le calcul préalable de l'écart-type
 
 . . .
 
-``` {r echo=TRUE, out.width="50%"}
+```{r echo=TRUE, out.width="50%"}
 # Formatage des données
 data_mean <- data %>%
   group_by(Species) %>%
@@ -2209,7 +2175,7 @@ data_mean <- data %>%
 
 . . .
 
-``` {r echo=TRUE, out.width="50%"}
+```{r echo=TRUE, out.width="50%"}
 # Réalisation du diagramme en barres
 pbar <- ggplot(data_mean) +
   geom_col(aes(x = Species, y = sepal_mean)) +
@@ -2218,7 +2184,8 @@ pbar <- ggplot(data_mean) +
 ```
 
 ## Diagrammes en barres & barres d'erreurs
-``` {r echo=FALSE, out.width="75%"}
+
+```{r echo=FALSE, out.width="75%"}
 # Réalisation du diagramme en barres
 pbar 
 ```
@@ -2258,6 +2225,7 @@ p6_7 <- ggplot(biomass_exercic6_7) +
   theme_bw()
 p6_7
 ```
+
 ## Exercice 6.8 {auto-animate="true"}
 
 A partir des données de l'**exercice 3_5**, representez le nombre de transect par pays. Améliorez le visuel du plot et donnez lui un titre
@@ -2291,13 +2259,14 @@ p6_8 <- ggplot() +
 
 ## Exercice 6.9 {auto-animate="true"}
 
-A partir des données de l'**exercice 3_5**, choisissez 3 pays. Représentez la biomasse en fonction de l'abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l'abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux **shape**. Choisissez le **shape 3** pour le pays 1, le **shape 4** pour le pays 2 et le **shape 8** pour le pays 3 
+A partir des données de l'**exercice 3_5**, choisissez 3 pays. Représentez la biomasse en fonction de l'abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l'abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux **shape**. Choisissez le **shape 3** pour le pays 1, le **shape 4** pour le pays 2 et le **shape 8** pour le pays 3
+
 ``` r
 ```
 
 ## Exercice 6.9 correction {auto-animate="true"}
 
-A partir des données de l'**exercice 3_5**, choisissez 3 pays. Représentez la biomasse en fonction de l'abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l'abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux **shape**. Choisissez le **shape 3** pour le pays 1, le **shape 4** pour le pays 2 et le **shape 8** pour le pays 3 
+A partir des données de l'**exercice 3_5**, choisissez 3 pays. Représentez la biomasse en fonction de l'abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l'abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux **shape**. Choisissez le **shape 3** pour le pays 1, le **shape 4** pour le pays 2 et le **shape 8** pour le pays 3
 
 ``` r
 tr_country6_9 <- abundance_biomass_survey_exercice3_5 %>%
@@ -2306,7 +2275,7 @@ filter(country %in% c("Costa Rica", "Ecuador", "Mexico"))
 
 ## Exercice 6.9 correction {auto-animate="true"}
 
-A partir des données de l'**exercice 3_5**, choisissez 3 pays. Représentez la biomasse en fonction de l'abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l'abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux **shape**. Choisissez le **shape 3** pour le pays 1, le **shape 4** pour le pays 2 et le **shape 8** pour le pays 3 
+A partir des données de l'**exercice 3_5**, choisissez 3 pays. Représentez la biomasse en fonction de l'abondance. Donnez une couleur par famille et une forme par pays. Sur le plot ne representez que les valeurs allant de 0 à 500 pour la biomasse et 0 et 300 pour l'abondance. Positionnez la légende en bas et ne gardez que la légende correspondante aux **shape**. Choisissez le **shape 3** pour le pays 1, le **shape 4** pour le pays 2 et le **shape 8** pour le pays 3
 
 ``` r
 p6_9 <- ggplot(data = tr_country6_9, aes( x = abundance, y = biomass, color = family, shape = country)) +
@@ -2317,5 +2286,4 @@ scale_shape_manual(values = c("Costa Rica" = 3, "Ecuador" = 4, "Mexico" = 8)) +
 guides(color = "none") +
 theme_bw() +
 theme(legend.position = "bottom") 
-
 ```
